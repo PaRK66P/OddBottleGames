@@ -4,6 +4,8 @@ using UnityEngine.UIElements;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEditor.UIElements;
+using UnityEditor.SceneManagement;
+using UnityEngine.Rendering;
 
 public class VNEditorWindow : EditorWindow
 {
@@ -24,6 +26,9 @@ public class VNEditorWindow : EditorWindow
     private int fontSize = 18;
 
     Sprite selectedSprite;
+
+    [SerializeField]
+    private string sceneName = "default";
 
     //tag as menu item
     [MenuItem("Window/UI Toolkit/Visual Novel Scene Editor")]
@@ -87,6 +92,11 @@ public class VNEditorWindow : EditorWindow
             UpdateViewPort();
         });
 
+        var compileButton = new UnityEngine.UIElements.Button();
+        compileButton.text = "Generate Scene";
+        compileButton.clicked += OnGenerateClick;
+        bottomRightPane.Add(compileButton);
+
 
         //bind the enumerated list of sprites to the left pane
         leftPane.makeItem = () => new Label();
@@ -98,6 +108,7 @@ public class VNEditorWindow : EditorWindow
         leftPane.selectedIndex = selectedIndex;
         leftPane.selectionChanged += (items) => { selectedIndex = leftPane.selectedIndex; };
         
+
     }
 
     private void UpdateViewPort()
@@ -235,6 +246,28 @@ public class VNEditorWindow : EditorWindow
             UpdateViewPort();
 
         }
+    }
+
+    private void OnGenerateClick()
+    {
+        //create new prefab and add script to it
+        GameObject newScenePrefab = new GameObject(sceneName);
+        VNPrefabScript newPrefabScript = newScenePrefab.AddComponent<VNPrefabScript>();
+
+        //fill in data
+        VisualNovelScene sceneData = new VisualNovelScene(selectedSprite, textFieldInput);
+        newPrefabScript.Scenes.Add(sceneData);
+
+        //save to file directory as a prefab
+        if (!AssetDatabase.IsValidFolder("Assets/Developers/Josh/Prefabs"))
+        {
+            AssetDatabase.CreateFolder("Assets/Developers/Josh", "Prefabs");
+        }
+        string prefabPath = "Assets/Developers/Josh/Prefabs/" + sceneName + ".prefab";
+        PrefabUtility.SaveAsPrefabAsset(newScenePrefab, prefabPath);
+
+        //clean up after
+        DestroyImmediate(newScenePrefab);
     }
 
 

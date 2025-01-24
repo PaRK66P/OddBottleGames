@@ -7,7 +7,12 @@ using UnityEngine.UI;
 [System.Serializable]
 public class VisualNovelScene
 {
-   public string text;
+    public VisualNovelScene(Sprite sprite, string newText)
+    {
+        CharacterAsset = sprite;
+        text = newText;
+    }
+    public string text;
     public Sprite CharacterAsset;
 }
 
@@ -16,7 +21,7 @@ public class VisualNovelScript : MonoBehaviour
     
 
     //[SerializeField]
-    public List<VisualNovelScene> VNScenes = new List<VisualNovelScene> {new VisualNovelScene()};
+    public List<VNPrefabScript> VNScenes = new List<VNPrefabScript>();
 
     public bool isNovelSection;
     public string newtext;
@@ -24,7 +29,8 @@ public class VisualNovelScript : MonoBehaviour
     public GameObject text;
     public GameObject sprite;
 
-    int currentIndex = 0;
+    int currentSceneIndex = 0;
+    int currentVNPrefabIndex = 0;
 
     void Start()
     {
@@ -44,17 +50,25 @@ public class VisualNovelScript : MonoBehaviour
         {
             canv.SetActive(false);
         }
-        text.GetComponent<TMP_Text>().text = newtext;
+        //text.GetComponent<TMP_Text>().text = newtext;
     }
 
     void StartNovelScene(int NovelSceneID)
     {
-        currentIndex = NovelSceneID;
+        currentVNPrefabIndex = NovelSceneID;
+        currentSceneIndex = 0;
         isNovelSection = true;
-        if (currentIndex < VNScenes.Count && currentIndex > -1)
+        if (currentVNPrefabIndex < VNScenes.Count && currentVNPrefabIndex > -1)
         {
-            sprite.GetComponent<Image>().sprite = VNScenes[currentIndex].CharacterAsset;
-            text.GetComponent<TMP_Text>().text = VNScenes[currentIndex].text;
+            if (currentSceneIndex < VNScenes[currentVNPrefabIndex].Scenes.Count && currentSceneIndex > -1)
+            {
+                sprite.GetComponent<Image>().sprite = VNScenes[currentVNPrefabIndex].Scenes[currentSceneIndex].CharacterAsset;
+                text.GetComponent<TMP_Text>().text = VNScenes[currentVNPrefabIndex].Scenes[currentSceneIndex].text;
+            }
+            else
+            {
+                Debug.LogError("currentSceneIndex out of range: " + VNScenes[currentVNPrefabIndex].Scenes.Count);
+            }
         }
         else 
         {
@@ -64,11 +78,11 @@ public class VisualNovelScript : MonoBehaviour
     }
     void NextScene ()
     {
-        currentIndex += 1;
-        if (currentIndex < VNScenes.Count)
+        currentSceneIndex += 1;
+        if (currentSceneIndex < VNScenes.Count)
         {
-            sprite.GetComponent<Image>().sprite = VNScenes[currentIndex].CharacterAsset;
-            text.GetComponent<TMP_Text>().text = VNScenes[currentIndex].text;
+            sprite.GetComponent<Image>().sprite = VNScenes[currentVNPrefabIndex].Scenes[currentSceneIndex].CharacterAsset;
+            text.GetComponent<TMP_Text>().text = VNScenes[currentVNPrefabIndex].Scenes[currentSceneIndex].text;
         }
         else 
         {
