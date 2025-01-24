@@ -10,6 +10,9 @@ public class VNEditorWindow : EditorWindow
     //keep track of index we have selected for hot reloads
     [SerializeField]
     private int selectedIndex = -1;
+
+    private int width = 852;
+    private int height = 480;
     
     private VisualElement topRightPane;
     private TextField bottomRightPane;
@@ -19,6 +22,8 @@ public class VNEditorWindow : EditorWindow
 
     [SerializeField]
     private int fontSize = 18;
+
+    Sprite selectedSprite;
 
     //tag as menu item
     [MenuItem("Window/UI Toolkit/Visual Novel Scene Editor")]
@@ -76,7 +81,12 @@ public class VNEditorWindow : EditorWindow
 
         rightSplitView.Add(bottomRightPane);
         bottomRightPane.value = textFieldInput;
-        bottomRightPane.RegisterValueChangedCallback(evt => { textFieldInput = evt.newValue; });
+        bottomRightPane.RegisterValueChangedCallback(evt => 
+        { 
+            textFieldInput = evt.newValue;
+            UpdateViewPort();
+        });
+
 
         //bind the enumerated list of sprites to the left pane
         leftPane.makeItem = () => new Label();
@@ -90,104 +100,142 @@ public class VNEditorWindow : EditorWindow
         
     }
 
+    private void UpdateViewPort()
+    {
+        if (selectedSprite != null)
+        {
+            //clear the viewport
+            topRightPane.Clear();
+
+            //create a rendertexture for display and a temporary texture
+            RenderTexture renderTexture = new RenderTexture(width, height, 24);
+            RenderTexture.active = renderTexture;
+            GL.Clear(true, true, Color.black);
+            Texture2D newTexture = new Texture2D(width, height, TextureFormat.RGBA32, false);
+
+            //create temp gameobject for the canvas and canvas scaler
+            GameObject tempGO = new GameObject("TempCanv");
+            tempGO.transform.position = Vector2.zero;
+            Canvas canvas = tempGO.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceCamera;
+            canvas.sortingOrder = 1;
+            CanvasScaler canvasScaler = tempGO.AddComponent<CanvasScaler>();
+            canvasScaler.referenceResolution = new Vector2(width, height);
+            canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+            canvasScaler.matchWidthOrHeight = 0.5f;
+            canvasScaler.scaleFactor = 1.0f;
+            canvasScaler.dynamicPixelsPerUnit = 1;
+
+            //create temporary camera and add to same game object as canvas (initialised like default unity camera)
+            GameObject camGO = new GameObject("TempCam");
+            Camera camera = camGO.AddComponent<Camera>();
+            camera.cullingMask = -1;
+            camera.orthographic = true;
+            camera.nearClipPlane = 0.3f;
+            camera.farClipPlane = 1000.0f;
+            camera.orthographicSize = 256.0f;
+            camera.targetTexture = renderTexture;
+            camera.clearFlags = CameraClearFlags.Color;
+            camera.backgroundColor = Color.black;
+            camGO.transform.position = new Vector3(0, 0, -20);
+            camera.depth = 1;
+
+            //set canvas worldcamera as camera
+            canvas.worldCamera = camera;
+
+
+            //create temporary gameobject for text as a child of the canvas object
+            GameObject textGO = new GameObject("Text");
+            textGO.transform.SetParent(canvas.transform);
+            Text textComponent = textGO.AddComponent<Text>();
+            textComponent.fontSize = fontSize;
+            textComponent.color = Color.white;
+            textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            textComponent.text = textFieldInput;
+            textComponent.alignment = TextAnchor.UpperLeft;
+
+            //create canvas renderer for text component
+            CanvasRenderer textCanvasrenderer = textGO.GetComponent<CanvasRenderer>();
+            textCanvasrenderer.cullTransparentMesh = true;
+
+            //avoiding z position being set to -4608 for reasons only god and satan understand (and also set size of the text box and stuff)
+            RectTransform textRectTransform = textGO.GetComponent<RectTransform>();
+            textRectTransform.position = Vector3.zero;
+            textRectTransform.sizeDelta = new Vector2(width - 50, 100);
+            textRectTransform.anchoredPosition = new Vector2(0, 0);
+
+            textGO.transform.position = new Vector3(0, -height / 2 + 100, 0);
+
+            //create a simple background image in the same place as the text
+            GameObject backgroundImageGO = new GameObject("Background Image");
+            backgroundImageGO.transform.SetParent(canvas.transform);
+            UnityEngine.UI.Image bgImage = backgroundImageGO.AddComponent<UnityEngine.UI.Image>();
+            bgImage.color = new Color(0.3f, 0.3f, 0.3f, 1.0f);
+            RectTransform bgImageRectTransform = backgroundImageGO.GetComponent<RectTransform>();
+            bgImageRectTransform.position = textRectTransform.position;
+            bgImageRectTransform.sizeDelta = new Vector2(textRectTransform.sizeDelta.x + 10, textRectTransform.sizeDelta.y + 10);
+            bgImageRectTransform.anchoredPosition = textRectTransform.anchoredPosition;
+
+            backgroundImageGO.transform.position = new Vector3(textGO.transform.position.x, textGO.transform.position.y, -10.0f);
+
+            textRectTransform.SetSiblingIndex(bgImageRectTransform.GetSiblingIndex() + 1);
+
+            //create image to load sprite onto 
+            GameObject imageGO = new GameObject("Image");
+            imageGO.transform.SetParent(canvas.transform);
+            UnityEngine.UI.Image character = imageGO.AddComponent<UnityEngine.UI.Image>();
+            character.sprite = selectedSprite;
+            //scaling
+            float maxScale = 150.0f;
+            float spriteWidth = selectedSprite.rect.width;
+            float spriteHeight = selectedSprite.rect.height;
+            float widthScale = maxScale / spriteWidth;
+            float heightScale = maxScale / spriteHeight;
+            float scale = Mathf.Min(widthScale, heightScale);
+            character.rectTransform.position = Vector3.zero;
+            character.rectTransform.sizeDelta = new Vector2(spriteWidth * scale, spriteHeight * scale);
+            character.rectTransform.anchoredPosition = new Vector2(0, 0);
+
+            imageGO.transform.position = new Vector3(-width / 2 + 150, 0, 0);
+
+            //update canvas
+            Canvas.ForceUpdateCanvases();
+
+            //render camera
+            camera.Render();
+
+            //read pixels and apply to texture
+            newTexture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+            newTexture.Apply();
+
+            //create an image to display the texture we just created
+            var image = new UnityEngine.UIElements.Image();
+            image.scaleMode = ScaleMode.ScaleToFit;
+            image.image = newTexture;
+            topRightPane.Add(image);
+
+            //destroy temp objects and reset viewport
+            RenderTexture.active = null;
+            Object.DestroyImmediate(tempGO);
+            Object.DestroyImmediate(textGO);
+            Object.DestroyImmediate(camGO);
+            Object.DestroyImmediate(backgroundImageGO);
+            renderTexture.Release();
+        }
+    }
     //runs when a new sprite is selected
     private void OnSpriteSelectionChange(IEnumerable<object> selectedItems)
-    {
-        //clear the right pane at the start
-        topRightPane.Clear();
+    { 
 
         //check that the current sprite is valid and exists
         var enumerator = selectedItems.GetEnumerator();
         if (enumerator.MoveNext())
         {
-            var selectedSprite = enumerator.Current as Sprite;
-            if (selectedSprite != null)
-            {
-                //create a rendertexture for display and a temporary texture
-                RenderTexture renderTexture = new RenderTexture(512, 512, 24);
-                RenderTexture.active = renderTexture;
-                GL.Clear(true, true, Color.blue);
-                Texture2D newTexture = new Texture2D(512, 512, TextureFormat.RGBA32, false);
+            selectedSprite = enumerator.Current as Sprite;
+            UpdateViewPort();
 
-                //copy sprite to new texture
-                Graphics.Blit(selectedSprite.texture, renderTexture);
-                newTexture.ReadPixels(new Rect(0, 0, 512, 512), 0, 0);
-                newTexture.Apply();
-
-                //create temp gameobject for the canvas and canvas scaler
-                GameObject tempGO = new GameObject("TempCanv");
-                tempGO.transform.position = Vector2.zero;
-                Canvas canvas = tempGO.AddComponent<Canvas>();
-                canvas.renderMode = RenderMode.ScreenSpaceCamera;
-                CanvasScaler canvasScaler = tempGO.AddComponent<CanvasScaler>();
-                canvasScaler.referenceResolution = new Vector2(512, 512);
-                canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
-                canvasScaler.matchWidthOrHeight = 0.5f;
-                canvasScaler.scaleFactor = 1.0f;
-                canvasScaler.dynamicPixelsPerUnit = 1;
-
-                //create temporary camera and add to same game object as canvas (initialised like default unity camera)
-                GameObject camGO = new GameObject("TempCam");
-                Camera camera = camGO.AddComponent<Camera>();
-                camera.cullingMask = -1;
-                camera.orthographic = true;
-                camera.nearClipPlane = 0.3f;
-                camera.farClipPlane = 1000.0f;
-                camera.orthographicSize = 256.0f;
-                camera.targetTexture = renderTexture;
-                camera.clearFlags = CameraClearFlags.Skybox;
-                camera.backgroundColor = Color.blue;
-                camGO.transform.position = new Vector3(0, 0, -20);
-                camera.depth = -1;
-
-                //set canvas worldcamera as camera
-                canvas.worldCamera = camera;
-                
-
-                //create temporary gameobject for text as a child of the canvas object
-                GameObject textGO = new GameObject("Text");
-                textGO.transform.SetParent(canvas.transform);
-                Text textComponent = textGO.AddComponent<Text>();
-                textComponent.fontSize = fontSize;
-                textComponent.color = Color.white;
-                textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-                textComponent.text = textFieldInput;
-                textComponent.alignment = TextAnchor.MiddleCenter;
-                
-                CanvasRenderer textCanvasrenderer = textGO.GetComponent<CanvasRenderer>();
-                textCanvasrenderer.cullTransparentMesh = true;
-
-                textGO.GetComponent<RectTransform>().position = Vector3.zero;
-
-                //RectTransform rectTransform = textGO.GetComponent<RectTransform>();
-                //rectTransform.sizeDelta = new Vector2(512, 512);
-                //rectTransform.anchoredPosition = Vector2.zero;
-                //rectTransform.anchorMin = Vector2.zero;
-                //rectTransform.anchorMax = Vector2.zero;
-
-                //update canvas
-                Canvas.ForceUpdateCanvases();
-
-                //render camera
-                camera.Render();
-
-                //read pixels and apply to texture
-                newTexture.ReadPixels(new Rect(0, 0, 512, 512), 0, 0);
-                newTexture.Apply();
-
-                //create an image to display the texture we just created
-                var image = new UnityEngine.UIElements.Image();
-                image.scaleMode = ScaleMode.ScaleToFit;
-                image.image = newTexture;
-                topRightPane.Add(image);
-                
-                //destroy temp objects and reset viewport
-                RenderTexture.active = null;
-                Object.DestroyImmediate(tempGO);
-                Object.DestroyImmediate(textGO);
-                Object.DestroyImmediate(camGO);
-                renderTexture.Release();
-            }
         }
     }
+
+
 }
