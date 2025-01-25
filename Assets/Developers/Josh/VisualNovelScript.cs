@@ -32,6 +32,8 @@ public class VisualNovelScript : MonoBehaviour
     DialogueTreeNode currentNode;
     int currentVNPrefabIndex = 0;
 
+    private bool keyPress = false;
+
     void Start()
     {
         canv = GameObject.Find("VisualNovelCanvas");
@@ -49,6 +51,15 @@ public class VisualNovelScript : MonoBehaviour
         else
         {
             canv.SetActive(false);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            keyPress = true;
+            NextScene();
+        }
+        else
+        {
+            keyPress = false;
         }
     }
 

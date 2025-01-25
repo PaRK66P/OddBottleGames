@@ -326,8 +326,7 @@ public class VNEditorWindow : EditorWindow
                     return;
                 }
                 //fill in data
-                VisualNovelScene sceneData = new VisualNovelScene(selectedSprite, textFieldInput);
-                DialogueTreeNode newRoot = new DialogueTreeNode(sceneData);
+                currentNode.sceneData = new VisualNovelScene(selectedSprite, textFieldInput);
                 DialogueTree newTree = new DialogueTree(workingRoot);
                 newPrefabScript.SetScene(newTree);
 
