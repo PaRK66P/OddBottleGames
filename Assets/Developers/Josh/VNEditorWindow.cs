@@ -33,6 +33,9 @@ public class VNEditorWindow : EditorWindow
 
     Sprite selectedSprite;
 
+    //should always end with /Prefabs else problems will ensue
+    const string PrefabFolderPath = "Assets/Developers/Josh/Prefabs";
+
 
     //tag as menu item
     [MenuItem("Window/UI Toolkit/Visual Novel Scene Editor")]
@@ -264,9 +267,10 @@ public class VNEditorWindow : EditorWindow
     private void OnGenerateClick()
     {
         //save to file directory as a prefab
-        if (!AssetDatabase.IsValidFolder("Assets/Developers/Josh/Prefabs"))
+        if (!AssetDatabase.IsValidFolder(PrefabFolderPath))
         {
-            AssetDatabase.CreateFolder("Assets/Developers/Josh", "Prefabs");
+            //janky way of saying create a prefabs folder at prefab folder path - /prefabs (8 characters) - does mean that prefab path should always end with /prefabs
+            AssetDatabase.CreateFolder(PrefabFolderPath.Substring(0, PrefabFolderPath.Length-8), "Prefabs");
         }
         if (titleString != "")
         {
@@ -280,7 +284,7 @@ public class VNEditorWindow : EditorWindow
                 VisualNovelScene sceneData = new VisualNovelScene(selectedSprite, textFieldInput);
                 newPrefabScript.Scenes.Add(sceneData);
 
-                string prefabPath = "Assets/Developers/Josh/Prefabs/" + titleString + ".prefab";
+                string prefabPath = PrefabFolderPath + "/" + titleString + ".prefab";
                 PrefabUtility.SaveAsPrefabAsset(newScenePrefab, prefabPath);
 
                 //clean up after
@@ -288,7 +292,7 @@ public class VNEditorWindow : EditorWindow
             }
             else
             {
-                Debug.LogError("Invalid scene name");
+                Debug.LogError("Scene already exists with this name");
             }
         }
         else
@@ -302,7 +306,7 @@ public class VNEditorWindow : EditorWindow
     private bool IsValidSceneName(string name)
     {
         
-        string[] prefabGUIDs = AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/Developers/Josh/Prefabs" });
+        string[] prefabGUIDs = AssetDatabase.FindAssets("t:Prefab", new[] { PrefabFolderPath });
         
         foreach (string guid in prefabGUIDs)
         {

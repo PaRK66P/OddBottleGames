@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Scenes:
-  - text: testing testing 1 2 1 2
+  - text: ha
     CharacterAsset: {fileID: 3497104649879979669, guid: ae7a07a9bfaf24246940502be44a4cd4, type: 3}
