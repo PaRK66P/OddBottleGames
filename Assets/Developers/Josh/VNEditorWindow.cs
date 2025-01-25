@@ -6,6 +6,9 @@ using UnityEngine.UI;
 using UnityEditor.UIElements;
 using UnityEditor.SceneManagement;
 using UnityEngine.Rendering;
+using System.Runtime.CompilerServices;
+using NUnit.Framework.Constraints;
+using UnityEditor.PackageManager.Requests;
 
 public class VNEditorWindow : EditorWindow
 {
@@ -15,7 +18,7 @@ public class VNEditorWindow : EditorWindow
 
     private int width = 852;
     private int height = 480;
-    
+
     private VisualElement topRightPane;
     private TextField bottomRightPane;
 
@@ -23,12 +26,13 @@ public class VNEditorWindow : EditorWindow
     private string textFieldInput = "";
 
     [SerializeField]
+    private string titleString = "";
+
+    [SerializeField]
     private int fontSize = 18;
 
     Sprite selectedSprite;
 
-    [SerializeField]
-    private string sceneName = "default";
 
     //tag as menu item
     [MenuItem("Window/UI Toolkit/Visual Novel Scene Editor")]
@@ -48,7 +52,7 @@ public class VNEditorWindow : EditorWindow
     public void CreateGUI()
     {
         //enumerate all sprites in the project
-        var allObjectGuids = AssetDatabase.FindAssets("t:Sprite", new[] { "Assets/Developers/Josh/Sprites" } );
+        var allObjectGuids = AssetDatabase.FindAssets("t:Sprite", new[] { "Assets/Developers/Josh/Sprites" });
         var allObjects = new List<Sprite>();
         foreach (var guid in allObjectGuids)
         {
@@ -57,6 +61,15 @@ public class VNEditorWindow : EditorWindow
 
         // Each editor window contains a root VisualElement object
         VisualElement root = rootVisualElement;
+
+        TextField titleField = new TextField("Scene Name");
+        titleField.value = titleString;
+        titleField.RegisterValueChangedCallback(evt =>
+        {
+            titleString = evt.newValue;
+            UpdateViewPort();
+        });
+        rootVisualElement.Add(titleField);
 
         //create a splitview for two panes
         var splitView = new TwoPaneSplitView(0, 250, TwoPaneSplitViewOrientation.Horizontal);
@@ -86,8 +99,8 @@ public class VNEditorWindow : EditorWindow
 
         rightSplitView.Add(bottomRightPane);
         bottomRightPane.value = textFieldInput;
-        bottomRightPane.RegisterValueChangedCallback(evt => 
-        { 
+        bottomRightPane.RegisterValueChangedCallback(evt =>
+        {
             textFieldInput = evt.newValue;
             UpdateViewPort();
         });
@@ -107,7 +120,7 @@ public class VNEditorWindow : EditorWindow
         leftPane.selectionChanged += OnSpriteSelectionChange;
         leftPane.selectedIndex = selectedIndex;
         leftPane.selectionChanged += (items) => { selectedIndex = leftPane.selectedIndex; };
-        
+
 
     }
 
@@ -236,7 +249,7 @@ public class VNEditorWindow : EditorWindow
     }
     //runs when a new sprite is selected
     private void OnSpriteSelectionChange(IEnumerable<object> selectedItems)
-    { 
+    {
 
         //check that the current sprite is valid and exists
         var enumerator = selectedItems.GetEnumerator();
@@ -250,25 +263,57 @@ public class VNEditorWindow : EditorWindow
 
     private void OnGenerateClick()
     {
-        //create new prefab and add script to it
-        GameObject newScenePrefab = new GameObject(sceneName);
-        VNPrefabScript newPrefabScript = newScenePrefab.AddComponent<VNPrefabScript>();
-
-        //fill in data
-        VisualNovelScene sceneData = new VisualNovelScene(selectedSprite, textFieldInput);
-        newPrefabScript.Scenes.Add(sceneData);
-
         //save to file directory as a prefab
         if (!AssetDatabase.IsValidFolder("Assets/Developers/Josh/Prefabs"))
         {
             AssetDatabase.CreateFolder("Assets/Developers/Josh", "Prefabs");
         }
-        string prefabPath = "Assets/Developers/Josh/Prefabs/" + sceneName + ".prefab";
-        PrefabUtility.SaveAsPrefabAsset(newScenePrefab, prefabPath);
+        if (titleString != "")
+        {
+            if (IsValidSceneName(titleString))
+            {
+                //create new prefab and add script to it
+                GameObject newScenePrefab = new GameObject(titleString);
+                VNPrefabScript newPrefabScript = newScenePrefab.AddComponent<VNPrefabScript>();
 
-        //clean up after
-        DestroyImmediate(newScenePrefab);
+                //fill in data
+                VisualNovelScene sceneData = new VisualNovelScene(selectedSprite, textFieldInput);
+                newPrefabScript.Scenes.Add(sceneData);
+
+                string prefabPath = "Assets/Developers/Josh/Prefabs/" + titleString + ".prefab";
+                PrefabUtility.SaveAsPrefabAsset(newScenePrefab, prefabPath);
+
+                //clean up after
+                DestroyImmediate(newScenePrefab);
+            }
+            else
+            {
+                Debug.LogError("Invalid scene name");
+            }
+        }
+        else
+        {
+            Debug.LogError("Cannot save scene without name");
+        }
     }
 
 
+    //enumerate all prefabs in prefab folder and check none have the same name as we are checking
+    private bool IsValidSceneName(string name)
+    {
+        
+        string[] prefabGUIDs = AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/Developers/Josh/Prefabs" });
+        
+        foreach (string guid in prefabGUIDs)
+        {
+            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+            string assetName = System.IO.Path.GetFileNameWithoutExtension(assetPath);
+
+            if (assetName == name)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }

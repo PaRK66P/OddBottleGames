@@ -395,8 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VNScenes:
-  - text: uidbsvvdb
-    CharacterAsset: {fileID: 0}
+  - {fileID: 8586129316987021058, guid: 80d2902e842e98f4ebbdacbb5d95d1ee, type: 3}
   isNovelSection: 0
   newtext: hm
   canv: {fileID: 0}
