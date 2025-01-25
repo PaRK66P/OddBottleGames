@@ -32,6 +32,10 @@ public class VNEditorWindow : EditorWindow
     private int fontSize = 18;
 
     Sprite selectedSprite;
+    Sprite defaultSprite;
+
+    private DialogueTreeNode workingRoot = new DialogueTreeNode(new VisualNovelScene());
+    private DialogueTreeNode currentNode;
 
     //should always end with /Prefabs else problems will ensue
     const string PrefabFolderPath = "Assets/Developers/Josh/Prefabs";
@@ -49,17 +53,34 @@ public class VNEditorWindow : EditorWindow
         //define max and min sizes
         wnd.minSize = new Vector2(450, 200);
         wnd.maxSize = new Vector2(1920, 720);
+
+        
     }
 
     //CreateGUI functions similar to update
     public void CreateGUI()
     {
+        if (currentNode == null)
+        {
+            currentNode = workingRoot;
+        }
         //enumerate all sprites in the project
         var allObjectGuids = AssetDatabase.FindAssets("t:Sprite", new[] { "Assets/Developers/Josh/Sprites" });
         var allObjects = new List<Sprite>();
         foreach (var guid in allObjectGuids)
         {
             allObjects.Add(AssetDatabase.LoadAssetAtPath<Sprite>(AssetDatabase.GUIDToAssetPath(guid)));
+        }
+
+        if (defaultSprite == null)
+        {
+            foreach (Sprite sprite in allObjects)
+            {
+                if (sprite.name == "missing sprite_0")
+                {
+                    defaultSprite = sprite;
+                }
+            }
         }
 
         // Each editor window contains a root VisualElement object
@@ -99,7 +120,8 @@ public class VNEditorWindow : EditorWindow
         var textInputField = bottomRightPane.Q("unity-text-input");
         textInputField.style.height = EditorGUIUtility.singleLineHeight * 10.0f;
         textInputField.style.whiteSpace = WhiteSpace.Normal;
-
+        
+        Debug.Log(textFieldInput);
         rightSplitView.Add(bottomRightPane);
         bottomRightPane.value = textFieldInput;
         bottomRightPane.RegisterValueChangedCallback(evt =>
@@ -108,10 +130,23 @@ public class VNEditorWindow : EditorWindow
             UpdateViewPort();
         });
 
+
+        var nextSceneButton = new UnityEngine.UIElements.Button();
+        nextSceneButton.text = "Next Scene";
+        nextSceneButton.clicked += OnNextSceneClick;
+        bottomRightPane.Add(nextSceneButton);
+
+        var prevSceneButton = new UnityEngine.UIElements.Button();
+        prevSceneButton.text = "Previous Scene";
+        prevSceneButton.clicked += OnPrevSceneClick;
+        bottomRightPane.Add(prevSceneButton);
+
         var compileButton = new UnityEngine.UIElements.Button();
         compileButton.text = "Generate Scene";
         compileButton.clicked += OnGenerateClick;
         bottomRightPane.Add(compileButton);
+
+        
 
 
         //bind the enumerated list of sprites to the left pane
@@ -123,7 +158,11 @@ public class VNEditorWindow : EditorWindow
         leftPane.selectionChanged += OnSpriteSelectionChange;
         leftPane.selectedIndex = selectedIndex;
         leftPane.selectionChanged += (items) => { selectedIndex = leftPane.selectedIndex; };
+    }
 
+    public void Update()
+    {
+        bottomRightPane.value = textFieldInput;
 
     }
 
@@ -170,7 +209,6 @@ public class VNEditorWindow : EditorWindow
             //set canvas worldcamera as camera
             canvas.worldCamera = camera;
 
-
             //create temporary gameobject for text as a child of the canvas object
             GameObject textGO = new GameObject("Text");
             textGO.transform.SetParent(canvas.transform);
@@ -211,11 +249,13 @@ public class VNEditorWindow : EditorWindow
             GameObject imageGO = new GameObject("Image");
             imageGO.transform.SetParent(canvas.transform);
             UnityEngine.UI.Image character = imageGO.AddComponent<UnityEngine.UI.Image>();
+
             character.sprite = selectedSprite;
+
             //scaling
             float maxScale = 150.0f;
-            float spriteWidth = selectedSprite.rect.width;
-            float spriteHeight = selectedSprite.rect.height;
+            float spriteWidth = character.sprite.rect.width;
+            float spriteHeight = character.sprite.rect.height;
             float widthScale = maxScale / spriteWidth;
             float heightScale = maxScale / spriteHeight;
             float scale = Mathf.Min(widthScale, heightScale);
@@ -269,7 +309,7 @@ public class VNEditorWindow : EditorWindow
         //save to file directory as a prefab
         if (!AssetDatabase.IsValidFolder(PrefabFolderPath))
         {
-            //janky way of saying create a prefabs folder at prefab folder path - /prefabs (8 characters) - does mean that prefab path should always end with /prefabs
+            //janky way of saying create a prefabs folder at prefab folder path - /prefabs (8 characters) - does mean that prefab path should always end with /Prefabs
             AssetDatabase.CreateFolder(PrefabFolderPath.Substring(0, PrefabFolderPath.Length-8), "Prefabs");
         }
         if (titleString != "")
@@ -280,10 +320,18 @@ public class VNEditorWindow : EditorWindow
                 GameObject newScenePrefab = new GameObject(titleString);
                 VNPrefabScript newPrefabScript = newScenePrefab.AddComponent<VNPrefabScript>();
 
+                if (newPrefabScript == null)
+                {
+                    Debug.LogError("Prefab Script not attached to prefab or gameobject");
+                    return;
+                }
                 //fill in data
                 VisualNovelScene sceneData = new VisualNovelScene(selectedSprite, textFieldInput);
-                newPrefabScript.Scenes.Add(sceneData);
+                DialogueTreeNode newRoot = new DialogueTreeNode(sceneData);
+                DialogueTree newTree = new DialogueTree(workingRoot);
+                newPrefabScript.SetScene(newTree);
 
+                //always save prefab after making all changes to script or they wont be saved
                 string prefabPath = PrefabFolderPath + "/" + titleString + ".prefab";
                 PrefabUtility.SaveAsPrefabAsset(newScenePrefab, prefabPath);
 
@@ -319,5 +367,49 @@ public class VNEditorWindow : EditorWindow
             }
         }
         return true;
+    }
+
+    private void OnNextSceneClick()
+    {
+        if (currentNode.isLeaf())
+        {
+            VisualNovelScene sceneData = new VisualNovelScene();
+            sceneData.text = textFieldInput;
+            sceneData.CharacterAsset = selectedSprite;
+            currentNode.sceneData = sceneData;
+            DialogueTreeNode newChild = new DialogueTreeNode();
+            newChild.parent = currentNode;
+            currentNode.AddChild(newChild);
+            currentNode = newChild;
+
+            selectedSprite = defaultSprite;
+            textFieldInput = "";
+        }
+        else
+        {
+            VisualNovelScene sceneData = new VisualNovelScene();
+            sceneData.text = textFieldInput;
+            sceneData.CharacterAsset = selectedSprite;
+            currentNode.sceneData = sceneData;
+            currentNode = currentNode.children[0];
+            selectedSprite = currentNode.sceneData.CharacterAsset;
+            textFieldInput = currentNode.sceneData.text;
+        }
+        UpdateViewPort();
+    }
+
+    private void OnPrevSceneClick()
+    {
+        if (currentNode.parent != null)
+        {
+            VisualNovelScene sceneData = new VisualNovelScene();
+            sceneData.text = textFieldInput;
+            sceneData.CharacterAsset = selectedSprite;
+            currentNode.sceneData = sceneData;
+            currentNode = currentNode.parent;
+            selectedSprite = currentNode.sceneData.CharacterAsset;
+            textFieldInput = currentNode.sceneData.text;
+            UpdateViewPort();
+        }
     }
 }

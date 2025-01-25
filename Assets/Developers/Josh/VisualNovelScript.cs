@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class VisualNovelScene
 {
+    public VisualNovelScene() { text = ""; }
     public VisualNovelScene(Sprite sprite, string newText)
     {
         CharacterAsset = sprite;
@@ -18,8 +20,6 @@ public class VisualNovelScene
 
 public class VisualNovelScript : MonoBehaviour
 {
-    
-
     //[SerializeField]
     public List<VNPrefabScript> VNScenes = new List<VNPrefabScript>();
 
@@ -29,7 +29,7 @@ public class VisualNovelScript : MonoBehaviour
     public GameObject text;
     public GameObject sprite;
 
-    int currentSceneIndex = 0;
+    DialogueTreeNode currentNode;
     int currentVNPrefabIndex = 0;
 
     void Start()
@@ -50,25 +50,20 @@ public class VisualNovelScript : MonoBehaviour
         {
             canv.SetActive(false);
         }
-        //text.GetComponent<TMP_Text>().text = newtext;
     }
 
     void StartNovelScene(int NovelSceneID)
     {
         currentVNPrefabIndex = NovelSceneID;
-        currentSceneIndex = 0;
+        
         isNovelSection = true;
         if (currentVNPrefabIndex < VNScenes.Count && currentVNPrefabIndex > -1)
         {
-            if (currentSceneIndex < VNScenes[currentVNPrefabIndex].Scenes.Count && currentSceneIndex > -1)
-            {
-                sprite.GetComponent<Image>().sprite = VNScenes[currentVNPrefabIndex].Scenes[currentSceneIndex].CharacterAsset;
-                text.GetComponent<TMP_Text>().text = VNScenes[currentVNPrefabIndex].Scenes[currentSceneIndex].text;
-            }
-            else
-            {
-                Debug.LogError("currentSceneIndex out of range: " + VNScenes[currentVNPrefabIndex].Scenes.Count);
-            }
+            DialogueTree tree = new DialogueTree(ReconstructTree(VNScenes[currentVNPrefabIndex].tree));
+            currentNode = tree.rootNode;
+            text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
+            sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
+            
         }
         else 
         {
@@ -78,15 +73,40 @@ public class VisualNovelScript : MonoBehaviour
     }
     void NextScene ()
     {
-        currentSceneIndex += 1;
-        if (currentSceneIndex < VNScenes.Count)
+        if (!currentNode.isLeaf())
         {
-            sprite.GetComponent<Image>().sprite = VNScenes[currentVNPrefabIndex].Scenes[currentSceneIndex].CharacterAsset;
-            text.GetComponent<TMP_Text>().text = VNScenes[currentVNPrefabIndex].Scenes[currentSceneIndex].text;
+            currentNode = currentNode.children[0];
+            sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
+            text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
         }
         else 
         {
             isNovelSection = false;
         }
     }
+
+    public DialogueTreeNode ReconstructTree(SerializedTree serializedTree)
+    {
+        //Debug.Log(serializedTree);
+        var nodeDict = new Dictionary<int, DialogueTreeNode>();
+
+        foreach (var serializedNode in serializedTree.nodes)
+        {
+            var node = new DialogueTreeNode(serializedNode.sceneData);
+            nodeDict[serializedNode.id] = node;
+
+            
+        }
+        foreach (var serializedNode in serializedTree.nodes)
+        {
+            if (serializedNode.parentId != 0)
+            {
+                var parentNode = nodeDict[serializedNode.parentId];
+                parentNode.children.Add(nodeDict[serializedNode.id]);
+            }
+        }
+        return nodeDict[serializedTree.nodes[0].id];
+    }
+
+    
 }
