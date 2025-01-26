@@ -24,9 +24,13 @@ public class VNEditorWindow : EditorWindow
     private VisualElement topRightPane;
     private TextField bottomRightPane;
     private TwoPaneSplitView graphSplitView;
+    private IntegerField nextSceneIndexInput;
 
     [SerializeField]
     private string textFieldInput = "";
+
+    [SerializeField]
+    private int integerFieldInput = 0;
 
     [SerializeField]
     private string titleString = "";
@@ -146,10 +150,18 @@ public class VNEditorWindow : EditorWindow
         VisualElement ButtonContainer = new VisualElement();
         bottomRightSplit.Add(ButtonContainer);
 
+        var nextSceneButtonPanel = new VisualElement();
+        ButtonContainer.Add(nextSceneButtonPanel);
+
+        nextSceneIndexInput = new IntegerField("next node index");
+        nextSceneIndexInput.value = integerFieldInput;
+        nextSceneIndexInput.RegisterValueChangedCallback(evt => { integerFieldInput = evt.newValue; });
+        nextSceneButtonPanel.Add(nextSceneIndexInput);
+
         var nextSceneButton = new UnityEngine.UIElements.Button();
         nextSceneButton.text = "Next Scene";
         nextSceneButton.clicked += OnNextSceneClick;
-        ButtonContainer.Add(nextSceneButton);
+        nextSceneButtonPanel.Add(nextSceneButton);
 
         var prevSceneButton = new UnityEngine.UIElements.Button();
         prevSceneButton.text = "Previous Scene";
@@ -308,6 +320,8 @@ public class VNEditorWindow : EditorWindow
             Object.DestroyImmediate(camGO);
             Object.DestroyImmediate(backgroundImageGO);
             renderTexture.Release();
+
+            nextSceneIndexInput.SetValueWithoutNotify(integerFieldInput);
         }
     }
     //runs when a new sprite is selected
@@ -398,10 +412,18 @@ public class VNEditorWindow : EditorWindow
             sceneData.CharacterAsset = selectedSprite;
             currentNode.sceneData = sceneData;
 
-            currentNode = currentNode.children[0];
-            selectedSprite = currentNode.sceneData.CharacterAsset;
-            textFieldInput = currentNode.sceneData.text;
-            UpdateGraphPane();
+            if (integerFieldInput < currentNode.children.Count && integerFieldInput > -1)
+            {
+                currentNode = currentNode.children[integerFieldInput];
+                selectedSprite = currentNode.sceneData.CharacterAsset;
+                textFieldInput = currentNode.sceneData.text;
+                integerFieldInput = 0;
+                UpdateGraphPane();
+            }
+            else
+            {
+                Debug.LogError("next node ID out of range - IDs start at 0");
+            }
         }
         else
         {
@@ -420,11 +442,13 @@ public class VNEditorWindow : EditorWindow
         newChild.parent = currentNode;
         VisualNovelScene newNodeScene = new VisualNovelScene(defaultSprite, "");
         currentNode.AddChild(newChild);
+        integerFieldInput = currentNode.children.Count - 1;
         currentNode = newChild;
 
         selectedSprite = defaultSprite;
         textFieldInput = "";
         
+
         UpdateGraphPane();
         UpdateViewPort();
         
@@ -439,8 +463,10 @@ public class VNEditorWindow : EditorWindow
             sceneData.CharacterAsset = selectedSprite;
             currentNode.sceneData = sceneData;
             currentNode = currentNode.parent;
+            integerFieldInput = 0;
             selectedSprite = currentNode.sceneData.CharacterAsset;
             textFieldInput = currentNode.sceneData.text;
+            
             UpdateGraphPane();
             UpdateViewPort();
         }
@@ -463,13 +489,13 @@ public class VNEditorWindow : EditorWindow
         
         treeRoot.generateVisualContent += ctx => DrawLines(ctx);
         float startingYPos = GetSubTreeHeight(workingRoot, 20);
-        DrawTreeNode(treeRoot, workingRoot, new Vector2(50, startingYPos));
+        DrawTreeNode(treeRoot, workingRoot, new Vector2(50, startingYPos), "root");
         
 
         return treeRoot;
     }
 
-    private void DrawTreeNode(VisualElement nodeDrawingCanvas, DialogueTreeNode node, Vector2 position)
+    private void DrawTreeNode(VisualElement nodeDrawingCanvas, DialogueTreeNode node, Vector2 position, string nodeName)
     {
         VisualElement nodeDrawing = new VisualElement();
         nodeDrawing.style.width = 50;
@@ -487,7 +513,7 @@ public class VNEditorWindow : EditorWindow
         nodeDrawing.style.marginBottom = 10;
         nodeDrawing.style.translate = new Translate(position.x, position.y);
 
-        var nodeLabel = new Label("default");
+        var nodeLabel = new Label(nodeName);
         nodeLabel.style.unityTextAlign = TextAnchor.MiddleCenter;
         nodeLabel.style.backgroundColor = new StyleColor(new Color(0.3f, 0.3f, 0.3f, 0.5f));
         nodeDrawing.Add(nodeLabel);
@@ -508,7 +534,7 @@ public class VNEditorWindow : EditorWindow
                 new Vector2(position.x + 60.0f, childPositionY+8.0f)));
 
 
-            DrawTreeNode(nodeDrawingCanvas, child, new Vector2(position.x + 60, childPositionY));
+            DrawTreeNode(nodeDrawingCanvas, child, new Vector2(position.x + 60, childPositionY), index.ToString());
             newYPos += subTreeHeight;
             index++;
         }

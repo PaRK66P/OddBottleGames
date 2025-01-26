@@ -51,7 +51,7 @@ MonoBehaviour:
       sceneData:
         text: hello
         CharacterAsset: {fileID: 7880311140226740293, guid: 0018312694b94d84db68dcf868db7b61, type: 3}
-    - id: -1038119250
+    - id: -1038118284
       parentId: -1139922374
       sceneData:
         text: hi there
