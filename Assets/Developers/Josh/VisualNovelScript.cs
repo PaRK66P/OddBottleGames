@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -32,7 +33,6 @@ public class VisualNovelScript : MonoBehaviour
     DialogueTreeNode currentNode;
     int currentVNPrefabIndex = 0;
 
-    private bool keyPress = false;
 
     void Start()
     {
@@ -40,7 +40,7 @@ public class VisualNovelScript : MonoBehaviour
         text = GameObject.Find("VisualNovelText");
         sprite = GameObject.Find("VisualNovelSprite");
 
-        StartNovelScene(0);
+        StartNovelSceneByName("test");
     }
     void Update()
     {
@@ -54,12 +54,7 @@ public class VisualNovelScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            keyPress = true;
             NextScene();
-        }
-        else
-        {
-            keyPress = false;
         }
     }
 
@@ -81,6 +76,21 @@ public class VisualNovelScript : MonoBehaviour
             isNovelSection = false;
             UnityEngine.Debug.LogError("Invalid Novel Scene ID");
         }
+    }
+
+    void StartNovelSceneByName(string name)
+    {
+        int index = 0;
+        foreach (var scene in VNScenes)
+        {
+            if (scene.name == name)
+            {
+                StartNovelScene(index);
+                return;
+            }
+            index++;
+        }
+        Debug.LogError("No scene found with name: " + name);
     }
     void NextScene ()
     {

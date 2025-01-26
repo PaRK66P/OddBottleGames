@@ -9,6 +9,7 @@ using UnityEngine.Rendering;
 using System.Runtime.CompilerServices;
 using NUnit.Framework.Constraints;
 using UnityEditor.PackageManager.Requests;
+using System.Linq;
 
 public class VNEditorWindow : EditorWindow
 {
@@ -19,6 +20,7 @@ public class VNEditorWindow : EditorWindow
     private int width = 852;
     private int height = 480;
 
+    private ScrollView graphPane;
     private VisualElement topRightPane;
     private TextField bottomRightPane;
 
@@ -52,7 +54,7 @@ public class VNEditorWindow : EditorWindow
 
         //define max and min sizes
         wnd.minSize = new Vector2(450, 200);
-        wnd.maxSize = new Vector2(1920, 720);
+        wnd.maxSize = new Vector2(1400, 900);
 
         
     }
@@ -95,9 +97,16 @@ public class VNEditorWindow : EditorWindow
         });
         rootVisualElement.Add(titleField);
 
+        var graphSplitView = new TwoPaneSplitView(0, 700, TwoPaneSplitViewOrientation.Vertical);
+        rootVisualElement.Add(graphSplitView);
+
         //create a splitview for two panes
         var splitView = new TwoPaneSplitView(0, 250, TwoPaneSplitViewOrientation.Horizontal);
-        rootVisualElement.Add(splitView);
+        graphSplitView.Add(splitView);
+
+        graphPane = GenerateTreeDiagram();
+        //graphPane.style.flexDirection = FlexDirection.Column;
+        graphSplitView.Add(graphPane);
 
         //add a listview to the left pane of the split view
         var leftPane = new ListView();
@@ -111,6 +120,9 @@ public class VNEditorWindow : EditorWindow
         topRightPane = new ScrollView(ScrollViewMode.VerticalAndHorizontal);
         rightSplitView.Add(topRightPane);
 
+        TwoPaneSplitView bottomRightSplit = new TwoPaneSplitView(0, 600, TwoPaneSplitViewOrientation.Horizontal);
+        rightSplitView.Add(bottomRightSplit);
+
         //styling for text input field
         bottomRightPane = new TextField("Dialogue");
         bottomRightPane.multiline = true;
@@ -121,8 +133,8 @@ public class VNEditorWindow : EditorWindow
         textInputField.style.height = EditorGUIUtility.singleLineHeight * 10.0f;
         textInputField.style.whiteSpace = WhiteSpace.Normal;
         
-        Debug.Log(textFieldInput);
-        rightSplitView.Add(bottomRightPane);
+        //Debug.Log(textFieldInput);
+        bottomRightSplit.Add(bottomRightPane);
         bottomRightPane.value = textFieldInput;
         bottomRightPane.RegisterValueChangedCallback(evt =>
         {
@@ -130,21 +142,28 @@ public class VNEditorWindow : EditorWindow
             UpdateViewPort();
         });
 
+        VisualElement ButtonContainer = new VisualElement();
+        bottomRightSplit.Add(ButtonContainer);
 
         var nextSceneButton = new UnityEngine.UIElements.Button();
         nextSceneButton.text = "Next Scene";
         nextSceneButton.clicked += OnNextSceneClick;
-        bottomRightPane.Add(nextSceneButton);
+        ButtonContainer.Add(nextSceneButton);
 
         var prevSceneButton = new UnityEngine.UIElements.Button();
         prevSceneButton.text = "Previous Scene";
         prevSceneButton.clicked += OnPrevSceneClick;
-        bottomRightPane.Add(prevSceneButton);
+        ButtonContainer.Add(prevSceneButton);
+
+        var newBranchButton = new UnityEngine.UIElements.Button();
+        newBranchButton.text = "New Branch";
+        newBranchButton.clicked += CreateNewScene;
+        ButtonContainer.Add(newBranchButton);
 
         var compileButton = new UnityEngine.UIElements.Button();
         compileButton.text = "Generate Scene";
         compileButton.clicked += OnGenerateClick;
-        bottomRightPane.Add(compileButton);
+        ButtonContainer.Add(compileButton);
 
         
 
@@ -370,31 +389,43 @@ public class VNEditorWindow : EditorWindow
 
     private void OnNextSceneClick()
     {
-        if (currentNode.isLeaf())
+        if (!currentNode.isLeaf())
         {
             VisualNovelScene sceneData = new VisualNovelScene();
             sceneData.text = textFieldInput;
             sceneData.CharacterAsset = selectedSprite;
             currentNode.sceneData = sceneData;
-            DialogueTreeNode newChild = new DialogueTreeNode();
-            newChild.parent = currentNode;
-            currentNode.AddChild(newChild);
-            currentNode = newChild;
 
-            selectedSprite = defaultSprite;
-            textFieldInput = "";
-        }
-        else
-        {
-            VisualNovelScene sceneData = new VisualNovelScene();
-            sceneData.text = textFieldInput;
-            sceneData.CharacterAsset = selectedSprite;
-            currentNode.sceneData = sceneData;
             currentNode = currentNode.children[0];
             selectedSprite = currentNode.sceneData.CharacterAsset;
             textFieldInput = currentNode.sceneData.text;
+            UpdateGraphPane();
+        }
+        else
+        {
+            CreateNewScene();
         }
         UpdateViewPort();
+    }
+
+    private void CreateNewScene()
+    {
+        VisualNovelScene sceneData = new VisualNovelScene();
+        sceneData.text = textFieldInput;
+        sceneData.CharacterAsset = selectedSprite;
+        currentNode.sceneData = sceneData;
+        DialogueTreeNode newChild = new DialogueTreeNode();
+        newChild.parent = currentNode;
+        VisualNovelScene newNodeScene = new VisualNovelScene(defaultSprite, "");
+        currentNode.AddChild(newChild);
+        currentNode = newChild;
+
+        selectedSprite = defaultSprite;
+        textFieldInput = "";
+        
+        UpdateGraphPane();
+        UpdateViewPort();
+        
     }
 
     private void OnPrevSceneClick()
@@ -408,7 +439,92 @@ public class VNEditorWindow : EditorWindow
             currentNode = currentNode.parent;
             selectedSprite = currentNode.sceneData.CharacterAsset;
             textFieldInput = currentNode.sceneData.text;
+            UpdateGraphPane();
             UpdateViewPort();
         }
+    }
+
+    private ScrollView GenerateTreeDiagram()
+    {
+        ScrollView treeRoot = new ScrollView(ScrollViewMode.Vertical);
+
+        treeRoot.style.width = 1400;
+        treeRoot.style.height = 200;
+
+        if (workingRoot == null)
+        {
+            return treeRoot;
+        }
+
+        float startingYPos = GetSubTreeHeight(workingRoot, 20);
+        DrawTreeNode(treeRoot, workingRoot, new Vector2(50, startingYPos));
+
+
+        return treeRoot;
+    }
+
+    private void DrawTreeNode(VisualElement nodeDrawingCanvas, DialogueTreeNode node, Vector2 position)
+    {
+        VisualElement nodeDrawing = new VisualElement();
+        nodeDrawing.style.width = 50;
+        nodeDrawing.style.height = 50;
+        nodeDrawing.style.position = Position.Absolute;
+        if (node == currentNode)
+        {
+            nodeDrawing.style.color = new StyleColor(Color.red);
+        }
+        else
+        {
+            nodeDrawing.style.color = new StyleColor(Color.white);
+        }
+        nodeDrawing.style.transformOrigin = nodeDrawingCanvas.style.transformOrigin;
+        nodeDrawing.style.marginBottom = 10;
+        nodeDrawing.style.translate = new Translate(position.x, position.y);
+
+        var nodeLabel = new Label("default");
+        nodeLabel.style.unityTextAlign = TextAnchor.MiddleCenter;
+        nodeLabel.style.backgroundColor = new StyleColor(new Color(0.3f, 0.3f, 0.3f, 0.5f));
+        nodeDrawing.Add(nodeLabel);
+
+        float totalChildHeight = 0.0f;
+        foreach (var child in node.children)
+        {
+            totalChildHeight += GetSubTreeHeight(child, 20) - 10;
+        }
+        float newYPos = position.y - totalChildHeight;
+        float index = 0;
+        foreach (var child in node.children)
+        {
+            float subTreeHeight = GetSubTreeHeight(child, 20);
+            float childPositionY = newYPos + (subTreeHeight / 2.0f);
+
+            DrawTreeNode(nodeDrawingCanvas, child, new Vector2(position.x + 60, childPositionY));
+            newYPos += subTreeHeight;
+            index++;
+        }
+
+        nodeDrawingCanvas.Add(nodeDrawing);
+        
+    }
+
+    private float GetSubTreeHeight(DialogueTreeNode node, float nodeHeight)
+    {
+        if (node.isLeaf())
+        {
+            return nodeHeight;
+        }
+
+        float height = 0;
+        foreach (var child in node.children)
+        {
+            height += GetSubTreeHeight(child, nodeHeight);
+        }
+        return height;
+    }
+
+    private void UpdateGraphPane()
+    {
+        graphPane.Clear();
+        graphPane.Add(GenerateTreeDiagram());
     }
 }
