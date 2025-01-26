@@ -441,7 +441,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VNScenes:
-  - {fileID: 7762409023629518970, guid: a26ff8bf0a8629b4388d91055c76cb13, type: 3}
+  - {fileID: 8549859638812460360, guid: a26ff8bf0a8629b4388d91055c76cb13, type: 3}
+  - {fileID: 7205815279054723027, guid: 44dae135b1009fd4e97e2777ff03b5d4, type: 3}
   isNovelSection: 0
   newtext: hm
   canv: {fileID: 0}

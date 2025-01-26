@@ -23,6 +23,7 @@ public class VNEditorWindow : EditorWindow
     private ScrollView graphPane;
     private VisualElement topRightPane;
     private TextField bottomRightPane;
+    private TwoPaneSplitView graphSplitView;
 
     [SerializeField]
     private string textFieldInput = "";
@@ -97,7 +98,7 @@ public class VNEditorWindow : EditorWindow
         });
         rootVisualElement.Add(titleField);
 
-        var graphSplitView = new TwoPaneSplitView(0, 700, TwoPaneSplitViewOrientation.Vertical);
+        graphSplitView = new TwoPaneSplitView(0, 700, TwoPaneSplitViewOrientation.Vertical);
         rootVisualElement.Add(graphSplitView);
 
         //create a splitview for two panes
@@ -353,6 +354,7 @@ public class VNEditorWindow : EditorWindow
                 string prefabPath = PrefabFolderPath + "/" + titleString + ".prefab";
                 PrefabUtility.SaveAsPrefabAsset(newScenePrefab, prefabPath);
 
+                Debug.Log("saving scene as: " + name);
                 //clean up after
                 DestroyImmediate(newScenePrefab);
             }
@@ -444,10 +446,12 @@ public class VNEditorWindow : EditorWindow
         }
     }
 
+    private List<(Vector2 lineStart, Vector2 lineEnd)> lines = new List<(Vector2 lineStart, Vector2 lineEnd)>();
     private ScrollView GenerateTreeDiagram()
     {
+        lines.Clear();
         ScrollView treeRoot = new ScrollView(ScrollViewMode.Vertical);
-
+        
         treeRoot.style.width = 1400;
         treeRoot.style.height = 200;
 
@@ -455,10 +459,12 @@ public class VNEditorWindow : EditorWindow
         {
             return treeRoot;
         }
-
+        
+        
+        treeRoot.generateVisualContent += ctx => DrawLines(ctx);
         float startingYPos = GetSubTreeHeight(workingRoot, 20);
         DrawTreeNode(treeRoot, workingRoot, new Vector2(50, startingYPos));
-
+        
 
         return treeRoot;
     }
@@ -498,13 +504,16 @@ public class VNEditorWindow : EditorWindow
             float subTreeHeight = GetSubTreeHeight(child, 20);
             float childPositionY = newYPos + (subTreeHeight / 2.0f);
 
+            lines.Add((new Vector2(position.x + 50.0f, position.y+8.0f),
+                new Vector2(position.x + 60.0f, childPositionY+8.0f)));
+
+
             DrawTreeNode(nodeDrawingCanvas, child, new Vector2(position.x + 60, childPositionY));
             newYPos += subTreeHeight;
             index++;
         }
 
         nodeDrawingCanvas.Add(nodeDrawing);
-        
     }
 
     private float GetSubTreeHeight(DialogueTreeNode node, float nodeHeight)
@@ -522,9 +531,30 @@ public class VNEditorWindow : EditorWindow
         return height;
     }
 
+    private void DrawLines(MeshGenerationContext mgc)
+    {
+        Vector2 scrollOffset = (mgc.visualElement as ScrollView)?.scrollOffset ?? Vector2.zero;
+
+        foreach (var (start, end) in lines)
+        {
+            Vector2 adjustedStart = start - scrollOffset;
+            Vector2 adjustedEnd = end - scrollOffset;
+
+
+            var painter = mgc.painter2D;
+            painter.strokeColor = Color.gray;
+            painter.lineWidth = 2;
+            painter.BeginPath();
+            painter.MoveTo(adjustedStart);
+            painter.LineTo(adjustedEnd);
+            painter.Stroke();
+        }
+    }
+
     private void UpdateGraphPane()
     {
-        graphPane.Clear();
-        graphPane.Add(GenerateTreeDiagram());
+        graphPane.parent.Remove(graphPane);
+        graphPane = GenerateTreeDiagram();
+        graphSplitView.Add(graphPane);
     }
 }
