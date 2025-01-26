@@ -25,6 +25,7 @@ public class VNEditorWindow : EditorWindow
     private TextField bottomRightPane;
     private TwoPaneSplitView graphSplitView;
     private IntegerField nextSceneIndexInput;
+    private TextField entryTextField;
 
     [SerializeField]
     private string textFieldInput = "";
@@ -48,7 +49,7 @@ public class VNEditorWindow : EditorWindow
     private DialogueTreeNode currentNode;
 
     //should always end with /Prefabs else problems will ensue
-    const string PrefabFolderPath = "Assets/Developers/Josh/Prefabs";
+    const string PrefabFolderPath = "Assets/Developers/Josh/VisualNovelScenes";
 
 
     //tag as menu item
@@ -105,7 +106,7 @@ public class VNEditorWindow : EditorWindow
         });
         rootVisualElement.Add(titleField);
 
-        TextField entryTextField = new TextField("Entry Text");
+        entryTextField = new TextField("Entry Text");
         entryTextField.value = entryTextString;
         entryTextField.RegisterValueChangedCallback(evt =>
         {
@@ -207,7 +208,8 @@ public class VNEditorWindow : EditorWindow
     public void Update()
     {
         bottomRightPane.value = textFieldInput;
-
+        entryTextField.value = entryTextString;
+        
     }
 
     private void UpdateViewPort()
@@ -355,8 +357,8 @@ public class VNEditorWindow : EditorWindow
         //save to file directory as a prefab
         if (!AssetDatabase.IsValidFolder(PrefabFolderPath))
         {
-            //janky way of saying create a prefabs folder at prefab folder path - /prefabs (8 characters) - does mean that prefab path should always end with /Prefabs
-            AssetDatabase.CreateFolder(PrefabFolderPath.Substring(0, PrefabFolderPath.Length-8), "Prefabs");
+            //janky way of saying create a VisualNovelScenes folder at prefab folder path - /VisualNovelScenes (8 characters) - does mean that prefab path should always end with /VisualNovelScenes
+            AssetDatabase.CreateFolder(PrefabFolderPath.Substring(0, PrefabFolderPath.Length-17), "VisualNovelScenes");
         }
         if (titleString != "")
         {
@@ -435,6 +437,7 @@ public class VNEditorWindow : EditorWindow
                     currentNode = currentNode.children[integerFieldInput];
                     selectedSprite = currentNode.sceneData.CharacterAsset;
                     textFieldInput = currentNode.sceneData.text;
+                    entryTextString = currentNode.sceneData.entryText;
                     integerFieldInput = 0;
                     UpdateGraphPane();
                 }
@@ -445,7 +448,7 @@ public class VNEditorWindow : EditorWindow
             }
             else
             {
-                Debug.LogError("must write entry text for scene");
+                Debug.LogError("must write entry text to move to next scene");
             }
         }
         else
@@ -462,6 +465,7 @@ public class VNEditorWindow : EditorWindow
             VisualNovelScene sceneData = new VisualNovelScene();
             sceneData.text = textFieldInput;
             sceneData.CharacterAsset = selectedSprite;
+            sceneData.entryText = entryTextString;
             currentNode.sceneData = sceneData;
             DialogueTreeNode newChild = new DialogueTreeNode();
             newChild.parent = currentNode;
@@ -480,7 +484,7 @@ public class VNEditorWindow : EditorWindow
         }
         else
         {
-            Debug.LogError("must write entry text for scene");
+            Debug.LogError("must write entry text to create a new node");
         }
         
     }
@@ -492,11 +496,13 @@ public class VNEditorWindow : EditorWindow
             VisualNovelScene sceneData = new VisualNovelScene();
             sceneData.text = textFieldInput;
             sceneData.CharacterAsset = selectedSprite;
+            sceneData.entryText = entryTextString;
             currentNode.sceneData = sceneData;
             currentNode = currentNode.parent;
             integerFieldInput = 0;
             selectedSprite = currentNode.sceneData.CharacterAsset;
             textFieldInput = currentNode.sceneData.text;
+            entryTextString = currentNode.sceneData.entryText;
             
             UpdateGraphPane();
             UpdateViewPort();
