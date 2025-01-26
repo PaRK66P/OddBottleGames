@@ -36,6 +36,9 @@ public class VNEditorWindow : EditorWindow
     private string titleString = "";
 
     [SerializeField]
+    private string entryTextString = "";
+
+    [SerializeField]
     private int fontSize = 18;
 
     Sprite selectedSprite;
@@ -101,6 +104,15 @@ public class VNEditorWindow : EditorWindow
             UpdateViewPort();
         });
         rootVisualElement.Add(titleField);
+
+        TextField entryTextField = new TextField("Entry Text");
+        entryTextField.value = entryTextString;
+        entryTextField.RegisterValueChangedCallback(evt =>
+        {
+            entryTextString = evt.newValue;
+            UpdateViewPort();
+        });
+        rootVisualElement.Add(entryTextField);
 
         graphSplitView = new TwoPaneSplitView(0, 700, TwoPaneSplitViewOrientation.Vertical);
         rootVisualElement.Add(graphSplitView);
@@ -350,27 +362,28 @@ public class VNEditorWindow : EditorWindow
         {
             if (IsValidSceneName(titleString))
             {
-                //create new prefab and add script to it
-                GameObject newScenePrefab = new GameObject(titleString);
-                VNPrefabScript newPrefabScript = newScenePrefab.AddComponent<VNPrefabScript>();
+                    //create new prefab and add script to it
+                    GameObject newScenePrefab = new GameObject(titleString);
+                    VNPrefabScript newPrefabScript = newScenePrefab.AddComponent<VNPrefabScript>();
 
-                if (newPrefabScript == null)
-                {
-                    Debug.LogError("Prefab Script not attached to prefab or gameobject");
-                    return;
-                }
-                //fill in data
-                currentNode.sceneData = new VisualNovelScene(selectedSprite, textFieldInput);
-                DialogueTree newTree = new DialogueTree(workingRoot);
-                newPrefabScript.SetScene(newTree);
+                    if (newPrefabScript == null)
+                    {
+                        Debug.LogError("Prefab Script not attached to prefab or gameobject");
+                        return;
+                    }
+                    //fill in data
+                    currentNode.sceneData = new VisualNovelScene(selectedSprite, textFieldInput, entryTextString);
+                    DialogueTree newTree = new DialogueTree(workingRoot);
+                    newPrefabScript.SetScene(newTree);
 
-                //always save prefab after making all changes to script or they wont be saved
-                string prefabPath = PrefabFolderPath + "/" + titleString + ".prefab";
-                PrefabUtility.SaveAsPrefabAsset(newScenePrefab, prefabPath);
+                    //always save prefab after making all changes to script or they wont be saved
+                    string prefabPath = PrefabFolderPath + "/" + titleString + ".prefab";
+                    PrefabUtility.SaveAsPrefabAsset(newScenePrefab, prefabPath);
 
-                Debug.Log("saving scene as: " + name);
-                //clean up after
-                DestroyImmediate(newScenePrefab);
+                    Debug.Log("saving scene as: " + name);
+                    //clean up after
+                    DestroyImmediate(newScenePrefab);
+                
             }
             else
             {
@@ -407,22 +420,32 @@ public class VNEditorWindow : EditorWindow
     {
         if (!currentNode.isLeaf())
         {
-            VisualNovelScene sceneData = new VisualNovelScene();
-            sceneData.text = textFieldInput;
-            sceneData.CharacterAsset = selectedSprite;
-            currentNode.sceneData = sceneData;
-
-            if (integerFieldInput < currentNode.children.Count && integerFieldInput > -1)
+            if (entryTextString != "")
             {
-                currentNode = currentNode.children[integerFieldInput];
-                selectedSprite = currentNode.sceneData.CharacterAsset;
-                textFieldInput = currentNode.sceneData.text;
-                integerFieldInput = 0;
-                UpdateGraphPane();
+
+
+                VisualNovelScene sceneData = new VisualNovelScene();
+                sceneData.text = textFieldInput;
+                sceneData.CharacterAsset = selectedSprite;
+                sceneData.entryText = entryTextString;
+                currentNode.sceneData = sceneData;
+
+                if (integerFieldInput < currentNode.children.Count && integerFieldInput > -1)
+                {
+                    currentNode = currentNode.children[integerFieldInput];
+                    selectedSprite = currentNode.sceneData.CharacterAsset;
+                    textFieldInput = currentNode.sceneData.text;
+                    integerFieldInput = 0;
+                    UpdateGraphPane();
+                }
+                else
+                {
+                    Debug.LogError("next node ID out of range - IDs start at 0");
+                }
             }
             else
             {
-                Debug.LogError("next node ID out of range - IDs start at 0");
+                Debug.LogError("must write entry text for scene");
             }
         }
         else
@@ -434,23 +457,31 @@ public class VNEditorWindow : EditorWindow
 
     private void CreateNewScene()
     {
-        VisualNovelScene sceneData = new VisualNovelScene();
-        sceneData.text = textFieldInput;
-        sceneData.CharacterAsset = selectedSprite;
-        currentNode.sceneData = sceneData;
-        DialogueTreeNode newChild = new DialogueTreeNode();
-        newChild.parent = currentNode;
-        VisualNovelScene newNodeScene = new VisualNovelScene(defaultSprite, "");
-        currentNode.AddChild(newChild);
-        integerFieldInput = currentNode.children.Count - 1;
-        currentNode = newChild;
+        if (entryTextString != "")
+        {
+            VisualNovelScene sceneData = new VisualNovelScene();
+            sceneData.text = textFieldInput;
+            sceneData.CharacterAsset = selectedSprite;
+            currentNode.sceneData = sceneData;
+            DialogueTreeNode newChild = new DialogueTreeNode();
+            newChild.parent = currentNode;
+            VisualNovelScene newNodeScene = new VisualNovelScene(defaultSprite, "", "");
+            currentNode.AddChild(newChild);
+            integerFieldInput = currentNode.children.Count - 1;
+            currentNode = newChild;
 
-        selectedSprite = defaultSprite;
-        textFieldInput = "";
-        
+            selectedSprite = defaultSprite;
+            textFieldInput = "";
+            entryTextString = "";
 
-        UpdateGraphPane();
-        UpdateViewPort();
+
+            UpdateGraphPane();
+            UpdateViewPort();
+        }
+        else
+        {
+            Debug.LogError("must write entry text for scene");
+        }
         
     }
 

@@ -9,12 +9,14 @@ using UnityEngine.UI;
 [System.Serializable]
 public class VisualNovelScene
 {
-    public VisualNovelScene() { text = ""; }
-    public VisualNovelScene(Sprite sprite, string newText)
+    public VisualNovelScene() { text = ""; entryText = ""; }
+    public VisualNovelScene(Sprite sprite, string newText, string newEntryText)
     {
         CharacterAsset = sprite;
         text = newText;
+        entryText = newEntryText;
     }
+    public string entryText;
     public string text;
     public Sprite CharacterAsset;
 }
