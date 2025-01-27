@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerInputManager : MonoBehaviour
 {
     public PlayerInputs_ActionMap actionMap;
-    private InputAction horizontalMovement;
+    private InputAction movementAction;
 
     public PlayerMovement playerMovement;
 
@@ -18,7 +18,7 @@ public class PlayerInputManager : MonoBehaviour
     void Start()
     {
         actionMap = new PlayerInputs_ActionMap();
-        horizontalMovement = actionMap.Movement.HorizontalMovement;
+        movementAction = actionMap.Movement.Movement;
     }
 
     void OnEnable()
@@ -34,16 +34,17 @@ public class PlayerInputManager : MonoBehaviour
 
     public void EnableInput()
     {
-        horizontalMovement.Enable();
-        horizontalMovement.performed += playerMovement.SetHorizontalMovementInput;
-        horizontalMovement.canceled += playerMovement.SetHorizontalMovementInput;
+        movementAction.Enable();
+        movementAction.performed += playerMovement.SetMovementInput;
+        movementAction.canceled += playerMovement.SetMovementInput;
+
 
     }
 
     public void DisableInput()
     {
-        horizontalMovement.Disable();
-        horizontalMovement.performed -= playerMovement.SetHorizontalMovementInput;
-        horizontalMovement.canceled -= playerMovement.SetHorizontalMovementInput;
+        movementAction.Disable();
+        movementAction.performed -= playerMovement.SetMovementInput;
+        movementAction.canceled -= playerMovement.SetMovementInput;
     }
 }
