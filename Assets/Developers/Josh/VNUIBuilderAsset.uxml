@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Developers/Josh/VNUITree.uss?fileID=7433441132597879392&amp;guid=71b39f5a9cc11ad488a2c58453f460ad&amp;type=3#VNUITree" />
+    <ui:Label text="Label from UI builder" />
+    <ui:Toggle label="isNovelSection" binding-path="isNovelSection" class="unity-base-field_aligned" />
+    <ui:TextField label="Text" placeholder-text="sup" binding-path="newtext" />
+    <uie:PropertyField binding-path="VNScenes" />
+</ui:UXML>
