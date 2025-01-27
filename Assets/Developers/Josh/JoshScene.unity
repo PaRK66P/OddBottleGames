@@ -433,7 +433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &350544344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,7 +641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1159459595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,18 +651,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1159459594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c7ed92e487860c428effbfbb7f6692c, type: 3}
+  m_Script: {fileID: 11500000, guid: ed65f2c5d102e714f9a6affbdb61f2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   VNScenes:
-  - {fileID: 4661644311037518602, guid: 5978f3e2ae45d9d44a06b30beb89c408, type: 3}
   - {fileID: 4862411490976480042, guid: 69631b6bac878904e930cd755f4014d8, type: 3}
-  isNovelSection: 0
-  newtext: hm
-  canv: {fileID: 0}
-  text: {fileID: 0}
-  sprite: {fileID: 0}
-  buttonContainer: {fileID: 0}
+  isNovelSection: 1
+  newtext: 
+  canv: {fileID: 350544343}
+  text: {fileID: 1737563923}
+  sprite: {fileID: 120298230}
+  buttonContainer: {fileID: 81304092}
   buttonPrefab: {fileID: 7795797384788526613, guid: a43a3a69db6c9ff4dbd5dc65216ea167, type: 3}
 --- !u!4 &1159459596
 Transform:

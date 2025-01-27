@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mario test Image_0: 7880311140226740293
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
