@@ -67,7 +67,7 @@ public class VisualNovelScript : MonoBehaviour
         //CreateButtons();
     }
 
-    void StartNovelScene(int NovelSceneID)
+    public void StartNovelScene(int NovelSceneID)
     {
         currentVNPrefabIndex = NovelSceneID;
         
