@@ -198,5 +198,4 @@ public class VisualNovelScript : MonoBehaviour
             buttons.Add(newButton);
         }
     }
-    
 }
