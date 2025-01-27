@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &67062206
+--- !u!1 &81304091
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,44 +127,33 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 67062208}
-  - component: {fileID: 67062207}
-  m_Layer: 0
-  m_Name: test
+  - component: {fileID: 81304092}
+  m_Layer: 5
+  m_Name: VisualNovelButtonContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &67062207
-MonoBehaviour:
+--- !u!224 &81304092
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67062206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71bfef80ec99bae43b5a69ec1f2ade9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tree:
-    nodes: []
---- !u!4 &67062208
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67062206}
-  serializedVersion: 2
+  m_GameObject: {fileID: 81304091}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 350544347}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &120298230
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +325,7 @@ RectTransform:
   m_Children:
   - {fileID: 120298231}
   - {fileID: 1737563924}
+  - {fileID: 81304092}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -411,6 +401,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1080710889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1080710891}
+  - component: {fileID: 1080710890}
+  m_Layer: 0
+  m_Name: test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1080710890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080710889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71bfef80ec99bae43b5a69ec1f2ade9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tree:
+    nodes:
+    - id: -1611625128
+      parentId: 0
+      sceneData:
+        entryText: test
+        text: test
+        CharacterAsset: {fileID: 7880311140226740293, guid: 0018312694b94d84db68dcf868db7b61, type: 3}
+--- !u!4 &1080710891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080710889}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1159459594
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,13 +483,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VNScenes:
-  - {fileID: 3025708400646328977, guid: a26ff8bf0a8629b4388d91055c76cb13, type: 3}
-  - {fileID: 7205815279054723027, guid: 44dae135b1009fd4e97e2777ff03b5d4, type: 3}
+  - {fileID: 4661644311037518602, guid: 5978f3e2ae45d9d44a06b30beb89c408, type: 3}
+  - {fileID: 4862411490976480042, guid: 69631b6bac878904e930cd755f4014d8, type: 3}
   isNovelSection: 0
   newtext: hm
   canv: {fileID: 0}
   text: {fileID: 0}
   sprite: {fileID: 0}
+  buttonContainer: {fileID: 0}
+  buttonPrefab: {fileID: 7795797384788526613, guid: a43a3a69db6c9ff4dbd5dc65216ea167, type: 3}
 --- !u!4 &1159459596
 Transform:
   m_ObjectHideFlags: 0
@@ -699,4 +743,4 @@ SceneRoots:
   - {fileID: 1159459596}
   - {fileID: 350544347}
   - {fileID: 689022728}
-  - {fileID: 67062208}
+  - {fileID: 1080710891}

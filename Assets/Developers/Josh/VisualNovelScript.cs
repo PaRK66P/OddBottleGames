@@ -31,6 +31,11 @@ public class VisualNovelScript : MonoBehaviour
     public GameObject canv;
     public GameObject text;
     public GameObject sprite;
+    
+    public Transform buttonContainer;
+    public GameObject buttonPrefab;
+    private List<GameObject> buttons = new List<GameObject>();
+
 
     DialogueTreeNode currentNode;
     int currentVNPrefabIndex = 0;
@@ -41,8 +46,9 @@ public class VisualNovelScript : MonoBehaviour
         canv = GameObject.Find("VisualNovelCanvas");
         text = GameObject.Find("VisualNovelText");
         sprite = GameObject.Find("VisualNovelSprite");
+        buttonContainer = GameObject.Find("VisualNovelButtonContainer").GetComponent<Transform>();
 
-        StartNovelSceneByName("test");
+        StartNovelSceneByName("multiple scene test");
     }
     void Update()
     {
@@ -56,8 +62,9 @@ public class VisualNovelScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            NextScene();
+            NextScene(0);
         }
+        //CreateButtons();
     }
 
     void StartNovelScene(int NovelSceneID)
@@ -71,6 +78,7 @@ public class VisualNovelScript : MonoBehaviour
             currentNode = tree.rootNode;
             text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
             sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
+            CreateButtons();
             
         }
         else 
@@ -94,13 +102,21 @@ public class VisualNovelScript : MonoBehaviour
         }
         Debug.LogError("No scene found with name: " + name);
     }
-    void NextScene ()
+    void NextScene(int index)
     {
         if (!currentNode.isLeaf())
         {
-            currentNode = currentNode.children[0];
-            sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
-            text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
+            if (index > -1 && index < currentNode.children.Count)
+            {
+                currentNode = currentNode.children[index];
+                sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
+                text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
+                CreateButtons();
+            }
+            else
+            {
+                Debug.LogError("tried to transition to invalid scene index");
+            }
         }
         else 
         {
@@ -131,5 +147,56 @@ public class VisualNovelScript : MonoBehaviour
         return nodeDict[serializedTree.nodes[0].id];
     }
 
+    public void CreateButtons()
+    {
+        foreach (GameObject button in buttons)
+        {
+            Destroy(button);
+        }
+        buttons.Clear();
+
+        if (currentNode.isLeaf())
+        {
+            GameObject newButton = Instantiate(buttonPrefab, buttonContainer);
+            newButton.name = "Button_" + 0;
+
+
+            Text buttonText = newButton.GetComponentInChildren<Text>();
+            if (buttonText != null)
+            {
+                buttonText.text = "continue";
+            }
+
+            Button buttonComponent = newButton.GetComponent<Button>();
+            if (buttonComponent != null)
+            {
+                buttonComponent.onClick.AddListener(() => NextScene(0));
+            }
+
+            buttons.Add(newButton);
+        }
+        for (int i = 0; i < currentNode.children.Count; i++)
+        {
+            GameObject newButton = Instantiate(buttonPrefab, buttonContainer);
+            newButton.name = "Button_" + i;
+            newButton.transform.localPosition = new Vector3(0, -45 * i, 0);
+               
+
+            Text buttonText = newButton.GetComponentInChildren<Text>();
+            if (buttonText != null)
+            {
+                buttonText.text = currentNode.children[i].sceneData.entryText;
+            }
+
+            int index = i;
+            Button buttonComponent = newButton.GetComponent<Button>();
+            if (buttonComponent != null)
+            {
+                buttonComponent.onClick.AddListener(() => NextScene(index));
+            }
+
+            buttons.Add(newButton);
+        }
+    }
     
 }
