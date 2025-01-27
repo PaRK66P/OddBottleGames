@@ -357,9 +357,11 @@ public class VNEditorWindow : EditorWindow
         //save to file directory as a prefab
         if (!AssetDatabase.IsValidFolder(PrefabFolderPath))
         {
-            //janky way of saying create a VisualNovelScenes folder at prefab folder path - /VisualNovelScenes (8 characters) - does mean that prefab path should always end with /VisualNovelScenes
-            AssetDatabase.CreateFolder(PrefabFolderPath.Substring(0, PrefabFolderPath.Length-17), "VisualNovelScenes");
+            Debug.Log("creating new folder");
+            //janky way of saying create a VisualNovelScenes folder at prefab folder path - /VisualNovelScenes (17 characters) - does mean that prefab path should always end with /VisualNovelScenes
+            AssetDatabase.CreateFolder(PrefabFolderPath.Substring(0, PrefabFolderPath.Length-18), "VisualNovelScenes");
         }
+
         if (titleString != "")
         {
             if (IsValidSceneName(titleString))
@@ -402,17 +404,19 @@ public class VNEditorWindow : EditorWindow
     //enumerate all prefabs in prefab folder and check none have the same name as we are checking
     private bool IsValidSceneName(string name)
     {
-        
         string[] prefabGUIDs = AssetDatabase.FindAssets("t:Prefab", new[] { PrefabFolderPath });
-        
-        foreach (string guid in prefabGUIDs)
-        {
-            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-            string assetName = System.IO.Path.GetFileNameWithoutExtension(assetPath);
 
-            if (assetName == name)
+        if (prefabGUIDs.Length > 0)
+        {
+            foreach (string guid in prefabGUIDs)
             {
-                return false;
+                string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                string assetName = System.IO.Path.GetFileNameWithoutExtension(assetPath);
+
+                if (assetName == name)
+                {
+                    return false;
+                }
             }
         }
         return true;
