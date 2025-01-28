@@ -24,7 +24,9 @@ public class bossScript : MonoBehaviour
     public float timeBetweenStrikes = 0.5f;
     int strikesSpawned = 0;
     float strikesTimer;
-
+    [Header("Projectiles attack")]
+    public GameObject projectilePrefab;
+    public int projectileAttackNo = 10;
 
     public void takeDamage(int dmg)
     {
@@ -56,8 +58,7 @@ public class bossScript : MonoBehaviour
             if (restTimer >= restPeriod)
             {
                 //attackNo = 1;
-                attackNo = UnityEngine.Random.Range(0, 2);
-                //attackNo = 1;
+                attackNo = UnityEngine.Random.Range(0, 3);
 
                 strikesSpawned = 0;
                 strikesTimer = timeBetweenStrikes;
@@ -89,6 +90,11 @@ public class bossScript : MonoBehaviour
                     TargetedArtileryStrike();
                     break;
                 }
+            case 2:
+                {
+                    CircularProjectiles();
+                    break;
+                }
             default:
                 break;
         }
@@ -99,7 +105,7 @@ public class bossScript : MonoBehaviour
         for (int i = 0; i<= randomArtileryProjectileNo; ++i)
         {
             //UnityEngine.Vector3 pos = new UnityEngine.Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), 0);
-            UnityEngine.Vector3 pos = new UnityEngine.Vector3(UnityEngine.Random.Range(-10, 10), UnityEngine.Random.Range(-10, 10), 0);
+            UnityEngine.Vector3 pos = new UnityEngine.Vector3(UnityEngine.Random.Range(-8, 8), UnityEngine.Random.Range(-5, 5), 0);
 
             Instantiate(artileryPrefab, pos, UnityEngine.Quaternion.Euler(0, 0, 0));
         }
@@ -131,7 +137,17 @@ public class bossScript : MonoBehaviour
                 Debug.Log(pauseRest);
             }
         }
+    }
 
-        
+    void CircularProjectiles()
+    {
+        float rotStep = 360 / projectileAttackNo;
+        UnityEngine.Vector3 rotation = new UnityEngine.Vector3(0, 0, 0);
+
+        for (int i = 0; i <projectileAttackNo; i++)
+        {
+            Instantiate(projectilePrefab, gameObject.transform.position, UnityEngine.Quaternion.Euler(rotation));
+            rotation.z += rotStep;
+        }
     }
 }

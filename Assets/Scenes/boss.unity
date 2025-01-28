@@ -422,6 +422,8 @@ MonoBehaviour:
   randomArtileryProjectileNo: 10
   targetedArtileryProjectileNo: 5
   timeBetweenStrikes: 0.5
+  projectilePrefab: {fileID: 2374814210022972564, guid: 62f4b03af46c2d64fbda13766426096b, type: 3}
+  projectileAttackNo: 15
 --- !u!212 &1537294408
 SpriteRenderer:
   m_ObjectHideFlags: 0
