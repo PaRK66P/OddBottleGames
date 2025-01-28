@@ -19,6 +19,7 @@ public class VisualNovelScene
     public string entryText;
     public string text;
     public Sprite CharacterAsset;
+    public int selectionID;
 }
 
 public class VisualNovelScript : MonoBehaviour
@@ -39,6 +40,7 @@ public class VisualNovelScript : MonoBehaviour
 
     DialogueTreeNode currentNode;
     int currentVNPrefabIndex = 0;
+    public int lastSelectionID = 0;
 
 
     void Start()
@@ -78,6 +80,8 @@ public class VisualNovelScript : MonoBehaviour
             currentNode = tree.rootNode;
             text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
             sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
+
+            IDSelectionOptions(currentNode, 0);
             CreateButtons();
             
         }
@@ -120,6 +124,9 @@ public class VisualNovelScript : MonoBehaviour
         }
         else 
         {
+            
+            lastSelectionID = currentNode.sceneData.selectionID;
+            Debug.Log("selectionID: " + lastSelectionID);
             isNovelSection = false;
         }
     }
@@ -196,6 +203,27 @@ public class VisualNovelScript : MonoBehaviour
             }
 
             buttons.Add(newButton);
+        }
+    }
+
+    int IDSelectionOptions(DialogueTreeNode node, int currentIDCount)
+    {
+        if (node.isLeaf())
+        {
+            node.sceneData.selectionID = currentIDCount;
+            return 0;
+        }
+        else
+        {
+            int it = currentIDCount-1;
+            foreach (var child in node.children)
+            {
+                it++;
+                int id = IDSelectionOptions(child, it);
+                it += id;
+                
+            }
+            return it;
         }
     }
 }
