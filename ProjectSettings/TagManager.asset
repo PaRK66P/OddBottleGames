@@ -14,8 +14,8 @@ TagManager:
   - Environment
   - Player
   - Projectile
-  - 
-  - 
+  - AwaitingEnemyAttack
+  - EnemyAttack
   - 
   - 
   - 
