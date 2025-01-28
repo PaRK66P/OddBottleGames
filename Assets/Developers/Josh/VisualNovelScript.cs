@@ -40,7 +40,7 @@ public class VisualNovelScript : MonoBehaviour
 
     DialogueTreeNode currentNode;
     int currentVNPrefabIndex = 0;
-    public int lastSelectionID = 0;
+    private int lastSelectionID = 0;
 
 
     void Start()
@@ -225,5 +225,10 @@ public class VisualNovelScript : MonoBehaviour
             }
             return it;
         }
+    }
+
+    public int GetLastSelectionID()
+    {
+        return lastSelectionID;
     }
 }
