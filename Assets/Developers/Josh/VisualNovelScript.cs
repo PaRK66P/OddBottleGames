@@ -50,7 +50,7 @@ public class VisualNovelScript : MonoBehaviour
         sprite = GameObject.Find("VisualNovelSprite");
         buttonContainer = GameObject.Find("VisualNovelButtonContainer").GetComponent<Transform>();
 
-        StartNovelSceneByName("multiple scene test");
+        //StartNovelSceneByName("multiple scene test");
     }
     void Update()
     {
@@ -62,11 +62,6 @@ public class VisualNovelScript : MonoBehaviour
         {
             canv.SetActive(false);
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            NextScene(0);
-        }
-        //CreateButtons();
     }
 
     public void StartNovelScene(int NovelSceneID)
@@ -92,7 +87,7 @@ public class VisualNovelScript : MonoBehaviour
         }
     }
 
-    void StartNovelSceneByName(string name)
+    public void StartNovelSceneByName(string name)
     {
         int index = 0;
         foreach (var scene in VNScenes)
