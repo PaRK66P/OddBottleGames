@@ -21,4 +21,21 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer == 9)
+        {
+            if(collision.gameObject.tag == "Companion")
+            {
+                collision.gameObject.GetComponentInParent<CompanionLogic>().TakeDamage(1);
+            }
+            else
+            {
+                collision.gameObject.GetComponent<TempDamage>().TakeDamage(1);
+            }
+            Debug.Log(collision.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }
