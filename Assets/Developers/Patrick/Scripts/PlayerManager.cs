@@ -30,7 +30,7 @@ public class PlayerManager : MonoBehaviour
 
     public void TakeDamage()
     {
-        if (hasWeapon)
+        if (hasWeapon && !playerMovement.dash)
         {
             hasWeapon = false;
             playerMovement.DisableFire();

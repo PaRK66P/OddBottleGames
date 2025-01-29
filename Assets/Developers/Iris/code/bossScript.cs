@@ -14,6 +14,10 @@ public class bossScript : MonoBehaviour
     bool pauseRest = false;
     int attackNo = 0;
 
+    [SerializeField]
+    private Transform TopLeft;
+    [SerializeField] private Transform BottomRight;
+
     [Space]
     [Header("Attacks variables")]
     public GameObject artileryPrefab;
@@ -105,7 +109,7 @@ public class bossScript : MonoBehaviour
         for (int i = 0; i<= randomArtileryProjectileNo; ++i)
         {
             //UnityEngine.Vector3 pos = new UnityEngine.Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), 0);
-            UnityEngine.Vector3 pos = new UnityEngine.Vector3(UnityEngine.Random.Range(-8, 8), UnityEngine.Random.Range(-5, 5), 0);
+            UnityEngine.Vector3 pos = new UnityEngine.Vector3(UnityEngine.Random.Range(TopLeft.position.x, BottomRight.position.x), UnityEngine.Random.Range(BottomRight.position.y, TopLeft.position.y), 0);
 
             Instantiate(artileryPrefab, pos, UnityEngine.Quaternion.Euler(0, 0, 0));
         }
@@ -113,6 +117,7 @@ public class bossScript : MonoBehaviour
 
     void TargetedArtileryStrike()
     {
+        Debug.Log("Strike");
         strikesTimer += Time.deltaTime;
         if(strikesTimer >= timeBetweenStrikes)
         {

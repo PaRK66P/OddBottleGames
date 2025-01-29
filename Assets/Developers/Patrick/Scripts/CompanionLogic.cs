@@ -19,7 +19,7 @@ public class CompanionLogic : MonoBehaviour
     private Transform idlePosition;
     [SerializeField]
     private float maxHealth;
-    private float currentHealth;
+    private float currentHealth = 15;
 
     [SerializeField]
     private GameObject[] currentTargets;
@@ -39,6 +39,14 @@ public class CompanionLogic : MonoBehaviour
     private Vector3 startingPosition;
     private float timer;
     private bool alive = true;
+
+    //REMOVE THIS FUNCTIONALITY
+    [SerializeField]
+    private GameObject choiceObject;
+    [SerializeField]
+    private GameObject bossVersion;
+    [SerializeField]
+    private GameObject companionVersion;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +68,7 @@ public class CompanionLogic : MonoBehaviour
             GameObject targetObject = GetClosestTarget();
             if(targetObject == null)
             {
-                Vector3 direction = idlePosition.position - transform.position; 
+                Vector3 direction = idlePosition.position - transform.position + Vector3.down * 1.5f; 
                 direction = direction.normalized;
 
                 transform.position += direction * speed * Time.deltaTime;
@@ -232,5 +240,24 @@ public class CompanionLogic : MonoBehaviour
     private void Defeated()
     {
         alive = false;
+
+        if (!companion)
+        {
+            choiceObject.SetActive(true);
+        }
+    }
+
+    public void JoinBoss()
+    {
+        choiceObject.SetActive(false);
+        bossVersion.SetActive(true);
+        Destroy(gameObject);
+    }
+
+    public void JoinPlayer()
+    {
+        choiceObject.SetActive(false);
+        companionVersion.SetActive(true);
+        Destroy(gameObject);
     }
 }

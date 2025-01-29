@@ -6,14 +6,14 @@ public class AIProjectileScript : MonoBehaviour
 {
     // Start is called before the first frame update
     float projectileTimer = 5.0f;
-    public float bulletSpeed = 3.0f;
+    public float bulletSpeed = 10.0f;
     public Vector3 direction = Vector3.zero;
     public GameObject owner;
 
     public bool toBeDestroyed;
     void Start()
     {
-        
+        GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
     }
 
     // Update is called once per frame
@@ -32,11 +32,11 @@ public class AIProjectileScript : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject != owner)
+        if (collision.gameObject.tag == "Player")
         {
-            toBeDestroyed = true;
+            collision.gameObject.GetComponent<PlayerManager>().TakeDamage();
         }
     }
 

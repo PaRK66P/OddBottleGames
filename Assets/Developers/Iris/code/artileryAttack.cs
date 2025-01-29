@@ -9,10 +9,12 @@ public class artileryAttack : MonoBehaviour
 
     float timeElapsed = 0;
 
+    bool damage;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        damage = false;
     }
 
     // Update is called once per frame
@@ -24,6 +26,7 @@ public class artileryAttack : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1);
             gameObject.layer = LayerMask.NameToLayer("EnemyAttack");
+            damage = true;
         }
 
         if(timeElapsed >= activeTime + delay)
@@ -33,5 +36,13 @@ public class artileryAttack : MonoBehaviour
 
         //collision with player function
             //player take damage
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player" && damage)
+        {
+            collision.gameObject.GetComponent<PlayerManager>().TakeDamage();
+        }
     }
 }

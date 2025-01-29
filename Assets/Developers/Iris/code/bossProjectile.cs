@@ -13,6 +13,15 @@ public class bossProjectile : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<PlayerManager>().TakeDamage();
+            Destroy(gameObject);
+        }
+    }
+
     private void OnBecameInvisible()
     {
         Destroy(gameObject);

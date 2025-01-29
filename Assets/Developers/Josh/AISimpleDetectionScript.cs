@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class AISimpleDetectionScript : MonoBehaviour
 {
     public GameObject player;
     public float detectionRange = 10;
@@ -11,7 +11,7 @@ public class NewBehaviourScript : MonoBehaviour
     public float speed = 2;
     public float fireRate = 2.0f;
 
-    private float health = 5.0f;
+    private float health = 2.0f;
     private bool seePlayer = false;
     private bool playerInRange = false;
     private float shootingTimer = 0.0f;
@@ -30,11 +30,6 @@ public class NewBehaviourScript : MonoBehaviour
         UpdateAIRanges();
         MakeAIActions();
         BulletCleanUp();
-        if (health <= 0)
-        {
-            DestroyAllBullets();
-            Destroy(this.gameObject);
-        }
     }
 
     void UpdateAIRanges()
@@ -84,7 +79,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     void MoveTowardsPlayer()
     {
-        Vector3 toPlayer = player.transform .position - this.transform.position;
+        Vector3 toPlayer = player.transform.position - this.transform.position;
         this.GetComponent<Rigidbody2D>().velocity = toPlayer.normalized * speed;
     }
 
@@ -129,7 +124,14 @@ public class NewBehaviourScript : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        Debug.Log("Ouch");
         health -= damage;
+
+        if (health <= 0)
+        {
+            DestroyAllBullets();
+            Destroy(this.gameObject);
+        }
     }
 
 }

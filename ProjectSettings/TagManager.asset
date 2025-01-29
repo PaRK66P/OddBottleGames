@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Weapon
   - Companion
+  - Boss
   layers:
   - Default
   - TransparentFX
