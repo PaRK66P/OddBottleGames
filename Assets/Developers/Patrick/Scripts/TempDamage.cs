@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TempDamage : MonoBehaviour
 {
+    float health = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,16 @@ public class TempDamage : MonoBehaviour
         if (collision.gameObject.layer == 7)
         {
             collision.gameObject.GetComponent<PlayerManager>().TakeDamage();
+        }
+    }
+
+    public void TakeDamage(float hurtValue)
+    {
+        health -= hurtValue;
+
+        if(health < 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
