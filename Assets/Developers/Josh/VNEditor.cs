@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 
-[CustomEditor(typeof(VisualNovelScript))]
+//[CustomEditor(typeof(VisualNovelScript))]
 public class VNEditor : Editor
 {
     public VisualTreeAsset EditorXML;
