@@ -13,9 +13,12 @@ public class TriggerVNScene : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == GameObject.Find("PlayerProto"))
+        if (!VNSceneManager.isNovelSection)
         {
-            VNSceneManager.StartNovelSceneByName("multiple scene test");
+            if (collision.gameObject == GameObject.Find("PlayerProto"))
+            {
+                VNSceneManager.StartNovelSceneByName("multiple scene test");
+            }
         }
     }
 }

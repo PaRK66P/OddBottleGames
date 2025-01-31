@@ -963,7 +963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VNScenes:
   - {fileID: 4862411490976480042, guid: 69631b6bac878904e930cd755f4014d8, type: 3}
-  isNovelSection: 1
+  isNovelSection: 0
   newtext: 
   canv: {fileID: 350544343}
   text: {fileID: 1737563923}
@@ -1177,6 +1177,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   canFire: 1
+  dash: 0
 --- !u!114 &1194307068
 MonoBehaviour:
   m_ObjectHideFlags: 0
