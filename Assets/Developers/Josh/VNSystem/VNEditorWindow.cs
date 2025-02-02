@@ -48,7 +48,7 @@ public class VNEditorWindow : EditorWindow
     private DialogueTreeNode workingRoot = new DialogueTreeNode(new VisualNovelScene());
     private DialogueTreeNode currentNode;
 
-    //should always end with /Prefabs else problems will ensue
+    //should always end with /Prefabs else problems will ensue - also needs to be changed in VisualNovelScript cause im lazy
     const string PrefabFolderPath = "Assets/Developers/Josh/VisualNovelScenes";
 
 

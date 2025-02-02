@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1767341910802330281}
   - component: {fileID: 4661644311037518602}
   m_Layer: 0
-  m_Name: test
+  m_Name: Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,9 +46,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tree:
     nodes:
-    - id: 1587905084
+    - id: 196906022
       parentId: 0
       sceneData:
-        entryText: test
-        text: test
+        entryText: heyo
+        text: hihi hows it going
         CharacterAsset: {fileID: 7880311140226740293, guid: 0018312694b94d84db68dcf868db7b61, type: 3}
+        selectionID: 0
+    - id: 140654124
+      parentId: 196906022
+      sceneData:
+        entryText: just testing some stuff
+        text: just a test huh?
+        CharacterAsset: {fileID: 3497104649879979669, guid: ae7a07a9bfaf24246940502be44a4cd4, type: 3}
+        selectionID: 0
