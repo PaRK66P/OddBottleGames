@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
+
+public class attack2 : AttackClass
+{
+    public int targetedArtileryProjectileNo = 5;
+    public float timeBetweenStrikes = 0.5f;
+    public GameObject artileryPrefab;
+
+    public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim)
+    {
+        if(tim.Count() == 0)
+        {
+            tim.Add(0);
+            itt.Add(0);
+        }
+
+        tim[0] += Time.deltaTime;
+        if (tim[0] >= timeBetweenStrikes)
+        {
+            tim[0] = 0;
+            if (itt[0] < 5)
+            {
+                UnityEngine.Vector3 pos = new UnityEngine.Vector3(0, 0, 0);
+
+                if (GameObject.FindGameObjectWithTag("Player"))
+                {
+                    pos = GameObject.FindGameObjectWithTag("Player").transform.position;
+                }
+
+                Instantiate(artileryPrefab, pos, UnityEngine.Quaternion.Euler(0, 0, 0));
+
+                itt[0]++;
+            }
+            else
+            {
+                b = false;
+                itt.Clear();
+                tim.Clear();
+            }
+        }
+    }
+}

@@ -19,15 +19,19 @@ public class attackPaternsScript : MonoBehaviour
 
     [Space]
     public List<AttackClass> attackList = new List<AttackClass>();
-    
-    int currentAttack;
-    bool inAttack;
-    List<int> itterators;
-    
+
+    int currentAttack = 0;
+    int attackItterator = 0;
+    bool inAttack = new bool();
+    List<int> itterators = new List<int>();
+    List<float> timers = new List<float>();
+
 
     // Start is called before the first frame update
     void Start()
     {
+        inAttack = false;
+
         List<int> noVec = new List<int>();
 
         int n = 0;
@@ -60,8 +64,14 @@ public class attackPaternsScript : MonoBehaviour
                 break;
             }
         }
-        
-        
+
+        n = 0;
+        if (patList[0].Count() > 1)
+        {
+            n = UnityEngine.Random.Range(0, patList[0].Count() + 1);
+            currentAttack = patList[0][n];
+        }
+        currentAttack = patList[0][n];
     }
 
     // Update is called once per frame
@@ -73,16 +83,35 @@ public class attackPaternsScript : MonoBehaviour
             if(attackTimer >= timeBetweenAttacks)
             {
                 inAttack = true;
+                attackTimer = 0;
+                int n = 0;
+                if (patList[attackItterator].Count() > 1)
+                {
+                    n = UnityEngine.Random.Range(0, patList[attackItterator].Count() + 1);
+                    currentAttack = patList[attackItterator][n];
+                }
+                currentAttack = patList[attackItterator][n];
+                attackItterator++;
             }
         }
-        foreach (List<int> move in patList)
+        else
         {
-            int i = 0;
-            if (move.Count() > 1)
-            {
-                i = UnityEngine.Random.Range(0, move.Count() + 1);
-            }
-            attackList[move[i]].Attack(ref inAttack, ref itterators);
+            attackList[currentAttack].Attack(ref inAttack, ref itterators, ref timers);
         }
+
+        if (attackItterator == patList.Count())
+        {
+            attackItterator = 0;
+        }
+
+        //foreach (List<int> move in patList)
+        //{
+        //    int i = 0;
+        //    if (move.Count() > 1)
+        //    {
+        //        i = UnityEngine.Random.Range(0, move.Count() + 1);
+        //    }
+        //    attackList[move[i]].Attack(ref inAttack, ref itterators);
+        //}
     }
 }

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class AttackClass : MonoBehaviour
 {
-    public virtual void Attack(ref bool b, ref List<int> itt) { }
+    public virtual void Attack(ref bool b, ref List<int> itt, ref List<float> tim) { }
 }
