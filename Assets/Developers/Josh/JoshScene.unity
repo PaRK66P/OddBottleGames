@@ -1471,7 +1471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1194307065}
-  detectionRange: 5
+  detectionRange: 7
   shootingRange: 4
   speed: 2
   fireRate: 2
@@ -1548,7 +1548,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.9, y: -10.08}
+  m_AnchoredPosition: {x: 0.9, y: -10.01}
   m_SizeDelta: {x: 99.4848, y: 100.3435}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1289362448
@@ -2194,7 +2194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3967532119571133711, guid: cb144b3d10975644f9a4fc46a650705b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10.08
+      value: -10.01
       objectReference: {fileID: 0}
     - target: {fileID: 3967532119571133711, guid: cb144b3d10975644f9a4fc46a650705b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2216,6 +2216,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1194307065}
+    - target: {fileID: 5612761942428473473, guid: cb144b3d10975644f9a4fc46a650705b, type: 3}
+      propertyPath: detectionRange
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

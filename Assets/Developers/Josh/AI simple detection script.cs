@@ -31,7 +31,7 @@ public class AISimpleBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateAIRanges();
+        UpdateAIVision();
         MakeAIActions();
         BulletCleanUp();
         if (health <= 0)
@@ -41,28 +41,53 @@ public class AISimpleBehaviour : MonoBehaviour
         }
     }
 
-    void UpdateAIRanges()
+    void UpdateAIVision()
     {
-        Vector3 distToPlayer = this.transform.position - player.transform.position;
-
-        float dist = distToPlayer.magnitude;
-
-        if (dist < detectionRange)
+        int numRays = 20;
+        float coneAngle = 250.0f;
+        float angleStep = coneAngle / (float)numRays;
+        bool playerBeenSeen = false;
+        for (int i = 0; i < numRays+1; i++)
         {
-            seePlayer = true;
+            float angle = (-coneAngle/2.0f) + (i * angleStep);
+            Vector3 dir = Quaternion.Euler(0, 0, angle) * this.transform.right;
+            dir.Normalize();
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, detectionRange, LayerMask.GetMask("Player"));
+            if (hit.collider != null)
+            {
+                Debug.DrawRay(transform.position, dir * detectionRange, Color.green);
+                seePlayer = true;
+                playerBeenSeen = true;
+            }
+            else
+            {
+                Debug.DrawRay(transform.position, dir * detectionRange, Color.red);
+            }
         }
-        if (dist < shootingRange)
+
+        Vector3 distToPlayer = this.transform.position - player.transform.position;
+        float dist = distToPlayer.magnitude;
+        if (!playerBeenSeen)
         {
-            playerInRange = true;
+            seePlayer = false;
+            
         }
         else
         {
-            //only reset seeplayer if they are outside the shooting range as well
-            //keeps track of player through whole shooting range (in case shooting range is larger than vision range)
-            if (dist > detectionRange)
+
+            if (dist < shootingRange)
             {
-                seePlayer = false;
+                playerInRange = true;
             }
+
+            Vector3 direction = player.transform.position - this.transform.position;
+
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            float targetRotation = Mathf.LerpAngle(this.transform.rotation.eulerAngles.z, angle, Time.deltaTime * 10);
+            this.transform.rotation = Quaternion.Euler(0, 0, targetRotation);
+        }
+        if (dist > shootingRange)
+        {
             playerInRange = false;
         }
     }
