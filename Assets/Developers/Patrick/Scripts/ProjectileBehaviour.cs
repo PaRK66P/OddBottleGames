@@ -36,9 +36,9 @@ public class ProjectileBehaviour : MonoBehaviour
             {
                 collision.gameObject.GetComponent<bossScript>().takeDamage(1);
             }
-            else if (collision.gameObject.GetComponent<AISimpleDetectionScript>() != null)
+            else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
             {
-                collision.gameObject.GetComponent<AISimpleDetectionScript>().TakeDamage(1);
+                collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(1);
             }
 
             Debug.Log(collision.gameObject);

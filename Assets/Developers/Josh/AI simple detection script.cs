@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class AISimpleBehaviour : MonoBehaviour
 {
     public GameObject player;
     public float detectionRange = 10;
@@ -17,11 +17,15 @@ public class NewBehaviourScript : MonoBehaviour
     private float shootingTimer = 0.0f;
 
     public GameObject AIProjectilePrefab;
+    [SerializeField]
     private List<GameObject> projectiles = new List<GameObject>();
+
+    public ObjectPoolManager objectPoolManager;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("PlayerProto");
+        objectPoolManager = GameObject.Find("GameManager").GetComponent<ObjectPoolManager>();
     }
 
     // Update is called once per frame
@@ -90,7 +94,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     void ShootAtPlayer()
     {
-        GameObject newBullet = Instantiate(AIProjectilePrefab);
+        GameObject newBullet = objectPoolManager.GetFreeObject("AIProjectileProto");
         Vector3 toPlayer = player.transform.position - this.transform.position;
         AIProjectileScript projScript = newBullet.GetComponent<AIProjectileScript>();
         projScript.SetBulletDirectionAndSpeed(toPlayer, 8);
@@ -101,28 +105,26 @@ public class NewBehaviourScript : MonoBehaviour
 
     void BulletCleanUp()
     {
-        List<GameObject> bulletsToRemove = new List<GameObject>();
+        List<GameObject> releasedBullets = new List<GameObject>();
         foreach (var bullet in projectiles)
         {
             if (bullet.GetComponent<AIProjectileScript>().toBeDestroyed)
             {
-                bulletsToRemove.Add(bullet);
-                Destroy(bullet);
+                objectPoolManager.ReleaseObject("AIProjectileProto", bullet);
+                releasedBullets.Add(bullet);
             }
         }
-
-        foreach (var bullet in bulletsToRemove)
+        foreach (var bullet in releasedBullets)
         {
             projectiles.Remove(bullet);
         }
-        bulletsToRemove.Clear();
     }
 
     void DestroyAllBullets()
     {
         foreach (var bullet in projectiles)
         {
-            Destroy(bullet);
+            objectPoolManager.ReleaseObject("AIProjectileProto", bullet);
         }
         projectiles.Clear();
     }

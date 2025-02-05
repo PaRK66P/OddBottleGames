@@ -43,9 +43,9 @@ public class ExplosionLogic : MonoBehaviour
                 {
                     obj.GetComponent<PlayerManager>().TakeDamage();
                 }
-                else if (obj.GetComponent<AISimpleDetectionScript>() != null)
+                else if (obj.GetComponent<AISimpleBehaviour>() != null)
                 {
-                    obj.GetComponent<AISimpleDetectionScript>().TakeDamage(damage);
+                    obj.GetComponent<AISimpleBehaviour>().TakeDamage(damage);
                 }
                 else if (obj.GetComponent<bossScript>() != null)
                 {

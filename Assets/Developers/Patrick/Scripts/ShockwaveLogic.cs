@@ -37,9 +37,9 @@ public class ShockwaveLogic : MonoBehaviour
             {
                 collision.gameObject.GetComponent<PlayerManager>().TakeDamage();
             }
-            else if (collision.gameObject.GetComponent<AISimpleDetectionScript>() != null)
+            else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
             {
-                collision.gameObject.GetComponent<AISimpleDetectionScript>().TakeDamage(damage);
+                collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(damage);
             }
             else if (collision.gameObject.GetComponent<bossScript>() != null)
             {
