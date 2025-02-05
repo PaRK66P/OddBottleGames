@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 7707908051896750492}
   - component: {fileID: 8281260145388845797}
   m_Layer: 5
-  m_Name: VisualNovelButtonPrefab
+  m_Name: VNButtonPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

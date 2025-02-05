@@ -5,6 +5,7 @@ using UnityEngine;
 public class TriggerVNScene : MonoBehaviour
 {
     public VisualNovelScript VNSceneManager;
+    public string sceneName;
 
     private void Start()
     {
@@ -13,9 +14,12 @@ public class TriggerVNScene : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == GameObject.Find("PlayerProto"))
+        if (!VNSceneManager.isNovelSection)
         {
-            VNSceneManager.StartNovelSceneByName("multiple scene test");
+            if (collision.gameObject == GameObject.Find("PlayerProto"))
+            {
+                VNSceneManager.StartNovelSceneByName(sceneName);
+            }
         }
     }
 }

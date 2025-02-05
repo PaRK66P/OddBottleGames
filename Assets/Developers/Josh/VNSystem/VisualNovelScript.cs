@@ -25,7 +25,7 @@ public class VisualNovelScene
 public class VisualNovelScript : MonoBehaviour
 {
     //[SerializeField]
-    public List<VNPrefabScript> VNScenes = new List<VNPrefabScript>();
+    List<VNPrefabScript> VNScenes = new List<VNPrefabScript>();
 
     public bool isNovelSection;
     public string newtext;
@@ -50,7 +50,21 @@ public class VisualNovelScript : MonoBehaviour
         sprite = GameObject.Find("VisualNovelSprite");
         buttonContainer = GameObject.Find("VisualNovelButtonContainer").GetComponent<Transform>();
 
-        //StartNovelSceneByName("multiple scene test");
+        string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/Developers/Josh/VisualNovelScenes" });
+        foreach (string guid in guids)
+        {
+            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
+            if (prefab != null)
+            {
+                VNPrefabScript script = prefab.GetComponent<VNPrefabScript>();
+                if (script != null)
+                {
+                    VNScenes.Add(prefab.GetComponent<VNPrefabScript>());
+                }
+                
+            }
+        }
     }
     void Update()
     {
