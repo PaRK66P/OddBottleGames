@@ -9,6 +9,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private PlayerInputManager playerInputManager;
 
+    [SerializeField]
+    private GameObject weaponDrop;
+
+    private bool hasWeapon = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +26,25 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void TakeDamage()
+    {
+        if (hasWeapon && !playerMovement.dash)
+        {
+            hasWeapon = false;
+            playerMovement.DisableFire();
+
+            float randomAngle = Random.Range(0, 360);
+            Vector3 weaponPos = new Vector3(5 * Mathf.Cos(randomAngle), 5 * Mathf.Sin(randomAngle)) + transform.position;
+            Instantiate(weaponDrop, weaponPos, Quaternion.identity);
+        }
+        
+    }
+
+    public void RegainWeapon()
+    {
+        hasWeapon = true;
+        playerMovement.EnableFire();
     }
 }
