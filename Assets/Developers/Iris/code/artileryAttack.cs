@@ -6,6 +6,7 @@ public class artileryAttack : MonoBehaviour
 {
     public float delay = 1;
     public float activeTime = 1;
+    public GameObject pooler;
 
     float timeElapsed = 0;
 

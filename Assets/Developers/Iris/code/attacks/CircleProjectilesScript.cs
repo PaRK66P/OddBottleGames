@@ -6,6 +6,7 @@ public class CircleProjectilesScript : AttackClass
 {
     public GameObject projectilePrefab;
     public int projectileAttackNo = 10;
+    public GameObject pooler;
 
     public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim)
     {
@@ -15,6 +16,7 @@ public class CircleProjectilesScript : AttackClass
         for (int i = 0; i < projectileAttackNo; i++)
         {
             Instantiate(projectilePrefab, gameObject.transform.position, UnityEngine.Quaternion.Euler(rotation));
+            //pooler.GetComponent<ObjectPoolManager>().
             rotation.z += rotStep;
         }
         b = false;
