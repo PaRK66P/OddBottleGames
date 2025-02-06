@@ -119,12 +119,16 @@ public class AISimpleBehaviour : MonoBehaviour
 
     void ShootAtPlayer()
     {
+        //Debug.Log("shoot");
         GameObject newBullet = objectPoolManager.GetFreeObject("AIProjectileProto");
+        //Debug.Log(newBullet);
         Vector3 toPlayer = player.transform.position - this.transform.position;
         AIProjectileScript projScript = newBullet.GetComponent<AIProjectileScript>();
         projScript.SetBulletDirectionAndSpeed(toPlayer, 8);
         newBullet.transform.position = this.transform.position + toPlayer.normalized;
         projScript.owner = this.gameObject;
+        projScript.toBeDestroyed = false;
+        projScript.projectileTimer = 5.0f;
         projectiles.Add(newBullet);
     }
 
