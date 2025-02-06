@@ -20,12 +20,20 @@ public class PlayerManager : MonoBehaviour
     private GameObject weaponDrop;
 
     private bool hasWeapon = true;
+    private bool isDamaged = false;
+
+    private float timeOfDamage = -10.0f;
+    private float invulnerableTime = 1.0f;
 
     private event EventHandler OnDamageTaken;
+
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+
         playerInputManager = gameObject.AddComponent<PlayerInputManager>();
         playerMovement = gameObject.AddComponent<PlayerMovement>();
         playerShooting = gameObject.AddComponent<PlayerShooting>();
@@ -54,11 +62,28 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (isDamaged)
+        {
+            if(Time.time - timeOfDamage >= playerData.controlLossTime) // Exceeded the time for player to not have control
+            {
+                playerInputManager.EnableInput();
+            }
+            if(Time.time - timeOfDamage > invulnerableTime) // We've exceeded the time for being invulnerable
+            {
+                rb.excludeLayers = 0;
+                isDamaged = false;
+            }
+        }
     }
 
     public void TakeDamage()
     {
+        if (isDamaged) { return; }
+
+        rb.excludeLayers = playerData.damageLayers;
+        isDamaged = true;
+        playerInputManager.DisableInput();
+
         OnDamageTaken?.Invoke(this, EventArgs.Empty);
     }
 

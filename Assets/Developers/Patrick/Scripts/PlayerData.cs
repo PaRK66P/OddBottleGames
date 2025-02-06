@@ -21,6 +21,9 @@ public class PlayerData : ScriptableObject
     public GameObject baseProjectileType;
     [Min(0.0f)] public float baseProjectileSpeed;
 
+    [Header("Damage")]
+    [Min(0.0f)] public float controlLossTime;
+
     // Start is called before the first frame update
     void Start()
     {

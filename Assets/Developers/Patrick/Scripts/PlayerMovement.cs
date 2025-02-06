@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     public float dashDistance;
 
     public LayerMask damageLayers;
-    public LayerMask empty;
 
     public bool dash = false;
     private float dashTimer = 0.0f;
@@ -29,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        empty = new LayerMask();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -64,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (dashTimer >= dashTime)
                 {
-                    rb.excludeLayers = empty;
+                    rb.excludeLayers = 0;
 
                     dash = false;
 
