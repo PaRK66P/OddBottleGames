@@ -139,10 +139,8 @@ public class CompanionLogic : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(1 << collision.gameObject.layer);
         if((1 << collision.gameObject.layer) == targetLayer.value)
         {
-            Debug.Log("Detected");
             AddTarget(collision.gameObject);
         }
     }

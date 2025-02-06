@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef613ee5bdf97944593e6bf4fbb983f1, type: 3}
+  m_Name: DefaultDebug
+  m_EditorClassIdentifier: 
+  canDropWeapon: 0
+  weaponObject: {fileID: 3849058719711503265, guid: e95c3aa441d863e4885c8d27a2d6ae43, type: 3}

@@ -105,8 +105,6 @@ GameObject:
   - component: {fileID: 8581369424203144876}
   - component: {fileID: 8120071430467085006}
   - component: {fileID: 7323071417537107713}
-  - component: {fileID: 6417836532550072876}
-  - component: {fileID: 6799739240742631301}
   m_Layer: 7
   m_Name: PlayerProto
   m_TagString: Untagged
@@ -259,43 +257,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f171b00c285c44a44b03f140150771ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 6417836532550072876}
-  playerInputManager: {fileID: 6799739240742631301}
-  weaponDrop: {fileID: 3849058719711503265, guid: e95c3aa441d863e4885c8d27a2d6ae43, type: 3}
---- !u!114 &6417836532550072876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7795560865290384392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de29bc4b644c9374dba40d911b4238c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  projectileSpeed: 15
-  projectilePrefab: {fileID: 1223489425459614113, guid: 50e3b8fba1c074f4ba558c89a7b1613e, type: 3}
-  dashDistance: 3
-  damageLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  empty:
-    serializedVersion: 2
-    m_Bits: 0
-  canFire: 1
---- !u!114 &6799739240742631301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7795560865290384392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 099e4e861e45faa449bfdd174a4dce94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerMovement: {fileID: 0}
-  isInitialised: 0
+  playerData: {fileID: 11400000, guid: eff54af2d3cd2c24badc3f05b2e57eb4, type: 2}
+  debugData: {fileID: 11400000, guid: 4d082aba971073f4eb298f409e371475, type: 2}
