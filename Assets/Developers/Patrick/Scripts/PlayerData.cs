@@ -11,6 +11,8 @@ public class PlayerData : ScriptableObject
     [Header("Dashing")]
     [Min(0.0f)] public float dashTime;
     [Min(0.0f)] public float dashDistance;
+    [Min(0.0f)] public float dashCooldown;
+    [Min(0.0f)] public float dashInputBuffer;
 
     [Header("Collisions")]
     public LayerMask damageLayers;

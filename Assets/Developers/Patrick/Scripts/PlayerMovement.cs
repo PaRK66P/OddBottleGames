@@ -21,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 dashStart = Vector2.zero;
     private Vector2 dashDirection = Vector2.zero;
     private float dashTime = 0.2f;
+    private float dashCooldown = 0.2f;
+    private float dashInputBuffer = 0.0f;
+    private float lastDashTime = -10.0f;
+    private float lastDashInputTime = -10.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -48,27 +52,36 @@ public class PlayerMovement : MonoBehaviour
     {
         if (dash)
         {
-
-            dashTimer += Time.fixedDeltaTime;
-
-            rb.excludeLayers = damageLayers;
-
-            rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * dashDistance, Mathf.Min(dashTimer / dashTime, 1.0f)));
-
-            if(dashTimer >= dashTime)
+            if(Time.time - lastDashTime >= dashCooldown) // Off cooldown
             {
-                rb.excludeLayers = empty;
+                dashTimer += Time.fixedDeltaTime;
 
+                rb.excludeLayers = damageLayers;
+
+                rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * dashDistance, Mathf.Min(dashTimer / dashTime, 1.0f)));
+
+                if (dashTimer >= dashTime)
+                {
+                    rb.excludeLayers = empty;
+
+                    dash = false;
+
+                    lastDashTime = Time.time;
+                }
+                return;
+            }
+
+            if (Time.time - lastDashInputTime > dashInputBuffer) // Buffer has been exceeded
+            {
                 dash = false;
             }
+            
         }
-        else
+
+        rb.velocity = movementInput * speed;
+        if(rb.velocity != Vector2.zero)
         {
-            rb.velocity = movementInput * speed;
-            if(rb.velocity != Vector2.zero)
-            {
-                movementDirection = rb.velocity.normalized;
-            }
+            movementDirection = rb.velocity.normalized;
         }
     }
 
@@ -80,6 +93,8 @@ public class PlayerMovement : MonoBehaviour
     public void PlayerDashInput(InputAction.CallbackContext context)
     {
         Debug.Log("Dash");
+
+        lastDashInputTime = Time.time;
 
         dash = true;
         dashTimer = 0.0f;
