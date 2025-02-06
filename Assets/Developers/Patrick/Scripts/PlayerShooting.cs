@@ -12,17 +12,20 @@ public class PlayerShooting : MonoBehaviour
     public bool canFire = true;
     private bool fireInput = false;
 
+    private ObjectPoolManager poolManager;
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    public void InitialiseComponent(GameObject projectile, float dProjectileSpeed, bool dCanDropWeapon)
+    public void InitialiseComponent(GameObject projectile, float dProjectileSpeed, bool dCanDropWeapon, ref ObjectPoolManager dPoolManager)
     {
         projectilePrefab = projectile;
         projectileSpeed = dProjectileSpeed;
         canDropWeapon = dCanDropWeapon;
+        poolManager = dPoolManager;
     }
 
     // Update is called once per frame
@@ -37,9 +40,14 @@ public class PlayerShooting : MonoBehaviour
             Vector3 rotation = mouseWorldPos - transform.position;
             float rotz = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
-            ProjectileBehaviour projectile = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(0, 0, rotz)).GetComponent<ProjectileBehaviour>();
-            projectile.Instantiate((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)).normalized, projectileSpeed);
-
+            GameObject projectile = poolManager.GetFreeObject(projectilePrefab.name);
+            projectile.transform.position = transform.position;
+            projectile.transform.rotation = Quaternion.Euler(0, 0, rotz);
+            projectile.GetComponent<ProjectileBehaviour>().InitialiseComponent((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)).normalized, 
+                projectileSpeed,
+                ref poolManager,
+                projectilePrefab.name);
+   
             fireInput = false;
         }
     }

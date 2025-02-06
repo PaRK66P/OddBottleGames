@@ -6,6 +6,9 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField]
+    private ObjectPoolManager poolManager;
+
+    [SerializeField]
     private PlayerData playerData;
     [SerializeField]
     private PlayerDebugData debugData;
@@ -29,7 +32,7 @@ public class PlayerManager : MonoBehaviour
 
         playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
         playerMovement.InitialiseComponent(playerData.speed, playerData.dashTime, playerData.dashDistance, playerData.damageLayers);
-        playerShooting.InitialiseComponent(playerData.baseProjectileType, playerData.baseProjectileSpeed, debugData.canDropWeapon);
+        playerShooting.InitialiseComponent(playerData.baseProjectileType, playerData.baseProjectileSpeed, debugData.canDropWeapon, ref poolManager);
 
         playerInputManager.EnableInput();
 
