@@ -26,6 +26,9 @@ public class attackPaternsScript : MonoBehaviour
     List<int> itterators = new List<int>();
     List<float> timers = new List<float>();
 
+    [Space]
+    public ObjectPoolManager pooler;
+
 
     // Start is called before the first frame update
     void Start()
@@ -96,22 +99,12 @@ public class attackPaternsScript : MonoBehaviour
         }
         else
         {
-            attackList[currentAttack].Attack(ref inAttack, ref itterators, ref timers);
+            attackList[currentAttack].Attack(ref inAttack, ref itterators, ref timers, ref pooler);
         }
 
         if (attackItterator == patList.Count())
         {
             attackItterator = 0;
         }
-
-        //foreach (List<int> move in patList)
-        //{
-        //    int i = 0;
-        //    if (move.Count() > 1)
-        //    {
-        //        i = UnityEngine.Random.Range(0, move.Count() + 1);
-        //    }
-        //    attackList[move[i]].Attack(ref inAttack, ref itterators);
-        //}
     }
 }

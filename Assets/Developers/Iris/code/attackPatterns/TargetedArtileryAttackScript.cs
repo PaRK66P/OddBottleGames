@@ -5,12 +5,14 @@ using System.Linq;
 
 public class attack2 : AttackClass
 {
+    public GameObject artileryPrefab;
+    ObjectPoolManager pooler;
     public int targetedArtileryProjectileNo = 5;
     public float timeBetweenStrikes = 0.5f;
-    public GameObject artileryPrefab;
 
-    public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim)
+    public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim, ref ObjectPoolManager poolMan)
     {
+        pooler = poolMan;
         if(tim.Count() == 0)
         {
             tim.Add(0);
@@ -30,7 +32,10 @@ public class attack2 : AttackClass
                     pos = GameObject.FindGameObjectWithTag("Player").transform.position;
                 }
 
-                Instantiate(artileryPrefab, pos, UnityEngine.Quaternion.Euler(0, 0, 0));
+                GameObject obj = pooler.GetFreeObject(artileryPrefab.name);
+                obj.GetComponent<artileryAttack>().InstantiateComponent(ref pooler, artileryPrefab.name);
+                obj.transform.position = pos;
+                obj.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, 0);
 
                 itt[0]++;
             }

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,8 @@ public class artileryAttack : MonoBehaviour
 {
     public float delay = 1;
     public float activeTime = 1;
-    public GameObject pooler;
+    ObjectPoolManager pooler;
+    string prefabName;
 
     float timeElapsed = 0;
 
@@ -32,11 +34,8 @@ public class artileryAttack : MonoBehaviour
 
         if(timeElapsed >= activeTime + delay)
         {
-            Destroy(gameObject);
+            pooler.ReleaseObject(prefabName, gameObject);
         }
-
-        //collision with player function
-            //player take damage
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -45,5 +44,11 @@ public class artileryAttack : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerManager>().TakeDamage();
         }
+    }
+
+    public void InstantiateComponent(ref ObjectPoolManager poolMan, string prefName)
+    {
+        pooler = poolMan;
+        prefabName = prefName;
     }
 }

@@ -157,6 +157,7 @@ MonoBehaviour:
   - {fileID: 283872786456334360, guid: 9d9997f6426b88845a6fea70f47e30c2, type: 3}
   - {fileID: 3347065349177360490, guid: 7ebaa6e2edd1a4e43ab5dab466033370, type: 3}
   - {fileID: 8618366252599702755, guid: fb6a72a3e5ba6144f9d3bd9a4ac441e3, type: 3}
+  pooler: {fileID: 2122395242}
 --- !u!61 &395241775
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -526,6 +527,7 @@ MonoBehaviour:
   attackList:
   - {fileID: 8416651022134215290, guid: 6b794e8633df15642872005a47150d88, type: 3}
   - {fileID: 8416651022134215290, guid: 6b794e8633df15642872005a47150d88, type: 3}
+  pooler: {fileID: 0}
 --- !u!4 &1961684558
 Transform:
   m_ObjectHideFlags: 0

@@ -6,11 +6,13 @@ public class bossProjectile : MonoBehaviour
 {
     public float speed;
     public Rigidbody2D rb;
+    ObjectPoolManager pooler;
+    string prefabName;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = transform.right * speed;
+        
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -18,12 +20,20 @@ public class bossProjectile : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerManager>().TakeDamage();
-            Destroy(gameObject);
+            pooler.ReleaseObject(prefabName, gameObject);
         }
     }
 
     private void OnBecameInvisible()
     {
-        Destroy(gameObject);
+        pooler.ReleaseObject(prefabName, gameObject);
+    }
+
+    public void InstantiateComponent(ref ObjectPoolManager poolMan, string prefName)
+    {
+        pooler = poolMan;
+        prefabName = prefName;
+        ///rotation and stuff
+        rb.velocity = transform.right * speed;
     }
 }

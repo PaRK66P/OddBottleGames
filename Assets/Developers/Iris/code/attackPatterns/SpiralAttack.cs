@@ -6,13 +6,15 @@ using UnityEngine;
 public class SpiralAttack : AttackClass
 {
     public GameObject projectilePrefab;
+    ObjectPoolManager pooler;
     public int projectilePerWaveNo = 6;
     public int numberOfWaves = 10;
     public float timeBetweenWaves = 0.2f;
     public int angleBetweenWaves = 5;
 
-    public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim)
+    public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim, ref ObjectPoolManager poolMan)
     {
+        pooler = poolMan;
         if (tim.Count() == 0)
         {
             tim.Add(0);//timer between waves
@@ -29,7 +31,10 @@ public class SpiralAttack : AttackClass
 
             for (int i = 0; i < projectilePerWaveNo; i++)
             {
-                Instantiate(projectilePrefab, gameObject.transform.position, UnityEngine.Quaternion.Euler(rotation));
+                GameObject obj = pooler.GetFreeObject(projectilePrefab.name);
+                obj.GetComponent<bossProjectile>().InstantiateComponent(ref pooler, projectilePrefab.name);
+                obj.transform.position = transform.position;
+                obj.transform.rotation = UnityEngine.Quaternion.Euler(rotation);
                 rotation.z += rotStep;
             }
             itt[0]++;
