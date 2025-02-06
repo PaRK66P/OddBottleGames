@@ -33,11 +33,13 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void InitialiseComponent(float dSpeed, float dDashTime, float dDashDistance, LayerMask dDamageLayers)
+    public void InitialiseComponent(float dSpeed, float dDashTime, float dDashDistance, float dDashCooldown, float dDashInputBuffer, LayerMask dDamageLayers)
     {
         speed = dSpeed;
         dashTime = dDashTime;
         dashDistance = dDashDistance;
+        dashCooldown = dDashCooldown;
+        dashInputBuffer = dDashInputBuffer;
         damageLayers = dDamageLayers;
     }
 
@@ -95,10 +97,12 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Dash");
 
         lastDashInputTime = Time.time;
-
-        dash = true;
-        dashTimer = 0.0f;
-        dashStart = new Vector2(transform.position.x, transform.position.y);
-        dashDirection = movementDirection;
+        if (!dash)
+        {
+            dash = true;
+            dashTimer = 0.0f;
+            dashStart = new Vector2(transform.position.x, transform.position.y);
+            dashDirection = movementDirection;
+        }
     }
 }
