@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum AIType
+{
+    SHOOTER,
+    BLASTER,
+    SPRAYER
+}
 public class AISimpleBehaviour : MonoBehaviour
 {
     public GameObject player;
@@ -21,6 +27,9 @@ public class AISimpleBehaviour : MonoBehaviour
     private List<GameObject> projectiles = new List<GameObject>();
 
     public ObjectPoolManager objectPoolManager;
+
+    public AIType aiMode = AIType.SHOOTER;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -119,19 +128,72 @@ public class AISimpleBehaviour : MonoBehaviour
 
     void ShootAtPlayer()
     {
-        //Debug.Log("shoot");
-        GameObject newBullet = objectPoolManager.GetFreeObject("AIProjectileProto");
-        //Debug.Log(newBullet);
-        Vector3 toPlayer = player.transform.position - this.transform.position;
-        AIProjectileScript projScript = newBullet.GetComponent<AIProjectileScript>();
-        projScript.SetBulletDirectionAndSpeed(toPlayer, 8);
-        newBullet.transform.position = this.transform.position + toPlayer.normalized;
-        projScript.owner = this.gameObject;
-        projScript.toBeDestroyed = false;
-        projScript.projectileTimer = 5.0f;
-        projectiles.Add(newBullet);
+        switch (aiMode)
+        {
+            case AIType.SHOOTER:
+            {
+                //Debug.Log("shoot");
+                GameObject newBullet = objectPoolManager.GetFreeObject("AIProjectileProto");
+                //Debug.Log(newBullet);
+                Vector3 toPlayer = player.transform.position - this.transform.position;
+                AIProjectileScript projScript = newBullet.GetComponent<AIProjectileScript>();
+                projScript.SetBulletDirectionAndSpeed(toPlayer, 8);
+                newBullet.transform.position = this.transform.position + toPlayer.normalized;
+                projScript.owner = this.gameObject;
+                projScript.toBeDestroyed = false;
+                projScript.projectileTimer = 5.0f;
+                projectiles.Add(newBullet);
+                break;
+            }
+            case AIType.BLASTER:
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    //Debug.Log("shoot");
+                    GameObject newBullet = objectPoolManager.GetFreeObject("AIProjectileProto");
+                    //Debug.Log(newBullet);
+                    Vector3 toPlayer = player.transform.position - this.transform.position;
+                    AIProjectileScript projScript = newBullet.GetComponent<AIProjectileScript>();
+                    float randomAngle = Random.Range(-20.0f, 20.0f);
+                    Vector3 bulletDir = Quaternion.Euler(0, 0, randomAngle) * toPlayer;
+                    projScript.SetBulletDirectionAndSpeed(bulletDir, 8);
+                    newBullet.transform.position = this.transform.position + toPlayer.normalized;
+                    projScript.owner = this.gameObject;
+                    projScript.toBeDestroyed = false;
+                    projScript.projectileTimer = 5.0f;
+                    projectiles.Add(newBullet);
+                }
+                break;
+            }
+            case AIType.SPRAYER:
+            {
+                
+                StartCoroutine(SprayerShooting());
+                break;
+            }
+        }
     }
 
+    IEnumerator SprayerShooting()
+    {
+        for (int i = -2; i < 3; i++)
+        {
+            yield return new WaitForSeconds(0.1f);
+            //Debug.Log("shoot");
+            GameObject newBullet = objectPoolManager.GetFreeObject("AIProjectileProto");
+            //Debug.Log(newBullet);
+            Vector3 toPlayer = player.transform.position - this.transform.position;
+            AIProjectileScript projScript = newBullet.GetComponent<AIProjectileScript>();
+            float bulletMaxAngle = 20.0f;
+            Vector3 bulletDir = Quaternion.Euler(0, 0, bulletMaxAngle * i) * toPlayer;
+            projScript.SetBulletDirectionAndSpeed(bulletDir, 8);
+            newBullet.transform.position = this.transform.position + toPlayer.normalized;
+            projScript.owner = this.gameObject;
+            projScript.toBeDestroyed = false;
+            projScript.projectileTimer = 5.0f;
+            projectiles.Add(newBullet);
+        }
+    }
     void BulletCleanUp()
     {
         List<GameObject> releasedBullets = new List<GameObject>();
