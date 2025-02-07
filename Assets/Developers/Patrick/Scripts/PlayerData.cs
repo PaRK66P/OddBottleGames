@@ -20,6 +20,7 @@ public class PlayerData : ScriptableObject
     [Header("Shooting")]
     public GameObject baseProjectileType;
     [Min(0.0f)] public float baseProjectileSpeed;
+    [Min(0.0f)] public float fireRate;
 
     [Header("Damage")]
     [Min(0.0f)] public float controlLossTime;

@@ -9,6 +9,9 @@ public class PlayerDebugData : ScriptableObject
     public bool canDropWeapon = false;
     public GameObject weaponObject;
 
+    [Header("Dashing")]
+    public bool dashTowardsMouse = false;
+
     // Start is called before the first frame update
     void Start()
     {

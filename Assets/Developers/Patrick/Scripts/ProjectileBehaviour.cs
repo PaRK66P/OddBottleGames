@@ -46,7 +46,10 @@ public class ProjectileBehaviour : MonoBehaviour
                 collision.gameObject.GetComponent<AISimpleDetectionScript>().TakeDamage(1);
             }
 
-            Debug.Log(collision.gameObject);
+            poolManager.ReleaseObject(objectName, gameObject);
+        }
+        else if (collision.gameObject.layer == 6)
+        {
             poolManager.ReleaseObject(objectName, gameObject);
         }
     }

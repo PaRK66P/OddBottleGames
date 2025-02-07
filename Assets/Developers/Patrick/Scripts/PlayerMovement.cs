@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     private float lastDashTime = -10.0f;
     private float lastDashInputTime = -10.0f;
 
+    private bool dashTowardsMouse = false;
+
     private Vector2 knockbackForce = Vector2.zero;
 
     // Start is called before the first frame update
@@ -33,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void InitialiseComponent(float dSpeed, float dDashTime, float dDashDistance, float dDashCooldown, float dDashInputBuffer, LayerMask dDamageLayers)
+    public void InitialiseComponent(float dSpeed, float dDashTime, float dDashDistance, float dDashCooldown, float dDashInputBuffer, LayerMask dDamageLayers, bool dashingTowardsMouse)
     {
         speed = dSpeed;
         dashTime = dDashTime;
@@ -41,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         dashCooldown = dDashCooldown;
         dashInputBuffer = dDashInputBuffer;
         damageLayers = dDamageLayers;
+        dashTowardsMouse = dashingTowardsMouse;
     }
 
     // Update is called once per frame
@@ -52,6 +55,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (movementInput != Vector2.zero)
+        {
+            movementDirection = movementInput.normalized;
+        }
+
         if (knockbackForce != Vector2.zero)
         {
             dash = false;
@@ -81,8 +89,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 return;
             }
-
-            if (Time.time - lastDashInputTime > dashInputBuffer) // Buffer has been exceeded
+            else if (Time.time - lastDashInputTime > dashInputBuffer) // Buffer has been exceeded
             {
                 dash = false;
             }
@@ -90,10 +97,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.velocity = movementInput * speed;
-        if(rb.velocity != Vector2.zero)
-        {
-            movementDirection = rb.velocity.normalized;
-        }
     }
 
     public void SetMovementInput(InputAction.CallbackContext context)
@@ -111,7 +114,8 @@ public class PlayerMovement : MonoBehaviour
             dash = true;
             dashTimer = 0.0f;
             dashStart = new Vector2(transform.position.x, transform.position.y);
-            dashDirection = movementDirection;
+            dashDirection = dashTowardsMouse ? new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x - transform.position.x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y - transform.position.y).normalized
+                : movementDirection;
         }
     }
 

@@ -53,6 +53,7 @@ public class PlayerInputManager : MonoBehaviour
         dashAction.performed += playerMovement.PlayerDashInput;
         dashAction.performed += DebugMessage;
         fireAction.performed += playerShooting.PlayerFireInput;
+        fireAction.canceled += playerShooting.PlayerStopFireInput;
     }
 
     public void DebugMessage(InputAction.CallbackContext context)
@@ -70,5 +71,6 @@ public class PlayerInputManager : MonoBehaviour
         movementAction.canceled -= playerMovement.SetMovementInput;
         dashAction.performed -= playerMovement.PlayerDashInput;
         fireAction.performed -= playerShooting.PlayerFireInput;
+        fireAction.canceled -= playerShooting.PlayerStopFireInput;
     }
 }

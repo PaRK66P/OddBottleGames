@@ -14,16 +14,20 @@ public class PlayerShooting : MonoBehaviour
 
     private ObjectPoolManager poolManager;
 
+    private float fireRate;
+    private float fireTime;
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    public void InitialiseComponent(GameObject projectile, float dProjectileSpeed, bool dCanDropWeapon, ref ObjectPoolManager dPoolManager)
+    public void InitialiseComponent(GameObject projectile, float dProjectileSpeed, float dFireRate, bool dCanDropWeapon, ref ObjectPoolManager dPoolManager)
     {
         projectilePrefab = projectile;
         projectileSpeed = dProjectileSpeed;
+        fireRate = dFireRate;
         canDropWeapon = dCanDropWeapon;
         poolManager = dPoolManager;
     }
@@ -35,7 +39,7 @@ public class PlayerShooting : MonoBehaviour
 
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
 
-        if (fireInput)
+        if (fireInput && Time.time - fireTime >= fireRate)
         {
             Vector3 rotation = mouseWorldPos - transform.position;
             float rotz = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
@@ -47,17 +51,18 @@ public class PlayerShooting : MonoBehaviour
                 projectileSpeed,
                 ref poolManager,
                 projectilePrefab.name);
-   
-            fireInput = false;
+            fireTime = Time.time;
         }
     }
 
     public void PlayerFireInput(InputAction.CallbackContext context)
     {
-        if (canFire)
-        {
-            fireInput = true;
-        }
+        fireInput = true;
+    }
+
+    public void PlayerStopFireInput(InputAction.CallbackContext context)
+    {
+        fireInput = false;
     }
 
     public void DisableFire()

@@ -41,8 +41,8 @@ public class PlayerManager : MonoBehaviour
         playerShooting = gameObject.AddComponent<PlayerShooting>();
 
         playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
-        playerMovement.InitialiseComponent(playerData.speed, playerData.dashTime, playerData.dashDistance, playerData.dashCooldown, playerData.dashInputBuffer, playerData.damageLayers);
-        playerShooting.InitialiseComponent(playerData.baseProjectileType, playerData.baseProjectileSpeed, debugData.canDropWeapon, ref poolManager);
+        playerMovement.InitialiseComponent(playerData.speed, playerData.dashTime, playerData.dashDistance, playerData.dashCooldown, playerData.dashInputBuffer, playerData.damageLayers, debugData.dashTowardsMouse);
+        playerShooting.InitialiseComponent(playerData.baseProjectileType, playerData.baseProjectileSpeed, playerData.fireRate, debugData.canDropWeapon, ref poolManager);
 
         playerInputManager.EnableInput();
 
