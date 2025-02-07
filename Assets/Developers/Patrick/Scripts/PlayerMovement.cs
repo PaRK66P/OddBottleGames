@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     private float lastDashTime = -10.0f;
     private float lastDashInputTime = -10.0f;
 
+    private Vector2 knockbackForce = Vector2.zero;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +52,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (knockbackForce != Vector2.zero)
+        {
+            dash = false;
+
+            rb.AddForce(knockbackForce, ForceMode2D.Impulse);
+            return;
+        }
+
         if (dash)
         {
             if(Time.time - lastDashTime >= dashCooldown) // Off cooldown
@@ -102,5 +112,10 @@ public class PlayerMovement : MonoBehaviour
             dashStart = new Vector2(transform.position.x, transform.position.y);
             dashDirection = movementDirection;
         }
+    }
+
+    public void KnockbackPlayer(Vector2 direction, float scale)
+    {
+        knockbackForce = direction * scale;
     }
 }

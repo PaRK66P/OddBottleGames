@@ -36,7 +36,9 @@ public class AIProjectileScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerManager>().TakeDamage();
+            Vector2 damageDirection = new Vector2(collision.gameObject.transform.position.x - transform.position.x,
+                collision.gameObject.transform.position.y - transform.position.y);
+            collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized);
         }
     }
 

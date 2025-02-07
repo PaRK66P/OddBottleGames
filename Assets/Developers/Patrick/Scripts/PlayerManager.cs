@@ -28,11 +28,13 @@ public class PlayerManager : MonoBehaviour
     private event EventHandler OnDamageTaken;
 
     private Rigidbody2D rb;
+    private SpriteRenderer image;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        image = rb.GetComponent<SpriteRenderer>();
 
         playerInputManager = gameObject.AddComponent<PlayerInputManager>();
         playerMovement = gameObject.AddComponent<PlayerMovement>();
@@ -72,17 +74,22 @@ public class PlayerManager : MonoBehaviour
             {
                 rb.excludeLayers = 0;
                 isDamaged = false;
+                image.color = Color.white;
             }
         }
     }
 
-    public void TakeDamage()
+    public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f)
     {
         if (isDamaged) { return; }
 
         rb.excludeLayers = playerData.damageLayers;
         isDamaged = true;
         playerInputManager.DisableInput();
+        image.color = Color.blue;
+        timeOfDamage = Time.time;
+        invulnerableTime = damageTime;
+        playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);
 
         OnDamageTaken?.Invoke(this, EventArgs.Empty);
     }
