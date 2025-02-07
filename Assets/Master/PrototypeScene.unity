@@ -2985,6 +2985,10 @@ PrefabInstance:
       propertyPath: dashDistance
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7323071417537107713, guid: c384f01ce30b1db42887bafee9cf3810, type: 3}
+      propertyPath: poolManager
+      value: 
+      objectReference: {fileID: 984443862}
     - target: {fileID: 7443885563349530414, guid: c384f01ce30b1db42887bafee9cf3810, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -3255,6 +3259,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &984443862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8157098210090043802, guid: 48bca1a328de6a94f99da60f7b756bfe, type: 3}
+  m_PrefabInstance: {fileID: 2204213228615585164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df5d15268b1d91641912eb80fb9d32c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1035670479
 GameObject:
   m_ObjectHideFlags: 0
@@ -6306,6 +6321,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectPoolManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8157098210090043802, guid: 48bca1a328de6a94f99da60f7b756bfe, type: 3}
+      propertyPath: objectTypes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8157098210090043802, guid: 48bca1a328de6a94f99da60f7b756bfe, type: 3}
+      propertyPath: 'objectTypes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1223489425459614113, guid: 50e3b8fba1c074f4ba558c89a7b1613e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

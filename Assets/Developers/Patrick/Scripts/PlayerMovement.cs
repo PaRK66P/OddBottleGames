@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
             dash = false;
 
             rb.AddForce(knockbackForce, ForceMode2D.Impulse);
+            knockbackForce = Vector2.zero;
             return;
         }
 
