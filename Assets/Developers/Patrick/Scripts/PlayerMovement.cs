@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 rotation = mouseWorldPos - transform.position;
             float rotz = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
-            Debug.Log(mouseWorldPos);
+            //Debug.Log(mouseWorldPos);
 
             ProjectileBehaviour projectile = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(0, 0, rotz)).GetComponent<ProjectileBehaviour>();
             projectile.Instantiate((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)).normalized, projectileSpeed);

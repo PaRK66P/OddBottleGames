@@ -26,7 +26,7 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         if(collision.gameObject.layer == 9)
         {
-            Debug.Log("Trigger");
+            //Debug.Log("Trigger");
 
             if(collision.gameObject.tag == "Companion")
             {
@@ -41,7 +41,7 @@ public class ProjectileBehaviour : MonoBehaviour
                 collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(1);
             }
 
-            Debug.Log(collision.gameObject);
+            //Debug.Log(collision.gameObject);
             Destroy(gameObject);
         }
     }

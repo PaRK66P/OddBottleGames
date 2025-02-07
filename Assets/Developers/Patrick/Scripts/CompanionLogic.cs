@@ -1,7 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+
+public enum CompanionMode
+{
+    MINIBOSS,
+    COMPANION
+}
+
 
 public class CompanionLogic : MonoBehaviour
 {
@@ -11,19 +19,22 @@ public class CompanionLogic : MonoBehaviour
     private float speed;
     [SerializeField]
     private float jumpTime;
-    [SerializeField]
+
     private LayerMask targetLayer;
-    [SerializeField] private float explosionSize;
+    
+    [SerializeField] 
+    private float explosionSize;
 
     [SerializeField]
     private Transform idlePosition;
+
     [SerializeField]
     private float maxHealth;
     private float currentHealth = 15;
 
     [SerializeField]
-    private GameObject[] currentTargets;
-    private int targetIndex = -1;
+    private List<GameObject> currentTargets;
+    private int targetIndex = 0;
 
     [SerializeField]
     private GameObject explosionObject;
@@ -40,18 +51,23 @@ public class CompanionLogic : MonoBehaviour
     private float timer;
     private bool alive = true;
 
-    //REMOVE THIS FUNCTIONALITY
+    private bool modeLayerSelected = false;
+
     [SerializeField]
-    private GameObject choiceObject;
-    [SerializeField]
-    private GameObject bossVersion;
-    [SerializeField]
-    private GameObject companionVersion;
+    private CompanionMode companionMode = CompanionMode.MINIBOSS;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentTargets = new GameObject[4];
+        currentTargets = new List<GameObject>();
+        if (companionMode == CompanionMode.MINIBOSS)
+        {
+            targetLayer = LayerMask.GetMask("Player");
+        }
+        else if (companionMode == CompanionMode.COMPANION)
+        {
+            targetLayer = LayerMask.GetMask("Enemy");
+        }
     }
 
     // Update is called once per frame
@@ -62,16 +78,33 @@ public class CompanionLogic : MonoBehaviour
             return;
         }
 
+        if (!modeLayerSelected)
+        {
+            if (companionMode == CompanionMode.MINIBOSS)
+            {
+                targetLayer = LayerMask.GetMask("Player");
+            }
+            else if (companionMode == CompanionMode.COMPANION)
+            {
+                targetLayer = LayerMask.GetMask("Enemy");
+            }
+            modeLayerSelected = true;
+        }
+    
+
         timer += Time.deltaTime;
         if (!selectedAction)
         {
             GameObject targetObject = GetClosestTarget();
             if(targetObject == null)
             {
-                Vector3 direction = idlePosition.position - transform.position + Vector3.down * 1.5f; 
-                direction = direction.normalized;
-
-                transform.position += direction * speed * Time.deltaTime;
+                if ((idlePosition.position - transform.position + Vector3.down * 1.5f).magnitude > 0.1f)
+                {
+                    Vector3 direction = idlePosition.position - transform.position + Vector3.down * 1.5f;
+                    direction = direction.normalized;
+                    transform.position += direction * speed * Time.deltaTime;
+                }
+                
             }
             else
             {
@@ -99,6 +132,7 @@ public class CompanionLogic : MonoBehaviour
         {
             if (currentAttackType == 0)
             {
+
                 transform.position = Vector3.Lerp(startingPosition, selectedTargetPosition - (selectedTargetPosition - startingPosition).normalized * explosionSize, Mathf.Min(timer / jumpTime, 1));
 
                 if(timer > jumpTime)
@@ -139,7 +173,7 @@ public class CompanionLogic : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(1 << collision.gameObject.layer);
+        //Debug.Log(1 << collision.gameObject.layer);
         if((1 << collision.gameObject.layer) == targetLayer.value)
         {
             Debug.Log("Detected");
@@ -157,45 +191,12 @@ public class CompanionLogic : MonoBehaviour
 
     private void AddTarget(GameObject target)
     {
-        targetIndex++;
-        if(targetIndex == currentTargets.Length)
-        {
-            GameObject[] newList = new GameObject[currentTargets.Length + 1];
-            for(int i = 0; i < currentTargets.Length; i++)
-            {
-                newList[i] = currentTargets[i];
-            }
-
-            currentTargets = newList;
-        }
-
-        currentTargets[targetIndex] = target;
+        currentTargets.Add(target);
     }
 
     private void RemoveTarget(GameObject target)
     {
-        int removalIndex = Array.IndexOf(currentTargets, target);
-        if (removalIndex == -1)
-        {
-           return;
-        }
-
-        GameObject[] newList = new GameObject[currentTargets.Length - 1];
-
-        currentTargets[removalIndex] = null;
-        targetIndex--;
-
-        int i = 0;
-        foreach (GameObject obj in currentTargets)
-        {
-            if (obj == null)
-            {
-                continue;
-            }
-
-            newList[i] = obj;
-            i++;
-        }
+        currentTargets.Remove(target);
     }
 
     private GameObject GetClosestTarget()
@@ -241,23 +242,32 @@ public class CompanionLogic : MonoBehaviour
     {
         alive = false;
 
-        if (!companion)
+        Debug.Log("defeated");
+        if (companionMode != CompanionMode.COMPANION)
         {
-            choiceObject.SetActive(true);
+            JoinPlayer();
         }
     }
 
     public void JoinBoss()
     {
-        choiceObject.SetActive(false);
-        bossVersion.SetActive(true);
-        Destroy(gameObject);
+        this.companionMode = CompanionMode.MINIBOSS;
+        modeLayerSelected = false;
+        alive = true;
     }
 
     public void JoinPlayer()
     {
-        choiceObject.SetActive(false);
-        companionVersion.SetActive(true);
-        Destroy(gameObject);
+        this.companionMode = CompanionMode.COMPANION;
+        idlePosition = GameObject.Find("PlayerProto").GetComponent<Transform>();
+        currentHealth = 15;
+        //targetIndex = -1;
+        modeLayerSelected = false;
+        alive = true;
+
+        GetComponent<CircleCollider2D>().enabled = false;
+        currentTargets.Clear();
+        GetComponent<CircleCollider2D>().enabled = true;
+        GetClosestTarget();
     }
 }
