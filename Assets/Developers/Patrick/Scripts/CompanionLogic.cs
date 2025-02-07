@@ -42,6 +42,9 @@ public class CompanionLogic : MonoBehaviour
     [SerializeField]
     private GameObject shockwaveObject;
 
+    [SerializeField]
+    ObjectPoolManager objectPoolManager;
+
     private bool selectedAction = false;
     private int currentAttackType = 1;
     private int shockwaveIterations = 0;
@@ -104,7 +107,6 @@ public class CompanionLogic : MonoBehaviour
                     direction = direction.normalized;
                     transform.position += direction * speed * Time.deltaTime;
                 }
-                
             }
             else
             {
@@ -160,7 +162,15 @@ public class CompanionLogic : MonoBehaviour
 
     private void CreateExplosion(Vector3 targetPosition)
     {
-        Instantiate(explosionObject, targetPosition, Quaternion.identity).GetComponent<ExplosionLogic>().InitialiseEffect(targetLayer, 5, 20, 0.5f, 1);
+       // Instantiate(explosionObject, targetPosition, Quaternion.identity).GetComponent<ExplosionLogic>().InitialiseEffect(targetLayer, 5, 20, 0.5f, 1);
+
+        GameObject newExplosion = objectPoolManager.GetFreeObject("Explosion");
+
+        newExplosion.transform.rotation = Quaternion.identity;
+        newExplosion.transform.position = targetPosition;
+
+        ExplosionLogic newShockwaveScript = newExplosion.GetComponent<ExplosionLogic>();
+        newShockwaveScript.InitialiseEffect(targetLayer, 5, 20, 0.5f, 1, objectPoolManager);
     }
 
     private void CreateShockwave(Vector3 targetPosition)
@@ -168,7 +178,13 @@ public class CompanionLogic : MonoBehaviour
         Vector3 rotation = targetPosition - transform.position;
         float rotz = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
-        Instantiate(shockwaveObject, transform.position, Quaternion.Euler(0, 0, rotz)).GetComponent<ShockwaveLogic>().InitialiseEffect(targetLayer, 2, rotation.normalized, 8);
+        GameObject newShockwave = objectPoolManager.GetFreeObject("Shockwave");
+        
+        newShockwave.transform.rotation = Quaternion.Euler(0, 0, rotz);
+        newShockwave.transform.position = transform.position;
+
+        ShockwaveLogic newShockwaveScript = newShockwave.GetComponent<ShockwaveLogic>();
+        newShockwaveScript.InitialiseEffect(targetLayer, 2, rotation.normalized, 8, objectPoolManager);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

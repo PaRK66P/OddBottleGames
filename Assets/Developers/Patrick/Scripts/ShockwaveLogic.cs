@@ -12,6 +12,10 @@ public class ShockwaveLogic : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private ObjectPoolManager objectPoolManager;
+
+    private float timer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +25,11 @@ public class ShockwaveLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+        if (timer > 5.0f) 
+        {
+            objectPoolManager.ReleaseObject("Shockwave", this.gameObject);
+        }
     }
 
     private void FixedUpdate()
@@ -48,12 +56,14 @@ public class ShockwaveLogic : MonoBehaviour
         }
     }
 
-    public void InitialiseEffect(LayerMask damageLayer, float totalDamage, Vector2 direction, float speedMovement)
+    public void InitialiseEffect(LayerMask damageLayer, float totalDamage, Vector2 direction, float speedMovement, ObjectPoolManager objMgr)
     {
         target = damageLayer;
         damage = totalDamage;
         directionMovement = direction;
         speed = speedMovement;
+        objectPoolManager = objMgr;
+        timer = 0;
     }
 
 

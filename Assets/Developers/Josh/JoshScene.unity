@@ -2100,6 +2100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectTypes:
   - {fileID: 7652979212732001909, guid: 8ec0ffbae7cf1264b87544a1b8ecad6d, type: 3}
+  - {fileID: 3435594869752445726, guid: b441c1341214a324aa1cb8c04549edda, type: 3}
+  - {fileID: 4477185975153253371, guid: bbab72cfdb288704bb440d570e037d51, type: 3}
 --- !u!4 &1774741689
 Transform:
   m_ObjectHideFlags: 0
@@ -2127,6 +2129,10 @@ PrefabInstance:
       propertyPath: idlePosition
       value: 
       objectReference: {fileID: 928464624}
+    - target: {fileID: 820337604963442035, guid: dc8165da833c66d41aeeb5375d28ebb7, type: 3}
+      propertyPath: objectPoolManager
+      value: 
+      objectReference: {fileID: 1774741688}
     - target: {fileID: 4567305192621164428, guid: dc8165da833c66d41aeeb5375d28ebb7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.49
