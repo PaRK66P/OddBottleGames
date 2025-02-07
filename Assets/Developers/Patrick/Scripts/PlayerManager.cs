@@ -39,7 +39,6 @@ public class PlayerManager : MonoBehaviour
             Vector3 weaponPos = new Vector3(5 * Mathf.Cos(randomAngle), 5 * Mathf.Sin(randomAngle)) + transform.position;
             Instantiate(weaponDrop, weaponPos, Quaternion.identity);
         }
-        
     }
 
     public void RegainWeapon()
