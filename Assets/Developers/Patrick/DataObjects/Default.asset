@@ -15,8 +15,11 @@ MonoBehaviour:
   speed: 5
   dashTime: 0.2
   dashDistance: 5
+  dashCooldown: 0
+  dashInputBuffer: 0
   damageLayers:
     serializedVersion: 2
     m_Bits: 2048
   baseProjectileType: {fileID: 1223489425459614113, guid: 50e3b8fba1c074f4ba558c89a7b1613e, type: 3}
   baseProjectileSpeed: 15
+  controlLossTime: 0.2
