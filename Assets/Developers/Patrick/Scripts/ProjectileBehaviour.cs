@@ -6,6 +6,7 @@ public class ProjectileBehaviour : MonoBehaviour
 {
     private ObjectPoolManager poolManager;
     private string objectName;
+    private GameObject playerRef;
 
     // Start is called before the first frame update
     void Start()
@@ -13,18 +14,28 @@ public class ProjectileBehaviour : MonoBehaviour
         
     }
 
-    public void InitialiseComponent(Vector2 moveDirection, float speed, ref ObjectPoolManager dPoolManager, string prefabName)
+    public void InitialiseComponent(Vector2 moveDirection, float speed, ref ObjectPoolManager dPoolManager, string prefabName, GameObject playerRefrence)
     {
         GetComponent<Rigidbody2D>().velocity = moveDirection * speed;
         poolManager = dPoolManager;
 
         objectName = prefabName;
+        playerRef = playerRefrence;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void OnDestroy()
+    {
+        if (playerRef != null)
+        {
+
+            playerRef.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

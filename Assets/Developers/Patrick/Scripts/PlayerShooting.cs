@@ -50,7 +50,8 @@ public class PlayerShooting : MonoBehaviour
             projectile.GetComponent<ProjectileBehaviour>().InitialiseComponent((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)).normalized, 
                 projectileSpeed,
                 ref poolManager,
-                projectilePrefab.name);
+                projectilePrefab.name,
+                gameObject);
             fireTime = Time.time;
         }
     }

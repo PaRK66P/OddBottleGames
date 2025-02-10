@@ -22,12 +22,12 @@ public class ObjectPoolManager : MonoBehaviour
             GameObject objType = objectTypes[i];
             objectPools.Add(new ObjectPool<GameObject>(
                 createFunc: () => Instantiate(objType),
-                actionOnGet: obj => obj.SetActive(true),
-                actionOnRelease: obj => obj.SetActive(false),
-                actionOnDestroy: obj => Destroy(obj),
+                actionOnGet: obj => { obj.SetActive(true); obj.GetComponentInChildren<SpriteRenderer>().color = Color.red; },
+                actionOnRelease: obj => { obj.GetComponentInChildren<SpriteRenderer>().color = Color.blue; },
+                actionOnDestroy: obj => obj.GetComponentInChildren<SpriteRenderer>().color = Color.green,
                 collectionCheck: false,
                 defaultCapacity: 5,
-                maxSize: 100
+                maxSize: 500
                 ));
         }
     }
@@ -39,6 +39,7 @@ public class ObjectPoolManager : MonoBehaviour
 
     public void ReleaseObject(string objectTypeName, GameObject releaseObject)
     {
+        Debug.Log("Release " + objectTypeName);
         objectPools[lookupTable[objectTypeName]].Release(releaseObject);
     }
 }
