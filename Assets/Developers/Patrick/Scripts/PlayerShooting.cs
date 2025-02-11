@@ -121,13 +121,6 @@ public class PlayerShooting : MonoBehaviour
             return;
         }
 
-        if(currentAmmo <= 0) // Trying to shoot with no ammo
-        {
-            StartCoroutine(ReloadAmmo());
-            return;
-        }
-
-
         // Start charging a shot
         timeForChargedShot = Time.time;
 
@@ -172,6 +165,12 @@ public class PlayerShooting : MonoBehaviour
 
         currentAmmo--;
         ammoUIObjects[currentAmmo].SetActive(false);
+
+        if (currentAmmo <= 0) // Trying to shoot with no ammo
+        {
+            StartCoroutine(ReloadAmmo());
+            return;
+        }
     }
     private IEnumerator ReloadAmmo()
     {
@@ -210,7 +209,7 @@ public class PlayerShooting : MonoBehaviour
     #region Charge Firing
     private void ChargeAmmo()
     {
-        ammoUIObjects[chargedAmmo].GetComponent<Image>().color = Color.blue;
+        ammoUIObjects[maxAmmo - chargedAmmo - 1].GetComponent<Image>().color = Color.blue;
         chargedAmmo++;
     }
 
