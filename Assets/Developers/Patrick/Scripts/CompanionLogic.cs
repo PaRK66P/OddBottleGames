@@ -250,21 +250,36 @@ public class CompanionLogic : MonoBehaviour
 
         if (currentHealth < 0)
         {
-            Defeated();
+            StartCoroutine(Defeated());
         }
     }
 
-    private void Defeated()
+    private IEnumerator Defeated()
     {
         alive = false;
-
+        VisualNovelScript visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+        visualNovelManager.StartNovelSceneByName("Miniboss tester");
         Debug.Log("defeated");
-        if (companionMode != CompanionMode.COMPANION)
+        selectedAction = false;
+        currentAttackType = 0;
+        shockwaveIterations = 0;
+        timer = 0.0f;
+        yield return WaitForNovel();
+        if (visualNovelManager.GetLastSelectionID() == 0)
         {
             JoinPlayer();
         }
+        else
+        {
+            JoinBoss();
+        }
     }
 
+    IEnumerator WaitForNovel()
+    {
+        VisualNovelScript visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+        yield return new WaitWhile(() => visualNovelManager.isNovelSection == true);
+    }
     public void JoinBoss()
     {
         this.companionMode = CompanionMode.MINIBOSS;

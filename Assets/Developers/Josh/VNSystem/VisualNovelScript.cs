@@ -175,7 +175,7 @@ public class VisualNovelScript : MonoBehaviour
         {
             GameObject newButton = Instantiate(buttonPrefab, buttonContainer);
             newButton.name = "Button_" + 0;
-
+            newButton.transform.localScale = new Vector3(2,2,1);
 
             Text buttonText = newButton.GetComponentInChildren<Text>();
             if (buttonText != null)
@@ -195,7 +195,9 @@ public class VisualNovelScript : MonoBehaviour
         {
             GameObject newButton = Instantiate(buttonPrefab, buttonContainer);
             newButton.name = "Button_" + i;
-            newButton.transform.localPosition = new Vector3(0, -45 * i, 0);
+            newButton.transform.localPosition = new Vector3(0, -90 * i, 0);
+            newButton.transform.localScale = new Vector3(2,2,1);
+
                
 
             Text buttonText = newButton.GetComponentInChildren<Text>();
