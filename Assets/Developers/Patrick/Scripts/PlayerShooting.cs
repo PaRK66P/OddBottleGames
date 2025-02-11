@@ -103,6 +103,7 @@ public class PlayerShooting : MonoBehaviour
                 if(currentAmmo - chargedAmmo <= 0)
                 {
                     startCharging = false; // Reached max charged Ammo
+                    return;
                 }
 
                 ChargeAmmo();
@@ -201,12 +202,7 @@ public class PlayerShooting : MonoBehaviour
     {
         interrupted = true;
         startCharging = false;
-        chargedAmmo = 0;
-
-        foreach (GameObject obj in ammoUIObjects)
-        {
-            obj.GetComponent<Image>().color = Color.white;
-        }
+        ReleaseChargedShots();
     }
 
     #endregion
@@ -222,7 +218,7 @@ public class PlayerShooting : MonoBehaviour
     {
         firingChargedShot = true;
 
-        float startTime = Time.time;
+        float startTime;
 
         for (int i = 0; i < chargedAmmo; i++)
         {
@@ -230,6 +226,8 @@ public class PlayerShooting : MonoBehaviour
             {
                 break;
             }
+
+            startTime = Time.time;
 
             Fire();
 
@@ -239,9 +237,19 @@ public class PlayerShooting : MonoBehaviour
             }
         }
 
-        chargedAmmo = 0;
+        ReleaseChargedShots();
 
         firingChargedShot = false;
+    }
+
+    private void ReleaseChargedShots()
+    {
+        foreach (GameObject obj in ammoUIObjects)
+        {
+            obj.GetComponent<Image>().color = Color.white;
+        }
+
+        chargedAmmo = 0;
     }
     #endregion
 
