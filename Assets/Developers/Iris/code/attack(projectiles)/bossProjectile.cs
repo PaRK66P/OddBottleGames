@@ -14,8 +14,7 @@ public class bossProjectile : MonoBehaviour
     {
         
     }
-
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
@@ -29,11 +28,12 @@ public class bossProjectile : MonoBehaviour
         pooler.ReleaseObject(prefabName, gameObject);
     }
 
-    public void InstantiateComponent(ref ObjectPoolManager poolMan, string prefName)
+    public void InstantiateComponent(ref ObjectPoolManager poolMan, string prefName, Vector3 pos, Vector3 rot)
     {
         pooler = poolMan;
         prefabName = prefName;
-        ///rotation and stuff
+        transform.position = pos;
+        transform.rotation = UnityEngine.Quaternion.Euler(rot);
         rb.velocity = transform.right * speed;
     }
 }

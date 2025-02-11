@@ -31,9 +31,10 @@ public class attack2 : AttackClass
                 {
                     pos = GameObject.FindGameObjectWithTag("Player").transform.position;
                 }
+                UnityEngine.Vector3 rot = new UnityEngine.Vector3(0, 0, 0);
 
                 GameObject obj = pooler.GetFreeObject(artileryPrefab.name);
-                obj.GetComponent<artileryAttack>().InstantiateComponent(ref pooler, artileryPrefab.name);
+                obj.GetComponent<artileryAttack>().InstantiateComponent(ref pooler, artileryPrefab.name, pos, rot);
                 obj.transform.position = pos;
                 obj.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, 0);
 

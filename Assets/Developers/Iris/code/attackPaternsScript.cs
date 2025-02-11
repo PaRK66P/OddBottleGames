@@ -90,7 +90,7 @@ public class attackPaternsScript : MonoBehaviour
                 int n = 0;
                 if (patList[attackItterator].Count() > 1)
                 {
-                    n = UnityEngine.Random.Range(0, patList[attackItterator].Count() + 1);
+                    n = UnityEngine.Random.Range(0, patList[attackItterator].Count());
                     currentAttack = patList[attackItterator][n];
                 }
                 currentAttack = patList[attackItterator][n];

@@ -11,13 +11,12 @@ public class artileryAttack : MonoBehaviour
     string prefabName;
 
     float timeElapsed = 0;
-
-    bool damage;
+    bool damage = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        damage = false;
+        
     }
 
     // Update is called once per frame
@@ -43,12 +42,17 @@ public class artileryAttack : MonoBehaviour
         if(collision.gameObject.tag == "Player" && damage)
         {
             collision.gameObject.GetComponent<PlayerManager>().TakeDamage();
+            //damage = false;
         }
     }
 
-    public void InstantiateComponent(ref ObjectPoolManager poolMan, string prefName)
+    public void InstantiateComponent(ref ObjectPoolManager poolMan, string prefName, Vector3 pos, Vector3 rot)
     {
         pooler = poolMan;
         prefabName = prefName;
+        transform.position = pos;
+        transform.rotation = UnityEngine.Quaternion.Euler(rot);
+        timeElapsed = 0;
+        damage = false;
     }
 }

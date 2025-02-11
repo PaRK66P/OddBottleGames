@@ -32,9 +32,7 @@ public class SpiralAttack : AttackClass
             for (int i = 0; i < projectilePerWaveNo; i++)
             {
                 GameObject obj = pooler.GetFreeObject(projectilePrefab.name);
-                obj.GetComponent<bossProjectile>().InstantiateComponent(ref pooler, projectilePrefab.name);
-                obj.transform.position = transform.position;
-                obj.transform.rotation = UnityEngine.Quaternion.Euler(rotation);
+                obj.GetComponent<bossProjectile>().InstantiateComponent(ref pooler, projectilePrefab.name, transform.position, rotation);
                 rotation.z += rotStep;
             }
             itt[0]++;

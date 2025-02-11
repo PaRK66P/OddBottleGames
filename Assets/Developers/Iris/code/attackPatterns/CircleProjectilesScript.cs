@@ -17,9 +17,7 @@ public class CircleProjectilesScript : AttackClass
         for (int i = 0; i < projectileAttackNo; i++)
         {
             GameObject obj = pooler.GetFreeObject(projectilePrefab.name);
-            obj.GetComponent<bossProjectile>().InstantiateComponent(ref pooler, projectilePrefab.name);
-            obj.transform.position = transform.position;
-            obj.transform.rotation = UnityEngine.Quaternion.Euler(rotation);
+            obj.GetComponent<bossProjectile>().InstantiateComponent(ref pooler, projectilePrefab.name, transform.position, rotation);
             rotation.z += rotStep;
         }
         b = false;
