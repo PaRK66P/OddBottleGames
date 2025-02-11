@@ -12,15 +12,21 @@ public class PlayerData : ScriptableObject
     [Min(0.0f)] public float dashTime;
     [Min(0.0f)] public float dashDistance;
     [Min(0.0f)] public float dashCooldown;
-    [Min(0.0f)] public float dashInputBuffer;
 
     [Header("Collisions")]
     public LayerMask damageLayers;
 
     [Header("Shooting")]
+    public GameObject ammoUIObject;
+    [Min(0.0f)] public float fireRate;
+    [Min(0.0f)] public float timeToChargeShot;
+    [Min(0.0f)] public float chargeShotIntervals;
+    [Min(1)] public int maxAmmo;
+    [Min(0.0f)] public float reloadTime;
+
+    [Header("Projectile")]
     public GameObject baseProjectileType;
     [Min(0.0f)] public float baseProjectileSpeed;
-    [Min(0.0f)] public float fireRate;
 
     [Header("Damage")]
     [Min(0.0f)] public float controlLossTime;

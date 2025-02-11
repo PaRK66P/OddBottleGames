@@ -7,6 +7,8 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField]
     private ObjectPoolManager poolManager;
+    [SerializeField]
+    private GameObject UICanvas;
 
     [SerializeField]
     private PlayerData playerData;
@@ -40,9 +42,15 @@ public class PlayerManager : MonoBehaviour
         playerMovement = gameObject.AddComponent<PlayerMovement>();
         playerShooting = gameObject.AddComponent<PlayerShooting>();
 
+        playerMovement.InitialiseComponent(playerData.speed, playerData.dashTime, playerData.dashDistance, playerData.dashCooldown, debugData.dashInputBuffer, playerData.damageLayers, debugData.dashTowardsMouse);
+        playerShooting.InitialiseComponent(playerData.ammoUIObject,
+            playerData.fireRate,
+            playerData.timeToChargeShot, playerData.chargeShotIntervals,
+            playerData.maxAmmo, playerData.reloadTime,
+            playerData.baseProjectileType, playerData.baseProjectileSpeed, 
+            debugData.firingInputBuffer, debugData.canDropWeapon, 
+            ref poolManager, ref UICanvas);
         playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
-        playerMovement.InitialiseComponent(playerData.speed, playerData.dashTime, playerData.dashDistance, playerData.dashCooldown, playerData.dashInputBuffer, playerData.damageLayers, debugData.dashTowardsMouse);
-        playerShooting.InitialiseComponent(playerData.baseProjectileType, playerData.baseProjectileSpeed, playerData.fireRate, debugData.canDropWeapon, ref poolManager);
 
         playerInputManager.EnableInput();
 

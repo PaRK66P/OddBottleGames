@@ -22,9 +22,9 @@ public class ObjectPoolManager : MonoBehaviour
             GameObject objType = objectTypes[i];
             objectPools.Add(new ObjectPool<GameObject>(
                 createFunc: () => Instantiate(objType),
-                actionOnGet: obj => { obj.SetActive(true); obj.GetComponentInChildren<SpriteRenderer>().color = Color.red; },
-                actionOnRelease: obj => { obj.GetComponentInChildren<SpriteRenderer>().color = Color.blue; },
-                actionOnDestroy: obj => obj.GetComponentInChildren<SpriteRenderer>().color = Color.green,
+                actionOnGet: obj => obj.SetActive(true),
+                actionOnRelease: obj => obj.SetActive(false),
+                actionOnDestroy: obj => Destroy(obj),
                 collectionCheck: false,
                 defaultCapacity: 5,
                 maxSize: 500

@@ -2,23 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public float projectileSpeed = 10;
-    public GameObject projectilePrefab;
+    private float projectileSpeed = 10;
+    private GameObject projectilePrefab;
+    private GameObject[] ammoUIObjects;
 
     private bool canDropWeapon = false;
-    public bool canFire = true;
+    private bool canFire = true;
 
     private ObjectPoolManager poolManager;
 
     private float fireRate;
-    private float fireTime;
-    private float startShot = 0.0f;
-    private float chargeShotTime = 0.0f;
     private bool startCharging = false;
     private float timeForChargedShot = 1.0f;
+    private float chargeUpShotTime = 1.0f;
     private bool takeShot = false;
     private float chargeShotIntervals = 0.0f;
     private float lastShotTime = 0.0f;
@@ -32,6 +32,7 @@ public class PlayerShooting : MonoBehaviour
 
     private bool reloading = false;
     private bool firingChargedShot = false;
+    private bool interrupted = false;
 
     // Start is called before the first frame update
     void Start()
@@ -39,22 +40,46 @@ public class PlayerShooting : MonoBehaviour
         
     }
 
-    public void InitialiseComponent(GameObject projectile, float dProjectileSpeed, float dFireRate, int dMaxAmmo, bool dCanDropWeapon, ref ObjectPoolManager dPoolManager)
+    public void InitialiseComponent(GameObject dAmmoUIObject, 
+        float dFireRate, 
+        float dTimeToChargeShot, float dChargeShotIntervals, 
+        int dMaxAmmo, float dReloadTime,
+        GameObject dBaseProjectileType, float dBaseProjectileSpeed, 
+        float dFiringInputBuffer, bool dCanDropWeapon, 
+        ref ObjectPoolManager dPoolManager, ref GameObject dUICanvas)
     {
-        projectilePrefab = projectile;
-        projectileSpeed = dProjectileSpeed;
+
         fireRate = dFireRate;
+
+        timeForChargedShot = dTimeToChargeShot;
+        chargeShotIntervals = dChargeShotIntervals;
+
         maxAmmo = dMaxAmmo;
+        currentAmmo = maxAmmo;
+
+        projectilePrefab = dBaseProjectileType;
+        projectileSpeed = dBaseProjectileSpeed;
+        
+        fireInputBuffer = dFiringInputBuffer;
         canDropWeapon = dCanDropWeapon;
+
         poolManager = dPoolManager;
 
-        currentAmmo = maxAmmo;
+        ammoUIObjects = new GameObject[maxAmmo];
+        for (int i = 0; i < maxAmmo; i++)
+        {
+            ammoUIObjects[i] = Instantiate(dAmmoUIObject, dUICanvas.transform);
+
+            ammoUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.right * 100 * i);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         Debug.DrawLine(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)));
+
+        if(interrupted) { return; }
 
         if (takeShot)
         {
@@ -73,7 +98,7 @@ public class PlayerShooting : MonoBehaviour
         }
         else if (startCharging)
         {
-            if(Time.time - timeForChargedShot < fireRate)
+            if(Time.time - timeForChargedShot >= chargeUpShotTime)
             {
                 if(currentAmmo - chargedAmmo <= 0)
                 {
@@ -90,24 +115,28 @@ public class PlayerShooting : MonoBehaviour
 
     public void PlayerFireInput(InputAction.CallbackContext context)
     {
-        if (reloading)
+        if (reloading || !canFire) // Currently reloading or can't fire
         {
             return;
         }
 
-        if(currentAmmo <= 0)
+        if(currentAmmo <= 0) // Trying to shoot with no ammo
         {
             StartCoroutine(ReloadAmmo());
+            return;
         }
 
-        startShot = Time.time;
+
+        // Start charging a shot
         timeForChargedShot = Time.time;
 
         startCharging = true;
+        interrupted = false;
     }
 
     public void PlayerStopFireInput(InputAction.CallbackContext context)
     {
+        // Check if firing here as we can charge immediately but not fire immediately
         if (!CanFire()) {  return; }
 
         // Signals we want to fire
@@ -117,9 +146,10 @@ public class PlayerShooting : MonoBehaviour
 
     #endregion
 
+    #region Firing
     private bool CanFire()
     {
-        return (Time.time - lastShotTime < fireRate - fireInputBuffer); // Is the fire time within the buffer or past the fire rate
+        return (Time.time - lastShotTime >= fireRate - fireInputBuffer && !firingChargedShot && !reloading); // Is the fire time within the buffer or past the fire rate
     }
 
     private void Fire()
@@ -137,11 +167,54 @@ public class PlayerShooting : MonoBehaviour
             ref poolManager,
             projectilePrefab.name,
             gameObject);
-        fireTime = Time.time;
+        lastShotTime = Time.time;
+
+        currentAmmo--;
+        ammoUIObjects[currentAmmo].SetActive(false);
+    }
+    private IEnumerator ReloadAmmo()
+    {
+        reloading = true;
+
+        foreach (GameObject obj in ammoUIObjects)
+        {
+            obj.GetComponent<Image>().color = Color.white;
+        }
+
+        float startTime = Time.time;
+        while (Time.time - startTime <= reloadTime)
+        {
+            yield return null;
+        }
+
+        currentAmmo = maxAmmo;
+
+        reloading = false;
+
+        foreach (GameObject obj in ammoUIObjects)
+        {
+            obj.SetActive(true);
+        }
     }
 
+    public void InterruptFiring()
+    {
+        interrupted = true;
+        startCharging = false;
+        chargedAmmo = 0;
+
+        foreach (GameObject obj in ammoUIObjects)
+        {
+            obj.GetComponent<Image>().color = Color.white;
+        }
+    }
+
+    #endregion
+
+    #region Charge Firing
     private void ChargeAmmo()
     {
+        ammoUIObjects[chargedAmmo].GetComponent<Image>().color = Color.blue;
         chargedAmmo++;
     }
 
@@ -153,31 +226,24 @@ public class PlayerShooting : MonoBehaviour
 
         for (int i = 0; i < chargedAmmo; i++)
         {
+            if (interrupted)
+            {
+                break;
+            }
+
             Fire();
 
-            while (Time.time - startTime <= reloadTime)
+            while (Time.time - startTime <= chargeShotIntervals && !interrupted)
             {
                 yield return null;
             }
         }
 
+        chargedAmmo = 0;
+
         firingChargedShot = false;
     }
-
-    private IEnumerator ReloadAmmo()
-    {
-        reloading = true;
-
-        float startTime = Time.time;
-        while(Time.time - startTime <= reloadTime)
-        {
-            yield return null;
-        }
-        
-        currentAmmo = maxAmmo;
-
-        reloading = false;
-    }
+    #endregion
 
     #region Weapon Drop
     public void DisableFire()
