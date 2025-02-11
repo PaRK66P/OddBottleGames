@@ -33,6 +33,7 @@ public class PlayerShooting : MonoBehaviour
     private bool reloading = false;
     private bool firingChargedShot = false;
     private bool interrupted = false;
+    private bool charging = false;
 
     // Start is called before the first frame update
     void Start()
@@ -126,6 +127,7 @@ public class PlayerShooting : MonoBehaviour
 
         startCharging = true;
         interrupted = false;
+        charging = true;
     }
 
     public void PlayerStopFireInput(InputAction.CallbackContext context)
@@ -136,6 +138,14 @@ public class PlayerShooting : MonoBehaviour
         // Signals we want to fire
         takeShot = true;
         startCharging = false;
+        charging = false;
+    }
+
+    public void PlayerReloadAction(InputAction.CallbackContext context)
+    {
+        if(charging || reloading || currentAmmo == maxAmmo) { return; }
+
+        StartCoroutine(ReloadAmmo());
     }
 
     #endregion
@@ -166,12 +176,13 @@ public class PlayerShooting : MonoBehaviour
         currentAmmo--;
         ammoUIObjects[currentAmmo].SetActive(false);
 
-        if (currentAmmo <= 0) // Trying to shoot with no ammo
+        if (currentAmmo <= 0 && !reloading) // Trying to shoot with no ammo
         {
             StartCoroutine(ReloadAmmo());
             return;
         }
     }
+
     private IEnumerator ReloadAmmo()
     {
         reloading = true;
