@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2603134745996678031}
   - component: {fileID: 250053247744475674}
   - component: {fileID: 4265360394354500076}
-  - component: {fileID: 5281638691780711305}
+  - component: {fileID: 163119219605942989}
   m_Layer: 9
   m_Name: EnemyPrototype
   m_TagString: Untagged
@@ -162,7 +162,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5281638691780711305
+--- !u!114 &163119219605942989
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,11 +175,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  detectionRange: 5
-  shootingRange: 4
+  detectionRange: 10
+  shootingRange: 6
   speed: 2
   fireRate: 2
-  AIProjectilePrefab: {fileID: 7652979212732001909, guid: 8ec0ffbae7cf1264b87544a1b8ecad6d, type: 3}
+  AIProjectilePrefab: {fileID: 0}
   projectiles: []
   objectPoolManager: {fileID: 0}
   aiMode: 0

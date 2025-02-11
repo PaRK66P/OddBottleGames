@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 7323071417537107713}
   m_Layer: 7
   m_Name: PlayerProto
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -290,5 +290,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolManager: {fileID: 0}
+  UICanvas: {fileID: 0}
   playerData: {fileID: 11400000, guid: eff54af2d3cd2c24badc3f05b2e57eb4, type: 2}
   debugData: {fileID: 11400000, guid: 4d082aba971073f4eb298f409e371475, type: 2}
