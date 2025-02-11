@@ -270,6 +270,15 @@ public class CompanionLogic : MonoBehaviour
         this.companionMode = CompanionMode.MINIBOSS;
         modeLayerSelected = false;
         alive = true;
+        Transform bossTransform = GameObject.FindGameObjectWithTag("Boss").transform;
+        bossTransform.position -= new Vector3(0, -2, 0);
+        idlePosition = bossTransform;
+        currentHealth = 15;
+
+        GetComponent<CircleCollider2D>().enabled = false;
+        currentTargets.Clear();
+        GetComponent<CircleCollider2D>().enabled = true;
+        GetClosestTarget();
     }
 
     public void JoinPlayer()
