@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e6244bdc64379d4abe988fd44c0b134, type: 3}
+  m_Name: Default
+  m_EditorClassIdentifier: 
+  speed: 5
+  dashTime: 0.2
+  dashDistance: 5
+  dashCooldown: 0.5
+  damageLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  ammoUIObject: {fileID: 454602280210619587, guid: 0e0c634a477346b49b37aaa0420069ad, type: 3}
+  fireRate: 0.15
+  timeToChargeShot: 0.15
+  chargeShotIntervals: 0.1
+  maxAmmo: 6
+  reloadTime: 1
+  baseProjectileType: {fileID: 1223489425459614113, guid: 50e3b8fba1c074f4ba558c89a7b1613e, type: 3}
+  baseProjectileSpeed: 15
+  controlLossTime: 0.2

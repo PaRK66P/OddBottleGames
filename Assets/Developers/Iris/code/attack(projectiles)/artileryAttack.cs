@@ -41,8 +41,9 @@ public class artileryAttack : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player" && damage)
         {
-            //implement player damage
-            Debug.Log("player took damage");
+            Vector2 damageDirection = new Vector2(collision.gameObject.transform.position.x - transform.position.x,
+                    collision.gameObject.transform.position.y - transform.position.y);
+            collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized);
         }
     }
 

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
+    private ObjectPoolManager poolManager;
+    private string objectName;
+    private GameObject playerRef;
 
     // Start is called before the first frame update
     void Start()
@@ -11,15 +14,28 @@ public class ProjectileBehaviour : MonoBehaviour
         
     }
 
-    public void Instantiate(Vector2 moveDirection, float speed)
+    public void InitialiseComponent(Vector2 moveDirection, float speed, ref ObjectPoolManager dPoolManager, string prefabName, GameObject playerRefrence)
     {
         GetComponent<Rigidbody2D>().velocity = moveDirection * speed;
+        poolManager = dPoolManager;
+
+        objectName = prefabName;
+        playerRef = playerRefrence;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void OnDestroy()
+    {
+        if (playerRef != null)
+        {
+
+            playerRef.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,8 +57,11 @@ public class ProjectileBehaviour : MonoBehaviour
                 collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(1);
             }
 
-            //Debug.Log(collision.gameObject);
-            Destroy(gameObject);
+            poolManager.ReleaseObject(objectName, gameObject);
+        }
+        else if (collision.gameObject.layer == 6)
+        {
+            poolManager.ReleaseObject(objectName, gameObject);
         }
     }
 }

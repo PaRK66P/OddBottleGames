@@ -27,7 +27,7 @@ public class ObjectPoolManager : MonoBehaviour
                 actionOnDestroy: obj => Destroy(obj),
                 collectionCheck: false,
                 defaultCapacity: 5,
-                maxSize: 100
+                maxSize: 500
                 ));
         }
     }
@@ -39,6 +39,7 @@ public class ObjectPoolManager : MonoBehaviour
 
     public void ReleaseObject(string objectTypeName, GameObject releaseObject)
     {
+        Debug.Log("Release " + objectTypeName);
         objectPools[lookupTable[objectTypeName]].Release(releaseObject);
     }
 }
