@@ -18,7 +18,8 @@ public class TriggerScript : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("collision with trigger");
         if (!isTriggered)
@@ -27,6 +28,6 @@ public class TriggerScript : MonoBehaviour
             {
                 enemyMan.lockDoors();
             }
-        }        
+        }
     }
 }

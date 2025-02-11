@@ -26,7 +26,7 @@ public class artileryAttack : MonoBehaviour
 
         if(timeElapsed >= delay)
         {
-            GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1);
+            changeColor(new Color(1, 0, 0, 1));
             gameObject.layer = LayerMask.NameToLayer("EnemyAttack");
             damage = true;
         }
@@ -41,8 +41,8 @@ public class artileryAttack : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player" && damage)
         {
-            collision.gameObject.GetComponent<PlayerManager>().TakeDamage();
-            //damage = false;
+            //implement player damage
+            Debug.Log("player took damage");
         }
     }
 
@@ -54,5 +54,11 @@ public class artileryAttack : MonoBehaviour
         transform.rotation = UnityEngine.Quaternion.Euler(rot);
         timeElapsed = 0;
         damage = false;
+        changeColor(new Color(1, 1, 0, 1));
+    }
+
+    void changeColor(Color c)
+    {
+        GetComponent<SpriteRenderer>().color = c;
     }
 }

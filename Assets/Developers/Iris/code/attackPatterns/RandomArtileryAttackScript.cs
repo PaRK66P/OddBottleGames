@@ -23,17 +23,17 @@ public class attack1 : AttackClass
         {
             tim.Add(0);//timer between waves
             itt.Add(0);//wave number
-        }
 
+            for (int i = 0; i <= randomArtileryProjectileNo; ++i)
+            {
+                UnityEngine.Vector3 pos = new UnityEngine.Vector3(UnityEngine.Random.Range(-horizantalUnitsFromOrigin, horizantalUnitsFromOrigin), UnityEngine.Random.Range(-verticalUnitsFromOrigin, verticalUnitsFromOrigin), 0);
+                UnityEngine.Vector3 rot = new UnityEngine.Vector3(0, 0, 0);
+
+                GameObject obj = pooler.GetFreeObject(artileryPrefab.name);
+                obj.GetComponent<artileryAttack>().InstantiateComponent(ref pooler, artileryPrefab.name, pos, rot);
+            }
+        }
         tim[0] += Time.deltaTime;
-        for (int i = 0; i <= randomArtileryProjectileNo; ++i)
-        {
-            UnityEngine.Vector3 pos = new UnityEngine.Vector3(UnityEngine.Random.Range(-horizantalUnitsFromOrigin, horizantalUnitsFromOrigin), UnityEngine.Random.Range(-verticalUnitsFromOrigin, verticalUnitsFromOrigin), 0);
-            UnityEngine.Vector3 rot = new UnityEngine.Vector3(0, 0, 0);
-
-            GameObject obj = pooler.GetFreeObject(artileryPrefab.name);
-            obj.GetComponent<artileryAttack>().InstantiateComponent(ref pooler, artileryPrefab.name, pos, rot);
-        }
 
         if (tim[0] >= totalDelay)
         {
