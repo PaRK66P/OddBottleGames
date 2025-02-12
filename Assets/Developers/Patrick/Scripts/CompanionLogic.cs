@@ -33,7 +33,7 @@ public class CompanionLogic : MonoBehaviour
 
     [SerializeField]
     private float maxHealth;
-    private float currentHealth = 1;
+    private float currentHealth = 15;
 
     [SerializeField]
     private List<GameObject> currentTargets;
@@ -206,14 +206,6 @@ public class CompanionLogic : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Boss")
-        {
-            Debug.Log(collision.gameObject.name);
-        }
-    }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if ((1 << collision.gameObject.layer) == targetLayer.value)
@@ -310,8 +302,8 @@ public class CompanionLogic : MonoBehaviour
         modeLayerSelected = false;
         alive = true;
         // STOP USING FIND FUNCTIONS
-        transform.position = new Vector3(80.0f, 0.0f, 0.0f);
-        idlePosition.position = new Vector3(80.0f, 0.0f, 0.0f);
+        transform.position = new Vector3(95.0f, 0.0f, 0.0f);
+        idlePosition.position = new Vector3(95.0f, 0.0f, 0.0f);
         currentHealth = 15;
 
         GetComponent<CircleCollider2D>().enabled = false;
