@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public enum CompanionMode
 {
@@ -108,7 +109,24 @@ public class CompanionLogic : MonoBehaviour
                 if ((idlePosition.position - transform.position + Vector3.down * 1.5f).magnitude > 0.1f)
                 {
                     Vector3 direction = idlePosition.position - transform.position + Vector3.down * 1.5f;
+                    float distance = direction.magnitude;
                     direction = direction.normalized;
+                    if (distance > 4)
+                    {
+                        speed = Mathf.Lerp(speed, 6, 0.3f);
+                    }
+                    else if (distance > 3)
+                    {
+                        speed = Mathf.Lerp(speed, 5, 0.3f);
+                    }
+                    else if (distance > 2)
+                    {
+                        speed = Mathf.Lerp(speed, 4, 0.3f);
+                    }
+                    else
+                    {
+                        speed = Mathf.Lerp(speed, 3, 0.3f);
+                    }
                     transform.position += direction * speed * Time.deltaTime;
                 }
             }
@@ -150,14 +168,14 @@ public class CompanionLogic : MonoBehaviour
             }
             else if (currentAttackType == 1)
             {
-                if(timer > 2 + shockwaveIterations * 0.6)
+                if(timer > 2 + shockwaveIterations * 1.0f)
                 {
                     CreateShockwave(selectedTargetPosition);
                     shockwaveIterations++;
                     if(shockwaveIterations > 2)
                     {
                         selectedAction = false;
-                        timer -= 2;
+                        timer -= 2.0f;
                     }
                 }
             }
