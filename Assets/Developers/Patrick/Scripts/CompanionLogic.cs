@@ -251,36 +251,37 @@ public class CompanionLogic : MonoBehaviour
 
         if (currentHealth < 0)
         {
-            //StartCoroutine(Defeated());
+            StartCoroutine(Defeated());
         }
     }
 
-    //private IEnumerator Defeated()
-    //{
-    //    alive = false;
-    //    VisualNovelScript visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
-    //    visualNovelManager.StartNovelSceneByName("Miniboss tester");
-    //    Debug.Log("defeated");
-    //    selectedAction = false;
-    //    currentAttackType = 0;
-    //    shockwaveIterations = 0;
-    //    timer = 0.0f;
-    //    yield return WaitForNovel();
-    //    if (visualNovelManager.GetLastSelectionID() == 0)
-    //    {
-    //        JoinPlayer();
-    //    }
-    //    else
-    //    {
-    //        JoinBoss();
-    //    }
-    //}
+    private IEnumerator Defeated()
+    {
+        alive = false;
+        VisualNovelScript visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+        visualNovelManager.StartNovelSceneByName("Miniboss tester");
+        Debug.Log("defeated");
+        selectedAction = false;
+        currentAttackType = 0;
+        shockwaveIterations = 0;
+        timer = 0.0f;
+        yield return WaitForNovel();
+        if (visualNovelManager.GetLastSelectionID() == 0)
+        {
+            JoinPlayer();
+        }
+        else
+        {
+            JoinBoss();
+        }
+        GetComponent<enemyScr>().DecreaseEnemyCount();
+    }
 
-    //IEnumerator WaitForNovel()
-    //{
-    //    VisualNovelScript visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
-    //    yield return new WaitWhile(() => visualNovelManager.isNovelSection == true);
-    //}
+    IEnumerator WaitForNovel()
+    {
+        VisualNovelScript visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+        yield return new WaitWhile(() => visualNovelManager.isNovelSection == true);
+    }
     public void JoinBoss()
     {
         this.companionMode = CompanionMode.MINIBOSS;
