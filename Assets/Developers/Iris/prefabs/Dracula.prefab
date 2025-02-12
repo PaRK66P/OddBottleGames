@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2326828305508879890}
   - component: {fileID: 2981722800395821302}
   - component: {fileID: -7418976992388251413}
+  - component: {fileID: 1513435293440046769}
   m_Layer: 0
   m_Name: Dracula
   m_TagString: Untagged
@@ -100,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30de30e18e55bc74d97fb60c0293dee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pattern: 0,
+  pattern: 0,1,2,3,
   timeBetweenAttacks: 2
   attackList:
   - {fileID: 2472219134077984931, guid: 68b2924def505054287b192c24f567c7, type: 3}
@@ -120,3 +121,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77703582fc401fb4caee4f951248a8f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1513435293440046769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6827650287450667780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c0794303c83554c920fd8cee15ca28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  pooler: {fileID: 0}
+  prefabName: 

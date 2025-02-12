@@ -11,10 +11,12 @@ public class attack1 : AttackClass
     [Space]
     public int horizantalUnitsFromOrigin;
     public int verticalUnitsFromOrigin;
+    public int originX;
+    public int originY;
 
     float totalDelay;
 
-    public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim, ref ObjectPoolManager poolMan)
+    public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim, ref ObjectPoolManager poolMan, ref GameObject callingObj)
     {
         totalDelay = artileryPrefab.delay + artileryPrefab.activeTime;
         pooler = poolMan;
@@ -26,7 +28,7 @@ public class attack1 : AttackClass
 
             for (int i = 0; i <= randomArtileryProjectileNo; ++i)
             {
-                UnityEngine.Vector3 pos = new UnityEngine.Vector3(UnityEngine.Random.Range(-horizantalUnitsFromOrigin, horizantalUnitsFromOrigin), UnityEngine.Random.Range(-verticalUnitsFromOrigin, verticalUnitsFromOrigin), 0);
+                UnityEngine.Vector3 pos = new UnityEngine.Vector3(UnityEngine.Random.Range(-horizantalUnitsFromOrigin + originX, horizantalUnitsFromOrigin + originX), UnityEngine.Random.Range(-verticalUnitsFromOrigin + originY, verticalUnitsFromOrigin + originY), 0);
                 UnityEngine.Vector3 rot = new UnityEngine.Vector3(0, 0, 0);
 
                 GameObject obj = pooler.GetFreeObject(artileryPrefab.name);

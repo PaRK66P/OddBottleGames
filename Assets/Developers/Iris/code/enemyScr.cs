@@ -18,6 +18,10 @@ public class enemyScr : MonoBehaviour
         {
             GetComponent<attackPaternsScript>().InstantiateComponent(ref pooler);
         }
+        if (GetComponent<boss>())
+        {
+            GetComponent<boss>().InsantiateComponent(ref pooler, prefName);
+        }
         //transform.position = pos;
         //transform.rotation = UnityEngine.Quaternion.Euler(rot);
         //timeElapsed = 0;
