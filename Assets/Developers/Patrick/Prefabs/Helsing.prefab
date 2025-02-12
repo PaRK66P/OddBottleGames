@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 8120071430467085006}
   - component: {fileID: 7323071417537107713}
   m_Layer: 7
-  m_Name: PlayerProto
+  m_Name: Helsing
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -18,7 +18,7 @@ public class PlayerShooting : MonoBehaviour
     private float fireRate;
     private bool startCharging = false;
     private float timeForChargedShot = 1.0f;
-    private float chargeUpShotTime = 1.0f;
+    private float chargeUpShotTime = 0.15f;
     private bool takeShot = false;
     private float chargeShotIntervals = 0.0f;
     private float lastShotTime = 0.0f;

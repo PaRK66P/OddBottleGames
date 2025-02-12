@@ -66,7 +66,7 @@ public class enemyManager : MonoBehaviour
     {
         enemyNumber--;
 
-        Debug.Log(enemyNumber);
+        //Debug.Log(enemyNumber);
 
         if (enemyNumber <= 0)
         {

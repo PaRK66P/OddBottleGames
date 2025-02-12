@@ -24,6 +24,10 @@ public class bossProjectile : MonoBehaviour
             collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized);
             pooler.ReleaseObject(prefabName, gameObject);
         }
+        else if(collision.gameObject.layer == 6)
+        {
+            pooler.ReleaseObject(prefabName, gameObject);
+        }
     }
 
     private void OnBecameInvisible()
