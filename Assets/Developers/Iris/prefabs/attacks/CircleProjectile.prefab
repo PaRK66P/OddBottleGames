@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2445935131160177237}
   - component: {fileID: 3347065349177360490}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CircleProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
