@@ -1,9 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Threading;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 public class bossScript : MonoBehaviour

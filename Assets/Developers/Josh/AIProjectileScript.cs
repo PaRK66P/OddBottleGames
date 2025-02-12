@@ -5,12 +5,12 @@ using UnityEngine;
 public class AIProjectileScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    float projectileTimer = 5.0f;
+    public float projectileTimer = 5.0f;
     public float bulletSpeed = 10.0f;
     public Vector3 direction = Vector3.zero;
     public GameObject owner;
-
     public bool toBeDestroyed;
+
     void Start()
     {
         GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
@@ -36,7 +36,9 @@ public class AIProjectileScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerManager>().TakeDamage();
+            Vector2 damageDirection = new Vector2(collision.gameObject.transform.position.x - transform.position.x,
+                collision.gameObject.transform.position.y - transform.position.y);
+            collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized);
         }
     }
 

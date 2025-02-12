@@ -17,6 +17,8 @@ public class ExplosionLogic : MonoBehaviour
     private GameObject[] objectsToDamage;
     private int targetIndex = -1;
 
+    private ObjectPoolManager objectPoolManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,11 +43,13 @@ public class ExplosionLogic : MonoBehaviour
 
                 if (obj.GetComponent<PlayerManager>() != null)
                 {
-                    obj.GetComponent<PlayerManager>().TakeDamage();
+                    Vector2 damageDirection = new Vector2(obj.transform.position.x - transform.position.x,
+                        obj.transform.position.y - transform.position.y);
+                    obj.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized);
                 }
-                else if (obj.GetComponent<AISimpleDetectionScript>() != null)
+                else if (obj.GetComponent<AISimpleBehaviour>() != null)
                 {
-                    obj.GetComponent<AISimpleDetectionScript>().TakeDamage(damage);
+                    obj.GetComponent<AISimpleBehaviour>().TakeDamage(damage);
                 }
                 else if (obj.GetComponent<bossScript>() != null)
                 {
@@ -56,18 +60,20 @@ public class ExplosionLogic : MonoBehaviour
         }
         else if (timer > removal)
         {
-            Destroy(gameObject);
+            objectPoolManager.ReleaseObject("Explosion", this.gameObject);
         }
 
     }
 
-    public void InitialiseEffect(LayerMask damageLayer, float totalDamage, float explosionRadius, float explosionDelay, float removalTime)
+    public void InitialiseEffect(LayerMask damageLayer, float totalDamage, float explosionRadius, float explosionDelay, float removalTime, ObjectPoolManager objMgr)
     {
         target = damageLayer;
         damage = totalDamage;
         radius = explosionRadius;
         delay = explosionDelay;
         removal = removalTime;
+        timer = 0;
+        objectPoolManager = objMgr;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

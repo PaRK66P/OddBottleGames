@@ -22,7 +22,9 @@ public class TempDamage : MonoBehaviour
     {
         if (collision.gameObject.layer == 7)
         {
-            collision.gameObject.GetComponent<PlayerManager>().TakeDamage();
+            Vector2 damageDirection = new Vector2(collision.gameObject.transform.position.x - transform.position.x,
+                collision.gameObject.transform.position.y - transform.position.y);
+            collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized);
         }
     }
 
