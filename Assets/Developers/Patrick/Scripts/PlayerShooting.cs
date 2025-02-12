@@ -220,8 +220,8 @@ public class PlayerShooting : MonoBehaviour
     #region Charge Firing
     private void ChargeAmmo()
     {
-        ammoUIObjects[maxAmmo - chargedAmmo - 1].GetComponent<Image>().color = Color.blue;
         chargedAmmo++;
+        ammoUIObjects[currentAmmo - chargedAmmo].GetComponent<Image>().color = Color.blue;
     }
 
     private IEnumerator FireChargedShots()

@@ -36,7 +36,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        image = rb.GetComponent<SpriteRenderer>();
+        image = GetComponentInChildren<SpriteRenderer>();
 
         playerInputManager = gameObject.AddComponent<PlayerInputManager>();
         playerMovement = gameObject.AddComponent<PlayerMovement>();

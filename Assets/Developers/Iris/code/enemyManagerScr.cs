@@ -59,14 +59,18 @@ public class enemyManager : MonoBehaviour
         //    decreaseEnemyCount();
         //}
 
-        if (enemyNumber <= 0)
-        {
-            unlockDoors();
-        }
+        
     }
 
     public void decreaseEnemyCount()
     {
         enemyNumber--;
+
+        Debug.Log(enemyNumber);
+
+        if (enemyNumber <= 0)
+        {
+            unlockDoors();
+        }
     }
 }
