@@ -34,4 +34,10 @@ public class enemyScr : MonoBehaviour
         enemyManager.decreaseEnemyCount();
         pooler.ReleaseObject(prefabName, gameObject);
     }
+
+    //for companions since we dont want to release them when they die
+    public void DecreaseEnemyCount()
+    {
+        enemyManager.decreaseEnemyCount();
+    }
 }
