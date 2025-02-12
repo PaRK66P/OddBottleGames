@@ -52,7 +52,7 @@ public class PlayerShooting : MonoBehaviour
 
         fireRate = dFireRate;
 
-        timeForChargedShot = dTimeToChargeShot;
+        chargeUpShotTime = dTimeToChargeShot;
         chargeShotIntervals = dChargeShotIntervals;
 
         maxAmmo = dMaxAmmo;
@@ -99,6 +99,7 @@ public class PlayerShooting : MonoBehaviour
         }
         else if (startCharging)
         {
+            Debug.Log(chargeUpShotTime);
             if(Time.time - timeForChargedShot >= chargeUpShotTime)
             {
                 if(currentAmmo - chargedAmmo <= 0)
