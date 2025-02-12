@@ -20,7 +20,7 @@ public class enemyScr : MonoBehaviour
         }
         if (GetComponent<boss>())
         {
-            GetComponent<boss>().InsantiateComponent(ref pooler, prefName);
+            GetComponent<boss>().InsantiateComponent(ref pooler, prefName, ref enemyManager);
         }
         //transform.position = pos;
         //transform.rotation = UnityEngine.Quaternion.Euler(rot);

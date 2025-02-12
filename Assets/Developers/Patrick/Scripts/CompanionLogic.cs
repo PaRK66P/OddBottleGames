@@ -7,7 +7,8 @@ using UnityEngine;
 public enum CompanionMode
 {
     MINIBOSS,
-    COMPANION
+    COMPANION,
+    //BOSSALLY
 }
 
 
