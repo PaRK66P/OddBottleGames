@@ -2643,6 +2643,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b4fa6de1f2c3e343b8cd8d889bb0376, type: 3}
+--- !u!114 &632806105 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 790445554391188771, guid: 1b4fa6de1f2c3e343b8cd8d889bb0376, type: 3}
+  m_PrefabInstance: {fileID: 632806104}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1f888219385c340908eb451eafe5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &633975243
 GameObject:
   m_ObjectHideFlags: 0
@@ -3202,7 +3213,7 @@ PrefabInstance:
       objectReference: {fileID: 729990807}
     - target: {fileID: 7549295984513981018, guid: 177abd26433bcf549859da2c472dc937, type: 3}
       propertyPath: spawners.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7549295984513981018, guid: 177abd26433bcf549859da2c472dc937, type: 3}
       propertyPath: 'trigers.Array.data[0]'
@@ -3211,7 +3222,7 @@ PrefabInstance:
     - target: {fileID: 7549295984513981018, guid: 177abd26433bcf549859da2c472dc937, type: 3}
       propertyPath: 'spawners.Array.data[0]'
       value: 
-      objectReference: {fileID: 188674094}
+      objectReference: {fileID: 632806105}
     - target: {fileID: 7549295984513981018, guid: 177abd26433bcf549859da2c472dc937, type: 3}
       propertyPath: 'spawners.Array.data[1]'
       value: 
@@ -6632,7 +6643,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 788027136632944688, guid: c384f01ce30b1db42887bafee9cf3810, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.4
+      value: -29.92
       objectReference: {fileID: 0}
     - target: {fileID: 788027136632944688, guid: c384f01ce30b1db42887bafee9cf3810, type: 3}
       propertyPath: m_LocalPosition.y
