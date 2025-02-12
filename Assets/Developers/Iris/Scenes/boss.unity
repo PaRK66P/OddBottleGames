@@ -432,9 +432,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 790445554391188771, guid: 1b4fa6de1f2c3e343b8cd8d889bb0376, type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 6827650287450667780, guid: a078e41d2c0ba124ab569b37305d6fc9, type: 3}
     - target: {fileID: 1711477330670187276, guid: 1b4fa6de1f2c3e343b8cd8d889bb0376, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.41
+      value: -2.41
       objectReference: {fileID: 0}
     - target: {fileID: 1711477330670187276, guid: 1b4fa6de1f2c3e343b8cd8d889bb0376, type: 3}
       propertyPath: m_LocalPosition.y
@@ -706,6 +710,7 @@ MonoBehaviour:
   - {fileID: 2374814210022972564, guid: 62f4b03af46c2d64fbda13766426096b, type: 3}
   - {fileID: 2374814210022972564, guid: 9f62acb8d36af6540a52f5728b471312, type: 3}
   - {fileID: 4929140104880662653, guid: 9bc80124aabdaa7438a5b5bed72793e6, type: 3}
+  - {fileID: 6827650287450667780, guid: a078e41d2c0ba124ab569b37305d6fc9, type: 3}
 --- !u!4 &2122395243
 Transform:
   m_ObjectHideFlags: 0
@@ -832,7 +837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3016445019156514198, guid: be5583fba378cfe47aecd0882d812e1a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.5067
+      value: -5.5067
       objectReference: {fileID: 0}
     - target: {fileID: 3016445019156514198, guid: be5583fba378cfe47aecd0882d812e1a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -891,9 +896,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 866892662695985016, guid: fb06ec5ee7c3c994faabc2443eb8d93d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1592756413988045176, guid: fb06ec5ee7c3c994faabc2443eb8d93d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.744814
+      value: 5.255186
       objectReference: {fileID: 0}
     - target: {fileID: 1592756413988045176, guid: fb06ec5ee7c3c994faabc2443eb8d93d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1048,6 +1057,10 @@ PrefabInstance:
     - target: {fileID: 6827650287450667780, guid: a078e41d2c0ba124ab569b37305d6fc9, type: 3}
       propertyPath: m_Name
       value: Dracula
+      objectReference: {fileID: 0}
+    - target: {fileID: 6827650287450667780, guid: a078e41d2c0ba124ab569b37305d6fc9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
