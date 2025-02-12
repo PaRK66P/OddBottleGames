@@ -52,7 +52,7 @@ public class AISimpleBehaviour : MonoBehaviour
 
     void UpdateAIVision()
     {
-        int numRays = 20;
+        int numRays = 30;
         float coneAngle = 250.0f;
         float angleStep = coneAngle / (float)numRays;
         bool playerBeenSeen = false;
