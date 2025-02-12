@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,19 +48,19 @@ public class VisualNovelScript : MonoBehaviour
         sprite = GameObject.Find("VisualNovelSprite");
         buttonContainer = GameObject.Find("VisualNovelButtonContainer").GetComponent<Transform>();
 
-        string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/Developers/Josh/VisualNovelScenes" });
-        foreach (string guid in guids)
+        GameObject[] VisualNovelPrefabs = Resources.LoadAll<GameObject>("VisualNovelScenes");
+        foreach (GameObject prefab in VisualNovelPrefabs)
         {
-            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
+            //Debug.Log("found scene");
             if (prefab != null)
             {
-                VNPrefabScript script = prefab.GetComponent<VNPrefabScript>();
+                //Debug.Log("not null");
+                VNPrefabScript script = Instantiate(prefab).GetComponent<VNPrefabScript>();
                 if (script != null)
                 {
                     VNScenes.Add(prefab.GetComponent<VNPrefabScript>());
+                    //script.VNname = prefab.name;
                 }
-
             }
         }
     }
@@ -96,7 +95,7 @@ public class VisualNovelScript : MonoBehaviour
         else
         {
             isNovelSection = false;
-            UnityEngine.Debug.LogError("Invalid Novel Scene ID");
+            Debug.LogError("Invalid Novel Scene ID");
         }
     }
 
@@ -105,6 +104,7 @@ public class VisualNovelScript : MonoBehaviour
         int index = 0;
         foreach (var scene in VNScenes)
         {
+            Debug.Log(scene.name + ", " + name);
             if (scene.name == name)
             {
                 StartNovelScene(index);
