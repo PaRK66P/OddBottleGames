@@ -104,7 +104,7 @@ public class VisualNovelScript : MonoBehaviour
         int index = 0;
         foreach (var scene in VNScenes)
         {
-            Debug.Log(scene.name + ", " + name);
+            //Debug.Log(scene.name + ", " + name);
             if (scene.name == name)
             {
                 StartNovelScene(index);
