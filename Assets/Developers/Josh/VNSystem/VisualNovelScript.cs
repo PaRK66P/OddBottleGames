@@ -25,6 +25,8 @@ public class VisualNovelScript : MonoBehaviour
     //[SerializeField]
     List<VNPrefabScript> VNScenes = new List<VNPrefabScript>();
 
+    [SerializeField] GameObject playerRef;
+
     public bool isNovelSection;
     public string newtext;
     public GameObject canv;
@@ -78,6 +80,7 @@ public class VisualNovelScript : MonoBehaviour
 
     public void StartNovelScene(int NovelSceneID)
     {
+        playerRef.GetComponent<PlayerManager>().DisableInput();
         currentVNPrefabIndex = NovelSceneID;
 
         isNovelSection = true;
@@ -134,8 +137,9 @@ public class VisualNovelScript : MonoBehaviour
         {
 
             lastSelectionID = currentNode.sceneData.selectionID;
-            Debug.Log("selectionID: " + lastSelectionID);
+            //Debug.Log("selectionID: " + lastSelectionID);
             isNovelSection = false;
+            playerRef.GetComponent<PlayerManager>().EnableInput();
         }
     }
 

@@ -120,4 +120,14 @@ public class PlayerManager : MonoBehaviour
         hasWeapon = true;
         playerShooting.EnableFire();
     }
+
+    public void DisableInput()
+    {
+        playerInputManager.DisableInput();
+    }
+
+    public void EnableInput()
+    {
+        playerInputManager.EnableInput();
+    }
 }

@@ -105,7 +105,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerDashInput(InputAction.CallbackContext context)
     {
-        Debug.Log("Dash");
 
         lastDashInputTime = Time.time;
         if (!dash)

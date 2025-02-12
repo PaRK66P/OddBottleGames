@@ -22,6 +22,9 @@ public class CompanionLogic : MonoBehaviour
     [SerializeField]
     private float jumpTime;
 
+    [SerializeField]
+    private GameObject hitBoxObject;
+
     private LayerMask targetLayer;
     
     [SerializeField] 
@@ -61,6 +64,8 @@ public class CompanionLogic : MonoBehaviour
     [SerializeField]
     private CompanionMode companionMode = CompanionMode.MINIBOSS;
 
+    private bool displayVN = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +81,8 @@ public class CompanionLogic : MonoBehaviour
         idlePosition = new GameObject("mimiTrans").transform;
         idlePosition.position = this.transform.position;
         objectPoolManager = GameObject.Find("ObjectPoolManager").GetComponent<ObjectPoolManager>();
+
+        displayVN = true;
     }
 
     // Update is called once per frame
@@ -211,6 +218,7 @@ public class CompanionLogic : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if((1 << collision.gameObject.layer) == targetLayer.value)
         {
             AddTarget(collision.gameObject);
@@ -276,10 +284,15 @@ public class CompanionLogic : MonoBehaviour
 
     private IEnumerator Defeated()
     {
+        if (!displayVN)
+        {
+            Destroy(gameObject);
+            yield break;
+        }
+
         alive = false;
         VisualNovelScript visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
         visualNovelManager.StartNovelSceneByName("Miniboss tester");
-        Debug.Log("defeated");
         selectedAction = false;
         currentAttackType = 0;
         shockwaveIterations = 0;
@@ -294,6 +307,7 @@ public class CompanionLogic : MonoBehaviour
             JoinBoss();
         }
         GetComponent<enemyScr>().DecreaseEnemyCount();
+        displayVN = false;
     }
 
     IEnumerator WaitForNovel()
@@ -306,9 +320,9 @@ public class CompanionLogic : MonoBehaviour
         this.companionMode = CompanionMode.MINIBOSS;
         modeLayerSelected = false;
         alive = true;
-        Transform bossTransform = GameObject.FindGameObjectWithTag("Boss").transform;
-        bossTransform.position -= new Vector3(0, -2, 0);
-        idlePosition = bossTransform;
+        // STOP USING FIND FUNCTIONS
+        transform.position = new Vector3(95.0f, 0.0f, 0.0f);
+        idlePosition.position = new Vector3(95.0f, 0.0f, 0.0f);
         currentHealth = 15;
 
         GetComponent<CircleCollider2D>().enabled = false;
@@ -319,6 +333,8 @@ public class CompanionLogic : MonoBehaviour
 
     public void JoinPlayer()
     {
+        gameObject.layer = 0;
+        hitBoxObject.layer = 0;
         this.companionMode = CompanionMode.COMPANION;
         idlePosition = GameObject.Find("PlayerProto").GetComponent<Transform>();
         currentHealth = 15;

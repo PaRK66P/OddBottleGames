@@ -50,7 +50,7 @@ public class ProjectileBehaviour : MonoBehaviour
             }
             else if(collision.gameObject.tag == "Boss")
             {
-                collision.gameObject.GetComponent<bossScript>().takeDamage(1);
+                collision.gameObject.GetComponent<boss>().takeDamage(1);
             }
             else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
             {

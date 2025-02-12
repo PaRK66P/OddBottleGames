@@ -18,7 +18,7 @@ public class AISimpleBehaviour : MonoBehaviour
     public float fireRate = 2.0f;
 
     private float health = 5.0f;
-    private bool seePlayer = false;
+    private bool seePlayer = true;
     private bool playerInRange = false;
     private float shootingTimer = 0.0f;
 
@@ -53,7 +53,7 @@ public class AISimpleBehaviour : MonoBehaviour
     void UpdateAIVision()
     {
         int numRays = 30;
-        float coneAngle = 250.0f;
+        float coneAngle = 360.0f;
         float angleStep = coneAngle / (float)numRays;
         bool playerBeenSeen = false;
         for (int i = 0; i < numRays + 1; i++)
@@ -78,7 +78,7 @@ public class AISimpleBehaviour : MonoBehaviour
         float dist = distToPlayer.magnitude;
         if (!playerBeenSeen)
         {
-            seePlayer = false;
+            //seePlayer = false;
 
         }
         else
