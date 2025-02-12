@@ -71,6 +71,9 @@ public class CompanionLogic : MonoBehaviour
         {
             targetLayer = LayerMask.GetMask("Enemy");
         }
+        idlePosition = new GameObject("mimiTrans").transform;
+        idlePosition.position = this.transform.position;
+        objectPoolManager = GameObject.Find("ObjectPoolManager").GetComponent<ObjectPoolManager>();
     }
 
     // Update is called once per frame
