@@ -46,7 +46,7 @@ public class AISimpleBehaviour : MonoBehaviour
         if (health <= 0)
         {
             //DestroyAllBullets();
-            Destroy(this.gameObject);
+            GetComponent<enemyScr>().releaseEnemy();
         }
     }
 
