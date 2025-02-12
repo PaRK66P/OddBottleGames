@@ -119,22 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &21728272 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1711477330670187276, guid: 1b4fa6de1f2c3e343b8cd8d889bb0376, type: 3}
-  m_PrefabInstance: {fileID: 1227239260}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &21728273 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 790445554391188771, guid: 1b4fa6de1f2c3e343b8cd8d889bb0376, type: 3}
-  m_PrefabInstance: {fileID: 1227239260}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be1f888219385c340908eb451eafe5d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &33615196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,7 +1941,6 @@ Transform:
   - {fileID: 2000004976}
   - {fileID: 1825558837}
   - {fileID: 380605673}
-  - {fileID: 21728272}
   - {fileID: 188674093}
   - {fileID: 573071014}
   m_Father: {fileID: 0}
@@ -3282,7 +3265,7 @@ PrefabInstance:
       objectReference: {fileID: 729990807}
     - target: {fileID: 7549295984513981018, guid: 177abd26433bcf549859da2c472dc937, type: 3}
       propertyPath: spawners.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7549295984513981018, guid: 177abd26433bcf549859da2c472dc937, type: 3}
       propertyPath: 'trigers.Array.data[0]'
@@ -6749,7 +6732,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 788027136632944688, guid: c384f01ce30b1db42887bafee9cf3810, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.14
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 788027136632944688, guid: c384f01ce30b1db42887bafee9cf3810, type: 3}
       propertyPath: m_LocalPosition.y
