@@ -14,6 +14,10 @@ public class enemyScr : MonoBehaviour
         pooler = poolMan;
         prefabName = prefName;
         enemyManager = enemyMan;
+        if(GetComponent<attackPaternsScript>())
+        {
+            GetComponent<attackPaternsScript>().InstantiateComponent(ref pooler);
+        }
         //transform.position = pos;
         //transform.rotation = UnityEngine.Quaternion.Euler(rot);
         //timeElapsed = 0;

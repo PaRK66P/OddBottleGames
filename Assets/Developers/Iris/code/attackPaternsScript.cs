@@ -29,6 +29,10 @@ public class attackPaternsScript : MonoBehaviour
     [Space]
     public ObjectPoolManager pooler;
 
+    public void InstantiateComponent(ref ObjectPoolManager objPooler)
+    {
+        pooler = objPooler;
+    }
 
     // Start is called before the first frame update
     void Start()
