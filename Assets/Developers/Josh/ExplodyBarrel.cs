@@ -23,10 +23,9 @@ public class ExplodyBarrel : MonoBehaviour
     {
         
         currentExplosion = objectPoolManager.GetFreeObject("Explosion");
-        currentExplosion.GetComponent<ExplosionLogic>().InitialiseEffect(LayerMask.GetMask(attackLayers), 1,4,2,1,objectPoolManager);
+        currentExplosion.GetComponent<ExplosionLogic>().InitialiseEffect(LayerMask.GetMask(attackLayers), 5,4,2,1,objectPoolManager);
         currentExplosion.transform.position = this.transform.position;
-        enemyScr es = GetComponent<enemyScr>();
-        es.releaseEnemy();
+        Destroy(this.gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
