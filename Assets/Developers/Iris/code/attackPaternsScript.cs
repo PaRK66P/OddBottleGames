@@ -22,6 +22,8 @@ public class attackPaternsScript : MonoBehaviour
     [Space]
     public ObjectPoolManager pooler;
 
+    private GameObject myself;
+
     public void InstantiateComponent(ref ObjectPoolManager objPooler)
     {
         pooler = objPooler;
@@ -72,6 +74,8 @@ public class attackPaternsScript : MonoBehaviour
             currentAttack = patList[0][n];
         }
         currentAttack = patList[0][n];
+
+        myself = gameObject;
     }
 
     // Update is called once per frame
@@ -96,7 +100,7 @@ public class attackPaternsScript : MonoBehaviour
         }
         else
         {
-            attackList[currentAttack].Attack(ref inAttack, ref itterators, ref timers, ref pooler);
+            attackList[currentAttack].Attack(ref inAttack, ref itterators, ref timers, ref pooler, ref myself);
         }
 
         if (attackItterator == patList.Count())
