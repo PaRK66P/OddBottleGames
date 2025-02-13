@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7340915424001148504
+--- !u!1 &862764198218962816
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2801803203557388314}
-  - component: {fileID: 2472219134077984931}
+  - component: {fileID: 2445935131160177237}
+  - component: {fileID: 3347065349177360490}
   m_Layer: 11
-  m_Name: RandomArtilery
+  m_Name: Circle attack Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2801803203557388314
+--- !u!4 &2445935131160177237
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7340915424001148504}
+  m_GameObject: {fileID: 862764198218962816}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.30669054, y: -0.39298835, z: 0.020564094}
@@ -32,21 +32,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2472219134077984931
+--- !u!114 &3347065349177360490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7340915424001148504}
+  m_GameObject: {fileID: 862764198218962816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2796b0e14fbd8294db513ab46083882c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3bd9df0aa7fcd5046930ecb9b45906b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  artileryPrefab: {fileID: 6792591194043661507, guid: 765b3f763aeb3204e8d2e50e528ec651, type: 3}
-  randomArtileryProjectileNo: 16
-  horizantalUnitsFromOrigin: 16
-  verticalUnitsFromOrigin: 10
-  originX: 81
-  originY: -1
+  projectilePrefab: {fileID: 2374814210022972564, guid: 62f4b03af46c2d64fbda13766426096b, type: 3}
+  projectileAttackNo: 10

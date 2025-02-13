@@ -30,11 +30,6 @@ public class bossProjectile : MonoBehaviour
         }
     }
 
-    private void OnBecameInvisible()
-    {
-        pooler.ReleaseObject(prefabName, gameObject);
-    }
-
     public void InstantiateComponent(ref ObjectPoolManager poolMan, string prefName, Vector3 pos, Vector3 rot)
     {
         pooler = poolMan;
