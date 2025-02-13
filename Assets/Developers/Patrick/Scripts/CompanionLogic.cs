@@ -201,7 +201,7 @@ public class CompanionLogic : MonoBehaviour
         newExplosion.transform.position = targetPosition;
 
         ExplosionLogic newShockwaveScript = newExplosion.GetComponent<ExplosionLogic>();
-        newShockwaveScript.InitialiseEffect(targetLayer, 3, 20, 0.5f, 0.7f, objectPoolManager);
+        newShockwaveScript.InitialiseEffect(targetLayer, 3, 3, 0.5f, 0.7f, objectPoolManager);
     }
 
     private void CreateShockwave(Vector3 targetPosition)
