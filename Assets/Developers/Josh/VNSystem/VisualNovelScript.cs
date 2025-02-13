@@ -80,6 +80,7 @@ public class VisualNovelScript : MonoBehaviour
 
     public void StartNovelScene(int NovelSceneID)
     {
+        Time.timeScale = 0;
         playerRef.GetComponent<PlayerManager>().DisableInput();
         currentVNPrefabIndex = NovelSceneID;
 
@@ -140,6 +141,7 @@ public class VisualNovelScript : MonoBehaviour
             //Debug.Log("selectionID: " + lastSelectionID);
             isNovelSection = false;
             playerRef.GetComponent<PlayerManager>().EnableInput();
+            Time.timeScale = 1.0f;
         }
     }
 

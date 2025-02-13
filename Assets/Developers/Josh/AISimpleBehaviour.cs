@@ -17,7 +17,7 @@ public class AISimpleBehaviour : MonoBehaviour
     public float speed = 2;
     public float fireRate = 2.0f;
 
-    private float health = 5.0f;
+    private float health = 6.0f;
     private bool seePlayer = true;
     private bool playerInRange = false;
     private float shootingTimer = 0.0f;
