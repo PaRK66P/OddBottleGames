@@ -170,19 +170,21 @@ public class CompanionLogic : MonoBehaviour
                 {
                     CreateExplosion(selectedTargetPosition);
                     selectedAction = false;
-                    timer = -1.5f;
+                    //Delay before next action
+                    timer = -0.5f;
                 }
             }
             else if (currentAttackType == 1)
             {
-                if(timer > 2 + shockwaveIterations * 1.0f)
+                if(timer > 1 + shockwaveIterations * 0.15f)
                 {
                     CreateShockwave(selectedTargetPosition);
                     shockwaveIterations++;
                     if(shockwaveIterations > 2)
                     {
                         selectedAction = false;
-                        timer -= 2.0f;
+                        //Delay before next action
+                        timer -= 0.5f;
                     }
                 }
             }
@@ -199,7 +201,7 @@ public class CompanionLogic : MonoBehaviour
         newExplosion.transform.position = targetPosition;
 
         ExplosionLogic newShockwaveScript = newExplosion.GetComponent<ExplosionLogic>();
-        newShockwaveScript.InitialiseEffect(targetLayer, 5, 20, 0.5f, 1, objectPoolManager);
+        newShockwaveScript.InitialiseEffect(targetLayer, 5, 20, 0.5f, 0.7f, objectPoolManager);
     }
 
     private void CreateShockwave(Vector3 targetPosition)
@@ -213,7 +215,7 @@ public class CompanionLogic : MonoBehaviour
         newShockwave.transform.position = transform.position;
 
         ShockwaveLogic newShockwaveScript = newShockwave.GetComponent<ShockwaveLogic>();
-        newShockwaveScript.InitialiseEffect(targetLayer, 2, rotation.normalized, 8, objectPoolManager);
+        newShockwaveScript.InitialiseEffect(targetLayer, 2, rotation.normalized, 12, objectPoolManager);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

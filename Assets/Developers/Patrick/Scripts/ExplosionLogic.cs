@@ -57,6 +57,7 @@ public class ExplosionLogic : MonoBehaviour
                 }
             }
             firedDamage = true;
+            GetComponent<SpriteRenderer>().color = Color.red;
         }
         else if (timer > removal)
         {
@@ -73,7 +74,10 @@ public class ExplosionLogic : MonoBehaviour
         delay = explosionDelay;
         removal = removalTime;
         timer = 0;
+        firedDamage = false;
         objectPoolManager = objMgr;
+
+        GetComponent<SpriteRenderer>().color = new Color(222.0f / 256.0f, 170.0f / 256.0f, 65.0f / 256.0f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

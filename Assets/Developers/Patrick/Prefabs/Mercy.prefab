@@ -118,8 +118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   companion: 0
-  speed: 3
-  jumpTime: 4
+  speed: 10
+  jumpTime: 1
   hitBoxObject: {fileID: 2023029667341579415}
   explosionSize: 2
   idlePosition: {fileID: 0}
