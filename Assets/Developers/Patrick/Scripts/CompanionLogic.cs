@@ -343,6 +343,7 @@ public class CompanionLogic : MonoBehaviour
         //targetIndex = -1;
         modeLayerSelected = false;
         alive = true;
+        selectedAction = false;
 
         GetComponent<CircleCollider2D>().enabled = false;
         currentTargets.Clear();

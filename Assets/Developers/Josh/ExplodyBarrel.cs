@@ -7,11 +7,15 @@ public class ExplodyBarrel : MonoBehaviour
     public ObjectPoolManager objectPoolManager;
     private GameObject currentExplosion;
     private string[] attackLayers = { "Player", "Enemy", "Enviroment" };
+    private string[] collisionLayers = { "Projectile", "EnemyAttack" };
+    LayerMask collLayers;
 
     // Start is called before the first frame update
     void Start()
     {
         objectPoolManager = GameObject.Find("ObjectPoolManager").GetComponent<ObjectPoolManager>();
+        //Physics.IgnoreLayerCollision(LayerMask.GetMask(collisionLayers), true);
+        collLayers = LayerMask.GetMask(collisionLayers);
     }
 
     // Update is called once per frame
@@ -30,6 +34,9 @@ public class ExplodyBarrel : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        TriggerExplosion();
+        if ((collLayers.value & (1 << collision.gameObject.layer)) > 0)
+        {
+            TriggerExplosion();
+        }
     }
 }
