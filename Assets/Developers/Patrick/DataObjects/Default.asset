@@ -20,8 +20,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   ammoUIObject: {fileID: 454602280210619587, guid: 0e0c634a477346b49b37aaa0420069ad, type: 3}
-  fireRate: 0.3
-  timeToChargeShot: 0.15
+  fireRate: 0.5
+  maxTimeToChargeShot: 0.3
+  minTimeToChargeShot: 0.1
+  shotsTillFullCharge: 4
   chargeShotIntervals: 0.1
   maxAmmo: 6
   reloadTime: 1

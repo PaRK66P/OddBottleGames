@@ -70,7 +70,7 @@ public class ExplosionLogic : MonoBehaviour
     {
         target = damageLayer;
         damage = totalDamage;
-        radius = explosionRadius;
+        gameObject.transform.localScale = Vector3.one * explosionRadius;
         delay = explosionDelay;
         removal = removalTime;
         timer = 0;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
@@ -7,6 +5,9 @@ public class ProjectileBehaviour : MonoBehaviour
     private ObjectPoolManager poolManager;
     private string objectName;
     private GameObject playerRef;
+    private bool toBeReleased = false;
+    private float lifeSpan = 0.0f;
+    private float minLife = 0.05f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +22,18 @@ public class ProjectileBehaviour : MonoBehaviour
 
         objectName = prefabName;
         playerRef = playerRefrence;
+        lifeSpan = 0.0f;
+        toBeReleased = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        lifeSpan += Time.deltaTime;
+        if (toBeReleased && lifeSpan > minLife)
+        {
+            poolManager.ReleaseObject("ProjectileProto", this.gameObject);
+        }
     }
 
     private void OnDestroy()
@@ -57,11 +64,20 @@ public class ProjectileBehaviour : MonoBehaviour
                 collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(1);
             }
 
-            poolManager.ReleaseObject(objectName, gameObject);
+            toBeReleased = true;
         }
         else if (collision.gameObject.layer == 6)
         {
-            poolManager.ReleaseObject(objectName, gameObject);
+            Vector2 projDir = GetComponent<Rigidbody2D>().velocity.normalized;
+            Vector2 dirToCollisionObject = collision.gameObject.transform.position - gameObject.transform.position;
+
+            float angle = Vector2.Angle(projDir, dirToCollisionObject);
+            
+            //Debug.Log(angle);
+            if (angle < 90.0f)
+            {
+                toBeReleased = true;
+            }
         }
     }
 }
