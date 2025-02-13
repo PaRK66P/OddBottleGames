@@ -47,6 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPoolManager: {fileID: 0}
+  layers1:
+    serializedVersion: 2
+    m_Bits: 512
+  layers2:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!212 &317123601684849251
 SpriteRenderer:
   m_ObjectHideFlags: 0
