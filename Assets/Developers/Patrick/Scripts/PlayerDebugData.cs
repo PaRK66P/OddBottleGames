@@ -16,6 +16,11 @@ public class PlayerDebugData : ScriptableObject
     [Header("Dashing")]
     public bool dashTowardsMouse = false;
 
+    [Header("Charging")]
+    public bool slowOnCharge = false;
+    public bool constantChargeTime = false;
+    public float contantChargeTimeValue = 0.15f;
+
     // Start is called before the first frame update
     void Start()
     {
