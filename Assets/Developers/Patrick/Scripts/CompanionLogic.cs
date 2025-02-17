@@ -288,7 +288,7 @@ public class CompanionLogic : MonoBehaviour
     {
         if (!displayVN)
         {
-            Destroy(gameObject);
+            objectPoolManager.ReleaseObject("Mercy", gameObject);
             yield break;
         }
 
@@ -353,9 +353,9 @@ public class CompanionLogic : MonoBehaviour
 
     IEnumerator DamageColor()
     {
-        SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer spriteRenderer = this.gameObject.transform.Find("Image").GetComponent<SpriteRenderer>();
         Color currentColor = spriteRenderer.color;
-        spriteRenderer.color = Color.red;
+        spriteRenderer.color = Color.white;
         yield return new WaitForSeconds(0.1f);
         spriteRenderer.color = currentColor;
     }
