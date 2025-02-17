@@ -71,3 +71,8 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Audio items for Wwise
+/[Rr]epo_WwiseProject
+/[Ww]wiseUnityIntegration_Mac_Src.zip
+/[Ww]wiseUnityIntegration_Windows_Src.zip
