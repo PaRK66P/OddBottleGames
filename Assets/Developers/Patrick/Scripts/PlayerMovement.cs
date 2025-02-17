@@ -114,11 +114,22 @@ public class PlayerMovement : MonoBehaviour
             dashStart = new Vector2(transform.position.x, transform.position.y);
             dashDirection = dashTowardsMouse ? new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x - transform.position.x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y - transform.position.y).normalized
                 : movementDirection;
+
+            StartCoroutine(DashColor());
         }
     }
 
     public void KnockbackPlayer(Vector2 direction, float scale)
     {
         knockbackForce = direction * scale;
+    }
+
+    IEnumerator DashColor()
+    {
+        SpriteRenderer spriteRenderer = this.gameObject.GetComponentInChildren<SpriteRenderer>();
+        Color currentColor = spriteRenderer.color;
+        spriteRenderer.color = Color.blue;
+        yield return new WaitForSeconds(dashTime);
+        spriteRenderer.color = currentColor;
     }
 }

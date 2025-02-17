@@ -230,7 +230,7 @@ public class AISimpleBehaviour : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         Color currentColor = spriteRenderer.color;
-        spriteRenderer.color = Color.red;
+        spriteRenderer.color = Color.white;
         yield return new WaitForSeconds(0.1f);
         spriteRenderer.color = currentColor;
     }
