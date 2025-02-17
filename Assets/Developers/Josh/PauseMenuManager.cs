@@ -7,6 +7,7 @@ public class PauseMenuManager : MonoBehaviour
     private GameObject player;
     private GameObject pauseMenu;
     private bool isPaused = false;
+    private float volume;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,5 +64,10 @@ public class PauseMenuManager : MonoBehaviour
     public void OnControlsClick()
     {
 
+    }
+
+    public void OnVolumeChange(float value)
+    {
+        volume = value;
     }
 }
