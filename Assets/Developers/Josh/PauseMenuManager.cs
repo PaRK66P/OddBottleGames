@@ -49,4 +49,19 @@ public class PauseMenuManager : MonoBehaviour
         isPaused = false;
 
     }
+
+    public void OnResumeClick()
+    {
+        OnUnpause();
+    }
+
+    public void OnQuitClick()
+    {
+
+    }
+
+    public void OnControlsClick()
+    {
+
+    }
 }
