@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviour
         playerMovement = gameObject.AddComponent<PlayerMovement>();
         playerShooting = gameObject.AddComponent<PlayerShooting>();
 
-        playerMovement.InitialiseComponent(playerData.speed, playerData.dashTime, playerData.dashDistance, playerData.dashCooldown, debugData.dashInputBuffer, playerData.damageLayers, debugData.dashTowardsMouse);
+        playerMovement.InitialiseComponent(playerData.speed, playerData.dashTime, playerData.dashDistance, playerData.dashCooldown, debugData.dashInputBuffer, playerData.damageLayers, debugData.dashTowardsMouse, playerData.dashChergesNumber, playerData.dashChargeTimer);
         playerShooting.InitialiseComponent(playerData.ammoUIObject,
             playerData.fireRate,
             playerData.timeToChargeShot, playerData.chargeShotIntervals,

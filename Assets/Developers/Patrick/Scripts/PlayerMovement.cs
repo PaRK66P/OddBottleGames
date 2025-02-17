@@ -11,11 +11,14 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movementInput;
     public float speed = 5;
     public float dashDistance;
+    public int dashChargesNumber = 3;
+    public float dashChargeTime = 3;
 
     public LayerMask damageLayers;
 
     public bool dash = false;
     private float dashTimer = 0.0f;
+    private float dashChargeTimer = 0.0f;
     private Vector2 movementDirection = Vector2.up;
     private Vector2 dashStart = Vector2.zero;
     private Vector2 dashDirection = Vector2.zero;
@@ -35,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void InitialiseComponent(float dSpeed, float dDashTime, float dDashDistance, float dDashCooldown, float dDashInputBuffer, LayerMask dDamageLayers, bool dashingTowardsMouse)
+    public void InitialiseComponent(float dSpeed, float dDashTime, float dDashDistance, float dDashCooldown, float dDashInputBuffer, LayerMask dDamageLayers, bool dashingTowardsMouse, int dDashCharges, float dDashChargeTime)
     {
         speed = dSpeed;
         dashTime = dDashTime;
@@ -44,12 +47,22 @@ public class PlayerMovement : MonoBehaviour
         dashInputBuffer = dDashInputBuffer;
         damageLayers = dDamageLayers;
         dashTowardsMouse = dashingTowardsMouse;
+        dashChargesNumber = dDashCharges;
+        dashChargeTimer = dDashChargeTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        dashChargeTimer += Time.deltaTime;
+        if(dashChargeTimer >= dashChargeTime)
+        {
+            dashChargeTimer = 0.0f;
+            if(dashChargesNumber < 3)
+            {
+                dashChargesNumber++;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -68,9 +81,38 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        //if (dash)
+        //{
+        //    if(Time.time - lastDashTime >= dashCooldown) // Off cooldown
+        //    {
+        //        dashTimer += Time.fixedDeltaTime;
+
+        //        rb.excludeLayers = damageLayers;
+
+        //        rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * dashDistance, Mathf.Min(dashTimer / dashTime, 1.0f)));
+
+        //        if (dashTimer >= dashTime)
+        //        {
+        //            rb.excludeLayers = 0;
+
+        //            dash = false;
+
+        //            lastDashTime = Time.time;
+        //        }
+        //        return;
+        //    }
+        //    else if (Time.time - lastDashInputTime > dashInputBuffer) // Buffer has been exceeded
+        //    {
+        //        dash = false;
+        //    }
+
+        //}
+
+
+
         if (dash)
         {
-            if(Time.time - lastDashTime >= dashCooldown) // Off cooldown
+            if (Time.time - lastDashTime >= dashCooldown/*check dash charges*/ && dashChargesNumber > 0) // Off cooldown
             {
                 dashTimer += Time.fixedDeltaTime;
 
@@ -85,6 +127,8 @@ public class PlayerMovement : MonoBehaviour
                     dash = false;
 
                     lastDashTime = Time.time;
+
+                    dashChargesNumber--;
                 }
                 return;
             }
@@ -92,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 dash = false;
             }
-            
+
         }
 
         rb.velocity = movementInput * speed;
