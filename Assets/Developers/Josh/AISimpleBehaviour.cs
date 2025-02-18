@@ -22,6 +22,10 @@ public class AISimpleBehaviour : MonoBehaviour
     private bool playerInRange = false;
     private float shootingTimer = 0.0f;
 
+    private float hitStunTimer = 1.0f;
+    private float hitStunLength = 0.2f;
+    private bool inStun = false;
+
     public GameObject AIProjectilePrefab;
     [SerializeField]
     private List<GameObject> projectiles = new List<GameObject>();
@@ -43,9 +47,29 @@ public class AISimpleBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateAIVision();
-        MakeAIActions();
-        BulletCleanUp();
+        if (hitStunTimer < hitStunLength)
+        {
+            hitStunTimer += Time.deltaTime;
+            inStun = true;
+        }
+        else
+        {
+            inStun = false;
+        }
+        if (!inStun)
+        {
+            Debug.Log("out of stun");
+            UpdateAIVision();
+            MakeAIActions();
+            BulletCleanUp();
+
+            //Debug.Log("in stun");
+        }
+        else
+        {
+            this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            Debug.Log("in stun");
+        }
         if (health <= 0)
         {
             //DestroyAllBullets();
@@ -73,20 +97,15 @@ public class AISimpleBehaviour : MonoBehaviour
             }
             else
             {
+                //seePlayer = false;
                 Debug.DrawRay(transform.position, dir * detectionRange, Color.red);
             }
         }
 
         Vector3 distToPlayer = this.transform.position - player.transform.position;
         float dist = distToPlayer.magnitude;
-        if (!playerBeenSeen)
+        if (playerBeenSeen)
         {
-            //seePlayer = false;
-
-        }
-        else
-        {
-
             if (dist < shootingRange)
             {
                 playerInRange = true;
@@ -97,6 +116,10 @@ public class AISimpleBehaviour : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             float targetRotation = Mathf.LerpAngle(this.transform.rotation.eulerAngles.z, angle, Time.deltaTime * 10);
             this.transform.rotation = Quaternion.Euler(0, 0, targetRotation);
+        }
+        else
+        {
+            seePlayer = false;
         }
         if (dist > shootingRange)
         {
@@ -227,6 +250,7 @@ public class AISimpleBehaviour : MonoBehaviour
     {
         health -= damage;
         StartCoroutine(DamageColor());
+        hitStunTimer = 0.0f;
     }
 
     IEnumerator DamageColor()
