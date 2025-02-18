@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     public int dashChargesNumber = 3;
     public float dashChargeTime = 3;
 
+    private GameObject[] dashChargesUIObject;
+
     public LayerMask damageLayers;
 
     public bool dash = false;
@@ -38,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void InitialiseComponent(float dSpeed, float dDashTime, float dDashDistance, float dDashCooldown, float dDashInputBuffer, LayerMask dDamageLayers, bool dashingTowardsMouse, int dDashCharges, float dDashChargeTime)
+    public void InitialiseComponent(float dSpeed, float dDashTime, float dDashDistance, float dDashCooldown, float dDashInputBuffer, LayerMask dDamageLayers, bool dashingTowardsMouse, int dDashCharges, float dDashChargeTime, ref GameObject dUICanvas, GameObject dDashChargeUIObject)
     {
         speed = dSpeed;
         dashTime = dDashTime;
@@ -49,6 +51,13 @@ public class PlayerMovement : MonoBehaviour
         dashTowardsMouse = dashingTowardsMouse;
         dashChargesNumber = dDashCharges;
         dashChargeTimer = dDashChargeTime;
+
+        for (int i = 0; i < dashChargesNumber; i++)
+        {
+            dashChargesUIObject[i] = Instantiate(dDashChargeUIObject, dUICanvas.transform);
+
+            dashChargesUIObject[i].GetComponent<RectTransform>().Translate(Vector3.right * 20 * (i+1));
+        }
     }
 
     // Update is called once per frame

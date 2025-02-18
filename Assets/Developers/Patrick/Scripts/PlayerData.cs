@@ -9,6 +9,7 @@ public class PlayerData : ScriptableObject
     [Min(0.0f)] public float speed;
 
     [Header("Dashing")]
+    public GameObject dashChargeUIObject;
     [Min(0.0f)] public float dashTime;
     [Min(0.0f)] public float dashDistance;
     [Min(0.0f)] public float dashCooldown;

@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Default
   m_EditorClassIdentifier: 
   speed: 5
+  dashChargeUIObject: {fileID: 454602280210619587, guid: 15acabbdf8d62154f9216abc70b7a442, type: 3}
   dashTime: 0.2
   dashDistance: 5
   dashCooldown: 0.5
+  dashChergesNumber: 3
+  dashChargeTimer: 0
   damageLayers:
     serializedVersion: 2
     m_Bits: 2048
