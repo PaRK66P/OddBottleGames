@@ -9,25 +9,19 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     private Vector2 movementInput;
-    public float speed = 5;
-    public float dashDistance;
-
-    public LayerMask damageLayers;
 
     public bool dash = false;
     private float dashTimer = 0.0f;
     private Vector2 movementDirection = Vector2.up;
     private Vector2 dashStart = Vector2.zero;
     private Vector2 dashDirection = Vector2.zero;
-    private float dashTime = 0.2f;
-    private float dashCooldown = 0.2f;
-    private float dashInputBuffer = 0.0f;
     private float lastDashTime = -10.0f;
     private float lastDashInputTime = -10.0f;
 
-    private bool dashTowardsMouse = false;
-
     private Vector2 knockbackForce = Vector2.zero;
+
+    private PlayerData playerData;
+    private PlayerDebugData debugData;
 
     // Start is called before the first frame update
     void Start()
@@ -35,15 +29,10 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void InitialiseComponent(float dSpeed, float dDashTime, float dDashDistance, float dDashCooldown, float dDashInputBuffer, LayerMask dDamageLayers, bool dashingTowardsMouse)
+    public void InitialiseComponent(PlayerData chosenPlayerData, PlayerDebugData chosenDebugData)
     {
-        speed = dSpeed;
-        dashTime = dDashTime;
-        dashDistance = dDashDistance;
-        dashCooldown = dDashCooldown;
-        dashInputBuffer = dDashInputBuffer;
-        damageLayers = dDamageLayers;
-        dashTowardsMouse = dashingTowardsMouse;
+        playerData = chosenPlayerData;
+        debugData = chosenDebugData;
     }
 
     // Update is called once per frame
@@ -56,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (movementInput != Vector2.zero)
         {
+            // Do we need this?
             movementDirection = movementInput.normalized;
         }
 
@@ -70,16 +60,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (dash)
         {
-            if(Time.time - lastDashTime >= dashCooldown) // Off cooldown
+            if(Time.time - lastDashTime >= playerData.dashCooldown) // Off cooldown
             {
                 StartCoroutine(DashColor());
                 dashTimer += Time.fixedDeltaTime;
 
-                rb.excludeLayers = damageLayers;
+                rb.excludeLayers = playerData.damageLayers;
 
-                rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * dashDistance, Mathf.Min(dashTimer / dashTime, 1.0f)));
+                rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * playerData.dashDistance, Mathf.Min(dashTimer / playerData.dashTime, 1.0f)));
 
-                if (dashTimer >= dashTime)
+                if (dashTimer >= playerData.dashTime)
                 {
                     rb.excludeLayers = 0;
 
@@ -89,14 +79,29 @@ public class PlayerMovement : MonoBehaviour
                 }
                 return;
             }
-            else if (Time.time - lastDashInputTime > dashInputBuffer) // Buffer has been exceeded
+            else if (Time.time - lastDashInputTime > debugData.dashInputBuffer) // Buffer has been exceeded
             {
                 dash = false;
             }
             
         }
 
-        rb.velocity = movementInput * speed;
+        Movement();
+    }
+
+    private void Movement()
+    {
+        // Get the speed the player wants to move at
+        Vector2 targetSpeed = movementInput * playerData.speed;
+
+        // Can implement acceleration in the future but not sure if necessary for this style of game
+
+        Vector2 speedDiff = targetSpeed - rb.velocity;
+
+        // Normally apply acceleration but we want instant so just use speed
+        Vector2 movement =  speedDiff * playerData.speed;
+
+        rb.AddForce(movement, ForceMode2D.Force);
     }
 
     public void SetMovementInput(InputAction.CallbackContext context)
@@ -113,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
             dash = true;
             dashTimer = 0.0f;
             dashStart = new Vector2(transform.position.x, transform.position.y);
-            dashDirection = dashTowardsMouse ? new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x - transform.position.x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y - transform.position.y).normalized
+            dashDirection = debugData.dashTowardsMouse ? new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x - transform.position.x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y - transform.position.y).normalized
                 : movementDirection;
 
             //StartCoroutine(DashColor());
@@ -129,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = this.gameObject.GetComponentInChildren<SpriteRenderer>();
         spriteRenderer.color = Color.blue;
-        yield return new WaitForSeconds(dashTime);
+        yield return new WaitForSeconds(playerData.dashTime);
         spriteRenderer.color = Color.white;
     }
 }
