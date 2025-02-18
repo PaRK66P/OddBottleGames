@@ -1,4 +1,4 @@
-using Mono.Cecil.Cil;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -43,6 +43,8 @@ public class VisualNovelScript : MonoBehaviour
     int currentVNPrefabIndex = 0;
     private int lastSelectionID = 0;
 
+    private IEnumerator typingText;
+
 
     void Start()
     {
@@ -81,7 +83,7 @@ public class VisualNovelScript : MonoBehaviour
 
     public void StartNovelScene(int NovelSceneID)
     {
-        Debug.Log(NovelSceneID);
+        //Debug.Log(NovelSceneID);
         if (!isNovelSection)
         {
             Time.timeScale = 0;
@@ -93,7 +95,8 @@ public class VisualNovelScript : MonoBehaviour
             {
                 DialogueTree tree = new DialogueTree(ReconstructTree(VNScenes[currentVNPrefabIndex].tree));
                 currentNode = tree.rootNode;
-                text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
+                typingText = TypewriterText(currentNode.sceneData.text);
+                StartCoroutine(typingText);
                 sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
 
                 IDSelectionOptions(currentNode, 0);
@@ -125,13 +128,15 @@ public class VisualNovelScript : MonoBehaviour
     }
     void NextScene(int index)
     {
+        //StopCoroutine(typingText);
         if (!currentNode.isLeaf())
         {
             if (index > -1 && index < currentNode.children.Count)
             {
                 currentNode = currentNode.children[index];
                 sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
-                text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
+                typingText = TypewriterText(currentNode.sceneData.text);
+                StartCoroutine(typingText);
                 CreateButtons();
             }
             else
@@ -250,5 +255,19 @@ public class VisualNovelScript : MonoBehaviour
     public int GetLastSelectionID()
     {
         return lastSelectionID;
+    }
+
+    private IEnumerator TypewriterText(string targetText)
+    {
+        string textToAdd = "";
+        for (int i = 0; i < targetText.Length; i++)
+        {
+            //Debug.Log(i + ", " + targetText.Length);
+            textToAdd += targetText[i];
+            text.GetComponent<TMP_Text>().text = textToAdd;
+            yield return new WaitForSecondsRealtime(0.05f);
+        }
+        //Debug.Log("done");
+        yield return null;
     }
 }

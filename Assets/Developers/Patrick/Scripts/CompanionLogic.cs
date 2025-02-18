@@ -33,19 +33,11 @@ public class CompanionLogic : MonoBehaviour
     [SerializeField]
     private Transform idlePosition;
 
-    [SerializeField]
-    private float maxHealth;
     private float currentHealth = 15;
 
     [SerializeField]
     private List<GameObject> currentTargets;
     private int targetIndex = 0;
-
-    [SerializeField]
-    private GameObject explosionObject;
-
-    [SerializeField]
-    private GameObject shockwaveObject;
 
     [SerializeField]
     ObjectPoolManager objectPoolManager;
@@ -355,7 +347,7 @@ public class CompanionLogic : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = this.gameObject.transform.Find("Image").GetComponent<SpriteRenderer>();
         Color currentColor = spriteRenderer.color;
-        spriteRenderer.color = Color.white;
+        spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         spriteRenderer.color = currentColor;
     }
