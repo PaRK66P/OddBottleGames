@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movementInput;
     public float speed = 5;
     public float dashDistance;
-    public int dashChargesNumber = 3;
+    public int dashChargesMaxNumber = 3;
     public float dashChargeTime = 3;
 
     private GameObject[] dashChargesUIObject;
@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool dash = false;
     private float dashTimer = 0.0f;
+    private int dashChargesNumber = 0;
     private float dashChargeTimer = 0.0f;
     private Vector2 movementDirection = Vector2.up;
     private Vector2 dashStart = Vector2.zero;
@@ -50,13 +51,15 @@ public class PlayerMovement : MonoBehaviour
         damageLayers = dDamageLayers;
         dashTowardsMouse = dashingTowardsMouse;
         dashChargesNumber = dDashCharges;
-        dashChargeTimer = dDashChargeTime;
+        dashChargesMaxNumber = dDashCharges;
+        dashChargeTime = dDashChargeTime;
+        dashChargesUIObject = new GameObject[dashChargesNumber];
 
         for (int i = 0; i < dashChargesNumber; i++)
         {
             dashChargesUIObject[i] = Instantiate(dDashChargeUIObject, dUICanvas.transform);
 
-            dashChargesUIObject[i].GetComponent<RectTransform>().Translate(Vector3.right * 20 * (i+1));
+            dashChargesUIObject[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
         }
     }
 
@@ -67,10 +70,42 @@ public class PlayerMovement : MonoBehaviour
         if(dashChargeTimer >= dashChargeTime)
         {
             dashChargeTimer = 0.0f;
-            if(dashChargesNumber < 3)
+            if(dashChargesNumber < dashChargesMaxNumber)
             {
                 dashChargesNumber++;
             }
+        }
+
+        switch (dashChargesNumber)
+        {
+            case 0:
+                for (int i = 0; i < 3; i++)
+                {
+                    dashChargesUIObject[i].SetActive(false);
+                }
+                break;
+            case 1:
+                dashChargesUIObject[0].SetActive(true);
+                for (int i = 1; i < 3; i++)
+                {
+                    dashChargesUIObject[i].SetActive(false);
+                }
+                break;
+            case 2:
+                dashChargesUIObject[2].SetActive(false);
+                for (int i = 0; i < 2; i++)
+                {
+                    dashChargesUIObject[i].SetActive(true);
+                }
+                break;
+            case 3:
+                for (int i = 0; i < 3; i++)
+                {
+                    dashChargesUIObject[i].SetActive(true);
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -117,11 +152,9 @@ public class PlayerMovement : MonoBehaviour
 
         //}
 
-
-
         if (dash)
         {
-            if (Time.time - lastDashTime >= dashCooldown/*check dash charges*/ && dashChargesNumber > 0) // Off cooldown
+            if (Time.time - lastDashTime >= dashCooldown && dashChargesNumber > 0) // Off cooldown
             {
                 dashTimer += Time.fixedDeltaTime;
 
@@ -139,6 +172,7 @@ public class PlayerMovement : MonoBehaviour
 
                     dashChargesNumber--;
                 }
+
                 return;
             }
             else if (Time.time - lastDashInputTime > dashInputBuffer) // Buffer has been exceeded

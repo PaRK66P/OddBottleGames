@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class PlayerManager : MonoBehaviour
 
     private float timeOfDamage = -10.0f;
     private float invulnerableTime = 1.0f;
+
+    private int health = 100;
+    private GameObject healthbar;
 
     private event EventHandler OnDamageTaken;
 
@@ -60,6 +64,10 @@ public class PlayerManager : MonoBehaviour
         {
             OnDamageTaken += DropWeapon;
         }
+
+        healthbar = Instantiate(playerData.healthbar, UICanvas.transform);
+        healthbar.GetComponent<Slider>().maxValue = playerData.health;
+        health = playerData.health;
     }
 
     private void OnDisable()
@@ -87,9 +95,11 @@ public class PlayerManager : MonoBehaviour
                 image.color = Color.white;
             }
         }
+
+        healthbar.GetComponent<Slider>().value = health;
     }
 
-    public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f)
+    public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f, int ammount = 20)
     {
         if (isDamaged) { return; }
 
@@ -102,6 +112,38 @@ public class PlayerManager : MonoBehaviour
         playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);
 
         OnDamageTaken?.Invoke(this, EventArgs.Empty);
+
+        health -= ammount;
+        if(health <= 1)
+        {
+            health = 1;
+        }
+    }
+
+    //public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f)
+    //{
+    //    if (isDamaged) { return; }
+
+    //    rb.excludeLayers = playerData.damageLayers;
+    //    isDamaged = true;
+    //    playerInputManager.DisableInput();
+    //    image.color = Color.blue;
+    //    timeOfDamage = Time.time;
+    //    invulnerableTime = damageTime;
+    //    playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);
+
+    //    OnDamageTaken?.Invoke(this, EventArgs.Empty);
+
+        
+    //}
+
+    public void Heal(int ammount)
+    {
+        health += ammount;
+        if(health >= playerData.health)
+        {
+            health = playerData.health;
+        }
     }
 
     private void DropWeapon(object sender, EventArgs e)

@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData", order = 1)]
 public class PlayerData : ScriptableObject
 {
+    [Header("Health")]
+    public int health = 100;
+    public GameObject healthbar;
+
     [Header("Movement")]
     [Min(0.0f)] public float speed;
 
