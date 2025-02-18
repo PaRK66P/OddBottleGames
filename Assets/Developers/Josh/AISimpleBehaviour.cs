@@ -30,11 +30,14 @@ public class AISimpleBehaviour : MonoBehaviour
 
     public AIType aiMode = AIType.SHOOTER;
 
+    private Color currentColor;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("PlayerProto");
         objectPoolManager = GameObject.Find("ObjectPoolManager").GetComponent<ObjectPoolManager>();
+        currentColor = gameObject.GetComponent<SpriteRenderer>().color;
     }
 
     // Update is called once per frame
@@ -223,6 +226,15 @@ public class AISimpleBehaviour : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        StartCoroutine(DamageColor());
+    }
+
+    IEnumerator DamageColor()
+    {
+        SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = currentColor;
     }
 
 }

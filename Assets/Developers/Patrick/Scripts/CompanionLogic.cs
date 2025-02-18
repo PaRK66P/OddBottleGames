@@ -277,7 +277,7 @@ public class CompanionLogic : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-
+        StartCoroutine(DamageColor());
         if (currentHealth < 0)
         {
             StartCoroutine(Defeated());
@@ -288,7 +288,7 @@ public class CompanionLogic : MonoBehaviour
     {
         if (!displayVN)
         {
-            Destroy(gameObject);
+            objectPoolManager.ReleaseObject("Mercy", gameObject);
             yield break;
         }
 
@@ -349,5 +349,14 @@ public class CompanionLogic : MonoBehaviour
         currentTargets.Clear();
         GetComponent<CircleCollider2D>().enabled = true;
         GetClosestTarget();
+    }
+
+    IEnumerator DamageColor()
+    {
+        SpriteRenderer spriteRenderer = this.gameObject.transform.Find("Image").GetComponent<SpriteRenderer>();
+        Color currentColor = spriteRenderer.color;
+        spriteRenderer.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = currentColor;
     }
 }

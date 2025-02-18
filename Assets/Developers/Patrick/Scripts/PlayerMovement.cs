@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if(Time.time - lastDashTime >= dashCooldown) // Off cooldown
             {
+                StartCoroutine(DashColor());
                 dashTimer += Time.fixedDeltaTime;
 
                 rb.excludeLayers = damageLayers;
@@ -114,11 +115,21 @@ public class PlayerMovement : MonoBehaviour
             dashStart = new Vector2(transform.position.x, transform.position.y);
             dashDirection = dashTowardsMouse ? new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x - transform.position.x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y - transform.position.y).normalized
                 : movementDirection;
+
+            //StartCoroutine(DashColor());
         }
     }
 
     public void KnockbackPlayer(Vector2 direction, float scale)
     {
         knockbackForce = direction * scale;
+    }
+
+    IEnumerator DashColor()
+    {
+        SpriteRenderer spriteRenderer = this.gameObject.GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer.color = Color.blue;
+        yield return new WaitForSeconds(dashTime);
+        spriteRenderer.color = Color.white;
     }
 }
