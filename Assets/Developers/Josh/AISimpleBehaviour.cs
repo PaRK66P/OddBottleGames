@@ -13,8 +13,8 @@ public class AISimpleBehaviour : MonoBehaviour
 {
     public GameObject player;
     public GameObject particle;
-    public float detectionRange = 10;
-    public float shootingRange = 6;
+    public float detectionRange = 15;
+    public float shootingRange = 9;
     public float speed = 2;
     public float fireRate = 2.0f;
 
@@ -83,51 +83,28 @@ public class AISimpleBehaviour : MonoBehaviour
 
     void UpdateAIVision()
     {
-        int numRays = 30;
-        float coneAngle = 360.0f;
-        float angleStep = coneAngle / (float)numRays;
-        bool playerBeenSeen = false;
-        for (int i = 0; i < numRays + 1; i++)
-        {
-            float angle = (-coneAngle / 2.0f) + (i * angleStep);
-            Vector3 dir = Quaternion.Euler(0, 0, angle) * this.transform.right;
-            dir.Normalize();
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, detectionRange, LayerMask.GetMask("Player"));
-            if (hit.collider != null)
-            {
-                Debug.DrawRay(transform.position, dir * detectionRange, Color.green);
-                seePlayer = true;
-                playerBeenSeen = true;
-            }
-            else
-            {
-                //seePlayer = false;
-                Debug.DrawRay(transform.position, dir * detectionRange, Color.red);
-            }
-        }
-
         Vector3 distToPlayer = this.transform.position - player.transform.position;
         float dist = distToPlayer.magnitude;
-        if (playerBeenSeen)
+        if (dist < shootingRange)
         {
-            if (dist < shootingRange)
-            {
-                playerInRange = true;
-            }
+            playerInRange = true;
+        }
+        else 
+        {
+            playerInRange = false;
+        }
 
-            Vector3 direction = player.transform.position - this.transform.position;
+        if (dist < detectionRange)
+        {
+            seePlayer = true;
+             float angle = Mathf.Atan2(distToPlayer.y, distToPlayer.x) * Mathf.Rad2Deg;
+             float targetRotation = Mathf.LerpAngle(this.transform.rotation.eulerAngles.z, angle, Time.deltaTime * 10);
+             this.transform.rotation = Quaternion.Euler(0, 0, targetRotation);
 
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            float targetRotation = Mathf.LerpAngle(this.transform.rotation.eulerAngles.z, angle, Time.deltaTime * 10);
-            this.transform.rotation = Quaternion.Euler(0, 0, targetRotation);
         }
         else
         {
             seePlayer = false;
-        }
-        if (dist > shootingRange)
-        {
-            playerInRange = false;
         }
     }
 
