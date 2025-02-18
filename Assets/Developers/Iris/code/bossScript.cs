@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Threading;
 using UnityEngine;
 
 public class bossScript : MonoBehaviour
@@ -66,7 +61,7 @@ public class bossScript : MonoBehaviour
                 strikesSpawned = 0;
                 strikesTimer = timeBetweenStrikes;
 
-                Debug.Log("strikes reset");
+                //Debug.Log("strikes reset");
 
                 Attack();
                 restTimer = 0;
@@ -116,7 +111,7 @@ public class bossScript : MonoBehaviour
 
     void TargetedArtileryStrike()
     {
-        Debug.Log("Strike");
+        //Debug.Log("Strike");
         strikesTimer += Time.deltaTime;
         if(strikesTimer >= timeBetweenStrikes)
         {
@@ -132,13 +127,13 @@ public class bossScript : MonoBehaviour
 
                 Instantiate(artileryPrefab, pos, UnityEngine.Quaternion.Euler(0, 0, 0));
 
-                Debug.Log(strikesSpawned);
+                //Debug.Log(strikesSpawned);
                 strikesSpawned++;
             }
             else
             {
                 pauseRest = false;
-                Debug.Log(pauseRest);
+                //Debug.Log(pauseRest);
             }
         }
     }

@@ -36,7 +36,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        image = rb.GetComponent<SpriteRenderer>();
+        image = GetComponentInChildren<SpriteRenderer>();
 
         playerInputManager = gameObject.AddComponent<PlayerInputManager>();
         playerMovement = gameObject.AddComponent<PlayerMovement>();
@@ -45,7 +45,7 @@ public class PlayerManager : MonoBehaviour
         playerMovement.InitialiseComponent(playerData.speed, playerData.dashTime, playerData.dashDistance, playerData.dashCooldown, debugData.dashInputBuffer, playerData.damageLayers, debugData.dashTowardsMouse);
         playerShooting.InitialiseComponent(playerData.ammoUIObject,
             playerData.fireRate,
-            playerData.timeToChargeShot, playerData.chargeShotIntervals,
+            playerData.maxTimeToChargeShot, playerData.minTimeToChargeShot, playerData.shotsTillFullCharge, playerData.chargeShotIntervals,
             playerData.maxAmmo, playerData.reloadTime,
             playerData.baseProjectileType, playerData.baseProjectileSpeed, 
             debugData.firingInputBuffer, debugData.canDropWeapon, 
@@ -98,6 +98,7 @@ public class PlayerManager : MonoBehaviour
         timeOfDamage = Time.time;
         invulnerableTime = damageTime;
         playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);
+        playerShooting.InterruptFiring();
 
         OnDamageTaken?.Invoke(this, EventArgs.Empty);
     }
@@ -119,5 +120,15 @@ public class PlayerManager : MonoBehaviour
     {
         hasWeapon = true;
         playerShooting.EnableFire();
+    }
+
+    public void DisableInput()
+    {
+        playerInputManager.DisableInput();
+    }
+
+    public void EnableInput()
+    {
+        playerInputManager.EnableInput();
     }
 }

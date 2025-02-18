@@ -19,7 +19,9 @@ public class PlayerData : ScriptableObject
     [Header("Shooting")]
     public GameObject ammoUIObject;
     [Min(0.0f)] public float fireRate;
-    [Min(0.0f)] public float timeToChargeShot;
+    [Min(0.0f)] public float maxTimeToChargeShot;
+    [Min(0.0f)] public float minTimeToChargeShot;
+    [Min(1)] public int shotsTillFullCharge;
     [Min(0.0f)] public float chargeShotIntervals;
     [Min(1)] public int maxAmmo;
     [Min(0.0f)] public float reloadTime;

@@ -12,6 +12,9 @@ public class ShockwaveLogic : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private ObjectPoolManager objectPoolManager;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,25 +40,30 @@ public class ShockwaveLogic : MonoBehaviour
             {
                 Vector2 damageDirection = new Vector2(collision.gameObject.transform.position.x - transform.position.x,
                     collision.gameObject.transform.position.y - transform.position.y);
-                collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized);
+                collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized, 1, 10);
             }
-            else if (collision.gameObject.GetComponent<AISimpleDetectionScript>() != null)
+            else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
             {
-                collision.gameObject.GetComponent<AISimpleDetectionScript>().TakeDamage(damage);
+                collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(damage);
             }
             else if (collision.gameObject.GetComponent<bossScript>() != null)
             {
                 collision.gameObject.GetComponent<bossScript>().takeDamage(1);
             }
         }
+        if(collision.gameObject.layer == 6)
+        {
+            objectPoolManager.ReleaseObject("Shockwave", this.gameObject);
+        }
     }
 
-    public void InitialiseEffect(LayerMask damageLayer, float totalDamage, Vector2 direction, float speedMovement)
+    public void InitialiseEffect(LayerMask damageLayer, float totalDamage, Vector2 direction, float speedMovement, ObjectPoolManager objMgr)
     {
         target = damageLayer;
         damage = totalDamage;
         directionMovement = direction;
         speed = speedMovement;
+        objectPoolManager = objMgr;
     }
 
 
