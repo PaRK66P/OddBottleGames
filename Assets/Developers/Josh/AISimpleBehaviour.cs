@@ -12,6 +12,7 @@ public enum AIType
 public class AISimpleBehaviour : MonoBehaviour
 {
     public GameObject player;
+    public GameObject particle;
     public float detectionRange = 10;
     public float shootingRange = 6;
     public float speed = 2;
@@ -25,6 +26,9 @@ public class AISimpleBehaviour : MonoBehaviour
     private float hitStunTimer = 1.0f;
     private float hitStunLength = 0.2f;
     private bool inStun = false;
+    private bool isDead = false;
+    private float deadTimer = 0.0f;
+    private List<GameObject> particles = new List<GameObject>();
 
     public GameObject AIProjectilePrefab;
     [SerializeField]
@@ -47,33 +51,36 @@ public class AISimpleBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hitStunTimer < hitStunLength)
+        if (!isDead)
         {
-            hitStunTimer += Time.deltaTime;
-            inStun = true;
-        }
-        else
-        {
-            inStun = false;
-        }
-        if (!inStun)
-        {
-            Debug.Log("out of stun");
-            UpdateAIVision();
-            MakeAIActions();
-            BulletCleanUp();
+            if (hitStunTimer < hitStunLength)
+            {
+                hitStunTimer += Time.deltaTime;
+                inStun = true;
+            }
+            else
+            {
+                inStun = false;
+            }
+            if (!inStun)
+            {
+                //Debug.Log("out of stun");
+                UpdateAIVision();
+                MakeAIActions();
+                BulletCleanUp();
 
-            //Debug.Log("in stun");
-        }
-        else
-        {
-            this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-            Debug.Log("in stun");
+                //Debug.Log("in stun");
+            }
+            else
+            {
+                this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                //Debug.Log("in stun");
+            }
         }
         if (health <= 0)
         {
-            //DestroyAllBullets();
-            GetComponent<enemyScr>().releaseEnemy();
+            isDead = true;
+            OnDeath();
         }
     }
 
@@ -261,4 +268,40 @@ public class AISimpleBehaviour : MonoBehaviour
         spriteRenderer.color = currentColor;
     }
 
+    void OnDeath()
+    {
+        if (deadTimer == 0.0f)
+        {
+            Debug.Log("dead");
+            
+            for (int i = 0; i < 8; i++)
+            {
+                particles.Add(Instantiate(particle));
+                float speed = 3.0f;
+                float angle = Mathf.PI * 2.0f * i/8.0f;
+                float x = speed * Mathf.Cos(angle);
+                float y = speed * Mathf.Sin(angle);
+                particles[i].GetComponent<Rigidbody2D>().velocity = new Vector2(x, y);
+                particles[i].transform.rotation = Quaternion.Euler(0,0,Mathf.Rad2Deg*angle);
+                particles[i].transform.position = gameObject.transform.position + (new Vector3(x,y,0)*0.2f);
+            }
+        }
+
+        deadTimer += Time.deltaTime;
+
+        foreach (GameObject particle in particles)
+        {
+            particle.GetComponent<Rigidbody2D>().velocity *= 0.96f;
+        }
+
+        if (deadTimer > 0.4f)
+        {
+            foreach (GameObject particle in particles)
+            {
+                Destroy(particle);
+            }
+            particles.Clear();
+            GetComponent<enemyScr>().releaseEnemy();
+        }
+    }
 }
