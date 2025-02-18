@@ -28,6 +28,7 @@ public class AISimpleBehaviour : MonoBehaviour
     private bool inStun = false;
     private bool isDead = false;
     private float deadTimer = 0.0f;
+    public bool takesKnockback = true;
     private List<GameObject> particles = new List<GameObject>();
 
     public GameObject AIProjectilePrefab;
@@ -57,6 +58,7 @@ public class AISimpleBehaviour : MonoBehaviour
             {
                 hitStunTimer += Time.deltaTime;
                 inStun = true;
+                GetComponent<Rigidbody2D>().velocity *= 0.96f;
             }
             else
             {
@@ -69,11 +71,6 @@ public class AISimpleBehaviour : MonoBehaviour
                 MakeAIActions();
                 BulletCleanUp();
 
-                //Debug.Log("in stun");
-            }
-            else
-            {
-                this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                 //Debug.Log("in stun");
             }
         }
@@ -253,11 +250,19 @@ public class AISimpleBehaviour : MonoBehaviour
         projectiles.Clear();
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Vector2 damageDir)
     {
         health -= damage;
         StartCoroutine(DamageColor());
         hitStunTimer = 0.0f;
+        //inStun = true;
+        this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        
+        if (takesKnockback && health > 0)
+        {
+            Debug.Log("knocking back");
+            gameObject.GetComponent<Rigidbody2D>().velocity = -damageDir.normalized * 4.0f;
+        }
     }
 
     IEnumerator DamageColor()
