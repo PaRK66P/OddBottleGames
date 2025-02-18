@@ -45,7 +45,7 @@ public class ExplosionLogic : MonoBehaviour
                 {
                     Vector2 damageDirection = new Vector2(obj.transform.position.x - transform.position.x,
                         obj.transform.position.y - transform.position.y);
-                    obj.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized);
+                    obj.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized, 1, 10);
                 }
                 else if (obj.GetComponent<AISimpleBehaviour>() != null)
                 {

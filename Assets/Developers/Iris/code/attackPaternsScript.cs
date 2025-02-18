@@ -70,7 +70,7 @@ public class attackPaternsScript : MonoBehaviour
         n = 0;
         if (patList[0].Count() > 1)
         {
-            n = UnityEngine.Random.Range(0, patList[0].Count() + 1);
+            n = UnityEngine.Random.Range(0, patList[0].Count());
             currentAttack = patList[0][n];
         }
         currentAttack = patList[0][n];

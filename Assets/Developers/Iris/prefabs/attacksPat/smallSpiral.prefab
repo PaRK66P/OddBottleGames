@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a007112ba4a34b9449cb88be96e15f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 8899993562786344213}
   projectilePerWaveNo: 6
   numberOfWaves: 10
   timeBetweenWaves: 0.2

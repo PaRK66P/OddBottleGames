@@ -40,7 +40,7 @@ public class ShockwaveLogic : MonoBehaviour
             {
                 Vector2 damageDirection = new Vector2(collision.gameObject.transform.position.x - transform.position.x,
                     collision.gameObject.transform.position.y - transform.position.y);
-                collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized);
+                collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized, 1, 10);
             }
             else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
             {

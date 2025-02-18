@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pattern: 0/1,2/3,4/5/6,
-  timeBetweenAttacks: 2
+  timeBetweenAttacks: 1
   attackList:
   - {fileID: 2472219134077984931, guid: 68b2924def505054287b192c24f567c7, type: 3}
   - {fileID: 283872786456334360, guid: 9d9997f6426b88845a6fea70f47e30c2, type: 3}
