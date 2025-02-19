@@ -265,7 +265,7 @@ public class AISimpleBehaviour : MonoBehaviour
                 float y = speed * Mathf.Sin(angle);
                 particles[i].GetComponent<Rigidbody2D>().velocity = new Vector2(x, y);
                 particles[i].transform.rotation = Quaternion.Euler(0,0,Mathf.Rad2Deg*angle);
-                particles[i].transform.position = gameObject.transform.position + (new Vector3(x,y,0)*0.2f);
+                particles[i].transform.position = gameObject.transform.position + (new Vector3(x,y,0)*0.4f);
             }
         }
 
@@ -273,10 +273,10 @@ public class AISimpleBehaviour : MonoBehaviour
 
         foreach (GameObject particle in particles)
         {
-            particle.GetComponent<Rigidbody2D>().velocity *= 0.96f;
+            particle.GetComponent<Rigidbody2D>().velocity *= 0.95f;
         }
 
-        if (deadTimer > 0.4f)
+        if (deadTimer > 0.3f)
         {
             foreach (GameObject particle in particles)
             {
