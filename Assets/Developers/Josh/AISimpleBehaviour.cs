@@ -237,7 +237,7 @@ public class AISimpleBehaviour : MonoBehaviour
         
         if (takesKnockback && health > 0)
         {
-            Debug.Log("knocking back");
+            //Debug.Log("knocking back");
             gameObject.GetComponent<Rigidbody2D>().velocity = -damageDir.normalized * 4.0f;
         }
     }
@@ -254,7 +254,7 @@ public class AISimpleBehaviour : MonoBehaviour
     {
         if (deadTimer == 0.0f)
         {
-            Debug.Log("dead");
+            //Debug.Log("dead");
             
             for (int i = 0; i < 8; i++)
             {
