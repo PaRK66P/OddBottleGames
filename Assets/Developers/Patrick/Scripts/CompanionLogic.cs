@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public enum CompanionMode
 {
@@ -58,6 +59,8 @@ public class CompanionLogic : MonoBehaviour
 
     private bool displayVN = true;
 
+    private Slider healthSlider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +78,11 @@ public class CompanionLogic : MonoBehaviour
         objectPoolManager = GameObject.Find("ObjectPoolManager").GetComponent<ObjectPoolManager>();
 
         displayVN = true;
+
+        healthSlider = GetComponentInChildren<Slider>();
+        healthSlider.maxValue = currentHealth;
+        healthSlider.minValue = 0;
+        healthSlider.value = currentHealth;
     }
 
     // Update is called once per frame
@@ -269,6 +277,7 @@ public class CompanionLogic : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        healthSlider.value = currentHealth;
         StartCoroutine(DamageColor());
         if (currentHealth < 0)
         {
@@ -318,6 +327,7 @@ public class CompanionLogic : MonoBehaviour
         transform.position = new Vector3(95.0f, 0.0f, 0.0f);
         idlePosition.position = new Vector3(95.0f, 0.0f, 0.0f);
         currentHealth = 15;
+        healthSlider.value = currentHealth;
 
         GetComponent<CircleCollider2D>().enabled = false;
         currentTargets.Clear();
@@ -332,6 +342,7 @@ public class CompanionLogic : MonoBehaviour
         this.companionMode = CompanionMode.COMPANION;
         idlePosition = GameObject.Find("PlayerProto").GetComponent<Transform>();
         currentHealth = 15;
+        healthSlider.value = currentHealth;
         //targetIndex = -1;
         modeLayerSelected = false;
         alive = true;
