@@ -67,11 +67,16 @@ public class PlayerShooting : MonoBehaviour
         poolManager = dPoolManager;
 
         ammoUIObjects = new GameObject[maxAmmo];
+
+        int offset = maxAmmo / 2 * 12;
         for (int i = 0; i < maxAmmo; i++)
         {
             ammoUIObjects[i] = Instantiate(dAmmoUIObject, dUICanvas.transform);
 
-            ammoUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.right * 100 * i);
+            ammoUIObjects[i].GetComponent<RectTransform>().Translate(new Vector3(520, 0, 0));
+            ammoUIObjects[i].GetComponent<RectTransform>().Translate(new Vector3(-offset, 0, 0));
+            ammoUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.right * 12 * i);
+            ammoUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 200);
         }
     }
 
