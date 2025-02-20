@@ -72,15 +72,14 @@ public class PlayerShooting : MonoBehaviour
 
         ammoUIObjects = new GameObject[maxAmmo];
 
-        int offset = maxAmmo / 2 * 12;
+        int offset = (maxAmmo / 2 + 1) * 20;
         for (int i = 0; i < maxAmmo; i++)
         {
             ammoUIObjects[i] = Instantiate(dAmmoUIObject, dUICanvas.transform);
 
-            ammoUIObjects[i].GetComponent<RectTransform>().Translate(new Vector3(520, 0, 0));
+            ammoUIObjects[i].GetComponent<RectTransform>().Translate(new Vector3(Screen.width/2 - 20, -Screen.height / 2 + 120, 0));
             ammoUIObjects[i].GetComponent<RectTransform>().Translate(new Vector3(-offset, 0, 0));
-            ammoUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.right * 12 * i);
-            ammoUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 200);
+            ammoUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.right * 20 * i);
         }
     }
 
