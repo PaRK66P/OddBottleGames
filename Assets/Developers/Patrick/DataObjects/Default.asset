@@ -12,21 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e6244bdc64379d4abe988fd44c0b134, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  health: 100
-  healthbar: {fileID: 7940067324356998275, guid: ac8003dc51160644aa424ec898956709, type: 3}
-  speed: 5
-  dashChargeUIObject: {fileID: 454602280210619587, guid: 15acabbdf8d62154f9216abc70b7a442, type: 3}
+  speed: 7
   dashTime: 0.2
   dashDistance: 5
-  dashCooldown: 0.2
-  dashChergesNumber: 3
-  dashChargeTimer: 2.5
+  dashCooldown: 0.5
   damageLayers:
     serializedVersion: 2
     m_Bits: 2048
   ammoUIObject: {fileID: 454602280210619587, guid: 0e0c634a477346b49b37aaa0420069ad, type: 3}
-  fireRate: 0.3
-  timeToChargeShot: 0.15
+  fireRate: 0.4
+  maxTimeToChargeShot: 0.4
+  minTimeToChargeShot: 0.05
+  shotsTillFullCharge: 4
   chargeShotIntervals: 0.1
   maxAmmo: 6
   reloadTime: 1

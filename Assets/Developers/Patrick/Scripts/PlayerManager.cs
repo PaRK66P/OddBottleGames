@@ -51,7 +51,7 @@ public class PlayerManager : MonoBehaviour
             playerData.dashChergesNumber, playerData.dashChargeTimer, ref UICanvas, playerData.dashChargeUIObject);
         playerShooting.InitialiseComponent(playerData.ammoUIObject,
             playerData.fireRate,
-            playerData.timeToChargeShot, playerData.chargeShotIntervals,
+            playerData.maxTimeToChargeShot, playerData.minTimeToChargeShot, playerData.shotsTillFullCharge, playerData.chargeShotIntervals,
             playerData.maxAmmo, playerData.reloadTime,
             playerData.baseProjectileType, playerData.baseProjectileSpeed, 
             debugData.firingInputBuffer, debugData.canDropWeapon, 
@@ -110,6 +110,7 @@ public class PlayerManager : MonoBehaviour
         timeOfDamage = Time.time;
         invulnerableTime = damageTime;
         playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);
+        playerShooting.InterruptFiring();
 
         OnDamageTaken?.Invoke(this, EventArgs.Empty);
 
@@ -163,5 +164,15 @@ public class PlayerManager : MonoBehaviour
     {
         hasWeapon = true;
         playerShooting.EnableFire();
+    }
+
+    public void DisableInput()
+    {
+        playerInputManager.DisableInput();
+    }
+
+    public void EnableInput()
+    {
+        playerInputManager.EnableInput();
     }
 }

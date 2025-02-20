@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -25,6 +26,8 @@ public class VisualNovelScript : MonoBehaviour
     //[SerializeField]
     List<VNPrefabScript> VNScenes = new List<VNPrefabScript>();
 
+    [SerializeField] GameObject playerRef;
+
     public bool isNovelSection;
     public string newtext;
     public GameObject canv;
@@ -43,10 +46,10 @@ public class VisualNovelScript : MonoBehaviour
 
     void Start()
     {
-        canv = GameObject.Find("VisualNovelCanvas");
-        text = GameObject.Find("VisualNovelText");
-        sprite = GameObject.Find("VisualNovelSprite");
-        buttonContainer = GameObject.Find("VisualNovelButtonContainer").GetComponent<Transform>();
+        canv = GameObject.Find("Canvas").transform.Find("VisualNovelCanvas").gameObject;
+        text = canv.transform.Find("VisualNovelText").gameObject;
+        sprite = canv.transform.Find("VisualNovelSprite").gameObject;
+        buttonContainer = canv.transform.Find("VisualNovelButtonContainer").GetComponent<Transform>();
 
         GameObject[] VisualNovelPrefabs = Resources.LoadAll<GameObject>("VisualNovelScenes");
         foreach (GameObject prefab in VisualNovelPrefabs)
@@ -78,24 +81,30 @@ public class VisualNovelScript : MonoBehaviour
 
     public void StartNovelScene(int NovelSceneID)
     {
-        currentVNPrefabIndex = NovelSceneID;
-
-        isNovelSection = true;
-        if (currentVNPrefabIndex < VNScenes.Count && currentVNPrefabIndex > -1)
+        Debug.Log(NovelSceneID);
+        if (!isNovelSection)
         {
-            DialogueTree tree = new DialogueTree(ReconstructTree(VNScenes[currentVNPrefabIndex].tree));
-            currentNode = tree.rootNode;
-            text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
-            sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
+            Time.timeScale = 0;
+            playerRef.GetComponent<PlayerManager>().DisableInput();
+            currentVNPrefabIndex = NovelSceneID;
 
-            IDSelectionOptions(currentNode, 0);
-            CreateButtons();
+            isNovelSection = true;
+            if (currentVNPrefabIndex < VNScenes.Count && currentVNPrefabIndex > -1)
+            {
+                DialogueTree tree = new DialogueTree(ReconstructTree(VNScenes[currentVNPrefabIndex].tree));
+                currentNode = tree.rootNode;
+                text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
+                sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
 
-        }
-        else
-        {
-            isNovelSection = false;
-            Debug.LogError("Invalid Novel Scene ID");
+                IDSelectionOptions(currentNode, 0);
+                CreateButtons();
+
+            }
+            else
+            {
+                isNovelSection = false;
+                Debug.LogError("Invalid Novel Scene ID");
+            }
         }
     }
 
@@ -134,8 +143,10 @@ public class VisualNovelScript : MonoBehaviour
         {
 
             lastSelectionID = currentNode.sceneData.selectionID;
-            Debug.Log("selectionID: " + lastSelectionID);
+            //Debug.Log("selectionID: " + lastSelectionID);
             isNovelSection = false;
+            playerRef.GetComponent<PlayerManager>().EnableInput();
+            Time.timeScale = 1.0f;
         }
     }
 

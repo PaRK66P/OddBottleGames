@@ -17,8 +17,8 @@ public class AISimpleBehaviour : MonoBehaviour
     public float speed = 2;
     public float fireRate = 2.0f;
 
-    private float health = 5.0f;
-    private bool seePlayer = false;
+    private float health = 6.0f;
+    private bool seePlayer = true;
     private bool playerInRange = false;
     private float shootingTimer = 0.0f;
 
@@ -30,11 +30,14 @@ public class AISimpleBehaviour : MonoBehaviour
 
     public AIType aiMode = AIType.SHOOTER;
 
+    private Color currentColor;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("PlayerProto");
         objectPoolManager = GameObject.Find("ObjectPoolManager").GetComponent<ObjectPoolManager>();
+        currentColor = gameObject.GetComponent<SpriteRenderer>().color;
     }
 
     // Update is called once per frame
@@ -53,7 +56,7 @@ public class AISimpleBehaviour : MonoBehaviour
     void UpdateAIVision()
     {
         int numRays = 30;
-        float coneAngle = 250.0f;
+        float coneAngle = 360.0f;
         float angleStep = coneAngle / (float)numRays;
         bool playerBeenSeen = false;
         for (int i = 0; i < numRays + 1; i++)
@@ -78,7 +81,7 @@ public class AISimpleBehaviour : MonoBehaviour
         float dist = distToPlayer.magnitude;
         if (!playerBeenSeen)
         {
-            seePlayer = false;
+            //seePlayer = false;
 
         }
         else
@@ -223,6 +226,15 @@ public class AISimpleBehaviour : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        StartCoroutine(DamageColor());
+    }
+
+    IEnumerator DamageColor()
+    {
+        SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = currentColor;
     }
 
 }

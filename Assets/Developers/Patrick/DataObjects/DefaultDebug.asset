@@ -16,4 +16,7 @@ MonoBehaviour:
   firingInputBuffer: 0.01
   canDropWeapon: 0
   weaponObject: {fileID: 3849058719711503265, guid: e95c3aa441d863e4885c8d27a2d6ae43, type: 3}
-  dashTowardsMouse: 1
+  dashTowardsMouse: 0
+  slowOnCharge: 0
+  constantChargeTime: 0
+  contantChargeTimeValue: 0.15

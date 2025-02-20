@@ -54,15 +54,9 @@ public class PlayerInputManager : MonoBehaviour
         movementAction.performed += playerMovement.SetMovementInput;
         movementAction.canceled += playerMovement.SetMovementInput;
         dashAction.performed += playerMovement.PlayerDashInput;
-        dashAction.performed += DebugMessage;
         fireAction.performed += playerShooting.PlayerFireInput;
         fireAction.canceled += playerShooting.PlayerStopFireInput;
         reloadAction.performed += playerShooting.PlayerReloadAction;
-    }
-
-    public void DebugMessage(InputAction.CallbackContext context)
-    {
-        Debug.Log("Triggered");
     }
 
     public void DisableInput()

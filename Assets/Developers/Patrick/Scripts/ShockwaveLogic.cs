@@ -14,7 +14,6 @@ public class ShockwaveLogic : MonoBehaviour
 
     private ObjectPoolManager objectPoolManager;
 
-    private float timer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +24,7 @@ public class ShockwaveLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > 5.0f) 
-        {
-            objectPoolManager.ReleaseObject("Shockwave", this.gameObject);
-        }
+        
     }
 
     private void FixedUpdate()
@@ -45,7 +40,7 @@ public class ShockwaveLogic : MonoBehaviour
             {
                 Vector2 damageDirection = new Vector2(collision.gameObject.transform.position.x - transform.position.x,
                     collision.gameObject.transform.position.y - transform.position.y);
-                collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized);
+                collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized, 1, 10);
             }
             else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
             {
@@ -56,6 +51,10 @@ public class ShockwaveLogic : MonoBehaviour
                 collision.gameObject.GetComponent<bossScript>().takeDamage(1);
             }
         }
+        if(collision.gameObject.layer == 6)
+        {
+            objectPoolManager.ReleaseObject("Shockwave", this.gameObject);
+        }
     }
 
     public void InitialiseEffect(LayerMask damageLayer, float totalDamage, Vector2 direction, float speedMovement, ObjectPoolManager objMgr)
@@ -65,7 +64,6 @@ public class ShockwaveLogic : MonoBehaviour
         directionMovement = direction;
         speed = speedMovement;
         objectPoolManager = objMgr;
-        timer = 0;
     }
 
 
