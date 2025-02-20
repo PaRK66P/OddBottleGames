@@ -52,13 +52,10 @@ public class PlayerManager : MonoBehaviour
             playerData.dashCooldown, debugData.dashInputBuffer, playerData.damageLayers, debugData.dashTowardsMouse, 
             playerData.dashChergesNumber, playerData.dashChargeTimer, ref UICanvas, playerData.dashChargeUIObject);
         //shooting component
-        playerShooting.InitialiseComponent(playerData.ammoUIObject,
-            playerData.fireRate,
-            playerData.maxTimeToChargeShot, playerData.minTimeToChargeShot, playerData.shotsTillFullCharge, playerData.chargeShotIntervals,
-            playerData.maxAmmo, playerData.reloadTime,
-            playerData.baseProjectileType, playerData.baseProjectileSpeed, 
-            debugData.firingInputBuffer, debugData.canDropWeapon, 
-            ref poolManager, ref PlayerCanvas);
+        playerShooting.InitialiseComponent(playerData.ammoUIObject, playerData.fireRate, playerData.maxTimeToChargeShot, 
+            playerData.minTimeToChargeShot, playerData.shotsTillFullCharge, playerData.chargeShotIntervals,
+            playerData.maxAmmo, playerData.reloadTime, playerData.baseProjectileType, playerData.baseProjectileSpeed, 
+            debugData.firingInputBuffer, debugData.canDropWeapon, ref poolManager, ref PlayerCanvas, playerData.reloadUISlider);
         playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
 
         playerInputManager.EnableInput();

@@ -26,6 +26,7 @@ public class PlayerData : ScriptableObject
 
     [Header("Shooting")]
     public GameObject ammoUIObject;
+    public GameObject reloadUISlider;
     [Min(0.0f)] public float fireRate;
     [Min(0.0f)] public float maxTimeToChargeShot;
     [Min(0.0f)] public float minTimeToChargeShot;

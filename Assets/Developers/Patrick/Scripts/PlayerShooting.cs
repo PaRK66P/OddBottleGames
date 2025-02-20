@@ -9,6 +9,7 @@ public class PlayerShooting : MonoBehaviour
     private float projectileSpeed = 10;
     private GameObject projectilePrefab;
     private GameObject[] ammoUIObjects;
+    private GameObject reloadUISlider;
 
     private bool canDropWeapon = false;
     private bool canFire = true;
@@ -43,13 +44,10 @@ public class PlayerShooting : MonoBehaviour
         
     }
 
-    public void InitialiseComponent(GameObject dAmmoUIObject, 
-        float dFireRate, 
-        float dMaxChargeUpShotTime, float dMinChargeUpShotTime, int dShotsTillFullChargeUp, float dChargeShotIntervals, 
-        int dMaxAmmo, float dReloadTime,
-        GameObject dBaseProjectileType, float dBaseProjectileSpeed, 
-        float dFiringInputBuffer, bool dCanDropWeapon, 
-        ref ObjectPoolManager dPoolManager, ref GameObject dUICanvas)
+    public void InitialiseComponent(GameObject dAmmoUIObject, float dFireRate, float dMaxChargeUpShotTime, float dMinChargeUpShotTime, 
+        int dShotsTillFullChargeUp, float dChargeShotIntervals, int dMaxAmmo, float dReloadTime, GameObject dBaseProjectileType, 
+        float dBaseProjectileSpeed, float dFiringInputBuffer, bool dCanDropWeapon,ref ObjectPoolManager dPoolManager, ref GameObject dUICanvas,
+        GameObject dReloadUISlider)
     {
 
         fireRate = dFireRate;
@@ -81,6 +79,9 @@ public class PlayerShooting : MonoBehaviour
             //ammoUIObjects[i].GetComponent<RectTransform>().Translate(new Vector3(12.5f, 0, 0));
             ammoUIObjects[i].GetComponent<RectTransform>().Translate(new Vector3(12.6f - offset + (i * 0.3f), -0.55f, 0));
         }
+
+        reloadUISlider = Instantiate(dReloadUISlider, dUICanvas.transform);
+        reloadUISlider.SetActive(false);
     }
 
     // Update is called once per frame
@@ -215,10 +216,15 @@ public class PlayerShooting : MonoBehaviour
         }
 
         float startTime = Time.time;
+
+        reloadUISlider.SetActive(true);
+        reloadUISlider.GetComponent<Slider>().value = 0;
         while (Time.time - startTime <= reloadTime)
         {
+            reloadUISlider.GetComponent<Slider>().value = (Time.time - startTime) / reloadTime * 100;
             yield return null;
         }
+        reloadUISlider.SetActive(false);
 
         currentAmmo = maxAmmo;
 
