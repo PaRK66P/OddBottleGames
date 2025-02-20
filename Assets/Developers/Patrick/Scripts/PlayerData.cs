@@ -34,6 +34,7 @@ public class PlayerData : ScriptableObject
     [Min(0.0f)] public float chargeShotIntervals;
     [Min(1)] public int maxAmmo;
     [Min(0.0f)] public float reloadTime;
+    [Min(1.0f)] public float damageMultiplier;
 
     [Header("Projectile")]
     public GameObject baseProjectileType;

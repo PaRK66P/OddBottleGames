@@ -33,6 +33,7 @@ MonoBehaviour:
   chargeShotIntervals: 0.1
   maxAmmo: 6
   reloadTime: 1
+  damageMultiplier: 2
   baseProjectileType: {fileID: 1223489425459614113, guid: 50e3b8fba1c074f4ba558c89a7b1613e, type: 3}
   baseProjectileSpeed: 15
   controlLossTime: 0.2

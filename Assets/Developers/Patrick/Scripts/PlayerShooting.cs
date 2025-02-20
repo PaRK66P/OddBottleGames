@@ -25,6 +25,7 @@ public class PlayerShooting : MonoBehaviour
     private bool takeShot = false;
     private float chargeShotIntervals = 0.0f;
     private float lastShotTime = 0.0f;
+    private float damageMultiplier = 1.5f;
 
     private float fireInputBuffer;
 
@@ -47,7 +48,7 @@ public class PlayerShooting : MonoBehaviour
     public void InitialiseComponent(GameObject dAmmoUIObject, float dFireRate, float dMaxChargeUpShotTime, float dMinChargeUpShotTime, 
         int dShotsTillFullChargeUp, float dChargeShotIntervals, int dMaxAmmo, float dReloadTime, GameObject dBaseProjectileType, 
         float dBaseProjectileSpeed, float dFiringInputBuffer, bool dCanDropWeapon,ref ObjectPoolManager dPoolManager, ref GameObject dUICanvas,
-        GameObject dReloadUISlider)
+        GameObject dReloadUISlider, float dDamageMultiplier)
     {
 
         fireRate = dFireRate;
@@ -56,6 +57,8 @@ public class PlayerShooting : MonoBehaviour
         minChargeUpShotTime = dMinChargeUpShotTime;
         shotsTillFullChargeUp = dShotsTillFullChargeUp;
         chargeShotIntervals = dChargeShotIntervals;
+
+        damageMultiplier = dDamageMultiplier;
 
         maxAmmo = dMaxAmmo;
         currentAmmo = maxAmmo;
@@ -76,7 +79,6 @@ public class PlayerShooting : MonoBehaviour
             ammoUIObjects[i] = Instantiate(dAmmoUIObject, dUICanvas.transform);
 
             ammoUIObjects[i].GetComponent<RectTransform>().position = new Vector3(0, 0, 0);
-            //ammoUIObjects[i].GetComponent<RectTransform>().Translate(new Vector3(12.5f, 0, 0));
             ammoUIObjects[i].GetComponent<RectTransform>().Translate(new Vector3(12.6f - offset + (i * 0.3f), -0.55f, 0));
         }
 
@@ -182,7 +184,7 @@ public class PlayerShooting : MonoBehaviour
         return (Time.time - lastShotTime >= fireRate - fireInputBuffer && !reloading && charging && !firingChargedShot);
     }
 
-    private void Fire(Vector2 fireDirection, Vector3 rotation)
+    private void Fire(Vector2 fireDirection, Vector3 rotation, float fireMultiplier = 1.0f)
     {
         float rotz = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
@@ -193,16 +195,20 @@ public class PlayerShooting : MonoBehaviour
             projectileSpeed,
             ref poolManager,
             projectilePrefab.name,
-            gameObject);
+            gameObject,
+            fireMultiplier);
         lastShotTime = Time.time;
 
-        currentAmmo--;
-        ammoUIObjects[currentAmmo].SetActive(false);
-
-        if (currentAmmo <= 0 && !reloading) // Trying to shoot with no ammo
+        if (fireMultiplier == 1)
         {
-            StartCoroutine(ReloadAmmo());
-            return;
+            currentAmmo--;
+            ammoUIObjects[currentAmmo].SetActive(false);
+
+            if (currentAmmo <= 0 && !reloading) // Trying to shoot with no ammo
+            {
+                StartCoroutine(ReloadAmmo());
+                return;
+            }
         }
     }
 
@@ -259,6 +265,8 @@ public class PlayerShooting : MonoBehaviour
 
         float startTime;
 
+        float localDamageMultiplier = 1;
+
         for (int i = 0; i < chargedAmmo; i++)
         {
             if (interrupted)
@@ -268,12 +276,26 @@ public class PlayerShooting : MonoBehaviour
 
             startTime = Time.time;
 
-            Fire(direction, rotation);
+            //Fire(direction, rotation);
+            localDamageMultiplier *= damageMultiplier;
 
             while (Time.time - startTime <= chargeShotIntervals && !interrupted)
             {
                 yield return null;
             }
+        }
+
+        Fire(direction, rotation, localDamageMultiplier);
+
+        for (int j = 0; j < chargedAmmo;j++)
+        {
+            currentAmmo--;
+            ammoUIObjects[currentAmmo].SetActive(false);
+        }
+
+        if (currentAmmo <= 0 && !reloading) // Trying to shoot with no ammo
+        {
+            StartCoroutine(ReloadAmmo());
         }
 
         ReleaseChargedShots();
