@@ -83,6 +83,4 @@ IncrementalSoundBankData.xml
 
 # Audio items for Wwise
 /[Rr]epo_WwiseProject
-/[Ww]wiseUnityIntegration_Mac_Src.zip
-/[Ww]wiseUnityIntegration_Windows_Src.zip
 /[Aa]ssets/[Ww]wise/*
