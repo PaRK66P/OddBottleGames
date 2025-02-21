@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	198969431	Placeholder_BGM			\Default Work Unit\Placeholder_BGM	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	40184466	Dead_Cells_-_Prisoner_s_Awakening_Official_Soundtrack	D:\Abertay\GDP\Year 3.2\Repo\Repo_WwiseProject\.cache\Windows\SFX\Dead_Cells_-_Prisoner_s_Awakening_Official_Soundtrack_B0A57C9D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dead_Cells_-_Prisoner_s_Awakening_Official_Soundtrack		48602560
+
