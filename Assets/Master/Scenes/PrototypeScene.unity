@@ -5464,6 +5464,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 33433700094990734, guid: be5583fba378cfe47aecd0882d812e1a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3016445019156514198, guid: be5583fba378cfe47aecd0882d812e1a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -56.597855
@@ -9700,6 +9704,10 @@ PrefabInstance:
       propertyPath: 'objectTypes.Array.data[16]'
       value: 
       objectReference: {fileID: 2374814210022972564, guid: 9f62acb8d36af6540a52f5728b471312, type: 3}
+    - target: {fileID: 8157098210090043802, guid: 48bca1a328de6a94f99da60f7b756bfe, type: 3}
+      propertyPath: 'objectTypes.Array.data[17]'
+      value: 
+      objectReference: {fileID: 8899993562786344213, guid: e20070b5c4a80a14984c950a5dcf4fce, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

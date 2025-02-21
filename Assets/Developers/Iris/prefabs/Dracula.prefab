@@ -52,16 +52,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30de30e18e55bc74d97fb60c0293dee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pattern: 0/1,2/3,4/5/6,
-  timeBetweenAttacks: 1
+  pattern: 0/1,2/3,4/5/6,,
+  timeBetweenAttacks: 1.5
   attackList:
   - {fileID: 2472219134077984931, guid: 68b2924def505054287b192c24f567c7, type: 3}
   - {fileID: 283872786456334360, guid: 9d9997f6426b88845a6fea70f47e30c2, type: 3}
   - {fileID: 3347065349177360490, guid: 7ebaa6e2edd1a4e43ab5dab466033370, type: 3}
   - {fileID: 312214928314215403, guid: a910b990519e6fe4591fc7d14d8d1327, type: 3}
   - {fileID: 8618366252599702755, guid: fb6a72a3e5ba6144f9d3bd9a4ac441e3, type: 3}
-  - {fileID: 8751244404110851157, guid: e20070b5c4a80a14984c950a5dcf4fce, type: 3}
   - {fileID: 8979594851478723655, guid: 5dca40a6389637b4f966665cfff1c444, type: 3}
+  - {fileID: 8751244404110851157, guid: e20070b5c4a80a14984c950a5dcf4fce, type: 3}
   pooler: {fileID: 0}
 --- !u!114 &-7418976992388251413
 MonoBehaviour:
