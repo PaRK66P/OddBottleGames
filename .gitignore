@@ -73,14 +73,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Wwise
-![Aa]k.Wwise.Api.WAAPI.csproj
-![Aa]k.Wwise.Unity.API.csproj
-![Aa]k.Wwise.Unity.API.Editor.csproj
-![Aa]k.Wwise.Unity.API.WwiseTypes.csproj
-![Aa]k.Wwise.Unity.MonoBehaviour.csproj
-![Aa]k.Wwise.Unity.MonoBehaviour.Editor.csproj
-![Aa]k.Wwise.Unity.Timeline.csproj
-![Aa]k.Wwise.Unity.Timeline.Editor.csproj
 .backup*
 .cache*
 *.akd
