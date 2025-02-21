@@ -3322,6 +3322,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 984443862}
     - target: {fileID: 7549295984513981018, guid: 177abd26433bcf549859da2c472dc937, type: 3}
+      propertyPath: UICanvas
+      value: 
+      objectReference: {fileID: 318675708}
+    - target: {fileID: 7549295984513981018, guid: 177abd26433bcf549859da2c472dc937, type: 3}
       propertyPath: doors.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -5419,6 +5423,10 @@ PrefabInstance:
       propertyPath: pooler
       value: 
       objectReference: {fileID: 984443862}
+    - target: {fileID: 7549295984513981018, guid: 177abd26433bcf549859da2c472dc937, type: 3}
+      propertyPath: UICanvas
+      value: 
+      objectReference: {fileID: 318675708}
     - target: {fileID: 7549295984513981018, guid: 177abd26433bcf549859da2c472dc937, type: 3}
       propertyPath: doors.Array.size
       value: 1
@@ -7763,6 +7771,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 984443862}
     - target: {fileID: 7549295984513981018, guid: 177abd26433bcf549859da2c472dc937, type: 3}
+      propertyPath: UICanvas
+      value: 
+      objectReference: {fileID: 318675708}
+    - target: {fileID: 7549295984513981018, guid: 177abd26433bcf549859da2c472dc937, type: 3}
       propertyPath: doors.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -9380,7 +9392,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1321105607089079880, guid: 21aad766301008646808e8ca518c582b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.46
+      value: 60.2
       objectReference: {fileID: 0}
     - target: {fileID: 1321105607089079880, guid: 21aad766301008646808e8ca518c582b, type: 3}
       propertyPath: m_LocalPosition.y

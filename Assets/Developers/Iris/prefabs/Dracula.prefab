@@ -88,6 +88,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
+  healthbarPrefab: {fileID: 7940067324356998275, guid: ace6fbf26c5479d4d870cd37326fbc3d, type: 3}
+  damageTimer: 0.15
+  bossCanvasPrefab: {fileID: 5298947060840296537, guid: 479798805efffb34eb74ca46f150bbe5, type: 3}
 --- !u!58 &4128831174864724833
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class spawnerScript : MonoBehaviour
     public GameObject enemyPrefab;
     ObjectPoolManager pooler;
     enemyManager enemyMan;
+    public Canvas UICanvas;
 
     public void spawn()
     {
@@ -15,14 +16,15 @@ public class spawnerScript : MonoBehaviour
         //Debug.Log(pooler);
         //Debug.Log(enemyPrefab);
         //Debug.Log(enemyMan);
-        obj.GetComponent<enemyScr>().InstantiateEnemy(ref pooler, enemyPrefab.name, ref enemyMan);
+        obj.GetComponent<enemyScr>().InstantiateEnemy(ref pooler, enemyPrefab.name, ref enemyMan, ref UICanvas);
         obj.transform.position = transform.position;
         obj.transform.rotation = transform.rotation;
     }
 
-    public void setUp(ref ObjectPoolManager objPooler, ref enemyManager eneMan)
+    public void setUp(ref ObjectPoolManager objPooler, ref enemyManager eneMan, ref Canvas dUICanvas)
     {
         pooler = objPooler;
         enemyMan = eneMan;
+        UICanvas = dUICanvas;
     }
 }

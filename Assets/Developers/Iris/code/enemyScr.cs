@@ -9,7 +9,7 @@ public class enemyScr : MonoBehaviour
     ObjectPoolManager pooler;
     string prefabName;
 
-    public void InstantiateEnemy(ref ObjectPoolManager poolMan, string prefName, ref enemyManager enemyMan)
+    public void InstantiateEnemy(ref ObjectPoolManager poolMan, string prefName, ref enemyManager enemyMan, ref Canvas UICanvas)
     {
         pooler = poolMan;
         prefabName = prefName;
@@ -20,7 +20,7 @@ public class enemyScr : MonoBehaviour
         }
         if (GetComponent<boss>())
         {
-            GetComponent<boss>().InsantiateComponent(ref pooler, prefName, ref enemyManager);
+            GetComponent<boss>().InsantiateComponent(ref pooler, prefName, ref enemyManager, ref UICanvas);
         }
         //transform.position = pos;
         //transform.rotation = UnityEngine.Quaternion.Euler(rot);

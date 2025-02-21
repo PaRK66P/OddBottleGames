@@ -81,10 +81,10 @@ public class attackPaternsScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!inAttack)
+        if (!inAttack)
         {
             attackTimer += Time.deltaTime;
-            if(attackTimer >= timeBetweenAttacks)
+            if (attackTimer >= timeBetweenAttacks)
             {
                 inAttack = true;
                 attackTimer = 0;
