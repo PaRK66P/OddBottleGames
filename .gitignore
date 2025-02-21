@@ -73,6 +73,14 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Wwise
+![Aa]k.Wwise.Api.WAAPI.csproj
+![Aa]k.Wwise.Unity.API.csproj
+![Aa]k.Wwise.Unity.API.Editor.csproj
+![Aa]k.Wwise.Unity.API.WwiseTypes.csproj
+![Aa]k.Wwise.Unity.MonoBehaviour.csproj
+![Aa]k.Wwise.Unity.MonoBehaviour.Editor.csproj
+![Aa]k.Wwise.Unity.Timeline.csproj
+![Aa]k.Wwise.Unity.Timeline.Editor.csproj
 .backup*
 .cache*
 *.akd
@@ -83,4 +91,6 @@ IncrementalSoundBankData.xml
 
 # Audio items for Wwise
 /[Rr]epo_WwiseProject
+/[Ww]wiseUnityIntegration_Mac_Src.zip
+/[Ww]wiseUnityIntegration_Windows_Src.zip
 /[Aa]ssets/[Ww]wise/*
