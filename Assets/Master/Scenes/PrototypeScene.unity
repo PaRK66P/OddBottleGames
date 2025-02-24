@@ -2642,7 +2642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &583828318
 Transform:
   m_ObjectHideFlags: 0
@@ -3928,6 +3928,8 @@ MonoBehaviour:
   sprite: {fileID: 0}
   buttonContainer: {fileID: 0}
   buttonPrefab: {fileID: 7795797384788526613, guid: a43a3a69db6c9ff4dbd5dc65216ea167, type: 3}
+  fadeIn: 0
+  fadeOut: 0
 --- !u!4 &823530272
 Transform:
   m_ObjectHideFlags: 0
