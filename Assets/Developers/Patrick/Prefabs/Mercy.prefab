@@ -77,10 +77,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4453944451415421583}
-  - component: {fileID: 3190552835394184619}
   - component: {fileID: 1331553803085259021}
-  - component: {fileID: 7114035366523709633}
   - component: {fileID: -8511456158000988028}
+  - component: {fileID: -3334334151255189960}
   m_Layer: 0
   m_Name: Mercy
   m_TagString: Companion
@@ -105,30 +104,6 @@ Transform:
   - {fileID: 8723822518180836243}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3190552835394184619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6648114428920966895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58ee2d85595f8174ea7db44dfa0fff41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  companion: 0
-  speed: 10
-  jumpTime: 1
-  hitBoxObject: {fileID: 2023029667341579415}
-  explosionSize: 2
-  idlePosition: {fileID: 0}
-  maxHealth: 5
-  currentTargets: []
-  explosionObject: {fileID: 4477185975153253371, guid: bbab72cfdb288704bb440d570e037d51, type: 3}
-  shockwaveObject: {fileID: 3435594869752445726, guid: b441c1341214a324aa1cb8c04549edda, type: 3}
-  objectPoolManager: {fileID: 0}
-  companionMode: 0
 --- !u!58 &1331553803085259021
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -165,18 +140,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 30
---- !u!114 &7114035366523709633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6648114428920966895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77703582fc401fb4caee4f951248a8f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &-8511456158000988028
 Rigidbody2D:
   serializedVersion: 4
@@ -204,6 +167,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-3334334151255189960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6648114428920966895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f87e380a3f42a04fbd61d356c6c4160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolManager: {fileID: 0}
+  bossData: {fileID: 0}
+  friendData: {fileID: 0}
+  playerObject: {fileID: 0}
 --- !u!1 &7852087611882229210
 GameObject:
   m_ObjectHideFlags: 0
