@@ -61,6 +61,8 @@ public class CompanionLogic : MonoBehaviour
 
     private Slider healthSlider;
 
+    private MinibossRoomManager room2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,6 +85,8 @@ public class CompanionLogic : MonoBehaviour
         healthSlider.maxValue = currentHealth;
         healthSlider.minValue = 0;
         healthSlider.value = currentHealth;
+
+        room2 = GameObject.Find("Room2").GetComponent<MinibossRoomManager>();
     }
 
     // Update is called once per frame
@@ -281,8 +285,18 @@ public class CompanionLogic : MonoBehaviour
         StartCoroutine(DamageColor());
         if (currentHealth < 0)
         {
-            StartCoroutine(Defeated());
+            alive = false;
+            GetComponent<enemyScr>().DecreaseEnemyCount();
+            StartCoroutine(WaitForRoomEnd());
         }
+    }
+
+    private IEnumerator WaitForRoomEnd()
+    {
+        Debug.Log("waiting");
+        yield return new WaitUntil(() => room2.roomStart == false);
+        Debug.Log("waited");
+        yield return Defeated();
     }
 
     private IEnumerator Defeated()
@@ -309,7 +323,6 @@ public class CompanionLogic : MonoBehaviour
         {
             JoinBoss();
         }
-        GetComponent<enemyScr>().DecreaseEnemyCount();
         displayVN = false;
     }
 
@@ -357,9 +370,8 @@ public class CompanionLogic : MonoBehaviour
     IEnumerator DamageColor()
     {
         SpriteRenderer spriteRenderer = this.gameObject.transform.Find("Image").GetComponent<SpriteRenderer>();
-        Color currentColor = spriteRenderer.color;
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        spriteRenderer.color = currentColor;
+        spriteRenderer.color = Color.white;
     }
 }

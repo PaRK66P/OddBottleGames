@@ -5,7 +5,7 @@ using UnityEngine;
 public class MinibossRoomManager : MonoBehaviour
 {
     public enemyManager enemyManager;
-    private bool roomStart = false;
+    public bool roomStart = false;
     private bool roomEnd = false;
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class MinibossRoomManager : MonoBehaviour
         }
         if (roomStart)
         {
-             if (enemyManager.enemyNumber == 0)
+            if (enemyManager.enemyNumber == 0)
             {
                 roomEnd = true;
             }
