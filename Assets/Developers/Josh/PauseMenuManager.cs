@@ -6,6 +6,7 @@ public class PauseMenuManager : MonoBehaviour
 {
     private GameObject player;
     private GameObject pauseMenuContainer;
+    private VisualNovelScript visualNovelManager;
     private bool isPaused = false;
     private float volume;
     // Start is called before the first frame update
@@ -13,6 +14,7 @@ public class PauseMenuManager : MonoBehaviour
     {
         player = GameObject.Find("PlayerProto");
         pauseMenuContainer = GameObject.Find("Canvas").transform.Find("PauseMenu").gameObject;
+        visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
     }
 
     // Update is called once per frame
@@ -86,5 +88,20 @@ public class PauseMenuManager : MonoBehaviour
     public void OnVolumeChange(float value)
     {
         volume = value;
+    }
+
+    public void OnTextSpeedSliderChange(float val)
+    {
+        visualNovelManager.typeTextSpeed = val;
+    }
+
+    public void OnTypingTextToggleChanged(bool toggle)
+    {
+        visualNovelManager.typingTextToggle = toggle;
+    }
+
+    public void DashToMouseToggleChanged(bool toggle)
+    {
+        player.GetComponent<PlayerMovement>().dashTowardsMouse = toggle;
     }
 }

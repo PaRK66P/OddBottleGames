@@ -50,6 +50,9 @@ public class VisualNovelScript : MonoBehaviour
     [SerializeField]
     private bool fadeOut = false;
 
+    public float typeTextSpeed = 1.0f;
+
+    public bool typingTextToggle = true;
 
     void Start()
     {
@@ -121,8 +124,16 @@ public class VisualNovelScript : MonoBehaviour
             {
                 DialogueTree tree = new DialogueTree(ReconstructTree(VNScenes[currentVNPrefabIndex].tree));
                 currentNode = tree.rootNode;
-                typingText = TypewriterText(currentNode.sceneData.text);
-                StartCoroutine(typingText);
+                //Debug.Log(typingTextToggle);
+                if (typingTextToggle == true)
+                {
+                    typingText = TypewriterText(currentNode.sceneData.text);
+                    StartCoroutine(typingText);
+                }
+                else
+                {
+                    text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
+                }
                 sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
 
                 IDSelectionOptions(currentNode, 0);
@@ -162,8 +173,15 @@ public class VisualNovelScript : MonoBehaviour
             {
                 currentNode = currentNode.children[index];
                 sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
-                typingText = TypewriterText(currentNode.sceneData.text);
-                StartCoroutine(typingText);
+                if (typingTextToggle)
+                {
+                    typingText = TypewriterText(currentNode.sceneData.text);
+                    StartCoroutine(typingText);
+                }
+                else
+                {
+                    text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
+                }
                 CreateButtons();
             }
             else
@@ -295,7 +313,7 @@ public class VisualNovelScript : MonoBehaviour
             //Debug.Log(i + ", " + targetText.Length);
             textToAdd += targetText[i];
             text.GetComponent<TMP_Text>().text = textToAdd;
-            yield return new WaitForSecondsRealtime(0.05f);
+            yield return new WaitForSecondsRealtime(0.05f / typeTextSpeed);
         }
         //Debug.Log("done");
         yield return null;
