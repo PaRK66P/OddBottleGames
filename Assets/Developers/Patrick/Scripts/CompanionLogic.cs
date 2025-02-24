@@ -293,9 +293,9 @@ public class CompanionLogic : MonoBehaviour
 
     private IEnumerator WaitForRoomEnd()
     {
-        Debug.Log("waiting");
+        //Debug.Log("waiting");
         yield return new WaitUntil(() => room2.roomStart == false);
-        Debug.Log("waited");
+        //Debug.Log("waited");
         yield return Defeated();
     }
 
