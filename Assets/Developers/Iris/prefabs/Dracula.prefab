@@ -63,6 +63,7 @@ MonoBehaviour:
   - {fileID: 8979594851478723655, guid: 5dca40a6389637b4f966665cfff1c444, type: 3}
   - {fileID: 8751244404110851157, guid: e20070b5c4a80a14984c950a5dcf4fce, type: 3}
   pooler: {fileID: 0}
+  stunned: 0
 --- !u!114 &-7418976992388251413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +91,8 @@ MonoBehaviour:
   health: 50
   healthbarPrefab: {fileID: 7940067324356998275, guid: ace6fbf26c5479d4d870cd37326fbc3d, type: 3}
   damageTimer: 0.15
-  bossCanvasPrefab: {fileID: 5298947060840296537, guid: 479798805efffb34eb74ca46f150bbe5, type: 3}
+  deathBackdropPrefab: {fileID: 7566201161607254939, guid: da7a629ef727e704c9bab430bc584f26, type: 3}
+  deathSequenceTime: 1.4
 --- !u!58 &4128831174864724833
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -23,6 +23,7 @@ public class attackPaternsScript : MonoBehaviour
     public ObjectPoolManager pooler;
 
     private GameObject myself;
+    public bool stunned = false;
 
     public void InstantiateComponent(ref ObjectPoolManager objPooler)
     {
@@ -81,31 +82,34 @@ public class attackPaternsScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!inAttack)
+        if (!stunned)
         {
-            attackTimer += Time.deltaTime;
-            if (attackTimer >= timeBetweenAttacks)
+            if (!inAttack)
             {
-                inAttack = true;
-                attackTimer = 0;
-                int n = 0;
-                if (patList[attackItterator].Count() > 1)
+                attackTimer += Time.deltaTime;
+                if (attackTimer >= timeBetweenAttacks)
                 {
-                    n = UnityEngine.Random.Range(0, patList[attackItterator].Count());
+                    inAttack = true;
+                    attackTimer = 0;
+                    int n = 0;
+                    if (patList[attackItterator].Count() > 1)
+                    {
+                        n = UnityEngine.Random.Range(0, patList[attackItterator].Count());
+                        currentAttack = patList[attackItterator][n];
+                    }
                     currentAttack = patList[attackItterator][n];
+                    attackItterator++;
                 }
-                currentAttack = patList[attackItterator][n];
-                attackItterator++;
             }
-        }
-        else
-        {
-            attackList[currentAttack].Attack(ref inAttack, ref itterators, ref timers, ref pooler, ref myself);
-        }
+            else
+            {
+                attackList[currentAttack].Attack(ref inAttack, ref itterators, ref timers, ref pooler, ref myself);
+            }
 
-        if (attackItterator == patList.Count())
-        {
-            attackItterator = 0;
+            if (attackItterator == patList.Count())
+            {
+                attackItterator = 0;
+            }
         }
     }
 }
