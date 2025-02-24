@@ -25,7 +25,7 @@ public class CompanionManager : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         bossScript = gameObject.AddComponent<CompanionBoss>();
-        bossScript.InitialiseComponent(ref bossData, ref rb, ref playerObject);
+        bossScript.InitialiseComponent(ref bossData, ref rb, ref playerObject, ref poolManager);
 
         friendScript = gameObject.AddComponent<CompanionFriend>();
     }
@@ -39,5 +39,25 @@ public class CompanionManager : MonoBehaviour
     private void FixedUpdate()
     {
         bossScript.CompanionFixedUpdate();
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (bossData.drawGizmos)
+        {
+            Vector3 forwardDirection = (playerObject.transform.position - transform.position).normalized;
+            float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f ,0.0f , 1.0f));
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, bossData.leapTravelDistance);
+            Gizmos.color = new Color(1, 0.5f, 0);
+            Gizmos.DrawLine(transform.position, transform.position + forwardDirection * bossData.leapTravelDistance);
+        
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * forwardAngleFromRight), Mathf.Sin(Mathf.Deg2Rad * forwardAngleFromRight), 0.0f) * bossData.spitSpawnDistance, bossData.spitProjectile.transform.localScale.x / 2.0f);
+            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + bossData.spitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + bossData.spitSpawnAngle)), 0.0f) * bossData.spitSpawnDistance, bossData.spitProjectile.transform.localScale.x / 2.0f);
+            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - bossData.spitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - bossData.spitSpawnAngle)), 0.0f) * bossData.spitSpawnDistance, bossData.spitProjectile.transform.localScale.x / 2.0f);
+
+        }
     }
 }

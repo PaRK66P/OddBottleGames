@@ -12,4 +12,15 @@ public class CompanionBossData : ScriptableObject
     public float leapTravelTime;
     public float leapEndTime;
     public float leapTravelDistance;
+
+    public int feralLeapAmount;
+    public float feralLeapDelay;
+
+    public GameObject spitProjectile;
+    public float spitChargeTime;
+    public float spitSpawnDistance;
+    public float spitSpawnAngle;
+
+    public bool drawGizmos;
+
 }

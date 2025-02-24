@@ -11,7 +11,7 @@ public class CompanionBoss : MonoBehaviour
         LICK = 2,
         SCREAM = 3,
         FERAL_LEAP = 4,
-        STUNNED = 5
+        DELAY = 5
     }
 
     private AttackState currentState;
@@ -19,6 +19,7 @@ public class CompanionBoss : MonoBehaviour
     private CompanionBossData dataObj;
     private Rigidbody2D rb;
     private GameObject playerObj;
+    private ObjectPoolManager poolManager;
 
     // Attacks
     private float _attackEndDelay;
@@ -34,12 +35,19 @@ public class CompanionBoss : MonoBehaviour
     private bool _isLeapMoving;
     private bool _isLeapFinished;
 
+    // Feral Attack
+    private int _feralLeapAmount;
+
+    // Spit Attack
+    private float _spitStartTimer;
+
     // Start is called before the first frame update
-    public void InitialiseComponent(ref CompanionBossData bossData, ref Rigidbody2D rigidbodyComp, ref GameObject playerObjectRef)
+    public void InitialiseComponent(ref CompanionBossData bossData, ref Rigidbody2D rigidbodyComp, ref GameObject playerObjectRef, ref ObjectPoolManager poolManagerRef)
     {
         dataObj = bossData;
         rb = rigidbodyComp;
         playerObj = playerObjectRef;
+        poolManager = poolManagerRef;
 
         currentState = AttackState.LEAP;
 
@@ -51,6 +59,8 @@ public class CompanionBoss : MonoBehaviour
         _leapMoveTimer = 0;
         _isLeapMoving = false;
         _isLeapFinished = false;
+
+        _feralLeapAmount = 0;
     }
 
     public void CompanionUpdate()
@@ -72,8 +82,8 @@ public class CompanionBoss : MonoBehaviour
             case AttackState.FERAL_LEAP:
                 FeralLeapAttack();
                 break;
-            case AttackState.STUNNED:
-                StunnedDelay();
+            case AttackState.DELAY:
+                Delay();
                 break;
             default:
                 Debug.LogError("Companion currentState is unknown");
@@ -112,9 +122,6 @@ public class CompanionBoss : MonoBehaviour
         {
             _leapMoveTimer = Time.time;
             _isLeapMoving = true;
-
-            _leapStart = transform.position;
-            _leapDirection = (playerObj.transform.position - transform.position).normalized;
         }
 
         // Wait for leap to finish in fixed update
@@ -125,7 +132,7 @@ public class CompanionBoss : MonoBehaviour
         }
 
         _attackEndDelay = dataObj.leapEndTime;
-        currentState = AttackState.STUNNED;
+        currentState = AttackState.DELAY;
 
         _isLeapMoving = false;
         _isLeapFinished = false;
@@ -135,10 +142,21 @@ public class CompanionBoss : MonoBehaviour
 
     private void SpitAttack()
     {
-        Debug.Log("Spit");
+        //if (Time.time - _spitStartTimer <= dataObj.spitChargeTime)
+        //{
+        //    return;
+        //}
+
+        //GameObject projectileRef;
+
+        //for (int i = 0; i < 3; i++)
+        //{
+        //    projectileRef = poolManager.GetFreeObject(dataObj.spitProjectile.name);
+
+        //}
 
         _attackEndDelay = 0.0f;
-        currentState = AttackState.STUNNED;
+        currentState = AttackState.DELAY;
     }
 
     private void LickAttack()
@@ -146,7 +164,7 @@ public class CompanionBoss : MonoBehaviour
         Debug.Log("Lick");
 
         _attackEndDelay = 0.0f;
-        currentState = AttackState.STUNNED;
+        currentState = AttackState.DELAY;
     }
 
     private void ScreamAttack()
@@ -154,21 +172,40 @@ public class CompanionBoss : MonoBehaviour
         Debug.Log("Scream");
 
         _attackEndDelay = 0.0f;
-        currentState = AttackState.STUNNED;
+        currentState = AttackState.DELAY;
     }
 
     private void FeralLeapAttack()
     {
-        Debug.Log("Feral");
+        LeapAttack();
 
+        if(currentState != AttackState.DELAY)
+        {
+            return;
+        }
+
+        currentState = AttackState.FERAL_LEAP;
+        _feralLeapAmount++;
+
+        if (_feralLeapAmount < dataObj.feralLeapAmount)
+        {
+            _leapStartTimer = Time.time;
+            _leapStart = transform.position;
+            _leapDirection = (playerObj.transform.position - transform.position).normalized;
+            return;
+        }
+
+        _feralLeapAmount = 0;
         _attackEndDelay = 0.0f;
-        currentState = AttackState.STUNNED;
+        currentState = AttackState.DELAY;
+
+        Debug.Log("Feral");
     }
 
     #endregion
 
     // Not to be caused from the player but self impossed from attacks
-    private void StunnedDelay()
+    private void Delay()
     {
         _attackEndDelay -= Time.deltaTime;
         if(_attackEndDelay < 0)
@@ -183,6 +220,10 @@ public class CompanionBoss : MonoBehaviour
         if (!_isLastAttackLeap)
         {
             _isLastAttackLeap = true;
+
+            _leapStartTimer = Time.time;
+            _leapStart = transform.position;
+            _leapDirection = (playerObj.transform.position - transform.position).normalized;
 
             // Check if feral leap conditions are met
             if (_leapAmount < dataObj.leapsBeforeFeral)
@@ -209,6 +250,8 @@ public class CompanionBoss : MonoBehaviour
         {
             currentState = AttackState.SPIT;
 
+            _spitStartTimer = Time.time;
+
             return;
         }
 
@@ -225,7 +268,5 @@ public class CompanionBoss : MonoBehaviour
         _doLickAttack = true;
 
         currentState = AttackState.SCREAM;
-
-
     }
 }

@@ -13,8 +13,15 @@ MonoBehaviour:
   m_Name: MercyEnemy
   m_EditorClassIdentifier: 
   leapsBeforeFeral: 3
-  closeRangeDistance: 0
-  leapChargeTime: 0
-  leapTravelTime: 0
-  leapEndTime: 0
-  leapTravelDistance: 0
+  closeRangeDistance: 10
+  leapChargeTime: 0.3
+  leapTravelTime: 0.2
+  leapEndTime: 0.5
+  leapTravelDistance: 10
+  feralLeapAmount: 3
+  feralLeapDelay: 0
+  spitProjectile: {fileID: 5242277665205136327, guid: 6360764a931239e4b90bdbb8c14074e4, type: 3}
+  spitChargeTime: 0
+  spitSpawnDistance: 3.58
+  spitSpawnAngle: 40
+  drawGizmos: 1
