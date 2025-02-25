@@ -19,9 +19,13 @@ MonoBehaviour:
   leapEndTime: 0.5
   leapTravelDistance: 10
   feralLeapAmount: 3
-  feralLeapDelay: 0
+  feralLeapDelay: 0.2
+  feralLeapEndTime: 1
   spitProjectile: {fileID: 5242277665205136327, guid: 6360764a931239e4b90bdbb8c14074e4, type: 3}
-  spitChargeTime: 0
+  spitProjectileLifespan: 3
+  spitProjectileTravelDistance: 5
+  spitChargeTime: 0.2
   spitSpawnDistance: 3.58
   spitSpawnAngle: 40
+  spitEndTime: 0.3
   drawGizmos: 1

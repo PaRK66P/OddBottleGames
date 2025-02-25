@@ -665,7 +665,6 @@ GameObject:
   - component: {fileID: 1032157892}
   - component: {fileID: 1032157891}
   - component: {fileID: 1032157890}
-  - component: {fileID: 1032157889}
   m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
@@ -673,52 +672,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &1032157889
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1032157888}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!50 &1032157890
 Rigidbody2D:
   serializedVersion: 4
@@ -841,11 +794,11 @@ PrefabInstance:
       objectReference: {fileID: 8332283613408487918}
     - target: {fileID: 4453944451415421583, guid: ec8937fc56096b54489ceb023c77f496, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.25
+      value: 14.36
       objectReference: {fileID: 0}
     - target: {fileID: 4453944451415421583, guid: ec8937fc56096b54489ceb023c77f496, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.47
+      value: 1.06
       objectReference: {fileID: 0}
     - target: {fileID: 4453944451415421583, guid: ec8937fc56096b54489ceb023c77f496, type: 3}
       propertyPath: m_LocalPosition.z
@@ -883,7 +836,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mercy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1331553803085259021, guid: ec8937fc56096b54489ceb023c77f496, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1018,6 +972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectTypes:
   - {fileID: 1223489425459614113, guid: 50e3b8fba1c074f4ba558c89a7b1613e, type: 3}
+  - {fileID: 5242277665205136327, guid: 6360764a931239e4b90bdbb8c14074e4, type: 3}
 --- !u!4 &1328680602
 Transform:
   m_ObjectHideFlags: 0
