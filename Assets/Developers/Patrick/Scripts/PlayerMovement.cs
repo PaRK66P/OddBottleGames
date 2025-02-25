@@ -66,7 +66,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        dashChargeTimer += Time.deltaTime;
+        if(dashChargesNumber < dashChargesMaxNumber)
+        {
+            dashChargeTimer += Time.deltaTime;
+        }
         if(dashChargeTimer >= dashChargeTime)
         {
             dashChargeTimer = 0.0f;

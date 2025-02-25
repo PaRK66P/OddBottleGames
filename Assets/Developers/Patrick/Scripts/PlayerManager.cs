@@ -146,6 +146,7 @@ public class PlayerManager : MonoBehaviour
         {
             health = playerData.health;
         }
+
     }
 
     private void DropWeapon(object sender, EventArgs e)

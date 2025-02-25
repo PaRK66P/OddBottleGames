@@ -6,8 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class resetTriggerProtoScript : MonoBehaviour
 {
+    public GameObject endScreen;
+    public GameObject player;
+
     bool started = false;
     bool ended = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +46,9 @@ public class resetTriggerProtoScript : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                SceneManager.LoadScene("PrototypeScene");
+                //SceneManager.LoadScene("PrototypeScene");
+                endScreen.SetActive(true);
+                player.GetComponent<PlayerInputManager>().DisableInput();
             }
         }
     }
