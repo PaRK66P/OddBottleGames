@@ -48,10 +48,23 @@ public class CompanionManager : MonoBehaviour
             Vector3 forwardDirection = (playerObject.transform.position - transform.position).normalized;
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f ,0.0f , 1.0f));
 
+            Vector3 playerDirection = playerObject.transform.position - transform.position;
+            Vector3 leapDirection = playerDirection.normalized;
+            Vector3 leapEnd = transform.position + leapDirection * bossData.leapTravelDistance;
+            if (playerDirection.sqrMagnitude >= bossData.leapTravelDistance * bossData.leapTravelDistance)
+            {
+                leapEnd = playerObject.transform.position;
+            }
+            RaycastHit2D wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, bossData.leapTravelDistance, bossData.environmentMask); // Update layer mask variable
+            if (wallCheck)
+            {
+                leapEnd = wallCheck.point;
+            }
+
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, bossData.leapTravelDistance);
             Gizmos.color = new Color(1, 0.5f, 0);
-            Gizmos.DrawLine(transform.position, transform.position + forwardDirection * bossData.leapTravelDistance);
+            Gizmos.DrawLine(transform.position, leapEnd);
         
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * forwardAngleFromRight), Mathf.Sin(Mathf.Deg2Rad * forwardAngleFromRight), 0.0f) * bossData.spitSpawnDistance, bossData.spitProjectile.transform.localScale.x / 2.0f);

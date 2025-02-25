@@ -8,6 +8,7 @@ public class CompanionBossData : ScriptableObject
     [Header("Attacks")]
     public int leapsBeforeFeral;
     public float closeRangeDistance;
+    public LayerMask environmentMask;
 
     [Header("Leap")]
     public float leapChargeTime;

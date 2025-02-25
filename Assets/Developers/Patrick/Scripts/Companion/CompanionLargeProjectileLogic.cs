@@ -51,4 +51,16 @@ public class CompanionLargeProjectileLogic : MonoBehaviour
     {
         return Vector2.Lerp(_startPosition, _endPosition, (Time.time - _startTime) / _lifespan);
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (_isActive)
+        {
+            if (collision.tag == "Player")
+            {
+                Vector2 damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
+                collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection);
+            }
+        }
+    }
 }

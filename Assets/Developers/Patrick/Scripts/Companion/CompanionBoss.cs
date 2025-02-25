@@ -31,6 +31,7 @@ public class CompanionBoss : MonoBehaviour
     private float _leapStartTimer;
     private float _leapMoveTimer;
     private Vector2 _leapStart;
+    private Vector2 _leapEnd;
     private Vector2 _leapDirection;
     private bool _isLeapMoving;
     private bool _isLeapFinished;
@@ -101,7 +102,7 @@ public class CompanionBoss : MonoBehaviour
 
         float travelPosition = (Time.time - _leapMoveTimer) / dataObj.leapTravelTime;
 
-        rb.MovePosition(Vector2.Lerp(_leapStart, _leapStart + _leapDirection * dataObj.leapTravelDistance, travelPosition));
+        rb.MovePosition(Vector2.Lerp(_leapStart, _leapEnd, travelPosition));
 
         if (travelPosition >= 1)
         {
@@ -201,7 +202,18 @@ public class CompanionBoss : MonoBehaviour
         {
             _leapStartTimer = Time.time;
             _leapStart = transform.position;
-            _leapDirection = (playerObj.transform.position - transform.position).normalized;
+            Vector2 playerDirection = playerObj.transform.position - transform.position;
+            Vector2 leapDirection = playerDirection.normalized;
+            _leapEnd = _leapStart + leapDirection * dataObj.leapTravelDistance;
+            if (playerDirection.sqrMagnitude >= dataObj.leapTravelDistance * dataObj.leapTravelDistance)
+            {
+                _leapEnd = playerObj.transform.position;
+            }
+            RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, dataObj.leapTravelDistance, dataObj.environmentMask); 
+            if (wallCheck)
+            {
+                _leapEnd = wallCheck.point;
+            }
             return;
         }
 
@@ -233,7 +245,19 @@ public class CompanionBoss : MonoBehaviour
 
             _leapStartTimer = Time.time;
             _leapStart = transform.position;
-            _leapDirection = (playerObj.transform.position - transform.position).normalized;
+            Vector2 playerDirection = playerObj.transform.position - transform.position;
+            Vector2 leapDirection = playerDirection.normalized;
+            _leapEnd = _leapStart + leapDirection * dataObj.leapTravelDistance;
+            if (playerDirection.sqrMagnitude >= dataObj.leapTravelDistance * dataObj.leapTravelDistance)
+            {
+                _leapEnd = playerObj.transform.position;
+            }
+            RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, dataObj.leapTravelDistance, dataObj.environmentMask); 
+            if (wallCheck)
+            {
+                _leapEnd = wallCheck.point;
+                Debug.Log(wallCheck.point);
+            }
 
             // Check if feral leap conditions are met
             if (_leapAmount < dataObj.leapsBeforeFeral)
