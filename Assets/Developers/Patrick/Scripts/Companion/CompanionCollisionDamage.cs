@@ -13,6 +13,29 @@ public class CompanionCollisionDamage : MonoBehaviour
 
     private CollisionDamageStates collisionDamageStates;
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Vector2 damageDirection = Vector2.left;
+
+        collisionDamageStates = CollisionDamageStates.ACTIVE;
+
+        switch (collisionDamageStates)
+        {
+            case CollisionDamageStates.NONE:
+                break;
+            case CollisionDamageStates.ACTIVE:
+                if (collision.tag == "Player")
+                {
+                    damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
+                    collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection);
+                }
+                break;
+            case CollisionDamageStates.LEAPING:
+
+                break;
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         Vector2 damageDirection = Vector2.left;

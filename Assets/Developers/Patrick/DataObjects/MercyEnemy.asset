@@ -14,10 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leapsBeforeFeral: 3
   closeRangeDistance: 10
+  environmentMask:
+    serializedVersion: 2
+    m_Bits: 64
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
   leapChargeTime: 0.3
   leapTravelTime: 0.2
   leapEndTime: 0.5
-  leapTravelDistance: 10
+  leapTravelDistance: 20
   feralLeapAmount: 3
   feralLeapDelay: 0.2
   feralLeapEndTime: 1
@@ -28,4 +34,10 @@ MonoBehaviour:
   spitSpawnDistance: 3.58
   spitSpawnAngle: 40
   spitEndTime: 0.3
-  drawGizmos: 1
+  screamProjectile: {fileID: 6314627607262925113, guid: 7e751bbcfe8a2894992bf098742dccc3, type: 3}
+  screamProjectileSpawnDistance: 1.42
+  numberOfScreamProjectiles: 12
+  screamProjectileSpeed: 0
+  drawLeaps: 0
+  drawSpit: 0
+  drawScream: 1

@@ -9,6 +9,7 @@ public class CompanionBossData : ScriptableObject
     public int leapsBeforeFeral;
     public float closeRangeDistance;
     public LayerMask environmentMask;
+    public LayerMask playerMask;
 
     [Header("Leap")]
     public float leapChargeTime;
@@ -30,8 +31,24 @@ public class CompanionBossData : ScriptableObject
     public float spitSpawnAngle;
     public float spitEndTime;
 
+    [Header("Lick")]
+    public GameObject lickProjectile;
+    public float lickProjectileNumber;
+    public float lickProjectileSpawnDistance;
+    public float lickProjectileSeperationDistance;
+    public float lickProjectileAngle;
+
+    [Header("Scream")]
+    public GameObject screamProjectile;
+    public float screamProjectileSpawnDistance;
+    public int numberOfScreamProjectiles;
+    public float screamProjectileSpeed;
+
 
     [Header("Debug")]
-    public bool drawGizmos;
+    public bool drawLeaps;
+    public bool drawSpit;
+    public bool drawLick;
+    public bool drawScream;
 
 }

@@ -182,6 +182,22 @@ public class CompanionBoss : MonoBehaviour
     {
         Debug.Log("Scream");
 
+        // Delay
+        GameObject projectileRef;
+        Vector2 forwardDirection = (playerObj.transform.position - transform.position).normalized;
+        float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f));
+        float screamAngle = 360.0f / (float)dataObj.numberOfScreamProjectiles;
+        Vector3 projectileSpawnPosition;
+        for (int i = 0; i < dataObj.numberOfScreamProjectiles; i++)
+        {
+            projectileSpawnPosition = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * i)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * i)), 0.0f) * dataObj.screamProjectileSpawnDistance;
+            
+            projectileRef = poolManager.GetFreeObject(dataObj.screamProjectile.name);
+            projectileRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref poolManager, dataObj.screamProjectile.name,
+                transform.position + projectileSpawnPosition, projectileSpawnPosition.normalized, dataObj.screamProjectileSpeed,
+                dataObj.environmentMask, dataObj.playerMask);
+        }
+
         _attackEndDelay = 0.0f;
         currentState = AttackState.DELAY;
     }
