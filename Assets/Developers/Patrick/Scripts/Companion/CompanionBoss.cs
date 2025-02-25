@@ -142,21 +142,31 @@ public class CompanionBoss : MonoBehaviour
 
     private void SpitAttack()
     {
-        //if (Time.time - _spitStartTimer <= dataObj.spitChargeTime)
-        //{
-        //    return;
-        //}
+        if (Time.time - _spitStartTimer <= dataObj.spitChargeTime)
+        {
+            return;
+        }
 
-        //GameObject projectileRef;
+        GameObject projectileRef;
 
-        //for (int i = 0; i < 3; i++)
-        //{
-        //    projectileRef = poolManager.GetFreeObject(dataObj.spitProjectile.name);
+        Vector3 forwardDirection = (playerObj.transform.position - transform.position).normalized;
+        float angleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f)) - dataObj.spitSpawnAngle;
 
-        //}
+        for (int i = 0; i < 3; i++)
+        {
+            projectileRef = poolManager.GetFreeObject(dataObj.spitProjectile.name);
+            projectileRef.GetComponent<CompanionLargeProjectileLogic>().Initialise(
+                ref poolManager,
+                dataObj.spitProjectile.name,
+                dataObj.spitProjectileLifespan,
+                transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), Mathf.Sin(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), 0.0f) * dataObj.spitSpawnDistance,
+                transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), Mathf.Sin(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), 0.0f) * (dataObj.spitSpawnDistance + dataObj.spitProjectileTravelDistance)); // Add linecast to end early at wall
+        }
 
-        _attackEndDelay = 0.0f;
+        _attackEndDelay = dataObj.spitEndTime;
         currentState = AttackState.DELAY;
+
+        Debug.Log("Spit");
     }
 
     private void LickAttack()
@@ -196,7 +206,7 @@ public class CompanionBoss : MonoBehaviour
         }
 
         _feralLeapAmount = 0;
-        _attackEndDelay = 0.0f;
+        _attackEndDelay = dataObj.feralLeapEndTime;
         currentState = AttackState.DELAY;
 
         Debug.Log("Feral");
