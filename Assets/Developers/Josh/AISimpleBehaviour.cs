@@ -12,8 +12,9 @@ public enum AIType
 public class AISimpleBehaviour : MonoBehaviour
 {
     public GameObject player;
-    public float detectionRange = 10;
-    public float shootingRange = 6;
+    public GameObject particle;
+    public float detectionRange = 15;
+    public float shootingRange = 9;
     public float speed = 2;
     public float fireRate = 2.0f;
 
@@ -21,6 +22,14 @@ public class AISimpleBehaviour : MonoBehaviour
     private bool seePlayer = true;
     private bool playerInRange = false;
     private float shootingTimer = 0.0f;
+
+    private float hitStunTimer = 1.0f;
+    private float hitStunLength = 0.2f;
+    private bool inStun = false;
+    private bool isDead = false;
+    private float deadTimer = 0.0f;
+    public bool takesKnockback = true;
+    private List<GameObject> particles = new List<GameObject>();
 
     public GameObject AIProjectilePrefab;
     [SerializeField]
@@ -43,64 +52,59 @@ public class AISimpleBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateAIVision();
-        MakeAIActions();
-        BulletCleanUp();
+        if (!isDead)
+        {
+            if (hitStunTimer < hitStunLength)
+            {
+                hitStunTimer += Time.deltaTime;
+                inStun = true;
+                GetComponent<Rigidbody2D>().velocity *= 0.96f;
+            }
+            else
+            {
+                inStun = false;
+            }
+            if (!inStun)
+            {
+                //Debug.Log("out of stun");
+                UpdateAIVision();
+                MakeAIActions();
+                BulletCleanUp();
+
+                //Debug.Log("in stun");
+            }
+        }
         if (health <= 0)
         {
-            //DestroyAllBullets();
-            GetComponent<enemyScr>().releaseEnemy();
+            isDead = true;
+            OnDeath();
         }
     }
 
     void UpdateAIVision()
     {
-        int numRays = 30;
-        float coneAngle = 360.0f;
-        float angleStep = coneAngle / (float)numRays;
-        bool playerBeenSeen = false;
-        for (int i = 0; i < numRays + 1; i++)
-        {
-            float angle = (-coneAngle / 2.0f) + (i * angleStep);
-            Vector3 dir = Quaternion.Euler(0, 0, angle) * this.transform.right;
-            dir.Normalize();
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, detectionRange, LayerMask.GetMask("Player"));
-            if (hit.collider != null)
-            {
-                Debug.DrawRay(transform.position, dir * detectionRange, Color.green);
-                seePlayer = true;
-                playerBeenSeen = true;
-            }
-            else
-            {
-                Debug.DrawRay(transform.position, dir * detectionRange, Color.red);
-            }
-        }
-
         Vector3 distToPlayer = this.transform.position - player.transform.position;
         float dist = distToPlayer.magnitude;
-        if (!playerBeenSeen)
+        if (dist < shootingRange)
         {
-            //seePlayer = false;
+            playerInRange = true;
+        }
+        else 
+        {
+            playerInRange = false;
+        }
+
+        if (dist < detectionRange)
+        {
+            seePlayer = true;
+             float angle = Mathf.Atan2(distToPlayer.y, distToPlayer.x) * Mathf.Rad2Deg;
+             float targetRotation = Mathf.LerpAngle(this.transform.rotation.eulerAngles.z, angle, Time.deltaTime * 10);
+             this.transform.rotation = Quaternion.Euler(0, 0, targetRotation);
 
         }
         else
         {
-
-            if (dist < shootingRange)
-            {
-                playerInRange = true;
-            }
-
-            Vector3 direction = player.transform.position - this.transform.position;
-
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            float targetRotation = Mathf.LerpAngle(this.transform.rotation.eulerAngles.z, angle, Time.deltaTime * 10);
-            this.transform.rotation = Quaternion.Euler(0, 0, targetRotation);
-        }
-        if (dist > shootingRange)
-        {
-            playerInRange = false;
+            seePlayer = false;
         }
     }
 
@@ -223,10 +227,19 @@ public class AISimpleBehaviour : MonoBehaviour
         projectiles.Clear();
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Vector2 damageDir)
     {
         health -= damage;
         StartCoroutine(DamageColor());
+        hitStunTimer = 0.0f;
+        //inStun = true;
+        this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        
+        if (takesKnockback && health > 0)
+        {
+            //Debug.Log("knocking back");
+            gameObject.GetComponent<Rigidbody2D>().velocity = -damageDir.normalized * 4.0f;
+        }
     }
 
     IEnumerator DamageColor()
@@ -237,4 +250,40 @@ public class AISimpleBehaviour : MonoBehaviour
         spriteRenderer.color = currentColor;
     }
 
+    void OnDeath()
+    {
+        if (deadTimer == 0.0f)
+        {
+            //Debug.Log("dead");
+            
+            for (int i = 0; i < 8; i++)
+            {
+                particles.Add(Instantiate(particle));
+                float speed = 3.0f;
+                float angle = Mathf.PI * 2.0f * i/8.0f;
+                float x = speed * Mathf.Cos(angle);
+                float y = speed * Mathf.Sin(angle);
+                particles[i].GetComponent<Rigidbody2D>().velocity = new Vector2(x, y);
+                particles[i].transform.rotation = Quaternion.Euler(0,0,Mathf.Rad2Deg*angle);
+                particles[i].transform.position = gameObject.transform.position + (new Vector3(x,y,0)*0.4f);
+            }
+        }
+
+        deadTimer += Time.deltaTime;
+
+        foreach (GameObject particle in particles)
+        {
+            particle.GetComponent<Rigidbody2D>().velocity *= 0.95f;
+        }
+
+        if (deadTimer > 0.3f)
+        {
+            foreach (GameObject particle in particles)
+            {
+                Destroy(particle);
+            }
+            particles.Clear();
+            GetComponent<enemyScr>().releaseEnemy();
+        }
+    }
 }

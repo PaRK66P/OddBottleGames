@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
     private GameObject player;
-    private GameObject pauseMenu;
+    private GameObject pauseMenuContainer;
+    private VisualNovelScript visualNovelManager;
     private bool isPaused = false;
     private float volume;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("PlayerProto");
-        pauseMenu = GameObject.Find("Canvas").transform.Find("PauseMenu").gameObject;
+        pauseMenuContainer = GameObject.Find("Canvas").transform.Find("PauseMenu").gameObject;
+        visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
     }
 
     // Update is called once per frame
@@ -36,7 +38,9 @@ public class PauseMenuManager : MonoBehaviour
         Time.timeScale = 0.0f;
         player.GetComponent<PlayerManager>().DisableInput();
 
-        pauseMenu.SetActive(true);
+        pauseMenuContainer.SetActive(true);
+        pauseMenuContainer.transform.Find("MainPause").gameObject.SetActive(true);
+        pauseMenuContainer.transform.Find("ControlsScreen").gameObject.SetActive(false);
         isPaused = true;
 
     }
@@ -46,7 +50,7 @@ public class PauseMenuManager : MonoBehaviour
         Time.timeScale = 1.0f;
         player.GetComponent<PlayerManager>().EnableInput();
 
-        pauseMenu.SetActive(false);
+        pauseMenuContainer.SetActive(false);
         isPaused = false;
 
     }
@@ -58,16 +62,46 @@ public class PauseMenuManager : MonoBehaviour
 
     public void OnQuitClick()
     {
-
+        Application.Quit();
     }
 
     public void OnControlsClick()
     {
+        pauseMenuContainer.transform.Find("MainPause").gameObject.SetActive(false);
+        pauseMenuContainer.transform.Find("ControlsScreen").gameObject.SetActive(true);
+    }
 
+    public void OnControlsBackClick()
+    {
+        pauseMenuContainer.transform.Find("MainPause").gameObject.SetActive(true);
+        pauseMenuContainer.transform.Find("ControlsScreen").gameObject.SetActive(false);
+    }
+
+    public void OnRestartClick()
+    {
+        //pauseMenuContainer.SetActive(false);
+        OnResumeClick();
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
     public void OnVolumeChange(float value)
     {
         volume = value;
+    }
+
+    public void OnTextSpeedSliderChange(float val)
+    {
+        visualNovelManager.typeTextSpeed = val;
+    }
+
+    public void OnTypingTextToggleChanged(bool toggle)
+    {
+        visualNovelManager.typingTextToggle = toggle;
+    }
+
+    public void DashToMouseToggleChanged(bool toggle)
+    {
+        player.GetComponent<PlayerMovement>().dashTowardsMouse = toggle;
     }
 }

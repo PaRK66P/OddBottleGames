@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private float lastDashTime = -10.0f;
     private float lastDashInputTime = -10.0f;
 
-    private bool dashTowardsMouse = false;
+    public bool dashTowardsMouse = false;
 
     private Vector2 knockbackForce = Vector2.zero;
 
@@ -200,6 +200,7 @@ public class PlayerMovement : MonoBehaviour
         lastDashInputTime = Time.time;
         if (!dash)
         {
+            //Debug.Log(dashTowardsMouse);
             dash = true;
             dashTimer = 0.0f;
             dashStart = new Vector2(transform.position.x, transform.position.y);

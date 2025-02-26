@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,6 +39,14 @@ public class PlayerManager : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer image;
 
+    private CanvasGroup canvGroup;
+    [SerializeField]
+    private bool fadeIn = false;
+    [SerializeField]
+    private bool fadeOut = false;
+    [SerializeField]
+    private float fadeTextTimer = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,9 +75,13 @@ public class PlayerManager : MonoBehaviour
             OnDamageTaken += DropWeapon;
         }
 
+
         healthbar = Instantiate(playerData.healthbar, UICanvas.transform);
         healthbar.GetComponent<Slider>().maxValue = playerData.health;
         health = playerData.health;
+
+        //canvGroup = gameObject.transform.Find("Canv").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
+
     }
 
     private void OnDisable()
@@ -97,7 +110,33 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        healthbar.GetComponent<Slider>().value = health;
+        // healthbar.GetComponent<Slider>().value = health;
+        // if (fadeIn)
+        // {
+        //     canvGroup.alpha += Time.deltaTime;
+        //     if (canvGroup.alpha >= 1.0f)
+        //     {
+        //         fadeIn = false;
+        //     }
+        // }
+        // if (fadeOut && !fadeIn)
+        // {
+        //     canvGroup.alpha -= Time.deltaTime;
+        //     if (canvGroup.alpha <= 0.0f)
+        //     {
+        //         fadeOut = false;
+        //     }
+        // }
+        // if (canvGroup.alpha >= 1.0f)
+        // {
+        //     fadeTextTimer += Time.deltaTime;
+        // }
+        
+        // if (fadeTextTimer > 3.0f)
+        // {
+        //     fadeOut = true;
+        // }
+
     }
 
     public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f, int ammount = 20)
@@ -112,6 +151,7 @@ public class PlayerManager : MonoBehaviour
         invulnerableTime = damageTime;
         playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);
         playerShooting.InterruptFiring();
+        fadeOut = true;
 
         OnDamageTaken?.Invoke(this, EventArgs.Empty);
 
@@ -176,5 +216,12 @@ public class PlayerManager : MonoBehaviour
     public void EnableInput()
     {
         playerInputManager.EnableInput();
+    }
+
+    public void StartFadeInSpeech(string text)
+    {
+        fadeIn = true;
+        fadeTextTimer = 0.0f;
+        canvGroup.gameObject.GetComponentInChildren<TMP_Text>().text = text;
     }
 }

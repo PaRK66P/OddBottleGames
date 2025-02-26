@@ -5,7 +5,7 @@ using UnityEngine;
 public class enemyManager : MonoBehaviour
 {
     public ObjectPoolManager pooler;
-    int enemyNumber = 0;
+    public int enemyNumber = 0;
     public List<TriggerScript> trigers;
     public List<GameObject> doors;
     public List<spawnerScript> spawners;

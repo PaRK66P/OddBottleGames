@@ -73,7 +73,7 @@ public class ProjectileBehaviour : MonoBehaviour
             }
             else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
             {
-                collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(damage);
+                collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(1, gameObject.transform.position - collision.gameObject.transform.position);
             }
 
             toBeReleased = true;

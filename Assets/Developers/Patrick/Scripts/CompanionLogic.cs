@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public enum CompanionMode
 {
@@ -33,19 +34,11 @@ public class CompanionLogic : MonoBehaviour
     [SerializeField]
     private Transform idlePosition;
 
-    [SerializeField]
-    private float maxHealth;
     private float currentHealth = 15;
 
     [SerializeField]
     private List<GameObject> currentTargets;
     private int targetIndex = 0;
-
-    [SerializeField]
-    private GameObject explosionObject;
-
-    [SerializeField]
-    private GameObject shockwaveObject;
 
     [SerializeField]
     ObjectPoolManager objectPoolManager;
@@ -66,6 +59,10 @@ public class CompanionLogic : MonoBehaviour
 
     private bool displayVN = true;
 
+    private Slider healthSlider;
+
+    private MinibossRoomManager room2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,6 +80,13 @@ public class CompanionLogic : MonoBehaviour
         objectPoolManager = GameObject.Find("ObjectPoolManager").GetComponent<ObjectPoolManager>();
 
         displayVN = true;
+
+        healthSlider = GetComponentInChildren<Slider>();
+        healthSlider.maxValue = currentHealth;
+        healthSlider.minValue = 0;
+        healthSlider.value = currentHealth;
+
+        room2 = GameObject.Find("Room2").GetComponent<MinibossRoomManager>();
     }
 
     // Update is called once per frame
@@ -277,11 +281,22 @@ public class CompanionLogic : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        healthSlider.value = currentHealth;
         StartCoroutine(DamageColor());
         if (currentHealth < 0)
         {
-            StartCoroutine(Defeated());
+            alive = false;
+            GetComponent<enemyScr>().DecreaseEnemyCount();
+            StartCoroutine(WaitForRoomEnd());
         }
+    }
+
+    private IEnumerator WaitForRoomEnd()
+    {
+        //Debug.Log("waiting");
+        yield return new WaitUntil(() => room2.roomStart == false);
+        //Debug.Log("waited");
+        yield return Defeated();
     }
 
     private IEnumerator Defeated()
@@ -308,7 +323,6 @@ public class CompanionLogic : MonoBehaviour
         {
             JoinBoss();
         }
-        GetComponent<enemyScr>().DecreaseEnemyCount();
         displayVN = false;
     }
 
@@ -326,6 +340,7 @@ public class CompanionLogic : MonoBehaviour
         transform.position = new Vector3(95.0f, 0.0f, 0.0f);
         idlePosition.position = new Vector3(95.0f, 0.0f, 0.0f);
         currentHealth = 15;
+        healthSlider.value = currentHealth;
 
         GetComponent<CircleCollider2D>().enabled = false;
         currentTargets.Clear();
@@ -340,6 +355,7 @@ public class CompanionLogic : MonoBehaviour
         this.companionMode = CompanionMode.COMPANION;
         idlePosition = GameObject.Find("PlayerProto").GetComponent<Transform>();
         currentHealth = 15;
+        healthSlider.value = currentHealth;
         //targetIndex = -1;
         modeLayerSelected = false;
         alive = true;
@@ -354,9 +370,8 @@ public class CompanionLogic : MonoBehaviour
     IEnumerator DamageColor()
     {
         SpriteRenderer spriteRenderer = this.gameObject.transform.Find("Image").GetComponent<SpriteRenderer>();
-        Color currentColor = spriteRenderer.color;
-        spriteRenderer.color = Color.white;
+        spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        spriteRenderer.color = currentColor;
+        spriteRenderer.color = Color.white;
     }
 }
