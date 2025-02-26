@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed28f7f29a142b4cb8be512a0c0a3c0, type: 3}
   m_Name: MercyEnemy
   m_EditorClassIdentifier: 
+  health: 4
   leapsBeforeFeral: 3
-  closeRangeDistance: 10
+  closeRangeDistance: 5.63
   environmentMask:
     serializedVersion: 2
     m_Bits: 64
@@ -23,7 +24,7 @@ MonoBehaviour:
   leapChargeTime: 0.3
   leapTravelTime: 0.2
   leapEndTime: 0.5
-  leapTravelDistance: 20
+  leapTravelDistance: 8.1
   feralLeapAmount: 3
   feralLeapDelay: 0.2
   feralLeapEndTime: 1
@@ -39,11 +40,17 @@ MonoBehaviour:
   lickProjectileSpawnDistance: 1.64
   lickProjectileSeperationDistance: 0.38
   lickProjectileAngle: 17.6
+  lickProjectileSpeed: 8
+  lickChargeTime: 0.2
+  lickEndTime: 0.3
   screamProjectile: {fileID: 6314627607262925113, guid: 7e751bbcfe8a2894992bf098742dccc3, type: 3}
   screamProjectileSpawnDistance: 1.42
   numberOfScreamProjectiles: 12
-  screamProjectileSpeed: 0
-  drawLeaps: 0
+  screamProjectileSpeed: 6
+  screamChargeTime: 0.2
+  screamEndTime: 0.4
+  drawRange: 1
+  drawLeaps: 1
   drawSpit: 0
-  drawLick: 1
+  drawLick: 0
   drawScream: 0

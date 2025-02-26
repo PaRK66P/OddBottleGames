@@ -102,6 +102,6 @@ public class PauseMenuManager : MonoBehaviour
 
     public void DashToMouseToggleChanged(bool toggle)
     {
-        player.GetComponent<PlayerMovement>().dashTowardsMouse = toggle;
+        player.GetComponent<PlayerManager>().ChangeDashToggle(toggle);
     }
 }

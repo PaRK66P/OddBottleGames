@@ -16,7 +16,7 @@ TagManager:
   - UI
   - Environment
   - Player
-  - Projectile
+  - PlayerAttack
   - Enemy
   - AwaitingEnemyAttack
   - EnemyAttack

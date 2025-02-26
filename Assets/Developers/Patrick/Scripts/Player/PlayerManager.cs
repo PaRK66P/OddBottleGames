@@ -57,9 +57,7 @@ public class PlayerManager : MonoBehaviour
         playerMovement = gameObject.AddComponent<PlayerMovement>();
         playerShooting = gameObject.AddComponent<PlayerShooting>();
         //movement component
-        playerMovement.InitialiseComponent(playerData.speed, playerData.dashTime, playerData.dashDistance, 
-            playerData.dashCooldown, debugData.dashInputBuffer, playerData.damageLayers, debugData.dashTowardsMouse, 
-            playerData.dashChergesNumber, playerData.dashChargeTimer, ref UICanvas, playerData.dashChargeUIObject);
+        playerMovement.InitialiseComponent(ref playerData, ref debugData, ref UICanvas);
         //shooting component
         playerShooting.InitialiseComponent(playerData.ammoUIObject, playerData.fireRate, playerData.maxTimeToChargeShot, 
             playerData.minTimeToChargeShot, playerData.shotsTillFullCharge, playerData.chargeShotIntervals,
@@ -223,5 +221,10 @@ public class PlayerManager : MonoBehaviour
         fadeIn = true;
         fadeTextTimer = 0.0f;
         canvGroup.gameObject.GetComponentInChildren<TMP_Text>().text = text;
+    }
+
+    public void ChangeDashToggle(bool toggle)
+    {
+        debugData.dashTowardsMouse = toggle;
     }
 }

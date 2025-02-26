@@ -9,18 +9,13 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     private Vector2 movementInput;
-    public float speed = 5;
-    public float dashDistance;
-    public int dashChargesMaxNumber = 3;
-    public float dashChargeTime = 3;
 
-    private GameObject[] dashChargesUIObject;
-
-    public LayerMask damageLayers;
+    private GameObject[] dashChargesUIObjects;
 
     public bool dash = false;
     private float dashTimer = 0.0f;
     private int dashChargesNumber = 0;
+    private int maxDashCharges = 0;
     private float dashChargeTimer = 0.0f;
     private Vector2 movementDirection = Vector2.up;
     private Vector2 dashStart = Vector2.zero;
@@ -28,12 +23,10 @@ public class PlayerMovement : MonoBehaviour
     private float lastDashTime = -10.0f;
     private float lastDashInputTime = -10.0f;
 
-    public bool dashTowardsMouse = false;
-
     private Vector2 knockbackForce = Vector2.zero;
 
-    private PlayerData playerData;
-    private PlayerDebugData debugData;
+    private PlayerData _playerData;
+    private PlayerDebugData _debugData;
 
     // Start is called before the first frame update
     void Start()
@@ -41,40 +34,37 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void InitialiseComponent(float dSpeed, float dDashTime, float dDashDistance, float dDashCooldown, float dDashInputBuffer, LayerMask dDamageLayers, bool dashingTowardsMouse, int dDashCharges, float dDashChargeTime, ref GameObject dUICanvas, GameObject dDashChargeUIObject)
+    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject UICanvas)
     {
-        speed = dSpeed;
-        dashTime = dDashTime;
-        dashDistance = dDashDistance;
-        dashCooldown = dDashCooldown;
-        dashInputBuffer = dDashInputBuffer;
-        damageLayers = dDamageLayers;
-        dashTowardsMouse = dashingTowardsMouse;
-        dashChargesNumber = dDashCharges;
-        dashChargesMaxNumber = dDashCharges;
-        dashChargeTime = dDashChargeTime;
-        dashChargesUIObject = new GameObject[dashChargesNumber];
+        _playerData = playerData;
+        _debugData = debugData;
 
-        for (int i = 0; i < dashChargesNumber; i++)
+        dashChargesNumber = _playerData.numberOfDashCharges;
+        maxDashCharges = 3;
+
+        dashChargesUIObjects = new GameObject[maxDashCharges];
+
+        for (int i = 0; i < maxDashCharges; i++)
         {
-            dashChargesUIObject[i] = Instantiate(dDashChargeUIObject, dUICanvas.transform);
+            dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
 
-            dashChargesUIObject[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-            dashChargesUIObject[i].transform.SetParent(dUICanvas.transform.Find("PlayerUI"), true);
+            dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
+            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform.Find("PlayerUI"), true);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(dashChargesNumber < dashChargesMaxNumber)
+        if(dashChargesNumber < maxDashCharges)
         {
             dashChargeTimer += Time.deltaTime;
         }
-        if(dashChargeTimer >= dashChargeTime)
+        if(dashChargeTimer >= _playerData.dashRechargeTime)
         {
             dashChargeTimer = 0.0f;
-            if(dashChargesNumber < dashChargesMaxNumber)
+
+            if (dashChargesNumber < maxDashCharges)
             {
                 dashChargesNumber++;
             }
@@ -85,27 +75,27 @@ public class PlayerMovement : MonoBehaviour
             case 0:
                 for (int i = 0; i < 3; i++)
                 {
-                    dashChargesUIObject[i].SetActive(false);
+                    dashChargesUIObjects[i].SetActive(false);
                 }
                 break;
             case 1:
-                dashChargesUIObject[0].SetActive(true);
+                dashChargesUIObjects[0].SetActive(true);
                 for (int i = 1; i < 3; i++)
                 {
-                    dashChargesUIObject[i].SetActive(false);
+                    dashChargesUIObjects[i].SetActive(false);
                 }
                 break;
             case 2:
-                dashChargesUIObject[2].SetActive(false);
+                dashChargesUIObjects[2].SetActive(false);
                 for (int i = 0; i < 2; i++)
                 {
-                    dashChargesUIObject[i].SetActive(true);
+                    dashChargesUIObjects[i].SetActive(true);
                 }
                 break;
             case 3:
                 for (int i = 0; i < 3; i++)
                 {
-                    dashChargesUIObject[i].SetActive(true);
+                    dashChargesUIObjects[i].SetActive(true);
                 }
                 break;
             default:
@@ -159,16 +149,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (dash)
         {
-            if (Time.time - lastDashTime >= dashCooldown && dashChargesNumber > 0) // Off cooldown
+            if (Time.time - lastDashTime >= _playerData.dashCooldown && dashChargesNumber > 0) // Off cooldown
             {
                 StartCoroutine(DashColor());
                 dashTimer += Time.fixedDeltaTime;
 
-                rb.excludeLayers = playerData.damageLayers;
+                rb.excludeLayers = _playerData.damageLayers;
 
-                rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * playerData.dashDistance, Mathf.Min(dashTimer / playerData.dashTime, 1.0f)));
+                rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * _playerData.dashDistance, Mathf.Min(dashTimer / _playerData.dashTime, 1.0f)));
 
-                if (dashTimer >= playerData.dashTime)
+                if (dashTimer >= _playerData.dashTime)
                 {
                     rb.excludeLayers = 0;
 
@@ -181,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
 
                 return;
             }
-            else if (Time.time - lastDashInputTime > debugData.dashInputBuffer) // Buffer has been exceeded
+            else if (Time.time - lastDashInputTime > _debugData.dashInputBuffer) // Buffer has been exceeded
             {
                 dash = false;
             }
@@ -194,14 +184,14 @@ public class PlayerMovement : MonoBehaviour
     private void Movement()
     {
         // Get the speed the player wants to move at
-        Vector2 targetSpeed = movementInput * playerData.speed;
+        Vector2 targetSpeed = movementInput * _playerData.speed;
 
         // Can implement acceleration in the future but not sure if necessary for this style of game
 
         Vector2 speedDiff = targetSpeed - rb.velocity;
 
         // Normally apply acceleration but we want instant so just use speed
-        Vector2 movement =  speedDiff * playerData.speed;
+        Vector2 movement =  speedDiff * _playerData.speed;
 
         rb.AddForce(movement, ForceMode2D.Force);
     }
@@ -221,7 +211,7 @@ public class PlayerMovement : MonoBehaviour
             dash = true;
             dashTimer = 0.0f;
             dashStart = new Vector2(transform.position.x, transform.position.y);
-            dashDirection = debugData.dashTowardsMouse ? new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x - transform.position.x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y - transform.position.y).normalized
+            dashDirection = _debugData.dashTowardsMouse ? new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x - transform.position.x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y - transform.position.y).normalized
                 : movementDirection;
 
             //StartCoroutine(DashColor());
@@ -237,7 +227,7 @@ public class PlayerMovement : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = this.gameObject.GetComponentInChildren<SpriteRenderer>();
         spriteRenderer.color = Color.blue;
-        yield return new WaitForSeconds(playerData.dashTime);
+        yield return new WaitForSeconds(_playerData.dashTime);
         spriteRenderer.color = Color.white;
     }
 }
