@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         _debugData = debugData;
 
         dashChargesNumber = _playerData.numberOfDashCharges;
-        maxDashCharges = 3;
+        maxDashCharges = _playerData.numberOfDashCharges;
 
         dashChargesUIObjects = new GameObject[maxDashCharges];
 

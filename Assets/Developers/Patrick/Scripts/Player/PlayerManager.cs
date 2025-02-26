@@ -71,6 +71,7 @@ public class PlayerManager : MonoBehaviour
 
 
         healthbar = Instantiate(playerData.healthbar, UICanvas.transform.Find("PlayerUI"));
+        healthbar.GetComponent<RectTransform>().position = new Vector3(Screen.width / 6, Screen.height / 15, 0);
         healthbar.GetComponent<Slider>().maxValue = playerData.health;
         health = playerData.health;
 

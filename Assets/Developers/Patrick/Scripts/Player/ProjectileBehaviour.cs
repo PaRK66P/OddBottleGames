@@ -33,7 +33,7 @@ public class ProjectileBehaviour : MonoBehaviour
         damage = originalDamage;
         if (damageMultiplier != 1)
         {
-            transform.localScale = originalScale * (1 + (damageMultiplier * 0.1f));
+            transform.localScale = originalScale * (1 + (damageMultiplier * 0.2f));
             damage = (int)(originalDamage * damageMultiplier);
         }
     }
