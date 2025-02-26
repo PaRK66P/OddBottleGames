@@ -80,7 +80,7 @@ public class PlayerManager : MonoBehaviour
         healthbar.GetComponent<Slider>().maxValue = playerData.health;
         health = playerData.health;
 
-        //canvGroup = gameObject.transform.Find("Canv").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
+        canvGroup = gameObject.transform.Find("PlayerCanvas").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
 
     }
 
@@ -110,32 +110,32 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        // healthbar.GetComponent<Slider>().value = health;
-        // if (fadeIn)
-        // {
-        //     canvGroup.alpha += Time.deltaTime;
-        //     if (canvGroup.alpha >= 1.0f)
-        //     {
-        //         fadeIn = false;
-        //     }
-        // }
-        // if (fadeOut && !fadeIn)
-        // {
-        //     canvGroup.alpha -= Time.deltaTime;
-        //     if (canvGroup.alpha <= 0.0f)
-        //     {
-        //         fadeOut = false;
-        //     }
-        // }
-        // if (canvGroup.alpha >= 1.0f)
-        // {
-        //     fadeTextTimer += Time.deltaTime;
-        // }
-        
-        // if (fadeTextTimer > 3.0f)
-        // {
-        //     fadeOut = true;
-        // }
+        healthbar.GetComponent<Slider>().value = health;
+        if (fadeIn)
+        {
+            canvGroup.alpha += Time.deltaTime;
+            if (canvGroup.alpha >= 1.0f)
+            {
+                fadeIn = false;
+            }
+        }
+        if (fadeOut && !fadeIn)
+        {
+            canvGroup.alpha -= Time.deltaTime;
+            if (canvGroup.alpha <= 0.0f)
+            {
+                fadeOut = false;
+            }
+        }
+        if (canvGroup.alpha >= 1.0f)
+        {
+            fadeTextTimer += Time.deltaTime;
+        }
+
+        if (fadeTextTimer > 3.0f)
+        {
+            fadeOut = true;
+        }
 
     }
 

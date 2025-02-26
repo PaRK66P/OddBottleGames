@@ -60,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
             dashChargesUIObject[i] = Instantiate(dDashChargeUIObject, dUICanvas.transform);
 
             dashChargesUIObject[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
+            dashChargesUIObject[i].transform.SetParent(dUICanvas.transform.Find("PlayerUI"), true);
         }
     }
 

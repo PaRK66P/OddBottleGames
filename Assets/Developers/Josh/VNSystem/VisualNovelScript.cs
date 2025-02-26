@@ -34,6 +34,7 @@ public class VisualNovelScript : MonoBehaviour
     public GameObject text;
     public GameObject sprite;
     private CanvasGroup canvGroup;
+    private GameObject playerUI;
 
     public Transform buttonContainer;
     public GameObject buttonPrefab;
@@ -61,6 +62,7 @@ public class VisualNovelScript : MonoBehaviour
         sprite = canv.transform.Find("VisualNovelSprite").gameObject;
         buttonContainer = canv.transform.Find("VisualNovelButtonContainer").GetComponent<Transform>();
         canvGroup = canv.GetComponent<CanvasGroup>();
+        playerUI = GameObject.Find("Canvas").transform.Find("PlayerUI").gameObject;
 
         GameObject[] VisualNovelPrefabs = Resources.LoadAll<GameObject>("VisualNovelScenes");
         foreach (GameObject prefab in VisualNovelPrefabs)
@@ -113,6 +115,7 @@ public class VisualNovelScript : MonoBehaviour
             Time.timeScale = 0;
             playerRef.GetComponent<PlayerManager>().DisableInput();
             currentVNPrefabIndex = NovelSceneID;
+            playerUI.SetActive(false);
 
             isNovelSection = true;
 
@@ -199,7 +202,9 @@ public class VisualNovelScript : MonoBehaviour
             Time.timeScale = 1.0f;
             fadeOut = true;
             //canv.SetActive(false);
-            
+            playerUI.SetActive(true);
+           
+
         }
     }
 
