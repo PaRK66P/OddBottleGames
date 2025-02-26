@@ -39,7 +39,7 @@ public class ExplodyBarrel : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collLayers.value & (1 << collision.gameObject.layer)) > 0)
+        if (collLayers.value == LayerMask.GetMask("Projectile"))
         {
             TriggerExplosion();
         }
