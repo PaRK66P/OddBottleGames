@@ -243,9 +243,9 @@ public class VisualNovelScript : MonoBehaviour
         {
             GameObject newButton = Instantiate(buttonPrefab, buttonContainer);
             newButton.name = "Button_" + 0;
-            newButton.transform.localScale = new Vector3(2, 2, 1);
+            //newButton.transform.localScale = new Vector3(2, 2, 1);
 
-            Text buttonText = newButton.GetComponentInChildren<Text>();
+            TMP_Text buttonText = newButton.GetComponentInChildren<TMP_Text>();
             if (buttonText != null)
             {
                 buttonText.text = "continue";
@@ -264,10 +264,12 @@ public class VisualNovelScript : MonoBehaviour
             GameObject newButton = Instantiate(buttonPrefab, buttonContainer);
             newButton.name = "Button_" + i;
             newButton.transform.localPosition = new Vector3(0, -90 * i, 0);
-            newButton.transform.localScale = new Vector3(2, 2, 1);
+            //newButton.GetComponent<RectTransform>().offsetMin = new Vector2(0, -15);
+            //newButton.GetComponent<RectTransform>().offsetMax = new Vector2(250, 0);
+            //newButton.transform.localScale = new Vector3(2, 2, 1);
 
 
-            Text buttonText = newButton.GetComponentInChildren<Text>();
+            TMP_Text buttonText = newButton.GetComponentInChildren<TMP_Text>();
             if (buttonText != null)
             {
                 buttonText.text = currentNode.children[i].sceneData.entryText;
