@@ -6,32 +6,20 @@ using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
 {
-    private float projectileSpeed = 10;
-    private GameObject projectilePrefab;
     private GameObject[] ammoUIObjects;
     private GameObject reloadUISlider;
 
-    private bool canDropWeapon = false;
     private bool canFire = true;
 
-    private ObjectPoolManager poolManager;
+    private ObjectPoolManager _poolManager;
 
-    private float fireRate;
     private bool startCharging = false;
     private float timeForChargedShot = 1.0f;
-    private float maxChargeUpShotTime = 0.2f;
-    private float minChargeUpShotTime = 0.5f;
-    private int shotsTillFullChargeUp = 4;
     private bool takeShot = false;
-    private float chargeShotIntervals = 0.0f;
     private float lastShotTime = 0.0f;
-    private float damageMultiplier = 1.5f;
 
-    private float fireInputBuffer;
-
-    private int maxAmmo;
+    private int currentAmmo = 0;
     private int chargedAmmo = 0;
-    private int currentAmmo;
     private float reloadTime = 1.0f;
 
     private bool reloading = false;
@@ -39,50 +27,30 @@ public class PlayerShooting : MonoBehaviour
     private bool interrupted = false;
     private bool charging = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private PlayerData _playerData;
+    private PlayerDebugData _debugData;
+
+    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref ObjectPoolManager poolManager, ref GameObject dUICanvas)
     {
-        
-    }
+        _playerData = playerData;
+        _debugData = debugData;
 
-    public void InitialiseComponent(GameObject dAmmoUIObject, float dFireRate, float dMaxChargeUpShotTime, float dMinChargeUpShotTime, 
-        int dShotsTillFullChargeUp, float dChargeShotIntervals, int dMaxAmmo, float dReloadTime, GameObject dBaseProjectileType, 
-        float dBaseProjectileSpeed, float dFiringInputBuffer, bool dCanDropWeapon,ref ObjectPoolManager dPoolManager, ref GameObject dUICanvas,
-        GameObject dReloadUISlider, float dDamageMultiplier)
-    {
+        currentAmmo = _playerData.maxAmmo;
 
-        fireRate = dFireRate;
+        _poolManager = poolManager;
 
-        maxChargeUpShotTime = dMaxChargeUpShotTime;
-        minChargeUpShotTime = dMinChargeUpShotTime;
-        shotsTillFullChargeUp = dShotsTillFullChargeUp;
-        chargeShotIntervals = dChargeShotIntervals;
+        ammoUIObjects = new GameObject[_playerData.maxAmmo];
 
-        damageMultiplier = dDamageMultiplier;
-
-        maxAmmo = dMaxAmmo;
-        currentAmmo = maxAmmo;
-
-        projectilePrefab = dBaseProjectileType;
-        projectileSpeed = dBaseProjectileSpeed;
-        
-        fireInputBuffer = dFiringInputBuffer;
-        canDropWeapon = dCanDropWeapon;
-
-        poolManager = dPoolManager;
-
-        ammoUIObjects = new GameObject[maxAmmo];
-
-        float offset = (maxAmmo / 2) * 0.3f - 0.2f;
-        for (int i = 0; i < maxAmmo; i++)
+        float offset = (_playerData.maxAmmo / 2) * 0.3f - 0.2f;
+        for (int i = 0; i < _playerData.maxAmmo; i++)
         {
-            ammoUIObjects[i] = Instantiate(dAmmoUIObject, dUICanvas.transform);
+            ammoUIObjects[i] = Instantiate(_playerData.ammoUIObject, dUICanvas.transform);
 
             ammoUIObjects[i].GetComponent<RectTransform>().position = transform.position;
             ammoUIObjects[i].GetComponent<RectTransform>().Translate(new Vector3(-offset + (i * 0.3f), 1.45f, 0));
         }
 
-        reloadUISlider = Instantiate(dReloadUISlider, dUICanvas.transform);
+        reloadUISlider = Instantiate(_playerData.reloadUISlider, dUICanvas.transform);
         reloadUISlider.SetActive(false);
     }
 
@@ -95,24 +63,25 @@ public class PlayerShooting : MonoBehaviour
 
         if (takeShot)
         {
-            if(Time.time - lastShotTime >= fireRate) // Waits until the can shoot (works from buffer)
+            if(Time.time - lastShotTime >= _playerData.fireRate) // Waits until the can shoot (works from buffer)
             {
                 takeShot = false;
                 if (chargedAmmo == 0)
                 {
                     Fire((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)),
-                        Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)) - transform.position); // Regular shot
+                        Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)) - transform.position,
+                        1); // Regular shot
                     return;
                 }
 
                 // Charged shot
-                StartCoroutine(FireChargedShots((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)),
-                    Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)) - transform.position));
+                FireChargedShots((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)),
+                    Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)) - transform.position);
             }
         }
         else if (startCharging)
         {
-            if(Time.time - timeForChargedShot >= Mathf.Lerp(maxChargeUpShotTime, minChargeUpShotTime, Mathf.Min(chargedAmmo / (shotsTillFullChargeUp - 1.0f), 1.0f)))
+            if(Time.time - timeForChargedShot >= Mathf.Lerp(_playerData.maxTimeToChargeShot, _playerData.minTimeToChargeShot, Mathf.Min(chargedAmmo / (_playerData.shotsTillFullCharge - 1.0f), 1.0f)))
             {
                 if(currentAmmo - chargedAmmo <= 0)
                 {
@@ -164,7 +133,12 @@ public class PlayerShooting : MonoBehaviour
 
     public void PlayerReloadAction(InputAction.CallbackContext context)
     {
-        if(charging || reloading || currentAmmo == maxAmmo) { return; }
+        if(charging || reloading || currentAmmo == _playerData.maxAmmo) { return; }
+
+        for (int i = 0; i < currentAmmo; i++)
+        {
+            ammoUIObjects[i].SetActive(false);
+        }
 
         StartCoroutine(ReloadAmmo());
     }
@@ -181,34 +155,35 @@ public class PlayerShooting : MonoBehaviour
          * Not reloading
          * Currently charging
          */
-        return (Time.time - lastShotTime >= fireRate - fireInputBuffer && !reloading && charging && !firingChargedShot);
+        return (Time.time - lastShotTime >= _playerData.fireRate - _debugData.firingInputBuffer && !reloading && charging && !firingChargedShot);
     }
 
-    private void Fire(Vector2 fireDirection, Vector3 rotation, float fireMultiplier = 1.0f)
+    private void Fire(Vector2 fireDirection, Vector3 rotation, int ammoUsed, float fireMultiplier = 1.0f)
     {
         float rotz = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
-        GameObject projectile = poolManager.GetFreeObject(projectilePrefab.name);
+        GameObject projectile = _poolManager.GetFreeObject(_playerData.baseProjectileType.name);
         projectile.transform.position = transform.position;
         projectile.transform.rotation = Quaternion.Euler(0, 0, rotz);
         projectile.GetComponent<ProjectileBehaviour>().InitialiseComponent(fireDirection.normalized,
-            projectileSpeed,
-            ref poolManager,
-            projectilePrefab.name,
+            _playerData.baseProjectileSpeed,
+            ref _poolManager,
+            _playerData.baseProjectileType.name,
             gameObject,
             fireMultiplier);
         lastShotTime = Time.time;
 
-        if (fireMultiplier == 1)
-        {
-            currentAmmo--;
-            ammoUIObjects[currentAmmo].SetActive(false);
+        currentAmmo -= ammoUsed;
 
-            if (currentAmmo <= 0 && !reloading) // Trying to shoot with no ammo
-            {
-                StartCoroutine(ReloadAmmo());
-                return;
-            }
+        for (int i = currentAmmo; i < currentAmmo + ammoUsed; i++)
+        {
+            ammoUIObjects[i].SetActive(false);
+        }
+
+        if (currentAmmo <= 0 && !reloading) // Trying to shoot with no ammo
+        {
+            StartCoroutine(ReloadAmmo());
+            return;
         }
     }
 
@@ -232,7 +207,7 @@ public class PlayerShooting : MonoBehaviour
         }
         reloadUISlider.SetActive(false);
 
-        currentAmmo = maxAmmo;
+        currentAmmo = _playerData.maxAmmo;
 
         reloading = false;
 
@@ -259,44 +234,18 @@ public class PlayerShooting : MonoBehaviour
         ammoUIObjects[currentAmmo - chargedAmmo].GetComponent<Image>().color = Color.blue;
     }
 
-    private IEnumerator FireChargedShots(Vector2 direction, Vector3 rotation)
+    private void FireChargedShots(Vector2 direction, Vector3 rotation)
     {
-        firingChargedShot = true;
-
-        float startTime;
+        firingChargedShot = true; // Needed anymore?
 
         float localDamageMultiplier = 1;
 
         for (int i = 0; i < chargedAmmo; i++)
         {
-            if (interrupted)
-            {
-                break;
-            }
-
-            startTime = Time.time;
-
-            //Fire(direction, rotation);
-            localDamageMultiplier *= damageMultiplier;
-
-            while (Time.time - startTime <= chargeShotIntervals && !interrupted)
-            {
-                yield return null;
-            }
+            localDamageMultiplier *= _playerData.damageMultiplier;
         }
 
-        Fire(direction, rotation, localDamageMultiplier);
-
-        for (int j = 0; j < chargedAmmo;j++)
-        {
-            currentAmmo--;
-            ammoUIObjects[currentAmmo].SetActive(false);
-        }
-
-        if (currentAmmo <= 0 && !reloading) // Trying to shoot with no ammo
-        {
-            StartCoroutine(ReloadAmmo());
-        }
+        Fire(direction, rotation, chargedAmmo, localDamageMultiplier);
 
         ReleaseChargedShots();
 
@@ -317,7 +266,7 @@ public class PlayerShooting : MonoBehaviour
     #region Weapon Drop
     public void DisableFire()
     {
-        if (canDropWeapon)
+        if (_debugData.canDropWeapon)
         {
             canFire = false;
         }
@@ -325,7 +274,7 @@ public class PlayerShooting : MonoBehaviour
 
     public void EnableFire()
     {
-        if (canDropWeapon)
+        if (_debugData.canDropWeapon)
         {
             canFire = true;
         }
