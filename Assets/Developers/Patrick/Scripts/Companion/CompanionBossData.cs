@@ -6,6 +6,7 @@ using UnityEngine;
 public class CompanionBossData : ScriptableObject
 {
     [Header("Attacks")]
+    public float health;
     public int leapsBeforeFeral;
     public float closeRangeDistance;
     public LayerMask environmentMask;
@@ -37,15 +38,21 @@ public class CompanionBossData : ScriptableObject
     public float lickProjectileSpawnDistance;
     public float lickProjectileSeperationDistance;
     public float lickProjectileAngle;
+    public float lickProjectileSpeed;
+    public float lickChargeTime;
+    public float lickEndTime;
 
     [Header("Scream")]
     public GameObject screamProjectile;
     public float screamProjectileSpawnDistance;
     public int numberOfScreamProjectiles;
     public float screamProjectileSpeed;
+    public float screamChargeTime;
+    public float screamEndTime;
 
 
     [Header("Debug")]
+    public bool drawRange;
     public bool drawLeaps;
     public bool drawSpit;
     public bool drawLick;

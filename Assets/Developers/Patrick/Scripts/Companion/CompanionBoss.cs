@@ -42,6 +42,12 @@ public class CompanionBoss : MonoBehaviour
     // Spit Attack
     private float _spitStartTimer;
 
+    // Lick Attack
+    private float _lickStartTimer;
+
+    // Scream Attack
+    private float _screamStartTimer;
+
     // Start is called before the first frame update
     public void InitialiseComponent(ref CompanionBossData bossData, ref Rigidbody2D rigidbodyComp, ref GameObject playerObjectRef, ref ObjectPoolManager poolManagerRef)
     {
@@ -49,11 +55,14 @@ public class CompanionBoss : MonoBehaviour
         rb = rigidbodyComp;
         playerObj = playerObjectRef;
         poolManager = poolManagerRef;
+    }
 
-        currentState = AttackState.LEAP;
+    public void SetupEnemy()
+    {
+        currentState = AttackState.DELAY;
 
-        _isLastAttackLeap = true;
-        _leapAmount = 1;
+        _isLastAttackLeap = false;
+        _leapAmount = 0;
         _doLickAttack = false; // Start with Scream
 
         _leapStartTimer = 0;
@@ -172,15 +181,56 @@ public class CompanionBoss : MonoBehaviour
 
     private void LickAttack()
     {
-        Debug.Log("Lick");
+        if (Time.time - _lickStartTimer <= dataObj.lickChargeTime)
+        {
+            return;
+        }
 
-        _attackEndDelay = 0.0f;
+        Vector3 forwardVector = (playerObj.transform.position - transform.position).normalized;
+        Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
+
+        float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardVector, new Vector3(0.0f, 0.0f, 1.0f));
+
+        float spawnShifts = (dataObj.lickProjectileNumber - 1) / 2.0f;
+
+        Vector3 startSpawnPosition = transform.position + forwardVector * dataObj.lickProjectileSpawnDistance - rightVector * dataObj.lickProjectileSeperationDistance * spawnShifts;
+
+        float arcAngle = (dataObj.lickProjectileAngle * 2.0f) / (dataObj.lickProjectileNumber - 1);
+        Vector3 projectileDirection;
+        float currentAngle;
+
+        GameObject objectRef;
+
+        // Draws left to right
+        for (int i = 0; i < dataObj.lickProjectileNumber; i++)
+        {
+            currentAngle = dataObj.lickProjectileAngle - arcAngle * (dataObj.lickProjectileNumber - 1 - i);
+
+            projectileDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), 0.0f) * dataObj.screamProjectileSpawnDistance;
+
+            objectRef = poolManager.GetFreeObject(dataObj.lickProjectile.name);
+
+            objectRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref poolManager, dataObj.lickProjectile.name,
+                startSpawnPosition + rightVector * i * dataObj.lickProjectileSeperationDistance,
+                projectileDirection.normalized,
+                dataObj.lickProjectileSpeed,
+                dataObj.environmentMask, dataObj.playerMask);
+        }
+
+
+        _attackEndDelay = dataObj.lickEndTime;
         currentState = AttackState.DELAY;
+
+
+        Debug.Log("Lick");
     }
 
     private void ScreamAttack()
     {
-        Debug.Log("Scream");
+        if (Time.time - _screamStartTimer <= dataObj.screamChargeTime)
+        {
+            return;
+        }
 
         // Delay
         GameObject projectileRef;
@@ -198,8 +248,10 @@ public class CompanionBoss : MonoBehaviour
                 dataObj.environmentMask, dataObj.playerMask);
         }
 
-        _attackEndDelay = 0.0f;
+        _attackEndDelay = dataObj.screamEndTime;
         currentState = AttackState.DELAY;
+
+        Debug.Log("Scream");
     }
 
     private void FeralLeapAttack()
@@ -311,11 +363,13 @@ public class CompanionBoss : MonoBehaviour
             currentState = AttackState.LICK;
 
             _doLickAttack = false;
+            _lickStartTimer = Time.time;
 
             return;
         }
 
         _doLickAttack = true;
+        _screamStartTimer = Time.time;
 
         currentState = AttackState.SCREAM;
     }

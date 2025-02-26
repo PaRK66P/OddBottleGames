@@ -11,15 +11,15 @@ public class CompanionCollisionDamage : MonoBehaviour
         LEAPING = 2
     }
 
-    private CollisionDamageStates collisionDamageStates;
+    private CollisionDamageStates collisionDamageState;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Vector2 damageDirection = Vector2.left;
 
-        collisionDamageStates = CollisionDamageStates.ACTIVE;
+        collisionDamageState = CollisionDamageStates.ACTIVE;
 
-        switch (collisionDamageStates)
+        switch (collisionDamageState)
         {
             case CollisionDamageStates.NONE:
                 break;
@@ -28,6 +28,7 @@ public class CompanionCollisionDamage : MonoBehaviour
                 {
                     damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
                     collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection);
+                    return;
                 }
                 break;
             case CollisionDamageStates.LEAPING:
@@ -40,9 +41,9 @@ public class CompanionCollisionDamage : MonoBehaviour
     {
         Vector2 damageDirection = Vector2.left;
 
-        collisionDamageStates = CollisionDamageStates.ACTIVE;
+        collisionDamageState = CollisionDamageStates.ACTIVE;
 
-        switch (collisionDamageStates)
+        switch (collisionDamageState)
         {
             case CollisionDamageStates.NONE:
                 break;

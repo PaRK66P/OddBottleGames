@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class CompanionManager : MonoBehaviour
 {
+    enum CompanionStates
+    {
+        NONE = 0,
+        ENEMY = 1,
+        FRIEND = 2
+    }
+
     [SerializeField]
     private GameObject playerObject;
     [SerializeField]
@@ -19,6 +26,9 @@ public class CompanionManager : MonoBehaviour
     private CompanionBoss bossScript;
     private CompanionFriend friendScript;
 
+    private CompanionStates _currentState;
+    private float _health;
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,22 +39,94 @@ public class CompanionManager : MonoBehaviour
         bossScript.InitialiseComponent(ref bossData, ref rb, ref playerObject, ref poolManager);
 
         friendScript = gameObject.AddComponent<CompanionFriend>();
+
+        // Testing
+        ChangeToEnemy();
     }
 
     // Update is called once per frame
     void Update()
     {
-        bossScript.CompanionUpdate();
+        switch (_currentState)
+        {
+            case CompanionStates.NONE:
+                break;
+            case CompanionStates.ENEMY:
+                bossScript.CompanionUpdate();
+                break;
+            case CompanionStates.FRIEND:
+                friendScript.CompanionUpdate();
+                break;
+        }
     }
 
     private void FixedUpdate()
     {
-        bossScript.CompanionFixedUpdate();
+        switch (_currentState)
+        {
+            case CompanionStates.NONE:
+                break;
+            case CompanionStates.ENEMY:
+                bossScript.CompanionFixedUpdate();
+                break;
+            case CompanionStates.FRIEND:
+
+                break;
+        }
     }
 
+    public void TakeDamage(float damage)
+    {
+        if(_currentState == CompanionStates.NONE) { return; }
+
+        _health -= damage;
+        if(_health <= 0)
+        {
+            _currentState = CompanionStates.NONE;
+            DefeatVisual();
+            return;
+        }
+
+        DamageVisual();
+    }
+
+    private void DamageVisual()
+    {
+
+    }
+
+    private void DefeatVisual()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void ChangeToNone()
+    {
+        _currentState = CompanionStates.NONE;
+    }
+
+    public void ChangeToEnemy()
+    {
+        _health = bossData.health;
+        bossScript.SetupEnemy();
+        _currentState = CompanionStates.ENEMY;
+    }
+
+    public void ChangeToFriendly()
+    {
+        _currentState = CompanionStates.FRIEND;
+    }
+
+    #region Gizmos
     private void OnDrawGizmos()
     {
         RaycastHit2D wallCheck;
+
+        if (bossData.drawRange)
+        {
+            Gizmos.color = UnityEngine.Color.cyan;
+            Gizmos.DrawWireSphere(transform.position, bossData.closeRangeDistance);
+        }
 
         if (bossData.drawLeaps)
         {
@@ -103,8 +185,6 @@ public class CompanionManager : MonoBehaviour
             float arcAngle = (bossData.lickProjectileAngle * 2.0f) / (bossData.lickProjectileNumber - 1);
             float currentAngle = 0.0f;
 
-            // DOESN'T WORK
-
             // Draws left to right
             for (int i = 0; i < bossData.lickProjectileNumber; i++)
             {
@@ -146,4 +226,5 @@ public class CompanionManager : MonoBehaviour
 
         }
     }
+    #endregion
 }
