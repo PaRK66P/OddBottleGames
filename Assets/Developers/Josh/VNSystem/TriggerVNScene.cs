@@ -4,6 +4,7 @@ public class TriggerVNScene : MonoBehaviour
 {
     public VisualNovelScript VNSceneManager;
     public string sceneName;
+    bool hasBeenTriggered = false;
 
     private void Start()
     {
@@ -12,12 +13,16 @@ public class TriggerVNScene : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!VNSceneManager.isNovelSection)
+        if (!hasBeenTriggered)
         {
-            if (collision.gameObject == GameObject.Find("PlayerProto"))
+            if (!VNSceneManager.isNovelSection)
             {
-                VNSceneManager.StartNovelSceneByName(sceneName);
+                if (collision.gameObject == GameObject.Find("PlayerProto"))
+                {
+                    VNSceneManager.StartNovelSceneByName(sceneName);
+                }
             }
+            hasBeenTriggered = true;
         }
     }
 }
