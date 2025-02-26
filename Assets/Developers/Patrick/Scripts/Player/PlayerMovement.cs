@@ -66,12 +66,15 @@ public class PlayerMovement : MonoBehaviour
 
             if (dashChargesNumber < maxDashCharges)
             {
+                Debug.Log("recharged dash");
                 dashChargesNumber++;
             }
         }
 
+        //Debug.Log(dashChargesNumber);
         switch (dashChargesNumber)
         {
+           
             case 0:
                 for (int i = 0; i < 3; i++)
                 {
