@@ -91,7 +91,7 @@ public class CompanionManager : MonoBehaviour
             Gizmos.color = UnityEngine.Color.yellow;
 
             Vector3 forwardVector = (playerObject.transform.position - transform.position).normalized;
-            Vector3 rightVector = new Vector3(-forwardVector.x, forwardVector.y, forwardVector.z);
+            Vector3 rightVector = new Vector3( forwardVector.y, -forwardVector.x, forwardVector.z);
 
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardVector, new Vector3(0.0f, 0.0f, 1.0f));
 
@@ -99,9 +99,9 @@ public class CompanionManager : MonoBehaviour
 
             Vector3 startSpawnPosition = transform.position + forwardVector * bossData.lickProjectileSpawnDistance - rightVector * bossData.lickProjectileSeperationDistance * spawnShifts;
 
-            Vector3 projectileDirection = Vector3.forward;
-            float arcAngle = (bossData.lickProjectileAngle * 2.0f) / bossData.lickProjectileNumber;
-            float currentAngle;
+            Vector3 projectileDirection;
+            float arcAngle = (bossData.lickProjectileAngle * 2.0f) / (bossData.lickProjectileNumber - 1);
+            float currentAngle = 0.0f;
 
             // DOESN'T WORK
 
@@ -110,9 +110,9 @@ public class CompanionManager : MonoBehaviour
             {
                 Gizmos.DrawWireSphere(startSpawnPosition + rightVector * i * bossData.lickProjectileSeperationDistance, bossData.lickProjectile.transform.localScale.x);
 
-                currentAngle = bossData.lickProjectileAngle - arcAngle * (bossData.lickProjectileNumber + 1 + i);
+                currentAngle = bossData.lickProjectileAngle - arcAngle * (bossData.lickProjectileNumber - 1 - i);
 
-                projectileDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + currentAngle * i)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + currentAngle * i)), 0.0f) * bossData.screamProjectileSpawnDistance;
+                projectileDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), 0.0f) * bossData.screamProjectileSpawnDistance;
 
                 Gizmos.DrawLine(startSpawnPosition + rightVector * i * bossData.lickProjectileSeperationDistance, startSpawnPosition + rightVector * i * bossData.lickProjectileSeperationDistance + projectileDirection.normalized * 10);
             }
