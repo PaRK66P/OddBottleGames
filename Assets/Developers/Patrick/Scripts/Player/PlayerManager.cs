@@ -74,7 +74,7 @@ public class PlayerManager : MonoBehaviour
         }
 
 
-        healthbar = Instantiate(playerData.healthbar, UICanvas.transform);
+        healthbar = Instantiate(playerData.healthbar, UICanvas.transform.Find("PlayerUI"));
         healthbar.GetComponent<Slider>().maxValue = playerData.health;
         health = playerData.health;
 
