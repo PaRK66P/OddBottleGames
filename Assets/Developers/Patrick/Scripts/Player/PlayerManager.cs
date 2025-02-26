@@ -109,6 +109,8 @@ public class PlayerManager : MonoBehaviour
         }
 
         healthbar.GetComponent<Slider>().value = health;
+
+
         if (fadeIn)
         {
             canvGroup.alpha += Time.deltaTime;
