@@ -19,8 +19,8 @@ MonoBehaviour:
   dashTime: 0.2
   dashDistance: 5
   dashCooldown: 0.2
-  dashChergesNumber: 3
-  dashChargeTimer: 2
+  numberOfDashCharges: 0
+  dashRechargeTime: 1
   damageLayers:
     serializedVersion: 2
     m_Bits: 2048

@@ -7,14 +7,19 @@ public class DialoguePopup : MonoBehaviour
     CanvasGroup canvasGroup;
     [SerializeField]
     private string text;
+    private bool hasBeenActivated = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (!hasBeenActivated)
         {
-            //Debug.Log("collided with player");
-            collision.gameObject.GetComponent<PlayerManager>().StartFadeInSpeech(text);
-
+            if (collision.gameObject.tag == "Player")
+            {
+                //Debug.Log("collided with player");
+                collision.gameObject.GetComponent<PlayerManager>().StartFadeInSpeech(text);
+                hasBeenActivated = true;
+            }
+            
         }
     }
 }
