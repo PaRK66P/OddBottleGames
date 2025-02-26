@@ -44,6 +44,23 @@ public class CompanionManager : MonoBehaviour
         ChangeToEnemy();
     }
 
+    private void OnEnable()
+    {
+        if(rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
+        if (bossScript == null)
+        {
+            bossScript = gameObject.AddComponent<CompanionBoss>();
+            bossScript.InitialiseComponent(ref bossData, ref rb, ref playerObject, ref poolManager);
+        }
+        if (friendScript == null)
+        {
+            friendScript = gameObject.AddComponent<CompanionFriend>();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

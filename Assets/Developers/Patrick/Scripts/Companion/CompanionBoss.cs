@@ -146,8 +146,6 @@ public class CompanionBoss : MonoBehaviour
 
         _isLeapMoving = false;
         _isLeapFinished = false;
-
-        Debug.Log("Leap");
     }
 
     private void SpitAttack()
@@ -175,8 +173,6 @@ public class CompanionBoss : MonoBehaviour
 
         _attackEndDelay = dataObj.spitEndTime;
         currentState = AttackState.DELAY;
-
-        Debug.Log("Spit");
     }
 
     private void LickAttack()
@@ -220,9 +216,6 @@ public class CompanionBoss : MonoBehaviour
 
         _attackEndDelay = dataObj.lickEndTime;
         currentState = AttackState.DELAY;
-
-
-        Debug.Log("Lick");
     }
 
     private void ScreamAttack()
@@ -250,8 +243,6 @@ public class CompanionBoss : MonoBehaviour
 
         _attackEndDelay = dataObj.screamEndTime;
         currentState = AttackState.DELAY;
-
-        Debug.Log("Scream");
     }
 
     private void FeralLeapAttack()
@@ -288,8 +279,6 @@ public class CompanionBoss : MonoBehaviour
         _feralLeapAmount = 0;
         _attackEndDelay = dataObj.feralLeapEndTime;
         currentState = AttackState.DELAY;
-
-        Debug.Log("Feral");
     }
 
     #endregion
