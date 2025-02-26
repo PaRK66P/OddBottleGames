@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerDebugData", menuName = "ScriptableObjects/PlayerDebugData", order = 2)]
+[CreateAssetMenu(fileName = "PlayerDebugData", menuName = "DataObject/PlayerDebugData", order = 2)]
 public class PlayerDebugData : ScriptableObject
 {
     [Header("Input")]

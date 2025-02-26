@@ -65,7 +65,7 @@ public class ProjectileBehaviour : MonoBehaviour
 
             if(collision.gameObject.tag == "Companion")
             {
-                collision.gameObject.GetComponentInParent<CompanionLogic>().TakeDamage(damage);
+                collision.gameObject.GetComponentInParent<CompanionManager>().TakeDamage(damage);
             }
             else if(collision.gameObject.tag == "Boss")
             {

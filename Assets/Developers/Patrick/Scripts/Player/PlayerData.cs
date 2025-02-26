@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-[CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData", order = 1)]
+[CreateAssetMenu(fileName = "PlayerData", menuName = "DataObject/PlayerData", order = 1)]
 public class PlayerData : ScriptableObject
 {
     [Header("Health")]
