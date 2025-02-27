@@ -12,7 +12,9 @@ public class CompanionManager : MonoBehaviour
         FRIEND = 2
     }
 
+    [SerializeField]
     private GameObject _playerObject;
+    [SerializeField]
     private ObjectPoolManager _poolManager;
 
     [SerializeField]
@@ -21,6 +23,7 @@ public class CompanionManager : MonoBehaviour
     private CompanionFriendData friendData;
 
     private Rigidbody2D rb;
+    private CompanionCollisionDamage collisionDamageScript;
     private CompanionDetection detectionScript;
 
     private CompanionBoss bossScript;
@@ -39,7 +42,11 @@ public class CompanionManager : MonoBehaviour
         {
             rb = GetComponent<Rigidbody2D>();
         }
-        if(friendScript == null)
+        if (collisionDamageScript == null)
+        {
+            collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
+        }
+        if (detectionScript == null)
         {
             detectionScript = GetComponentInChildren<CompanionDetection>();
         }
@@ -59,9 +66,13 @@ public class CompanionManager : MonoBehaviour
 
     private void OnEnable()
     {
-        if(rb == null)
+        if (rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
+        }
+        if (friendScript == null)
+        {
+            detectionScript = GetComponentInChildren<CompanionDetection>();
         }
         if (bossScript == null)
         {
@@ -71,7 +82,10 @@ public class CompanionManager : MonoBehaviour
         if (friendScript == null)
         {
             friendScript = gameObject.AddComponent<CompanionFriend>();
+            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref rb, ref _playerObject);
         }
+
+        ChangeToFriendly();
     }
 
     // Update is called once per frame
@@ -135,6 +149,8 @@ public class CompanionManager : MonoBehaviour
     {
         _currentState = CompanionStates.NONE;
 
+        collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.NONE);
+
         detectionScript.gameObject.SetActive(false);
     }
 
@@ -144,12 +160,16 @@ public class CompanionManager : MonoBehaviour
         bossScript.SetupEnemy();
         _currentState = CompanionStates.ENEMY;
 
+        collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.PLAYER);
+
         detectionScript.gameObject.SetActive(false);
     }
 
     public void ChangeToFriendly()
     {
         _currentState = CompanionStates.FRIEND;
+
+        collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.ENEMY);
 
         detectionScript.gameObject.SetActive(true);
     }
