@@ -14,6 +14,7 @@ public class CompanionFriend : MonoBehaviour
 
     private CompanionFriendData _dataObj;
     private CompanionDetection _detectionScript;
+    private CompanionAnimations _animationScript;
     private Rigidbody2D _rb;
     private GameObject _player;
 
@@ -33,10 +34,11 @@ public class CompanionFriend : MonoBehaviour
     private bool _isLeapCalculated;
     private bool _isDashRefreshSpawned;
 
-    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref Rigidbody2D rb, ref GameObject player)
+    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimations animationScript, ref Rigidbody2D rb, ref GameObject player)
     {
         _dataObj = dataObj;
         _detectionScript = detectionScript;
+        _animationScript = animationScript;
         _rb = rb;
         _player = player;
     }
@@ -83,7 +85,6 @@ public class CompanionFriend : MonoBehaviour
                 if (travelPosition >= 1)
                 {
                     _isLeapFinished = true;
-                    //Debug.Log("Leaped");
                 }
 
                 break;
@@ -106,12 +107,15 @@ public class CompanionFriend : MonoBehaviour
 
             return;
         }
+
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.IDLE);
     }
 
     public void Leap()
     {
         if(Time.time - _leapTimer < _dataObj.leapChargeTime)
         {
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_CHARGE);
             return;
         }
 
@@ -139,12 +143,16 @@ public class CompanionFriend : MonoBehaviour
             _leapMoveTimer = Time.time;
 
             _isLeapCalculated = true;
+
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_MOVING);
         }
 
         if (!_isLeapFinished)
         {
             return;
         }
+
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_END);
 
         if (!_isDashRefreshSpawned)
         {

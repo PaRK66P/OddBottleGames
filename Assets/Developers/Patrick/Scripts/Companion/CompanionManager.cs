@@ -77,7 +77,7 @@ public class CompanionManager : MonoBehaviour
         if (friendScript == null)
         {
             friendScript = gameObject.AddComponent<CompanionFriend>();
-            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref rb, ref _playerObject);
+            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref rb, ref _playerObject);
         }
 
         ChangeToEnemy();
