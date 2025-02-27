@@ -11,6 +11,8 @@ public class CompanionDetection : MonoBehaviour
     public void InitialiseComponent(ref CompanionFriendData dataObj)
     {
         _dataObj = dataObj;
+
+        _targetsList = new List<GameObject>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
