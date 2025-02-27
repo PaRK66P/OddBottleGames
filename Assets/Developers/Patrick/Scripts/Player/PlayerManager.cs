@@ -30,6 +30,7 @@ public class PlayerManager : MonoBehaviour
 
     private float timeOfDamage = -10.0f;
     private float invulnerableTime = 1.0f;
+    private float regenTimer = 0.0f;
 
     private int health = 100;
     private GameObject healthbar;
@@ -105,6 +106,13 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
+        regenTimer += Time.deltaTime;
+        if(regenTimer >= 1)
+        {
+            health += 1;
+            regenTimer = 0;
+        }
+
         healthbar.GetComponent<Slider>().value = health;
 
 
@@ -136,14 +144,14 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f, int ammount = 20)
+    public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f, int ammount = 10)
     {
         if (isDamaged) { return; }
 
         rb.excludeLayers = playerData.damageLayers;
         isDamaged = true;
         playerInputManager.DisableInput();
-        image.color = Color.blue;
+        image.color = Color.red;
         timeOfDamage = Time.time;
         invulnerableTime = damageTime;
         playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);

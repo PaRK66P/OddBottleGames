@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class CompanionManager : MonoBehaviour
 {
@@ -33,13 +35,14 @@ public class CompanionManager : MonoBehaviour
 
     private CompanionStates _currentState;
     private float _health;
+    private GameObject healthbar;
 
     private VisualNovelScript visualNovelManager;
     private bool hasPlayedNovel = false;
 
     // No protection for uninitialised Companion
 
-    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager)
+    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref Canvas dUICanvas)
     {
         _playerObject = playerObject;
         _poolManager = poolManager;
@@ -79,6 +82,12 @@ public class CompanionManager : MonoBehaviour
             friendScript = gameObject.AddComponent<CompanionFriend>();
             friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref rb, ref _playerObject);
         }
+
+        healthbar = Instantiate(bossData.healthbar, dUICanvas.transform);
+        healthbar.GetComponent<RectTransform>().Translate(new Vector3(Screen.width / 2 - 400, Screen.height - 240, 0));
+
+        healthbar.GetComponent<UnityEngine.UI.Slider>().maxValue = bossData.health;
+        healthbar.GetComponent<UnityEngine.UI.Slider>().value = bossData.health;
 
         ChangeToEnemy();
     }
@@ -181,10 +190,11 @@ public class CompanionManager : MonoBehaviour
         if(_health <= 0)
         {
             _currentState = CompanionStates.NONE;
+            healthbar.SetActive(false);
             DefeatVisual();
             return;
         }
-
+        healthbar.GetComponent<UnityEngine.UI.Slider>().value = _health;
         DamageVisual();
     }
 
@@ -196,11 +206,14 @@ public class CompanionManager : MonoBehaviour
     private void DefeatVisual()
     {
         // To be removed
-        //gameObject.SetActive(false);
+        
         if (!hasPlayedNovel)
         {
             hasPlayedNovel = true;
+
             visualNovelManager.StartNovelSceneByName("Miniboss tester 2");
+            GetComponent<enemyScr>().DecreaseEnemyCount();
+            spriteRenderer.gameObject.SetActive(false);
         }
     }
 
@@ -231,6 +244,7 @@ public class CompanionManager : MonoBehaviour
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.ENEMY);
 
         detectionScript.gameObject.SetActive(true);
+        spriteRenderer.gameObject.SetActive(true);
     }
 
     IEnumerator DamageColor()
