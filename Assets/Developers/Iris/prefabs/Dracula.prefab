@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c0794303c83554c920fd8cee15ca28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 150
   healthbarPrefab: {fileID: 7940067324356998275, guid: ace6fbf26c5479d4d870cd37326fbc3d, type: 3}
   damageTimer: 0.15
   deathBackdropPrefab: {fileID: 7566201161607254939, guid: da7a629ef727e704c9bab430bc584f26, type: 3}
