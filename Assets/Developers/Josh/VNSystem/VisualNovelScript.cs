@@ -138,6 +138,7 @@ public class VisualNovelScript : MonoBehaviour
                     text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
                 }
                 sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
+                sprite.GetComponent<Image>().SetNativeSize();
 
                 IDSelectionOptions(currentNode, 0);
                 CreateButtons();
