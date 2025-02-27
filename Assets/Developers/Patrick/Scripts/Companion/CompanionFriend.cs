@@ -49,7 +49,7 @@ public class CompanionFriend : MonoBehaviour
                 IdleAction();
                 break;
             case CompanionStates.ATTACKING:
-
+                Leap();
                 break;
         }
     }
@@ -68,8 +68,6 @@ public class CompanionFriend : MonoBehaviour
 
                 _rb.MovePosition(new Vector2(_rb.position.x, _rb.position.y) + playerDistance.normalized * travelDistance);
 
-                Debug.Log("Idle movement");
-
                 break;
             case CompanionStates.ATTACKING:
 
@@ -85,6 +83,7 @@ public class CompanionFriend : MonoBehaviour
                 if (travelPosition >= 1)
                 {
                     _isLeapFinished = true;
+                    Debug.Log("Leaped");
                 }
 
                 break;
@@ -118,9 +117,13 @@ public class CompanionFriend : MonoBehaviour
 
         if (!_isLeapCalculated)
         {
-            _leapStart = transform.position;
             Vector2 targetDirection = _target.transform.position - transform.position;
             Vector2 leapDirection = targetDirection.normalized;
+            if (targetDirection == Vector2.zero)
+            {
+                leapDirection = (_leapEnd - _leapStart).normalized;
+            }
+            _leapStart = transform.position;
             _leapEnd = _leapStart + leapDirection * _dataObj.leapDistance;
             if (targetDirection.sqrMagnitude >= _dataObj.leapDistance * _dataObj.leapDistance)
             {

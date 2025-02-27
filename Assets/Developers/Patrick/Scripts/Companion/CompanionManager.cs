@@ -45,10 +45,12 @@ public class CompanionManager : MonoBehaviour
         if (collisionDamageScript == null)
         {
             collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
+            collisionDamageScript.InitialiseComponent(ref friendData);
         }
         if (detectionScript == null)
         {
             detectionScript = GetComponentInChildren<CompanionDetection>();
+            detectionScript.InitialiseComponent(ref friendData);
         }
         if (bossScript == null)
         {
@@ -70,9 +72,15 @@ public class CompanionManager : MonoBehaviour
         {
             rb = GetComponent<Rigidbody2D>();
         }
-        if (friendScript == null)
+        if (collisionDamageScript == null)
+        {
+            collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
+            collisionDamageScript.InitialiseComponent(ref friendData);
+        }
+        if (detectionScript == null)
         {
             detectionScript = GetComponentInChildren<CompanionDetection>();
+            detectionScript.InitialiseComponent(ref friendData);
         }
         if (bossScript == null)
         {
@@ -84,8 +92,6 @@ public class CompanionManager : MonoBehaviour
             friendScript = gameObject.AddComponent<CompanionFriend>();
             friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref rb, ref _playerObject);
         }
-
-        ChangeToFriendly();
     }
 
     // Update is called once per frame

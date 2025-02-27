@@ -25,8 +25,6 @@ public class CompanionCollisionDamage : MonoBehaviour
     {
         Vector2 damageDirection = Vector2.left;
 
-        _collisionDamageState = CollisionDamageStates.PLAYER;
-
         switch (_collisionDamageState)
         {
             case CollisionDamageStates.NONE:
@@ -58,8 +56,6 @@ public class CompanionCollisionDamage : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         Vector2 damageDirection = Vector2.left;
-
-        _collisionDamageState = CollisionDamageStates.PLAYER;
 
         switch (_collisionDamageState)
         {

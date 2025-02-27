@@ -12,3 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c648b908d437d11499f1a3f8e88b1938, type: 3}
   m_Name: MercyFriend
   m_EditorClassIdentifier: 
+  environmentLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  leapTravelTime: 0.2
+  leapChargeTime: 0.4
+  leapDistance: 5
+  leapDamage: 3
+  idleSpeed: 6
