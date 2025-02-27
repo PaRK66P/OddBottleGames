@@ -45,7 +45,9 @@ public class CompanionFriend : MonoBehaviour
     {
         switch (_state)
         {
-
+            case CompanionStates.IDLE:
+                IdleAction();
+                break;
             case CompanionStates.ATTACKING:
 
                 break;
@@ -65,6 +67,8 @@ public class CompanionFriend : MonoBehaviour
                 }
 
                 _rb.MovePosition(new Vector2(_rb.position.x, _rb.position.y) + playerDistance.normalized * travelDistance);
+
+                Debug.Log("Idle movement");
 
                 break;
             case CompanionStates.ATTACKING:
