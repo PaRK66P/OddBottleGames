@@ -43,7 +43,7 @@ public class CompanionDetection : MonoBehaviour
 
     public GameObject GetTarget()
     {
-        if (_targetsList == null) { return null; }
+        if (_targetsList == null || _targetsList.Count == 0) { return null; }
 
         GameObject closestTarget = _targetsList[0];
         float closestDistance = (_targetsList[0].transform.position - transform.position).sqrMagnitude;

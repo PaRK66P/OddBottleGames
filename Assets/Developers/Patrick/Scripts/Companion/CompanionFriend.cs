@@ -83,7 +83,7 @@ public class CompanionFriend : MonoBehaviour
                 if (travelPosition >= 1)
                 {
                     _isLeapFinished = true;
-                    Debug.Log("Leaped");
+                    //Debug.Log("Leaped");
                 }
 
                 break;

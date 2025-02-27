@@ -34,11 +34,17 @@ public class CompanionManager : MonoBehaviour
     private CompanionStates _currentState;
     private float _health;
 
+    private VisualNovelScript visualNovelManager;
+    private bool hasPlayedNovel = false;
+
     // No protection for uninitialised Companion
 
     public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager)
     {
         _playerObject = playerObject;
+        _poolManager = poolManager;
+        visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+
 
         if (rb == null)
         {
@@ -77,42 +83,42 @@ public class CompanionManager : MonoBehaviour
         ChangeToEnemy();
     }
 
-    private void OnEnable()
-    {
-        if (rb == null)
-        {
-            rb = GetComponent<Rigidbody2D>();
-        }
-        if (spriteRenderer == null)
-        {
-            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        }
-        if (collisionDamageScript == null)
-        {
-            collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
-            collisionDamageScript.InitialiseComponent(ref friendData);
-        }
-        if (detectionScript == null)
-        {
-            detectionScript = GetComponentInChildren<CompanionDetection>();
-            detectionScript.InitialiseComponent(ref friendData);
-        }
-        if (animationsScript == null)
-        {
-            animationsScript = gameObject.AddComponent<CompanionAnimations>();
-            animationsScript.InitialiseComponent(ref bossData, ref friendData, ref spriteRenderer);
-        }
-        if (bossScript == null)
-        {
-            bossScript = gameObject.AddComponent<CompanionBoss>();
-            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
-        }
-        if (friendScript == null)
-        {
-            friendScript = gameObject.AddComponent<CompanionFriend>();
-            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref rb, ref _playerObject);
-        }
-    }
+    // private void OnEnable()
+    // {
+    //     if (rb == null)
+    //     {
+    //         rb = GetComponent<Rigidbody2D>();
+    //     }
+    //     if (spriteRenderer == null)
+    //     {
+    //         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    //     }
+    //     if (collisionDamageScript == null)
+    //     {
+    //         collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
+    //         collisionDamageScript.InitialiseComponent(ref friendData);
+    //     }
+    //     if (detectionScript == null)
+    //     {
+    //         detectionScript = GetComponentInChildren<CompanionDetection>();
+    //         detectionScript.InitialiseComponent(ref friendData);
+    //     }
+    //     if (animationsScript == null)
+    //     {
+    //         animationsScript = gameObject.AddComponent<CompanionAnimations>();
+    //         animationsScript.InitialiseComponent(ref bossData, ref friendData, ref spriteRenderer);
+    //     }
+    //     if (bossScript == null)
+    //     {
+    //         bossScript = gameObject.AddComponent<CompanionBoss>();
+    //         bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
+    //     }
+    //     if (friendScript == null)
+    //     {
+    //         friendScript = gameObject.AddComponent<CompanionFriend>();
+    //         friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref rb, ref _playerObject);
+    //     }
+    // }
 
     // Update is called once per frame
     void Update()
@@ -127,6 +133,27 @@ public class CompanionManager : MonoBehaviour
             case CompanionStates.FRIEND:
                 friendScript.CompanionUpdate();
                 break;
+        }
+        if (_currentState == CompanionStates.NONE && hasPlayedNovel && !visualNovelManager.isNovelSection)
+        {
+            switch(visualNovelManager.GetLastSelectionID())
+            {
+                case 0:
+                {
+                    ChangeToFriendly();
+                    break;
+                }
+                case 1:
+                {
+                    ChangeToEnemy();
+                    break;
+                }
+                default:
+                {
+                    Debug.LogError("Visual novel selection not supported. make sure to update selection code in miniboss as well as the novel that plays");
+                    break;
+                }
+            }
         }
     }
 
@@ -168,7 +195,12 @@ public class CompanionManager : MonoBehaviour
     private void DefeatVisual()
     {
         // To be removed
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        if (!hasPlayedNovel)
+        {
+            hasPlayedNovel = true;
+            visualNovelManager.StartNovelSceneByName("Miniboss tester");
+        }
     }
 
     public void ChangeToNone()
