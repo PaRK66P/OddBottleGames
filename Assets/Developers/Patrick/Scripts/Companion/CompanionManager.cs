@@ -205,11 +205,14 @@ public class CompanionManager : MonoBehaviour
     private void DefeatVisual()
     {
         // To be removed
-        //gameObject.SetActive(false);
+        
         if (!hasPlayedNovel)
         {
             hasPlayedNovel = true;
-            visualNovelManager.StartNovelSceneByName("Miniboss tester");
+
+            visualNovelManager.StartNovelSceneByName("Miniboss tester 2");
+            GetComponent<enemyScr>().DecreaseEnemyCount();
+            spriteRenderer.gameObject.SetActive(false);
         }
     }
 
@@ -240,6 +243,7 @@ public class CompanionManager : MonoBehaviour
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.ENEMY);
 
         detectionScript.gameObject.SetActive(true);
+        spriteRenderer.gameObject.SetActive(true);
     }
 
     IEnumerator DamageColor()

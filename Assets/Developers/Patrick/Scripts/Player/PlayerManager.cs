@@ -144,14 +144,14 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f, int ammount = 20)
+    public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f, int ammount = 10)
     {
         if (isDamaged) { return; }
 
         rb.excludeLayers = playerData.damageLayers;
         isDamaged = true;
         playerInputManager.DisableInput();
-        image.color = Color.blue;
+        image.color = Color.red;
         timeOfDamage = Time.time;
         invulnerableTime = damageTime;
         playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);

@@ -33,7 +33,7 @@ public class CompanionCollisionDamage : MonoBehaviour
                 if (collision.tag == "Player")
                 {
                     damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
-                    collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection);
+                    collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 30, 20);
                     return;
                 }
                 break;
