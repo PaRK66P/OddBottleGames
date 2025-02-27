@@ -7,23 +7,31 @@ public class CompanionCollisionDamage : MonoBehaviour
     enum CollisionDamageStates
     {
         NONE = 0,
-        ACTIVE = 1,
-        LEAPING = 2
+        PLAYER = 1,
+        ENEMY = 2
     }
 
     private CollisionDamageStates collisionDamageState;
+
+    private CompanionFriendData _friendData;
+
+
+    public void InitialiseComponent(ref CompanionFriendData friendData)
+    {
+        _friendData = friendData;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Vector2 damageDirection = Vector2.left;
 
-        collisionDamageState = CollisionDamageStates.ACTIVE;
+        collisionDamageState = CollisionDamageStates.PLAYER;
 
         switch (collisionDamageState)
         {
             case CollisionDamageStates.NONE:
                 break;
-            case CollisionDamageStates.ACTIVE:
+            case CollisionDamageStates.PLAYER:
                 if (collision.tag == "Player")
                 {
                     damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
@@ -31,8 +39,18 @@ public class CompanionCollisionDamage : MonoBehaviour
                     return;
                 }
                 break;
-            case CollisionDamageStates.LEAPING:
-
+            case CollisionDamageStates.ENEMY:
+                if (((1 << collision.gameObject.layer) & _friendData.enemyLayer) != 0)
+                {
+                    if (collision.gameObject.tag == "Boss")
+                    {
+                        collision.gameObject.GetComponent<boss>().takeDamage((int)_friendData.leapDamage);
+                    }
+                    else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
+                    {
+                        collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(_friendData.leapDamage, gameObject.transform.position - collision.gameObject.transform.position);
+                    }
+                }
                 break;
         }
     }
@@ -41,20 +59,20 @@ public class CompanionCollisionDamage : MonoBehaviour
     {
         Vector2 damageDirection = Vector2.left;
 
-        collisionDamageState = CollisionDamageStates.ACTIVE;
+        collisionDamageState = CollisionDamageStates.PLAYER;
 
         switch (collisionDamageState)
         {
             case CollisionDamageStates.NONE:
                 break;
-            case CollisionDamageStates.ACTIVE:
+            case CollisionDamageStates.PLAYER:
                 if(collision.tag == "Player")
                 {
                     damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
                     collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection);
                 }
                 break;
-            case CollisionDamageStates.LEAPING:
+            case CollisionDamageStates.ENEMY:
 
                 break;
         }
