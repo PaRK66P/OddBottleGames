@@ -146,6 +146,7 @@ public class CompanionManager : MonoBehaviour
                 case 1:
                 {
                     ChangeToEnemy();
+                    gameObject.GetComponent<enemyScr>().releaseEnemy();
                     break;
                 }
                 default:
