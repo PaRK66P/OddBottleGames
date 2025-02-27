@@ -10,6 +10,7 @@ public class enemyManager : MonoBehaviour
     public List<GameObject> doors;
     public List<spawnerScript> spawners;
     public Canvas UICanvas;
+    public GameObject player;
 
     private enemyManager myself;
 
@@ -26,7 +27,7 @@ public class enemyManager : MonoBehaviour
         }
         foreach (spawnerScript s in spawners)
         {
-            s.setUp(ref pooler, ref myself, ref UICanvas);
+            s.setUp(ref pooler, ref myself, ref UICanvas, ref player);
             s.spawn();
             enemyNumber++;
         }
