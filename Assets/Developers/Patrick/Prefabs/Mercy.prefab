@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f87e380a3f42a04fbd61d356c6c4160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visualNovelManager: {fileID: 0}
   _playerObject: {fileID: 0}
   _poolManager: {fileID: 0}
   bossData: {fileID: 11400000, guid: 5b5f6e8c4c7dec144ad524db11ccb3b6, type: 2}
@@ -322,7 +323,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

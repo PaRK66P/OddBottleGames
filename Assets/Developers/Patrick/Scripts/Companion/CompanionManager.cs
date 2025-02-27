@@ -200,7 +200,7 @@ public class CompanionManager : MonoBehaviour
 
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.PLAYER);
 
-        detectionScript.gameObject.SetActive(false);
+        detectionScript.gameObject.SetActive(true);
     }
 
     public void ChangeToFriendly()
