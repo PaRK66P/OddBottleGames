@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 14
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.16420436, g: 0.7735849, b: 0.29410082, a: 1}
   m_FlipX: 0
@@ -193,6 +193,7 @@ MonoBehaviour:
   shootingRange: 6
   speed: 2
   fireRate: 2
+  takesKnockback: 1
   AIProjectilePrefab: {fileID: 0}
   projectiles: []
   objectPoolManager: {fileID: 0}
