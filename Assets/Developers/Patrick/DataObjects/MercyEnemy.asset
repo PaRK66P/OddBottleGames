@@ -20,7 +20,7 @@ MonoBehaviour:
     m_Bits: 64
   playerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   leapChargeTime: 0.3
   leapTravelTime: 0.2
   leapEndTime: 0.5

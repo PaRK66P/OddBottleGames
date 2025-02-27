@@ -24,6 +24,7 @@ public class enemyScr : MonoBehaviour
         }
         if(GetComponent<CompanionManager>())
         {
+            //Debug.Log("spawning companion manager " + poolMan.name);
             GetComponent<CompanionManager>().InitialiseEnemy(ref dPlayer, ref poolMan);
         }
         //transform.position = pos;

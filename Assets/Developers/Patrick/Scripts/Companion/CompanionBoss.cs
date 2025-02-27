@@ -55,6 +55,7 @@ public class CompanionBoss : MonoBehaviour
         rb = rigidbodyComp;
         playerObj = _playerObjectRef;
         poolManager = poolManagerRef;
+        //Debug.Log("poolManager" + poolManagerRef.name);
     }
 
     public void SetupEnemy()
@@ -313,7 +314,7 @@ public class CompanionBoss : MonoBehaviour
             if (wallCheck)
             {
                 _leapEnd = wallCheck.point;
-                Debug.Log(wallCheck.point);
+                //Debug.Log(wallCheck.point);
             }
 
             // Check if feral leap conditions are met
