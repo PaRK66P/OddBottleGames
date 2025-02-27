@@ -213,7 +213,7 @@ public class CompanionManager : MonoBehaviour
 
             visualNovelManager.StartNovelSceneByName("Miniboss tester 2");
             GetComponent<enemyScr>().DecreaseEnemyCount();
-            spriteRenderer.gameObject.SetActive(false);
+            //spriteRenderer.gameObject.SetActive(false);
         }
     }
 
@@ -244,7 +244,7 @@ public class CompanionManager : MonoBehaviour
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.ENEMY);
 
         detectionScript.gameObject.SetActive(true);
-        spriteRenderer.gameObject.SetActive(true);
+        //spriteRenderer.gameObject.SetActive(true);
     }
 
     IEnumerator DamageColor()
