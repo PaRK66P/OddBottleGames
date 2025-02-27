@@ -199,7 +199,8 @@ public class CompanionManager : MonoBehaviour
         if (!hasPlayedNovel)
         {
             hasPlayedNovel = true;
-            visualNovelManager.StartNovelSceneByName("Miniboss tester");
+
+            visualNovelManager.StartNovelSceneByName("Miniboss tester 2");
             GetComponent<enemyScr>().DecreaseEnemyCount();
             spriteRenderer.gameObject.SetActive(false);
         }
