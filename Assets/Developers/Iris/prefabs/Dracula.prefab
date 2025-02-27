@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30de30e18e55bc74d97fb60c0293dee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pattern: 0/1,2/3,4/5/6,,
+  pattern: 0/1,2/3,4/5/6,
   timeBetweenAttacks: 1.5
   attackList:
   - {fileID: 2472219134077984931, guid: 68b2924def505054287b192c24f567c7, type: 3}
