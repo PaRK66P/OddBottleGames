@@ -7,6 +7,7 @@ public class CompanionBossData : ScriptableObject
 {
     [Header("Attacks")]
     public float health;
+    public GameObject healthbar;
     public int leapsBeforeFeral;
     public float closeRangeDistance;
     public LayerMask environmentMask;

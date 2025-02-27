@@ -18,9 +18,9 @@ MonoBehaviour:
   dashChargeUIObject: {fileID: 454602280210619587, guid: 15acabbdf8d62154f9216abc70b7a442, type: 3}
   dashTime: 0.2
   dashDistance: 5
-  dashCooldown: 0.2
+  dashCooldown: 0.15
   numberOfDashCharges: 3
-  dashRechargeTime: 1
+  dashRechargeTime: 2
   damageLayers:
     serializedVersion: 2
     m_Bits: 2048

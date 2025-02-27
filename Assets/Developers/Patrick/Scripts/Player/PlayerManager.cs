@@ -30,6 +30,7 @@ public class PlayerManager : MonoBehaviour
 
     private float timeOfDamage = -10.0f;
     private float invulnerableTime = 1.0f;
+    private float regenTimer = 0.0f;
 
     private int health = 100;
     private GameObject healthbar;
@@ -103,6 +104,13 @@ public class PlayerManager : MonoBehaviour
                 isDamaged = false;
                 image.color = Color.white;
             }
+        }
+
+        regenTimer += Time.deltaTime;
+        if(regenTimer >= 1)
+        {
+            health += 1;
+            regenTimer = 0;
         }
 
         healthbar.GetComponent<Slider>().value = health;
