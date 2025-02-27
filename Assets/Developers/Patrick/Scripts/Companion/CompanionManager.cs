@@ -199,7 +199,7 @@ public class CompanionManager : MonoBehaviour
         if (!hasPlayedNovel)
         {
             hasPlayedNovel = true;
-            visualNovelManager.StartNovelSceneByName("Miniboss tester");
+            visualNovelManager.StartNovelSceneByName("Miniboss tester 2");
         }
     }
 
