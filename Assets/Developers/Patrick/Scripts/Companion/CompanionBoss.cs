@@ -49,11 +49,11 @@ public class CompanionBoss : MonoBehaviour
     private float _screamStartTimer;
 
     // Start is called before the first frame update
-    public void InitialiseComponent(ref CompanionBossData bossData, ref Rigidbody2D rigidbodyComp, ref GameObject playerObjectRef, ref ObjectPoolManager poolManagerRef)
+    public void InitialiseComponent(ref CompanionBossData bossData, ref Rigidbody2D rigidbodyComp, ref GameObject _playerObjectRef, ref ObjectPoolManager poolManagerRef)
     {
         dataObj = bossData;
         rb = rigidbodyComp;
-        playerObj = playerObjectRef;
+        playerObj = _playerObjectRef;
         poolManager = poolManagerRef;
     }
 

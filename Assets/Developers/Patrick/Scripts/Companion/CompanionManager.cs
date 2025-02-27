@@ -12,16 +12,16 @@ public class CompanionManager : MonoBehaviour
         FRIEND = 2
     }
 
-    [SerializeField]
-    private GameObject playerObject;
-    [SerializeField]
-    private ObjectPoolManager poolManager;
+    private GameObject _playerObject;
+    private ObjectPoolManager _poolManager;
+
     [SerializeField]
     private CompanionBossData bossData;
     [SerializeField]
     private CompanionFriendData friendData;
 
     private Rigidbody2D rb;
+    private CompanionDetection detectionScript;
 
     private CompanionBoss bossScript;
     private CompanionFriend friendScript;
@@ -29,18 +29,31 @@ public class CompanionManager : MonoBehaviour
     private CompanionStates _currentState;
     private float _health;
 
+    // No protection for uninitialised Companion
 
-    // Start is called before the first frame update
-    void Start()
+    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager)
     {
-        rb = GetComponent<Rigidbody2D>();
+        _playerObject = playerObject;
 
-        bossScript = gameObject.AddComponent<CompanionBoss>();
-        bossScript.InitialiseComponent(ref bossData, ref rb, ref playerObject, ref poolManager);
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
+        if(friendScript == null)
+        {
+            detectionScript = GetComponentInChildren<CompanionDetection>();
+        }
+        if (bossScript == null)
+        {
+            bossScript = gameObject.AddComponent<CompanionBoss>();
+            bossScript.InitialiseComponent(ref bossData, ref rb, ref _playerObject, ref _poolManager);
+        }
+        if (friendScript == null)
+        {
+            friendScript = gameObject.AddComponent<CompanionFriend>();
+            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref rb, ref _playerObject);
+        }
 
-        friendScript = gameObject.AddComponent<CompanionFriend>();
-
-        // Testing
         ChangeToEnemy();
     }
 
@@ -53,7 +66,7 @@ public class CompanionManager : MonoBehaviour
         if (bossScript == null)
         {
             bossScript = gameObject.AddComponent<CompanionBoss>();
-            bossScript.InitialiseComponent(ref bossData, ref rb, ref playerObject, ref poolManager);
+            bossScript.InitialiseComponent(ref bossData, ref rb, ref _playerObject, ref _poolManager);
         }
         if (friendScript == null)
         {
@@ -87,7 +100,7 @@ public class CompanionManager : MonoBehaviour
                 bossScript.CompanionFixedUpdate();
                 break;
             case CompanionStates.FRIEND:
-
+                friendScript.CompanionFixedUpdate();
                 break;
         }
     }
@@ -114,12 +127,15 @@ public class CompanionManager : MonoBehaviour
 
     private void DefeatVisual()
     {
+        // To be removed
         gameObject.SetActive(false);
     }
 
     public void ChangeToNone()
     {
         _currentState = CompanionStates.NONE;
+
+        detectionScript.gameObject.SetActive(false);
     }
 
     public void ChangeToEnemy()
@@ -127,16 +143,25 @@ public class CompanionManager : MonoBehaviour
         _health = bossData.health;
         bossScript.SetupEnemy();
         _currentState = CompanionStates.ENEMY;
+
+        detectionScript.gameObject.SetActive(false);
     }
 
     public void ChangeToFriendly()
     {
         _currentState = CompanionStates.FRIEND;
+
+        detectionScript.gameObject.SetActive(true);
     }
 
     #region Gizmos
     private void OnDrawGizmos()
     {
+        if(_playerObject == null)
+        {
+            return;
+        }
+
         RaycastHit2D wallCheck;
 
         if (bossData.drawRange)
@@ -148,12 +173,12 @@ public class CompanionManager : MonoBehaviour
         if (bossData.drawLeaps)
         {
             // Leaping
-            Vector3 playerDirection = playerObject.transform.position - transform.position;
+            Vector3 playerDirection = _playerObject.transform.position - transform.position;
             Vector3 leapDirection = playerDirection.normalized;
             Vector3 leapEnd = transform.position + leapDirection * bossData.leapTravelDistance;
             if (playerDirection.sqrMagnitude >= bossData.leapTravelDistance * bossData.leapTravelDistance)
             {
-                leapEnd = playerObject.transform.position;
+                leapEnd = _playerObject.transform.position;
             }
             wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, bossData.leapTravelDistance, bossData.environmentMask); // Update layer mask variable
             if (wallCheck)
@@ -170,7 +195,7 @@ public class CompanionManager : MonoBehaviour
 
         if (bossData.drawSpit)
         {
-            Vector2 forwardDirection = (playerObject.transform.position - transform.position).normalized;
+            Vector2 forwardDirection = (_playerObject.transform.position - transform.position).normalized;
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f));
 
             // Spit
@@ -189,7 +214,7 @@ public class CompanionManager : MonoBehaviour
         {
             Gizmos.color = UnityEngine.Color.yellow;
 
-            Vector3 forwardVector = (playerObject.transform.position - transform.position).normalized;
+            Vector3 forwardVector = (_playerObject.transform.position - transform.position).normalized;
             Vector3 rightVector = new Vector3( forwardVector.y, -forwardVector.x, forwardVector.z);
 
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardVector, new Vector3(0.0f, 0.0f, 1.0f));
@@ -220,7 +245,7 @@ public class CompanionManager : MonoBehaviour
 
             //Scream
             Gizmos.color = new UnityEngine.Color(148.0f / 255.0f, 17.0f / 255.0f, 255.0f / 255.0f);
-            Vector2 forwardDirection = (playerObject.transform.position - transform.position).normalized;
+            Vector2 forwardDirection = (_playerObject.transform.position - transform.position).normalized;
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f));
             float screamAngle = 360.0f / (float) bossData.numberOfScreamProjectiles;
             Vector3 projectileSpawnPosition;
