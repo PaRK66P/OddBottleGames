@@ -189,7 +189,7 @@ public class CompanionManager : MonoBehaviour
 
     private void DamageVisual()
     {
-
+        StartCoroutine(DamageColor());
     }
 
     private void DefeatVisual()
@@ -230,6 +230,13 @@ public class CompanionManager : MonoBehaviour
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.ENEMY);
 
         detectionScript.gameObject.SetActive(true);
+    }
+
+    IEnumerator DamageColor()
+    {
+        spriteRenderer.color = UnityEngine.Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = UnityEngine.Color.white;
     }
 
     #region Gizmos
