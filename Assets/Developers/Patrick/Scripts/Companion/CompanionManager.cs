@@ -23,11 +23,13 @@ public class CompanionManager : MonoBehaviour
     private CompanionFriendData friendData;
 
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
     private CompanionCollisionDamage collisionDamageScript;
     private CompanionDetection detectionScript;
 
     private CompanionBoss bossScript;
     private CompanionFriend friendScript;
+    private CompanionAnimations animationsScript;
 
     private CompanionStates _currentState;
     private float _health;
@@ -42,6 +44,10 @@ public class CompanionManager : MonoBehaviour
         {
             rb = GetComponent<Rigidbody2D>();
         }
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
         if (collisionDamageScript == null)
         {
             collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
@@ -52,10 +58,15 @@ public class CompanionManager : MonoBehaviour
             detectionScript = GetComponentInChildren<CompanionDetection>();
             detectionScript.InitialiseComponent(ref friendData);
         }
+        if (animationsScript == null)
+        {
+            animationsScript = gameObject.AddComponent<CompanionAnimations>();
+            animationsScript.InitialiseComponent(ref bossData, ref friendData, ref spriteRenderer);
+        }
         if (bossScript == null)
         {
             bossScript = gameObject.AddComponent<CompanionBoss>();
-            bossScript.InitialiseComponent(ref bossData, ref rb, ref _playerObject, ref _poolManager);
+            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
         }
         if (friendScript == null)
         {
@@ -72,6 +83,10 @@ public class CompanionManager : MonoBehaviour
         {
             rb = GetComponent<Rigidbody2D>();
         }
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
         if (collisionDamageScript == null)
         {
             collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
@@ -82,10 +97,15 @@ public class CompanionManager : MonoBehaviour
             detectionScript = GetComponentInChildren<CompanionDetection>();
             detectionScript.InitialiseComponent(ref friendData);
         }
+        if (animationsScript == null)
+        {
+            animationsScript = gameObject.AddComponent<CompanionAnimations>();
+            animationsScript.InitialiseComponent(ref bossData, ref friendData, ref spriteRenderer);
+        }
         if (bossScript == null)
         {
             bossScript = gameObject.AddComponent<CompanionBoss>();
-            bossScript.InitialiseComponent(ref bossData, ref rb, ref _playerObject, ref _poolManager);
+            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
         }
         if (friendScript == null)
         {

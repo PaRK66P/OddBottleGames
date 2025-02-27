@@ -18,6 +18,7 @@ public class CompanionBoss : MonoBehaviour
 
     private CompanionBossData dataObj;
     private Rigidbody2D rb;
+    private CompanionAnimations _animationScript;
     private GameObject playerObj;
     private ObjectPoolManager poolManager;
 
@@ -49,11 +50,12 @@ public class CompanionBoss : MonoBehaviour
     private float _screamStartTimer;
 
     // Start is called before the first frame update
-    public void InitialiseComponent(ref CompanionBossData bossData, ref Rigidbody2D rigidbodyComp, ref GameObject _playerObjectRef, ref ObjectPoolManager poolManagerRef)
+    public void InitialiseComponent(ref CompanionBossData bossData, ref Rigidbody2D rigidbodyComp, ref CompanionAnimations animationScript, ref GameObject playerObjectRef, ref ObjectPoolManager poolManagerRef)
     {
         dataObj = bossData;
         rb = rigidbodyComp;
-        playerObj = _playerObjectRef;
+        _animationScript = animationScript;
+        playerObj = playerObjectRef;
         poolManager = poolManagerRef;
     }
 
@@ -125,6 +127,7 @@ public class CompanionBoss : MonoBehaviour
     {
         if(Time.time - _leapStartTimer <= dataObj.leapChargeTime)
         {
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_CHARGE);
             return;
         }
 
@@ -132,6 +135,8 @@ public class CompanionBoss : MonoBehaviour
         {
             _leapMoveTimer = Time.time;
             _isLeapMoving = true;
+
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_MOVING);
         }
 
         // Wait for leap to finish in fixed update
@@ -140,6 +145,8 @@ public class CompanionBoss : MonoBehaviour
         {
             return;
         }
+
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_END);
 
         _attackEndDelay = dataObj.leapEndTime;
         currentState = AttackState.DELAY;
@@ -152,6 +159,7 @@ public class CompanionBoss : MonoBehaviour
     {
         if (Time.time - _spitStartTimer <= dataObj.spitChargeTime)
         {
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SPIT_CHARGE);
             return;
         }
 
@@ -159,6 +167,8 @@ public class CompanionBoss : MonoBehaviour
 
         Vector3 forwardDirection = (playerObj.transform.position - transform.position).normalized;
         float angleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f)) - dataObj.spitSpawnAngle;
+
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SPIT_ATTACK); // Need to setup anim changes on coroutines potentially as this never stays
 
         for (int i = 0; i < 3; i++)
         {
@@ -171,6 +181,8 @@ public class CompanionBoss : MonoBehaviour
                 transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), Mathf.Sin(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), 0.0f) * (dataObj.spitSpawnDistance + dataObj.spitProjectileTravelDistance)); // Add linecast to end early at wall
         }
 
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SPIT_END);
+
         _attackEndDelay = dataObj.spitEndTime;
         currentState = AttackState.DELAY;
     }
@@ -179,6 +191,8 @@ public class CompanionBoss : MonoBehaviour
     {
         if (Time.time - _lickStartTimer <= dataObj.lickChargeTime)
         {
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LICK_CHARGE);
+
             return;
         }
 
@@ -197,6 +211,8 @@ public class CompanionBoss : MonoBehaviour
 
         GameObject objectRef;
 
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LICK_ATTACK);
+
         // Draws left to right
         for (int i = 0; i < dataObj.lickProjectileNumber; i++)
         {
@@ -213,7 +229,7 @@ public class CompanionBoss : MonoBehaviour
                 dataObj.environmentMask, dataObj.playerMask);
         }
 
-
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LICK_END);
         _attackEndDelay = dataObj.lickEndTime;
         currentState = AttackState.DELAY;
     }
@@ -222,6 +238,8 @@ public class CompanionBoss : MonoBehaviour
     {
         if (Time.time - _screamStartTimer <= dataObj.screamChargeTime)
         {
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SCREAM_CHARGE);
+
             return;
         }
 
@@ -231,6 +249,9 @@ public class CompanionBoss : MonoBehaviour
         float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f));
         float screamAngle = 360.0f / (float)dataObj.numberOfScreamProjectiles;
         Vector3 projectileSpawnPosition;
+
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SCREAM_ATTACK);
+
         for (int i = 0; i < dataObj.numberOfScreamProjectiles; i++)
         {
             projectileSpawnPosition = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * i)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * i)), 0.0f) * dataObj.screamProjectileSpawnDistance;
@@ -240,6 +261,8 @@ public class CompanionBoss : MonoBehaviour
                 transform.position + projectileSpawnPosition, projectileSpawnPosition.normalized, dataObj.screamProjectileSpeed,
                 dataObj.environmentMask, dataObj.playerMask);
         }
+
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SCREAM_END);
 
         _attackEndDelay = dataObj.screamEndTime;
         currentState = AttackState.DELAY;
