@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -14,18 +15,23 @@ public class CompanionManager : MonoBehaviour
         FRIEND = 2
     }
 
+    [Header("Testing")]
     [SerializeField]
     private GameObject _playerObject;
     [SerializeField]
     private ObjectPoolManager _poolManager;
 
+    [Header("Prefab Necessary")]
     [SerializeField]
     private CompanionBossData bossData;
     [SerializeField]
     private CompanionFriendData friendData;
+    [SerializeField]
+    private SpriteRenderer _companionImage;
+    [SerializeField]
+    private GameObject dashRechargeZone;
 
     private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
     private CompanionCollisionDamage collisionDamageScript;
     private CompanionDetection detectionScript;
 
@@ -46,16 +52,15 @@ public class CompanionManager : MonoBehaviour
     {
         _playerObject = playerObject;
         _poolManager = poolManager;
+
         visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
 
+        dashRechargeZone.GetComponent<CircleCollider2D>().radius = friendData.rechargeZoneRadius;
+        dashRechargeZone.gameObject.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector3(friendData.rechargeZoneRadius * 2.0f, friendData.rechargeZoneRadius * 2.0f, 1.0f);
 
         if (rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
-        }
-        if (spriteRenderer == null)
-        {
-            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
         if (collisionDamageScript == null)
         {
@@ -66,11 +71,13 @@ public class CompanionManager : MonoBehaviour
         {
             detectionScript = GetComponentInChildren<CompanionDetection>();
             detectionScript.InitialiseComponent(ref friendData);
+
+            detectionScript.GetComponent<CircleCollider2D>().radius = friendData.detectionRadius;
         }
         if (animationsScript == null)
         {
             animationsScript = gameObject.AddComponent<CompanionAnimations>();
-            animationsScript.InitialiseComponent(ref bossData, ref friendData, ref spriteRenderer);
+            animationsScript.InitialiseComponent(ref bossData, ref friendData, ref _companionImage);
         }
         if (bossScript == null)
         {
@@ -80,7 +87,7 @@ public class CompanionManager : MonoBehaviour
         if (friendScript == null)
         {
             friendScript = gameObject.AddComponent<CompanionFriend>();
-            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref rb, ref _playerObject);
+            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref rb, ref _playerObject, ref dashRechargeZone);
         }
 
         healthbar = Instantiate(bossData.healthbar, dUICanvas.transform);
@@ -92,46 +99,60 @@ public class CompanionManager : MonoBehaviour
         ChangeToEnemy();
     }
 
-    // private void OnEnable()
-    // {
-    //     if (rb == null)
-    //     {
-    //         rb = GetComponent<Rigidbody2D>();
-    //     }
-    //     if (spriteRenderer == null)
-    //     {
-    //         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-    //     }
-    //     if (collisionDamageScript == null)
-    //     {
-    //         collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
-    //         collisionDamageScript.InitialiseComponent(ref friendData);
-    //     }
-    //     if (detectionScript == null)
-    //     {
-    //         detectionScript = GetComponentInChildren<CompanionDetection>();
-    //         detectionScript.InitialiseComponent(ref friendData);
-    //     }
-    //     if (animationsScript == null)
-    //     {
-    //         animationsScript = gameObject.AddComponent<CompanionAnimations>();
-    //         animationsScript.InitialiseComponent(ref bossData, ref friendData, ref spriteRenderer);
-    //     }
-    //     if (bossScript == null)
-    //     {
-    //         bossScript = gameObject.AddComponent<CompanionBoss>();
-    //         bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
-    //     }
-    //     if (friendScript == null)
-    //     {
-    //         friendScript = gameObject.AddComponent<CompanionFriend>();
-    //         friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref rb, ref _playerObject);
-    //     }
-    // }
+    // Testing purposes only, should be commented out otherwise
+    private void OnEnable()
+    {
+        //visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+
+        dashRechargeZone.GetComponent<CircleCollider2D>().radius = friendData.rechargeZoneRadius;
+        dashRechargeZone.gameObject.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector3(friendData.rechargeZoneRadius * 2.0f, friendData.rechargeZoneRadius * 2.0f, 1.0f);
+
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
+        if (collisionDamageScript == null)
+        {
+            collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
+            collisionDamageScript.InitialiseComponent(ref friendData);
+        }
+        if (detectionScript == null)
+        {
+            detectionScript = GetComponentInChildren<CompanionDetection>();
+            detectionScript.InitialiseComponent(ref friendData);
+
+            detectionScript.GetComponent<CircleCollider2D>().radius = friendData.detectionRadius;
+        }
+        if (animationsScript == null)
+        {
+            animationsScript = gameObject.AddComponent<CompanionAnimations>();
+            animationsScript.InitialiseComponent(ref bossData, ref friendData, ref _companionImage);
+        }
+        if (bossScript == null)
+        {
+            bossScript = gameObject.AddComponent<CompanionBoss>();
+            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
+        }
+        if (friendScript == null)
+        {
+            friendScript = gameObject.AddComponent<CompanionFriend>();
+            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref rb, ref _playerObject, ref dashRechargeZone);
+        }
+
+        //healthbar = Instantiate(bossData.healthbar, dUICanvas.transform);
+        //healthbar.GetComponent<RectTransform>().Translate(new Vector3(Screen.width / 2 - 400, Screen.height - 240, 0));
+
+        //healthbar.GetComponent<UnityEngine.UI.Slider>().maxValue = bossData.health;
+        //healthbar.GetComponent<UnityEngine.UI.Slider>().value = bossData.health;
+
+        ChangeToNone();
+        ChangeToFriendly();
+    }
 
     // Update is called once per frame
     void Update()
     {
+        
         switch (_currentState)
         {
             case CompanionStates.NONE:
@@ -190,11 +211,11 @@ public class CompanionManager : MonoBehaviour
         if(_health <= 0)
         {
             _currentState = CompanionStates.NONE;
-            healthbar.SetActive(false);
+            //healthbar.SetActive(false);
             DefeatVisual();
             return;
         }
-        healthbar.GetComponent<UnityEngine.UI.Slider>().value = _health;
+        //healthbar.GetComponent<UnityEngine.UI.Slider>().value = _health;
         DamageVisual();
     }
 
@@ -224,6 +245,7 @@ public class CompanionManager : MonoBehaviour
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.NONE);
 
         detectionScript.gameObject.SetActive(false);
+        dashRechargeZone.gameObject.SetActive(false);
     }
 
     public void ChangeToEnemy()
@@ -234,7 +256,7 @@ public class CompanionManager : MonoBehaviour
 
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.PLAYER);
 
-        detectionScript.gameObject.SetActive(true);
+        detectionScript.gameObject.SetActive(false);
     }
 
     public void ChangeToFriendly()
@@ -249,9 +271,9 @@ public class CompanionManager : MonoBehaviour
 
     IEnumerator DamageColor()
     {
-        spriteRenderer.color = UnityEngine.Color.red;
+        _companionImage.color = UnityEngine.Color.red;
         yield return new WaitForSeconds(0.1f);
-        spriteRenderer.color = UnityEngine.Color.white;
+        _companionImage.color = UnityEngine.Color.white;
     }
 
     #region Gizmos
@@ -364,8 +386,24 @@ public class CompanionManager : MonoBehaviour
                     Gizmos.DrawLine(transform.position + projectileSpawnPosition, projectileSpawnPosition.normalized * 100.0f);
                 }
             }
+        }
 
+        if (friendData.drawDetectionRange)
+        {
+            Gizmos.color = new UnityEngine.Color(1.0f, 0.753f, 0.796f);
+            Gizmos.DrawWireSphere(transform.position, friendData.detectionRadius);
+        }
 
+        if (friendData.drawRechargeZone)
+        {
+            Gizmos.color = UnityEngine.Color.cyan;
+            Gizmos.DrawWireSphere(transform.position, friendData.rechargeZoneRadius);
+        }
+
+        if (friendData.drawIdleDistance)
+        {
+            Gizmos.color = UnityEngine.Color.green;
+            Gizmos.DrawWireSphere(_playerObject.transform.position, friendData.idleDistance);
         }
     }
     #endregion

@@ -319,6 +319,16 @@ public class CompanionBoss : MonoBehaviour
 
     private void SelectAttack()
     {
+        // To be updated later
+        if (playerObj.transform.position.x - transform.position.x < 0)
+        {
+            _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.LEFT);
+        }
+        else if (playerObj.transform.position.x - transform.position.x > 0)
+        {
+            _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.RIGHT);
+        }
+
         // Does a leap attack between other attacks
         if (!_isLastAttackLeap)
         {

@@ -17,6 +17,7 @@ public class CompanionFriend : MonoBehaviour
     private CompanionAnimations _animationScript;
     private Rigidbody2D _rb;
     private GameObject _player;
+    private GameObject _dashRechargeZone;
 
     private GameObject _target;
 
@@ -34,13 +35,14 @@ public class CompanionFriend : MonoBehaviour
     private bool _isLeapCalculated;
     private bool _isDashRefreshSpawned;
 
-    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimations animationScript, ref Rigidbody2D rb, ref GameObject player)
+    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimations animationScript, ref Rigidbody2D rb, ref GameObject player, ref GameObject dashRechargeZone)
     {
         _dataObj = dataObj;
         _detectionScript = detectionScript;
         _animationScript = animationScript;
         _rb = rb;
         _player = player;
+        _dashRechargeZone = dashRechargeZone;
     }
 
     public void CompanionUpdate()
@@ -63,7 +65,15 @@ public class CompanionFriend : MonoBehaviour
             case CompanionStates.IDLE:
                 float travelDistance = _dataObj.idleSpeed * Time.fixedDeltaTime;
                 Vector2 playerDistance = new Vector2(_player.transform.position.x, _player.transform.position.y) - _rb.position;
-                if(playerDistance.sqrMagnitude < travelDistance * travelDistance)
+
+                if(playerDistance.sqrMagnitude <= _dataObj.idleDistance * _dataObj.idleDistance)
+                {
+                    break;
+                }
+
+                playerDistance = playerDistance - (playerDistance.normalized * _dataObj.idleDistance);
+
+                if (playerDistance.sqrMagnitude < travelDistance * travelDistance)
                 {
                     travelDistance = playerDistance.magnitude;
                 }
@@ -104,6 +114,16 @@ public class CompanionFriend : MonoBehaviour
             _isLeapFinished = false;
             _isDashRefreshSpawned = false;
             _isLeapMoving = false;
+
+            // To be updated later
+            if (_target.transform.position.x - transform.position.x < 0)
+            {
+                _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.LEFT);
+            }
+            else if (_target.transform.position.x - transform.position.x > 0)
+            {
+                _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.RIGHT);
+            }
 
             return;
         }
@@ -161,7 +181,7 @@ public class CompanionFriend : MonoBehaviour
             _isDashRefreshSpawned = true;
         }
 
-        if(Time.time - _leapEndTimer < _dataObj.leapChargeTime)
+        if(Time.time - _leapEndTimer < _dataObj.leapEndTime)
         {
             return;
         }
@@ -173,11 +193,11 @@ public class CompanionFriend : MonoBehaviour
 
     private void SpawnDashRefresh()
     {
-
+        _dashRechargeZone.SetActive(true);
     }
 
     private void DespawnDashRefresh()
     {
-
+        _dashRechargeZone.SetActive(false);
     }
 }
