@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private GameObject UICanvas;
 
     private Vector2 movementInput;
 
@@ -34,13 +35,15 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject UICanvas)
+    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas)
     {
+        UICanvas = dUICanvas;
+
         _playerData = playerData;
         _debugData = debugData;
 
-        dashChargesNumber = _playerData.numberOfDashCharges;
-        maxDashCharges = _playerData.numberOfDashCharges;
+        dashChargesNumber = 3;
+        maxDashCharges = 3;
 
         dashChargesUIObjects = new GameObject[maxDashCharges];
 
@@ -72,37 +75,49 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Debug.Log(dashChargesNumber);
-        switch (dashChargesNumber)
-        {
+        //switch (dashChargesNumber)
+        //{
            
-            case 0:
-                for (int i = 0; i < 3; i++)
-                {
-                    dashChargesUIObjects[i].SetActive(false);
-                }
-                break;
-            case 1:
-                dashChargesUIObjects[0].SetActive(true);
-                for (int i = 1; i < 3; i++)
-                {
-                    dashChargesUIObjects[i].SetActive(false);
-                }
-                break;
-            case 2:
-                dashChargesUIObjects[2].SetActive(false);
-                for (int i = 0; i < 2; i++)
-                {
-                    dashChargesUIObjects[i].SetActive(true);
-                }
-                break;
-            case 3:
-                for (int i = 0; i < 3; i++)
-                {
-                    dashChargesUIObjects[i].SetActive(true);
-                }
-                break;
-            default:
-                break;
+        //    case 0:
+        //        for (int i = 0; i < maxDashCharges; i++)
+        //        {
+        //            dashChargesUIObjects[i].SetActive(false);
+        //        }
+        //        break;
+        //    case 1:
+        //        dashChargesUIObjects[0].SetActive(true);
+        //        for (int i = 1; i < maxDashCharges; i++)
+        //        {
+        //            dashChargesUIObjects[i].SetActive(false);
+        //        }
+        //        break;
+        //    case 2:
+        //        dashChargesUIObjects[2].SetActive(false);
+        //        for (int i = 0; i < 2; i++)
+        //        {
+        //            dashChargesUIObjects[i].SetActive(true);
+        //        }
+        //        break;
+        //    case 3:
+        //        for (int i = 0; i < 3; i++)
+        //        {
+        //            dashChargesUIObjects[i].SetActive(true);
+        //        }
+        //        break;
+        //    default:
+        //        break;
+        //}
+
+        for(int i = 0; i < maxDashCharges; ++i)
+        {
+            if(dashChargesNumber > i)
+            {
+                dashChargesUIObjects[i].SetActive(true);
+            }
+            else
+            {
+                dashChargesUIObjects[i].SetActive(false);
+            }
         }
     }
 
@@ -232,5 +247,20 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer.color = Color.blue;
         yield return new WaitForSeconds(_playerData.dashTime);
         spriteRenderer.color = Color.white;
+    }
+
+    void EvolveDash()
+    {
+        maxDashCharges = _playerData.numberOfDashCharges;
+
+        dashChargesUIObjects = new GameObject[maxDashCharges];
+
+        for (int i = 0; i < maxDashCharges; i++)
+        {
+            dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
+
+            dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
+            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform.Find("PlayerUI"), true);
+        }
     }
 }
