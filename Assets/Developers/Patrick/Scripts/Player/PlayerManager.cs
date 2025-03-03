@@ -234,4 +234,9 @@ public class PlayerManager : MonoBehaviour
     {
         debugData.dashTowardsMouse = toggle;
     }
+
+    public void EvolveDash(bool toggle)
+    {
+        playerMovement.EvolveDash();
+    }
 }

@@ -42,8 +42,8 @@ public class PlayerMovement : MonoBehaviour
         _playerData = playerData;
         _debugData = debugData;
 
-        dashChargesNumber = 3;
-        maxDashCharges = 3;
+        dashChargesNumber = 1;
+        maxDashCharges = 1;
 
         dashChargesUIObjects = new GameObject[maxDashCharges];
 
@@ -73,40 +73,6 @@ public class PlayerMovement : MonoBehaviour
                 dashChargesNumber++;
             }
         }
-
-        //Debug.Log(dashChargesNumber);
-        //switch (dashChargesNumber)
-        //{
-           
-        //    case 0:
-        //        for (int i = 0; i < maxDashCharges; i++)
-        //        {
-        //            dashChargesUIObjects[i].SetActive(false);
-        //        }
-        //        break;
-        //    case 1:
-        //        dashChargesUIObjects[0].SetActive(true);
-        //        for (int i = 1; i < maxDashCharges; i++)
-        //        {
-        //            dashChargesUIObjects[i].SetActive(false);
-        //        }
-        //        break;
-        //    case 2:
-        //        dashChargesUIObjects[2].SetActive(false);
-        //        for (int i = 0; i < 2; i++)
-        //        {
-        //            dashChargesUIObjects[i].SetActive(true);
-        //        }
-        //        break;
-        //    case 3:
-        //        for (int i = 0; i < 3; i++)
-        //        {
-        //            dashChargesUIObjects[i].SetActive(true);
-        //        }
-        //        break;
-        //    default:
-        //        break;
-        //}
 
         for(int i = 0; i < maxDashCharges; ++i)
         {
@@ -249,7 +215,7 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer.color = Color.white;
     }
 
-    void EvolveDash()
+    public void EvolveDash()
     {
         maxDashCharges = _playerData.numberOfDashCharges;
 
