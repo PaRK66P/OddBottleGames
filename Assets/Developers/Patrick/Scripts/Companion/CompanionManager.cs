@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class CompanionManager : MonoBehaviour
 {
@@ -12,7 +14,9 @@ public class CompanionManager : MonoBehaviour
         FRIEND = 2
     }
 
+    [SerializeField]
     private GameObject _playerObject;
+    [SerializeField]
     private ObjectPoolManager _poolManager;
 
     [SerializeField]
@@ -21,58 +25,109 @@ public class CompanionManager : MonoBehaviour
     private CompanionFriendData friendData;
 
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
+    private CompanionCollisionDamage collisionDamageScript;
     private CompanionDetection detectionScript;
 
     private CompanionBoss bossScript;
     private CompanionFriend friendScript;
+    private CompanionAnimations animationsScript;
 
     private CompanionStates _currentState;
     private float _health;
+    private GameObject healthbar;
+
+    private VisualNovelScript visualNovelManager;
+    private bool hasPlayedNovel = false;
 
     // No protection for uninitialised Companion
 
-    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager)
+    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref Canvas dUICanvas)
     {
         _playerObject = playerObject;
+        _poolManager = poolManager;
+        visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+
 
         if (rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
         }
-        if(friendScript == null)
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+        if (collisionDamageScript == null)
+        {
+            collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
+            collisionDamageScript.InitialiseComponent(ref friendData);
+        }
+        if (detectionScript == null)
         {
             detectionScript = GetComponentInChildren<CompanionDetection>();
+            detectionScript.InitialiseComponent(ref friendData);
+        }
+        if (animationsScript == null)
+        {
+            animationsScript = gameObject.AddComponent<CompanionAnimations>();
+            animationsScript.InitialiseComponent(ref bossData, ref friendData, ref spriteRenderer);
         }
         if (bossScript == null)
         {
             bossScript = gameObject.AddComponent<CompanionBoss>();
-            bossScript.InitialiseComponent(ref bossData, ref rb, ref _playerObject, ref _poolManager);
+            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
         }
         if (friendScript == null)
         {
             friendScript = gameObject.AddComponent<CompanionFriend>();
-            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref rb, ref _playerObject);
+            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref rb, ref _playerObject);
         }
+
+        healthbar = Instantiate(bossData.healthbar, dUICanvas.transform);
+        healthbar.GetComponent<RectTransform>().Translate(new Vector3(Screen.width / 2 - 400, Screen.height - 240, 0));
+
+        healthbar.GetComponent<UnityEngine.UI.Slider>().maxValue = bossData.health;
+        healthbar.GetComponent<UnityEngine.UI.Slider>().value = bossData.health;
 
         ChangeToEnemy();
     }
 
-    private void OnEnable()
-    {
-        if(rb == null)
-        {
-            rb = GetComponent<Rigidbody2D>();
-        }
-        if (bossScript == null)
-        {
-            bossScript = gameObject.AddComponent<CompanionBoss>();
-            bossScript.InitialiseComponent(ref bossData, ref rb, ref _playerObject, ref _poolManager);
-        }
-        if (friendScript == null)
-        {
-            friendScript = gameObject.AddComponent<CompanionFriend>();
-        }
-    }
+    // private void OnEnable()
+    // {
+    //     if (rb == null)
+    //     {
+    //         rb = GetComponent<Rigidbody2D>();
+    //     }
+    //     if (spriteRenderer == null)
+    //     {
+    //         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    //     }
+    //     if (collisionDamageScript == null)
+    //     {
+    //         collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
+    //         collisionDamageScript.InitialiseComponent(ref friendData);
+    //     }
+    //     if (detectionScript == null)
+    //     {
+    //         detectionScript = GetComponentInChildren<CompanionDetection>();
+    //         detectionScript.InitialiseComponent(ref friendData);
+    //     }
+    //     if (animationsScript == null)
+    //     {
+    //         animationsScript = gameObject.AddComponent<CompanionAnimations>();
+    //         animationsScript.InitialiseComponent(ref bossData, ref friendData, ref spriteRenderer);
+    //     }
+    //     if (bossScript == null)
+    //     {
+    //         bossScript = gameObject.AddComponent<CompanionBoss>();
+    //         bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
+    //     }
+    //     if (friendScript == null)
+    //     {
+    //         friendScript = gameObject.AddComponent<CompanionFriend>();
+    //         friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref rb, ref _playerObject);
+    //     }
+    // }
 
     // Update is called once per frame
     void Update()
@@ -87,6 +142,28 @@ public class CompanionManager : MonoBehaviour
             case CompanionStates.FRIEND:
                 friendScript.CompanionUpdate();
                 break;
+        }
+        if (_currentState == CompanionStates.NONE && hasPlayedNovel && !visualNovelManager.isNovelSection)
+        {
+            switch(visualNovelManager.GetLastSelectionID())
+            {
+                case 0:
+                {
+                    ChangeToFriendly();
+                    break;
+                }
+                case 1:
+                {
+                    ChangeToEnemy();
+                    gameObject.GetComponent<enemyScr>().releaseEnemy();
+                    break;
+                }
+                default:
+                {
+                    Debug.LogError("Visual novel selection not supported. make sure to update selection code in miniboss as well as the novel that plays");
+                    break;
+                }
+            }
         }
     }
 
@@ -113,27 +190,38 @@ public class CompanionManager : MonoBehaviour
         if(_health <= 0)
         {
             _currentState = CompanionStates.NONE;
+            healthbar.SetActive(false);
             DefeatVisual();
             return;
         }
-
+        healthbar.GetComponent<UnityEngine.UI.Slider>().value = _health;
         DamageVisual();
     }
 
     private void DamageVisual()
     {
-
+        StartCoroutine(DamageColor());
     }
 
     private void DefeatVisual()
     {
         // To be removed
-        gameObject.SetActive(false);
+        
+        if (!hasPlayedNovel)
+        {
+            hasPlayedNovel = true;
+
+            visualNovelManager.StartNovelSceneByName("Miniboss tester 2");
+            GetComponent<enemyScr>().DecreaseEnemyCount();
+            //spriteRenderer.gameObject.SetActive(false);
+        }
     }
 
     public void ChangeToNone()
     {
         _currentState = CompanionStates.NONE;
+
+        collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.NONE);
 
         detectionScript.gameObject.SetActive(false);
     }
@@ -144,14 +232,26 @@ public class CompanionManager : MonoBehaviour
         bossScript.SetupEnemy();
         _currentState = CompanionStates.ENEMY;
 
-        detectionScript.gameObject.SetActive(false);
+        collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.PLAYER);
+
+        detectionScript.gameObject.SetActive(true);
     }
 
     public void ChangeToFriendly()
     {
         _currentState = CompanionStates.FRIEND;
 
+        collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.ENEMY);
+
         detectionScript.gameObject.SetActive(true);
+        //spriteRenderer.gameObject.SetActive(true);
+    }
+
+    IEnumerator DamageColor()
+    {
+        spriteRenderer.color = UnityEngine.Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = UnityEngine.Color.white;
     }
 
     #region Gizmos

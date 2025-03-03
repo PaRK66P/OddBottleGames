@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CompanionCollisionDamage : MonoBehaviour
 {
-    enum CollisionDamageStates
+    public enum CollisionDamageStates
     {
         NONE = 0,
         PLAYER = 1,
         ENEMY = 2
     }
 
-    private CollisionDamageStates collisionDamageState;
+    private CollisionDamageStates _collisionDamageState;
 
     private CompanionFriendData _friendData;
 
@@ -25,9 +25,7 @@ public class CompanionCollisionDamage : MonoBehaviour
     {
         Vector2 damageDirection = Vector2.left;
 
-        collisionDamageState = CollisionDamageStates.PLAYER;
-
-        switch (collisionDamageState)
+        switch (_collisionDamageState)
         {
             case CollisionDamageStates.NONE:
                 break;
@@ -35,7 +33,7 @@ public class CompanionCollisionDamage : MonoBehaviour
                 if (collision.tag == "Player")
                 {
                     damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
-                    collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection);
+                    collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 30, 20);
                     return;
                 }
                 break;
@@ -59,9 +57,7 @@ public class CompanionCollisionDamage : MonoBehaviour
     {
         Vector2 damageDirection = Vector2.left;
 
-        collisionDamageState = CollisionDamageStates.PLAYER;
-
-        switch (collisionDamageState)
+        switch (_collisionDamageState)
         {
             case CollisionDamageStates.NONE:
                 break;
@@ -76,5 +72,10 @@ public class CompanionCollisionDamage : MonoBehaviour
 
                 break;
         }
+    }
+
+    public void ChangeState(CollisionDamageStates collisionDamageState)
+    {
+        _collisionDamageState = collisionDamageState;
     }
 }

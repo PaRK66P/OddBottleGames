@@ -14,6 +14,7 @@ public class CompanionFriend : MonoBehaviour
 
     private CompanionFriendData _dataObj;
     private CompanionDetection _detectionScript;
+    private CompanionAnimations _animationScript;
     private Rigidbody2D _rb;
     private GameObject _player;
 
@@ -33,10 +34,11 @@ public class CompanionFriend : MonoBehaviour
     private bool _isLeapCalculated;
     private bool _isDashRefreshSpawned;
 
-    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref Rigidbody2D rb, ref GameObject player)
+    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimations animationScript, ref Rigidbody2D rb, ref GameObject player)
     {
         _dataObj = dataObj;
         _detectionScript = detectionScript;
+        _animationScript = animationScript;
         _rb = rb;
         _player = player;
     }
@@ -45,9 +47,11 @@ public class CompanionFriend : MonoBehaviour
     {
         switch (_state)
         {
-
+            case CompanionStates.IDLE:
+                IdleAction();
+                break;
             case CompanionStates.ATTACKING:
-
+                Leap();
                 break;
         }
     }
@@ -103,20 +107,27 @@ public class CompanionFriend : MonoBehaviour
 
             return;
         }
+
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.IDLE);
     }
 
     public void Leap()
     {
         if(Time.time - _leapTimer < _dataObj.leapChargeTime)
         {
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_CHARGE);
             return;
         }
 
         if (!_isLeapCalculated)
         {
-            _leapStart = transform.position;
             Vector2 targetDirection = _target.transform.position - transform.position;
             Vector2 leapDirection = targetDirection.normalized;
+            if (targetDirection == Vector2.zero)
+            {
+                leapDirection = (_leapEnd - _leapStart).normalized;
+            }
+            _leapStart = transform.position;
             _leapEnd = _leapStart + leapDirection * _dataObj.leapDistance;
             if (targetDirection.sqrMagnitude >= _dataObj.leapDistance * _dataObj.leapDistance)
             {
@@ -132,12 +143,16 @@ public class CompanionFriend : MonoBehaviour
             _leapMoveTimer = Time.time;
 
             _isLeapCalculated = true;
+
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_MOVING);
         }
 
         if (!_isLeapFinished)
         {
             return;
         }
+
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_END);
 
         if (!_isDashRefreshSpawned)
         {

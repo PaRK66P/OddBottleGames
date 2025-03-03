@@ -11,6 +11,8 @@ public class CompanionDetection : MonoBehaviour
     public void InitialiseComponent(ref CompanionFriendData dataObj)
     {
         _dataObj = dataObj;
+
+        _targetsList = new List<GameObject>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,7 +43,7 @@ public class CompanionDetection : MonoBehaviour
 
     public GameObject GetTarget()
     {
-        if (_targetsList.Count == 0) { return null; }
+        if (_targetsList == null || _targetsList.Count == 0) { return null; }
 
         GameObject closestTarget = _targetsList[0];
         float closestDistance = (_targetsList[0].transform.position - transform.position).sqrMagnitude;

@@ -244,7 +244,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator DashColor()
     {
         SpriteRenderer spriteRenderer = this.gameObject.GetComponentInChildren<SpriteRenderer>();
-        spriteRenderer.color = Color.blue;
+        spriteRenderer.color = Color.cyan;
         yield return new WaitForSeconds(_playerData.dashTime);
         spriteRenderer.color = Color.white;
     }
