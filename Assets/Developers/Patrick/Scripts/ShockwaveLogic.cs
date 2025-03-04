@@ -44,7 +44,7 @@ public class ShockwaveLogic : MonoBehaviour
             }
             else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
             {
-                collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(damage);
+                collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(damage, gameObject.transform.position - collision.gameObject.transform.position);
             }
             else if (collision.gameObject.GetComponent<bossScript>() != null)
             {

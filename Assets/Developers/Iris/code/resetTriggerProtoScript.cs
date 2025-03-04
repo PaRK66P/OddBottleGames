@@ -48,7 +48,7 @@ public class resetTriggerProtoScript : MonoBehaviour
             {
                 //SceneManager.LoadScene("PrototypeScene");
                 endScreen.SetActive(true);
-                player.GetComponent<PlayerInputManager>().DisableInput();
+                player.GetComponent<PlayerManager>().DisableInput();
             }
         }
     }

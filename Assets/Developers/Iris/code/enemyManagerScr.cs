@@ -5,11 +5,12 @@ using UnityEngine;
 public class enemyManager : MonoBehaviour
 {
     public ObjectPoolManager pooler;
-    int enemyNumber = 0;
+    public int enemyNumber = 0;
     public List<TriggerScript> trigers;
     public List<GameObject> doors;
     public List<spawnerScript> spawners;
     public Canvas UICanvas;
+    public GameObject player;
 
     private enemyManager myself;
 
@@ -26,7 +27,7 @@ public class enemyManager : MonoBehaviour
         }
         foreach (spawnerScript s in spawners)
         {
-            s.setUp(ref pooler, ref myself, ref UICanvas);
+            s.setUp(ref pooler, ref myself, ref UICanvas, ref player);
             s.spawn();
             enemyNumber++;
         }

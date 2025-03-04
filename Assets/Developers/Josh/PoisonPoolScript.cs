@@ -40,7 +40,7 @@ public class PoisonPoolScript : MonoBehaviour
                 }
                 else if (obj.GetComponent<AISimpleBehaviour>() != null)
                 {
-                    obj.GetComponent<AISimpleBehaviour>().TakeDamage(1);
+                    obj.GetComponent<AISimpleBehaviour>().TakeDamage(1, gameObject.transform.position - obj.transform.position);
                 }
                 else if (obj.GetComponent<bossScript>() != null)
                 {

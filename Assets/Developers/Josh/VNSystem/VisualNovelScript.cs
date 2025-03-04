@@ -1,4 +1,4 @@
-using Mono.Cecil.Cil;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -33,16 +33,27 @@ public class VisualNovelScript : MonoBehaviour
     public GameObject canv;
     public GameObject text;
     public GameObject sprite;
+    private CanvasGroup canvGroup;
+    private GameObject playerUI;
 
     public Transform buttonContainer;
     public GameObject buttonPrefab;
     private List<GameObject> buttons = new List<GameObject>();
 
-
     DialogueTreeNode currentNode;
     int currentVNPrefabIndex = 0;
     private int lastSelectionID = 0;
 
+    private IEnumerator typingText;
+
+    [SerializeField]
+    private bool fadeIn = false;
+    [SerializeField]
+    private bool fadeOut = false;
+
+    public float typeTextSpeed = 1.0f;
+
+    public bool typingTextToggle = true;
 
     void Start()
     {
@@ -50,6 +61,8 @@ public class VisualNovelScript : MonoBehaviour
         text = canv.transform.Find("VisualNovelText").gameObject;
         sprite = canv.transform.Find("VisualNovelSprite").gameObject;
         buttonContainer = canv.transform.Find("VisualNovelButtonContainer").GetComponent<Transform>();
+        canvGroup = canv.GetComponent<CanvasGroup>();
+        playerUI = GameObject.Find("Canvas").transform.Find("PlayerUI").gameObject;
 
         GameObject[] VisualNovelPrefabs = Resources.LoadAll<GameObject>("VisualNovelScenes");
         foreach (GameObject prefab in VisualNovelPrefabs)
@@ -67,38 +80,68 @@ public class VisualNovelScript : MonoBehaviour
             }
         }
     }
-    void Update()
+
+    private void Update()
     {
-        if (isNovelSection)
+        //Debug.Log("fixedupdate");
+        if (fadeIn)
         {
             canv.SetActive(true);
+            canvGroup.alpha += Time.unscaledDeltaTime*2;
+            if (canvGroup.alpha >= 1.0f)
+            {
+                fadeIn = false;
+            }
         }
-        else
+
+        if (fadeOut && !fadeIn)
         {
-            canv.SetActive(false);
+            canvGroup.alpha -= Time.unscaledDeltaTime*2;
+            if (canvGroup.alpha <= 0.0f)
+            {
+                fadeOut = false;
+                canv.SetActive(false);
+            }
+            
         }
+        
     }
 
     public void StartNovelScene(int NovelSceneID)
     {
-        Debug.Log(NovelSceneID);
+        //Debug.Log(NovelSceneID);
         if (!isNovelSection)
         {
             Time.timeScale = 0;
             playerRef.GetComponent<PlayerManager>().DisableInput();
             currentVNPrefabIndex = NovelSceneID;
+            playerUI.SetActive(false);
 
             isNovelSection = true;
+
+            //canv.SetActive(true);
+
+            fadeIn = true;
+
             if (currentVNPrefabIndex < VNScenes.Count && currentVNPrefabIndex > -1)
             {
                 DialogueTree tree = new DialogueTree(ReconstructTree(VNScenes[currentVNPrefabIndex].tree));
                 currentNode = tree.rootNode;
-                text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
+                //Debug.Log(typingTextToggle);
+                if (typingTextToggle == true)
+                {
+                    typingText = TypewriterText(currentNode.sceneData.text);
+                    StartCoroutine(typingText);
+                }
+                else
+                {
+                    text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
+                }
                 sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
+                sprite.GetComponent<Image>().SetNativeSize();
 
                 IDSelectionOptions(currentNode, 0);
                 CreateButtons();
-
             }
             else
             {
@@ -107,6 +150,8 @@ public class VisualNovelScript : MonoBehaviour
             }
         }
     }
+
+
 
     public void StartNovelSceneByName(string name)
     {
@@ -125,13 +170,22 @@ public class VisualNovelScript : MonoBehaviour
     }
     void NextScene(int index)
     {
+        //StopCoroutine(typingText);
         if (!currentNode.isLeaf())
         {
             if (index > -1 && index < currentNode.children.Count)
             {
                 currentNode = currentNode.children[index];
                 sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
-                text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
+                if (typingTextToggle)
+                {
+                    typingText = TypewriterText(currentNode.sceneData.text);
+                    StartCoroutine(typingText);
+                }
+                else
+                {
+                    text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
+                }
                 CreateButtons();
             }
             else
@@ -147,6 +201,11 @@ public class VisualNovelScript : MonoBehaviour
             isNovelSection = false;
             playerRef.GetComponent<PlayerManager>().EnableInput();
             Time.timeScale = 1.0f;
+            fadeOut = true;
+            //canv.SetActive(false);
+            playerUI.SetActive(true);
+           
+
         }
     }
 
@@ -185,9 +244,9 @@ public class VisualNovelScript : MonoBehaviour
         {
             GameObject newButton = Instantiate(buttonPrefab, buttonContainer);
             newButton.name = "Button_" + 0;
-            newButton.transform.localScale = new Vector3(2, 2, 1);
+            //newButton.transform.localScale = new Vector3(2, 2, 1);
 
-            Text buttonText = newButton.GetComponentInChildren<Text>();
+            TMP_Text buttonText = newButton.GetComponentInChildren<TMP_Text>();
             if (buttonText != null)
             {
                 buttonText.text = "continue";
@@ -206,10 +265,12 @@ public class VisualNovelScript : MonoBehaviour
             GameObject newButton = Instantiate(buttonPrefab, buttonContainer);
             newButton.name = "Button_" + i;
             newButton.transform.localPosition = new Vector3(0, -90 * i, 0);
-            newButton.transform.localScale = new Vector3(2, 2, 1);
+            //newButton.GetComponent<RectTransform>().offsetMin = new Vector2(0, -15);
+            //newButton.GetComponent<RectTransform>().offsetMax = new Vector2(250, 0);
+            //newButton.transform.localScale = new Vector3(2, 2, 1);
 
 
-            Text buttonText = newButton.GetComponentInChildren<Text>();
+            TMP_Text buttonText = newButton.GetComponentInChildren<TMP_Text>();
             if (buttonText != null)
             {
                 buttonText.text = currentNode.children[i].sceneData.entryText;
@@ -250,5 +311,19 @@ public class VisualNovelScript : MonoBehaviour
     public int GetLastSelectionID()
     {
         return lastSelectionID;
+    }
+
+    private IEnumerator TypewriterText(string targetText)
+    {
+        string textToAdd = "";
+        for (int i = 0; i < targetText.Length; i++)
+        {
+            //Debug.Log(i + ", " + targetText.Length);
+            textToAdd += targetText[i];
+            text.GetComponent<TMP_Text>().text = textToAdd;
+            yield return new WaitForSecondsRealtime(0.05f / typeTextSpeed);
+        }
+        //Debug.Log("done");
+        yield return null;
     }
 }
