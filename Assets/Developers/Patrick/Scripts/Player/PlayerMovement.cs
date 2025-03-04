@@ -217,9 +217,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void EvolveDash()
     {
-        maxDashCharges = _playerData.numberOfDashCharges;
+        for (int i = 0; i < maxDashCharges; i++)
+        {
+            Destroy(dashChargesUIObjects[i]);
+        }
 
-        Debug.Log(maxDashCharges);
+        maxDashCharges = _playerData.numberOfDashCharges;
+        dashChargesNumber = maxDashCharges;
 
         dashChargesUIObjects = new GameObject[maxDashCharges];
 
