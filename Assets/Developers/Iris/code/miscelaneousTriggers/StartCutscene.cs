@@ -12,10 +12,10 @@ public class StartCutscene : MonoBehaviour
         //Debug.Log("collision with trigger");
         if (!isTriggered)
         {
-            Debug.Log("Triggered");
+            //Debug.Log("Triggered");
             if (collision.gameObject.tag == "Player")
             {
-                GetComponent<PlayableDirector>().enabled = true;
+                GetComponent<PlayableDirector>().Play();
                 Debug.Log("playCutscene");
             }
         }
