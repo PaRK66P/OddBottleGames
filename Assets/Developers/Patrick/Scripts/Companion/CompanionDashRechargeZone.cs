@@ -9,7 +9,7 @@ public class CompanionDashRechargeZone : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             Debug.Log("Recharge");
-            collision.gameObject.GetComponent<PlayerManager>().GainDashCharge();
+            //collision.gameObject.GetComponent<PlayerManager>().GainDashCharge();
         }
     }
 }

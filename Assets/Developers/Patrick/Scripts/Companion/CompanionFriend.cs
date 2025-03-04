@@ -176,7 +176,7 @@ public class CompanionFriend : MonoBehaviour
 
         if (!_isDashRefreshSpawned)
         {
-            SpawnDashRefresh();
+            //SpawnDashRefresh();
             _leapEndTimer = Time.time;
             _isDashRefreshSpawned = true;
         }
@@ -186,7 +186,7 @@ public class CompanionFriend : MonoBehaviour
             return;
         }
 
-        DespawnDashRefresh();
+        //DespawnDashRefresh();
         _state = CompanionStates.IDLE;
 
     }
