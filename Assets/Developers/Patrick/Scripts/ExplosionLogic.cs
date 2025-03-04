@@ -45,11 +45,11 @@ public class ExplosionLogic : MonoBehaviour
                 {
                     Vector2 damageDirection = new Vector2(obj.transform.position.x - transform.position.x,
                         obj.transform.position.y - transform.position.y);
-                    obj.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized);
+                    obj.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized, 1, 10);
                 }
                 else if (obj.GetComponent<AISimpleBehaviour>() != null)
                 {
-                    obj.GetComponent<AISimpleBehaviour>().TakeDamage(damage);
+                    obj.GetComponent<AISimpleBehaviour>().TakeDamage(damage, gameObject.transform.position - obj.transform.position);
                 }
                 else if (obj.GetComponent<bossScript>() != null)
                 {
@@ -57,6 +57,7 @@ public class ExplosionLogic : MonoBehaviour
                 }
             }
             firedDamage = true;
+            GetComponent<SpriteRenderer>().color = Color.red;
         }
         else if (timer > removal)
         {
@@ -69,11 +70,14 @@ public class ExplosionLogic : MonoBehaviour
     {
         target = damageLayer;
         damage = totalDamage;
-        radius = explosionRadius;
+        gameObject.transform.localScale = Vector3.one * explosionRadius;
         delay = explosionDelay;
         removal = removalTime;
         timer = 0;
+        firedDamage = false;
         objectPoolManager = objMgr;
+
+        GetComponent<SpriteRenderer>().color = new Color(222.0f / 256.0f, 170.0f / 256.0f, 65.0f / 256.0f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

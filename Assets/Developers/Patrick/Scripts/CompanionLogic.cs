@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public enum CompanionMode
 {
     MINIBOSS,
-    COMPANION
+    COMPANION,
+    //BOSSALLY
 }
 
 
@@ -20,6 +23,9 @@ public class CompanionLogic : MonoBehaviour
     [SerializeField]
     private float jumpTime;
 
+    [SerializeField]
+    private GameObject hitBoxObject;
+
     private LayerMask targetLayer;
     
     [SerializeField] 
@@ -28,19 +34,11 @@ public class CompanionLogic : MonoBehaviour
     [SerializeField]
     private Transform idlePosition;
 
-    [SerializeField]
-    private float maxHealth;
     private float currentHealth = 15;
 
     [SerializeField]
     private List<GameObject> currentTargets;
     private int targetIndex = 0;
-
-    [SerializeField]
-    private GameObject explosionObject;
-
-    [SerializeField]
-    private GameObject shockwaveObject;
 
     [SerializeField]
     ObjectPoolManager objectPoolManager;
@@ -59,6 +57,12 @@ public class CompanionLogic : MonoBehaviour
     [SerializeField]
     private CompanionMode companionMode = CompanionMode.MINIBOSS;
 
+    private bool displayVN = true;
+
+    private Slider healthSlider;
+
+    private MinibossRoomManager room2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +75,18 @@ public class CompanionLogic : MonoBehaviour
         {
             targetLayer = LayerMask.GetMask("Enemy");
         }
+        idlePosition = new GameObject("mimiTrans").transform;
+        idlePosition.position = this.transform.position;
+        objectPoolManager = GameObject.Find("ObjectPoolManager").GetComponent<ObjectPoolManager>();
+
+        displayVN = true;
+
+        healthSlider = GetComponentInChildren<Slider>();
+        healthSlider.maxValue = currentHealth;
+        healthSlider.minValue = 0;
+        healthSlider.value = currentHealth;
+
+        room2 = GameObject.Find("Room2").GetComponent<MinibossRoomManager>();
     }
 
     // Update is called once per frame
@@ -104,7 +120,24 @@ public class CompanionLogic : MonoBehaviour
                 if ((idlePosition.position - transform.position + Vector3.down * 1.5f).magnitude > 0.1f)
                 {
                     Vector3 direction = idlePosition.position - transform.position + Vector3.down * 1.5f;
+                    float distance = direction.magnitude;
                     direction = direction.normalized;
+                    if (distance > 4)
+                    {
+                        speed = Mathf.Lerp(speed, 6, 0.3f);
+                    }
+                    else if (distance > 3)
+                    {
+                        speed = Mathf.Lerp(speed, 5, 0.3f);
+                    }
+                    else if (distance > 2)
+                    {
+                        speed = Mathf.Lerp(speed, 4, 0.3f);
+                    }
+                    else
+                    {
+                        speed = Mathf.Lerp(speed, 3, 0.3f);
+                    }
                     transform.position += direction * speed * Time.deltaTime;
                 }
             }
@@ -141,19 +174,21 @@ public class CompanionLogic : MonoBehaviour
                 {
                     CreateExplosion(selectedTargetPosition);
                     selectedAction = false;
-                    timer = -1.5f;
+                    //Delay before next action
+                    timer = -0.5f;
                 }
             }
             else if (currentAttackType == 1)
             {
-                if(timer > 2 + shockwaveIterations * 0.6)
+                if(timer > 1 + shockwaveIterations * 0.15f)
                 {
                     CreateShockwave(selectedTargetPosition);
                     shockwaveIterations++;
                     if(shockwaveIterations > 2)
                     {
                         selectedAction = false;
-                        timer -= 2;
+                        //Delay before next action
+                        timer -= 0.5f;
                     }
                 }
             }
@@ -170,7 +205,7 @@ public class CompanionLogic : MonoBehaviour
         newExplosion.transform.position = targetPosition;
 
         ExplosionLogic newShockwaveScript = newExplosion.GetComponent<ExplosionLogic>();
-        newShockwaveScript.InitialiseEffect(targetLayer, 5, 20, 0.5f, 1, objectPoolManager);
+        newShockwaveScript.InitialiseEffect(targetLayer, 3, 3, 0.5f, 0.7f, objectPoolManager);
     }
 
     private void CreateShockwave(Vector3 targetPosition)
@@ -184,11 +219,12 @@ public class CompanionLogic : MonoBehaviour
         newShockwave.transform.position = transform.position;
 
         ShockwaveLogic newShockwaveScript = newShockwave.GetComponent<ShockwaveLogic>();
-        newShockwaveScript.InitialiseEffect(targetLayer, 2, rotation.normalized, 8, objectPoolManager);
+        newShockwaveScript.InitialiseEffect(targetLayer, 1, rotation.normalized, 12, objectPoolManager);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if((1 << collision.gameObject.layer) == targetLayer.value)
         {
             AddTarget(collision.gameObject);
@@ -245,48 +281,66 @@ public class CompanionLogic : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-
+        healthSlider.value = currentHealth;
+        StartCoroutine(DamageColor());
         if (currentHealth < 0)
         {
-            //StartCoroutine(Defeated());
+            alive = false;
+            GetComponent<enemyScr>().DecreaseEnemyCount();
+            StartCoroutine(WaitForRoomEnd());
         }
     }
 
-    //private IEnumerator Defeated()
-    //{
-    //    alive = false;
-    //    VisualNovelScript visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
-    //    visualNovelManager.StartNovelSceneByName("Miniboss tester");
-    //    Debug.Log("defeated");
-    //    selectedAction = false;
-    //    currentAttackType = 0;
-    //    shockwaveIterations = 0;
-    //    timer = 0.0f;
-    //    yield return WaitForNovel();
-    //    if (visualNovelManager.GetLastSelectionID() == 0)
-    //    {
-    //        JoinPlayer();
-    //    }
-    //    else
-    //    {
-    //        JoinBoss();
-    //    }
-    //}
+    private IEnumerator WaitForRoomEnd()
+    {
+        //Debug.Log("waiting");
+        yield return new WaitUntil(() => room2.roomStart == false);
+        //Debug.Log("waited");
+        yield return Defeated();
+    }
 
-    //IEnumerator WaitForNovel()
-    //{
-    //    VisualNovelScript visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
-    //    yield return new WaitWhile(() => visualNovelManager.isNovelSection == true);
-    //}
+    private IEnumerator Defeated()
+    {
+        if (!displayVN)
+        {
+            objectPoolManager.ReleaseObject("Mercy", gameObject);
+            yield break;
+        }
+
+        alive = false;
+        VisualNovelScript visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+        visualNovelManager.StartNovelSceneByName("Miniboss tester");
+        selectedAction = false;
+        currentAttackType = 0;
+        shockwaveIterations = 0;
+        timer = 0.0f;
+        yield return WaitForNovel();
+        if (visualNovelManager.GetLastSelectionID() == 0)
+        {
+            JoinPlayer();
+        }
+        else
+        {
+            JoinBoss();
+        }
+        displayVN = false;
+    }
+
+    IEnumerator WaitForNovel()
+    {
+        VisualNovelScript visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+        yield return new WaitWhile(() => visualNovelManager.isNovelSection == true);
+    }
     public void JoinBoss()
     {
         this.companionMode = CompanionMode.MINIBOSS;
         modeLayerSelected = false;
         alive = true;
-        Transform bossTransform = GameObject.FindGameObjectWithTag("Boss").transform;
-        bossTransform.position -= new Vector3(0, -2, 0);
-        idlePosition = bossTransform;
+        // STOP USING FIND FUNCTIONS
+        transform.position = new Vector3(95.0f, 0.0f, 0.0f);
+        idlePosition.position = new Vector3(95.0f, 0.0f, 0.0f);
         currentHealth = 15;
+        healthSlider.value = currentHealth;
 
         GetComponent<CircleCollider2D>().enabled = false;
         currentTargets.Clear();
@@ -296,16 +350,28 @@ public class CompanionLogic : MonoBehaviour
 
     public void JoinPlayer()
     {
+        gameObject.layer = 0;
+        hitBoxObject.layer = 0;
         this.companionMode = CompanionMode.COMPANION;
         idlePosition = GameObject.Find("PlayerProto").GetComponent<Transform>();
         currentHealth = 15;
+        healthSlider.value = currentHealth;
         //targetIndex = -1;
         modeLayerSelected = false;
         alive = true;
+        selectedAction = false;
 
         GetComponent<CircleCollider2D>().enabled = false;
         currentTargets.Clear();
         GetComponent<CircleCollider2D>().enabled = true;
         GetClosestTarget();
+    }
+
+    IEnumerator DamageColor()
+    {
+        SpriteRenderer spriteRenderer = this.gameObject.transform.Find("Image").GetComponent<SpriteRenderer>();
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white;
     }
 }

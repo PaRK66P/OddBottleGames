@@ -14,20 +14,20 @@ public class bossProjectile : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             Vector2 damageDirection = new Vector2(collision.gameObject.transform.position.x - transform.position.x,
                     collision.gameObject.transform.position.y - transform.position.y);
-            collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized);
+            collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized, 1, 15);
             pooler.ReleaseObject(prefabName, gameObject);
         }
-    }
-
-    private void OnBecameInvisible()
-    {
-        pooler.ReleaseObject(prefabName, gameObject);
+        else if(collision.gameObject.layer == 6)
+        {
+            pooler.ReleaseObject(prefabName, gameObject);
+        }
     }
 
     public void InstantiateComponent(ref ObjectPoolManager poolMan, string prefName, Vector3 pos, Vector3 rot)

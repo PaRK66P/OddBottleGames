@@ -12,7 +12,7 @@ public class SpiralAttack : AttackClass
     public float timeBetweenWaves = 0.2f;
     public int angleBetweenWaves = 5;
 
-    public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim, ref ObjectPoolManager poolMan)
+    public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim, ref ObjectPoolManager poolMan, ref GameObject callingObj)
     {
         pooler = poolMan;
         if (tim.Count() == 0)
@@ -32,7 +32,7 @@ public class SpiralAttack : AttackClass
             for (int i = 0; i < projectilePerWaveNo; i++)
             {
                 GameObject obj = pooler.GetFreeObject(projectilePrefab.name);
-                obj.GetComponent<bossProjectile>().InstantiateComponent(ref pooler, projectilePrefab.name, transform.position, rotation);
+                obj.GetComponent<bossProjectile>().InstantiateComponent(ref pooler, projectilePrefab.name, callingObj.transform.position, rotation);
                 rotation.z += rotStep;
             }
             itt[0]++;

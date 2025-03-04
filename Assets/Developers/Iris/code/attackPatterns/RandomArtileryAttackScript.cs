@@ -5,19 +5,99 @@ using UnityEngine;
 
 public class attack1 : AttackClass
 {
-    public artileryAttack artileryPrefab;
+    public GameObject artileryPrefab;
     public int randomArtileryProjectileNo;
     ObjectPoolManager pooler;
     [Space]
-    public int horizantalUnitsFromOrigin;
-    public int verticalUnitsFromOrigin;
+    public float horizantalUnitsFromOrigin;
+    public float verticalUnitsFromOrigin;
+    public float originX;
+    public float originY;
+
+    float leftB;
+    float rightB;
+    float upperB;
+    float lowerB;
 
     float totalDelay;
+    List<float> xCoords;
+    List<bool> xBoolStat;
+    List<float> yCoords;
+    List<bool> yBoolStat;
 
-    public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim, ref ObjectPoolManager poolMan)
+    int noOfCoords;
+
+    //public void Start()
+    //{
+    //    leftB = originX - horizantalUnitsFromOrigin;
+    //    rightB = originX + horizantalUnitsFromOrigin;
+    //    upperB = originY + verticalUnitsFromOrigin;
+    //    lowerB = originY - verticalUnitsFromOrigin;
+
+    //    //Debug.Log(leftB);
+    //    //Debug.Log(rightB);
+    //    //Debug.Log(upperB);
+    //    //Debug.Log(lowerB);
+
+    //    noOfCoords = randomArtileryProjectileNo;
+    //    float xStep = (rightB - leftB) / noOfCoords;
+    //    float yStep = (upperB - lowerB) / noOfCoords;
+
+    //    Debug.Log(xStep);
+    //    //Debug.Log(yStep);
+
+    //    xCoords.Clear();
+    //    yCoords.Clear();
+    //    xBoolStat.Clear();
+    //    yBoolStat.Clear();
+
+    //    for (int i = 0; i <= noOfCoords; ++i)
+    //    {
+    //        xCoords.Add(leftB + xStep * i);
+    //        yCoords.Add(lowerB + yStep * i);
+    //        //Debug.Log(xCoords[i]);
+    //        //Debug.Log(yCoords[i]);
+    //        xBoolStat.Add(false);
+    //        yBoolStat.Add(false);
+    //    }
+    //}
+
+    public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim, ref ObjectPoolManager poolMan, ref GameObject callingObj)
     {
-        totalDelay = artileryPrefab.delay + artileryPrefab.activeTime;
+        totalDelay = artileryPrefab.GetComponent<artileryAttack>().delay + artileryPrefab.GetComponent<artileryAttack>().activeTime;
         pooler = poolMan;
+
+        leftB = originX - horizantalUnitsFromOrigin;
+        rightB = originX + horizantalUnitsFromOrigin;
+        upperB = originY + verticalUnitsFromOrigin;
+        lowerB = originY - verticalUnitsFromOrigin;
+
+        //Debug.Log(leftB);
+        //Debug.Log(rightB);
+        //Debug.Log(upperB);
+        //Debug.Log(lowerB);
+
+        noOfCoords = randomArtileryProjectileNo / 3;
+        float xStep = (rightB - leftB) / noOfCoords;
+        float yStep = (upperB - lowerB) / noOfCoords;
+
+        //Debug.Log(xStep);
+        //Debug.Log(yStep);
+
+        xCoords.Clear();
+        yCoords.Clear();
+        xBoolStat.Clear();
+        yBoolStat.Clear();
+
+        for (int i = 0; i <= noOfCoords; ++i)
+        {
+            xCoords.Add(leftB + xStep * i);
+            yCoords.Add(lowerB + yStep * i);
+            //Debug.Log(xCoords[i]);
+            //Debug.Log(yCoords[i]);
+            xBoolStat.Add(false);
+            yBoolStat.Add(false);
+        }
 
         if (tim.Count() == 0)
         {
@@ -26,7 +106,37 @@ public class attack1 : AttackClass
 
             for (int i = 0; i <= randomArtileryProjectileNo; ++i)
             {
-                UnityEngine.Vector3 pos = new UnityEngine.Vector3(UnityEngine.Random.Range(-horizantalUnitsFromOrigin, horizantalUnitsFromOrigin), UnityEngine.Random.Range(-verticalUnitsFromOrigin, verticalUnitsFromOrigin), 0);
+                int x = UnityEngine.Random.Range(0, noOfCoords);
+                int y = UnityEngine.Random.Range(0, noOfCoords);
+
+                for (int n = 0; n<10;++n)
+                {
+                    if (xBoolStat[x] && yBoolStat[y])
+                    {
+                        int c = UnityEngine.Random.Range(0, 2);
+                        if(c == 0)
+                        {
+                            x++;
+                            if(x >= noOfCoords)
+                            {
+                                x = 0;
+                            }
+                        }
+                        else
+                        {
+                            y++;
+                            if (y >= noOfCoords)
+                            {
+                                y = 0;
+                            }
+                        }
+                    }
+                }
+
+                xBoolStat[x] = true;
+                yBoolStat[y] = true;
+
+                UnityEngine.Vector3 pos = new UnityEngine.Vector3(xCoords[x], yCoords[y], 0);
                 UnityEngine.Vector3 rot = new UnityEngine.Vector3(0, 0, 0);
 
                 GameObject obj = pooler.GetFreeObject(artileryPrefab.name);

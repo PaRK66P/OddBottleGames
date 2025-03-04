@@ -1,14 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Text;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class attackPaternsScript : MonoBehaviour
 {
@@ -29,6 +22,13 @@ public class attackPaternsScript : MonoBehaviour
     [Space]
     public ObjectPoolManager pooler;
 
+    private GameObject myself;
+    public bool stunned = false;
+
+    public void InstantiateComponent(ref ObjectPoolManager objPooler)
+    {
+        pooler = objPooler;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -71,40 +71,45 @@ public class attackPaternsScript : MonoBehaviour
         n = 0;
         if (patList[0].Count() > 1)
         {
-            n = UnityEngine.Random.Range(0, patList[0].Count() + 1);
+            n = UnityEngine.Random.Range(0, patList[0].Count());
             currentAttack = patList[0][n];
         }
         currentAttack = patList[0][n];
+
+        myself = gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!inAttack)
+        if (!stunned)
         {
-            attackTimer += Time.deltaTime;
-            if(attackTimer >= timeBetweenAttacks)
+            if (!inAttack)
             {
-                inAttack = true;
-                attackTimer = 0;
-                int n = 0;
-                if (patList[attackItterator].Count() > 1)
+                attackTimer += Time.deltaTime;
+                if (attackTimer >= timeBetweenAttacks)
                 {
-                    n = UnityEngine.Random.Range(0, patList[attackItterator].Count());
+                    inAttack = true;
+                    attackTimer = 0;
+                    int n = 0;
+                    if (patList[attackItterator].Count() > 1)
+                    {
+                        n = UnityEngine.Random.Range(0, patList[attackItterator].Count());
+                        currentAttack = patList[attackItterator][n];
+                    }
                     currentAttack = patList[attackItterator][n];
+                    attackItterator++;
                 }
-                currentAttack = patList[attackItterator][n];
-                attackItterator++;
             }
-        }
-        else
-        {
-            attackList[currentAttack].Attack(ref inAttack, ref itterators, ref timers, ref pooler);
-        }
+            else
+            {
+                attackList[currentAttack].Attack(ref inAttack, ref itterators, ref timers, ref pooler, ref myself);
+            }
 
-        if (attackItterator == patList.Count())
-        {
-            attackItterator = 0;
+            if (attackItterator == patList.Count())
+            {
+                attackItterator = 0;
+            }
         }
     }
 }

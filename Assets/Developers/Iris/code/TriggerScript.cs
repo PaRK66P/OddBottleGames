@@ -21,7 +21,7 @@ public class TriggerScript : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("collision with trigger");
+        //Debug.Log("collision with trigger");
         if (!isTriggered)
         {
             if (collision.gameObject.tag == "Player")

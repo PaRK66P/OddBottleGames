@@ -1,244 +1,329 @@
-//using System.Collections.Generic;
-//using System.Threading;
-//using TMPro;
-//using UnityEditor;
-//using UnityEngine;
-//using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 
-//[System.Serializable]
-//public class VisualNovelScene
-//{
-//    public VisualNovelScene() { text = ""; entryText = ""; }
-//    public VisualNovelScene(Sprite sprite, string newText, string newEntryText)
-//    {
-//        CharacterAsset = sprite;
-//        text = newText;
-//        entryText = newEntryText;
-//    }
-//    public string entryText;
-//    public string text;
-//    public Sprite CharacterAsset;
-//    public int selectionID;
-//}
+[System.Serializable]
+public class VisualNovelScene
+{
+    public VisualNovelScene() { text = ""; entryText = ""; }
+    public VisualNovelScene(Sprite sprite, string newText, string newEntryText)
+    {
+        CharacterAsset = sprite;
+        text = newText;
+        entryText = newEntryText;
+    }
+    public string entryText;
+    public string text;
+    public Sprite CharacterAsset;
+    public int selectionID;
+}
 
-//public class VisualNovelScript : MonoBehaviour
-//{
-//    //[SerializeField]
-//    List<VNPrefabScript> VNScenes = new List<VNPrefabScript>();
+public class VisualNovelScript : MonoBehaviour
+{
+    //[SerializeField]
+    List<VNPrefabScript> VNScenes = new List<VNPrefabScript>();
 
-//    public bool isNovelSection;
-//    public string newtext;
-//    public GameObject canv;
-//    public GameObject text;
-//    public GameObject sprite;
-    
-//    public Transform buttonContainer;
-//    public GameObject buttonPrefab;
-//    private List<GameObject> buttons = new List<GameObject>();
+    [SerializeField] GameObject playerRef;
 
+    public bool isNovelSection;
+    public string newtext;
+    public GameObject canv;
+    public GameObject text;
+    public GameObject sprite;
+    private CanvasGroup canvGroup;
+    private GameObject playerUI;
 
-//    DialogueTreeNode currentNode;
-//    int currentVNPrefabIndex = 0;
-//    private int lastSelectionID = 0;
+    public Transform buttonContainer;
+    public GameObject buttonPrefab;
+    private List<GameObject> buttons = new List<GameObject>();
 
+    DialogueTreeNode currentNode;
+    int currentVNPrefabIndex = 0;
+    private int lastSelectionID = 0;
 
-//    void Start()
-//    {
-//        canv = GameObject.Find("VisualNovelCanvas");
-//        text = GameObject.Find("VisualNovelText");
-//        sprite = GameObject.Find("VisualNovelSprite");
-//        buttonContainer = GameObject.Find("VisualNovelButtonContainer").GetComponent<Transform>();
+    private IEnumerator typingText;
 
-//        string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/Developers/Josh/VisualNovelScenes" });
-//        foreach (string guid in guids)
-//        {
-//            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-//            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
-//            if (prefab != null)
-//            {
-//                VNPrefabScript script = prefab.GetComponent<VNPrefabScript>();
-//                if (script != null)
-//                {
-//                    VNScenes.Add(prefab.GetComponent<VNPrefabScript>());
-//                }
-                
-//            }
-//        }
-//    }
-//    void Update()
-//    {
-//        if (isNovelSection)
-//        {
-//            canv.SetActive(true);
-//        }
-//        else
-//        {
-//            canv.SetActive(false);
-//        }
-//    }
+    [SerializeField]
+    private bool fadeIn = false;
+    [SerializeField]
+    private bool fadeOut = false;
 
-//    public void StartNovelScene(int NovelSceneID)
-//    {
-//        currentVNPrefabIndex = NovelSceneID;
+    public float typeTextSpeed = 1.0f;
+
+    public bool typingTextToggle = true;
+
+    void Start()
+    {
+        canv = GameObject.Find("Canvas").transform.Find("VisualNovelCanvas").gameObject;
+        text = canv.transform.Find("VisualNovelText").gameObject;
+        sprite = canv.transform.Find("VisualNovelSprite").gameObject;
+        buttonContainer = canv.transform.Find("VisualNovelButtonContainer").GetComponent<Transform>();
+        canvGroup = canv.GetComponent<CanvasGroup>();
+        playerUI = GameObject.Find("Canvas").transform.Find("PlayerUI").gameObject;
+
+        GameObject[] VisualNovelPrefabs = Resources.LoadAll<GameObject>("VisualNovelScenes");
+        foreach (GameObject prefab in VisualNovelPrefabs)
+        {
+            //Debug.Log("found scene");
+            if (prefab != null)
+            {
+                //Debug.Log("not null");
+                VNPrefabScript script = Instantiate(prefab).GetComponent<VNPrefabScript>();
+                if (script != null)
+                {
+                    VNScenes.Add(prefab.GetComponent<VNPrefabScript>());
+                    //script.VNname = prefab.name;
+                }
+            }
+        }
+    }
+
+    private void Update()
+    {
+        //Debug.Log("fixedupdate");
+        if (fadeIn)
+        {
+            canv.SetActive(true);
+            canvGroup.alpha += Time.unscaledDeltaTime*2;
+            if (canvGroup.alpha >= 1.0f)
+            {
+                fadeIn = false;
+            }
+        }
+
+        if (fadeOut && !fadeIn)
+        {
+            canvGroup.alpha -= Time.unscaledDeltaTime*2;
+            if (canvGroup.alpha <= 0.0f)
+            {
+                fadeOut = false;
+                canv.SetActive(false);
+            }
+            
+        }
         
-//        isNovelSection = true;
-//        if (currentVNPrefabIndex < VNScenes.Count && currentVNPrefabIndex > -1)
-//        {
-//            DialogueTree tree = new DialogueTree(ReconstructTree(VNScenes[currentVNPrefabIndex].tree));
-//            currentNode = tree.rootNode;
-//            text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
-//            sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
+    }
 
-//            IDSelectionOptions(currentNode, 0);
-//            CreateButtons();
-            
-//        }
-//        else 
-//        {
-//            isNovelSection = false;
-//            UnityEngine.Debug.LogError("Invalid Novel Scene ID");
-//        }
-//    }
+    public void StartNovelScene(int NovelSceneID)
+    {
+        //Debug.Log(NovelSceneID);
+        if (!isNovelSection)
+        {
+            Time.timeScale = 0;
+            playerRef.GetComponent<PlayerManager>().DisableInput();
+            currentVNPrefabIndex = NovelSceneID;
+            playerUI.SetActive(false);
 
-//    public void StartNovelSceneByName(string name)
-//    {
-//        int index = 0;
-//        foreach (var scene in VNScenes)
-//        {
-//            if (scene.name == name)
-//            {
-//                StartNovelScene(index);
-//                return;
-//            }
-//            index++;
-//        }
-//        Debug.LogError("No scene found with name: " + name);
-//    }
-//    void NextScene(int index)
-//    {
-//        if (!currentNode.isLeaf())
-//        {
-//            if (index > -1 && index < currentNode.children.Count)
-//            {
-//                currentNode = currentNode.children[index];
-//                sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
-//                text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
-//                CreateButtons();
-//            }
-//            else
-//            {
-//                Debug.LogError("tried to transition to invalid scene index");
-//            }
-//        }
-//        else 
-//        {
-            
-//            lastSelectionID = currentNode.sceneData.selectionID;
-//            Debug.Log("selectionID: " + lastSelectionID);
-//            isNovelSection = false;
-//        }
-//    }
+            isNovelSection = true;
 
-//    public DialogueTreeNode ReconstructTree(SerializedTree serializedTree)
-//    {
-//        //Debug.Log(serializedTree);
-//        var nodeDict = new Dictionary<int, DialogueTreeNode>();
+            //canv.SetActive(true);
 
-//        foreach (var serializedNode in serializedTree.nodes)
-//        {
-//            var node = new DialogueTreeNode(serializedNode.sceneData);
-//            nodeDict[serializedNode.id] = node;
+            fadeIn = true;
 
-            
-//        }
-//        foreach (var serializedNode in serializedTree.nodes)
-//        {
-//            if (serializedNode.parentId != 0)
-//            {
-//                var parentNode = nodeDict[serializedNode.parentId];
-//                parentNode.children.Add(nodeDict[serializedNode.id]);
-//            }
-//        }
-//        return nodeDict[serializedTree.nodes[0].id];
-//    }
+            if (currentVNPrefabIndex < VNScenes.Count && currentVNPrefabIndex > -1)
+            {
+                DialogueTree tree = new DialogueTree(ReconstructTree(VNScenes[currentVNPrefabIndex].tree));
+                currentNode = tree.rootNode;
+                //Debug.Log(typingTextToggle);
+                if (typingTextToggle == true)
+                {
+                    typingText = TypewriterText(currentNode.sceneData.text);
+                    StartCoroutine(typingText);
+                }
+                else
+                {
+                    text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
+                }
+                sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
+                sprite.GetComponent<Image>().SetNativeSize();
 
-//    public void CreateButtons()
-//    {
-//        foreach (GameObject button in buttons)
-//        {
-//            Destroy(button);
-//        }
-//        buttons.Clear();
+                IDSelectionOptions(currentNode, 0);
+                CreateButtons();
+            }
+            else
+            {
+                isNovelSection = false;
+                Debug.LogError("Invalid Novel Scene ID");
+            }
+        }
+    }
 
-//        if (currentNode.isLeaf())
-//        {
-//            GameObject newButton = Instantiate(buttonPrefab, buttonContainer);
-//            newButton.name = "Button_" + 0;
-//            newButton.transform.localScale = new Vector3(2,2,1);
 
-//            Text buttonText = newButton.GetComponentInChildren<Text>();
-//            if (buttonText != null)
-//            {
-//                buttonText.text = "continue";
-//            }
 
-//            Button buttonComponent = newButton.GetComponent<Button>();
-//            if (buttonComponent != null)
-//            {
-//                buttonComponent.onClick.AddListener(() => NextScene(0));
-//            }
+    public void StartNovelSceneByName(string name)
+    {
+        int index = 0;
+        foreach (var scene in VNScenes)
+        {
+            //Debug.Log(scene.name + ", " + name);
+            if (scene.name == name)
+            {
+                StartNovelScene(index);
+                return;
+            }
+            index++;
+        }
+        Debug.LogError("No scene found with name: " + name);
+    }
+    void NextScene(int index)
+    {
+        //StopCoroutine(typingText);
+        if (!currentNode.isLeaf())
+        {
+            if (index > -1 && index < currentNode.children.Count)
+            {
+                currentNode = currentNode.children[index];
+                sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
+                if (typingTextToggle)
+                {
+                    typingText = TypewriterText(currentNode.sceneData.text);
+                    StartCoroutine(typingText);
+                }
+                else
+                {
+                    text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
+                }
+                CreateButtons();
+            }
+            else
+            {
+                Debug.LogError("tried to transition to invalid scene index");
+            }
+        }
+        else
+        {
 
-//            buttons.Add(newButton);
-//        }
-//        for (int i = 0; i < currentNode.children.Count; i++)
-//        {
-//            GameObject newButton = Instantiate(buttonPrefab, buttonContainer);
-//            newButton.name = "Button_" + i;
-//            newButton.transform.localPosition = new Vector3(0, -90 * i, 0);
-//            newButton.transform.localScale = new Vector3(2,2,1);
-               
+            lastSelectionID = currentNode.sceneData.selectionID;
+            //Debug.Log("selectionID: " + lastSelectionID);
+            isNovelSection = false;
+            playerRef.GetComponent<PlayerManager>().EnableInput();
+            Time.timeScale = 1.0f;
+            fadeOut = true;
+            //canv.SetActive(false);
+            playerUI.SetActive(true);
+           
 
-//            Text buttonText = newButton.GetComponentInChildren<Text>();
-//            if (buttonText != null)
-//            {
-//                buttonText.text = currentNode.children[i].sceneData.entryText;
-//            }
+        }
+    }
 
-//            int index = i;
-//            Button buttonComponent = newButton.GetComponent<Button>();
-//            if (buttonComponent != null)
-//            {
-//                buttonComponent.onClick.AddListener(() => NextScene(index));
-//            }
+    public DialogueTreeNode ReconstructTree(SerializedTree serializedTree)
+    {
+        //Debug.Log(serializedTree);
+        var nodeDict = new Dictionary<int, DialogueTreeNode>();
 
-//            buttons.Add(newButton);
-//        }
-//    }
+        foreach (var serializedNode in serializedTree.nodes)
+        {
+            var node = new DialogueTreeNode(serializedNode.sceneData);
+            nodeDict[serializedNode.id] = node;
 
-//    int IDSelectionOptions(DialogueTreeNode node, int currentIDCount)
-//    {
-//        if (node.isLeaf())
-//        {
-//            node.sceneData.selectionID = currentIDCount;
-//            return 0;
-//        }
-//        else
-//        {
-//            int it = currentIDCount-1;
-//            foreach (var child in node.children)
-//            {
-//                it++;
-//                int id = IDSelectionOptions(child, it);
-//                it += id;
-                
-//            }
-//            return it;
-//        }
-//    }
 
-//    public int GetLastSelectionID()
-//    {
-//        return lastSelectionID;
-//    }
-//}
+        }
+        foreach (var serializedNode in serializedTree.nodes)
+        {
+            if (serializedNode.parentId != 0)
+            {
+                var parentNode = nodeDict[serializedNode.parentId];
+                parentNode.children.Add(nodeDict[serializedNode.id]);
+            }
+        }
+        return nodeDict[serializedTree.nodes[0].id];
+    }
+
+    public void CreateButtons()
+    {
+        foreach (GameObject button in buttons)
+        {
+            Destroy(button);
+        }
+        buttons.Clear();
+
+        if (currentNode.isLeaf())
+        {
+            GameObject newButton = Instantiate(buttonPrefab, buttonContainer);
+            newButton.name = "Button_" + 0;
+            //newButton.transform.localScale = new Vector3(2, 2, 1);
+
+            TMP_Text buttonText = newButton.GetComponentInChildren<TMP_Text>();
+            if (buttonText != null)
+            {
+                buttonText.text = "continue";
+            }
+
+            Button buttonComponent = newButton.GetComponent<Button>();
+            if (buttonComponent != null)
+            {
+                buttonComponent.onClick.AddListener(() => NextScene(0));
+            }
+
+            buttons.Add(newButton);
+        }
+        for (int i = 0; i < currentNode.children.Count; i++)
+        {
+            GameObject newButton = Instantiate(buttonPrefab, buttonContainer);
+            newButton.name = "Button_" + i;
+            newButton.transform.localPosition = new Vector3(0, -90 * i, 0);
+            //newButton.GetComponent<RectTransform>().offsetMin = new Vector2(0, -15);
+            //newButton.GetComponent<RectTransform>().offsetMax = new Vector2(250, 0);
+            //newButton.transform.localScale = new Vector3(2, 2, 1);
+
+
+            TMP_Text buttonText = newButton.GetComponentInChildren<TMP_Text>();
+            if (buttonText != null)
+            {
+                buttonText.text = currentNode.children[i].sceneData.entryText;
+            }
+
+            int index = i;
+            Button buttonComponent = newButton.GetComponent<Button>();
+            if (buttonComponent != null)
+            {
+                buttonComponent.onClick.AddListener(() => NextScene(index));
+            }
+
+            buttons.Add(newButton);
+        }
+    }
+
+    int IDSelectionOptions(DialogueTreeNode node, int currentIDCount)
+    {
+        if (node.isLeaf())
+        {
+            node.sceneData.selectionID = currentIDCount;
+            return 0;
+        }
+        else
+        {
+            int it = currentIDCount - 1;
+            foreach (var child in node.children)
+            {
+                it++;
+                int id = IDSelectionOptions(child, it);
+                it += id;
+
+            }
+            return it;
+        }
+    }
+
+    public int GetLastSelectionID()
+    {
+        return lastSelectionID;
+    }
+
+    private IEnumerator TypewriterText(string targetText)
+    {
+        string textToAdd = "";
+        for (int i = 0; i < targetText.Length; i++)
+        {
+            //Debug.Log(i + ", " + targetText.Length);
+            textToAdd += targetText[i];
+            text.GetComponent<TMP_Text>().text = textToAdd;
+            yield return new WaitForSecondsRealtime(0.05f / typeTextSpeed);
+        }
+        //Debug.Log("done");
+        yield return null;
+    }
+}

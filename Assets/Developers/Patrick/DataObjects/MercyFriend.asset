@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c648b908d437d11499f1a3f8e88b1938, type: 3}
+  m_Name: MercyFriend
+  m_EditorClassIdentifier: 
+  environmentLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  detectionRadius: 12
+  idleSpeed: 6
+  idleDistance: 2.71
+  leapTravelTime: 0.2
+  leapChargeTime: 0.8
+  leapDistance: 5
+  leapDamage: 3
+  leapEndTime: 0.5
+  rechargeZoneRadius: 5
+  drawDetectionRange: 0
+  drawRechargeZone: 0
+  drawIdleDistance: 1

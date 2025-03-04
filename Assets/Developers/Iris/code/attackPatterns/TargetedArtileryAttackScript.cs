@@ -10,7 +10,7 @@ public class attack2 : AttackClass
     public int targetedArtileryProjectileNo = 5;
     public float timeBetweenStrikes = 0.5f;
 
-    public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim, ref ObjectPoolManager poolMan)
+    public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim, ref ObjectPoolManager poolMan, ref GameObject callingObj)
     {
         pooler = poolMan;
         if(tim.Count() == 0)

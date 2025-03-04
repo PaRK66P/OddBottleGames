@@ -177,6 +177,28 @@
                 },
                 {
                     "name": "",
+                    "id": "fe1ba826-5f42-4a2a-8b82-afc4dc36c8a1",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af00b161-65ee-4a27-b334-7a56a1edb343",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "9da22823-8d75-402d-969a-29f776d3ada8",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",

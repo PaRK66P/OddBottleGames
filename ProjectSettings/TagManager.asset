@@ -16,7 +16,7 @@ TagManager:
   - UI
   - Environment
   - Player
-  - Projectile
+  - PlayerAttack
   - Enemy
   - AwaitingEnemyAttack
   - EnemyAttack
@@ -43,4 +43,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 879889349
+    locked: 0
+  - name: Layer2
+    uniqueID: 725638821
     locked: 0

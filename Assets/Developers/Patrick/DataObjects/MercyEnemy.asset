@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed28f7f29a142b4cb8be512a0c0a3c0, type: 3}
+  m_Name: MercyEnemy
+  m_EditorClassIdentifier: 
+  health: 75
+  healthbar: {fileID: 7940067324356998275, guid: ace6fbf26c5479d4d870cd37326fbc3d, type: 3}
+  leapsBeforeFeral: 3
+  closeRangeDistance: 5.63
+  environmentMask:
+    serializedVersion: 2
+    m_Bits: 64
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  idleSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
+  leapChargeTime: 0.5
+  leapTravelTime: 0.3
+  leapEndTime: 0.5
+  leapTravelDistance: 8.1
+  leapChargeSpriteLeft: {fileID: 21300000, guid: 04463bf04261e3f43bb0d7f34ea374e1, type: 3}
+  leapChargeSpriteRight: {fileID: 21300000, guid: bb1309a33d4407e459590c5129e01a3f, type: 3}
+  leapMoveSprite: {fileID: 21300000, guid: 0f56ace36a8c51043867070d895d3ca4, type: 3}
+  leapEndSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
+  feralLeapAmount: 3
+  feralLeapDelay: 0.4
+  feralLeapEndTime: 1.5
+  spitProjectile: {fileID: 5242277665205136327, guid: 6360764a931239e4b90bdbb8c14074e4, type: 3}
+  spitProjectileLifespan: 3
+  spitProjectileTravelDistance: 5
+  spitChargeTime: 0.2
+  spitSpawnDistance: 3.58
+  spitSpawnAngle: 40
+  spitEndTime: 0.3
+  spitChargeSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
+  spitAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
+  spitEndSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
+  lickProjectile: {fileID: 6314627607262925113, guid: 7e751bbcfe8a2894992bf098742dccc3, type: 3}
+  lickProjectileNumber: 5
+  lickProjectileSpawnDistance: 1.64
+  lickProjectileSeperationDistance: 0.38
+  lickProjectileAngle: 17.6
+  lickProjectileSpeed: 8
+  lickChargeTime: 0.2
+  lickEndTime: 0.3
+  lickChargeSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
+  lickAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
+  lickEndSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
+  screamProjectile: {fileID: 6314627607262925113, guid: 7e751bbcfe8a2894992bf098742dccc3, type: 3}
+  screamProjectileSpawnDistance: 1.42
+  numberOfScreamProjectiles: 12
+  screamProjectileSpeed: 6
+  screamChargeTime: 0.2
+  screamEndTime: 0.4
+  screamChargeSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
+  screamAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
+  screamEndSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
+  drawRange: 0
+  drawLeaps: 0
+  drawSpit: 0
+  drawLick: 0
+  drawScream: 0
