@@ -219,6 +219,8 @@ public class PlayerMovement : MonoBehaviour
     {
         maxDashCharges = _playerData.numberOfDashCharges;
 
+        Debug.Log(maxDashCharges);
+
         dashChargesUIObjects = new GameObject[maxDashCharges];
 
         for (int i = 0; i < maxDashCharges; i++)

@@ -100,54 +100,54 @@ public class CompanionManager : MonoBehaviour
     }
 
     // Testing purposes only, should be commented out otherwise
-    private void OnEnable()
-    {
-        //visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+    //private void OnEnable()
+    //{
+    //    //visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
 
-        dashRechargeZone.GetComponent<CircleCollider2D>().radius = friendData.rechargeZoneRadius;
-        dashRechargeZone.gameObject.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector3(friendData.rechargeZoneRadius * 2.0f, friendData.rechargeZoneRadius * 2.0f, 1.0f);
+    //    dashRechargeZone.GetComponent<CircleCollider2D>().radius = friendData.rechargeZoneRadius;
+    //    dashRechargeZone.gameObject.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector3(friendData.rechargeZoneRadius * 2.0f, friendData.rechargeZoneRadius * 2.0f, 1.0f);
 
-        if (rb == null)
-        {
-            rb = GetComponent<Rigidbody2D>();
-        }
-        if (collisionDamageScript == null)
-        {
-            collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
-            collisionDamageScript.InitialiseComponent(ref friendData);
-        }
-        if (detectionScript == null)
-        {
-            detectionScript = GetComponentInChildren<CompanionDetection>();
-            detectionScript.InitialiseComponent(ref friendData);
+    //    if (rb == null)
+    //    {
+    //        rb = GetComponent<Rigidbody2D>();
+    //    }
+    //    if (collisionDamageScript == null)
+    //    {
+    //        collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
+    //        collisionDamageScript.InitialiseComponent(ref friendData);
+    //    }
+    //    if (detectionScript == null)
+    //    {
+    //        detectionScript = GetComponentInChildren<CompanionDetection>();
+    //        detectionScript.InitialiseComponent(ref friendData);
 
-            detectionScript.GetComponent<CircleCollider2D>().radius = friendData.detectionRadius;
-        }
-        if (animationsScript == null)
-        {
-            animationsScript = gameObject.AddComponent<CompanionAnimations>();
-            animationsScript.InitialiseComponent(ref bossData, ref friendData, ref _companionImage);
-        }
-        if (bossScript == null)
-        {
-            bossScript = gameObject.AddComponent<CompanionBoss>();
-            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
-        }
-        if (friendScript == null)
-        {
-            friendScript = gameObject.AddComponent<CompanionFriend>();
-            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref rb, ref _playerObject, ref dashRechargeZone);
-        }
+    //        detectionScript.GetComponent<CircleCollider2D>().radius = friendData.detectionRadius;
+    //    }
+    //    if (animationsScript == null)
+    //    {
+    //        animationsScript = gameObject.AddComponent<CompanionAnimations>();
+    //        animationsScript.InitialiseComponent(ref bossData, ref friendData, ref _companionImage);
+    //    }
+    //    if (bossScript == null)
+    //    {
+    //        bossScript = gameObject.AddComponent<CompanionBoss>();
+    //        bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
+    //    }
+    //    if (friendScript == null)
+    //    {
+    //        friendScript = gameObject.AddComponent<CompanionFriend>();
+    //        friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref rb, ref _playerObject, ref dashRechargeZone);
+    //    }
 
-        //healthbar = Instantiate(bossData.healthbar, dUICanvas.transform);
-        //healthbar.GetComponent<RectTransform>().Translate(new Vector3(Screen.width / 2 - 400, Screen.height - 240, 0));
+    //    //healthbar = Instantiate(bossData.healthbar, dUICanvas.transform);
+    //    //healthbar.GetComponent<RectTransform>().Translate(new Vector3(Screen.width / 2 - 400, Screen.height - 240, 0));
 
-        //healthbar.GetComponent<UnityEngine.UI.Slider>().maxValue = bossData.health;
-        //healthbar.GetComponent<UnityEngine.UI.Slider>().value = bossData.health;
+    //    //healthbar.GetComponent<UnityEngine.UI.Slider>().maxValue = bossData.health;
+    //    //healthbar.GetComponent<UnityEngine.UI.Slider>().value = bossData.health;
 
-        ChangeToNone();
-        ChangeToFriendly();
-    }
+    //    ChangeToNone();
+    //    ChangeToFriendly();
+    //}
 
     // Update is called once per frame
     void Update()
@@ -169,21 +169,15 @@ public class CompanionManager : MonoBehaviour
             switch(visualNovelManager.GetLastSelectionID())
             {
                 case 0:
-                {
                     ChangeToFriendly();
                     break;
-                }
                 case 1:
-                {
-                    ChangeToEnemy();
+                    _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
                     gameObject.GetComponent<enemyScr>().releaseEnemy();
                     break;
-                }
                 default:
-                {
                     Debug.LogError("Visual novel selection not supported. make sure to update selection code in miniboss as well as the novel that plays");
                     break;
-                }
             }
         }
     }
@@ -211,11 +205,11 @@ public class CompanionManager : MonoBehaviour
         if(_health <= 0)
         {
             _currentState = CompanionStates.NONE;
-            //healthbar.SetActive(false);
+            healthbar.SetActive(false);
             DefeatVisual();
             return;
         }
-        //healthbar.GetComponent<UnityEngine.UI.Slider>().value = _health;
+        healthbar.GetComponent<UnityEngine.UI.Slider>().value = _health;
         DamageVisual();
     }
 
@@ -234,7 +228,6 @@ public class CompanionManager : MonoBehaviour
 
             visualNovelManager.StartNovelSceneByName("Miniboss tester 2");
             GetComponent<enemyScr>().DecreaseEnemyCount();
-            //spriteRenderer.gameObject.SetActive(false);
         }
     }
 
@@ -266,7 +259,6 @@ public class CompanionManager : MonoBehaviour
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.ENEMY);
 
         detectionScript.gameObject.SetActive(true);
-        //spriteRenderer.gameObject.SetActive(true);
     }
 
     IEnumerator DamageColor()
