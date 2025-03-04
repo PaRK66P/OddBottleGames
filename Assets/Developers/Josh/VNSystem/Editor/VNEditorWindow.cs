@@ -4,12 +4,7 @@ using UnityEngine.UIElements;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-using UnityEditor.SceneManagement;
-using UnityEngine.Rendering;
-using System.Runtime.CompilerServices;
-using NUnit.Framework.Constraints;
-using UnityEditor.PackageManager.Requests;
-using System.Linq;
+
 
 public class VNEditorWindow : EditorWindow
 {
@@ -190,6 +185,11 @@ public class VNEditorWindow : EditorWindow
         compileButton.text = "Generate Scene";
         compileButton.clicked += OnGenerateClick;
         ButtonContainer.Add(compileButton);
+
+        var loadTwineButton = new UnityEngine.UIElements.Button();
+        loadTwineButton.text = "Load Twine File";
+        loadTwineButton.clicked += LoadInTwineScene;
+        ButtonContainer.Add(loadTwineButton);
 
 
 
@@ -520,7 +520,7 @@ public class VNEditorWindow : EditorWindow
         ScrollView treeRoot = new ScrollView(ScrollViewMode.Vertical);
 
         treeRoot.style.width = 1400;
-        treeRoot.style.height = 200;
+        treeRoot.style.height = 1000;
 
         if (workingRoot == null)
         {
@@ -623,5 +623,21 @@ public class VNEditorWindow : EditorWindow
         graphPane.parent.Remove(graphPane);
         graphPane = GenerateTreeDiagram();
         graphSplitView.Add(graphPane);
+    }
+
+    private void LoadInTwineScene()
+    {
+        TextAsset myTwineData = Resources.Load("TwineFiles/DateorDecapitate2") as TextAsset;
+        //Debug.Log(myTwineData.text);
+
+        DialogueTree twineTree = TwineParser.ConstructTwineTree(TwineParser.ParseTwineText(myTwineData.text));
+
+        workingRoot = twineTree.rootNode;
+        currentNode = twineTree.rootNode;
+
+        entryTextString = workingRoot.twineData.title;
+        textFieldInput = workingRoot.sceneData.text;
+
+        UpdateGraphPane();
     }
 }

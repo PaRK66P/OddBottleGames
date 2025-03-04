@@ -4,7 +4,8 @@ using UnityEditor.Animations;
 
 public class TwineData
 {
-    public string Title = "";
+    public string title = "";
+    public List<string> responseData = new List<string>();
 }
 
 public class DialogueTreeNode
@@ -12,10 +13,12 @@ public class DialogueTreeNode
     public DialogueTreeNode()
     {
         sceneData = null;
+        twineData = new TwineData();
     }
     public DialogueTreeNode(VisualNovelScene scene)
     {
         sceneData = scene;
+        twineData = new TwineData();
     }
 
     public DialogueTreeNode parent;
@@ -33,31 +36,31 @@ public class DialogueTreeNode
         return !(children.Count > 0);
     }
 
-    public DialogueTreeNode FindNodeWithTitle(string title)
-    {
-        DialogueTreeNode resultNode = null;
-        if (twineData.Title == title)
-        {
-            resultNode = this;
-            return resultNode;
-        }
-        else
-        {
+    // public DialogueTreeNode FindNodeWithTitle(string title)
+    // {
+    //     DialogueTreeNode resultNode = null;
+    //     if (twineData.Title == title)
+    //     {
+    //         resultNode = this;
+    //         return resultNode;
+    //     }
+    //     else
+    //     {
             
-            foreach (DialogueTreeNode child in children)
-            {
-                resultNode = child.FindNodeWithTitle(title);
-                if (resultNode != null)
-                {
-                    return resultNode;
-                }
+    //         foreach (DialogueTreeNode child in children)
+    //         {
+    //             resultNode = child.FindNodeWithTitle(title);
+    //             if (resultNode != null)
+    //             {
+    //                 return resultNode;
+    //             }
 
-            }
-        }
+    //         }
+    //     }
 
-        UnityEngine.Debug.LogError("node with given title: " + title + " not found");
-        return resultNode;
-    }
+    //     UnityEngine.Debug.LogError("node with given title: " + title + " not found");
+    //     return resultNode;
+    // }
 }
 
 public class DialogueTree
