@@ -1,0 +1,540 @@
+:: StoryTitle
+DateorDecapitate2
+
+
+:: StoryData
+{
+  "ifid": "a02c1097-d2d7-4bfc-9071-6c1aa51ef534",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "zoom": 0.6
+}
+
+
+:: 1. {"position":"100,3300","size":"100,100"}
+M: - end of fight
+Such boldness...
+
+Sauntering in here so full of vigor,
+
+So full of *life*.
+
+A worthy adversary, all the better that your blood tastes so sweet.
+
+PC:
+I'll take that as a compliment.  [[Good]] 
+
+Enjoy it while it lasts, now surrender. [[Neutral]]
+
+It'll be the last you taste, you *Ghoul*[[Kill]]
+
+
+:: 1.1 {"position":"500,1400","size":"100,100"}
+PC: I'm reaching the core, no matter what it takes.
+
+M: No one's been there in a thousand years.
+
+Or has it been longer...
+
+Who knows what you're going to find in there,
+
+I heard the last only survived a century.
+
+But, why do you wish to reach it?
+
+PC: To kill it...to take it. I'll know when I'm there. [[1.1.1]]
+
+That's none of your concern, step aside or I'll deal with you here. [[1.1.2]]
+
+
+:: 1.1.1 {"position":"700,1200","size":"100,100"}
+PC: I'll know when I'm there.
+
+M: Hm.
+
+How about we strike a deal?
+
+I'm interested in you, so I'll help you.
+
+Take me with you to the core,
+
+And once we've defeated it,
+
+Take me with you to the surface.
+
+PC: Your strength will be a valuable asset. I accept. [[success1]]
+
+I'm not into your kind. [[failure1]]
+
+
+:: 1.1.2 {"position":"700,1500","size":"100,100"}
+PC: That's none of your concern, step aside or I'll deal with you here. 
+
+M: There's no acquiescing here.
+
+You can try to finish me.
+
+Or tell me why.
+
+If you wish to kill it,
+
+My services would be...available.
+
+PC: ...perhaps I do wish to kill it. [[success2]]
+
+I don't need your help. [[failure2]]
+
+
+
+
+:: 1.2 {"position":"525,2100","size":"100,100"}
+PC: I don't owe you an explanation.
+
+M: You don't owe me anything.
+
+But it has been so long since I've seen a Hunter.
+
+Humour me, is it just to kill?
+
+Or do you wish for more...
+
+PC: ...more? [[1.2.1]]
+
+Killing is the only thing on the table. [[1.2.2]]
+
+
+
+
+:: 1.2.1 {"position":"700,1900","size":"100,100"}
+PC: ...more? 
+
+M: More...
+
+Power.
+
+The core only comes to be in one way.
+
+Although I'm not sure how long that power would last with the Dungeon in this state.
+
+I would quite like to see the outcome regardless.
+
+Hunter, take me with you.
+
+PC: ...so be it. I could use the extra...help. [[success3]]
+
+And chance you taking it? No. [[failure3]]
+
+
+
+:: 1.2.2 {"position":"700,2200","size":"100,100"}
+PC: Killing is the only thing on the table. 
+
+M: Of course,
+
+Which is why I intend to help.
+
+You're the first living being I've seen in over six decades,
+
+Or has it been more...
+
+Either way,
+
+I'm sick of waiting.
+
+Take me with you.
+
+PC: Don't get in my way. [[success4]]
+
+A bold demand, I decline. [[failure4]]
+
+
+:: 2.1 {"position":"500,3100","size":"100,100"}
+PC: You have one minute.
+
+M: So *gracious*
+
+You've proven your strength,
+
+Surely you feel I've proven mine.
+
+So let me proposition you,
+
+I'll help you get to the core...
+
+If you take me out of here with you.
+
+PC: Why would you want to leave? [[2.1.1]]
+
+You think I'm going to trust you?[[2.1.2]]
+
+
+:: 2.1.1 {"position":"700,2800","size":"100,100"}
+PC: Why would you want to leave?
+
+M: You have eyes, no?
+
+Look around.
+
+This place doesn't have much longer left.
+
+My chances up there are better than the definitive death that awaits me here.
+
+PC: I suppose you could be a good distraction.[[success2.1]]
+
+I'll be damned if I help you terrorise the surface. [[failure2.1]]
+
+
+:: 2.1.2 {"position":"700,3200","size":"100,100"}
+PC: You think I'm going to trust you?
+
+M: Of course not,
+
+I thought you'd use that pretty little head of yours,
+
+I'm dead regardless,
+
+So what's the loss for you?
+
+PC: ...you're dead the second you make a wrong move[[success2.1.2.]]
+
+I won't be taken for a fool. [[failure2.1.2]]
+
+
+:: 2.2 {"position":"500,3500","size":"100,100"}
+PC: I don't have time to humour you.
+
+M: Then why exactly are you asking me to surrender?
+
+Surely you would have just killed me by now if you weren't slightly intrigued?
+
+So I'll ask again, 
+
+Let me do the talking.
+
+PC: ... [[2.2.1]]
+
+PC: If you're that eager for me to finish the job[[2.2.2]]
+
+
+:: 2.2.1 {"position":"700,3500","size":"100,100"}
+PC: ...
+
+M: Good.
+
+*sigh*
+
+This place is dying,
+
+I have no intention of waiting to die with it.
+
+I'll help you get to the core, defeat it if you so wish.
+
+*If*, you'll bring me up to the surface.
+
+PC: An extra hand can't hurt. [[success2.2.1]]
+
+As if I'd believe that. [[failure2.2.1]]
+
+
+:: 2.2.2 {"position":"700,4000","size":"100,100"}
+PC: If you're that eager for me to finish the job.
+
+M: Hold on!
+
+...
+
+This brings me no pleasure to offer my services in such a position.
+
+But I can help you get to the core.
+
+Just bring me to the surface when you're done.
+
+PC: If you'd just said that to begin with. [[success2.2.2]]
+
+PC: No chance.[[failure2.2.2.]]
+
+
+:: 3.1 {"position":"500,4700","size":"100,100"}
+PC: Perceptive, are we.
+
+M: Only when someone interesting catches my eye.
+
+Your strength is commendable,
+
+It's been too long since I've met someone of your prowess,
+
+You're sure to give this place a good run.
+
+PC: You don't sound like someone who's about to die. [[3.1.1.]]
+
+Flattery won't save you here. [[3.1.2]]
+
+
+:: 3.1.1. {"position":"700,4600","size":"100,100"}
+PC: You don't sound like someone who's about to die.
+
+M: I've long accepted my death, 
+
+I'd rather it be by the hands of a valiant fighter,
+
+than simply wasting away here.
+
+PC: Wasting away? [[3.1.1.1]]
+
+Then I'll grant that. [[failure21]]
+
+
+:: 3.1.1.1 {"position":"900,4500","size":"100,100"}
+PC: Wasting away?
+
+M: This dungeon won't be alive for much longer.
+
+I know you're strong, 
+
+You must have fought plenty of Ghouls before,
+
+So you must feel that we, down here, aren't as we used to be
+
+PC: Then why not leave? [[3.1.1.1.1]]
+
+Insult my strength, I'll show you. [[failure22]]
+
+
+:: 3.1.1.1.1 {"position":"1100,4400","size":"100,100"}
+PC: Then why not leave?
+
+M: ...
+
+It's...not that simple.
+
+...
+
+Perhaps,
+
+Fuck it, I want to live.
+
+Let me come with you.
+
+PC: Ha! Why not. [[success6]]
+
+No. [[failure5]]
+
+
+:: 3.1.2 {"position":"700,4800","size":"100,100"}
+PC: Flattery won't save you here
+
+M: That wasn't the intention,
+
+But if it were to work...
+
+I may be so bold to comment on your capabilities,
+
+Perhaps the very real possibility of you making it out of here alive.
+
+What are you trying to say? [[3.1.2.1]]
+
+I'm done playing around. [[failure23]]
+
+
+:: 3.1.2.1 {"position":"900,4900","size":"100,100"}
+PC: What are you trying to say?
+
+M: You're impatient, clearly. 
+
+I'll get to it.
+
+I don't wish to die here.
+
+And I think you're going to get out.
+
+So I want in.
+
+I'll help of course, I've proven myself as much as you have.
+
+PC: ...I'll be watching you. [[success9]]
+
+You wishes mean nothing to me. [[failure24]]
+
+
+:: Good {"position":"300,1700","size":"100,100"}
+PC: I'll take that as a compliment.
+
+M: As intended.
+
+Tell me, Hunter, why have you come this far?
+
+Your eyes don't look like that of one who wishes to die.
+
+PC: I'm reaching the core, no matter what it takes. [[1.1]]
+
+I don't owe you an explanation. [[1.2]]
+
+
+
+
+:: Kill {"position":"300,4800","size":"100,100"}
+PC: It'll be the last you taste you ghoul.
+
+M: Hearty, aren't we.
+
+As much as I'd love to enable your theatrics,
+
+I have a feeling you have the intention of following through,
+
+PC: Perceptive, are we. [[3.1]]
+
+Your feeling would be correct.[[failure25]]
+
+
+:: Neutral {"position":"300,3300","size":"100,100"}
+PC: enjoy it whilst it lasts, now surrender
+
+M: So serious, although your way of fighting already showed as much.
+
+Surely there's no harm in humouring me for a moment,
+
+Call it a dying request.
+
+PC: You have one minute.[[2.1]]
+
+I don't have time to humour you.[[2.2]]
+
+
+:: failure1 {"position":"900,1200","size":"100,100"}
+
+
+
+:: failure2 {"position":"900,1600","size":"100,100"}
+
+
+
+:: failure2.1 {"position":"900,2800","size":"100,100"}
+PC: I'll be damned if I help you terrorise the surface
+
+M:
+
+
+:: failure2.1.2 {"position":"900,3300","size":"100,100"}
+PC: I won't be taken for a fool
+
+
+:: failure2.2.1 {"position":"900,3700","size":"100,100"}
+
+
+
+:: failure2.2.2. {"position":"900,4100","size":"100,100"}
+
+
+
+:: failure21 {"position":"900,4700","size":"100,100"}
+
+
+
+:: failure22 {"position":"1100,4600","size":"100,100"}
+
+
+
+:: failure23 {"position":"900,5100","size":"100,100"}
+
+
+
+:: failure24 {"position":"1100,4800","size":"100,100"}
+
+
+
+:: failure25 {"position":"500,4900","size":"100,100"}
+
+
+
+:: failure3 {"position":"900,2000","size":"100,100"}
+
+
+
+:: failure4 {"position":"900,2400","size":"100,100"}
+
+
+
+:: failure5 {"position":"1300,4475","size":"100,100"}
+
+
+
+:: success1 {"position":"900,1000","size":"100,100"}
+PC: Your strength will be a valuable asset. I accept.
+
+M: A wise choice.
+
+Let us go forth.
+
+
+:: success2 {"position":"900,1400","size":"100,100"}
+PC: ...perhaps I do wish to kill it.
+
+M: Then we must waste no time.
+
+You will answer my question later.
+
+
+:: success2.1 {"position":"900,2600","size":"100,100"}
+PC: Suppose you could be good distraction
+
+M: Hmph,
+
+At times,
+
+But there's fight left in me still.
+
+Lead on.
+
+
+:: success2.1.2. {"position":"900,3100","size":"100,100"}
+PC: You're dead the second you make a wrong move.
+
+M: Goes without saying.
+
+M: I'll be right behind you.
+
+
+:: success2.2.1 {"position":"900,3500","size":"100,100"}
+PC: An extra hand can't hurt. 
+
+M: There's more extra parts than just hands.
+
+I'll show you just how much more I can do.
+
+
+:: success2.2.2 {"position":"900,3900","size":"100,100"}
+PC: If you'd just said that to begin with. 
+
+M: Ha!
+
+Let us go.
+
+
+:: success3 {"position":"900,1800","size":"100,100"}
+PC: ...so be it. I could use the extra...help.
+
+M: And help you shall have,
+
+Let us go on.
+
+
+:: success4 {"position":"900,2200","size":"100,100"}
+PC: Don't get in my way. 
+
+M: By all means, 
+
+Lead the way.
+
+
+:: success6 {"position":"1300,4300","size":"100,100"}
+PC: Ha! Why not.
+
+M: Excellent.
+
+Forwards, we march on.
+
+
+:: success9 {"position":"1100,5000","size":"100,100"}
+PC: ...I'll be watching you.
+
+M: Keep your eyes on me all you like.
