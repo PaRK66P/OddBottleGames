@@ -25,7 +25,7 @@ public class enemyScr : MonoBehaviour
         if(GetComponent<CompanionManager>())
         {
             //Debug.Log("spawning companion manager " + poolMan.name);
-            GetComponent<CompanionManager>().InitialiseEnemy(ref dPlayer, ref poolMan, ref UICanvas);
+            //GetComponent<CompanionManager>().InitialiseEnemy(ref dPlayer, ref poolMan, ref UICanvas);
         }
         //transform.position = pos;
         //transform.rotation = UnityEngine.Quaternion.Euler(rot);

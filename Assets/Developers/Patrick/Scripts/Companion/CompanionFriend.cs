@@ -15,6 +15,7 @@ public class CompanionFriend : MonoBehaviour
     private CompanionFriendData _dataObj;
     private CompanionDetection _detectionScript;
     private CompanionAnimations _animationScript;
+    private PathfindingManager _pathfindingManager;
     private Rigidbody2D _rb;
     private GameObject _player;
     private GameObject _dashRechargeZone;
@@ -35,11 +36,15 @@ public class CompanionFriend : MonoBehaviour
     private bool _isLeapCalculated;
     private bool _isDashRefreshSpawned;
 
-    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimations animationScript, ref Rigidbody2D rb, ref GameObject player, ref GameObject dashRechargeZone)
+    private Node _lastPlayerNode;
+    private Vector2 _lastPathDirection;
+
+    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimations animationScript, ref PathfindingManager pathfindingManager, ref Rigidbody2D rb, ref GameObject player, ref GameObject dashRechargeZone)
     {
         _dataObj = dataObj;
         _detectionScript = detectionScript;
         _animationScript = animationScript;
+        _pathfindingManager = pathfindingManager;
         _rb = rb;
         _player = player;
         _dashRechargeZone = dashRechargeZone;
@@ -71,14 +76,16 @@ public class CompanionFriend : MonoBehaviour
                     break;
                 }
 
-                playerDistance = playerDistance - (playerDistance.normalized * _dataObj.idleDistance);
+                //playerDistance = playerDistance - (playerDistance.normalized * _dataObj.idleDistance);
 
-                if (playerDistance.sqrMagnitude < travelDistance * travelDistance)
-                {
-                    travelDistance = playerDistance.magnitude;
-                }
+                //if (playerDistance.sqrMagnitude < travelDistance * travelDistance)
+                //{
+                //    travelDistance = playerDistance.magnitude;
+                //}
 
-                _rb.MovePosition(new Vector2(_rb.position.x, _rb.position.y) + playerDistance.normalized * travelDistance);
+                Vector2 travelDirection = CompanionPathfinding();
+
+                _rb.MovePosition(new Vector2(_rb.position.x, _rb.position.y) + travelDirection * travelDistance);
 
                 break;
             case CompanionStates.ATTACKING:
@@ -100,6 +107,18 @@ public class CompanionFriend : MonoBehaviour
                 break;
 
         }
+    }
+
+    private Vector2 CompanionPathfinding()
+    {
+        if(_lastPlayerNode == _pathfindingManager.NodeFromWorldPosition(_player.transform.position))
+        {
+            return _lastPathDirection;
+        }
+
+        Vector2 direction = _pathfindingManager.GetPathDirection(_rb.position, _player.transform.position);
+        _lastPathDirection = direction;
+        return direction;
     }
 
     public void IdleAction()

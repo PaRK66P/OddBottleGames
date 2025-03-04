@@ -20,6 +20,8 @@ public class CompanionManager : MonoBehaviour
     private GameObject _playerObject;
     [SerializeField]
     private ObjectPoolManager _poolManager;
+    [SerializeField]
+    private PathfindingManager _pathfindingManager;
 
     [Header("Prefab Necessary")]
     [SerializeField]
@@ -48,10 +50,11 @@ public class CompanionManager : MonoBehaviour
 
     // No protection for uninitialised Companion
 
-    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref Canvas dUICanvas)
+    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref PathfindingManager pathfindingManager, ref Canvas dUICanvas)
     {
         _playerObject = playerObject;
         _poolManager = poolManager;
+        _pathfindingManager = pathfindingManager;
 
         visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
 
@@ -87,7 +90,7 @@ public class CompanionManager : MonoBehaviour
         if (friendScript == null)
         {
             friendScript = gameObject.AddComponent<CompanionFriend>();
-            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref rb, ref _playerObject, ref dashRechargeZone);
+            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref _pathfindingManager, ref rb, ref _playerObject, ref dashRechargeZone);
         }
 
         healthbar = Instantiate(bossData.healthbar, dUICanvas.transform);
@@ -136,7 +139,7 @@ public class CompanionManager : MonoBehaviour
         if (friendScript == null)
         {
             friendScript = gameObject.AddComponent<CompanionFriend>();
-            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref rb, ref _playerObject, ref dashRechargeZone);
+            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref _pathfindingManager, ref rb, ref _playerObject, ref dashRechargeZone);
         }
 
         //healthbar = Instantiate(bossData.healthbar, dUICanvas.transform);
