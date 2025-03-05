@@ -12,12 +12,9 @@ public class PathfindingComponent : MonoBehaviour
         _manager = manager;
     }
 
-    public List<Node> GetPath(Vector3 startPosition, Vector3 targetPosition)
+    public List<Node> GetPath(Node startNode, Node targetNode)
     {
         _path = new List<Node>();
-
-        Node startNode = _manager.NodeFromWorldPosition(startPosition);
-        Node targetNode = _manager.NodeFromWorldPosition(targetPosition);
 
         List<Node> openSet = new List<Node>(); // Set of nodes to visit
         HashSet<Node> closedSet = new HashSet<Node>(); // Set of visited nodes

@@ -141,7 +141,34 @@ public class PathfindingManager : MonoBehaviour
 
     public Vector3 GetPathDirection(Vector3 startPosition, Vector3 targetPosition)
     {
-        List<Node> path = _pathfindingScript.GetPath(startPosition, targetPosition);
+        Node startNode = NodeFromWorldPosition(startPosition);
+        if (startNode.isBlocked)
+        {
+            List<Node> startNeighbours = GetNeighbourNodes(startNode);
+            if(startNeighbours.Count <= 0)
+            {
+                Debug.LogError("Target is unreachable and stuck in a wall");
+                return Vector3.zero;
+            }
+
+            startNode = startNeighbours[0];
+        }
+
+        Node targetNode = NodeFromWorldPosition(targetPosition);
+        if (targetNode.isBlocked)
+        {
+            List<Node> targetNeighbours = GetNeighbourNodes(targetNode);
+            if (targetNeighbours.Count <= 0)
+            {
+                Debug.LogError("Target is unreachable and stuck in a wall");
+                return Vector3.zero;
+            }
+
+            targetNode = targetNeighbours[0];
+        }
+
+
+        List<Node> path = _pathfindingScript.GetPath(startNode, targetNode);
         if (path != null)
         {
             return (path[0].worldPosition - startPosition).normalized;
@@ -150,29 +177,29 @@ public class PathfindingManager : MonoBehaviour
         return Vector3.zero;
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.yellow;
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
 
-    //    if (_grid != null)
-    //    {
-    //        foreach (Node node in _grid)
-    //        {
-    //            Gizmos.color = Color.red;
-    //            if (node.isBlocked)
-    //            {
-    //                Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeSize - 0.1f));
-    //            }
-    //        }
-    //    }
+        if (_grid != null)
+        {
+            foreach (Node node in _grid)
+            {
+                Gizmos.color = Color.red;
+                if (node.isBlocked)
+                {
+                    Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeSize - 0.1f));
+                }
+            }
+        }
 
-    //    //if (_debugPath != null)
-    //    //{
-    //    //    foreach (Node node in _debugPath)
-    //    //    {
-    //    //        Gizmos.color = Color.green;
-    //    //        Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeSize - 0.1f));
-    //    //    }
-    //    //}
-    //}
+        //if (_debugPath != null)
+        //{
+        //    foreach (Node node in _debugPath)
+        //    {
+        //        Gizmos.color = Color.green;
+        //        Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeSize - 0.1f));
+        //    }
+        //}
+    }
 }

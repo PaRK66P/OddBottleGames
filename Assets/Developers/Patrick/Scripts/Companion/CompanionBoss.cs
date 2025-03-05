@@ -34,11 +34,12 @@ public class CompanionBoss : MonoBehaviour
     private float _leapMoveTimer;
     private Vector2 _leapStart;
     private Vector2 _leapEnd;
-    private Vector2 _leapDirection;
     private bool _isLeapMoving;
     private bool _isLeapFinished;
     private bool _isReadyToLeap;
     private float _readyStartTime;
+    private Node _lastPlayerNode;
+    private Vector3 _lastLeapMoveDirection;
 
     // Feral Attack
     private int _feralLeapAmount;
@@ -118,9 +119,14 @@ public class CompanionBoss : MonoBehaviour
 
         if (!_isReadyToLeap)
         {
-            Vector3 pathfindingDirection = _pathfindingScript.GetPathDirection(transform.position, playerObj.transform.position);
+            Node playerNode = _pathfindingScript.NodeFromWorldPosition(playerObj.transform.position);
+            if (_lastPlayerNode != playerNode)
+            {
+                _lastLeapMoveDirection = _pathfindingScript.GetPathDirection(transform.position, playerObj.transform.position);
+                _lastPlayerNode = playerNode;
+            }
 
-            rb.MovePosition(transform.position + pathfindingDirection * dataObj.moveSpeed * Time.fixedDeltaTime * Mathf.Max((dataObj.moveSpeedMultiplier * (Time.time - _readyStartTime)), 1.0f));
+            rb.MovePosition(transform.position + _lastLeapMoveDirection * dataObj.moveSpeed * Time.fixedDeltaTime * Mathf.Max((dataObj.moveSpeedMultiplier * (Time.time - _readyStartTime)), 1.0f));
 
             if (WithinLeapRange(dataObj.leapTravelDistance + (currentState == AttackState.FERAL_LEAP ? dataObj.feralLeapAdditionalDistance : 0.0f)))
             {
