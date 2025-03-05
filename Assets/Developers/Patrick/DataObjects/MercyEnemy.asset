@@ -27,6 +27,7 @@ MonoBehaviour:
   leapTravelTime: 0.3
   leapEndTime: 0.5
   leapTravelDistance: 8.1
+  leapTargetTravelPercentage: 0.8
   leapChargeSpriteLeft: {fileID: 21300000, guid: 04463bf04261e3f43bb0d7f34ea374e1, type: 3}
   leapChargeSpriteRight: {fileID: 21300000, guid: bb1309a33d4407e459590c5129e01a3f, type: 3}
   leapMoveSprite: {fileID: 21300000, guid: 0f56ace36a8c51043867070d895d3ca4, type: 3}
@@ -65,7 +66,7 @@ MonoBehaviour:
   screamAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   screamEndSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
   drawRange: 0
-  drawLeaps: 0
+  drawLeaps: 1
   drawSpit: 0
   drawLick: 0
   drawScream: 0

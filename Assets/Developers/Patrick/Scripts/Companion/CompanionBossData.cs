@@ -19,6 +19,7 @@ public class CompanionBossData : ScriptableObject
     public float leapTravelTime;
     public float leapEndTime;
     public float leapTravelDistance;
+    [Range(0.0f, 1.0f)] public float leapTargetTravelPercentage; // Where along the leap would the target be at the start of the leap as a percentage of the leap line
     public Sprite leapChargeSpriteLeft;
     public Sprite leapChargeSpriteRight;
     public Sprite leapMoveSprite;

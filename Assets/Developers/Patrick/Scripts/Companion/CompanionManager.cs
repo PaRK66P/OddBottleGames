@@ -48,6 +48,17 @@ public class CompanionManager : MonoBehaviour
     private VisualNovelScript visualNovelManager;
     private bool hasPlayedNovel = false;
 
+    private void Start()
+    {
+        Vector3 playerDirection = _playerObject.transform.position - transform.position;
+        Vector3 leapDirection = playerDirection.normalized;
+        Vector3 targetPosition = transform.position + leapDirection * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage;
+        float targetDistance = (targetPosition - transform.position).sqrMagnitude;
+
+        Debug.Log(targetDistance);
+        Debug.Log(bossData.leapTravelDistance * bossData.leapTravelDistance);
+    }
+
     // No protection for uninitialised Companion
 
     public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref PathfindingManager pathfindingManager, ref Canvas dUICanvas)
@@ -301,20 +312,44 @@ public class CompanionManager : MonoBehaviour
             Vector3 playerDirection = _playerObject.transform.position - transform.position;
             Vector3 leapDirection = playerDirection.normalized;
             Vector3 leapEnd = transform.position + leapDirection * bossData.leapTravelDistance;
-            if (playerDirection.sqrMagnitude >= bossData.leapTravelDistance * bossData.leapTravelDistance)
+
+            Vector3 targetPosition = transform.position + leapDirection * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage;
+            float targetDistance = (targetPosition - transform.position).sqrMagnitude;
+            bool drawTarget = true;
+
+            if((_playerObject.transform.position - transform.position).sqrMagnitude > targetDistance)
             {
-                leapEnd = _playerObject.transform.position;
+                drawTarget = false;
             }
+
+            if (playerDirection.sqrMagnitude < (bossData.leapTravelDistance * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage) * (bossData.leapTravelDistance * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage))
+            {
+                targetPosition = _playerObject.transform.position;
+                targetDistance = (targetPosition - transform.position).sqrMagnitude;
+
+            }
+
             wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, bossData.leapTravelDistance, bossData.environmentMask); // Update layer mask variable
             if (wallCheck)
             {
+                float wallDistance = (wallCheck.point - new Vector2(transform.position.x, transform.position.y)).sqrMagnitude;
+                
                 leapEnd = wallCheck.point;
+
+                if(wallDistance < targetDistance)
+                {
+                    drawTarget = false;
+                }
             }
 
             Gizmos.color = UnityEngine.Color.red;
             Gizmos.DrawWireSphere(transform.position, bossData.leapTravelDistance);
             Gizmos.color = new UnityEngine.Color(1, 0.5f, 0);
             Gizmos.DrawLine(transform.position, leapEnd);
+            if (drawTarget)
+            {
+                Gizmos.DrawWireSphere(targetPosition, 1.0f);
+            }
 
         }
 
