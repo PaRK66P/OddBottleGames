@@ -14,10 +14,14 @@ public class CompanionFriendData : ScriptableObject
     public float idleSpeed;
     public float idleDistance;
 
+    [Header("Attack")]
+    public float moveSpeed;
+
     [Header("Leap")]
     public float leapTravelTime;
     public float leapChargeTime;
     public float leapDistance;
+    [Range(0.0f, 1.0f)] public float leapTargetTravelPercentage; // Where along the leap would the target be at the start of the leap as a percentage of the leap line
 
     public float leapDamage;
     public float leapEndTime;

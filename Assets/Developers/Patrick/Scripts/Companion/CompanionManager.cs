@@ -48,17 +48,6 @@ public class CompanionManager : MonoBehaviour
     private VisualNovelScript visualNovelManager;
     private bool hasPlayedNovel = false;
 
-    private void Start()
-    {
-        Vector3 playerDirection = _playerObject.transform.position - transform.position;
-        Vector3 leapDirection = playerDirection.normalized;
-        Vector3 targetPosition = transform.position + leapDirection * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage;
-        float targetDistance = (targetPosition - transform.position).sqrMagnitude;
-
-        Debug.Log(targetDistance);
-        Debug.Log(bossData.leapTravelDistance * bossData.leapTravelDistance);
-    }
-
     // No protection for uninitialised Companion
 
     public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref PathfindingManager pathfindingManager, ref Canvas dUICanvas)
@@ -96,7 +85,7 @@ public class CompanionManager : MonoBehaviour
         if (bossScript == null)
         {
             bossScript = gameObject.AddComponent<CompanionBoss>();
-            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
+            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _pathfindingManager, ref _playerObject, ref _poolManager);
         }
         if (friendScript == null)
         {
@@ -145,7 +134,7 @@ public class CompanionManager : MonoBehaviour
         if (bossScript == null)
         {
             bossScript = gameObject.AddComponent<CompanionBoss>();
-            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
+            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _pathfindingManager, ref _playerObject, ref _poolManager);
         }
         if (friendScript == null)
         {
@@ -160,7 +149,7 @@ public class CompanionManager : MonoBehaviour
         //healthbar.GetComponent<UnityEngine.UI.Slider>().value = bossData.health;
 
         ChangeToNone();
-        ChangeToFriendly();
+        ChangeToEnemy();
     }
 
     // Update is called once per frame
@@ -344,6 +333,8 @@ public class CompanionManager : MonoBehaviour
 
             Gizmos.color = UnityEngine.Color.red;
             Gizmos.DrawWireSphere(transform.position, bossData.leapTravelDistance);
+            Gizmos.color = UnityEngine.Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, bossData.leapTravelDistance + bossData.feralLeapAdditionalDistance);
             Gizmos.color = new UnityEngine.Color(1, 0.5f, 0);
             Gizmos.DrawLine(transform.position, leapEnd);
             if (drawTarget)

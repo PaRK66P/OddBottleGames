@@ -16,6 +16,8 @@ MonoBehaviour:
   healthbar: {fileID: 7940067324356998275, guid: ace6fbf26c5479d4d870cd37326fbc3d, type: 3}
   leapsBeforeFeral: 3
   closeRangeDistance: 5.63
+  moveSpeed: 6
+  moveSpeedMultiplier: 1.4
   environmentMask:
     serializedVersion: 2
     m_Bits: 64
@@ -26,7 +28,7 @@ MonoBehaviour:
   leapChargeTime: 0.5
   leapTravelTime: 0.3
   leapEndTime: 0.5
-  leapTravelDistance: 8.1
+  leapTravelDistance: 11.23
   leapTargetTravelPercentage: 0.8
   leapChargeSpriteLeft: {fileID: 21300000, guid: 04463bf04261e3f43bb0d7f34ea374e1, type: 3}
   leapChargeSpriteRight: {fileID: 21300000, guid: bb1309a33d4407e459590c5129e01a3f, type: 3}
@@ -35,6 +37,7 @@ MonoBehaviour:
   feralLeapAmount: 3
   feralLeapDelay: 0.4
   feralLeapEndTime: 1.5
+  feralLeapAdditionalDistance: 6.66
   spitProjectile: {fileID: 5242277665205136327, guid: 6360764a931239e4b90bdbb8c14074e4, type: 3}
   spitProjectileLifespan: 3
   spitProjectileTravelDistance: 5

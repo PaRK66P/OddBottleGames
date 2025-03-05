@@ -44,12 +44,6 @@ public class PathfindingManager : MonoBehaviour
 
     private PathfindingComponent _pathfindingScript;
 
-    [Header("Debugging")]
-    public Transform startPath;
-    public Transform endPath;
-    private List<Node> _debugPath;
-    private float _debugTime;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -64,18 +58,6 @@ public class PathfindingManager : MonoBehaviour
 
         InitialiseGrid();
         CalculateGrid();
-
-        Debug.Log(GetPathDirection(startPath.position, endPath.position));
-    }
-
-    private void Update()
-    {
-        if(Time.time - _debugTime > 1.0f)
-        {
-            _debugTime = Time.time;
-            _debugPath = _pathfindingScript.GetPath(startPath.position, endPath.position);
-        }
-
     }
 
     private void InitialiseGrid()
@@ -168,29 +150,29 @@ public class PathfindingManager : MonoBehaviour
         return Vector3.zero;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.yellow;
 
-        if (_grid != null)
-        {
-            foreach (Node node in _grid)
-            {
-                Gizmos.color = Color.red;
-                if (node.isBlocked)
-                {
-                    Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeSize - 0.1f));
-                }
-            }
-        }
+    //    if (_grid != null)
+    //    {
+    //        foreach (Node node in _grid)
+    //        {
+    //            Gizmos.color = Color.red;
+    //            if (node.isBlocked)
+    //            {
+    //                Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeSize - 0.1f));
+    //            }
+    //        }
+    //    }
 
-        //if (_debugPath != null)
-        //{
-        //    foreach (Node node in _debugPath)
-        //    {
-        //        Gizmos.color = Color.green;
-        //        Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeSize - 0.1f));
-        //    }
-        //}
-    }
+    //    //if (_debugPath != null)
+    //    //{
+    //    //    foreach (Node node in _debugPath)
+    //    //    {
+    //    //        Gizmos.color = Color.green;
+    //    //        Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeSize - 0.1f));
+    //    //    }
+    //    //}
+    //}
 }

@@ -25,15 +25,15 @@ public class CompanionFriend : MonoBehaviour
     private CompanionStates _state;
 
     private float _leapTimer;
-    private bool _isLeapMoving;
     private bool _isLeapFinished;
     private float _leapMoveTimer;
     private float _leapEndTimer;
 
+    private bool _isReadyToLeap;
+
     private Vector2 _leapStart;
     private Vector2 _leapEnd;
 
-    private bool _isLeapCalculated;
     private bool _isDashRefreshSpawned;
 
     private Node _lastPlayerNode;
@@ -76,13 +76,6 @@ public class CompanionFriend : MonoBehaviour
                     break;
                 }
 
-                //playerDistance = playerDistance - (playerDistance.normalized * _dataObj.idleDistance);
-
-                //if (playerDistance.sqrMagnitude < travelDistance * travelDistance)
-                //{
-                //    travelDistance = playerDistance.magnitude;
-                //}
-
                 Vector2 travelDirection = CompanionPathfinding();
 
                 _rb.MovePosition(new Vector2(_rb.position.x, _rb.position.y) + travelDirection * travelDistance);
@@ -90,8 +83,45 @@ public class CompanionFriend : MonoBehaviour
                 break;
             case CompanionStates.ATTACKING:
 
-                if (!_isLeapMoving)
+                if (!_isReadyToLeap)
                 {
+                    Vector3 pathfindingDirection = _pathfindingManager.GetPathDirection(transform.position, _target.transform.position);
+
+                    _rb.MovePosition(transform.position + pathfindingDirection * _dataObj.moveSpeed * Time.fixedDeltaTime);
+
+                    if (WithinLeapRange(_dataObj.leapDistance))
+                    {
+                        Vector2 targetDirection = _target.transform.position - transform.position;
+                        Vector2 leapDirection = targetDirection.normalized;
+                        if (targetDirection == Vector2.zero)
+                        {
+                            leapDirection = (_leapEnd - _leapStart).normalized;
+                        }
+                        _leapStart = transform.position;
+                        _leapEnd = _leapStart + leapDirection * _dataObj.leapDistance;
+                        if (targetDirection.sqrMagnitude >= _dataObj.leapDistance * _dataObj.leapDistance)
+                        {
+                            _leapEnd = _target.transform.position;
+                        }
+                        RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, _dataObj.leapDistance, _dataObj.environmentLayer);
+                        if (wallCheck)
+                        {
+                            _leapEnd = wallCheck.point;
+                        }
+
+                        _leapTimer = Time.time;
+
+                        _isReadyToLeap = true;
+
+                        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_MOVING);
+                    }
+                    return;
+                }
+
+                if (Time.time - _leapTimer < _dataObj.leapChargeTime)
+                {
+                    _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_CHARGE);
+                    _leapMoveTimer = Time.time;
                     return;
                 }
 
@@ -107,6 +137,32 @@ public class CompanionFriend : MonoBehaviour
                 break;
 
         }
+    }
+    private bool WithinLeapRange(float leapDistance)
+    {
+        // Leaping
+        Vector3 playerDirection = _player.transform.position - transform.position;
+        Vector3 leapDirection = playerDirection.normalized;
+
+        Vector3 targetPosition = transform.position + leapDirection * leapDistance * _dataObj.leapTargetTravelPercentage;
+        float targetDistance = (targetPosition - transform.position).sqrMagnitude;
+
+        if ((_player.transform.position - transform.position).sqrMagnitude > targetDistance)
+        {
+            return false;
+        }
+
+        RaycastHit2D wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, leapDistance, _dataObj.environmentLayer); // Update layer mask variable
+        if (wallCheck)
+        {
+            float wallDistance = (wallCheck.point - new Vector2(transform.position.x, transform.position.y)).sqrMagnitude;
+
+            if (wallDistance < targetDistance)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     private Vector2 CompanionPathfinding()
@@ -129,10 +185,9 @@ public class CompanionFriend : MonoBehaviour
         {
             _state = CompanionStates.ATTACKING;
             _leapTimer = Time.time;
-            _isLeapCalculated = false;
+            _isReadyToLeap = false;
             _isLeapFinished = false;
             _isDashRefreshSpawned = false;
-            _isLeapMoving = false;
 
             // To be updated later
             if (_target.transform.position.x - transform.position.x < 0)
@@ -152,40 +207,6 @@ public class CompanionFriend : MonoBehaviour
 
     public void Leap()
     {
-        if(Time.time - _leapTimer < _dataObj.leapChargeTime)
-        {
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_CHARGE);
-            return;
-        }
-
-        if (!_isLeapCalculated)
-        {
-            Vector2 targetDirection = _target.transform.position - transform.position;
-            Vector2 leapDirection = targetDirection.normalized;
-            if (targetDirection == Vector2.zero)
-            {
-                leapDirection = (_leapEnd - _leapStart).normalized;
-            }
-            _leapStart = transform.position;
-            _leapEnd = _leapStart + leapDirection * _dataObj.leapDistance;
-            if (targetDirection.sqrMagnitude >= _dataObj.leapDistance * _dataObj.leapDistance)
-            {
-                _leapEnd = _target.transform.position;
-            }
-            RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, _dataObj.leapDistance, _dataObj.environmentLayer);
-            if (wallCheck)
-            {
-                _leapEnd = wallCheck.point;
-            }
-
-            _isLeapMoving = true;
-            _leapMoveTimer = Time.time;
-
-            _isLeapCalculated = true;
-
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_MOVING);
-        }
-
         if (!_isLeapFinished)
         {
             return;
