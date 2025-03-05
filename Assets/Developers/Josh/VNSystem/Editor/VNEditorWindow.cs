@@ -602,10 +602,24 @@ public class VNEditorWindow : EditorWindow
         nodeDrawing.style.width = 50;
         nodeDrawing.style.height = 50;
         nodeDrawing.style.position = Position.Absolute;
-        nodeDrawing.style.color = (node == currentNode) ? new StyleColor(Color.red) : new StyleColor(Color.white);
+       
         nodeDrawing.style.transformOrigin = nodeDrawingCanvas.style.transformOrigin;
         nodeDrawing.style.marginBottom = 10;
-        nodeDrawing.style.translate = new Translate(position.x, position.y);
+        nodeDrawing.style.translate = new Translate(position.x, position.y); 
+
+        if (node == currentNode)
+        {
+            nodeDrawing.style.color = new StyleColor(Color.red);
+        }
+        else if (node.sceneData.CharacterAsset == null)
+        {
+            nodeDrawing.style.color = new StyleColor(Color.blue);
+        }
+        else
+        {
+            nodeDrawing.style.color = new StyleColor(Color.white);
+        }
+
 
         var nodeLabel = new Label(nodeName);
         nodeLabel.style.unityTextAlign = TextAnchor.MiddleCenter;
