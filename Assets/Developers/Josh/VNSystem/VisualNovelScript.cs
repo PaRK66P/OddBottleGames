@@ -112,6 +112,7 @@ public class VisualNovelScript : MonoBehaviour
         //Debug.Log(NovelSceneID);
         if (!isNovelSection)
         {
+            canvGroup.alpha = 0;
             Time.timeScale = 0;
             playerRef.GetComponent<PlayerManager>().DisableInput();
             currentVNPrefabIndex = NovelSceneID;

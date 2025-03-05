@@ -137,7 +137,7 @@ public class CompanionManager : MonoBehaviour
         {
             _currentState = CompanionStates.NONE;
             healthbar.SetActive(false);
-            PlayDeathEffects();
+            StartCoroutine(PlayDeathEffects());
             return;
         }
         healthbar.GetComponent<UnityEngine.UI.Slider>().value = _health;
@@ -200,13 +200,24 @@ public class CompanionManager : MonoBehaviour
         spriteRenderer.color = UnityEngine.Color.white;
     }
 
-    private void PlayDeathEffects()
+    private IEnumerator PlayDeathEffects()
     {
         // maake sure to wait for stuff to finish in this function
         // or the visual novel will start playing over the top of it
-
+        float targetTime = 0.5f;
+        while (Time.timeScale > targetTime)
+        {
+            Time.timeScale -= Time.deltaTime;
+            if (Time.timeScale < targetTime)
+            {
+                Time.timeScale = targetTime;
+            }
+            yield return null;
+        }
+        
 
         DefeatVisualNovel();
+        //yield return null;
     }
 
     private void GetVisualNovelResult()
