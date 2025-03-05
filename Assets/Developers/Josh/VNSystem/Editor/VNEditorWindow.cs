@@ -831,6 +831,8 @@ public class VNEditorWindow : EditorWindow
 
             entryTextString = workingRoot.twineData.title;
             textFieldInput = workingRoot.sceneData.text;
+            selectedSprite = workingRoot.sceneData.CharacterAsset;
+
 
             UpdateGraphPane();
         }

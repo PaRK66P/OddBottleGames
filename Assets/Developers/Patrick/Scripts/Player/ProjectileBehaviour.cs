@@ -80,16 +80,19 @@ public class ProjectileBehaviour : MonoBehaviour
         }
         else if (collision.gameObject.layer == 6)
         {
-            Vector2 projDir = GetComponent<Rigidbody2D>().velocity.normalized;
-            Vector2 dirToCollisionObject = collision.gameObject.transform.position - gameObject.transform.position;
+            // Vector2 projDir = GetComponent<Rigidbody2D>().velocity.normalized;
+            // Vector2 dirToCollisionObject = collision.gameObject.transform.position - gameObject.transform.position;
 
-            float angle = Vector2.Angle(projDir, dirToCollisionObject);
-            
-            //Debug.Log(angle);
-            if (angle < 90.0f)
-            {
-                toBeReleased = true;
-            }
+            // float angle = Vector2.Angle(projDir, dirToCollisionObject);
+            // Debug.Log(angle);
+
+
+            // //Debug.Log(angle);
+            // if (angle < 125.0f)
+            // {
+            //     toBeReleased = true;
+            // }
+            toBeReleased = true;
         }
     }
 }
