@@ -41,7 +41,10 @@ public class ExplodyBarrel : MonoBehaviour
     {
         if (collLayers.value == LayerMask.GetMask("Projectile"))
         {
-            TriggerExplosion();
+            if (collision.gameObject.GetComponent<ProjectileBehaviour>() != null)
+            {
+                TriggerExplosion();
+            }
         }
     }
 }

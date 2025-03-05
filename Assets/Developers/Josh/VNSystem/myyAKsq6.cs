@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// This code is a modified version of work referenced at https://pastebin.com/myyAKsq6
+// This code is a heavily modified version of work referenced at https://pastebin.com/myyAKsq6
 // found through the youtube video https://www.youtube.com/watch?v=cmafUgj1cu8&t=534s
 // changed to fit our projects backend
 //
