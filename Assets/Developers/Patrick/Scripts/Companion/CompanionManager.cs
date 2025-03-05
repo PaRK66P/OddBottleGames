@@ -42,7 +42,7 @@ public class CompanionManager : MonoBehaviour
     private float _health;
     private GameObject healthbar;
 
-    private VisualNovelScript visualNovelManager;
+    //private VisualNovelScript visualNovelManager;
     private bool hasPlayedNovel = false;
 
     // No protection for uninitialised Companion
@@ -52,7 +52,7 @@ public class CompanionManager : MonoBehaviour
         _playerObject = playerObject;
         _poolManager = poolManager;
 
-        visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+        //visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
 
         dashRechargeZone.GetComponent<CircleCollider2D>().radius = friendData.rechargeZoneRadius;
         dashRechargeZone.gameObject.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector3(friendData.rechargeZoneRadius * 2.0f, friendData.rechargeZoneRadius * 2.0f, 1.0f);
@@ -163,22 +163,22 @@ public class CompanionManager : MonoBehaviour
                 friendScript.CompanionUpdate();
                 break;
         }
-        if (_currentState == CompanionStates.NONE && hasPlayedNovel && !visualNovelManager.isNovelSection)
-        {
-            switch(visualNovelManager.GetLastSelectionID())
-            {
-                case 0:
-                    ChangeToFriendly();
-                    break;
-                case 1:
-                    _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
-                    gameObject.GetComponent<enemyScr>().releaseEnemy();
-                    break;
-                default:
-                    Debug.LogError("Visual novel selection not supported. make sure to update selection code in miniboss as well as the novel that plays");
-                    break;
-            }
-        }
+        //if (_currentState == CompanionStates.NONE && hasPlayedNovel && !visualNovelManager.isNovelSection)
+        //{
+        //    switch(visualNovelManager.GetLastSelectionID())
+        //    {
+        //        case 0:
+        //            ChangeToFriendly();
+        //            break;
+        //        case 1:
+        //            _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
+        //            gameObject.GetComponent<enemyScr>().releaseEnemy();
+        //            break;
+        //        default:
+        //            Debug.LogError("Visual novel selection not supported. make sure to update selection code in miniboss as well as the novel that plays");
+        //            break;
+        //    }
+        //}
     }
 
     private void FixedUpdate()
@@ -225,8 +225,9 @@ public class CompanionManager : MonoBehaviour
         {
             hasPlayedNovel = true;
 
-            visualNovelManager.StartNovelSceneByName("Miniboss tester 2");
+            //visualNovelManager.StartNovelSceneByName("Miniboss tester 2");
             GetComponent<enemyScr>().DecreaseEnemyCount();
+            gameObject.SetActive(false);
         }
     }
 
