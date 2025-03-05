@@ -92,43 +92,6 @@ public class CompanionManager : MonoBehaviour
         ChangeToEnemy();
     }
 
-    // private void OnEnable()
-    // {
-    //     if (rb == null)
-    //     {
-    //         rb = GetComponent<Rigidbody2D>();
-    //     }
-    //     if (spriteRenderer == null)
-    //     {
-    //         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-    //     }
-    //     if (collisionDamageScript == null)
-    //     {
-    //         collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
-    //         collisionDamageScript.InitialiseComponent(ref friendData);
-    //     }
-    //     if (detectionScript == null)
-    //     {
-    //         detectionScript = GetComponentInChildren<CompanionDetection>();
-    //         detectionScript.InitialiseComponent(ref friendData);
-    //     }
-    //     if (animationsScript == null)
-    //     {
-    //         animationsScript = gameObject.AddComponent<CompanionAnimations>();
-    //         animationsScript.InitialiseComponent(ref bossData, ref friendData, ref spriteRenderer);
-    //     }
-    //     if (bossScript == null)
-    //     {
-    //         bossScript = gameObject.AddComponent<CompanionBoss>();
-    //         bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
-    //     }
-    //     if (friendScript == null)
-    //     {
-    //         friendScript = gameObject.AddComponent<CompanionFriend>();
-    //         friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref rb, ref _playerObject);
-    //     }
-    // }
-
     // Update is called once per frame
     void Update()
     {
@@ -145,27 +108,10 @@ public class CompanionManager : MonoBehaviour
         }
         if (_currentState == CompanionStates.NONE && hasPlayedNovel && !visualNovelManager.isNovelSection)
         {
-            switch(visualNovelManager.GetLastSelectionID())
-            {
-                case 0:
-                {
-                    ChangeToFriendly();
-                    break;
-                }
-                case 1:
-                {
-                    ChangeToEnemy();
-                    gameObject.GetComponent<enemyScr>().releaseEnemy();
-                    break;
-                }
-                default:
-                {
-                    Debug.LogError("Visual novel selection not supported. make sure to update selection code in miniboss as well as the novel that plays");
-                    break;
-                }
-            }
+            GetVisualNovelResult();
         }
     }
+
 
     private void FixedUpdate()
     {
@@ -191,7 +137,7 @@ public class CompanionManager : MonoBehaviour
         {
             _currentState = CompanionStates.NONE;
             healthbar.SetActive(false);
-            DefeatVisual();
+            PlayDeathEffects();
             return;
         }
         healthbar.GetComponent<UnityEngine.UI.Slider>().value = _health;
@@ -203,7 +149,7 @@ public class CompanionManager : MonoBehaviour
         StartCoroutine(DamageColor());
     }
 
-    private void DefeatVisual()
+    private void DefeatVisualNovel()
     {
         // To be removed
         
@@ -252,6 +198,32 @@ public class CompanionManager : MonoBehaviour
         spriteRenderer.color = UnityEngine.Color.red;
         yield return new WaitForSeconds(0.1f);
         spriteRenderer.color = UnityEngine.Color.white;
+    }
+
+    private void PlayDeathEffects()
+    {
+        // maake sure to wait for stuff to finish in this function
+        // or the visual novel will start playing over the top of it
+
+
+        DefeatVisualNovel();
+    }
+
+    private void GetVisualNovelResult()
+    {
+        switch (visualNovelManager.GetLastSelectionID())
+        {
+            case 0:
+                ChangeToFriendly();
+                break;
+            case 1:
+                ChangeToEnemy();
+                gameObject.GetComponent<enemyScr>().releaseEnemy();
+                break;
+            default:
+                Debug.LogError("Visual novel selection not supported. make sure to update selection code in miniboss as well as the novel that plays");
+                break;
+        }
     }
 
     #region Gizmos
