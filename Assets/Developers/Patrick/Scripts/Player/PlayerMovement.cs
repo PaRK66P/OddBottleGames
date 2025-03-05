@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
             dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
 
             dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform.Find("PlayerUI"), true);
+            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
         }
     }
 
@@ -232,7 +232,7 @@ public class PlayerMovement : MonoBehaviour
             dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
 
             dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform.Find("PlayerUI"), true);
+            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
         }
     }
 }
