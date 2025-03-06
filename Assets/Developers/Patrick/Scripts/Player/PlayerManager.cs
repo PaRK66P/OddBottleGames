@@ -155,7 +155,7 @@ public class PlayerManager : MonoBehaviour
 
     public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f, int ammount = 10)
     {
-        if (isDamaged || isDashing) { return; }
+        if (CanBeDamaged()) { return; }
 
         rb.excludeLayers = playerData.damageLayers;
         isDamaged = true;
@@ -259,6 +259,12 @@ public class PlayerManager : MonoBehaviour
     public void SetDashInvulnerability(bool invulnerability)
     {
         isDashing = invulnerability;
+    }
+
+    public bool CanBeDamaged()
+    {
+        if(isDamaged || isDashing) { return false; }
+        return true;
     }
 
     private void OnDrawGizmos()

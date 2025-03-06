@@ -33,7 +33,10 @@ public class CompanionCollisionDamage : MonoBehaviour
                 if (collision.tag == "Player")
                 {
                     damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
-                    collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 30, 20);
+                    if (collision.gameObject.GetComponent<PlayerManager>().CanBeDamaged())
+                    {
+                        collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 30, 20);
+                    }
                     return;
                 }
                 break;
@@ -65,7 +68,10 @@ public class CompanionCollisionDamage : MonoBehaviour
                 if(collision.tag == "Player")
                 {
                     damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
-                    collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection);
+                    if (collision.gameObject.GetComponent<PlayerManager>().CanBeDamaged())
+                    {
+                        collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection);
+                    }
                 }
                 break;
             case CollisionDamageStates.ENEMY:

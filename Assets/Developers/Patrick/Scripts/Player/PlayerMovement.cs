@@ -168,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (dashTimer >= _playerData.dashTime)
                 {
-                    _playerManager.SetDashInvulnerability(true);
+                    _playerManager.SetDashInvulnerability(false);
 
                     dash = false;
 

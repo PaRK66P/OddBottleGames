@@ -577,6 +577,7 @@ MonoBehaviour:
   PlayerCanvas: {fileID: 2704403275224883303}
   playerData: {fileID: 11400000, guid: eff54af2d3cd2c24badc3f05b2e57eb4, type: 2}
   debugData: {fileID: 11400000, guid: 4d082aba971073f4eb298f409e371475, type: 2}
+  _evolveDashCollider: {fileID: 2293566067234523102}
   fadeIn: 0
   fadeOut: 0
   fadeTextTimer: 0
