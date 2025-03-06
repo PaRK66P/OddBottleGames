@@ -110,7 +110,7 @@ public class PlayerManager : MonoBehaviour
         if(regenTimer >= 1)
         {
             health += 1;
-            regenTimer = 0;
+            regenTimer = 0; 
         }
 
         healthbar.GetComponent<Slider>().value = health;
@@ -235,8 +235,8 @@ public class PlayerManager : MonoBehaviour
         debugData.dashTowardsMouse = toggle;
     }
 
-    public void GainDashCharge()
+    public void EvolveDash(bool toggle)
     {
-
+        playerMovement.EvolveDash();
     }
 }

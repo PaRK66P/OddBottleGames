@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   healthbar: {fileID: 7940067324356998275, guid: ac8003dc51160644aa424ec898956709, type: 3}
-  speed: 7
+  speed: 12
   dashChargeUIObject: {fileID: 454602280210619587, guid: 15acabbdf8d62154f9216abc70b7a442, type: 3}
+  dashRechargeUIObject: {fileID: 454602280210619587, guid: fb993dada00dc344dae6409bd2fc1b3e, type: 3}
   dashTime: 0.2
   dashDistance: 5
   dashCooldown: 0.15
