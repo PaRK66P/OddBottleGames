@@ -53,12 +53,12 @@ public class PlayerMovement : MonoBehaviour
         {
             dashRechargesUIObjects[i] = Instantiate(_playerData.dashRechargeUIObject, UICanvas.transform);
             dashRechargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-            dashRechargesUIObjects[i].transform.SetParent(UICanvas.transform.Find("PlayerUI"), true);
+            dashRechargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
             //dashRechargesUIObjects[i].GetComponent<RectTransform>().localScale = new Vector3(0, 0, 1);
 
             dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
             dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform.Find("PlayerUI"), true);
+            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
         }
     }
 
@@ -249,12 +249,12 @@ public class PlayerMovement : MonoBehaviour
         {
             dashRechargesUIObjects[i] = Instantiate(_playerData.dashRechargeUIObject, UICanvas.transform);
             dashRechargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-            dashRechargesUIObjects[i].transform.SetParent(UICanvas.transform.Find("PlayerUI"), true);
+            dashRechargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
             //dashRechargesUIObjects[i].GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
 
             dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
             dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform.Find("PlayerUI"), true);
+            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
         }
     }
 

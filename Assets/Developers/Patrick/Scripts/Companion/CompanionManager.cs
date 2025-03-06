@@ -336,10 +336,10 @@ public class CompanionManager : MonoBehaviour
             Gizmos.color = UnityEngine.Color.yellow;
             Gizmos.DrawWireSphere(transform.position, (bossData.leapTravelDistance + bossData.feralLeapAdditionalDistance) * bossData.leapTargetTravelPercentage);
 
-            Gizmos.color = new UnityEngine.Color(1, 1, 1);
-            Gizmos.DrawLine(transform.position, transform.position + leapDirection * (bossData.leapTravelDistance + bossData.feralLeapAdditionalDistance));
             Gizmos.color = new UnityEngine.Color(1, 0.5f, 0);
             Gizmos.DrawLine(transform.position, leapEnd);
+            Gizmos.color = new UnityEngine.Color(1, 1, 1);
+            Gizmos.DrawLine(leapEnd, transform.position + leapDirection * (bossData.leapTravelDistance + bossData.feralLeapAdditionalDistance));
             if (drawTarget)
             {
                 Gizmos.DrawWireSphere(targetPosition, 1.0f);

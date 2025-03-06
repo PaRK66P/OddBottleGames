@@ -239,4 +239,9 @@ public class PlayerManager : MonoBehaviour
     {
         playerMovement.EvolveDash();
     }
+
+    public void GainDashCharges()
+    {
+        playerMovement.RechargeDashes();
+    }
 }
