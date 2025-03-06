@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private PlayerManager _playerManager;
     private Rigidbody2D rb;
     private GameObject UICanvas;
 
@@ -27,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 knockbackForce = Vector2.zero;
 
+    private bool evolved = false;
+
     private PlayerData _playerData;
     private PlayerDebugData _debugData;
 
@@ -36,8 +39,10 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();        
     }
 
-    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas)
+    public void InitialiseComponent(ref PlayerManager playerManager, ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas)
     {
+        _playerManager = playerManager;
+
         UICanvas = dUICanvas;
 
         _playerData = playerData;
@@ -155,13 +160,15 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(DashColor());
                 dashTimer += Time.fixedDeltaTime;
 
-                rb.excludeLayers = _playerData.damageLayers;
+                _playerManager.SetDashInvulnerability(true);
+                //GetComponentInChildren<EvolveDashDamage>().UpdateCollisionLayer(_playerData.damageLayers);
+                // Update evolve dash collision layers if active
 
-                rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * _playerData.dashDistance, Mathf.Min(dashTimer / _playerData.dashTime, 1.0f)));
+                rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * (evolved ? _playerData.dashDistance + _playerData.evolvedDashExtraDistance : _playerData.dashDistance), Mathf.Min(dashTimer / _playerData.dashTime, 1.0f)));
 
                 if (dashTimer >= _playerData.dashTime)
                 {
-                    rb.excludeLayers = 0;
+                    _playerManager.SetDashInvulnerability(true);
 
                     dash = false;
 
@@ -257,6 +264,8 @@ public class PlayerMovement : MonoBehaviour
             dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
             dashChargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
         }
+
+        evolved = true;
     }
 
     public void RechargeDashes(int n = 3)
