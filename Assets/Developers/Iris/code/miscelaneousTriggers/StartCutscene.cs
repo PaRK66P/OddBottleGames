@@ -17,6 +17,7 @@ public class StartCutscene : MonoBehaviour
             {
                 GetComponent<PlayableDirector>().Play();
                 Debug.Log("playCutscene");
+                isTriggered = true;
             }
         }
     }
