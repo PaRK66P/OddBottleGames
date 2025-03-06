@@ -37,6 +37,7 @@ public class CompanionFriend : MonoBehaviour
     private bool _isDashRefreshSpawned;
 
     private Node _lastPlayerNode;
+    private Node _lastNode;
     private Vector2 _lastPathDirection;
 
     public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimations animationScript, ref PathfindingManager pathfindingManager, ref Rigidbody2D rb, ref GameObject player, ref GameObject dashRechargeZone)
@@ -85,7 +86,19 @@ public class CompanionFriend : MonoBehaviour
 
                 if (!_isReadyToLeap)
                 {
-                    Vector3 pathfindingDirection = _pathfindingManager.GetPathDirection(transform.position, _target.transform.position);
+                    Node playerNode = _pathfindingManager.NodeFromWorldPosition(_player.transform.position);
+                    Node currentNode = _pathfindingManager.NodeFromWorldPosition(transform.position);
+
+                    Vector3 pathfindingDirection = _lastPathDirection;
+
+                    if (_lastPlayerNode != playerNode || _lastNode != currentNode)
+                    {
+                        pathfindingDirection = _pathfindingManager.GetPathDirection(transform.position, _target.transform.position);
+
+                        _lastPlayerNode = playerNode;
+                        _lastNode = currentNode;
+                        _lastPathDirection = pathfindingDirection;
+                    }
 
                     _rb.MovePosition(transform.position + pathfindingDirection * _dataObj.moveSpeed * Time.fixedDeltaTime);
 
@@ -167,11 +180,15 @@ public class CompanionFriend : MonoBehaviour
 
     private Vector2 CompanionPathfinding()
     {
-        if(_lastPlayerNode == _pathfindingManager.NodeFromWorldPosition(_player.transform.position))
+        Node playerNode = _pathfindingManager.NodeFromWorldPosition(_player.transform.position);
+        Node currentNode = _pathfindingManager.NodeFromWorldPosition(transform.position);
+        if (_lastPlayerNode == playerNode && _lastNode == currentNode)
         {
             return _lastPathDirection;
         }
 
+        _lastPlayerNode = playerNode;
+        _lastNode = currentNode;
         Vector2 direction = _pathfindingManager.GetPathDirection(_rb.position, _player.transform.position);
         _lastPathDirection = direction;
         return direction;

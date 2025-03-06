@@ -42,6 +42,8 @@ public class PathfindingManager : MonoBehaviour
     private int _gridSizeX;
     private int _gridSizeY;
 
+    private List<Node> _debugPath;
+
     private PathfindingComponent _pathfindingScript;
 
     // Start is called before the first frame update
@@ -167,13 +169,14 @@ public class PathfindingManager : MonoBehaviour
             targetNode = targetNeighbours[0];
         }
 
-
         List<Node> path = _pathfindingScript.GetPath(startNode, targetNode);
+        _debugPath = path;
         if (path != null)
         {
+            Debug.Log((path[0].worldPosition - startPosition).normalized);
             return (path[0].worldPosition - startPosition).normalized;
         }
-
+        Debug.Log(Vector3.zero);
         return Vector3.zero;
     }
 
@@ -193,13 +196,13 @@ public class PathfindingManager : MonoBehaviour
             }
         }
 
-        //if (_debugPath != null)
-        //{
-        //    foreach (Node node in _debugPath)
-        //    {
-        //        Gizmos.color = Color.green;
-        //        Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeSize - 0.1f));
-        //    }
-        //}
+        if (_debugPath != null)
+        {
+            foreach (Node node in _debugPath)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeSize - 0.1f));
+            }
+        }
     }
 }
