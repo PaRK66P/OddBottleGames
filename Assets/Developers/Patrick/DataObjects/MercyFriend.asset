@@ -29,4 +29,4 @@ MonoBehaviour:
   rechargeZoneRadius: 5
   drawDetectionRange: 0
   drawRechargeZone: 0
-  drawIdleDistance: 1
+  drawIdleDistance: 0

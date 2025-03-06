@@ -200,9 +200,9 @@ public class PlayerShooting : MonoBehaviour
 
         reloadUISlider.SetActive(true);
         reloadUISlider.GetComponent<Slider>().value = 0;
-        while (Time.time - startTime <= reloadTime)
+        while (Time.time - startTime <= _playerData.reloadTime)
         {
-            reloadUISlider.GetComponent<Slider>().value = (Time.time - startTime) / reloadTime * 100;
+            reloadUISlider.GetComponent<Slider>().value = (Time.time - startTime) / _playerData.reloadTime * 100;
             yield return null;
         }
         reloadUISlider.SetActive(false);

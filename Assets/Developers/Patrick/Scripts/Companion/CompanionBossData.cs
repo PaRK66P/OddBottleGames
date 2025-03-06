@@ -10,6 +10,8 @@ public class CompanionBossData : ScriptableObject
     public GameObject healthbar;
     public int leapsBeforeFeral;
     public float closeRangeDistance;
+    public float moveSpeed;
+    public float moveSpeedMultiplier; // The multiplier that effects the speed the longer they move towards the player
     public LayerMask environmentMask;
     public LayerMask playerMask;
     public Sprite idleSprite;
@@ -19,6 +21,7 @@ public class CompanionBossData : ScriptableObject
     public float leapTravelTime;
     public float leapEndTime;
     public float leapTravelDistance;
+    [Range(0.0f, 1.0f)] public float leapTargetTravelPercentage; // Where along the leap would the target be at the start of the leap as a percentage of the leap line
     public Sprite leapChargeSpriteLeft;
     public Sprite leapChargeSpriteRight;
     public Sprite leapMoveSprite;
@@ -28,6 +31,7 @@ public class CompanionBossData : ScriptableObject
     public int feralLeapAmount;
     public float feralLeapDelay;
     public float feralLeapEndTime;
+    public float feralLeapAdditionalDistance;
 
     [Header("Spit")]
     public GameObject spitProjectile;
