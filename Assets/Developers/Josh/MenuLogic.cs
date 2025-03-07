@@ -111,8 +111,10 @@ public class MenuLogic : MonoBehaviour
 
     public void OnVolumeSliderChanged(float value)
     {
+        Debug.Log(value);
         volume = value;
         PlayerPrefs.SetFloat("volume", value);
+        Debug.Log(PlayerPrefs.GetFloat("volume"));
     }
 
     public void OnTextSpeedSliderChange(float value)
