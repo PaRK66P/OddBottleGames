@@ -207,7 +207,7 @@ public class CompanionManager : MonoBehaviour
         float targetTime = 0.5f;
         while (Time.timeScale > targetTime)
         {
-            Time.timeScale -= Time.deltaTime;
+            Time.timeScale -= Time.unscaledDeltaTime;
             if (Time.timeScale < targetTime)
             {
                 Time.timeScale = targetTime;

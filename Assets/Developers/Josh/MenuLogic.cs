@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuLogic : MonoBehaviour
 {
-    [SerializeField] GameObject MenuAssets;
+    [SerializeField] GameObject menuAssets;
+    [SerializeField] GameObject loadingScreenAssets;
+    [SerializeField] GameObject SettingsAssets;
 
-    [SerializeField] GameObject LoadingScreenAssets;
-
-    [SerializeField] GameObject LoadingBar;
+    [SerializeField] UnityEngine.UI.Image loadingBar;
     // Start is called before the first frame update
-    void OnStartClick()
+    public void OnStartClick()
     {
+        menuAssets.SetActive(false);
+        loadingScreenAssets.SetActive(true);
         StartCoroutine(LoadGame());
-        MenuAssets.SetActive(false);
-        LoadingScreenAssets.SetActive(true);
+        
     }
 
     IEnumerator LoadGame()
@@ -26,7 +28,20 @@ public class MenuLogic : MonoBehaviour
         while (!loadGame.isDone)
         {
             float fillAmount = Mathf.Clamp01(loadGame.progress / 0.9f);
+            loadingBar.fillAmount = fillAmount;
             yield return null;
         }
+    }
+
+    public void OnSettingsClick()
+    {
+        menuAssets.SetActive(false);
+        SettingsAssets.SetActive(true);
+    }
+
+    public void OnMenuClick()
+    {
+        SettingsAssets.SetActive(false);
+        menuAssets.SetActive(true);
     }
 }
