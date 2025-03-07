@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sanctum of the Heart_0: 2508645692844195057
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
