@@ -4173,6 +4173,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c227bcece97ab4381ab9da9f48894a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 569744112}
+  typingSpeedSlider: {fileID: 1031734417}
+  dashToggle: {fileID: 1236939986}
+  autoTypeToggle: {fileID: 611875105}
 --- !u!4 &585065423
 Transform:
   m_ObjectHideFlags: 0

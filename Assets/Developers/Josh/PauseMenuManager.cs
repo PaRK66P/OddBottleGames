@@ -4,17 +4,50 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
+    [SerializeField] UnityEngine.UI.Slider volumeSlider;
+    [SerializeField] UnityEngine.UI.Slider typingSpeedSlider;
+    [SerializeField] UnityEngine.UI.Toggle dashToggle;
+    [SerializeField] UnityEngine.UI.Toggle autoTypeToggle;
+
     private GameObject player;
     private GameObject pauseMenuContainer;
     private VisualNovelScript visualNovelManager;
     private bool isPaused = false;
-    private float volume;
+
+    private float volume = 0.3f;
+    private float typingSpeed = 1.0f;
+    private bool dash = false;
+    private bool autoType = true;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("PlayerProto");
         pauseMenuContainer = GameObject.Find("Canvas").transform.Find("PauseMenu").gameObject;
         visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+
+
+        if (!PlayerPrefs.HasKey("volume"))
+            PlayerPrefs.SetFloat("volume", volume);
+        volume = PlayerPrefs.GetFloat("volume", volume);
+        volumeSlider.value = volume;
+
+        if (!PlayerPrefs.HasKey("typingSpeed"))
+            PlayerPrefs.SetFloat("typingSpeed", typingSpeed);
+        typingSpeed = PlayerPrefs.GetFloat("typingSpeed", typingSpeed);
+        typingSpeedSlider.value = typingSpeed;
+
+        if (!PlayerPrefs.HasKey("dash"))
+            PlayerPrefs.SetInt("dash", BoolToInt(dash));
+        dash = IntToBool(PlayerPrefs.GetInt("dash", BoolToInt(dash)));
+        dashToggle.isOn = dash;
+
+        if (!PlayerPrefs.HasKey("autoType"))
+            PlayerPrefs.SetInt("autoType", BoolToInt(autoType));
+        autoType = IntToBool(PlayerPrefs.GetInt("autoType", BoolToInt(autoType)));
+        autoTypeToggle.isOn = autoType;
+
+        PlayerPrefs.Save();
     }
 
     // Update is called once per frame
@@ -47,6 +80,7 @@ public class PauseMenuManager : MonoBehaviour
 
     private void OnUnpause()
     {
+        PlayerPrefs.Save();
         Time.timeScale = 1.0f;
         player.GetComponent<PlayerManager>().EnableInput();
 
@@ -62,7 +96,8 @@ public class PauseMenuManager : MonoBehaviour
 
     public void OnQuitClick()
     {
-        Application.Quit();
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("MainMenuScene");
     }
 
     public void OnControlsClick()
@@ -85,23 +120,43 @@ public class PauseMenuManager : MonoBehaviour
         SceneManager.LoadScene(scene.name);
     }
 
-    public void OnVolumeChange(float value)
+    public void OnVolumeSliderChanged(float value)
     {
         volume = value;
+        PlayerPrefs.SetFloat("volume", volume);
     }
 
-    public void OnTextSpeedSliderChange(float val)
+    public void OnTextSpeedSliderChange(float value)
     {
-        visualNovelManager.typeTextSpeed = val;
+        typingSpeed = value;
+        PlayerPrefs.SetFloat("typingSpeed", typingSpeed);
     }
 
     public void OnTypingTextToggleChanged(bool toggle)
     {
-        visualNovelManager.typingTextToggle = toggle;
+        autoType = toggle;
+        PlayerPrefs.SetInt("autoType", BoolToInt(autoType));
     }
 
     public void DashToMouseToggleChanged(bool toggle)
     {
-        player.GetComponent<PlayerManager>().ChangeDashToggle(toggle);
+        dash = toggle;
+        PlayerPrefs.SetInt("dash", BoolToInt(dash));
+    }
+
+    private int BoolToInt(bool val)
+    {
+        if (val == true)
+            return 1;
+        else
+            return 0;
+    }
+
+    private bool IntToBool(int val)
+    {
+        if (val == 0)
+            return false;
+        else
+            return true;
     }
 }
