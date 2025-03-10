@@ -1,0 +1,738 @@
+fileFormatVersion: 2
+guid: 4d3cd87951319b84cae995516170bad1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 159365168866556868
+    second: abertay uni logo_0
+  - first:
+      213: -1827241734181996131
+    second: abertay uni logo_1
+  - first:
+      213: -1302447709981439311
+    second: abertay uni logo_2
+  - first:
+      213: -667149305798558358
+    second: abertay uni logo_3
+  - first:
+      213: -2805115819523564706
+    second: abertay uni logo_4
+  - first:
+      213: 1827079467987273254
+    second: abertay uni logo_5
+  - first:
+      213: -4854239665299420469
+    second: abertay uni logo_6
+  - first:
+      213: 7578621585002984012
+    second: abertay uni logo_7
+  - first:
+      213: -8688471215450545844
+    second: abertay uni logo_8
+  - first:
+      213: -2787599500422761010
+    second: abertay uni logo_9
+  - first:
+      213: -4885391646024780928
+    second: abertay uni logo_10
+  - first:
+      213: 8481097651050969899
+    second: abertay uni logo_11
+  - first:
+      213: -5787009970553576286
+    second: abertay uni logo_12
+  - first:
+      213: 6015769622107359289
+    second: abertay uni logo_13
+  - first:
+      213: 7711300846345206278
+    second: abertay uni logo_14
+  - first:
+      213: -6311132911739851579
+    second: abertay uni logo_15
+  - first:
+      213: 6484007306316393758
+    second: abertay uni logo_16
+  - first:
+      213: 8234083232550711095
+    second: abertay uni logo_17
+  - first:
+      213: -7257306527719850387
+    second: abertay uni logo_18
+  - first:
+      213: -1665047004592458401
+    second: abertay uni logo_19
+  - first:
+      213: -1641053722983886406
+    second: abertay uni logo_20
+  - first:
+      213: 8777154563757370220
+    second: abertay uni logo_21
+  - first:
+      213: -3180270156666369925
+    second: abertay uni logo_22
+  - first:
+      213: 5908061173709323563
+    second: abertay uni logo_23
+  - first:
+      213: -8283471925095871148
+    second: abertay uni logo_24
+  - first:
+      213: -4369761125372990599
+    second: abertay uni logo_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: abertay uni logo_0
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 268
+        width: 252
+        height: 287
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cb7cd7d6cd263200800000000000000
+      internalID: 159365168866556868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_1
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 175
+        width: 81
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d99305be25554a6e0800000000000000
+      internalID: -1827241734181996131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_2
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 175
+        width: 83
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ba090c55b6ccede0800000000000000
+      internalID: -1302447709981439311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_3
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 176
+        width: 34
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6d7ab7bd3fcdb6f0800000000000000
+      internalID: -667149305798558358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_4
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 176
+        width: 143
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5b1877360a3219d0800000000000000
+      internalID: -2805115819523564706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_5
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 176
+        width: 71
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6268ac988171b5910800000000000000
+      internalID: 1827079467987273254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_6
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 175
+        width: 50
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bca87374eb642acb0800000000000000
+      internalID: -4854239665299420469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_7
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 176
+        width: 34
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c42f535ad2cac2960800000000000000
+      internalID: 7578621585002984012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_8
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 176
+        width: 71
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c412dd986795c6780800000000000000
+      internalID: -8688471215450545844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_9
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 176
+        width: 83
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec5be3116057059d0800000000000000
+      internalID: -2787599500422761010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_10
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 131
+        width: 569
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 083380e8e2a933cb0800000000000000
+      internalID: -4885391646024780928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_11
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 112
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2bfa4cf069e2b570800000000000000
+      internalID: 8481097651050969899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_12
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 99
+        width: 48
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a4a289b71960bfa0800000000000000
+      internalID: -5787009970553576286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_13
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 131
+        width: 543
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9388b40399e4c7350800000000000000
+      internalID: 6015769622107359289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3
+        width: 184
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60a3396734b040b60800000000000000
+      internalID: 7711300846345206278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_15
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 3
+        width: 77
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cc2879fd0a5a68a0800000000000000
+      internalID: -6311132911739851579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_16
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 3
+        width: 87
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1da6069a42dbf950800000000000000
+      internalID: 6484007306316393758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_17
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 3
+        width: 89
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73f6f2fe217554270800000000000000
+      internalID: 8234083232550711095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_18
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 3
+        width: 101
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6e7225f92ed84b90800000000000000
+      internalID: -7257306527719850387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_19
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 3
+        width: 104
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5530f4329094e8e0800000000000000
+      internalID: -1665047004592458401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_20
+      rect:
+        serializedVersion: 2
+        x: 631
+        y: 3
+        width: 104
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab19638655ec939e0800000000000000
+      internalID: -1641053722983886406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_21
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 1
+        width: 103
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6be4778297bec970800000000000000
+      internalID: 8777154563757370220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_22
+      rect:
+        serializedVersion: 2
+        x: 837
+        y: 1
+        width: 102
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b78002e64296dd3d0800000000000000
+      internalID: -3180270156666369925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_23
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 3
+        width: 104
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2db832d556adf150800000000000000
+      internalID: 5908061173709323563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_24
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 3
+        width: 78
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45d4dbdfb223b0d80800000000000000
+      internalID: -8283471925095871148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abertay uni logo_25
+      rect:
+        serializedVersion: 2
+        x: 1123
+        y: 3
+        width: 77
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97be4d0986d7b53c0800000000000000
+      internalID: -4369761125372990599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

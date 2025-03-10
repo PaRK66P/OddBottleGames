@@ -6,10 +6,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEditor.ShaderGraph.Internal;
 
 
 public class TwineParser
