@@ -10,6 +10,7 @@ public class PlayerInputManager : MonoBehaviour
     private InputAction dashAction;
     private InputAction fireAction;
     private InputAction reloadAction;
+    private InputAction chargeAction;
 
     public PlayerMovement playerMovement;
     public PlayerShooting playerShooting;
@@ -26,6 +27,7 @@ public class PlayerInputManager : MonoBehaviour
         dashAction = actionMap.Player.Dash;
         fireAction = actionMap.Player.Shoot;
         reloadAction = actionMap.Player.Reload;
+        chargeAction = actionMap.Player.Charge;
 
         playerMovement = dPlayerMovement;
         playerShooting = dPlayerShooting;
@@ -50,12 +52,13 @@ public class PlayerInputManager : MonoBehaviour
         dashAction.Enable();
         fireAction.Enable();
         reloadAction.Enable();
+        chargeAction.Enable();
 
         movementAction.performed += playerMovement.SetMovementInput;
         movementAction.canceled += playerMovement.SetMovementInput;
         dashAction.performed += playerMovement.PlayerDashInput;
         fireAction.performed += playerShooting.PlayerFireInput;
-        fireAction.canceled += playerShooting.PlayerStopFireInput;
+        chargeAction.performed += playerShooting.PlayerStopFireInput;
         reloadAction.performed += playerShooting.PlayerReloadAction;
     }
 
@@ -65,12 +68,13 @@ public class PlayerInputManager : MonoBehaviour
         dashAction.Disable();
         fireAction.Disable();
         reloadAction.Disable();
+        chargeAction.Disable();
 
         movementAction.performed -= playerMovement.SetMovementInput;
         movementAction.canceled -= playerMovement.SetMovementInput;
         dashAction.performed -= playerMovement.PlayerDashInput;
         fireAction.performed -= playerShooting.PlayerFireInput;
-        fireAction.canceled -= playerShooting.PlayerStopFireInput;
+        chargeAction.performed -= playerShooting.PlayerStopFireInput;
         reloadAction.performed -= playerShooting.PlayerReloadAction;
     }
 }
