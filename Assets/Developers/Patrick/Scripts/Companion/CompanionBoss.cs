@@ -63,7 +63,6 @@ public class CompanionBoss : MonoBehaviour
         _pathfindingScript = pathfindingScript;
         playerObj = playerObjectRef;
         poolManager = poolManagerRef;
-        //Debug.Log("poolManager" + poolManagerRef.name);
     }
 
     public void SetupEnemy()
@@ -134,19 +133,20 @@ public class CompanionBoss : MonoBehaviour
             if (WithinLeapRange(dataObj.leapTravelDistance + (currentState == AttackState.FERAL_LEAP ? dataObj.feralLeapAdditionalDistance : 0.0f)))
             {
                 _leapStartTimer = Time.time;
-                _leapStart = transform.position;
+                _leapStart = transform.position; // Logically will always be in a not blocked node so this SHOULD be safe
                 Vector2 playerDirection = playerObj.transform.position - transform.position;
                 Vector2 leapDirection = playerDirection.normalized;
+
                 _leapEnd = _leapStart + leapDirection * (dataObj.leapTravelDistance + (currentState == AttackState.FERAL_LEAP ? dataObj.feralLeapAdditionalDistance : 0.0f));
-                if (playerDirection.sqrMagnitude >= (dataObj.leapTravelDistance + (currentState == AttackState.FERAL_LEAP ? dataObj.feralLeapAdditionalDistance : 0.0f)) * dataObj.leapTravelDistance)
-                {
-                    _leapEnd = playerObj.transform.position;
-                }
+                
+                // Ensures the end is not on the opposite side of a wall
                 RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, dataObj.leapTravelDistance + (currentState == AttackState.FERAL_LEAP ? dataObj.feralLeapAdditionalDistance : 0.0f), dataObj.environmentMask);
                 if (wallCheck)
                 {
                     _leapEnd = wallCheck.point;
                 }
+
+                _leapEnd = _pathfindingScript.GetNearestNodeInDirection(_leapEnd, new Vector3(-leapDirection.x, -leapDirection.y, 0.0f)).worldPosition; // Find the nearest unblocked node along the path
 
                 _leapStartTimer = Time.time;
                 _isReadyToLeap = true;

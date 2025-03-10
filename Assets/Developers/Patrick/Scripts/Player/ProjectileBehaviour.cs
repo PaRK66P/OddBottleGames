@@ -61,7 +61,6 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         if(collision.gameObject.layer == 9)
         {
-            //Debug.Log("Trigger");
 
             if(collision.gameObject.tag == "Companion")
             {
@@ -84,10 +83,7 @@ public class ProjectileBehaviour : MonoBehaviour
             // Vector2 dirToCollisionObject = collision.gameObject.transform.position - gameObject.transform.position;
 
             // float angle = Vector2.Angle(projDir, dirToCollisionObject);
-            // Debug.Log(angle);
 
-
-            // //Debug.Log(angle);
             // if (angle < 125.0f)
             // {
             //     toBeReleased = true;

@@ -67,10 +67,8 @@ public class VisualNovelScript : MonoBehaviour
         GameObject[] VisualNovelPrefabs = Resources.LoadAll<GameObject>("VisualNovelScenes");
         foreach (GameObject prefab in VisualNovelPrefabs)
         {
-            //Debug.Log("found scene");
             if (prefab != null)
             {
-                //Debug.Log("not null");
                 VNPrefabScript script = Instantiate(prefab).GetComponent<VNPrefabScript>();
                 if (script != null)
                 {
@@ -83,7 +81,6 @@ public class VisualNovelScript : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("fixedupdate");
         if (fadeIn)
         {
             canv.SetActive(true);
@@ -109,7 +106,6 @@ public class VisualNovelScript : MonoBehaviour
 
     public void StartNovelScene(int NovelSceneID)
     {
-        //Debug.Log(NovelSceneID);
         if (!isNovelSection)
         {
             canvGroup.alpha = 0;
@@ -128,7 +124,6 @@ public class VisualNovelScript : MonoBehaviour
             {
                 DialogueTree tree = new DialogueTree(ReconstructTree(VNScenes[currentVNPrefabIndex].tree));
                 currentNode = tree.rootNode;
-                //Debug.Log(typingTextToggle);
                 if (typingTextToggle == true)
                 {
                     typingText = TypewriterText(currentNode.sceneData.text);
@@ -159,7 +154,6 @@ public class VisualNovelScript : MonoBehaviour
         int index = 0;
         foreach (var scene in VNScenes)
         {
-            //Debug.Log(scene.name + ", " + name);
             if (scene.name == name)
             {
                 StartNovelScene(index);
@@ -198,7 +192,6 @@ public class VisualNovelScript : MonoBehaviour
         {
 
             lastSelectionID = currentNode.sceneData.selectionID;
-            //Debug.Log("selectionID: " + lastSelectionID);
             isNovelSection = false;
             playerRef.GetComponent<PlayerManager>().EnableInput();
             Time.timeScale = 1.0f;
@@ -212,7 +205,6 @@ public class VisualNovelScript : MonoBehaviour
 
     public DialogueTreeNode ReconstructTree(SerializedTree serializedTree)
     {
-        //Debug.Log(serializedTree);
         var nodeDict = new Dictionary<int, DialogueTreeNode>();
 
         foreach (var serializedNode in serializedTree.nodes)
@@ -319,12 +311,10 @@ public class VisualNovelScript : MonoBehaviour
         string textToAdd = "";
         for (int i = 0; i < targetText.Length; i++)
         {
-            //Debug.Log(i + ", " + targetText.Length);
             textToAdd += targetText[i];
             text.GetComponent<TMP_Text>().text = textToAdd;
             yield return new WaitForSecondsRealtime(0.05f / typeTextSpeed);
         }
-        //Debug.Log("done");
         yield return null;
     }
 }

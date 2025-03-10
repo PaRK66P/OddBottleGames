@@ -14,10 +14,6 @@ public class spawnerScript : MonoBehaviour
     public void spawn()
     {
         GameObject obj = pooler.GetFreeObject(enemyPrefab.name);
-        //Debug.Log(obj);
-        //Debug.Log(pooler);
-        //Debug.Log(enemyPrefab);
-        //Debug.Log(enemyMan);
         obj.GetComponent<enemyScr>().InstantiateEnemy(ref pooler, enemyPrefab.name, ref enemyMan, ref UICanvas, ref player, ref pathfinder);
         obj.transform.position = transform.position;
         obj.transform.rotation = transform.rotation;
