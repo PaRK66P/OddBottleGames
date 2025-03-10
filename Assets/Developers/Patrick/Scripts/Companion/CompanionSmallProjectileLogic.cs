@@ -48,7 +48,10 @@ public class CompanionSmallProjectileLogic : MonoBehaviour
                 _isActive = false;
 
                 Vector2 damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
-                collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 10, 10);
+                if (collision.gameObject.GetComponent<PlayerManager>().CanBeDamaged())
+                {
+                    collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 10, 10);
+                }
 
                 poolManager.ReleaseObject(_name, gameObject);
             }

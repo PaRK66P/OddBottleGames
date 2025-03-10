@@ -18,6 +18,8 @@ public class PlayerManager : MonoBehaviour
     private PlayerData playerData;
     [SerializeField]
     private PlayerDebugData debugData;
+    [SerializeField]
+    private GameObject _evolveDashCollider;
 
     private PlayerInputManager playerInputManager;
     private PlayerMovement playerMovement;
@@ -40,6 +42,8 @@ public class PlayerManager : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer image;
 
+    private bool isDashing = false;
+
     private CanvasGroup canvGroup;
     [SerializeField]
     private bool fadeIn = false;
@@ -57,8 +61,13 @@ public class PlayerManager : MonoBehaviour
         playerInputManager = gameObject.AddComponent<PlayerInputManager>();
         playerMovement = gameObject.AddComponent<PlayerMovement>();
         playerShooting = gameObject.AddComponent<PlayerShooting>();
+
+        _evolveDashCollider.GetComponent<EvolveDashDamage>().InitialiseScript(ref playerData);
+        _evolveDashCollider.SetActive(false);
+
+        PlayerManager manager = this;
         //movement component
-        playerMovement.InitialiseComponent(ref playerData, ref debugData, ref UICanvas);
+        playerMovement.InitialiseComponent(ref manager, ref playerData, ref debugData, ref UICanvas);
         //shooting component
         playerShooting.InitialiseComponent(ref playerData, ref debugData, ref poolManager, ref PlayerCanvas);
         playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
@@ -114,7 +123,7 @@ public class PlayerManager : MonoBehaviour
         if(regenTimer >= 1)
         {
             health += 1;
-            regenTimer = 0;
+            regenTimer = 0; 
         }
 
         healthbar.GetComponent<Slider>().value = health;
@@ -150,7 +159,7 @@ public class PlayerManager : MonoBehaviour
 
     public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f, int ammount = 10)
     {
-        if (isDamaged) { return; }
+        if (CanBeDamaged()) { return; }
 
         rb.excludeLayers = playerData.damageLayers;
         isDamaged = true;
@@ -242,5 +251,31 @@ public class PlayerManager : MonoBehaviour
     public void EvolveDash(bool toggle)
     {
         playerMovement.EvolveDash();
+        _evolveDashCollider.SetActive(true);
+        playerMovement.RechargeDashes();
+    }
+
+    public void GainDashCharges()
+    {
+        playerMovement.RechargeDashes();
+    }
+
+    public void SetDashInvulnerability(bool invulnerability)
+    {
+        isDashing = invulnerability;
+    }
+
+    public bool CanBeDamaged()
+    {
+        if(isDamaged || isDashing) { return false; }
+        return true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        //Gizmos.color = Color.green;
+        //Gizmos.DrawLine(transform.position, transform.position + Vector3.right * playerData.dashDistance);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawLine(transform.position + Vector3.right * playerData.dashDistance, transform.position + Vector3.right * (playerData.dashDistance + playerData.evolvedDashExtraDistance));
     }
 }

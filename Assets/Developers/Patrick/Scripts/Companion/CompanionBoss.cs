@@ -19,6 +19,7 @@ public class CompanionBoss : MonoBehaviour
     private CompanionBossData dataObj;
     private Rigidbody2D rb;
     private CompanionAnimations _animationScript;
+    private PathfindingManager _pathfindingScript;
     private GameObject playerObj;
     private ObjectPoolManager poolManager;
 
@@ -33,9 +34,13 @@ public class CompanionBoss : MonoBehaviour
     private float _leapMoveTimer;
     private Vector2 _leapStart;
     private Vector2 _leapEnd;
-    private Vector2 _leapDirection;
     private bool _isLeapMoving;
     private bool _isLeapFinished;
+    private bool _isReadyToLeap;
+    private float _readyStartTime;
+    private Node _lastPlayerNode;
+    private Node _lastNode;
+    private Vector3 _lastLeapMoveDirection;
 
     // Feral Attack
     private int _feralLeapAmount;
@@ -50,11 +55,12 @@ public class CompanionBoss : MonoBehaviour
     private float _screamStartTimer;
 
     // Start is called before the first frame update
-    public void InitialiseComponent(ref CompanionBossData bossData, ref Rigidbody2D rigidbodyComp, ref CompanionAnimations animationScript, ref GameObject playerObjectRef, ref ObjectPoolManager poolManagerRef)
+    public void InitialiseComponent(ref CompanionBossData bossData, ref Rigidbody2D rigidbodyComp, ref CompanionAnimations animationScript, ref PathfindingManager pathfindingScript, ref GameObject playerObjectRef, ref ObjectPoolManager poolManagerRef)
     {
         dataObj = bossData;
         rb = rigidbodyComp;
         _animationScript = animationScript;
+        _pathfindingScript = pathfindingScript;
         playerObj = playerObjectRef;
         poolManager = poolManagerRef;
         //Debug.Log("poolManager" + poolManagerRef.name);
@@ -107,26 +113,49 @@ public class CompanionBoss : MonoBehaviour
     // Only needed for Leap movement
     public void CompanionFixedUpdate()
     {
-        if (!_isLeapMoving)
+        if (currentState != AttackState.LEAP && currentState != AttackState.FERAL_LEAP)
         {
             return;
         }
 
-        float travelPosition = (Time.time - _leapMoveTimer) / dataObj.leapTravelTime;
-
-        rb.MovePosition(Vector2.Lerp(_leapStart, _leapEnd, travelPosition));
-
-        if (travelPosition >= 1)
+        if (!_isReadyToLeap)
         {
-            _isLeapFinished = true;
+            Node playerNode = _pathfindingScript.NodeFromWorldPosition(playerObj.transform.position);
+            Node currentNode = _pathfindingScript.NodeFromWorldPosition(transform.position);
+            if (_lastPlayerNode != playerNode || _lastNode != currentNode)
+            {
+                _lastLeapMoveDirection = _pathfindingScript.GetPathDirection(transform.position, playerObj.transform.position);
+                _lastPlayerNode = playerNode;
+                _lastNode = currentNode;
+            }
+
+            rb.MovePosition(transform.position + _lastLeapMoveDirection * dataObj.moveSpeed * Time.fixedDeltaTime * Mathf.Max((dataObj.moveSpeedMultiplier * (Time.time - _readyStartTime)), 1.0f));
+
+            if (WithinLeapRange(dataObj.leapTravelDistance + (currentState == AttackState.FERAL_LEAP ? dataObj.feralLeapAdditionalDistance : 0.0f)))
+            {
+                _leapStartTimer = Time.time;
+                _leapStart = transform.position;
+                Vector2 playerDirection = playerObj.transform.position - transform.position;
+                Vector2 leapDirection = playerDirection.normalized;
+                _leapEnd = _leapStart + leapDirection * (dataObj.leapTravelDistance + (currentState == AttackState.FERAL_LEAP ? dataObj.feralLeapAdditionalDistance : 0.0f));
+                if (playerDirection.sqrMagnitude >= (dataObj.leapTravelDistance + (currentState == AttackState.FERAL_LEAP ? dataObj.feralLeapAdditionalDistance : 0.0f)) * dataObj.leapTravelDistance)
+                {
+                    _leapEnd = playerObj.transform.position;
+                }
+                RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, dataObj.leapTravelDistance + (currentState == AttackState.FERAL_LEAP ? dataObj.feralLeapAdditionalDistance : 0.0f), dataObj.environmentMask);
+                if (wallCheck)
+                {
+                    _leapEnd = wallCheck.point;
+                }
+
+                _leapStartTimer = Time.time;
+                _isReadyToLeap = true;
+            }
+
+            return;
         }
-    }
 
-    #region Attacks
-
-    private void LeapAttack()
-    {
-        if(Time.time - _leapStartTimer <= dataObj.leapChargeTime)
+        if (Time.time - _leapStartTimer <= dataObj.leapChargeTime)
         {
             _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_CHARGE);
             return;
@@ -140,6 +169,47 @@ public class CompanionBoss : MonoBehaviour
             _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_MOVING);
         }
 
+        float travelPosition = (Time.time - _leapMoveTimer) / dataObj.leapTravelTime;
+
+        rb.MovePosition(Vector2.Lerp(_leapStart, _leapEnd, travelPosition));
+
+        if (travelPosition >= 1)
+        {
+            _isLeapFinished = true;
+        }
+    }
+
+    private bool WithinLeapRange(float leapDistance)
+    {
+        // Leaping
+        Vector3 playerDirection = playerObj.transform.position - transform.position;
+        Vector3 leapDirection = playerDirection.normalized;
+
+        Vector3 targetPosition = transform.position + leapDirection * leapDistance * dataObj.leapTargetTravelPercentage;
+        float targetDistance = (targetPosition - transform.position).sqrMagnitude;
+
+        if ((playerObj.transform.position - transform.position).sqrMagnitude > targetDistance)
+        {
+            return false;
+        }
+
+        RaycastHit2D wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, leapDistance, dataObj.environmentMask); // Update layer mask variable
+        if (wallCheck)
+        {
+            float wallDistance = (wallCheck.point - new Vector2(transform.position.x, transform.position.y)).sqrMagnitude;
+
+            if (wallDistance < targetDistance)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    #region Attacks
+
+    private void LeapAttack()
+    {
         // Wait for leap to finish in fixed update
 
         if (!_isLeapFinished)
@@ -154,6 +224,7 @@ public class CompanionBoss : MonoBehaviour
 
         _isLeapMoving = false;
         _isLeapFinished = false;
+        _isReadyToLeap = false;
     }
 
     private void SpitAttack()
@@ -283,20 +354,8 @@ public class CompanionBoss : MonoBehaviour
 
         if (_feralLeapAmount < dataObj.feralLeapAmount)
         {
-            _leapStartTimer = Time.time;
-            _leapStart = transform.position;
-            Vector2 playerDirection = playerObj.transform.position - transform.position;
-            Vector2 leapDirection = playerDirection.normalized;
-            _leapEnd = _leapStart + leapDirection * dataObj.leapTravelDistance;
-            if (playerDirection.sqrMagnitude >= dataObj.leapTravelDistance * dataObj.leapTravelDistance)
-            {
-                _leapEnd = playerObj.transform.position;
-            }
-            RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, dataObj.leapTravelDistance, dataObj.environmentMask); 
-            if (wallCheck)
-            {
-                _leapEnd = wallCheck.point;
-            }
+            _isReadyToLeap = false;
+            _readyStartTime = Time.time;
             return;
         }
 
@@ -319,26 +378,22 @@ public class CompanionBoss : MonoBehaviour
 
     private void SelectAttack()
     {
+        // To be updated later
+        if (playerObj.transform.position.x - transform.position.x < 0)
+        {
+            _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.LEFT);
+        }
+        else if (playerObj.transform.position.x - transform.position.x > 0)
+        {
+            _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.RIGHT);
+        }
+
         // Does a leap attack between other attacks
         if (!_isLastAttackLeap)
         {
             _isLastAttackLeap = true;
-
-            _leapStartTimer = Time.time;
-            _leapStart = transform.position;
-            Vector2 playerDirection = playerObj.transform.position - transform.position;
-            Vector2 leapDirection = playerDirection.normalized;
-            _leapEnd = _leapStart + leapDirection * dataObj.leapTravelDistance;
-            if (playerDirection.sqrMagnitude >= dataObj.leapTravelDistance * dataObj.leapTravelDistance)
-            {
-                _leapEnd = playerObj.transform.position;
-            }
-            RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, dataObj.leapTravelDistance, dataObj.environmentMask); 
-            if (wallCheck)
-            {
-                _leapEnd = wallCheck.point;
-                //Debug.Log(wallCheck.point);
-            }
+            _isReadyToLeap = false;
+            _readyStartTime = Time.time;
 
             // Check if feral leap conditions are met
             if (_leapAmount < dataObj.leapsBeforeFeral)
@@ -361,7 +416,7 @@ public class CompanionBoss : MonoBehaviour
         // Check for range
         float playerDistance = (playerObj.transform.position - transform.position).sqrMagnitude;
 
-        if( playerDistance <= dataObj.closeRangeDistance * dataObj.closeRangeDistance)
+        if (playerDistance <= dataObj.closeRangeDistance * dataObj.closeRangeDistance)
         {
             currentState = AttackState.SPIT;
 

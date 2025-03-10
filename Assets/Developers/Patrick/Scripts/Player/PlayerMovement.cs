@@ -6,12 +6,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private PlayerManager _playerManager;
     private Rigidbody2D rb;
     private GameObject UICanvas;
 
     private Vector2 movementInput;
 
     private GameObject[] dashChargesUIObjects;
+    private GameObject[] dashRechargesUIObjects;
 
     public bool dash = false;
     private float dashTimer = 0.0f;
@@ -26,17 +28,21 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 knockbackForce = Vector2.zero;
 
+    private bool evolved = false;
+
     private PlayerData _playerData;
     private PlayerDebugData _debugData;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();        
     }
 
-    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas)
+    public void InitialiseComponent(ref PlayerManager playerManager, ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas)
     {
+        _playerManager = playerManager;
+
         UICanvas = dUICanvas;
 
         _playerData = playerData;
@@ -45,14 +51,19 @@ public class PlayerMovement : MonoBehaviour
         dashChargesNumber = 1;
         maxDashCharges = 1;
 
+        dashRechargesUIObjects = new GameObject[maxDashCharges];
         dashChargesUIObjects = new GameObject[maxDashCharges];
 
         for (int i = 0; i < maxDashCharges; i++)
         {
-            dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
+            dashRechargesUIObjects[i] = Instantiate(_playerData.dashRechargeUIObject, UICanvas.transform);
+            dashRechargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
+            dashRechargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
+            //dashRechargesUIObjects[i].GetComponent<RectTransform>().localScale = new Vector3(0, 0, 1);
 
+            dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
             dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform.Find("PlayerUI"), true);
+            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
         }
     }
 
@@ -62,6 +73,8 @@ public class PlayerMovement : MonoBehaviour
         if(dashChargesNumber < maxDashCharges)
         {
             dashChargeTimer += Time.deltaTime;
+
+            dashRechargesUIObjects[dashChargesNumber].GetComponent<RectTransform>().localScale = new Vector3(dashChargeTimer / _playerData.dashRechargeTime, dashChargeTimer / _playerData.dashRechargeTime, 1);
         }
         if(dashChargeTimer >= _playerData.dashRechargeTime)
         {
@@ -70,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
             if (dashChargesNumber < maxDashCharges)
             {
                 //Debug.Log("recharged dash");
+                //dashRechargesUIObjects[dashChargesNumber].GetComponent<RectTransform>().localScale = new Vector3(0, 0, 1);
                 dashChargesNumber++;
             }
         }
@@ -83,6 +97,14 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 dashChargesUIObjects[i].SetActive(false);
+            }
+            if(dashChargesNumber == i)
+            {
+                dashRechargesUIObjects[i].SetActive(true);
+            }
+            else
+            {
+                dashRechargesUIObjects[i].SetActive(false);
             }
         }
     }
@@ -138,13 +160,15 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(DashColor());
                 dashTimer += Time.fixedDeltaTime;
 
-                rb.excludeLayers = _playerData.damageLayers;
+                _playerManager.SetDashInvulnerability(true);
+                //GetComponentInChildren<EvolveDashDamage>().UpdateCollisionLayer(_playerData.damageLayers);
+                // Update evolve dash collision layers if active
 
-                rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * _playerData.dashDistance, Mathf.Min(dashTimer / _playerData.dashTime, 1.0f)));
+                rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * (evolved ? _playerData.dashDistance + _playerData.evolvedDashExtraDistance : _playerData.dashDistance), Mathf.Min(dashTimer / _playerData.dashTime, 1.0f)));
 
                 if (dashTimer >= _playerData.dashTime)
                 {
-                    rb.excludeLayers = 0;
+                    _playerManager.SetDashInvulnerability(false);
 
                     dash = false;
 
@@ -220,16 +244,49 @@ public class PlayerMovement : MonoBehaviour
 
     public void EvolveDash()
     {
-        maxDashCharges = _playerData.numberOfDashCharges;
+        for (int i = 0; i < maxDashCharges; i++)
+        {
+            Destroy(dashRechargesUIObjects[i]);
+            Destroy(dashChargesUIObjects[i]);
+        }
 
+        maxDashCharges = _playerData.numberOfDashCharges;
+        dashChargesNumber = maxDashCharges;
+
+        dashRechargesUIObjects = new GameObject[maxDashCharges];
         dashChargesUIObjects = new GameObject[maxDashCharges];
 
         for (int i = 0; i < maxDashCharges; i++)
         {
-            dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
+            dashRechargesUIObjects[i] = Instantiate(_playerData.dashRechargeUIObject, UICanvas.transform);
+            dashRechargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
+            dashRechargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
+            //dashRechargesUIObjects[i].GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
 
+            dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
             dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform.Find("PlayerUI"), true);
+            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
+        }
+
+        evolved = true;
+    }
+
+    public void RechargeDashes(int n = 3)
+    {
+        if (maxDashCharges != _playerData.numberOfDashCharges)
+        {
+            if(n > 1)
+            {
+                n = 1;
+            }
+        }
+
+        dashChargesNumber += n;
+
+        if(dashChargesNumber > _playerData.numberOfDashCharges)
+        {
+            dashChargesNumber = _playerData.numberOfDashCharges;
+            dashChargeTimer = 0.0f;
         }
     }
 }

@@ -54,7 +54,7 @@ public class CompanionAnimations : MonoBehaviour
         if(_animState == animation) return;
 
         _animState = animation;
-        if (_animState == AnimationState.LEAP_MOVING)
+        if (_animState == AnimationState.LEAP_CHARGE)
         {
             _spriteRenderer.transform.localScale = new Vector3(Mathf.Abs(_spriteRenderer.transform.localScale.x), _spriteRenderer.transform.localScale.y, _spriteRenderer.transform.localScale.z);
         }

@@ -14,18 +14,25 @@ public class CompanionManager : MonoBehaviour
         FRIEND = 2
     }
 
+    [Header("Testing")]
     [SerializeField]
     private GameObject _playerObject;
     [SerializeField]
     private ObjectPoolManager _poolManager;
+    [SerializeField]
+    private PathfindingManager _pathfindingManager;
 
+    [Header("Prefab Necessary")]
     [SerializeField]
     private CompanionBossData bossData;
     [SerializeField]
     private CompanionFriendData friendData;
+    [SerializeField]
+    private SpriteRenderer _companionImage;
+    [SerializeField]
+    private GameObject dashRechargeZone;
 
     private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
     private CompanionCollisionDamage collisionDamageScript;
     private CompanionDetection detectionScript;
 
@@ -42,20 +49,20 @@ public class CompanionManager : MonoBehaviour
 
     // No protection for uninitialised Companion
 
-    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref Canvas dUICanvas)
+    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref PathfindingManager pathfindingManager, ref Canvas dUICanvas)
     {
         _playerObject = playerObject;
         _poolManager = poolManager;
+        _pathfindingManager = pathfindingManager;
+
         visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
 
+        dashRechargeZone.GetComponent<CircleCollider2D>().radius = friendData.rechargeZoneRadius;
+        dashRechargeZone.gameObject.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector3(friendData.rechargeZoneRadius * 2.0f, friendData.rechargeZoneRadius * 2.0f, 1.0f);
 
         if (rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
-        }
-        if (spriteRenderer == null)
-        {
-            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
         if (collisionDamageScript == null)
         {
@@ -66,21 +73,23 @@ public class CompanionManager : MonoBehaviour
         {
             detectionScript = GetComponentInChildren<CompanionDetection>();
             detectionScript.InitialiseComponent(ref friendData);
+
+            detectionScript.GetComponent<CircleCollider2D>().radius = friendData.detectionRadius;
         }
         if (animationsScript == null)
         {
             animationsScript = gameObject.AddComponent<CompanionAnimations>();
-            animationsScript.InitialiseComponent(ref bossData, ref friendData, ref spriteRenderer);
+            animationsScript.InitialiseComponent(ref bossData, ref friendData, ref _companionImage);
         }
         if (bossScript == null)
         {
             bossScript = gameObject.AddComponent<CompanionBoss>();
-            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
+            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _pathfindingManager, ref _playerObject, ref _poolManager);
         }
         if (friendScript == null)
         {
             friendScript = gameObject.AddComponent<CompanionFriend>();
-            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref rb, ref _playerObject);
+            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref _pathfindingManager, ref rb, ref _playerObject, ref dashRechargeZone);
         }
 
         healthbar = Instantiate(bossData.healthbar, dUICanvas.transform);
@@ -95,6 +104,7 @@ public class CompanionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         switch (_currentState)
         {
             case CompanionStates.NONE:
@@ -159,7 +169,6 @@ public class CompanionManager : MonoBehaviour
 
             visualNovelManager.StartNovelSceneByName("Miniboss tester 2");
             GetComponent<enemyScr>().DecreaseEnemyCount();
-            //spriteRenderer.gameObject.SetActive(false);
         }
     }
 
@@ -170,6 +179,7 @@ public class CompanionManager : MonoBehaviour
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.NONE);
 
         detectionScript.gameObject.SetActive(false);
+        dashRechargeZone.gameObject.SetActive(false);
     }
 
     public void ChangeToEnemy()
@@ -180,7 +190,7 @@ public class CompanionManager : MonoBehaviour
 
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.PLAYER);
 
-        detectionScript.gameObject.SetActive(true);
+        detectionScript.gameObject.SetActive(false);
     }
 
     public void ChangeToFriendly()
@@ -190,14 +200,13 @@ public class CompanionManager : MonoBehaviour
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.ENEMY);
 
         detectionScript.gameObject.SetActive(true);
-        //spriteRenderer.gameObject.SetActive(true);
     }
 
     IEnumerator DamageColor()
     {
-        spriteRenderer.color = UnityEngine.Color.red;
+        _companionImage.color = UnityEngine.Color.red;
         yield return new WaitForSeconds(0.1f);
-        spriteRenderer.color = UnityEngine.Color.white;
+        _companionImage.color = UnityEngine.Color.white;
     }
 
     private IEnumerator PlayDeathEffects()
@@ -259,20 +268,49 @@ public class CompanionManager : MonoBehaviour
             Vector3 playerDirection = _playerObject.transform.position - transform.position;
             Vector3 leapDirection = playerDirection.normalized;
             Vector3 leapEnd = transform.position + leapDirection * bossData.leapTravelDistance;
-            if (playerDirection.sqrMagnitude >= bossData.leapTravelDistance * bossData.leapTravelDistance)
+
+            Vector3 targetPosition = transform.position + leapDirection * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage;
+            float targetDistance = (targetPosition - transform.position).sqrMagnitude;
+            bool drawTarget = true;
+
+            if((_playerObject.transform.position - transform.position).sqrMagnitude > targetDistance)
             {
-                leapEnd = _playerObject.transform.position;
+                drawTarget = false;
             }
+
+            if (playerDirection.sqrMagnitude < (bossData.leapTravelDistance * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage) * (bossData.leapTravelDistance * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage))
+            {
+                targetPosition = _playerObject.transform.position;
+                targetDistance = (targetPosition - transform.position).sqrMagnitude;
+
+            }
+
             wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, bossData.leapTravelDistance, bossData.environmentMask); // Update layer mask variable
             if (wallCheck)
             {
+                float wallDistance = (wallCheck.point - new Vector2(transform.position.x, transform.position.y)).sqrMagnitude;
+                
                 leapEnd = wallCheck.point;
+
+                if(wallDistance < targetDistance)
+                {
+                    drawTarget = false;
+                }
             }
 
             Gizmos.color = UnityEngine.Color.red;
-            Gizmos.DrawWireSphere(transform.position, bossData.leapTravelDistance);
+            Gizmos.DrawWireSphere(transform.position, bossData.leapTravelDistance * bossData.leapTargetTravelPercentage);
+            Gizmos.color = UnityEngine.Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, (bossData.leapTravelDistance + bossData.feralLeapAdditionalDistance) * bossData.leapTargetTravelPercentage);
+
             Gizmos.color = new UnityEngine.Color(1, 0.5f, 0);
             Gizmos.DrawLine(transform.position, leapEnd);
+            Gizmos.color = new UnityEngine.Color(1, 1, 1);
+            Gizmos.DrawLine(leapEnd, transform.position + leapDirection * (bossData.leapTravelDistance + bossData.feralLeapAdditionalDistance));
+            if (drawTarget)
+            {
+                Gizmos.DrawWireSphere(targetPosition, 1.0f);
+            }
 
         }
 
@@ -347,8 +385,24 @@ public class CompanionManager : MonoBehaviour
                     Gizmos.DrawLine(transform.position + projectileSpawnPosition, projectileSpawnPosition.normalized * 100.0f);
                 }
             }
+        }
 
+        if (friendData.drawDetectionRange)
+        {
+            Gizmos.color = new UnityEngine.Color(1.0f, 0.753f, 0.796f);
+            Gizmos.DrawWireSphere(transform.position, friendData.detectionRadius);
+        }
 
+        if (friendData.drawRechargeZone)
+        {
+            Gizmos.color = UnityEngine.Color.cyan;
+            Gizmos.DrawWireSphere(transform.position, friendData.rechargeZoneRadius);
+        }
+
+        if (friendData.drawIdleDistance)
+        {
+            Gizmos.color = UnityEngine.Color.green;
+            Gizmos.DrawWireSphere(_playerObject.transform.position, friendData.idleDistance);
         }
     }
     #endregion

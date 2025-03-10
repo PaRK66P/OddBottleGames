@@ -18,8 +18,15 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
+  detectionRadius: 12
+  idleSpeed: 6
+  idleDistance: 2.71
   leapTravelTime: 0.2
-  leapChargeTime: 0.4
+  leapChargeTime: 0.8
   leapDistance: 5
   leapDamage: 3
-  idleSpeed: 6
+  leapEndTime: 0.5
+  rechargeZoneRadius: 5
+  drawDetectionRange: 0
+  drawRechargeZone: 0
+  drawIdleDistance: 0
