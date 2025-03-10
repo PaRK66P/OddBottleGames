@@ -159,7 +159,7 @@ public class PlayerManager : MonoBehaviour
 
     public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f, int ammount = 10)
     {
-        if (CanBeDamaged()) { return; }
+        if (!CanBeDamaged()) { return; }
 
         rb.excludeLayers = playerData.damageLayers;
         isDamaged = true;

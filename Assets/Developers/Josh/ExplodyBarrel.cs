@@ -27,7 +27,6 @@ public class ExplodyBarrel : MonoBehaviour
 
     void TriggerExplosion()
     {
-        
         currentExplosion = objectPoolManager.GetFreeObject("Explosion");
         currentExplosion.GetComponent<ExplosionLogic>().InitialiseEffect(layers1, 6,8,0.1f,1,objectPoolManager);
         currentExplosion.transform.position = this.transform.position;

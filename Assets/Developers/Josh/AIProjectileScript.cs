@@ -34,14 +34,15 @@ public class AIProjectileScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.gameObject.tag == "Player")
         {
+            //Debug.Log("playerCollision");
             Vector2 damageDirection = new Vector2(collision.gameObject.transform.position.x - transform.position.x,
                 collision.gameObject.transform.position.y - transform.position.y);
-            if (collision.gameObject.GetComponent<PlayerManager>().CanBeDamaged())
-            {
-                collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 1, 5);
-            }
+            
+            collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 1, 5);
+            
         }
     }
 

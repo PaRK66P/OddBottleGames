@@ -35307,6 +35307,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 22
       objectReference: {fileID: 0}
+    - target: {fileID: 7496921061012036790, guid: 21aad766301008646808e8ca518c582b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8047094757203861716, guid: 21aad766301008646808e8ca518c582b, type: 3}
       propertyPath: m_Interpolate
       value: 0

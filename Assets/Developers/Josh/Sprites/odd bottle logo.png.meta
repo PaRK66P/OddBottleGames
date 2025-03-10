@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      odd bottle logo_0: 4741766449667503199
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
