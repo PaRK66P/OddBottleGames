@@ -102,7 +102,11 @@ public class PlayerManager : MonoBehaviour
             {
                 rb.excludeLayers = 0;
                 isDamaged = false;
-                image.color = Color.white;
+                if (image.color == Color.red)
+                {
+                    image.color = Color.white;
+                }
+                //image.color = Color.white;
             }
         }
 
