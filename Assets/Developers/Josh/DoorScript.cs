@@ -6,12 +6,13 @@ public class DoorScript : MonoBehaviour
 {
     public bool keyCollected = false;
     private bool isPlayerInRange = false;
+    public GameObject player;
 
     public void Update()
     {
         if (isPlayerInRange && keyCollected)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (player.GetComponent<PlayerManager>().isInteracting())
             {
                 this.gameObject.SetActive(false);
             }
@@ -23,6 +24,7 @@ public class DoorScript : MonoBehaviour
         if (collision.tag == "Player")
         {
             isPlayerInRange = true;
+            player = collision.gameObject;
         }
     }
 
@@ -31,6 +33,7 @@ public class DoorScript : MonoBehaviour
         if (collision.tag == "Player")
         {
             isPlayerInRange = false;
+            
         }
     }
 }

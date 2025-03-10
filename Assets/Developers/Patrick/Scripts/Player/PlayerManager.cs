@@ -23,6 +23,7 @@ public class PlayerManager : MonoBehaviour
 
     private PlayerInputManager playerInputManager;
     private PlayerMovement playerMovement;
+    private InteractComponent playerInteract;
     private PlayerShooting playerShooting;
 
     private GameObject weaponDrop;
@@ -61,6 +62,7 @@ public class PlayerManager : MonoBehaviour
         playerInputManager = gameObject.AddComponent<PlayerInputManager>();
         playerMovement = gameObject.AddComponent<PlayerMovement>();
         playerShooting = gameObject.AddComponent<PlayerShooting>();
+        playerInteract = gameObject.AddComponent<InteractComponent>();
 
         _evolveDashCollider.GetComponent<EvolveDashDamage>().InitialiseScript(ref playerData);
         _evolveDashCollider.SetActive(false);
@@ -70,7 +72,7 @@ public class PlayerManager : MonoBehaviour
         playerMovement.InitialiseComponent(ref manager, ref playerData, ref debugData, ref UICanvas);
         //shooting component
         playerShooting.InitialiseComponent(ref playerData, ref debugData, ref poolManager, ref PlayerCanvas);
-        playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
+        playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting, ref playerInteract);
 
         playerInputManager.EnableInput();
 
@@ -269,6 +271,11 @@ public class PlayerManager : MonoBehaviour
     {
         if(isDamaged || isDashing) { return false; }
         return true;
+    }
+
+    public bool isInteracting()
+    {
+        return playerInteract.GetInteract();
     }
 
     private void OnDrawGizmos()

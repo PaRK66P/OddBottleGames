@@ -5508,6 +5508,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 8.055624, y: 8.679881}
   m_EdgeRadius: 0
+--- !u!114 &734071055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734071050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50cc1f0664f91c45ba79ff62c41dbd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyCollected: 0
 --- !u!1 &735203285
 GameObject:
   m_ObjectHideFlags: 0
@@ -34555,7 +34568,7 @@ Transform:
   m_GameObject: {fileID: 1956763155}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.9, y: -1.6, z: -10}
+  m_LocalPosition: {x: -21.527958, y: -1.7340935, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35767,6 +35780,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1220825330}
     m_Modifications:
+    - target: {fileID: 3163676959434933656, guid: dff64b5017da85c43b28c1e0c94191e1, type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 734071055}
     - target: {fileID: 4026182443971739568, guid: dff64b5017da85c43b28c1e0c94191e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -72.33
@@ -35818,6 +35835,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1638568336175636659, guid: dff64b5017da85c43b28c1e0c94191e1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 734071054}
+    - targetCorrespondingSourceObject: {fileID: 1638568336175636659, guid: dff64b5017da85c43b28c1e0c94191e1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 734071055}
   m_SourcePrefab: {fileID: 100100000, guid: dff64b5017da85c43b28c1e0c94191e1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

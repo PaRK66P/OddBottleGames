@@ -10,25 +10,29 @@ public class PlayerInputManager : MonoBehaviour
     private InputAction dashAction;
     private InputAction fireAction;
     private InputAction reloadAction;
+    private InputAction interactAction;
 
     public PlayerMovement playerMovement;
     public PlayerShooting playerShooting;
+    public InteractComponent interactComponent;
 
     public bool isInitialised = false;
 
     public void setInitialised(bool state) { isInitialised = state; }
 
     // Start is called before the first frame update
-    public void InitialiseComponent(ref PlayerMovement dPlayerMovement, ref PlayerShooting dPlayerShooting)
+    public void InitialiseComponent(ref PlayerMovement dPlayerMovement, ref PlayerShooting dPlayerShooting, ref InteractComponent dInteractComponent)
     {
         actionMap = new PlayerInputs_ActionMap();
         movementAction = actionMap.Player.Movement;
         dashAction = actionMap.Player.Dash;
         fireAction = actionMap.Player.Shoot;
         reloadAction = actionMap.Player.Reload;
+        interactAction = actionMap.Player.Interact;
 
         playerMovement = dPlayerMovement;
         playerShooting = dPlayerShooting;
+        interactComponent = dInteractComponent;
 
         isInitialised = true;
     }
@@ -50,6 +54,7 @@ public class PlayerInputManager : MonoBehaviour
         dashAction.Enable();
         fireAction.Enable();
         reloadAction.Enable();
+        interactAction.Enable();
 
         movementAction.performed += playerMovement.SetMovementInput;
         movementAction.canceled += playerMovement.SetMovementInput;
@@ -57,6 +62,7 @@ public class PlayerInputManager : MonoBehaviour
         fireAction.performed += playerShooting.PlayerFireInput;
         fireAction.canceled += playerShooting.PlayerStopFireInput;
         reloadAction.performed += playerShooting.PlayerReloadAction;
+        interactAction.performed += interactComponent.OnInteract;
     }
 
     public void DisableInput()
@@ -65,6 +71,7 @@ public class PlayerInputManager : MonoBehaviour
         dashAction.Disable();
         fireAction.Disable();
         reloadAction.Disable();
+        interactAction.Disable();
 
         movementAction.performed -= playerMovement.SetMovementInput;
         movementAction.canceled -= playerMovement.SetMovementInput;
@@ -72,5 +79,6 @@ public class PlayerInputManager : MonoBehaviour
         fireAction.performed -= playerShooting.PlayerFireInput;
         fireAction.canceled -= playerShooting.PlayerStopFireInput;
         reloadAction.performed -= playerShooting.PlayerReloadAction;
+        interactAction.performed -= interactComponent.OnInteract;
     }
 }
