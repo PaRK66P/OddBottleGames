@@ -4,25 +4,14 @@ using UnityEngine;
 
 public class KeyScript : MonoBehaviour
 {
-    [SerializeField] private GameObject door;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private DoorScript door;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            door.SetActive(false);
+            //door.gameObject.SetActive(false);
+            door.keyCollected = true;
             this.gameObject.SetActive(false);
         }
     }
