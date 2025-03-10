@@ -180,6 +180,26 @@ public class PathfindingManager : MonoBehaviour
         return Vector3.zero;
     }
 
+    public Vector3 GetNearestNodeInDirection(Vector3 target, Vector3 direction)
+    {
+        Node returnNode = NodeFromWorldPosition(target);
+        List<Node> neighbourNodes;
+
+        // AGAIN I AM BEING VERY CAREFUL
+        while (returnNode.isBlocked)
+        {
+            neighbourNodes = GetNeighbourNodes(returnNode);
+            if(neighbourNodes.Count <= 0)
+            {
+                returnNode = NodeFromWorldPosition(returnNode.worldPosition + direction * nodeSize);
+                continue;
+            }
+            returnNode = neighbourNodes[0];
+        }
+
+        return returnNode.worldPosition;
+    } 
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;

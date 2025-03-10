@@ -119,6 +119,7 @@ public class PlayerShooting : MonoBehaviour
         // Check if firing here as we can charge immediately but not fire immediately
         if (!CanFire() || !charging || chargedAmmo <= 0) 
         {
+            charging = false;
             if (!firingChargedShot)
             {
                 ReleaseChargedShots();
