@@ -15,6 +15,8 @@ public class CompanionBossData : ScriptableObject
     public LayerMask environmentMask;
     public LayerMask playerMask;
     public Sprite idleSprite;
+    [Range(0f, 1f)] public float stageTwoHealthThreshold;
+    [Range(0f, 1f)] public float stageThreeHealthThreshold;
 
     [Header("Leap")]
     public float leapChargeTime;

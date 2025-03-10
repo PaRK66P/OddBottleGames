@@ -150,8 +150,32 @@ public class CompanionManager : MonoBehaviour
             StartCoroutine(PlayDeathEffects());
             return;
         }
+
+        switch (bossScript.GetHeatUpStage())
+        {
+            case 1:
+                if(_health < bossData.stageTwoHealthThreshold * bossData.health)
+                {
+                    bossScript.HeatUp();
+                }
+                break;
+            case 2:
+                if(_health < bossData.stageThreeHealthThreshold * bossData.health)
+                {
+                    bossScript.HeatUp();
+                }
+                break;
+            case 3:
+                break;
+            default:
+                Debug.LogWarning("Heat up stage not accounted for: " + bossScript.GetHeatUpStage());
+                break;
+        }
+
         healthbar.GetComponent<UnityEngine.UI.Slider>().value = _health;
         DamageVisual();
+
+        Debug.Log(bossScript.GetHeatUpStage());
     }
 
     private void DamageVisual()

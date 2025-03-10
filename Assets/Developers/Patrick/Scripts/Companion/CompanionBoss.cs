@@ -54,6 +54,9 @@ public class CompanionBoss : MonoBehaviour
     // Scream Attack
     private float _screamStartTimer;
 
+    // Heat up
+    private int _heatUpStage;
+
     // Start is called before the first frame update
     public void InitialiseComponent(ref CompanionBossData bossData, ref Rigidbody2D rigidbodyComp, ref CompanionAnimations animationScript, ref PathfindingManager pathfindingScript, ref GameObject playerObjectRef, ref ObjectPoolManager poolManagerRef)
     {
@@ -63,6 +66,8 @@ public class CompanionBoss : MonoBehaviour
         _pathfindingScript = pathfindingScript;
         playerObj = playerObjectRef;
         poolManager = poolManagerRef;
+
+        _heatUpStage = 1;
     }
 
     public void SetupEnemy()
@@ -440,5 +445,15 @@ public class CompanionBoss : MonoBehaviour
         _screamStartTimer = Time.time;
 
         currentState = AttackState.SCREAM;
+    }
+
+    public void HeatUp()
+    {
+        _heatUpStage++;
+    }
+
+    public int GetHeatUpStage()
+    {
+        return _heatUpStage;
     }
 }

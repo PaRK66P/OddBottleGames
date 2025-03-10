@@ -25,6 +25,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   idleSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
+  stageTwoHealthThreshold: 0.801
+  stageThreeHealthThreshold: 0.51
   leapChargeTime: 0.5
   leapTravelTime: 0.3
   leapEndTime: 0.5
