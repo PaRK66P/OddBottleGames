@@ -4,14 +4,16 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
+    [Header("Pause menu assets")]
     [SerializeField] UnityEngine.UI.Slider volumeSlider;
     [SerializeField] UnityEngine.UI.Slider typingSpeedSlider;
     [SerializeField] UnityEngine.UI.Toggle dashToggle;
     [SerializeField] UnityEngine.UI.Toggle autoTypeToggle;
 
     private GameObject player;
-    private GameObject pauseMenuContainer;
-    private VisualNovelScript visualNovelManager;
+    [Header("Important references")]
+    [SerializeField] private GameObject pauseMenuContainer;
+    [SerializeField] private VisualNovelScript visualNovelManager;
     private bool isPaused = false;
 
     private float volume = 0.3f;
@@ -23,8 +25,8 @@ public class PauseMenuManager : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("PlayerProto");
-        pauseMenuContainer = GameObject.Find("Canvas").transform.Find("PauseMenu").gameObject;
-        visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+        //pauseMenuContainer = GameObject.Find("Canvas").transform.Find("PauseMenu").gameObject;
+        //visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
 
 
         if (!PlayerPrefs.HasKey("volume"))
@@ -73,7 +75,7 @@ public class PauseMenuManager : MonoBehaviour
 
         pauseMenuContainer.SetActive(true);
         pauseMenuContainer.transform.Find("MainPause").gameObject.SetActive(true);
-        pauseMenuContainer.transform.Find("ControlsScreen").gameObject.SetActive(false);
+        pauseMenuContainer.transform.Find("SettingsScreen").gameObject.SetActive(false);
         isPaused = true;
 
     }
@@ -103,13 +105,13 @@ public class PauseMenuManager : MonoBehaviour
     public void OnControlsClick()
     {
         pauseMenuContainer.transform.Find("MainPause").gameObject.SetActive(false);
-        pauseMenuContainer.transform.Find("ControlsScreen").gameObject.SetActive(true);
+        pauseMenuContainer.transform.Find("SettingsScreen").gameObject.SetActive(true);
     }
 
     public void OnControlsBackClick()
     {
         pauseMenuContainer.transform.Find("MainPause").gameObject.SetActive(true);
-        pauseMenuContainer.transform.Find("ControlsScreen").gameObject.SetActive(false);
+        pauseMenuContainer.transform.Find("SettingsScreen").gameObject.SetActive(false);
     }
 
     public void OnRestartClick()
