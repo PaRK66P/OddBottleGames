@@ -18,12 +18,12 @@ MonoBehaviour:
   dashChargeUIObject: {fileID: 454602280210619587, guid: 15acabbdf8d62154f9216abc70b7a442, type: 3}
   dashRechargeUIObject: {fileID: 454602280210619587, guid: fb993dada00dc344dae6409bd2fc1b3e, type: 3}
   dashTime: 0.2
-  dashDistance: 8
+  dashDistance: 6
   evolvedDashExtraDistance: 2
   dashCooldown: 0.15
   numberOfDashCharges: 3
   dashRechargeTime: 1
-  evolvedDashDamage: 0
+  evolvedDashDamage: 5
   damageLayers:
     serializedVersion: 2
     m_Bits: 2048

@@ -57,8 +57,9 @@ public class PlayerInputManager : MonoBehaviour
         movementAction.performed += playerMovement.SetMovementInput;
         movementAction.canceled += playerMovement.SetMovementInput;
         dashAction.performed += playerMovement.PlayerDashInput;
+        chargeAction.performed += playerShooting.PlayerChargeInput;
+        chargeAction.canceled += playerShooting.PlayerStopChargeInput;
         fireAction.performed += playerShooting.PlayerFireInput;
-        chargeAction.performed += playerShooting.PlayerStopFireInput;
         reloadAction.performed += playerShooting.PlayerReloadAction;
     }
 
@@ -73,8 +74,9 @@ public class PlayerInputManager : MonoBehaviour
         movementAction.performed -= playerMovement.SetMovementInput;
         movementAction.canceled -= playerMovement.SetMovementInput;
         dashAction.performed -= playerMovement.PlayerDashInput;
+        chargeAction.performed -= playerShooting.PlayerChargeInput;
+        chargeAction.canceled -= playerShooting.PlayerStopChargeInput;
         fireAction.performed -= playerShooting.PlayerFireInput;
-        chargeAction.performed -= playerShooting.PlayerStopFireInput;
         reloadAction.performed -= playerShooting.PlayerReloadAction;
     }
 }
