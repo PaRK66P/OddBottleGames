@@ -122,7 +122,7 @@ public class PlayerManager : MonoBehaviour
         regenTimer += Time.deltaTime;
         if(regenTimer >= 1.0f)
         {
-            health += 1.0f;
+            Heal(1.0f);
             regenTimer = 0; 
         }
 
