@@ -21,7 +21,7 @@ public class TwineParser
             //const int kIndexOfContentStart = 4;
             for ( int i = 0; i < nodeData.Length; i++ )
             {
-                
+            
                 // The first node comes after the UserStylesheet node
                 if ( !passedHeader )
                 {
@@ -43,9 +43,11 @@ public class TwineParser
                     int posEnd = currLineText.IndexOf("}", posBegin);
                     currLineText = currLineText.Substring( 0, posBegin ) + currLineText.Substring( posEnd + 1 );
                 }
+            
+                bool tagsPresent = currLineText.IndexOf( "[" ) < currLineText.IndexOf( "\n" );
+                int endOfFirstLine = currLineText.IndexOf( "\n" );
 
-                bool tagsPresent = currLineText.IndexOf( "[" ) < currLineText.IndexOf( "\r\n" );
-                int endOfFirstLine = currLineText.IndexOf( "\r\n" );
+                //UnityEngine.Debug.Log( endOfFirstLine + ", " + tagsPresent );
 
                 int startOfResponses = -1;
                 int startOfResponseDestinations = currLineText.IndexOf( "[[" );
@@ -55,7 +57,8 @@ public class TwineParser
                 else
                 {
                     // Last new line before "[["
-                    startOfResponses = currLineText.Substring( 0, startOfResponseDestinations ).LastIndexOf( "\r\n" );
+                    startOfResponses = currLineText.Substring( 0, startOfResponseDestinations ).LastIndexOf( "\n" );
+                UnityEngine.Debug.Log(currLineText.Substring(0, startOfResponseDestinations).LastIndexOf( "\n" ));
                 }
                 // if (endOfFirstLine == -1)
                 // {
@@ -98,6 +101,7 @@ public class TwineParser
                     messsageText = currLineText.Substring( endOfFirstLine, startOfResponses - endOfFirstLine).Trim();
                     responseText = currLineText.Substring( startOfResponses ).Trim();
                 }
+                //UnityEngine.Debug.Log(messsageText);
 
                 DialogueTreeNode curNode = new DialogueTreeNode();
                 //curNode.sceneData. = title;
@@ -119,12 +123,16 @@ public class TwineParser
                 //     With Message Format: "\r\n Message[[Response One]]"
                 //     Message - less Format: "\r\n [[Response One]]"
                 //curNode.responses = new List<Response>();
-    
+                
+                //UnityEngine.Debug.Log(responseText);
+
                 if ( !lastNode )
                 {
-                    List<string> responseData = new List<string>(responseText.Split( new string [] { "\r\n" }, System.StringSplitOptions.None ));
+                    List<string> responseData = new List<string>(responseText.Split( new string [] { "\n" }, System.StringSplitOptions.None ));
+                //UnityEngine.Debug.Log(responseData);
                     foreach (string response in responseData)
                     {
+                    //UnityEngine.Debug.Log(response);
                         curNode.twineData.responseData.Add(response);
                     }
                     // for ( int k = responseData.Count - 1; k >= 0; k-- )
@@ -170,12 +178,12 @@ public class TwineParser
 
         public static DialogueTree ConstructTwineTree(List<DialogueTreeNode> nodes)
         {
-            //UnityEngine.Debug.Log("constructing tree from twine data");
+            UnityEngine.Debug.Log("constructing tree from twine data");
             //DialogueTree output = new DialogueTree();
             DialogueTreeNode root = new DialogueTreeNode();
             for (int i = 0; i < nodes.Count; i++)
             {
-                //UnityEngine.Debug.Log(nodes[i].twineData.title);
+                UnityEngine.Debug.Log(nodes[i].twineData.title);
                 DialogueTreeNode node = nodes[i];
                 if (i == 0)
                 {
@@ -189,7 +197,7 @@ public class TwineParser
                     if (string.IsNullOrEmpty(response))
                     {
                         //node.twineData.responseData.Remove(response);
-                        //UnityEngine.Debug.Log("null or empty response being removed");
+                        UnityEngine.Debug.Log("null or empty response being removed");
                         continue;
                         
                     }
@@ -198,14 +206,14 @@ public class TwineParser
                     int destinationEnd = response.IndexOf("]]");
 
                     
-                    UnityEngine.Assertions.Assert.IsFalse( destinationStart == -1, "No destination around in node titled, '" + node.twineData.title + "'" );
+                    UnityEngine.Assertions.Assert.IsFalse( destinationStart == -1, "No destination around in node titled, '" + node.twineData.title + "': " + destinationStart + ", " + destinationEnd );
                     UnityEngine.Assertions.Assert.IsFalse( destinationEnd == -1, "No destination around in node titled, '" + node.twineData.title + "'" );
                     string destination = response.Substring(destinationStart + 2, (destinationEnd - destinationStart)-2);
                     //curResponse.destinationNode = destination;
 
                     if (destinationStart != 0)
                     {
-                        //UnityEngine.Debug.Log("adding response");
+                        UnityEngine.Debug.Log("adding response");
                         //int count = node.children.Count;
                         DialogueTreeNode responseNode = FindNodeWithTwineTitle(destination, ref nodes);
                         //UnityEngine.Debug.Log(responseNode.twineData.title);
