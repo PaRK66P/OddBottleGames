@@ -37,7 +37,6 @@ public class AIProjectileScript : MonoBehaviour
         
         if (collision.gameObject.tag == "Player")
         {
-            //Debug.Log("playerCollision");
             Vector2 damageDirection = new Vector2(collision.gameObject.transform.position.x - transform.position.x,
                 collision.gameObject.transform.position.y - transform.position.y);
             

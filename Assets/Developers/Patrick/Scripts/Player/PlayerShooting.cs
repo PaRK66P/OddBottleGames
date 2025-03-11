@@ -20,7 +20,6 @@ public class PlayerShooting : MonoBehaviour
 
     private int currentAmmo = 0;
     private int chargedAmmo = 0;
-    private float reloadTime = 1.0f;
 
     private bool reloading = false;
     private bool firingChargedShot = false;
@@ -159,10 +158,9 @@ public class PlayerShooting : MonoBehaviour
         // Conditions to fire
         /*
          * Fire rate with buffer consideration
-         * Not currently firing
          * Not reloading
          */
-        return (Time.time - lastShotTime >= _playerData.fireRate - _debugData.firingInputBuffer && !firingChargedShot && !reloading);
+        return (Time.time - lastShotTime >= _playerData.fireRate - _debugData.firingInputBuffer && !reloading);
     }
 
     private void Fire(Vector2 fireDirection, Vector3 rotation, int ammoUsed, float fireMultiplier = 1.0f)
@@ -243,8 +241,6 @@ public class PlayerShooting : MonoBehaviour
 
     private void FireChargedShots(Vector2 direction, Vector3 rotation)
     {
-        firingChargedShot = true; // Needed anymore?
-
         float localDamageMultiplier = 1;
 
         for (int i = 0; i < chargedAmmo; i++)
@@ -255,8 +251,6 @@ public class PlayerShooting : MonoBehaviour
         Fire(direction, rotation, chargedAmmo, localDamageMultiplier);
 
         ReleaseChargedShots();
-
-        firingChargedShot = false;
     }
 
     private void ReleaseChargedShots()

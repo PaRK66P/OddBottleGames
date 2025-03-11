@@ -39,7 +39,6 @@ public class ObjectPoolManager : MonoBehaviour
 
     public void ReleaseObject(string objectTypeName, GameObject releaseObject)
     {
-        //Debug.Log("Release " + objectTypeName);
         objectPools[lookupTable[objectTypeName]].Release(releaseObject);
     }
 }

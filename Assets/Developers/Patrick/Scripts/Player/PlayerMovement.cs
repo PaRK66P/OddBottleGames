@@ -82,7 +82,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (dashChargesNumber < maxDashCharges)
             {
-                //Debug.Log("recharged dash");
                 //dashRechargesUIObjects[dashChargesNumber].GetComponent<RectTransform>().localScale = new Vector3(0, 0, 1);
                 dashChargesNumber++;
             }
@@ -215,7 +214,6 @@ public class PlayerMovement : MonoBehaviour
         lastDashInputTime = Time.time;
         if (!dash)
         {
-            //Debug.Log(dashTowardsMouse);
             dash = true;
             dashTimer = 0.0f;
             dashStart = new Vector2(transform.position.x, transform.position.y);

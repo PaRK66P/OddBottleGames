@@ -112,15 +112,15 @@ public class CompanionFriend : MonoBehaviour
                         }
                         _leapStart = transform.position;
                         _leapEnd = _leapStart + leapDirection * _dataObj.leapDistance;
-                        if (targetDirection.sqrMagnitude >= _dataObj.leapDistance * _dataObj.leapDistance)
-                        {
-                            _leapEnd = _target.transform.position;
-                        }
+
                         RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, _dataObj.leapDistance, _dataObj.environmentLayer);
                         if (wallCheck)
                         {
                             _leapEnd = wallCheck.point;
                         }
+
+                        _leapEnd = _pathfindingManager.GetNearestNodeInDirection(_leapEnd, new Vector3(-leapDirection.x, -leapDirection.y, 0.0f)).worldPosition; // Find the nearest unblocked node along the path
+
 
                         _leapTimer = Time.time;
 
