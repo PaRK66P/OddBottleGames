@@ -46,12 +46,12 @@ MonoBehaviour:
   spitSpawnDistance: 3.58
   spitSpawnAngle: 40
   spitEndTime: 0.3
-  spitProjectileTravelDistance1: 1
-  spitProjectileSize1: 0
-  spitProjectileTravelDistance2: 0
-  spitProjectileSize2: 0
-  spitProjectileTravelDistance3: 0
-  spitProjectileSize3: 0
+  spitProjectileTravelDistance1: 5
+  spitProjectileSize1: 2
+  spitProjectileTravelDistance2: 5
+  spitProjectileSize2: 3
+  spitProjectileTravelDistance3: 8
+  spitProjectileSize3: 4
   spitChargeSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   spitAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   spitEndSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
@@ -61,21 +61,21 @@ MonoBehaviour:
   lickProjectileAngle: 17.6
   lickChargeTime: 0.2
   lickEndTime: 0.3
-  lickProjectileSpeed1: 0
+  lickProjectileSpeed1: 8
   lickWaveGapStage1: 0
-  lickWavesStage1: 0
-  lickProjectilesStage1: 0
-  lickLastWaveProjectilesStage1: 0
-  lickProjectileSpeed2: 0
-  lickWaveGapStage2: 0
-  lickWavesStage2: 0
-  lickProjectilesStage2: 0
-  lickLastWaveProjectilesStage2: 0
-  lickProjectileSpeed3: 0
-  lickWaveGapStage3: 0
-  lickWavesStage3: 0
-  lickProjectilesStage3: 0
-  lickLastWaveProjectilesStage3: 0
+  lickWavesStage1: 1
+  lickProjectilesStage1: 5
+  lickLastWaveProjectilesStage1: 5
+  lickProjectileSpeed2: 8
+  lickWaveGapStage2: 0.3
+  lickWavesStage2: 3
+  lickProjectilesStage2: 5
+  lickLastWaveProjectilesStage2: 8
+  lickProjectileSpeed3: 12
+  lickWaveGapStage3: 0.2
+  lickWavesStage3: 5
+  lickProjectilesStage3: 5
+  lickLastWaveProjectilesStage3: 8
   lickChargeSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   lickAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   lickEndSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
@@ -99,7 +99,7 @@ MonoBehaviour:
   screamAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   screamEndSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
   drawRange: 0
-  drawLeaps: 1
+  drawLeaps: 0
   drawSpit: 0
   drawLick: 0
   drawScream: 0
