@@ -12,6 +12,8 @@ public class PlayerInputManager : MonoBehaviour
     private InputAction reloadAction;
     private InputAction chargeAction;
 
+    private InputAction aimAction;
+
     public PlayerMovement playerMovement;
     public PlayerShooting playerShooting;
 
@@ -28,6 +30,8 @@ public class PlayerInputManager : MonoBehaviour
         fireAction = actionMap.Player.Shoot;
         reloadAction = actionMap.Player.Reload;
         chargeAction = actionMap.Player.Charge;
+
+        aimAction = actionMap.Player.Aim;
 
         playerMovement = dPlayerMovement;
         playerShooting = dPlayerShooting;
@@ -54,6 +58,8 @@ public class PlayerInputManager : MonoBehaviour
         reloadAction.Enable();
         chargeAction.Enable();
 
+        aimAction.Enable();
+
         movementAction.performed += playerMovement.SetMovementInput;
         movementAction.canceled += playerMovement.SetMovementInput;
         dashAction.performed += playerMovement.PlayerDashInput;
@@ -61,6 +67,9 @@ public class PlayerInputManager : MonoBehaviour
         chargeAction.canceled += playerShooting.PlayerStopChargeInput;
         fireAction.performed += playerShooting.PlayerFireInput;
         reloadAction.performed += playerShooting.PlayerReloadAction;
+
+        aimAction.performed += playerShooting.SetAimInput;
+        aimAction.canceled += playerShooting.SetAimInput;
     }
 
     public void DisableInput()
@@ -71,6 +80,8 @@ public class PlayerInputManager : MonoBehaviour
         reloadAction.Disable();
         chargeAction.Disable();
 
+        aimAction.Disable();
+
         movementAction.performed -= playerMovement.SetMovementInput;
         movementAction.canceled -= playerMovement.SetMovementInput;
         dashAction.performed -= playerMovement.PlayerDashInput;
@@ -78,5 +89,8 @@ public class PlayerInputManager : MonoBehaviour
         chargeAction.canceled -= playerShooting.PlayerStopChargeInput;
         fireAction.performed -= playerShooting.PlayerFireInput;
         reloadAction.performed -= playerShooting.PlayerReloadAction;
+
+        aimAction.performed -= playerShooting.SetAimInput;
+        aimAction.canceled -= playerShooting.SetAimInput;
     }
 }
