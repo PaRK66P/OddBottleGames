@@ -44,8 +44,8 @@ public class TwineParser
                     currLineText = currLineText.Substring( 0, posBegin ) + currLineText.Substring( posEnd + 1 );
                 }
             
-                bool tagsPresent = currLineText.IndexOf( "[" ) < currLineText.IndexOf( "\n" );
-                int endOfFirstLine = currLineText.IndexOf( "\n" );
+                bool tagsPresent = currLineText.IndexOf( "[" ) < currLineText.IndexOf( "\r\n" );
+                int endOfFirstLine = currLineText.IndexOf( "\r\n" );
 
                 //UnityEngine.Debug.Log( endOfFirstLine + ", " + tagsPresent );
 
@@ -57,8 +57,8 @@ public class TwineParser
                 else
                 {
                     // Last new line before "[["
-                    startOfResponses = currLineText.Substring( 0, startOfResponseDestinations ).LastIndexOf( "\n" );
-                UnityEngine.Debug.Log(currLineText.Substring(0, startOfResponseDestinations).LastIndexOf( "\n" ));
+                    startOfResponses = currLineText.Substring( 0, startOfResponseDestinations ).LastIndexOf( "\r\n" );
+                UnityEngine.Debug.Log(currLineText.Substring(0, startOfResponseDestinations).LastIndexOf( "\r\n" ));
                 }
                 // if (endOfFirstLine == -1)
                 // {
@@ -128,7 +128,7 @@ public class TwineParser
 
                 if ( !lastNode )
                 {
-                    List<string> responseData = new List<string>(responseText.Split( new string [] { "\n" }, System.StringSplitOptions.None ));
+                    List<string> responseData = new List<string>(responseText.Split( new string [] { "\r\n" }, System.StringSplitOptions.None ));
                 //UnityEngine.Debug.Log(responseData);
                     foreach (string response in responseData)
                     {
@@ -194,6 +194,7 @@ public class TwineParser
                     //UnityEngine.Debug.Log(j + ", " + node.twineData.responseData.Count);
                     //UnityEngine.Debug.Log(node.twineData.responseData.Count);
                     string response = node.twineData.responseData[j];
+                    UnityEngine.Debug.Log(response);
                     if (string.IsNullOrEmpty(response))
                     {
                         //node.twineData.responseData.Remove(response);
