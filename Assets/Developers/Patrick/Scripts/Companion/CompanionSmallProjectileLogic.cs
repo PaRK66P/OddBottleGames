@@ -48,15 +48,14 @@ public class CompanionSmallProjectileLogic : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                _isActive = false;
-
                 Vector2 damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
                 if (collision.gameObject.GetComponent<PlayerManager>().CanBeDamaged())
                 {
                     collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 10, _damage);
-                }
 
-                poolManager.ReleaseObject(_name, gameObject);
+                    _isActive = false;
+                    poolManager.ReleaseObject(_name, gameObject);
+                }
             }
         }
     }

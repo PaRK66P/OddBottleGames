@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed28f7f29a142b4cb8be512a0c0a3c0, type: 3}
   m_Name: MercyEnemy
   m_EditorClassIdentifier: 
-  health: 75
+  health: 100
   healthbar: {fileID: 7940067324356998275, guid: ace6fbf26c5479d4d870cd37326fbc3d, type: 3}
   leapsBeforeFeral: 3
   closeRangeDistance: 5.63
@@ -26,7 +26,7 @@ MonoBehaviour:
     m_Bits: 128
   idleSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
   stageTwoHealthThreshold: 0.801
-  stageThreeHealthThreshold: 0.51
+  stageThreeHealthThreshold: 0.609
   leapChargeTime: 0.5
   leapTravelTime: 0.3
   leapEndTime: 0.5
@@ -46,6 +46,7 @@ MonoBehaviour:
   spitSpawnDistance: 3.58
   spitSpawnAngle: 40
   spitEndTime: 0.3
+  spitProjectileDamage: 40
   spitProjectileTravelDistance1: 5
   spitProjectileSize1: 2
   spitProjectileTravelDistance2: 5
@@ -59,10 +60,12 @@ MonoBehaviour:
   lickProjectileSpawnDistance: 1.64
   lickProjectileSeperationDistance: 0.38
   lickProjectileAngle: 17.6
+  lickProjectileSize: 0.8
+  lickProjectileDamage: 20
   lickChargeTime: 0.2
   lickEndTime: 0.3
   lickProjectileSpeed1: 8
-  lickWaveGapStage1: 0
+  lickWaveGapStage1: 0.2
   lickWavesStage1: 1
   lickProjectilesStage1: 5
   lickLastWaveProjectilesStage1: 5
@@ -80,20 +83,20 @@ MonoBehaviour:
   lickAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   lickEndSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
   screamProjectile: {fileID: 6314627607262925113, guid: 7e751bbcfe8a2894992bf098742dccc3, type: 3}
-  screamProjectileSize: 0
-  screamProjectileDamage: 0
+  screamProjectileSize: 0.8
+  screamProjectileDamage: 20
   screamProjectileSpawnDistance: 1.42
-  numberOfScreamProjectiles: 12
+  numberOfScreamProjectiles: 10
   screamChargeTime: 0.2
   screamEndTime: 0.4
   screamProjectileSpeed1: 6
-  screamWaveGapStage1: 0
+  screamWaveGapStage1: 0.1
   screamWavesStage1: 1
   screamProjectileSpeed2: 6
-  screamWaveGapStage2: 0.5
+  screamWaveGapStage2: 0.6
   screamWavesStage2: 5
-  screamProjectileSpeed3: 12
-  screamWaveGapStage3: 0.25
+  screamProjectileSpeed3: 9
+  screamWaveGapStage3: 0.4
   screamWavesStage3: 10
   screamChargeSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   screamAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}

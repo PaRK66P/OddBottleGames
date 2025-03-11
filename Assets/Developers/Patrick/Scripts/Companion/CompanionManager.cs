@@ -172,8 +172,6 @@ public class CompanionManager : MonoBehaviour
 
         healthbar.GetComponent<UnityEngine.UI.Slider>().value = _health;
         DamageVisual();
-
-        Debug.Log(bossScript.GetHeatUpStage());
     }
 
     private void CompanionDeath()

@@ -45,6 +45,7 @@ public class CompanionBossData : ScriptableObject
     public float spitSpawnDistance;
     public float spitSpawnAngle;
     public float spitEndTime;
+    public float spitProjectileDamage;
     [Header("Stage 1")]
     public float spitProjectileTravelDistance1;
     public float spitProjectileSize1;
@@ -65,6 +66,8 @@ public class CompanionBossData : ScriptableObject
     public float lickProjectileSpawnDistance;
     public float lickProjectileSeperationDistance;
     public float lickProjectileAngle;
+    public float lickProjectileSize;
+    public float lickProjectileDamage;
     public float lickChargeTime;
     public float lickEndTime;
     [Header("Stage 1")]

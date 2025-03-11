@@ -67,6 +67,7 @@ public class CompanionBoss : MonoBehaviour
     private float _screamLastWaveStartTime;
     private float _screamWaveGap;
     private float _screamProjectileSpeed;
+    private Vector2 _screamStartDirection;
 
     // Heat up
     private int _heatUpStage;
@@ -268,7 +269,7 @@ public class CompanionBoss : MonoBehaviour
                 ref poolManager,
                 dataObj.spitProjectile.name,
                 dataObj.spitProjectileLifespan,
-                _spitSize,
+                _spitSize, dataObj.spitProjectileDamage,
                 transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), Mathf.Sin(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), 0.0f) * dataObj.spitSpawnDistance,
                 transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), Mathf.Sin(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), 0.0f) * (dataObj.spitSpawnDistance + _spitTravelDistance)); // Add linecast to end early at wall
         }
@@ -322,7 +323,7 @@ public class CompanionBoss : MonoBehaviour
                 objectRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref poolManager, dataObj.lickProjectile.name,
                     startSpawnPosition + rightVector * i * dataObj.lickProjectileSeperationDistance,
                     projectileDirection.normalized,
-                    _lickProjectileSpeed, 1.0f, 1.0f,
+                    _lickProjectileSpeed, dataObj.lickProjectileSize, dataObj.lickProjectileDamage,
                     dataObj.environmentMask, dataObj.playerMask);
             }
 
@@ -332,7 +333,7 @@ public class CompanionBoss : MonoBehaviour
             return;
         }
 
-        if (_lickWaveCurrentCount < _lickWaveCount - 1)
+        if (_lickWaveCurrentCount < _lickWaveCount)
         {
             if (Time.time - _lickLastWaveStartTime <= _lickWaveGap) { return; }
 
@@ -365,7 +366,7 @@ public class CompanionBoss : MonoBehaviour
                 objectRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref poolManager, dataObj.lickProjectile.name,
                     startSpawnPosition + rightVector * i * dataObj.lickProjectileSeperationDistance,
                     projectileDirection.normalized,
-                    _lickProjectileSpeed, 1.0f, 1.0f,
+                    _lickProjectileSpeed, dataObj.lickProjectileSize, dataObj.lickProjectileDamage,
                     dataObj.environmentMask, dataObj.playerMask);
             }
 
@@ -402,8 +403,7 @@ public class CompanionBoss : MonoBehaviour
 
             // Do scream
             GameObject projectileRef;
-            Vector2 forwardDirection = (playerObj.transform.position - transform.position).normalized;
-            float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f));
+            float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, _screamStartDirection, new Vector3(0.0f, 0.0f, 1.0f));
             float screamAngle = 360.0f / (float)dataObj.numberOfScreamProjectiles;
             Vector3 projectileSpawnPosition;
 
@@ -411,7 +411,7 @@ public class CompanionBoss : MonoBehaviour
 
             for (int i = 0; i < dataObj.numberOfScreamProjectiles; i++)
             {
-                projectileSpawnPosition = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * i)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * i)), 0.0f) * dataObj.screamProjectileSpawnDistance;
+                projectileSpawnPosition = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * (i + ((_screamWaveCurrentCount % 2) / 2.0f)))), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * (i + ((_screamWaveCurrentCount % 2) / 2.0f)))), 0.0f) * dataObj.screamProjectileSpawnDistance;
 
                 projectileRef = poolManager.GetFreeObject(dataObj.screamProjectile.name);
                 projectileRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref poolManager, dataObj.screamProjectile.name,
@@ -573,6 +573,7 @@ public class CompanionBoss : MonoBehaviour
         _doLickAttack = true;
         _screamStartTimer = Time.time;
         _screamWaveCurrentCount = 0;
+        _screamStartDirection = (transform.position - playerObj.transform.position).normalized;
         switch (_heatUpStage)
         {
             case 1:
