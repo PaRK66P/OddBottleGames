@@ -18,6 +18,7 @@ public class CompanionBossData : ScriptableObject
     [Range(0f, 1f)] public float stageTwoHealthThreshold;
     [Range(0f, 1f)] public float stageThreeHealthThreshold;
 
+    [Space(16)]
     [Header("Leap")]
     public float leapChargeTime;
     public float leapTravelTime;
@@ -29,12 +30,14 @@ public class CompanionBossData : ScriptableObject
     public Sprite leapMoveSprite;
     public Sprite leapEndSprite;
 
+    [Space(16)]
     [Header("Feral")]
     public int feralLeapAmount;
     public float feralLeapDelay;
     public float feralLeapEndTime;
     public float feralLeapAdditionalDistance;
 
+    [Space(16)]
     [Header("Spit")]
     public GameObject spitProjectile;
     public float spitProjectileLifespan;
@@ -47,6 +50,7 @@ public class CompanionBossData : ScriptableObject
     public Sprite spitAttackSprite;
     public Sprite spitEndSprite;
 
+    [Space(16)]
     [Header("Lick")]
     public GameObject lickProjectile;
     public float lickProjectileNumber;
@@ -60,13 +64,28 @@ public class CompanionBossData : ScriptableObject
     public Sprite lickAttackSprite;
     public Sprite lickEndSprite;
 
+    [Space(16)]
     [Header("Scream")]
     public GameObject screamProjectile;
+    public float screamProjectileSize;
+    public float screamProjectileDamage;
     public float screamProjectileSpawnDistance;
     public int numberOfScreamProjectiles;
-    public float screamProjectileSpeed;
     public float screamChargeTime;
     public float screamEndTime;
+    [Header("Stage 1"), Space(0)]
+    public float screamProjectileSpeed1;
+    public float screamWaveGapStage1;
+    public int screamWavesStage1;
+    [Header("Stage 2")]
+    public float screamProjectileSpeed2;
+    public float screamWaveGapStage2;
+    public int screamWavesStage2;
+    [Header("Stage 3")]
+    public float screamProjectileSpeed3;
+    public float screamWaveGapStage3;
+    public int screamWavesStage3;
+    [Header("Animations")]
     public Sprite screamChargeSprite;
     public Sprite screamAttackSprite;
     public Sprite screamEndSprite;

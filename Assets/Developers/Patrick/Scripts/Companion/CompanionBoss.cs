@@ -53,6 +53,11 @@ public class CompanionBoss : MonoBehaviour
 
     // Scream Attack
     private float _screamStartTimer;
+    private int _screamWaveCurrentCount;
+    private int _screamWaveCount;
+    private float _screamLastWaveStartTime;
+    private float _screamWaveGap;
+    private float _screamProjectileSpeed;
 
     // Heat up
     private int _heatUpStage;
@@ -302,7 +307,7 @@ public class CompanionBoss : MonoBehaviour
             objectRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref poolManager, dataObj.lickProjectile.name,
                 startSpawnPosition + rightVector * i * dataObj.lickProjectileSeperationDistance,
                 projectileDirection.normalized,
-                dataObj.lickProjectileSpeed,
+                dataObj.lickProjectileSpeed, 1.0f, 1.0f,
                 dataObj.environmentMask, dataObj.playerMask);
         }
 
@@ -313,6 +318,7 @@ public class CompanionBoss : MonoBehaviour
 
     private void ScreamAttack()
     {
+        // Delay
         if (Time.time - _screamStartTimer <= dataObj.screamChargeTime)
         {
             _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SCREAM_CHARGE);
@@ -320,24 +326,40 @@ public class CompanionBoss : MonoBehaviour
             return;
         }
 
-        // Delay
-        GameObject projectileRef;
-        Vector2 forwardDirection = (playerObj.transform.position - transform.position).normalized;
-        float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f));
-        float screamAngle = 360.0f / (float)dataObj.numberOfScreamProjectiles;
-        Vector3 projectileSpawnPosition;
 
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SCREAM_ATTACK);
-
-        for (int i = 0; i < dataObj.numberOfScreamProjectiles; i++)
+        // Firing
+        if(_screamWaveCurrentCount < _screamWaveCount)
         {
-            projectileSpawnPosition = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * i)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * i)), 0.0f) * dataObj.screamProjectileSpawnDistance;
-            
-            projectileRef = poolManager.GetFreeObject(dataObj.screamProjectile.name);
-            projectileRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref poolManager, dataObj.screamProjectile.name,
-                transform.position + projectileSpawnPosition, projectileSpawnPosition.normalized, dataObj.screamProjectileSpeed,
-                dataObj.environmentMask, dataObj.playerMask);
+            if (Time.time - _screamLastWaveStartTime <= _screamWaveGap)
+            {
+                return;
+            }
+
+            // Do scream
+            GameObject projectileRef;
+            Vector2 forwardDirection = (playerObj.transform.position - transform.position).normalized;
+            float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f));
+            float screamAngle = 360.0f / (float)dataObj.numberOfScreamProjectiles;
+            Vector3 projectileSpawnPosition;
+
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SCREAM_ATTACK);
+
+            for (int i = 0; i < dataObj.numberOfScreamProjectiles; i++)
+            {
+                projectileSpawnPosition = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * i)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * i)), 0.0f) * dataObj.screamProjectileSpawnDistance;
+
+                projectileRef = poolManager.GetFreeObject(dataObj.screamProjectile.name);
+                projectileRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref poolManager, dataObj.screamProjectile.name,
+                    transform.position + projectileSpawnPosition, projectileSpawnPosition.normalized, _screamProjectileSpeed, dataObj.screamProjectileSize, dataObj.screamProjectileDamage,
+                    dataObj.environmentMask, dataObj.playerMask);
+            }
+
+            _screamWaveCurrentCount++;
+            _screamLastWaveStartTime = Time.time;
+
+            return;
         }
+        
 
         _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SCREAM_END);
 
@@ -381,6 +403,7 @@ public class CompanionBoss : MonoBehaviour
         }
     }
 
+    // Also sets up attack based on stage within select attack (e.g. feral leaps will stay at stage 2 even if the companion goes to stage 3 during it)
     private void SelectAttack()
     {
         // To be updated later
@@ -443,6 +466,25 @@ public class CompanionBoss : MonoBehaviour
 
         _doLickAttack = true;
         _screamStartTimer = Time.time;
+        _screamWaveCurrentCount = 0;
+        switch (_heatUpStage)
+        {
+            case 1:
+                _screamProjectileSpeed = dataObj.screamProjectileSpeed1;
+                _screamWaveGap = dataObj.screamWaveGapStage1;
+                _screamWaveCount = dataObj.screamWavesStage1;
+                break;
+            case 2:
+                _screamProjectileSpeed = dataObj.screamProjectileSpeed2;
+                _screamWaveGap = dataObj.screamWaveGapStage2;
+                _screamWaveCount = dataObj.screamWavesStage2;
+                break;
+            case 3:
+                _screamProjectileSpeed = dataObj.screamProjectileSpeed3;
+                _screamWaveGap = dataObj.screamWaveGapStage3;
+                _screamWaveCount = dataObj.screamWavesStage3;
+                break;
+        }
 
         currentState = AttackState.SCREAM;
     }

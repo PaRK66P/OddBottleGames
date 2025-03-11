@@ -145,9 +145,7 @@ public class CompanionManager : MonoBehaviour
         _health -= damage;
         if(_health <= 0)
         {
-            _currentState = CompanionStates.NONE;
-            healthbar.SetActive(false);
-            StartCoroutine(PlayDeathEffects());
+            CompanionDeath();
             return;
         }
 
@@ -176,6 +174,18 @@ public class CompanionManager : MonoBehaviour
         DamageVisual();
 
         Debug.Log(bossScript.GetHeatUpStage());
+    }
+
+    private void CompanionDeath()
+    {
+        _currentState = CompanionStates.NONE;
+        RemoveHealthBar();
+        StartCoroutine(PlayDeathEffects());
+    }
+
+    private void RemoveHealthBar()
+    {
+        healthbar.SetActive(false);
     }
 
     private void DamageVisual()

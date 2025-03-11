@@ -20,7 +20,6 @@ public class PlayerShooting : MonoBehaviour
 
     private int currentAmmo = 0;
     private int chargedAmmo = 0;
-    private float reloadTime = 1.0f;
 
     private bool reloading = false;
     private bool firingChargedShot = false;
