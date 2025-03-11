@@ -41,11 +41,20 @@ public class CompanionBossData : ScriptableObject
     [Header("Spit")]
     public GameObject spitProjectile;
     public float spitProjectileLifespan;
-    public float spitProjectileTravelDistance;
     public float spitChargeTime;
     public float spitSpawnDistance;
     public float spitSpawnAngle;
     public float spitEndTime;
+    [Header("Stage 1")]
+    public float spitProjectileTravelDistance1;
+    public float spitProjectileSize1;
+    [Header("Stage 2")]
+    public float spitProjectileTravelDistance2;
+    public float spitProjectileSize2;
+    [Header("Stage 3")]
+    public float spitProjectileTravelDistance3;
+    public float spitProjectileSize3;
+    [Header("Animations")]
     public Sprite spitChargeSprite;
     public Sprite spitAttackSprite;
     public Sprite spitEndSprite;
@@ -53,13 +62,30 @@ public class CompanionBossData : ScriptableObject
     [Space(16)]
     [Header("Lick")]
     public GameObject lickProjectile;
-    public float lickProjectileNumber;
     public float lickProjectileSpawnDistance;
     public float lickProjectileSeperationDistance;
     public float lickProjectileAngle;
-    public float lickProjectileSpeed;
     public float lickChargeTime;
     public float lickEndTime;
+    [Header("Stage 1")]
+    public float lickProjectileSpeed1;
+    public float lickWaveGapStage1;
+    public int lickWavesStage1;
+    public int lickProjectilesStage1;
+    public int lickLastWaveProjectilesStage1;
+    [Header("Stage 2")]
+    public float lickProjectileSpeed2;
+    public float lickWaveGapStage2;
+    public int lickWavesStage2;
+    public int lickProjectilesStage2;
+    public int lickLastWaveProjectilesStage2;
+    [Header("Stage 3")]
+    public float lickProjectileSpeed3;
+    public float lickWaveGapStage3;
+    public int lickWavesStage3;
+    public int lickProjectilesStage3;
+    public int lickLastWaveProjectilesStage3;
+    [Header("Animations")]
     public Sprite lickChargeSprite;
     public Sprite lickAttackSprite;
     public Sprite lickEndSprite;
@@ -73,7 +99,7 @@ public class CompanionBossData : ScriptableObject
     public int numberOfScreamProjectiles;
     public float screamChargeTime;
     public float screamEndTime;
-    [Header("Stage 1"), Space(0)]
+    [Header("Stage 1")]
     public float screamProjectileSpeed1;
     public float screamWaveGapStage1;
     public int screamWavesStage1;

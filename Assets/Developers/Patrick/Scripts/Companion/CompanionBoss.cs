@@ -47,9 +47,18 @@ public class CompanionBoss : MonoBehaviour
 
     // Spit Attack
     private float _spitStartTimer;
+    private float _spitTravelDistance;
+    private float _spitSize;
 
     // Lick Attack
     private float _lickStartTimer;
+    private int _lickWaveCurrentCount;
+    private int _lickWaveCount;
+    private float _lickLastWaveStartTime;
+    private float _lickWaveGap;
+    private float _lickProjectileSpeed;
+    private float _lickProjectiles;
+    private float _lickLastWaveProjectiles;
 
     // Scream Attack
     private float _screamStartTimer;
@@ -259,8 +268,9 @@ public class CompanionBoss : MonoBehaviour
                 ref poolManager,
                 dataObj.spitProjectile.name,
                 dataObj.spitProjectileLifespan,
+                _spitSize,
                 transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), Mathf.Sin(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), 0.0f) * dataObj.spitSpawnDistance,
-                transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), Mathf.Sin(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), 0.0f) * (dataObj.spitSpawnDistance + dataObj.spitProjectileTravelDistance)); // Add linecast to end early at wall
+                transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), Mathf.Sin(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), 0.0f) * (dataObj.spitSpawnDistance + _spitTravelDistance)); // Add linecast to end early at wall
         }
 
         _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SPIT_END);
@@ -271,6 +281,7 @@ public class CompanionBoss : MonoBehaviour
 
     private void LickAttack()
     {
+        // Delay
         if (Time.time - _lickStartTimer <= dataObj.lickChargeTime)
         {
             _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LICK_CHARGE);
@@ -278,38 +289,92 @@ public class CompanionBoss : MonoBehaviour
             return;
         }
 
-        Vector3 forwardVector = (playerObj.transform.position - transform.position).normalized;
-        Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
-
-        float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardVector, new Vector3(0.0f, 0.0f, 1.0f));
-
-        float spawnShifts = (dataObj.lickProjectileNumber - 1) / 2.0f;
-
-        Vector3 startSpawnPosition = transform.position + forwardVector * dataObj.lickProjectileSpawnDistance - rightVector * dataObj.lickProjectileSeperationDistance * spawnShifts;
-
-        float arcAngle = (dataObj.lickProjectileAngle * 2.0f) / (dataObj.lickProjectileNumber - 1);
-        Vector3 projectileDirection;
-        float currentAngle;
-
-        GameObject objectRef;
-
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LICK_ATTACK);
-
-        // Draws left to right
-        for (int i = 0; i < dataObj.lickProjectileNumber; i++)
+        if(_lickWaveCurrentCount < _lickWaveCount - 1)
         {
-            currentAngle = dataObj.lickProjectileAngle - arcAngle * (dataObj.lickProjectileNumber - 1 - i);
+            if(Time.time - _lickLastWaveStartTime <= _lickWaveGap) { return; }
 
-            projectileDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), 0.0f) * dataObj.screamProjectileSpawnDistance;
+            Vector3 forwardVector = (playerObj.transform.position - transform.position).normalized;
+            Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
 
-            objectRef = poolManager.GetFreeObject(dataObj.lickProjectile.name);
+            float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardVector, new Vector3(0.0f, 0.0f, 1.0f));
 
-            objectRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref poolManager, dataObj.lickProjectile.name,
-                startSpawnPosition + rightVector * i * dataObj.lickProjectileSeperationDistance,
-                projectileDirection.normalized,
-                dataObj.lickProjectileSpeed, 1.0f, 1.0f,
-                dataObj.environmentMask, dataObj.playerMask);
+            float spawnShifts = (_lickProjectiles - 1) / 2.0f;
+
+            Vector3 startSpawnPosition = transform.position + forwardVector * dataObj.lickProjectileSpawnDistance - rightVector * dataObj.lickProjectileSeperationDistance * spawnShifts;
+
+            float arcAngle = (dataObj.lickProjectileAngle * 2.0f) / (_lickProjectiles - 1);
+            Vector3 projectileDirection;
+            float currentAngle;
+
+            GameObject objectRef;
+
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LICK_ATTACK);
+
+            // Draws left to right
+            for (int i = 0; i < _lickProjectiles; i++)
+            {
+                currentAngle = dataObj.lickProjectileAngle - arcAngle * (_lickProjectiles - 1 - i);
+
+                projectileDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), 0.0f) * dataObj.screamProjectileSpawnDistance;
+
+                objectRef = poolManager.GetFreeObject(dataObj.lickProjectile.name);
+
+                objectRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref poolManager, dataObj.lickProjectile.name,
+                    startSpawnPosition + rightVector * i * dataObj.lickProjectileSeperationDistance,
+                    projectileDirection.normalized,
+                    _lickProjectileSpeed, 1.0f, 1.0f,
+                    dataObj.environmentMask, dataObj.playerMask);
+            }
+
+            _lickLastWaveStartTime = Time.time;
+            _lickWaveCurrentCount++;
+
+            return;
         }
+
+        if (_lickWaveCurrentCount < _lickWaveCount - 1)
+        {
+            if (Time.time - _lickLastWaveStartTime <= _lickWaveGap) { return; }
+
+            Vector3 forwardVector = (playerObj.transform.position - transform.position).normalized;
+            Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
+
+            float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardVector, new Vector3(0.0f, 0.0f, 1.0f));
+
+            float spawnShifts = (_lickLastWaveProjectiles - 1) / 2.0f;
+
+            Vector3 startSpawnPosition = transform.position + forwardVector * dataObj.lickProjectileSpawnDistance - rightVector * dataObj.lickProjectileSeperationDistance * spawnShifts;
+
+            float arcAngle = (dataObj.lickProjectileAngle * 2.0f) / (_lickLastWaveProjectiles - 1);
+            Vector3 projectileDirection;
+            float currentAngle;
+
+            GameObject objectRef;
+
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LICK_ATTACK);
+
+            // Draws left to right
+            for (int i = 0; i < _lickLastWaveProjectiles; i++)
+            {
+                currentAngle = dataObj.lickProjectileAngle - arcAngle * (_lickLastWaveProjectiles - 1 - i);
+
+                projectileDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), 0.0f) * dataObj.screamProjectileSpawnDistance;
+
+                objectRef = poolManager.GetFreeObject(dataObj.lickProjectile.name);
+
+                objectRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref poolManager, dataObj.lickProjectile.name,
+                    startSpawnPosition + rightVector * i * dataObj.lickProjectileSeperationDistance,
+                    projectileDirection.normalized,
+                    _lickProjectileSpeed, 1.0f, 1.0f,
+                    dataObj.environmentMask, dataObj.playerMask);
+            }
+
+            _lickLastWaveStartTime = Time.time;
+            _lickWaveCurrentCount++;
+
+            return;
+        }
+
 
         _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LICK_END);
         _attackEndDelay = dataObj.lickEndTime;
@@ -446,9 +511,25 @@ public class CompanionBoss : MonoBehaviour
 
         if (playerDistance <= dataObj.closeRangeDistance * dataObj.closeRangeDistance)
         {
-            currentState = AttackState.SPIT;
-
             _spitStartTimer = Time.time;
+
+            switch (_heatUpStage)
+            {
+                case 1:
+                    _spitTravelDistance = dataObj.spitProjectileTravelDistance1;
+                    _spitSize = dataObj.spitProjectileSize1;
+                    break;
+                case 2:
+                    _spitTravelDistance = dataObj.spitProjectileTravelDistance2;
+                    _spitSize = dataObj.spitProjectileSize2;
+                    break;
+                case 3:
+                    _spitTravelDistance = dataObj.spitProjectileTravelDistance3;
+                    _spitSize = dataObj.spitProjectileSize3;
+                    break;
+            }
+
+            currentState = AttackState.SPIT;
 
             return;
         }
@@ -456,10 +537,35 @@ public class CompanionBoss : MonoBehaviour
         // Check which ranged attack
         if (_doLickAttack)
         {
-            currentState = AttackState.LICK;
-
             _doLickAttack = false;
             _lickStartTimer = Time.time;
+            _lickWaveCurrentCount = 0;
+            switch (_heatUpStage)
+            {
+                case 1:
+                    _lickProjectileSpeed = dataObj.lickProjectileSpeed1;
+                    _lickWaveGap = dataObj.lickWaveGapStage1;
+                    _lickWaveCount = dataObj.lickWavesStage1;
+                    _lickProjectiles = dataObj.lickProjectilesStage1;
+                    _lickLastWaveProjectiles = dataObj.lickLastWaveProjectilesStage1;
+                    break;
+                case 2:
+                    _lickProjectileSpeed = dataObj.lickProjectileSpeed2;
+                    _lickWaveGap = dataObj.lickWaveGapStage2;
+                    _lickWaveCount = dataObj.lickWavesStage2;
+                    _lickProjectiles = dataObj.lickProjectilesStage2;
+                    _lickLastWaveProjectiles = dataObj.lickLastWaveProjectilesStage2;
+                    break;
+                case 3:
+                    _lickProjectileSpeed = dataObj.lickProjectileSpeed3;
+                    _lickWaveGap = dataObj.lickWaveGapStage3;
+                    _lickWaveCount = dataObj.lickWavesStage3;
+                    _lickProjectiles = dataObj.lickProjectilesStage3;
+                    _lickLastWaveProjectiles = dataObj.lickLastWaveProjectilesStage3;
+                    break;
+            }
+
+            currentState = AttackState.LICK;
 
             return;
         }

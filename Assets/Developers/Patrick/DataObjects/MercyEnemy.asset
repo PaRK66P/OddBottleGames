@@ -42,39 +42,59 @@ MonoBehaviour:
   feralLeapAdditionalDistance: 6.66
   spitProjectile: {fileID: 5242277665205136327, guid: 6360764a931239e4b90bdbb8c14074e4, type: 3}
   spitProjectileLifespan: 3
-  spitProjectileTravelDistance: 5
   spitChargeTime: 0.2
   spitSpawnDistance: 3.58
   spitSpawnAngle: 40
   spitEndTime: 0.3
+  spitProjectileTravelDistance1: 1
+  spitProjectileSize1: 0
+  spitProjectileTravelDistance2: 0
+  spitProjectileSize2: 0
+  spitProjectileTravelDistance3: 0
+  spitProjectileSize3: 0
   spitChargeSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   spitAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   spitEndSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
   lickProjectile: {fileID: 6314627607262925113, guid: 7e751bbcfe8a2894992bf098742dccc3, type: 3}
-  lickProjectileNumber: 5
   lickProjectileSpawnDistance: 1.64
   lickProjectileSeperationDistance: 0.38
   lickProjectileAngle: 17.6
-  lickProjectileSpeed: 8
   lickChargeTime: 0.2
   lickEndTime: 0.3
+  lickProjectileSpeed1: 0
+  lickWaveGapStage1: 0
+  lickWavesStage1: 0
+  lickProjectilesStage1: 0
+  lickLastWaveProjectilesStage1: 0
+  lickProjectileSpeed2: 0
+  lickWaveGapStage2: 0
+  lickWavesStage2: 0
+  lickProjectilesStage2: 0
+  lickLastWaveProjectilesStage2: 0
+  lickProjectileSpeed3: 0
+  lickWaveGapStage3: 0
+  lickWavesStage3: 0
+  lickProjectilesStage3: 0
+  lickLastWaveProjectilesStage3: 0
   lickChargeSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   lickAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   lickEndSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
   screamProjectile: {fileID: 6314627607262925113, guid: 7e751bbcfe8a2894992bf098742dccc3, type: 3}
+  screamProjectileSize: 0
+  screamProjectileDamage: 0
   screamProjectileSpawnDistance: 1.42
   numberOfScreamProjectiles: 12
   screamChargeTime: 0.2
   screamEndTime: 0.4
-  screamProjectileSpeed1: 0
-  screamWaveGapStage1: 5
-  screamWavesStage1: 0
-  screamProjectileSpeed2: 0
-  screamWaveGapStage2: 0
-  screamWavesStage2: 0
-  screamProjectileSpeed3: 0
-  screamWaveGapStage3: 0
-  screamWavesStage3: 0
+  screamProjectileSpeed1: 6
+  screamWaveGapStage1: 0
+  screamWavesStage1: 1
+  screamProjectileSpeed2: 6
+  screamWaveGapStage2: 0.5
+  screamWavesStage2: 5
+  screamProjectileSpeed3: 12
+  screamWaveGapStage3: 0.25
+  screamWavesStage3: 10
   screamChargeSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   screamAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   screamEndSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}

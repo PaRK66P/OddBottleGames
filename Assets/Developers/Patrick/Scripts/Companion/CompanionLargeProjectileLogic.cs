@@ -16,7 +16,7 @@ public class CompanionLargeProjectileLogic : MonoBehaviour
     private Vector2 _endPosition;
     private bool _isActive = false;
 
-    public void Initialise(ref ObjectPoolManager poolManagerRef, string name, float lifespan, Vector2 startPosition, Vector2 endPosition)
+    public void Initialise(ref ObjectPoolManager poolManagerRef, string name, float lifespan, float size, Vector2 startPosition, Vector2 endPosition)
     {
         _startTime = Time.time;
         _lifespan = lifespan;
@@ -24,6 +24,8 @@ public class CompanionLargeProjectileLogic : MonoBehaviour
         poolManager = poolManagerRef;
 
         _name = name;
+
+        transform.localScale = new Vector3(size, size, 1.0f);
 
         transform.position = startPosition;
         _startPosition = startPosition;
