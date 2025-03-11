@@ -209,8 +209,10 @@ public class VisualNovelScript : MonoBehaviour
             fadeOut = true;
             //canv.SetActive(false);
             playerUI.SetActive(true);
-            onNovelFinish?.Invoke();
-           
+            if (onNovelFinish != null)
+            {
+                onNovelFinish?.Invoke();
+            }
 
         }
     }
