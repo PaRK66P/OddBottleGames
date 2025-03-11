@@ -116,10 +116,6 @@ public class CompanionManager : MonoBehaviour
                 friendScript.CompanionUpdate();
                 break;
         }
-        if (_currentState == CompanionStates.NONE && hasPlayedNovel && !visualNovelManager.isNovelSection)
-        {
-            GetVisualNovelResult();
-        }
     }
 
 
@@ -168,6 +164,7 @@ public class CompanionManager : MonoBehaviour
             hasPlayedNovel = true;
 
             visualNovelManager.StartNovelSceneByName("Miniboss tester 2");
+            visualNovelManager.onNovelFinish.AddListener(GetVisualNovelResult);
             GetComponent<enemyScr>().DecreaseEnemyCount();
         }
     }
@@ -244,6 +241,7 @@ public class CompanionManager : MonoBehaviour
                 Debug.LogError("Visual novel selection not supported. make sure to update selection code in miniboss as well as the novel that plays");
                 break;
         }
+        visualNovelManager.onNovelFinish.RemoveListener(GetVisualNovelResult);
     }
 
     #region Gizmos

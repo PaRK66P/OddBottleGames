@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 
 [System.Serializable]
@@ -54,6 +55,8 @@ public class VisualNovelScript : MonoBehaviour
     public float typeTextSpeed = 1.0f;
 
     public bool typingTextToggle = true;
+
+    public UnityEvent onNovelFinish;
 
     void Start()
     {
@@ -141,8 +144,8 @@ public class VisualNovelScript : MonoBehaviour
                 sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
                 sprite.GetComponent<Image>().SetNativeSize();
 
-                IDSelectionOptions(currentNode, 0);
-                CreateButtons();
+                //IDSelectionOptions(currentNode, 0);
+                //CreateButtons();
             }
             else
             {
@@ -171,6 +174,7 @@ public class VisualNovelScript : MonoBehaviour
     }
     void NextScene(int index)
     {
+        ClearButtons();
         //StopCoroutine(typingText);
         if (!currentNode.isLeaf())
         {
@@ -187,7 +191,7 @@ public class VisualNovelScript : MonoBehaviour
                 {
                     text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
                 }
-                CreateButtons();
+                //CreateButtons();
             }
             else
             {
@@ -205,6 +209,7 @@ public class VisualNovelScript : MonoBehaviour
             fadeOut = true;
             //canv.SetActive(false);
             playerUI.SetActive(true);
+            onNovelFinish?.Invoke();
            
 
         }
@@ -233,13 +238,17 @@ public class VisualNovelScript : MonoBehaviour
         return nodeDict[serializedTree.nodes[0].id];
     }
 
-    public void CreateButtons()
+    public void ClearButtons()
     {
         foreach (GameObject button in buttons)
         {
             Destroy(button);
         }
         buttons.Clear();
+    }
+    public void CreateButtons()
+    {
+        ClearButtons();
 
         if (currentNode.isLeaf())
         {
@@ -321,10 +330,17 @@ public class VisualNovelScript : MonoBehaviour
         {
             //Debug.Log(i + ", " + targetText.Length);
             textToAdd += targetText[i];
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                textToAdd = targetText;
+                text.GetComponent<TMP_Text>().text = textToAdd;
+                break;
+            }
             text.GetComponent<TMP_Text>().text = textToAdd;
+            
             yield return new WaitForSecondsRealtime(0.05f / typeTextSpeed);
         }
-        //Debug.Log("done");
+        CreateButtons();
         yield return null;
     }
 }
