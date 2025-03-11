@@ -289,4 +289,9 @@ public class PlayerMovement : MonoBehaviour
             dashChargeTimer = 0.0f;
         }
     }
+
+    public Vector2 getMovementInput()
+    {
+        return movementInput;
+    }
 }

@@ -13,6 +13,7 @@ public class PlayerShooting : MonoBehaviour
 
     private Vector2 aimInput;
     private Vector2 lastAimInput;
+    private Vector3 shotRotation = new Vector3(0,0,0);
 
     private ObjectPoolManager _poolManager;
 
@@ -61,7 +62,7 @@ public class PlayerShooting : MonoBehaviour
     void Update()
     {
 
-        
+
 
         //if (aimInput != Vector2.zero)
         //{
@@ -93,6 +94,27 @@ public class PlayerShooting : MonoBehaviour
         //    }
         //}
 
+        if (GetComponent<NPlayerInput>().isInputKeyboard())
+        {
+            aimInput = new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y);
+            shotRotation = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)) - transform.position;
+        }
+        else if(aimInput == Vector2.zero)
+        {
+            aimInput = GetComponent<PlayerMovement>().getMovementInput();
+            if (aimInput == Vector2.zero)
+            {
+                aimInput = lastAimInput;
+            }
+            shotRotation = aimInput;
+        }
+        else
+        {
+            shotRotation = aimInput;
+        }
+
+        lastAimInput = aimInput;
+
         Debug.DrawLine(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(lastAimInput.x, lastAimInput.y, 10.0f)));
 
         if (interrupted) { return; }
@@ -104,7 +126,7 @@ public class PlayerShooting : MonoBehaviour
                 takeShot = false;
                 if (chargedAmmo == 0)
                 {
-                    Fire(lastAimInput, Camera.main.ScreenToWorldPoint(new Vector3(lastAimInput.x, lastAimInput.y, 10.0f)) - transform.position, 1); // Regular shot
+                    Fire(lastAimInput, shotRotation, 1); // Regular shot
                     //Fire((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(lastAimInput.x, lastAimInput.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(lastAimInput.x, lastAimInput.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)),
                     //    Camera.main.ScreenToWorldPoint(new Vector3(lastAimInput.x, lastAimInput.y, 10.0f)) - transform.position,
                     //    1); // Regular shot
@@ -172,8 +194,8 @@ public class PlayerShooting : MonoBehaviour
 
     public void SetAimInput(InputAction.CallbackContext context)
     {
-        lastAimInput = context.ReadValue<Vector2>();
-        //Debug.Log(lastAimInput);
+        aimInput = context.ReadValue<Vector2>();
+        Debug.Log(aimInput);
     }
 
     public void PlayerFireInput(InputAction.CallbackContext context)

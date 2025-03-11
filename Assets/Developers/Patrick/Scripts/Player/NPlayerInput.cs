@@ -15,6 +15,16 @@ public class NPlayerInput : MonoBehaviour
 
     private bool isInitialised = false;
 
+    void OnEnable()
+    {
+        if (isInitialised) { EnableInput(); }
+    }
+
+    private void OnDisable()
+    {
+        DisableInput();
+    }
+
     public void InitialiseComponent(ref PlayerMovement dPlayerMovement, ref PlayerShooting dPlayerShooting)
     {
         playerIn = GetComponent<PlayerInput>();
@@ -73,9 +83,15 @@ public class NPlayerInput : MonoBehaviour
 
     public void setInitialised(bool state) { isInitialised = state; }
 
-    // Update is called once per frame
-    void Update()
+    public bool isInputKeyboard()
     {
-        
+        if(playerIn.currentControlScheme == "Keyboard")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

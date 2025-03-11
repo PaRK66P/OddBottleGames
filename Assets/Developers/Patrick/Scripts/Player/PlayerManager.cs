@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private GameObject _evolveDashCollider;
 
-    private PlayerInputManager playerInputManager;
+    private NPlayerInput playerInputManager;
     private PlayerMovement playerMovement;
     private PlayerShooting playerShooting;
 
@@ -58,7 +58,7 @@ public class PlayerManager : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         image = GetComponentInChildren<SpriteRenderer>();
 
-        playerInputManager = gameObject.AddComponent<PlayerInputManager>();
+        playerInputManager = gameObject.AddComponent<NPlayerInput>();
         playerMovement = gameObject.AddComponent<PlayerMovement>();
         playerShooting = gameObject.AddComponent<PlayerShooting>();
 
