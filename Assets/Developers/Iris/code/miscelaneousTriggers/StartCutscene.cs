@@ -16,7 +16,7 @@ public class StartCutscene : MonoBehaviour
             if (collision.gameObject.tag == "Player")
             {
                 GetComponent<PlayableDirector>().Play();
-                Debug.Log("playCutscene");
+                //Debug.Log("playCutscene");
                 isTriggered = true;
             }
         }

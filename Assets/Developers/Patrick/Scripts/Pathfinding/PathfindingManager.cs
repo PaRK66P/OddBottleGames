@@ -173,7 +173,7 @@ public class PathfindingManager : MonoBehaviour
         _debugPath = path;
         if (path != null)
         {
-            Debug.Log((path[0].worldPosition - startPosition).normalized);
+            //Debug.Log((path[0].worldPosition - startPosition).normalized);
             return (path[0].worldPosition - startPosition).normalized;
         }
         Debug.Log(Vector3.zero);
