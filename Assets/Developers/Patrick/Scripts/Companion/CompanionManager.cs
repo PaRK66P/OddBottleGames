@@ -139,7 +139,7 @@ public class CompanionManager : MonoBehaviour
         if(_currentState == CompanionStates.NONE) { return; }
 
         _health -= damage;
-        if(_health <= 0)
+        if(_health <= 0 && !hasPlayedNovel)
         {
             CompanionDeath();
             return;
@@ -214,6 +214,7 @@ public class CompanionManager : MonoBehaviour
 
     public void ChangeToEnemy()
     {
+        _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
         _health = bossData.health;
         bossScript.SetupEnemy();
         _currentState = CompanionStates.ENEMY;

@@ -205,6 +205,7 @@ public partial class @PlayerInputs_ActionMap: IInputActionCollection2, IDisposab
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
                     ""id"": ""862f134e-0447-4ebe-8f37-cb8e9a7ce52d"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",

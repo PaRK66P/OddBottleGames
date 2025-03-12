@@ -168,7 +168,7 @@ public class PlayerShooting : MonoBehaviour
         float rotz = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
         GameObject projectile = _poolManager.GetFreeObject(_playerData.baseProjectileType.name);
-        projectile.transform.position = transform.position;
+        projectile.transform.position = transform.position + new Vector3(fireDirection.normalized.x, fireDirection.normalized.y, 0)*2.0f;
         projectile.transform.rotation = Quaternion.Euler(0, 0, rotz);
         projectile.GetComponent<ProjectileBehaviour>().InitialiseComponent(fireDirection.normalized,
             _playerData.baseProjectileSpeed,
