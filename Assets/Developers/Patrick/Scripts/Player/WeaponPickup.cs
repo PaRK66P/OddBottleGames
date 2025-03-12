@@ -18,10 +18,10 @@ public class WeaponPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == 7)
-        {
-            collision.gameObject.GetComponent<PlayerManager>().RegainWeapon();
-            Destroy(this.gameObject);
-        }
+        //if(collision.gameObject.layer == 7)
+        //{
+        //    collision.gameObject.GetComponent<PlayerManager>().RegainWeapon();
+        //    Destroy(this.gameObject);
+        //}
     }
 }

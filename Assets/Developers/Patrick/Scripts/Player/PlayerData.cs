@@ -12,6 +12,10 @@ public class PlayerData : ScriptableObject
 
     [Header("Movement")]
     [Min(0.0f)] public float speed;
+    [Range(0.0f, 1.0f)] public float acceleration;
+    [HideInInspector] public float accelerationRate;
+    [Range(0.0f, 1.0f)] public float deceleration;
+    [HideInInspector] public float decelerationRate;
 
     [Header("Dashing")]
     public GameObject dashChargeUIObject;
@@ -47,15 +51,9 @@ public class PlayerData : ScriptableObject
     [Header("Damage")]
     [Min(0.0f)] public float controlLossTime;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnValidate()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        accelerationRate = (50 * (acceleration * speed)) / speed;
+        decelerationRate = (50 * (deceleration * speed)) / speed;
     }
 }

@@ -244,7 +244,7 @@ public class CompanionBoss : MonoBehaviour
 
         _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_END);
 
-        _attackEndDelay = dataObj.leapEndTime;
+        _attackEndDelay = _leapEndTime;
         currentState = AttackState.DELAY;
 
         _isLeapMoving = false;

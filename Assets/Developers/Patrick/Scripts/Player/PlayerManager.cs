@@ -26,9 +26,9 @@ public class PlayerManager : MonoBehaviour
     private InteractComponent playerInteract;
     private PlayerShooting playerShooting;
 
-    private GameObject weaponDrop;
+    //private GameObject weaponDrop;
 
-    private bool hasWeapon = true;
+    //private bool hasWeapon = true;
     private bool isDamaged = false;
 
     private float timeOfDamage = -10.0f;
@@ -82,10 +82,10 @@ public class PlayerManager : MonoBehaviour
 
         playerInputManager.EnableInput();
 
-        if (debugData.canDropWeapon)
-        {
-            OnDamageTaken += DropWeapon;
-        }
+        //if (debugData.canDropWeapon)
+        //{
+        //    OnDamageTaken += DropWeapon;
+        //}
 
         
         //healthbar.GetComponent<RectTransform>().position = new Vector3(Screen.width / 6, Screen.height / 15, 0);
@@ -100,11 +100,11 @@ public class PlayerManager : MonoBehaviour
 
     private void OnDisable()
     {
-        // Improper event subscription, need to update later
-        if (debugData.canDropWeapon)
-        {
-            OnDamageTaken -= DropWeapon;
-        }
+        //// Improper event subscription, need to update later
+        //if (debugData.canDropWeapon)
+        //{
+        //    OnDamageTaken -= DropWeapon;
+        //}
     }
 
     // Update is called once per frame
@@ -218,24 +218,24 @@ public class PlayerManager : MonoBehaviour
         healthBarScript.SetValue(health);
     }
 
-    private void DropWeapon(object sender, EventArgs e)
-    {
-        if (hasWeapon && !playerMovement.dash)
-        {
-            hasWeapon = false;
-            playerShooting.DisableFire();
+    //private void DropWeapon(object sender, EventArgs e)
+    //{
+    //    if (hasWeapon && !playerMovement.dash)
+    //    {
+    //        hasWeapon = false;
+    //        playerShooting.DisableFire();
 
-            float randomAngle = UnityEngine.Random.Range(0, 360);
-            Vector3 weaponPos = new Vector3(5 * Mathf.Cos(randomAngle), 5 * Mathf.Sin(randomAngle)) + transform.position;
-            Instantiate(weaponDrop, weaponPos, Quaternion.identity);
-        }
-    }
+    //        float randomAngle = UnityEngine.Random.Range(0, 360);
+    //        Vector3 weaponPos = new Vector3(5 * Mathf.Cos(randomAngle), 5 * Mathf.Sin(randomAngle)) + transform.position;
+    //        Instantiate(weaponDrop, weaponPos, Quaternion.identity);
+    //    }
+    //}
 
-    public void RegainWeapon()
-    {
-        hasWeapon = true;
-        playerShooting.EnableFire();
-    }
+    //public void RegainWeapon()
+    //{
+    //    hasWeapon = true;
+    //    playerShooting.EnableFire();
+    //}
 
     public void DisableInput()
     {
