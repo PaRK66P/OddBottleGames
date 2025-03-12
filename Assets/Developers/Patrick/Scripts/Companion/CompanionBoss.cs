@@ -41,9 +41,14 @@ public class CompanionBoss : MonoBehaviour
     private Node _lastPlayerNode;
     private Node _lastNode;
     private Vector3 _lastLeapMoveDirection;
+    private float _leapTravelDistance;
+    private float _leapChargeTime;
+    private float _leapTravelTime;
+    private float _leapEndTime;
 
     // Feral Attack
     private int _feralLeapAmount;
+    private int _feralLeapCurrentAmount;
 
     // Spit Attack
     private float _spitStartTimer;
@@ -98,7 +103,7 @@ public class CompanionBoss : MonoBehaviour
         _isLeapMoving = false;
         _isLeapFinished = false;
 
-        _feralLeapAmount = 0;
+        _feralLeapCurrentAmount = 0;
     }
 
     public void CompanionUpdate()
@@ -150,17 +155,17 @@ public class CompanionBoss : MonoBehaviour
 
             rb.MovePosition(transform.position + _lastLeapMoveDirection * dataObj.moveSpeed * Time.fixedDeltaTime * Mathf.Max((dataObj.moveSpeedMultiplier * (Time.time - _readyStartTime)), 1.0f));
 
-            if (WithinLeapRange(dataObj.leapTravelDistance + (currentState == AttackState.FERAL_LEAP ? dataObj.feralLeapAdditionalDistance : 0.0f)))
+            if (WithinLeapRange(_leapTravelDistance))
             {
                 _leapStartTimer = Time.time;
                 _leapStart = transform.position; // Logically will always be in a not blocked node so this SHOULD be safe
                 Vector2 playerDirection = playerObj.transform.position - transform.position;
                 Vector2 leapDirection = playerDirection.normalized;
 
-                _leapEnd = _leapStart + leapDirection * (dataObj.leapTravelDistance + (currentState == AttackState.FERAL_LEAP ? dataObj.feralLeapAdditionalDistance : 0.0f));
+                _leapEnd = _leapStart + leapDirection * (_leapTravelDistance);
                 
                 // Ensures the end is not on the opposite side of a wall
-                RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, dataObj.leapTravelDistance + (currentState == AttackState.FERAL_LEAP ? dataObj.feralLeapAdditionalDistance : 0.0f), dataObj.environmentMask);
+                RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, _leapTravelDistance, dataObj.environmentMask);
                 if (wallCheck)
                 {
                     _leapEnd = wallCheck.point;
@@ -175,7 +180,7 @@ public class CompanionBoss : MonoBehaviour
             return;
         }
 
-        if (Time.time - _leapStartTimer <= dataObj.leapChargeTime)
+        if (Time.time - _leapStartTimer <= _leapChargeTime)
         {
             _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_CHARGE);
             return;
@@ -189,7 +194,7 @@ public class CompanionBoss : MonoBehaviour
             _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_MOVING);
         }
 
-        float travelPosition = (Time.time - _leapMoveTimer) / dataObj.leapTravelTime;
+        float travelPosition = (Time.time - _leapMoveTimer) / _leapTravelTime;
 
         rb.MovePosition(Vector2.Lerp(_leapStart, _leapEnd, travelPosition));
 
@@ -205,8 +210,8 @@ public class CompanionBoss : MonoBehaviour
         Vector3 playerDirection = playerObj.transform.position - transform.position;
         Vector3 leapDirection = playerDirection.normalized;
 
-        Vector3 targetPosition = transform.position + leapDirection * leapDistance * dataObj.leapTargetTravelPercentage;
-        float targetDistance = (targetPosition - transform.position).sqrMagnitude;
+        float targetDistance = leapDistance * dataObj.leapTargetTravelPercentage;
+        targetDistance *= targetDistance;
 
         if ((playerObj.transform.position - transform.position).sqrMagnitude > targetDistance)
         {
@@ -442,17 +447,16 @@ public class CompanionBoss : MonoBehaviour
         }
 
         currentState = AttackState.FERAL_LEAP;
-        _feralLeapAmount++;
+        _feralLeapCurrentAmount++;
 
-        if (_feralLeapAmount < dataObj.feralLeapAmount)
+        if (_feralLeapCurrentAmount < _feralLeapAmount)
         {
             _isReadyToLeap = false;
             _readyStartTime = Time.time;
             return;
         }
 
-        _feralLeapAmount = 0;
-        _attackEndDelay = dataObj.feralLeapEndTime;
+        _feralLeapCurrentAmount = 0;
         currentState = AttackState.DELAY;
     }
 
@@ -491,14 +495,58 @@ public class CompanionBoss : MonoBehaviour
             // Check if feral leap conditions are met
             if (_leapAmount < dataObj.leapsBeforeFeral)
             {
-                currentState = AttackState.LEAP;
-
                 _leapAmount++;
+                _leapEndTime = dataObj.leapEndTime;
+
+                switch (_heatUpStage)
+                {
+                    case 1:
+                        _leapChargeTime = dataObj.leapChargeTimeStage1;
+                        _leapTravelTime = dataObj.leapTravelTimeStage1;
+                        _leapTravelDistance = dataObj.leapTravelDistanceStage1;
+                        break;
+                    case 2:
+                        _leapChargeTime = dataObj.leapChargeTimeStage2;
+                        _leapTravelTime = dataObj.leapTravelTimeStage2;
+                        _leapTravelDistance = dataObj.leapTravelDistanceStage2;
+                        break;
+                    case 3:
+                        _leapChargeTime = dataObj.leapChargeTimeStage3;
+                        _leapTravelTime = dataObj.leapTravelTimeStage3;
+                        _leapTravelDistance = dataObj.leapTravelDistanceStage3;
+                        break;
+                }
+
+                currentState = AttackState.LEAP;
 
                 return;
             }
 
             _leapAmount = 0;
+            _leapEndTime = dataObj.feralLeapRestTime;
+
+            switch (_heatUpStage)
+            {
+                case 1:
+                    _feralLeapAmount = dataObj.feralLeapAmountStage1;
+                    _leapChargeTime = dataObj.feralLeapDelayStage1;
+                    _leapTravelTime = dataObj.feralLeapTravelTimeStage1;
+                    _leapTravelDistance = dataObj.feralLeapDistanceStage1;
+                    break;
+                case 2:
+                    _feralLeapAmount = dataObj.feralLeapAmountStage2;
+                    _leapChargeTime = dataObj.feralLeapDelayStage2;
+                    _leapTravelTime = dataObj.feralLeapTravelTimeStage2;
+                    _leapTravelDistance = dataObj.feralLeapDistanceStage2;
+                    break;
+                case 3:
+                    _feralLeapAmount = dataObj.feralLeapAmountStage3;
+                    _leapChargeTime = dataObj.feralLeapDelayStage3;
+                    _leapTravelTime = dataObj.feralLeapTravelTimeStage3;
+                    _leapTravelDistance = dataObj.feralLeapDistanceStage3;
+                    break;
+            }
+
             currentState = AttackState.FERAL_LEAP;
 
             return;

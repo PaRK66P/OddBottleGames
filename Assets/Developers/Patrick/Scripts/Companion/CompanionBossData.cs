@@ -20,11 +20,22 @@ public class CompanionBossData : ScriptableObject
 
     [Space(16)]
     [Header("Leap")]
-    public float leapChargeTime;
-    public float leapTravelTime;
+    public float leapDamage;
     public float leapEndTime;
-    public float leapTravelDistance;
     [Range(0.0f, 1.0f)] public float leapTargetTravelPercentage; // Where along the leap would the target be at the start of the leap as a percentage of the leap line
+    [Header("Stage 1")]
+    public float leapChargeTimeStage1;
+    public float leapTravelTimeStage1;
+    public float leapTravelDistanceStage1;
+    [Header("Stage 2")]
+    public float leapChargeTimeStage2;
+    public float leapTravelTimeStage2;
+    public float leapTravelDistanceStage2;
+    [Header("Stage 3")]
+    public float leapChargeTimeStage3;
+    public float leapTravelTimeStage3;
+    public float leapTravelDistanceStage3;
+    [Header("Animations")]
     public Sprite leapChargeSpriteLeft;
     public Sprite leapChargeSpriteRight;
     public Sprite leapMoveSprite;
@@ -32,10 +43,22 @@ public class CompanionBossData : ScriptableObject
 
     [Space(16)]
     [Header("Feral")]
-    public int feralLeapAmount;
-    public float feralLeapDelay;
-    public float feralLeapEndTime;
-    public float feralLeapAdditionalDistance;
+    public float feralLeapRestTime;
+    [Header("Stage 1")]
+    public int feralLeapAmountStage1;
+    public float feralLeapDelayStage1;
+    public float feralLeapTravelTimeStage1;
+    public float feralLeapDistanceStage1;
+    [Header("Stage 2")]
+    public int feralLeapAmountStage2;
+    public float feralLeapDelayStage2;
+    public float feralLeapTravelTimeStage2;
+    public float feralLeapDistanceStage2;
+    [Header("Stage 3")]
+    public int feralLeapAmountStage3;
+    public float feralLeapDelayStage3;
+    public float feralLeapTravelTimeStage3;
+    public float feralLeapDistanceStage3;
 
     [Space(16)]
     [Header("Spit")]

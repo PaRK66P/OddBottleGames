@@ -21,9 +21,11 @@ MonoBehaviour:
   detectionRadius: 12
   idleSpeed: 6
   idleDistance: 2.71
+  moveSpeed: 8
   leapTravelTime: 0.2
   leapChargeTime: 0.8
   leapDistance: 5
+  leapTargetTravelPercentage: 0
   leapDamage: 3
   leapEndTime: 0.5
   rechargeZoneRadius: 5

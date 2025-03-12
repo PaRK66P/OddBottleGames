@@ -67,7 +67,7 @@ public class CompanionManager : MonoBehaviour
         if (collisionDamageScript == null)
         {
             collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
-            collisionDamageScript.InitialiseComponent(ref friendData);
+            collisionDamageScript.InitialiseComponent(ref bossData, ref friendData);
         }
         if (detectionScript == null)
         {
@@ -292,57 +292,57 @@ public class CompanionManager : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, bossData.closeRangeDistance);
         }
 
-        if (bossData.drawLeaps)
-        {
-            // Leaping
-            Vector3 playerDirection = _playerObject.transform.position - transform.position;
-            Vector3 leapDirection = playerDirection.normalized;
-            Vector3 leapEnd = transform.position + leapDirection * bossData.leapTravelDistance;
+        //if (bossData.drawLeaps)
+        //{
+        //    // Leaping
+        //    Vector3 playerDirection = _playerObject.transform.position - transform.position;
+        //    Vector3 leapDirection = playerDirection.normalized;
+        //    Vector3 leapEnd = transform.position + leapDirection * bossData.leapTravelDistance;
 
-            Vector3 targetPosition = transform.position + leapDirection * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage;
-            float targetDistance = (targetPosition - transform.position).sqrMagnitude;
-            bool drawTarget = true;
+        //    Vector3 targetPosition = transform.position + leapDirection * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage;
+        //    float targetDistance = (targetPosition - transform.position).sqrMagnitude;
+        //    bool drawTarget = true;
 
-            if((_playerObject.transform.position - transform.position).sqrMagnitude > targetDistance)
-            {
-                drawTarget = false;
-            }
+        //    if((_playerObject.transform.position - transform.position).sqrMagnitude > targetDistance)
+        //    {
+        //        drawTarget = false;
+        //    }
 
-            if (playerDirection.sqrMagnitude < (bossData.leapTravelDistance * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage) * (bossData.leapTravelDistance * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage))
-            {
-                targetPosition = _playerObject.transform.position;
-                targetDistance = (targetPosition - transform.position).sqrMagnitude;
+        //    if (playerDirection.sqrMagnitude < (bossData.leapTravelDistance * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage) * (bossData.leapTravelDistance * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage))
+        //    {
+        //        targetPosition = _playerObject.transform.position;
+        //        targetDistance = (targetPosition - transform.position).sqrMagnitude;
 
-            }
+        //    }
 
-            wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, bossData.leapTravelDistance, bossData.environmentMask); // Update layer mask variable
-            if (wallCheck)
-            {
-                float wallDistance = (wallCheck.point - new Vector2(transform.position.x, transform.position.y)).sqrMagnitude;
+        //    wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, bossData.leapTravelDistance, bossData.environmentMask); // Update layer mask variable
+        //    if (wallCheck)
+        //    {
+        //        float wallDistance = (wallCheck.point - new Vector2(transform.position.x, transform.position.y)).sqrMagnitude;
                 
-                leapEnd = wallCheck.point;
+        //        leapEnd = wallCheck.point;
 
-                if(wallDistance < targetDistance)
-                {
-                    drawTarget = false;
-                }
-            }
+        //        if(wallDistance < targetDistance)
+        //        {
+        //            drawTarget = false;
+        //        }
+        //    }
 
-            Gizmos.color = UnityEngine.Color.red;
-            Gizmos.DrawWireSphere(transform.position, bossData.leapTravelDistance * bossData.leapTargetTravelPercentage);
-            Gizmos.color = UnityEngine.Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, (bossData.leapTravelDistance + bossData.feralLeapAdditionalDistance) * bossData.leapTargetTravelPercentage);
+        //    Gizmos.color = UnityEngine.Color.red;
+        //    Gizmos.DrawWireSphere(transform.position, bossData.leapTravelDistance * bossData.leapTargetTravelPercentage);
+        //    Gizmos.color = UnityEngine.Color.yellow;
+        //    Gizmos.DrawWireSphere(transform.position, (bossData.leapTravelDistance + bossData.feralLeapAdditionalDistance) * bossData.leapTargetTravelPercentage);
 
-            Gizmos.color = new UnityEngine.Color(1, 0.5f, 0);
-            Gizmos.DrawLine(transform.position, leapEnd);
-            Gizmos.color = new UnityEngine.Color(1, 1, 1);
-            Gizmos.DrawLine(leapEnd, transform.position + leapDirection * (bossData.leapTravelDistance + bossData.feralLeapAdditionalDistance));
-            if (drawTarget)
-            {
-                Gizmos.DrawWireSphere(targetPosition, 1.0f);
-            }
+        //    Gizmos.color = new UnityEngine.Color(1, 0.5f, 0);
+        //    Gizmos.DrawLine(transform.position, leapEnd);
+        //    Gizmos.color = new UnityEngine.Color(1, 1, 1);
+        //    Gizmos.DrawLine(leapEnd, transform.position + leapDirection * (bossData.leapTravelDistance + bossData.feralLeapAdditionalDistance));
+        //    if (drawTarget)
+        //    {
+        //        Gizmos.DrawWireSphere(targetPosition, 1.0f);
+        //    }
 
-        }
+        //}
 
         //if (bossData.drawSpit)
         //{
