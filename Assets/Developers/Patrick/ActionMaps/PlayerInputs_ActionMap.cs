@@ -195,17 +195,6 @@ public partial class @PlayerInputs_ActionMap: IInputActionCollection2, IDisposab
                 },
                 {
                     ""name"": """",
-                    ""id"": ""bca38a77-d7ff-4878-8e72-8b132f993bc7"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""862f134e-0447-4ebe-8f37-cb8e9a7ce52d"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
