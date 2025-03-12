@@ -37,6 +37,7 @@ public class PlayerManager : MonoBehaviour
 
     private float health = 100;
     private GameObject healthbar;
+    private HealthBarScript healthBarScript;
 
     private event EventHandler OnDamageTaken;
 
@@ -67,9 +68,14 @@ public class PlayerManager : MonoBehaviour
         _evolveDashCollider.GetComponent<EvolveDashDamage>().InitialiseScript(ref playerData);
         _evolveDashCollider.SetActive(false);
 
+        health = playerData.health;
+        healthbar = Instantiate(playerData.healthbar, UICanvas.transform.Find("PlayerUI"), true);
+        healthBarScript = healthbar.GetComponent<HealthBarScript>();
+        healthBarScript.SetMaxHealth(health);
+
         PlayerManager manager = this;
         //movement component
-        playerMovement.InitialiseComponent(ref manager, ref playerData, ref debugData, ref UICanvas);
+        playerMovement.InitialiseComponent(ref manager, ref playerData, ref debugData, ref UICanvas, ref healthBarScript);
         //shooting component
         playerShooting.InitialiseComponent(ref playerData, ref debugData, ref poolManager, ref PlayerCanvas);
         playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting, ref playerInteract);
@@ -81,11 +87,12 @@ public class PlayerManager : MonoBehaviour
             OnDamageTaken += DropWeapon;
         }
 
-
-        healthbar = Instantiate(playerData.healthbar, UICanvas.transform.Find("PlayerUI"));
-        healthbar.GetComponent<RectTransform>().position = new Vector3(Screen.width / 6, Screen.height / 15, 0);
-        healthbar.GetComponent<Slider>().maxValue = playerData.health;
-        health = playerData.health;
+        
+        //healthbar.GetComponent<RectTransform>().position = new Vector3(Screen.width / 6, Screen.height / 15, 0);
+        //healthbar.GetComponent<Slider>().maxValue = playerData.health;
+        
+        //healthBarScript.SetValue(health);
+        
 
         canvGroup = gameObject.transform.Find("PlayerCanvas").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
 
@@ -128,7 +135,7 @@ public class PlayerManager : MonoBehaviour
             regenTimer = 0; 
         }
 
-        healthbar.GetComponent<Slider>().value = health;
+        //healthbar.GetComponent<Slider>().value = health;
 
 
         if (fadeIn)
@@ -173,6 +180,7 @@ public class PlayerManager : MonoBehaviour
         playerShooting.InterruptFiring();
         fadeOut = true;
 
+        
         OnDamageTaken?.Invoke(this, EventArgs.Empty);
 
         health -= ammount;
@@ -180,6 +188,7 @@ public class PlayerManager : MonoBehaviour
         {
             health = 1.0f;
         }
+        healthBarScript.SetValue(health);
     }
 
     //public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f)
@@ -206,7 +215,7 @@ public class PlayerManager : MonoBehaviour
         {
             health = playerData.health;
         }
-
+        healthBarScript.SetValue(health);
     }
 
     private void DropWeapon(object sender, EventArgs e)

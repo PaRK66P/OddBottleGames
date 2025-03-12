@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerManager _playerManager;
     private Rigidbody2D rb;
     private GameObject UICanvas;
+    private HealthBarScript healthBarScript;
 
     private Vector2 movementInput;
 
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();        
     }
 
-    public void InitialiseComponent(ref PlayerManager playerManager, ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas)
+    public void InitialiseComponent(ref PlayerManager playerManager, ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas, ref HealthBarScript dHealthbarScript)
     {
         _playerManager = playerManager;
 
@@ -48,23 +49,26 @@ public class PlayerMovement : MonoBehaviour
         _playerData = playerData;
         _debugData = debugData;
 
+        healthBarScript = dHealthbarScript;
+
         dashChargesNumber = 1;
         maxDashCharges = 1;
 
-        dashRechargesUIObjects = new GameObject[maxDashCharges];
-        dashChargesUIObjects = new GameObject[maxDashCharges];
+        //dashRechargesUIObjects = new GameObject[maxDashCharges];
+        //dashChargesUIObjects = new GameObject[maxDashCharges];
 
-        for (int i = 0; i < maxDashCharges; i++)
-        {
-            dashRechargesUIObjects[i] = Instantiate(_playerData.dashRechargeUIObject, UICanvas.transform);
-            dashRechargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-            dashRechargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
-            //dashRechargesUIObjects[i].GetComponent<RectTransform>().localScale = new Vector3(0, 0, 1);
+        //for (int i = 0; i < maxDashCharges; i++)
+        //{
+        //    dashRechargesUIObjects[i] = Instantiate(_playerData.dashRechargeUIObject, UICanvas.transform);
+        //    dashRechargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
+        //    dashRechargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
+        //    //dashRechargesUIObjects[i].GetComponent<RectTransform>().localScale = new Vector3(0, 0, 1);
 
-            dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
-            dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
-        }
+        //    dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
+        //    dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
+        //    dashChargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
+        //}
+        healthBarScript.setDashUI(dashChargesNumber);
     }
 
     // Update is called once per frame
@@ -74,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         {
             dashChargeTimer += Time.deltaTime;
 
-            dashRechargesUIObjects[dashChargesNumber].GetComponent<RectTransform>().localScale = new Vector3(dashChargeTimer / _playerData.dashRechargeTime, dashChargeTimer / _playerData.dashRechargeTime, 1);
+            //dashRechargesUIObjects[dashChargesNumber].GetComponent<RectTransform>().localScale = new Vector3(dashChargeTimer / _playerData.dashRechargeTime, dashChargeTimer / _playerData.dashRechargeTime, 1);
         }
         if(dashChargeTimer >= _playerData.dashRechargeTime)
         {
@@ -84,28 +88,29 @@ public class PlayerMovement : MonoBehaviour
             {
                 //dashRechargesUIObjects[dashChargesNumber].GetComponent<RectTransform>().localScale = new Vector3(0, 0, 1);
                 dashChargesNumber++;
+                healthBarScript.setDashUI(dashChargesNumber);
             }
         }
 
-        for(int i = 0; i < maxDashCharges; ++i)
-        {
-            if(dashChargesNumber > i)
-            {
-                dashChargesUIObjects[i].SetActive(true);
-            }
-            else
-            {
-                dashChargesUIObjects[i].SetActive(false);
-            }
-            if(dashChargesNumber == i)
-            {
-                dashRechargesUIObjects[i].SetActive(true);
-            }
-            else
-            {
-                dashRechargesUIObjects[i].SetActive(false);
-            }
-        }
+        //for(int i = 0; i < maxDashCharges; ++i)
+        //{
+        //    if(dashChargesNumber > i)
+        //    {
+        //        dashChargesUIObjects[i].SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        dashChargesUIObjects[i].SetActive(false);
+        //    }
+        //    if(dashChargesNumber == i)
+        //    {
+        //        dashRechargesUIObjects[i].SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        dashRechargesUIObjects[i].SetActive(false);
+        //    }
+        //}
     }
 
     private void FixedUpdate()
@@ -174,6 +179,7 @@ public class PlayerMovement : MonoBehaviour
                     lastDashTime = Time.time;
 
                     dashChargesNumber--;
+                    healthBarScript.setDashUI(dashChargesNumber);
                 }
 
                 return;
