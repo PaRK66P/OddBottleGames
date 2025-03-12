@@ -74,10 +74,10 @@ public class PlayerManager : MonoBehaviour
 
         playerInputManager.EnableInput();
 
-        if (debugData.canDropWeapon)
-        {
-            OnDamageTaken += DropWeapon;
-        }
+        //if (debugData.canDropWeapon)
+        //{
+        //    OnDamageTaken += DropWeapon;
+        //}
 
 
         healthbar = Instantiate(playerData.healthbar, UICanvas.transform.Find("PlayerUI"));
@@ -91,11 +91,11 @@ public class PlayerManager : MonoBehaviour
 
     private void OnDisable()
     {
-        // Improper event subscription, need to update later
-        if (debugData.canDropWeapon)
-        {
-            OnDamageTaken -= DropWeapon;
-        }
+        //// Improper event subscription, need to update later
+        //if (debugData.canDropWeapon)
+        //{
+        //    OnDamageTaken -= DropWeapon;
+        //}
     }
 
     // Update is called once per frame
@@ -207,24 +207,24 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    private void DropWeapon(object sender, EventArgs e)
-    {
-        if (hasWeapon && !playerMovement.dash)
-        {
-            hasWeapon = false;
-            playerShooting.DisableFire();
+    //private void DropWeapon(object sender, EventArgs e)
+    //{
+    //    if (hasWeapon && !playerMovement.dash)
+    //    {
+    //        hasWeapon = false;
+    //        playerShooting.DisableFire();
 
-            float randomAngle = UnityEngine.Random.Range(0, 360);
-            Vector3 weaponPos = new Vector3(5 * Mathf.Cos(randomAngle), 5 * Mathf.Sin(randomAngle)) + transform.position;
-            Instantiate(weaponDrop, weaponPos, Quaternion.identity);
-        }
-    }
+    //        float randomAngle = UnityEngine.Random.Range(0, 360);
+    //        Vector3 weaponPos = new Vector3(5 * Mathf.Cos(randomAngle), 5 * Mathf.Sin(randomAngle)) + transform.position;
+    //        Instantiate(weaponDrop, weaponPos, Quaternion.identity);
+    //    }
+    //}
 
-    public void RegainWeapon()
-    {
-        hasWeapon = true;
-        playerShooting.EnableFire();
-    }
+    //public void RegainWeapon()
+    //{
+    //    hasWeapon = true;
+    //    playerShooting.EnableFire();
+    //}
 
     public void DisableInput()
     {

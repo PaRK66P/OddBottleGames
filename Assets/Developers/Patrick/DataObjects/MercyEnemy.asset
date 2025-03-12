@@ -25,18 +25,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   idleSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
-  stageTwoHealthThreshold: 0.801
-  stageThreeHealthThreshold: 0.609
+  stageTwoHealthThreshold: 0.75
+  stageThreeHealthThreshold: 0.5
   leapDamage: 8
   leapEndTime: 0.5
   leapTargetTravelPercentage: 0.8
   leapChargeTimeStage1: 0.75
   leapTravelTimeStage1: 0.5
   leapTravelDistanceStage1: 9
-  leapChargeTimeStage2: 0.4
+  leapChargeTimeStage2: 0.55
   leapTravelTimeStage2: 0.4
   leapTravelDistanceStage2: 11.23
-  leapChargeTimeStage3: 0.3
+  leapChargeTimeStage3: 0.4
   leapTravelTimeStage3: 0.3
   leapTravelDistanceStage3: 14
   leapChargeSpriteLeft: {fileID: 21300000, guid: 04463bf04261e3f43bb0d7f34ea374e1, type: 3}

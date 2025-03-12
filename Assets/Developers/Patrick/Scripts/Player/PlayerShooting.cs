@@ -98,7 +98,7 @@ public class PlayerShooting : MonoBehaviour
 
     public void PlayerChargeInput(InputAction.CallbackContext context)
     {
-        if (reloading || !canFire) // Currently reloading or can't fire
+        if (reloading) // Currently reloading or can't fire
         {
             return;
         }
@@ -134,7 +134,8 @@ public class PlayerShooting : MonoBehaviour
 
     public void PlayerFireInput(InputAction.CallbackContext context)
     {
-        if(charging || !canFire || !CanFire()) { return; }
+        if(charging || !CanFire()) { return; }
+        interrupted = false;
         takeShot = true;
     }
 
@@ -264,21 +265,21 @@ public class PlayerShooting : MonoBehaviour
     }
     #endregion
 
-    #region Weapon Drop
-    public void DisableFire()
-    {
-        if (_debugData.canDropWeapon)
-        {
-            canFire = false;
-        }
-    }
+    //#region Weapon Drop
+    //public void DisableFire()
+    //{
+    //    if (_debugData.canDropWeapon)
+    //    {
+    //        canFire = false;
+    //    }
+    //}
 
-    public void EnableFire()
-    {
-        if (_debugData.canDropWeapon)
-        {
-            canFire = true;
-        }
-    }
-    #endregion
+    //public void EnableFire()
+    //{
+    //    if (_debugData.canDropWeapon)
+    //    {
+    //        canFire = true;
+    //    }
+    //}
+    //#endregion
 }
