@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed28f7f29a142b4cb8be512a0c0a3c0, type: 3}
   m_Name: MercyEnemy
   m_EditorClassIdentifier: 
-  health: 75
+  health: 1
   healthbar: {fileID: 7940067324356998275, guid: ace6fbf26c5479d4d870cd37326fbc3d, type: 3}
   leapsBeforeFeral: 3
   closeRangeDistance: 5.63
