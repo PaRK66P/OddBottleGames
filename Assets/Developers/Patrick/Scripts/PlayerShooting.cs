@@ -35,6 +35,8 @@ public class PlayerShooting : MonoBehaviour
     private bool interrupted = false;
     private bool charging = false;
 
+    public AudioClip AudioPlayerGunFireClip; //NEED TO MAKE PRIVATE BUT UNSURE HOW TO REFER TO CLIP FILE
+    private AudioSource AudioPlayerGun;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +75,9 @@ public class PlayerShooting : MonoBehaviour
 
             ammoUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.right * 100 * i);
         }
+
+        AudioPlayerGun = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -90,6 +95,7 @@ public class PlayerShooting : MonoBehaviour
                 if (chargedAmmo == 0)
                 {
                     Fire(); // Regular shot
+                    PlayGunFire();
                     return;
                 }
 
@@ -280,4 +286,9 @@ public class PlayerShooting : MonoBehaviour
         }
     }
     #endregion
+    private void PlayGunFire()
+    {
+        AudioPlayerGun.pitch = Random.Range(0.7f,1f); //randomise pitch
+        AudioPlayerGun.PlayOneShot(AudioPlayerGunFireClip);
+    }
 }
