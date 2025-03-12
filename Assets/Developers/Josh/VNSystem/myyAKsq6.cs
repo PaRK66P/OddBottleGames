@@ -46,6 +46,10 @@ public class TwineParser
             
                 bool tagsPresent = currLineText.IndexOf( "[" ) < currLineText.IndexOf( "\r\n" );
                 int endOfFirstLine = currLineText.IndexOf( "\r\n" );
+                if (endOfFirstLine == -1)
+                {
+                    endOfFirstLine = currLineText.IndexOf("\n");
+                }
 
                 //UnityEngine.Debug.Log( endOfFirstLine + ", " + tagsPresent );
 
@@ -58,8 +62,12 @@ public class TwineParser
                 {
                     // Last new line before "[["
                     startOfResponses = currLineText.Substring( 0, startOfResponseDestinations ).LastIndexOf( "\r\n" );
-                UnityEngine.Debug.Log(currLineText.Substring(0, startOfResponseDestinations).LastIndexOf( "\r\n" ));
-                }
+                    if (startOfResponses == -1)
+                    {
+                        startOfResponses = currLineText.IndexOf("\n");
+                    }
+                //UnityEngine.Debug.Log(currLineText.Substring(0, startOfResponseDestinations).LastIndexOf( "\r\n" ));
+            }
                 // if (endOfFirstLine == -1)
                 // {
                 //     endOfFirstLine = currLineText.IndexOf(" ");
@@ -129,6 +137,10 @@ public class TwineParser
                 if ( !lastNode )
                 {
                     List<string> responseData = new List<string>(responseText.Split( new string [] { "\r\n" }, System.StringSplitOptions.None ));
+                    if (responseData.Count == 1 && responseData[0] == responseText)
+                    {
+                        responseData = new List<string>(responseText.Split(new string[] { "\n" }, System.StringSplitOptions.None));
+                    }
                 //UnityEngine.Debug.Log(responseData);
                     foreach (string response in responseData)
                     {
