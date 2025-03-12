@@ -13,7 +13,6 @@ public class TwineParser
 {
     public static List<DialogueTreeNode> ParseTwineText( string twineText )
         {
-            //UnityEngine.Debug.Log("parsing twine text");
             List<DialogueTreeNode> output = new List<DialogueTreeNode>();
             string[] nodeData = twineText.Split(new string[] { "::" }, System.StringSplitOptions.None);
             DialogueTreeNode rootNode = null;
@@ -30,7 +29,6 @@ public class TwineParser
 
                     continue;
                 }
-                //UnityEngine.Debug.Log("looping");
                 // Note: tags are optional
                 // Normal Format: "NodeTitle [Tags, comma, seperated] \r\n Message Text \r\n [[Response One]] \r\n [[Response Two]]"
                 // No-Tag Format: "NodeTitle \r\n Message Text \r\n [[Response One]] \r\n [[Response Two]]"
@@ -78,7 +76,6 @@ public class TwineParser
                     ? currLineText.IndexOf( "[" )
                     : endOfFirstLine;
 
-                //UnityEngine.Debug.Log(titleStart + ", " + titleEnd);
                 //UnityEngine.Assertions.Assert.IsTrue( titleEnd > 0, "Maybe you have a node with no responses?" );
                 string title = "";
                 if (titleEnd <=  0)
@@ -113,7 +110,6 @@ public class TwineParser
 
                 DialogueTreeNode curNode = new DialogueTreeNode();
                 //curNode.sceneData. = title;
-                //UnityEngine.Debug.Log(messsageText);
                 
                 VisualNovelScene newSceneData = new VisualNovelScene();
                 newSceneData.text = messsageText;
@@ -179,23 +175,19 @@ public class TwineParser
                     //         curNode.children[i].sceneData.entryText = curResponseData.Substring(0, destinationStart);
                     // }
                 }
-                //UnityEngine.Debug.Log(curNode.twineData.title);
                 output.Add(curNode);
                 
                 //nodes[ curNode.title ] = curNode;
             }
-            //UnityEngine.Debug.Log("parsed");
             return output;
         }
 
         public static DialogueTree ConstructTwineTree(List<DialogueTreeNode> nodes)
         {
-            UnityEngine.Debug.Log("constructing tree from twine data");
             //DialogueTree output = new DialogueTree();
             DialogueTreeNode root = new DialogueTreeNode();
             for (int i = 0; i < nodes.Count; i++)
             {
-                UnityEngine.Debug.Log(nodes[i].twineData.title);
                 DialogueTreeNode node = nodes[i];
                 if (i == 0)
                 {
@@ -203,14 +195,11 @@ public class TwineParser
                 }
                 for (int j = 0; j < node.twineData.responseData.Count; j++)
                 {
-                    //UnityEngine.Debug.Log(j + ", " + node.twineData.responseData.Count);
-                    //UnityEngine.Debug.Log(node.twineData.responseData.Count);
                     string response = node.twineData.responseData[j];
                     UnityEngine.Debug.Log(response);
                     if (string.IsNullOrEmpty(response))
                     {
                         //node.twineData.responseData.Remove(response);
-                        UnityEngine.Debug.Log("null or empty response being removed");
                         continue;
                         
                     }
@@ -226,10 +215,8 @@ public class TwineParser
 
                     if (destinationStart != 0)
                     {
-                        UnityEngine.Debug.Log("adding response");
                         //int count = node.children.Count;
                         DialogueTreeNode responseNode = FindNodeWithTwineTitle(destination, ref nodes);
-                        //UnityEngine.Debug.Log(responseNode.twineData.title);
                         responseNode.sceneData.entryText = response;
                         responseNode.parent = node;
                         node.children.Add(responseNode);
@@ -241,11 +228,8 @@ public class TwineParser
 
         private static DialogueTreeNode FindNodeWithTwineTitle(string title, ref List<DialogueTreeNode> nodes)
         {
-            //UnityEngine.Debug.Log(title);
             foreach (DialogueTreeNode node in nodes)
             {
-                //UnityEngine.Debug.Log(node.twineData.title);
-                //UnityEngine.Debug.Log(node.twineData.title);
                 if (node.twineData.title.Trim() == title)
                 {
                     return node;

@@ -143,42 +143,57 @@ public class PathfindingManager : MonoBehaviour
 
     public Vector3 GetPathDirection(Vector3 startPosition, Vector3 targetPosition)
     {
-        Node startNode = NodeFromWorldPosition(startPosition);
-        if (startNode.isBlocked)
-        {
-            List<Node> startNeighbours = GetNeighbourNodes(startNode);
-            if(startNeighbours.Count <= 0)
-            {
-                Debug.LogError("Target is unreachable and stuck in a wall");
-                return Vector3.zero;
-            }
-
-            startNode = startNeighbours[0];
-        }
-
-        Node targetNode = NodeFromWorldPosition(targetPosition);
-        if (targetNode.isBlocked)
-        {
-            List<Node> targetNeighbours = GetNeighbourNodes(targetNode);
-            if (targetNeighbours.Count <= 0)
-            {
-                Debug.LogError("Target is unreachable and stuck in a wall");
-                return Vector3.zero;
-            }
-
-            targetNode = targetNeighbours[0];
-        }
+        Node startNode = NodeFromWorldPosition(startPosition); // Node should never be blocked
+        Node targetNode = GetNearestNodeInDirection(NodeFromWorldPosition(targetPosition).worldPosition, startPosition - targetPosition);
 
         List<Node> path = _pathfindingScript.GetPath(startNode, targetNode);
         _debugPath = path;
-        if (path != null)
+        if (path.Count > 0)
         {
-            //Debug.Log((path[0].worldPosition - startPosition).normalized);
             return (path[0].worldPosition - startPosition).normalized;
         }
-        Debug.Log(Vector3.zero);
-        return Vector3.zero;
+        return targetPosition - startPosition;
     }
+
+    public Node GetNearestNodeInDirection(Vector3 target, Vector3 direction)
+    {
+        Node returnNode = NodeFromWorldPosition(target);
+        if(!returnNode.isBlocked) { return returnNode; }
+        List<Node> neighbourNodes;
+
+        bool isPositiveXDirection = direction.x >= 0.0f ? true : false;
+        bool isPositiveYDirection = direction.y >= 0.0f ? true : false;
+
+        Vector3 neighbourDirection;
+        bool isSameXDirection;
+        bool isSameYDirection;
+
+        // AGAIN I AM BEING VERY CAREFUL
+        while (returnNode.isBlocked)
+        {
+            neighbourNodes = GetNeighbourNodes(returnNode);
+            if(neighbourNodes.Count > 0)
+            {
+                foreach (Node neighbour in neighbourNodes)
+                {
+                    neighbourDirection = neighbour.worldPosition - returnNode.worldPosition;
+                    isSameXDirection = isPositiveXDirection == (neighbourDirection.x >= 0.0f ? true : false);
+                    isSameYDirection = isPositiveYDirection == (neighbourDirection.y >= 0.0f ? true : false);
+
+                    if ((isSameXDirection && neighbourDirection.y == 0.0f) // Check for only X direction
+                        || (isSameYDirection && neighbourDirection.x == 0.0f) // Check for only Y direction
+                        || (isSameXDirection && isSameYDirection)) // Check for matching both
+                    {
+                        return neighbour;
+                    }
+                }
+            }
+
+            returnNode = NodeFromWorldPosition(returnNode.worldPosition + direction * nodeSize);
+        }
+
+        return returnNode;
+    } 
 
     private void OnDrawGizmos()
     {

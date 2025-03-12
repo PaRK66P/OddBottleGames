@@ -24,7 +24,6 @@ public class enemyScr : MonoBehaviour
         }
         if(GetComponent<CompanionManager>())
         {
-            //Debug.Log("spawning companion manager " + poolMan.name);
             GetComponent<CompanionManager>().InitialiseEnemy(ref dPlayer, ref poolMan, ref dPathfinder, ref UICanvas);
         }
         //transform.position = pos;
@@ -32,7 +31,6 @@ public class enemyScr : MonoBehaviour
         //timeElapsed = 0;
         //damage = false;
         //changeColor(new Color(1, 1, 0, 1));
-        //Debug.Log("instantiated " + prefName);
     }
 
     public void releaseEnemy()

@@ -9,14 +9,11 @@ public class StartCutscene : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log("collision with trigger");
         if (!isTriggered)
         {
-            //Debug.Log("Triggered");
             if (collision.gameObject.tag == "Player")
             {
                 GetComponent<PlayableDirector>().Play();
-                //Debug.Log("playCutscene");
                 isTriggered = true;
             }
         }

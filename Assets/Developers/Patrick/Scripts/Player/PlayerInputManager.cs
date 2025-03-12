@@ -11,6 +11,7 @@ public class PlayerInputManager : MonoBehaviour
     private InputAction fireAction;
     private InputAction reloadAction;
     private InputAction interactAction;
+    private InputAction chargeAction;
 
     public PlayerMovement playerMovement;
     public PlayerShooting playerShooting;
@@ -29,6 +30,7 @@ public class PlayerInputManager : MonoBehaviour
         fireAction = actionMap.Player.Shoot;
         reloadAction = actionMap.Player.Reload;
         interactAction = actionMap.Player.Interact;
+        chargeAction = actionMap.Player.Charge;
 
         playerMovement = dPlayerMovement;
         playerShooting = dPlayerShooting;
@@ -55,12 +57,14 @@ public class PlayerInputManager : MonoBehaviour
         fireAction.Enable();
         reloadAction.Enable();
         interactAction.Enable();
+        chargeAction.Enable();
 
         movementAction.performed += playerMovement.SetMovementInput;
         movementAction.canceled += playerMovement.SetMovementInput;
         dashAction.performed += playerMovement.PlayerDashInput;
+        chargeAction.performed += playerShooting.PlayerChargeInput;
+        chargeAction.canceled += playerShooting.PlayerStopChargeInput;
         fireAction.performed += playerShooting.PlayerFireInput;
-        fireAction.canceled += playerShooting.PlayerStopFireInput;
         reloadAction.performed += playerShooting.PlayerReloadAction;
         interactAction.performed += interactComponent.OnInteract;
     }
@@ -72,12 +76,14 @@ public class PlayerInputManager : MonoBehaviour
         fireAction.Disable();
         reloadAction.Disable();
         interactAction.Disable();
+        chargeAction.Disable();
 
         movementAction.performed -= playerMovement.SetMovementInput;
         movementAction.canceled -= playerMovement.SetMovementInput;
         dashAction.performed -= playerMovement.PlayerDashInput;
+        chargeAction.performed -= playerShooting.PlayerChargeInput;
+        chargeAction.canceled -= playerShooting.PlayerStopChargeInput;
         fireAction.performed -= playerShooting.PlayerFireInput;
-        fireAction.canceled -= playerShooting.PlayerStopFireInput;
         reloadAction.performed -= playerShooting.PlayerReloadAction;
         interactAction.performed -= interactComponent.OnInteract;
     }

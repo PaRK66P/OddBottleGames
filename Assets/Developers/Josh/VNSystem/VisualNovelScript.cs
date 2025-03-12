@@ -4,6 +4,7 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 
 [System.Serializable]
@@ -56,6 +57,8 @@ public class VisualNovelScript : MonoBehaviour
 
     public bool typingTextToggle = true;
 
+    public UnityEvent onNovelFinish;
+
     void Start()
     {
         canv = GameObject.Find("Canvas").transform.Find("VisualNovelCanvas").gameObject;
@@ -68,10 +71,8 @@ public class VisualNovelScript : MonoBehaviour
         GameObject[] VisualNovelPrefabs = Resources.LoadAll<GameObject>("VisualNovelScenes");
         foreach (GameObject prefab in VisualNovelPrefabs)
         {
-            //Debug.Log("found scene");
             if (prefab != null)
             {
-                //Debug.Log("not null");
                 VNPrefabScript script = Instantiate(prefab).GetComponent<VNPrefabScript>();
                 if (script != null)
                 {
@@ -84,7 +85,6 @@ public class VisualNovelScript : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("fixedupdate");
         if (fadeIn)
         {
             canv.SetActive(true);
@@ -110,7 +110,6 @@ public class VisualNovelScript : MonoBehaviour
 
     public void StartNovelScene(int NovelSceneID)
     {
-        //Debug.Log(NovelSceneID);
         if (!isNovelSection)
         {
             canvGroup.alpha = 0;
@@ -129,7 +128,6 @@ public class VisualNovelScript : MonoBehaviour
             {
                 DialogueTree tree = new DialogueTree(ReconstructTree(VNScenes[currentVNPrefabIndex].tree));
                 currentNode = tree.rootNode;
-                //Debug.Log(typingTextToggle);
                 if (typingTextToggle == true)
                 {
                     typingText = TypewriterText(currentNode.sceneData.text);
@@ -161,7 +159,6 @@ public class VisualNovelScript : MonoBehaviour
         int index = 0;
         foreach (var scene in VNScenes)
         {
-            //Debug.Log(scene.name + ", " + name);
             if (scene.name == name)
             {
                 StartNovelScene(index);
@@ -173,6 +170,7 @@ public class VisualNovelScript : MonoBehaviour
     }
     void NextScene(int index)
     {
+        ClearButtons();
         //StopCoroutine(typingText);
         if (!currentNode.isLeaf())
         {
@@ -189,7 +187,7 @@ public class VisualNovelScript : MonoBehaviour
                 {
                     text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
                 }
-                CreateButtons();
+                //CreateButtons();
             }
             else
             {
@@ -200,21 +198,22 @@ public class VisualNovelScript : MonoBehaviour
         {
 
             lastSelectionID = currentNode.sceneData.selectionID;
-            //Debug.Log("selectionID: " + lastSelectionID);
             isNovelSection = false;
             playerRef.GetComponent<PlayerManager>().EnableInput();
             Time.timeScale = 1.0f;
             fadeOut = true;
             //canv.SetActive(false);
             playerUI.SetActive(true);
-           
+            if (onNovelFinish != null)
+            {
+                onNovelFinish?.Invoke();
+            }
 
         }
     }
 
     public DialogueTreeNode ReconstructTree(SerializedTree serializedTree)
     {
-        //Debug.Log(serializedTree);
         var nodeDict = new Dictionary<int, DialogueTreeNode>();
 
         foreach (var serializedNode in serializedTree.nodes)
@@ -235,13 +234,17 @@ public class VisualNovelScript : MonoBehaviour
         return nodeDict[serializedTree.nodes[0].id];
     }
 
-    public void CreateButtons()
+    public void ClearButtons()
     {
         foreach (GameObject button in buttons)
         {
             Destroy(button);
         }
         buttons.Clear();
+    }
+    public void CreateButtons()
+    {
+        ClearButtons();
 
         if (currentNode.isLeaf())
         {
@@ -321,7 +324,6 @@ public class VisualNovelScript : MonoBehaviour
         TMP_Text TMP = text.GetComponent<TMP_Text>();
         for (int i = 0; i < targetText.Length; i++)
         {
-            //Debug.Log(i + ", " + targetText.Length);
             textToAdd += targetText[i];
             TMP.text = textToAdd;
             
@@ -332,7 +334,7 @@ public class VisualNovelScript : MonoBehaviour
                 break;
             }
         }
-        //Debug.Log("done");
+        CreateButtons();
         yield return null;
     }
 }

@@ -35,7 +35,7 @@ public class PlayerManager : MonoBehaviour
     private float invulnerableTime = 1.0f;
     private float regenTimer = 0.0f;
 
-    private int health = 100;
+    private float health = 100;
     private GameObject healthbar;
 
     private event EventHandler OnDamageTaken;
@@ -122,9 +122,9 @@ public class PlayerManager : MonoBehaviour
         }
 
         regenTimer += Time.deltaTime;
-        if(regenTimer >= 1)
+        if(regenTimer >= 1.0f)
         {
-            health += 1;
+            Heal(1.0f);
             regenTimer = 0; 
         }
 
@@ -159,7 +159,7 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f, int ammount = 10)
+    public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f, float ammount = 10)
     {
         if (!CanBeDamaged()) { return; }
 
@@ -176,9 +176,9 @@ public class PlayerManager : MonoBehaviour
         OnDamageTaken?.Invoke(this, EventArgs.Empty);
 
         health -= ammount;
-        if(health <= 1)
+        if(health <= 1.0f)
         {
-            health = 1;
+            health = 1.0f;
         }
     }
 
@@ -199,7 +199,7 @@ public class PlayerManager : MonoBehaviour
         
     //}
 
-    public void Heal(int ammount)
+    public void Heal(float ammount)
     {
         health += ammount;
         if(health >= playerData.health)

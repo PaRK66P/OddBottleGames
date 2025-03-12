@@ -84,6 +84,7 @@ public class CompanionFriend : MonoBehaviour
                 break;
             case CompanionStates.ATTACKING:
 
+                Debug.Log("Start");
                 if (!_isReadyToLeap)
                 {
                     Node playerNode = _pathfindingManager.NodeFromWorldPosition(_player.transform.position);
@@ -104,6 +105,8 @@ public class CompanionFriend : MonoBehaviour
 
                     if (WithinLeapRange(_dataObj.leapDistance))
                     {
+                        Debug.Log("Within Range");
+
                         Vector2 targetDirection = _target.transform.position - transform.position;
                         Vector2 leapDirection = targetDirection.normalized;
                         if (targetDirection == Vector2.zero)
@@ -112,15 +115,15 @@ public class CompanionFriend : MonoBehaviour
                         }
                         _leapStart = transform.position;
                         _leapEnd = _leapStart + leapDirection * _dataObj.leapDistance;
-                        if (targetDirection.sqrMagnitude >= _dataObj.leapDistance * _dataObj.leapDistance)
-                        {
-                            _leapEnd = _target.transform.position;
-                        }
+
                         RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, _dataObj.leapDistance, _dataObj.environmentLayer);
                         if (wallCheck)
                         {
                             _leapEnd = wallCheck.point;
                         }
+
+                        _leapEnd = _pathfindingManager.GetNearestNodeInDirection(_leapEnd, new Vector3(-leapDirection.x, -leapDirection.y, 0.0f)).worldPosition; // Find the nearest unblocked node along the path
+
 
                         _leapTimer = Time.time;
 
@@ -133,6 +136,8 @@ public class CompanionFriend : MonoBehaviour
 
                 if (Time.time - _leapTimer < _dataObj.leapChargeTime)
                 {
+                    Debug.Log("Charging");
+
                     _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_CHARGE);
                     _leapMoveTimer = Time.time;
                     return;
@@ -140,10 +145,12 @@ public class CompanionFriend : MonoBehaviour
 
                 float travelPosition = (Time.time - _leapMoveTimer) / _dataObj.leapTravelTime;
 
+                Debug.Log("Moving");
                 _rb.MovePosition(Vector2.Lerp(_leapStart, _leapEnd, travelPosition));
 
                 if (travelPosition >= 1)
                 {
+                    Debug.Log("Finished");
                     _isLeapFinished = true;
                 }
 
@@ -151,26 +158,26 @@ public class CompanionFriend : MonoBehaviour
 
         }
     }
-    private bool WithinLeapRange(float leapDistance)
+    private bool WithinLeapRange(float leapTravelDistance)
     {
         // Leaping
         Vector3 playerDirection = _player.transform.position - transform.position;
         Vector3 leapDirection = playerDirection.normalized;
 
-        Vector3 targetPosition = transform.position + leapDirection * leapDistance * _dataObj.leapTargetTravelPercentage;
-        float targetDistance = (targetPosition - transform.position).sqrMagnitude;
+        float leapDistance = leapTravelDistance * _dataObj.leapTargetTravelPercentage;
+        leapDistance *= leapDistance;
 
-        if ((_player.transform.position - transform.position).sqrMagnitude > targetDistance)
+        if ((_target.transform.position - transform.position).sqrMagnitude > leapDistance)
         {
             return false;
         }
 
-        RaycastHit2D wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, leapDistance, _dataObj.environmentLayer); // Update layer mask variable
+        RaycastHit2D wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, leapTravelDistance, _dataObj.environmentLayer); // Update layer mask variable
         if (wallCheck)
         {
             float wallDistance = (wallCheck.point - new Vector2(transform.position.x, transform.position.y)).sqrMagnitude;
 
-            if (wallDistance < targetDistance)
+            if (wallDistance < leapDistance)
             {
                 return false;
             }

@@ -15,7 +15,6 @@ public class DialoguePopup : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                //Debug.Log("collided with player");
                 collision.gameObject.GetComponent<PlayerManager>().StartFadeInSpeech(text);
                 hasBeenActivated = true;
             }

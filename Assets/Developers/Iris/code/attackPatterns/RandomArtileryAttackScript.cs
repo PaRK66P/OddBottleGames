@@ -34,17 +34,9 @@ public class attack1 : AttackClass
     //    upperB = originY + verticalUnitsFromOrigin;
     //    lowerB = originY - verticalUnitsFromOrigin;
 
-    //    //Debug.Log(leftB);
-    //    //Debug.Log(rightB);
-    //    //Debug.Log(upperB);
-    //    //Debug.Log(lowerB);
-
     //    noOfCoords = randomArtileryProjectileNo;
     //    float xStep = (rightB - leftB) / noOfCoords;
     //    float yStep = (upperB - lowerB) / noOfCoords;
-
-    //    Debug.Log(xStep);
-    //    //Debug.Log(yStep);
 
     //    xCoords.Clear();
     //    yCoords.Clear();
@@ -55,8 +47,6 @@ public class attack1 : AttackClass
     //    {
     //        xCoords.Add(leftB + xStep * i);
     //        yCoords.Add(lowerB + yStep * i);
-    //        //Debug.Log(xCoords[i]);
-    //        //Debug.Log(yCoords[i]);
     //        xBoolStat.Add(false);
     //        yBoolStat.Add(false);
     //    }
@@ -72,17 +62,9 @@ public class attack1 : AttackClass
         upperB = originY + verticalUnitsFromOrigin;
         lowerB = originY - verticalUnitsFromOrigin;
 
-        //Debug.Log(leftB);
-        //Debug.Log(rightB);
-        //Debug.Log(upperB);
-        //Debug.Log(lowerB);
-
         noOfCoords = randomArtileryProjectileNo / 3;
         float xStep = (rightB - leftB) / noOfCoords;
         float yStep = (upperB - lowerB) / noOfCoords;
-
-        //Debug.Log(xStep);
-        //Debug.Log(yStep);
 
         xCoords.Clear();
         yCoords.Clear();
@@ -93,8 +75,7 @@ public class attack1 : AttackClass
         {
             xCoords.Add(leftB + xStep * i);
             yCoords.Add(lowerB + yStep * i);
-            //Debug.Log(xCoords[i]);
-            //Debug.Log(yCoords[i]);
+
             xBoolStat.Add(false);
             yBoolStat.Add(false);
         }
