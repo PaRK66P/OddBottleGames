@@ -147,7 +147,10 @@ public class CompanionManager : MonoBehaviour
         {
             _currentState = CompanionStates.NONE;
             healthbar.SetActive(false);
-            StartCoroutine(PlayDeathEffects());
+            if (!hasPlayedNovel)
+            {
+                StartCoroutine(PlayDeathEffects());
+            }
             return;
         }
         healthbar.GetComponent<UnityEngine.UI.Slider>().value = _health;
@@ -243,16 +246,6 @@ public class CompanionManager : MonoBehaviour
             case 14:
             case 16:
             case 21: 
-            case 24:
-            case 26:
-            case 28:
-            case 30:
-            case 32:
-            case 34:
-            case 36:
-            case 38:
-            case 40:
-            case 45:
                 ChangeToFriendly();
                 break;
             case 1:
@@ -269,26 +262,11 @@ public class CompanionManager : MonoBehaviour
             case 20:
             case 22:
             case 23:
-            case 25:
-            case 27:
-            case 29:
-            case 31:
-            case 33:
-            case 35:
-            case 37:
-            case 39:
-            case 41:
-            case 42:
-            case 43:
-            case 44:
-            case 46:
-            case 47:
-            case 48:
                 ChangeToEnemy();
                 gameObject.GetComponent<enemyScr>().releaseEnemy();
                 break;
             default:
-                Debug.LogError("Visual novel selection not supported. make sure to update selection code in miniboss as well as the novel that plays");
+                Debug.LogError("Visual novel selection of " + visualNovelManager.GetLastSelectionID() + " not supported. make sure to update selection code in miniboss as well as the novel that plays");
                 break;
         }
     }

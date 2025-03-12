@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -141,7 +142,8 @@ public class VisualNovelScript : MonoBehaviour
                 sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
                 sprite.GetComponent<Image>().SetNativeSize();
 
-                IDSelectionOptions(currentNode, 0);
+                int count = -1;
+                IDSelectionOptions(currentNode, ref count);
                 CreateButtons();
             }
             else
@@ -275,6 +277,7 @@ public class VisualNovelScript : MonoBehaviour
             if (buttonText != null)
             {
                 buttonText.text = currentNode.children[i].sceneData.entryText;
+                buttonText.fontSize = 12;
             }
 
             int index = i;
@@ -288,24 +291,22 @@ public class VisualNovelScript : MonoBehaviour
         }
     }
 
-    int IDSelectionOptions(DialogueTreeNode node, int currentIDCount)
+    void IDSelectionOptions(DialogueTreeNode node, ref int currentIDCount)
     {
+        if (node == null)
+            Debug.LogError("null node when assigning IDs");
+
         if (node.isLeaf())
         {
-            node.sceneData.selectionID = currentIDCount;
-            return 0;
+            node.sceneData.selectionID = ++currentIDCount;
+            Debug.Log(currentIDCount);
         }
         else
         {
-            int it = currentIDCount - 1;
             foreach (var child in node.children)
             {
-                it++;
-                int id = IDSelectionOptions(child, it);
-                it += id;
-
+                IDSelectionOptions(child, ref currentIDCount);
             }
-            return it;
         }
     }
 
@@ -317,12 +318,19 @@ public class VisualNovelScript : MonoBehaviour
     private IEnumerator TypewriterText(string targetText)
     {
         string textToAdd = "";
+        TMP_Text TMP = text.GetComponent<TMP_Text>();
         for (int i = 0; i < targetText.Length; i++)
         {
             //Debug.Log(i + ", " + targetText.Length);
             textToAdd += targetText[i];
-            text.GetComponent<TMP_Text>().text = textToAdd;
+            TMP.text = textToAdd;
+            
             yield return new WaitForSecondsRealtime(0.05f / typeTextSpeed);
+            if (Input.GetMouseButton(0))
+            {
+                TMP.text = targetText;
+                break;
+            }
         }
         //Debug.Log("done");
         yield return null;
