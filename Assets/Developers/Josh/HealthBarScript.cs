@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,9 +29,6 @@ public class HealthBarScript : MonoBehaviour
         maxRightMask = healthBarRect.rect.width - rectMask.padding.x - rectMask.padding.y;
         initialRightMask = rectMask.padding.z;
         initialLeftMask = rectMask.padding.x;
-        //Debug.Log("initial right mask: " + initialRightMask);
-        //maxHealth = 10;
-        //SetValue(100);
     }
 
     public void SetMaxHealth(float hp)

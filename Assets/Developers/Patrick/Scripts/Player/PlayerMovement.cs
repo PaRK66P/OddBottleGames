@@ -292,5 +292,7 @@ public class PlayerMovement : MonoBehaviour
             dashChargesNumber = _playerData.numberOfDashCharges;
             dashChargeTimer = 0.0f;
         }
+
+        healthBarScript.setDashUI(dashChargesNumber);
     }
 }
