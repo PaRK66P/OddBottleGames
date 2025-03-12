@@ -25,9 +25,9 @@ public class PlayerManager : MonoBehaviour
     private PlayerMovement playerMovement;
     private PlayerShooting playerShooting;
 
-    private GameObject weaponDrop;
+    //private GameObject weaponDrop;
 
-    private bool hasWeapon = true;
+    //private bool hasWeapon = true;
     private bool isDamaged = false;
 
     private float timeOfDamage = -10.0f;

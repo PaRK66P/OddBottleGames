@@ -193,12 +193,12 @@ public class PlayerMovement : MonoBehaviour
         // Get the speed the player wants to move at
         Vector2 targetSpeed = movementInput * _playerData.speed;
 
-        // Can implement acceleration in the future but not sure if necessary for this style of game
+        // Calculate acceleration type
+        float accelerationRate = (targetSpeed.sqrMagnitude > 0.0001f) ? _playerData.accelerationRate : _playerData.decelerationRate;
 
         Vector2 speedDiff = targetSpeed - rb.velocity;
 
-        // Normally apply acceleration but we want instant so just use speed
-        Vector2 movement =  speedDiff * _playerData.speed;
+        Vector2 movement =  speedDiff * accelerationRate;
 
         rb.AddForce(movement, ForceMode2D.Force);
     }

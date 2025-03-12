@@ -15,6 +15,10 @@ MonoBehaviour:
   health: 100
   healthbar: {fileID: 7940067324356998275, guid: ac8003dc51160644aa424ec898956709, type: 3}
   speed: 12
+  acceleration: 0.8
+  accelerationRate: 40
+  deceleration: 0.7
+  decelerationRate: 35
   dashChargeUIObject: {fileID: 454602280210619587, guid: 15acabbdf8d62154f9216abc70b7a442, type: 3}
   dashRechargeUIObject: {fileID: 454602280210619587, guid: fb993dada00dc344dae6409bd2fc1b3e, type: 3}
   dashTime: 0.2
@@ -41,5 +45,5 @@ MonoBehaviour:
   reloadTime: 1
   damageMultiplier: 1.5
   baseProjectileType: {fileID: 1223489425459614113, guid: 50e3b8fba1c074f4ba558c89a7b1613e, type: 3}
-  baseProjectileSpeed: 15
+  baseProjectileSpeed: 20
   controlLossTime: 0.2
