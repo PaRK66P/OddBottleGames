@@ -44,7 +44,7 @@ public class CompanionManager : MonoBehaviour
     private float _health;
     private GameObject healthbar;
 
-    //private VisualNovelScript visualNovelManager;
+    private VisualNovelScript visualNovelManager;
     private bool hasPlayedNovel = false;
 
     // No protection for uninitialised Companion
