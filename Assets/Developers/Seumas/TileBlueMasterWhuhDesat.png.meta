@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5257984d04c9cc648ad939e9984e5e25
+guid: b32e9415816301648bf3587e6824f4f5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3590444558137282449
-    second: tiles1_0
+      213: -6852337042408293243
+    second: TileBlueMasterWhuhDesat_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,19 +75,6 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -109,63 +96,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: tvOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tiles1_0
+      name: TileBlueMasterWhuhDesat_0
       rect:
         serializedVersion: 2
         x: 0
@@ -177,16 +112,16 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 8a729d1f6aa79c246941a81fad040459
-      internalID: 31839514
+      spriteID: 58cb002e3cb97e0a0800000000000000
+      internalID: -6852337042408293243
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles1_1
+      name: TileBlueMasterWhuhDesat_1
       rect:
         serializedVersion: 2
         x: 150
@@ -200,14 +135,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2134f2db7536ad84481942d6e84ba5d3
-      internalID: 793718519
+      spriteID: 3f956c7f77fb62244b0a27df65c784d8
+      internalID: -1982606382
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles1_2
+      name: TileBlueMasterWhuhDesat_2
       rect:
         serializedVersion: 2
         x: 0
@@ -221,14 +156,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db89ba05348d42a4da8f457d7dea5f75
-      internalID: -1236325532
+      spriteID: f6b1752910c60fb4cb038f8968caf48c
+      internalID: 1942614216
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles1_3
+      name: TileBlueMasterWhuhDesat_3
       rect:
         serializedVersion: 2
         x: 150
@@ -242,8 +177,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e347f5e96acdeda42b0364f051271662
-      internalID: 1302671775
+      spriteID: 9e84574eb33ff29408fa7cfcac3cd283
+      internalID: 917992148
       vertices: []
       indices: 
       edges: []
@@ -251,7 +186,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 659f6a59eb56f5841904d08faa892463
+    spriteID: 460950bb235748245ba924c6e8a58cc8
     internalID: 0
     vertices: []
     indices: 
@@ -259,10 +194,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      tiles1_0: 31839514
-      tiles1_1: 793718519
-      tiles1_2: -1236325532
-      tiles1_3: 1302671775
+      TileBlueMasterWhuhDesat_0: -6852337042408293243
+      TileBlueMasterWhuhDesat_1: -1982606382
+      TileBlueMasterWhuhDesat_2: 1942614216
+      TileBlueMasterWhuhDesat_3: 917992148
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
