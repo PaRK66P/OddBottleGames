@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   particle: {fileID: 7317420507254709891, guid: e44d4902256532545890d4ebc28a53ac, type: 3}
-  detectionRange: 30
+  detectionRange: 15
   shootingRange: 6
   speed: 2
   fireRate: 2
