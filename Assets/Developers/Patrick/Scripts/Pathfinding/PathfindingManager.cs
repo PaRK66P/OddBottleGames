@@ -141,17 +141,23 @@ public class PathfindingManager : MonoBehaviour
         return neighbours;
     }
 
-    public Vector3 GetPathDirection(Vector3 startPosition, Vector3 targetPosition)
+    public Vector2 GetPathDirection(Vector3 startPosition, Vector3 targetPosition)
     {
         Node startNode = NodeFromWorldPosition(startPosition); // Node should never be blocked
         Node targetNode = GetNearestNodeInDirection(NodeFromWorldPosition(targetPosition).worldPosition, startPosition - targetPosition);
 
         List<Node> path = _pathfindingScript.GetPath(startNode, targetNode);
-        _debugPath = path;
         if (path.Count > 0)
         {
-            return (path[0].worldPosition - startPosition).normalized;
+            path.Add(startNode);
+            _debugPath = path;
+            Vector2 pathDistance = new Vector2(path[0].worldPosition.x - startPosition.x, path[0].worldPosition.y - startPosition.y); 
+            return pathDistance.normalized;
         }
+
+        path.Add(startNode);
+        _debugPath = path;
+
         return targetPosition - startPosition;
     }
 

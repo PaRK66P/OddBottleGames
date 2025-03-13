@@ -90,7 +90,7 @@ public class CompanionFriend : MonoBehaviour
                     Node playerNode = _pathfindingManager.NodeFromWorldPosition(_player.transform.position);
                     Node currentNode = _pathfindingManager.NodeFromWorldPosition(transform.position);
 
-                    Vector3 pathfindingDirection = _lastPathDirection;
+                    Vector2 pathfindingDirection = _lastPathDirection;
 
                     if (_lastPlayerNode != playerNode || _lastNode != currentNode)
                     {
@@ -101,12 +101,10 @@ public class CompanionFriend : MonoBehaviour
                         _lastPathDirection = pathfindingDirection;
                     }
 
-                    _rb.MovePosition(transform.position + pathfindingDirection * _dataObj.moveSpeed * Time.fixedDeltaTime);
+                    _rb.MovePosition(new Vector2(transform.position.x, transform.position.y) + pathfindingDirection * _dataObj.moveSpeed * Time.fixedDeltaTime);
 
                     if (WithinLeapRange(_dataObj.leapDistance))
                     {
-                        Debug.Log("Within Range");
-
                         Vector2 targetDirection = _target.transform.position - transform.position;
                         Vector2 leapDirection = targetDirection.normalized;
                         if (targetDirection == Vector2.zero)
@@ -136,8 +134,6 @@ public class CompanionFriend : MonoBehaviour
 
                 if (Time.time - _leapTimer < _dataObj.leapChargeTime)
                 {
-                    Debug.Log("Charging");
-
                     _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_CHARGE);
                     _leapMoveTimer = Time.time;
                     return;
@@ -145,12 +141,10 @@ public class CompanionFriend : MonoBehaviour
 
                 float travelPosition = (Time.time - _leapMoveTimer) / _dataObj.leapTravelTime;
 
-                Debug.Log("Moving");
                 _rb.MovePosition(Vector2.Lerp(_leapStart, _leapEnd, travelPosition));
 
                 if (travelPosition >= 1)
                 {
-                    Debug.Log("Finished");
                     _isLeapFinished = true;
                 }
 
