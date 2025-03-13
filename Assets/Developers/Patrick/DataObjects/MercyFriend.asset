@@ -19,8 +19,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   detectionRadius: 12
-  idleSpeed: 6
-  idleDistance: 2.71
+  idleSpeed: 12
+  idleDistance: 3.06
   moveSpeed: 8
   leapTravelTime: 0.2
   leapChargeTime: 0.8

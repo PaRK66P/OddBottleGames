@@ -78,7 +78,7 @@ public class MenuLogic : MonoBehaviour
     IEnumerator LoadGame()
     {
         PlayerPrefs.Save();
-        AsyncOperation loadGame = SceneManager.LoadSceneAsync("PrototypeScene");
+        AsyncOperation loadGame = SceneManager.LoadSceneAsync("MAP3 3");
 
         while (!loadGame.isDone)
         {
