@@ -233,16 +233,25 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void EvolveDash()
+    public void EvolveDash(bool toggle)
     {
         //for (int i = 0; i < maxDashCharges; i++)
         //{
         //    Destroy(dashRechargesUIObjects[i]);
         //    Destroy(dashChargesUIObjects[i]);
         //}
-
-        maxDashCharges = _playerData.numberOfDashCharges;
-        dashChargesNumber = maxDashCharges;
+        if (toggle)
+        {
+            maxDashCharges = _playerData.numberOfDashCharges;
+            dashChargesNumber = maxDashCharges;
+            evolved = true;
+        }
+        else
+        {
+            maxDashCharges = 1;
+            dashChargesNumber = maxDashCharges;
+            evolved = false;
+        }
 
         //dashRechargesUIObjects = new GameObject[maxDashCharges];
         //dashChargesUIObjects = new GameObject[maxDashCharges];
@@ -259,7 +268,7 @@ public class PlayerMovement : MonoBehaviour
         //    dashChargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
         //}
 
-        evolved = true;
+        
     }
 
     public void RechargeDashes(int n = 3)

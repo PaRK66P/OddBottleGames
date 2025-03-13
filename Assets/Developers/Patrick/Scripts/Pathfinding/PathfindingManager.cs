@@ -147,15 +147,15 @@ public class PathfindingManager : MonoBehaviour
         Node targetNode = GetNearestNodeInDirection(NodeFromWorldPosition(targetPosition).worldPosition, startPosition - targetPosition);
 
         List<Node> path = _pathfindingScript.GetPath(startNode, targetNode);
-        if (path.Count > 0)
+        if (path.Count > 1)
         {
-            path.Add(startNode);
+            Vector2 pathDistance = new Vector2(path[1].worldPosition.x - startPosition.x, path[1].worldPosition.y - startPosition.y);
+
             _debugPath = path;
-            Vector2 pathDistance = new Vector2(path[0].worldPosition.x - startPosition.x, path[0].worldPosition.y - startPosition.y); 
+
             return pathDistance.normalized;
         }
 
-        path.Add(startNode);
         _debugPath = path;
 
         return targetPosition - startPosition;

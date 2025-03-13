@@ -216,7 +216,8 @@ public class CompanionManager : MonoBehaviour
 
     public void ChangeToEnemy()
     {
-        _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
+        Debug.Log("changing to enemy");
+        //_playerObject.GetComponent<PlayerManager>().EvolveDash(true);
         _health = bossData.health;
         bossScript.SetupEnemy();
         _currentState = CompanionStates.ENEMY;
@@ -228,6 +229,8 @@ public class CompanionManager : MonoBehaviour
 
     public void ChangeToFriendly()
     {
+        Debug.Log("change to friendly");
+        //_playerObject.GetComponent<PlayerManager>().EvolveDash(false);
         _currentState = CompanionStates.FRIEND;
 
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.ENEMY);
@@ -264,6 +267,7 @@ public class CompanionManager : MonoBehaviour
 
     private void GetVisualNovelResult()
     {
+        //Debug.Log("getting vis novel result");
         switch (visualNovelManager.GetLastSelectionID())
         {
             case 0:
@@ -293,6 +297,7 @@ public class CompanionManager : MonoBehaviour
             case 22:
             case 23:
                 ChangeToEnemy();
+                _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
                 gameObject.GetComponent<enemyScr>().releaseEnemy();
                 break;
             default:
