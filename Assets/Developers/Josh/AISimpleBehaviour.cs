@@ -44,7 +44,7 @@ public class AISimpleBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("PlayerProto");
+        player = GameObject.Find("Player");
         objectPoolManager = GameObject.Find("ObjectPoolManager").GetComponent<ObjectPoolManager>();
         currentColor = gameObject.GetComponent<SpriteRenderer>().color;
     }

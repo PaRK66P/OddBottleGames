@@ -55,7 +55,7 @@ public class CompanionManager : MonoBehaviour
         _poolManager = poolManager;
         _pathfindingManager = pathfindingManager;
 
-        //visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+        visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
 
         dashRechargeZone.GetComponent<CircleCollider2D>().radius = friendData.rechargeZoneRadius;
         dashRechargeZone.gameObject.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector3(friendData.rechargeZoneRadius * 2.0f, friendData.rechargeZoneRadius * 2.0f, 1.0f);
@@ -199,8 +199,8 @@ public class CompanionManager : MonoBehaviour
             visualNovelManager.StartNovelSceneByName("AmbrosiaTempDialogue");
             visualNovelManager.onNovelFinish.AddListener(GetVisualNovelResult);
 
-            GetComponent<enemyScr>().DecreaseEnemyCount();
-            gameObject.SetActive(false);
+            //GetComponent<enemyScr>().DecreaseEnemyCount();
+            //gameObject.SetActive(false);
         }
     }
 
