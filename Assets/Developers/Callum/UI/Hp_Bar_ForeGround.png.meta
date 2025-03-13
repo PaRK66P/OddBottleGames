@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hp_Bar_ForeGround_0: -4287220056333565505
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
