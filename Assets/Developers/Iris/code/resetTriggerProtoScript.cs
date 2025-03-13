@@ -46,7 +46,7 @@ public class resetTriggerProtoScript : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                //SceneManager.LoadScene("PrototypeScene");
+                SceneManager.LoadScene(0);
                 endScreen.SetActive(true);
                 player.GetComponent<PlayerManager>().DisableInput();
             }

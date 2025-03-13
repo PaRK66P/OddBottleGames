@@ -279,7 +279,8 @@ public class CompanionManager : MonoBehaviour
             case 12:
             case 14:
             case 16:
-            case 21: 
+            case 21:
+                gameObject.GetComponent<enemyScr>().DecreaseEnemyCount();
                 ChangeToFriendly();
                 break;
             case 1:
