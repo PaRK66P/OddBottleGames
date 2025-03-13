@@ -19,6 +19,8 @@ public class CompanionManager : MonoBehaviour
     private GameObject _playerObject;
     [SerializeField]
     private ObjectPoolManager _poolManager;
+    [SerializeField]
+    private PathfindingManager _pathfindingManager;
 
     [Header("Prefab Necessary")]
     [SerializeField]
@@ -47,10 +49,11 @@ public class CompanionManager : MonoBehaviour
 
     // No protection for uninitialised Companion
 
-    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref Canvas dUICanvas)
+    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref PathfindingManager pathfindingManager, ref Canvas dUICanvas)
     {
         _playerObject = playerObject;
         _poolManager = poolManager;
+        _pathfindingManager = pathfindingManager;
 
         //visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
 
@@ -64,7 +67,7 @@ public class CompanionManager : MonoBehaviour
         if (collisionDamageScript == null)
         {
             collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
-            collisionDamageScript.InitialiseComponent(ref friendData);
+            collisionDamageScript.InitialiseComponent(ref bossData, ref friendData);
         }
         if (detectionScript == null)
         {
@@ -81,12 +84,12 @@ public class CompanionManager : MonoBehaviour
         if (bossScript == null)
         {
             bossScript = gameObject.AddComponent<CompanionBoss>();
-            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
+            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _pathfindingManager, ref _playerObject, ref _poolManager);
         }
         if (friendScript == null)
         {
             friendScript = gameObject.AddComponent<CompanionFriend>();
-            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref rb, ref _playerObject, ref dashRechargeZone);
+            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref _pathfindingManager, ref rb, ref _playerObject, ref dashRechargeZone);
         }
 
         healthbar = Instantiate(bossData.healthbar, dUICanvas.transform);
@@ -97,56 +100,6 @@ public class CompanionManager : MonoBehaviour
 
         ChangeToEnemy();
     }
-
-    // Testing purposes only, should be commented out otherwise
-    //private void OnEnable()
-    //{
-    //    //visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
-
-    //    dashRechargeZone.GetComponent<CircleCollider2D>().radius = friendData.rechargeZoneRadius;
-    //    dashRechargeZone.gameObject.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector3(friendData.rechargeZoneRadius * 2.0f, friendData.rechargeZoneRadius * 2.0f, 1.0f);
-
-    //    if (rb == null)
-    //    {
-    //        rb = GetComponent<Rigidbody2D>();
-    //    }
-    //    if (collisionDamageScript == null)
-    //    {
-    //        collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
-    //        collisionDamageScript.InitialiseComponent(ref friendData);
-    //    }
-    //    if (detectionScript == null)
-    //    {
-    //        detectionScript = GetComponentInChildren<CompanionDetection>();
-    //        detectionScript.InitialiseComponent(ref friendData);
-
-    //        detectionScript.GetComponent<CircleCollider2D>().radius = friendData.detectionRadius;
-    //    }
-    //    if (animationsScript == null)
-    //    {
-    //        animationsScript = gameObject.AddComponent<CompanionAnimations>();
-    //        animationsScript.InitialiseComponent(ref bossData, ref friendData, ref _companionImage);
-    //    }
-    //    if (bossScript == null)
-    //    {
-    //        bossScript = gameObject.AddComponent<CompanionBoss>();
-    //        bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _playerObject, ref _poolManager);
-    //    }
-    //    if (friendScript == null)
-    //    {
-    //        friendScript = gameObject.AddComponent<CompanionFriend>();
-    //        friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref rb, ref _playerObject, ref dashRechargeZone);
-    //    }
-
-    //    //healthbar = Instantiate(bossData.healthbar, dUICanvas.transform);
-    //    //healthbar.GetComponent<RectTransform>().Translate(new Vector3(Screen.width / 2 - 400, Screen.height - 240, 0));
-
-    //    //healthbar.GetComponent<UnityEngine.UI.Slider>().maxValue = bossData.health;
-    //    //healthbar.GetComponent<UnityEngine.UI.Slider>().value = bossData.health;
-
-    //    ChangeToNone();
-    //    ChangeToFriendly();
-    //}
 
     // Update is called once per frame
     void Update()
@@ -163,23 +116,8 @@ public class CompanionManager : MonoBehaviour
                 friendScript.CompanionUpdate();
                 break;
         }
-        //if (_currentState == CompanionStates.NONE && hasPlayedNovel && !visualNovelManager.isNovelSection)
-        //{
-        //    switch(visualNovelManager.GetLastSelectionID())
-        //    {
-        //        case 0:
-        //            ChangeToFriendly();
-        //            break;
-        //        case 1:
-        //            _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
-        //            gameObject.GetComponent<enemyScr>().releaseEnemy();
-        //            break;
-        //        default:
-        //            Debug.LogError("Visual novel selection not supported. make sure to update selection code in miniboss as well as the novel that plays");
-        //            break;
-        //    }
-        //}
     }
+
 
     private void FixedUpdate()
     {
@@ -201,15 +139,47 @@ public class CompanionManager : MonoBehaviour
         if(_currentState == CompanionStates.NONE) { return; }
 
         _health -= damage;
-        if(_health <= 0)
+        if(_health <= 0 && !hasPlayedNovel)
         {
-            _currentState = CompanionStates.NONE;
-            healthbar.SetActive(false);
-            DefeatVisual();
+            CompanionDeath();
             return;
         }
+
+        switch (bossScript.GetHeatUpStage())
+        {
+            case 1:
+                if(_health < bossData.stageTwoHealthThreshold * bossData.health)
+                {
+                    bossScript.HeatUp();
+                }
+                break;
+            case 2:
+                if(_health < bossData.stageThreeHealthThreshold * bossData.health)
+                {
+                    bossScript.HeatUp();
+                }
+                break;
+            case 3:
+                break;
+            default:
+                Debug.LogWarning("Heat up stage not accounted for: " + bossScript.GetHeatUpStage());
+                break;
+        }
+
         healthbar.GetComponent<UnityEngine.UI.Slider>().value = _health;
         DamageVisual();
+    }
+
+    private void CompanionDeath()
+    {
+        _currentState = CompanionStates.NONE;
+        RemoveHealthBar();
+        StartCoroutine(PlayDeathEffects());
+    }
+
+    private void RemoveHealthBar()
+    {
+        healthbar.SetActive(false);
     }
 
     private void DamageVisual()
@@ -217,7 +187,7 @@ public class CompanionManager : MonoBehaviour
         StartCoroutine(DamageColor());
     }
 
-    private void DefeatVisual()
+    private void DefeatVisualNovel()
     {
         // To be removed
         
@@ -225,7 +195,10 @@ public class CompanionManager : MonoBehaviour
         {
             hasPlayedNovel = true;
 
-            //visualNovelManager.StartNovelSceneByName("Miniboss tester 2");
+
+            visualNovelManager.StartNovelSceneByName("AmbrosiaTempDialogue");
+            visualNovelManager.onNovelFinish.AddListener(GetVisualNovelResult);
+
             GetComponent<enemyScr>().DecreaseEnemyCount();
             gameObject.SetActive(false);
         }
@@ -243,6 +216,7 @@ public class CompanionManager : MonoBehaviour
 
     public void ChangeToEnemy()
     {
+        _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
         _health = bossData.health;
         bossScript.SetupEnemy();
         _currentState = CompanionStates.ENEMY;
@@ -268,6 +242,66 @@ public class CompanionManager : MonoBehaviour
         _companionImage.color = UnityEngine.Color.white;
     }
 
+    private IEnumerator PlayDeathEffects()
+    {
+        // maake sure to wait for stuff to finish in this function
+        // or the visual novel will start playing over the top of it
+        float targetTime = 0.5f;
+        while (Time.timeScale > targetTime)
+        {
+            Time.timeScale -= Time.unscaledDeltaTime;
+            if (Time.timeScale < targetTime)
+            {
+                Time.timeScale = targetTime;
+            }
+            yield return null;
+        }
+        
+
+        DefeatVisualNovel();
+        //yield return null;
+    }
+
+    private void GetVisualNovelResult()
+    {
+        switch (visualNovelManager.GetLastSelectionID())
+        {
+            case 0:
+            case 2:
+            case 4:
+            case 6:
+            case 8:
+            case 10:
+            case 12:
+            case 14:
+            case 16:
+            case 21: 
+                ChangeToFriendly();
+                break;
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 9:
+            case 11:
+            case 13:
+            case 15:
+            case 17:
+            case 18:
+            case 19:
+            case 20:
+            case 22:
+            case 23:
+                ChangeToEnemy();
+                gameObject.GetComponent<enemyScr>().releaseEnemy();
+                break;
+            default:
+                Debug.LogError("Visual novel selection of " + visualNovelManager.GetLastSelectionID() + " not supported. make sure to update selection code in miniboss as well as the novel that plays");
+                break;
+        }
+        visualNovelManager.onNovelFinish.RemoveListener(GetVisualNovelResult);
+    }
+
     #region Gizmos
     private void OnDrawGizmos()
     {
@@ -284,75 +318,104 @@ public class CompanionManager : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, bossData.closeRangeDistance);
         }
 
-        if (bossData.drawLeaps)
-        {
-            // Leaping
-            Vector3 playerDirection = _playerObject.transform.position - transform.position;
-            Vector3 leapDirection = playerDirection.normalized;
-            Vector3 leapEnd = transform.position + leapDirection * bossData.leapTravelDistance;
-            if (playerDirection.sqrMagnitude >= bossData.leapTravelDistance * bossData.leapTravelDistance)
-            {
-                leapEnd = _playerObject.transform.position;
-            }
-            wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, bossData.leapTravelDistance, bossData.environmentMask); // Update layer mask variable
-            if (wallCheck)
-            {
-                leapEnd = wallCheck.point;
-            }
+        //if (bossData.drawLeaps)
+        //{
+        //    // Leaping
+        //    Vector3 playerDirection = _playerObject.transform.position - transform.position;
+        //    Vector3 leapDirection = playerDirection.normalized;
+        //    Vector3 leapEnd = transform.position + leapDirection * bossData.leapTravelDistance;
 
-            Gizmos.color = UnityEngine.Color.red;
-            Gizmos.DrawWireSphere(transform.position, bossData.leapTravelDistance);
-            Gizmos.color = new UnityEngine.Color(1, 0.5f, 0);
-            Gizmos.DrawLine(transform.position, leapEnd);
+        //    Vector3 targetPosition = transform.position + leapDirection * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage;
+        //    float targetDistance = (targetPosition - transform.position).sqrMagnitude;
+        //    bool drawTarget = true;
 
-        }
+        //    if((_playerObject.transform.position - transform.position).sqrMagnitude > targetDistance)
+        //    {
+        //        drawTarget = false;
+        //    }
 
-        if (bossData.drawSpit)
-        {
-            Vector2 forwardDirection = (_playerObject.transform.position - transform.position).normalized;
-            float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f));
+        //    if (playerDirection.sqrMagnitude < (bossData.leapTravelDistance * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage) * (bossData.leapTravelDistance * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage))
+        //    {
+        //        targetPosition = _playerObject.transform.position;
+        //        targetDistance = (targetPosition - transform.position).sqrMagnitude;
 
-            // Spit
-            Gizmos.color = UnityEngine.Color.green;
-            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * forwardAngleFromRight), Mathf.Sin(Mathf.Deg2Rad * forwardAngleFromRight), 0.0f) * bossData.spitSpawnDistance, bossData.spitProjectile.transform.localScale.x / 2.0f);
-            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + bossData.spitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + bossData.spitSpawnAngle)), 0.0f) * bossData.spitSpawnDistance, bossData.spitProjectile.transform.localScale.x / 2.0f);
-            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - bossData.spitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - bossData.spitSpawnAngle)), 0.0f) * bossData.spitSpawnDistance, bossData.spitProjectile.transform.localScale.x / 2.0f);
+        //    }
 
-            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * forwardAngleFromRight), Mathf.Sin(Mathf.Deg2Rad * forwardAngleFromRight), 0.0f) * (bossData.spitSpawnDistance + bossData.spitProjectileTravelDistance), bossData.spitProjectile.transform.localScale.x / 2.0f);
-            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + bossData.spitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + bossData.spitSpawnAngle)), 0.0f) * (bossData.spitSpawnDistance + bossData.spitProjectileTravelDistance), bossData.spitProjectile.transform.localScale.x / 2.0f);
-            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - bossData.spitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - bossData.spitSpawnAngle)), 0.0f) * (bossData.spitSpawnDistance + bossData.spitProjectileTravelDistance), bossData.spitProjectile.transform.localScale.x / 2.0f);
+        //    wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, bossData.leapTravelDistance, bossData.environmentMask); // Update layer mask variable
+        //    if (wallCheck)
+        //    {
+        //        float wallDistance = (wallCheck.point - new Vector2(transform.position.x, transform.position.y)).sqrMagnitude;
+                
+        //        leapEnd = wallCheck.point;
 
-        }
+        //        if(wallDistance < targetDistance)
+        //        {
+        //            drawTarget = false;
+        //        }
+        //    }
 
-        if (bossData.drawLick)
-        {
-            Gizmos.color = UnityEngine.Color.yellow;
+        //    Gizmos.color = UnityEngine.Color.red;
+        //    Gizmos.DrawWireSphere(transform.position, bossData.leapTravelDistance * bossData.leapTargetTravelPercentage);
+        //    Gizmos.color = UnityEngine.Color.yellow;
+        //    Gizmos.DrawWireSphere(transform.position, (bossData.leapTravelDistance + bossData.feralLeapAdditionalDistance) * bossData.leapTargetTravelPercentage);
 
-            Vector3 forwardVector = (_playerObject.transform.position - transform.position).normalized;
-            Vector3 rightVector = new Vector3( forwardVector.y, -forwardVector.x, forwardVector.z);
+        //    Gizmos.color = new UnityEngine.Color(1, 0.5f, 0);
+        //    Gizmos.DrawLine(transform.position, leapEnd);
+        //    Gizmos.color = new UnityEngine.Color(1, 1, 1);
+        //    Gizmos.DrawLine(leapEnd, transform.position + leapDirection * (bossData.leapTravelDistance + bossData.feralLeapAdditionalDistance));
+        //    if (drawTarget)
+        //    {
+        //        Gizmos.DrawWireSphere(targetPosition, 1.0f);
+        //    }
 
-            float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardVector, new Vector3(0.0f, 0.0f, 1.0f));
+        //}
 
-            float spawnShifts = (bossData.lickProjectileNumber - 1) / 2.0f;
+        //if (bossData.drawSpit)
+        //{
+        //    Vector2 forwardDirection = (_playerObject.transform.position - transform.position).normalized;
+        //    float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f));
 
-            Vector3 startSpawnPosition = transform.position + forwardVector * bossData.lickProjectileSpawnDistance - rightVector * bossData.lickProjectileSeperationDistance * spawnShifts;
+        //    // Spit
+        //    Gizmos.color = UnityEngine.Color.green;
+        //    Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * forwardAngleFromRight), Mathf.Sin(Mathf.Deg2Rad * forwardAngleFromRight), 0.0f) * bossData.spitSpawnDistance, bossData.spitProjectile.transform.localScale.x / 2.0f);
+        //    Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + bossData.spitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + bossData.spitSpawnAngle)), 0.0f) * bossData.spitSpawnDistance, bossData.spitProjectile.transform.localScale.x / 2.0f);
+        //    Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - bossData.spitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - bossData.spitSpawnAngle)), 0.0f) * bossData.spitSpawnDistance, bossData.spitProjectile.transform.localScale.x / 2.0f);
 
-            Vector3 projectileDirection;
-            float arcAngle = (bossData.lickProjectileAngle * 2.0f) / (bossData.lickProjectileNumber - 1);
-            float currentAngle = 0.0f;
+        //    Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * forwardAngleFromRight), Mathf.Sin(Mathf.Deg2Rad * forwardAngleFromRight), 0.0f) * (bossData.spitSpawnDistance + bossData.spitProjectileTravelDistance), bossData.spitProjectile.transform.localScale.x / 2.0f);
+        //    Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + bossData.spitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + bossData.spitSpawnAngle)), 0.0f) * (bossData.spitSpawnDistance + bossData.spitProjectileTravelDistance), bossData.spitProjectile.transform.localScale.x / 2.0f);
+        //    Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - bossData.spitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - bossData.spitSpawnAngle)), 0.0f) * (bossData.spitSpawnDistance + bossData.spitProjectileTravelDistance), bossData.spitProjectile.transform.localScale.x / 2.0f);
 
-            // Draws left to right
-            for (int i = 0; i < bossData.lickProjectileNumber; i++)
-            {
-                Gizmos.DrawWireSphere(startSpawnPosition + rightVector * i * bossData.lickProjectileSeperationDistance, bossData.lickProjectile.transform.localScale.x);
+        //}
 
-                currentAngle = bossData.lickProjectileAngle - arcAngle * (bossData.lickProjectileNumber - 1 - i);
+        //if (bossData.drawLick)
+        //{
+        //    Gizmos.color = UnityEngine.Color.yellow;
 
-                projectileDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), 0.0f) * bossData.screamProjectileSpawnDistance;
+        //    Vector3 forwardVector = (_playerObject.transform.position - transform.position).normalized;
+        //    Vector3 rightVector = new Vector3( forwardVector.y, -forwardVector.x, forwardVector.z);
 
-                Gizmos.DrawLine(startSpawnPosition + rightVector * i * bossData.lickProjectileSeperationDistance, startSpawnPosition + rightVector * i * bossData.lickProjectileSeperationDistance + projectileDirection.normalized * 10);
-            }
-        }
+        //    float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardVector, new Vector3(0.0f, 0.0f, 1.0f));
+
+        //    float spawnShifts = (bossData.lickProjectileNumber - 1) / 2.0f;
+
+        //    Vector3 startSpawnPosition = transform.position + forwardVector * bossData.lickProjectileSpawnDistance - rightVector * bossData.lickProjectileSeperationDistance * spawnShifts;
+
+        //    Vector3 projectileDirection;
+        //    float arcAngle = (bossData.lickProjectileAngle * 2.0f) / (bossData.lickProjectileNumber - 1);
+        //    float currentAngle = 0.0f;
+
+        //    // Draws left to right
+        //    for (int i = 0; i < bossData.lickProjectileNumber; i++)
+        //    {
+        //        Gizmos.DrawWireSphere(startSpawnPosition + rightVector * i * bossData.lickProjectileSeperationDistance, bossData.lickProjectile.transform.localScale.x);
+
+        //        currentAngle = bossData.lickProjectileAngle - arcAngle * (bossData.lickProjectileNumber - 1 - i);
+
+        //        projectileDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), 0.0f) * bossData.screamProjectileSpawnDistance;
+
+        //        Gizmos.DrawLine(startSpawnPosition + rightVector * i * bossData.lickProjectileSeperationDistance, startSpawnPosition + rightVector * i * bossData.lickProjectileSeperationDistance + projectileDirection.normalized * 10);
+        //    }
+        //}
 
         if (bossData.drawScream)
         {

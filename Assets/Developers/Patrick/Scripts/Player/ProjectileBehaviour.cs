@@ -4,6 +4,7 @@ public class ProjectileBehaviour : MonoBehaviour
 {
     public Vector3 originalScale = new Vector3(1, 1, 1);
     public int originalDamage = 1;
+    public Vector2 _moveDirection;
 
     private ObjectPoolManager poolManager;
     private string objectName;
@@ -22,6 +23,7 @@ public class ProjectileBehaviour : MonoBehaviour
     public void InitialiseComponent(Vector2 moveDirection, float speed, ref ObjectPoolManager dPoolManager, string prefabName, GameObject playerRefrence, float damageMultiplier)
     {
         GetComponent<Rigidbody2D>().velocity = moveDirection * speed;
+        _moveDirection = moveDirection;
         poolManager = dPoolManager;
 
         objectName = prefabName;
@@ -41,10 +43,14 @@ public class ProjectileBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lifeSpan += Time.deltaTime;
-        if (toBeReleased && lifeSpan > minLife)
+        
+        if (toBeReleased)
         {
-            poolManager.ReleaseObject("ProjectileProto", this.gameObject);
+            if(lifeSpan > minLife)
+            {
+                poolManager.ReleaseObject(objectName, this.gameObject);
+            }
+            lifeSpan += Time.deltaTime;
         }
     }
 
@@ -52,16 +58,19 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         if (playerRef != null)
         {
-
             playerRef.SetActive(false);
         }
+    }
+
+    public void SetToRelease()
+    {
+        toBeReleased = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.layer == 9)
         {
-            //Debug.Log("Trigger");
 
             if(collision.gameObject.tag == "Companion")
             {
@@ -76,20 +85,8 @@ public class ProjectileBehaviour : MonoBehaviour
                 collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(damage, gameObject.transform.position - collision.gameObject.transform.position);
             }
 
+            lifeSpan = minLife;
             toBeReleased = true;
-        }
-        else if (collision.gameObject.layer == 6)
-        {
-            Vector2 projDir = GetComponent<Rigidbody2D>().velocity.normalized;
-            Vector2 dirToCollisionObject = collision.gameObject.transform.position - gameObject.transform.position;
-
-            float angle = Vector2.Angle(projDir, dirToCollisionObject);
-            
-            //Debug.Log(angle);
-            if (angle < 90.0f)
-            {
-                toBeReleased = true;
-            }
         }
     }
 }

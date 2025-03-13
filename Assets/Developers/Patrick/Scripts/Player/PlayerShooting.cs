@@ -20,7 +20,6 @@ public class PlayerShooting : MonoBehaviour
 
     private int currentAmmo = 0;
     private int chargedAmmo = 0;
-    private float reloadTime = 1.0f;
 
     private bool reloading = false;
     private bool firingChargedShot = false;
@@ -97,9 +96,9 @@ public class PlayerShooting : MonoBehaviour
 
     #region Input
 
-    public void PlayerFireInput(InputAction.CallbackContext context)
+    public void PlayerChargeInput(InputAction.CallbackContext context)
     {
-        if (reloading || !canFire) // Currently reloading or can't fire
+        if (reloading) // Currently reloading or can't fire
         {
             return;
         }
@@ -112,13 +111,14 @@ public class PlayerShooting : MonoBehaviour
         charging = true;
     }
 
-    public void PlayerStopFireInput(InputAction.CallbackContext context)
+    public void PlayerStopChargeInput(InputAction.CallbackContext context)
     {
         startCharging = false;
 
         // Check if firing here as we can charge immediately but not fire immediately
-        if (!CanFire()) 
+        if (!CanFire() || !charging || chargedAmmo <= 0) 
         {
+            charging = false;
             if (!firingChargedShot)
             {
                 ReleaseChargedShots();
@@ -126,9 +126,17 @@ public class PlayerShooting : MonoBehaviour
             return; 
         }
 
+        charging = false;
+
         // Signals we want to fire
         takeShot = true;
-        charging = false;
+    }
+
+    public void PlayerFireInput(InputAction.CallbackContext context)
+    {
+        if(charging || !CanFire()) { return; }
+        interrupted = false;
+        takeShot = true;
     }
 
     public void PlayerReloadAction(InputAction.CallbackContext context)
@@ -151,11 +159,9 @@ public class PlayerShooting : MonoBehaviour
         // Conditions to fire
         /*
          * Fire rate with buffer consideration
-         * Not currently firing
          * Not reloading
-         * Currently charging
          */
-        return (Time.time - lastShotTime >= _playerData.fireRate - _debugData.firingInputBuffer && !reloading && charging && !firingChargedShot);
+        return (Time.time - lastShotTime >= _playerData.fireRate - _debugData.firingInputBuffer && !reloading);
     }
 
     private void Fire(Vector2 fireDirection, Vector3 rotation, int ammoUsed, float fireMultiplier = 1.0f)
@@ -163,7 +169,7 @@ public class PlayerShooting : MonoBehaviour
         float rotz = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
         GameObject projectile = _poolManager.GetFreeObject(_playerData.baseProjectileType.name);
-        projectile.transform.position = transform.position;
+        projectile.transform.position = transform.position + new Vector3(fireDirection.normalized.x, fireDirection.normalized.y, 0)*2.0f;
         projectile.transform.rotation = Quaternion.Euler(0, 0, rotz);
         projectile.GetComponent<ProjectileBehaviour>().InitialiseComponent(fireDirection.normalized,
             _playerData.baseProjectileSpeed,
@@ -200,9 +206,9 @@ public class PlayerShooting : MonoBehaviour
 
         reloadUISlider.SetActive(true);
         reloadUISlider.GetComponent<Slider>().value = 0;
-        while (Time.time - startTime <= reloadTime)
+        while (Time.time - startTime <= _playerData.reloadTime)
         {
-            reloadUISlider.GetComponent<Slider>().value = (Time.time - startTime) / reloadTime * 100;
+            reloadUISlider.GetComponent<Slider>().value = (Time.time - startTime) / _playerData.reloadTime * 100;
             yield return null;
         }
         reloadUISlider.SetActive(false);
@@ -236,8 +242,6 @@ public class PlayerShooting : MonoBehaviour
 
     private void FireChargedShots(Vector2 direction, Vector3 rotation)
     {
-        firingChargedShot = true; // Needed anymore?
-
         float localDamageMultiplier = 1;
 
         for (int i = 0; i < chargedAmmo; i++)
@@ -248,8 +252,6 @@ public class PlayerShooting : MonoBehaviour
         Fire(direction, rotation, chargedAmmo, localDamageMultiplier);
 
         ReleaseChargedShots();
-
-        firingChargedShot = false;
     }
 
     private void ReleaseChargedShots()
@@ -263,21 +265,21 @@ public class PlayerShooting : MonoBehaviour
     }
     #endregion
 
-    #region Weapon Drop
-    public void DisableFire()
-    {
-        if (_debugData.canDropWeapon)
-        {
-            canFire = false;
-        }
-    }
+    //#region Weapon Drop
+    //public void DisableFire()
+    //{
+    //    if (_debugData.canDropWeapon)
+    //    {
+    //        canFire = false;
+    //    }
+    //}
 
-    public void EnableFire()
-    {
-        if (_debugData.canDropWeapon)
-        {
-            canFire = true;
-        }
-    }
-    #endregion
+    //public void EnableFire()
+    //{
+    //    if (_debugData.canDropWeapon)
+    //    {
+    //        canFire = true;
+    //    }
+    //}
+    //#endregion
 }

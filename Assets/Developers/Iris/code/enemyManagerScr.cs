@@ -11,6 +11,7 @@ public class enemyManager : MonoBehaviour
     public List<spawnerScript> spawners;
     public Canvas UICanvas;
     public GameObject player;
+    public PathfindingManager pathfinder;
 
     private enemyManager myself;
 
@@ -27,7 +28,7 @@ public class enemyManager : MonoBehaviour
         }
         foreach (spawnerScript s in spawners)
         {
-            s.setUp(ref pooler, ref myself, ref UICanvas, ref player);
+            s.setUp(ref pooler, ref myself, ref UICanvas, ref player, ref pathfinder);
             s.spawn();
             enemyNumber++;
         }
@@ -68,7 +69,6 @@ public class enemyManager : MonoBehaviour
     {
         enemyNumber--;
 
-        //Debug.Log(enemyNumber);
 
         if (enemyNumber <= 0)
         {

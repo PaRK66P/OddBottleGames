@@ -9,20 +9,24 @@ public class spawnerScript : MonoBehaviour
     enemyManager enemyMan;
     public Canvas UICanvas;
     GameObject player;
+    PathfindingManager pathfinder;
 
     public void spawn()
     {
         GameObject obj = pooler.GetFreeObject(enemyPrefab.name);
-        obj.GetComponent<enemyScr>().InstantiateEnemy(ref pooler, enemyPrefab.name, ref enemyMan, ref UICanvas, ref player);
+
+        obj.GetComponent<enemyScr>().InstantiateEnemy(ref pooler, enemyPrefab.name, ref enemyMan, ref UICanvas, ref player, ref pathfinder);
+
         obj.transform.position = transform.position;
         obj.transform.rotation = transform.rotation;
     }
 
-    public void setUp(ref ObjectPoolManager objPooler, ref enemyManager eneMan, ref Canvas dUICanvas, ref GameObject dPlayer)
+    public void setUp(ref ObjectPoolManager objPooler, ref enemyManager eneMan, ref Canvas dUICanvas, ref GameObject dPlayer, ref PathfindingManager dPathfinder)
     {
         pooler = objPooler;
         enemyMan = eneMan;
         UICanvas = dUICanvas;
         player = dPlayer;
+        pathfinder = dPathfinder;
     }
 }

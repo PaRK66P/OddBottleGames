@@ -62,6 +62,24 @@ public partial class @PlayerInputs_ActionMap: IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6bc8c05-f428-407f-b7f9-d36932e1347c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Charge"",
+                    ""type"": ""Button"",
+                    ""id"": ""e5444130-687d-47d4-899a-c33e7737fe29"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -188,17 +206,6 @@ public partial class @PlayerInputs_ActionMap: IInputActionCollection2, IDisposab
                 },
                 {
                     ""name"": """",
-                    ""id"": ""bca38a77-d7ff-4878-8e72-8b132f993bc7"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""fe1ba826-5f42-4a2a-8b82-afc4dc36c8a1"",
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
@@ -240,6 +247,28 @@ public partial class @PlayerInputs_ActionMap: IInputActionCollection2, IDisposab
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d1a88fa1-d59e-416a-b284-6a3767045d00"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""08a9c642-c98b-438d-8316-dee35fa231a6"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Charge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -252,6 +281,8 @@ public partial class @PlayerInputs_ActionMap: IInputActionCollection2, IDisposab
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Charge = m_Player.FindAction("Charge", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -317,6 +348,8 @@ public partial class @PlayerInputs_ActionMap: IInputActionCollection2, IDisposab
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Reload;
+    private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Charge;
     public struct PlayerActions
     {
         private @PlayerInputs_ActionMap m_Wrapper;
@@ -325,6 +358,8 @@ public partial class @PlayerInputs_ActionMap: IInputActionCollection2, IDisposab
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @Charge => m_Wrapper.m_Player_Charge;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -346,6 +381,12 @@ public partial class @PlayerInputs_ActionMap: IInputActionCollection2, IDisposab
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+            @Charge.started += instance.OnCharge;
+            @Charge.performed += instance.OnCharge;
+            @Charge.canceled += instance.OnCharge;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -362,6 +403,12 @@ public partial class @PlayerInputs_ActionMap: IInputActionCollection2, IDisposab
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+            @Charge.started -= instance.OnCharge;
+            @Charge.performed -= instance.OnCharge;
+            @Charge.canceled -= instance.OnCharge;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -385,5 +432,7 @@ public partial class @PlayerInputs_ActionMap: IInputActionCollection2, IDisposab
         void OnDash(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnCharge(InputAction.CallbackContext context);
     }
 }

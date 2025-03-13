@@ -66,12 +66,10 @@ public class AISimpleBehaviour : MonoBehaviour
             }
             if (!inStun)
             {
-                //Debug.Log("out of stun");
                 UpdateAIVision();
                 MakeAIActions();
                 BulletCleanUp();
 
-                //Debug.Log("in stun");
             }
         }
         if (health <= 0)
@@ -139,9 +137,7 @@ public class AISimpleBehaviour : MonoBehaviour
         {
             case AIType.SHOOTER:
                 {
-                    //Debug.Log("shoot");
                     GameObject newBullet = objectPoolManager.GetFreeObject("AIProjectileProto");
-                    //Debug.Log(newBullet);
                     Vector3 toPlayer = player.transform.position - this.transform.position;
                     AIProjectileScript projScript = newBullet.GetComponent<AIProjectileScript>();
                     projScript.SetBulletDirectionAndSpeed(toPlayer, 8);
@@ -156,9 +152,7 @@ public class AISimpleBehaviour : MonoBehaviour
                 {
                     for (int i = 0; i < 5; i++)
                     {
-                        //Debug.Log("shoot");
                         GameObject newBullet = objectPoolManager.GetFreeObject("AIProjectileProto");
-                        //Debug.Log(newBullet);
                         Vector3 toPlayer = player.transform.position - this.transform.position;
                         AIProjectileScript projScript = newBullet.GetComponent<AIProjectileScript>();
                         float randomAngle = Random.Range(-20.0f, 20.0f);
@@ -186,9 +180,7 @@ public class AISimpleBehaviour : MonoBehaviour
         for (int i = -2; i < 3; i++)
         {
             yield return new WaitForSeconds(0.1f);
-            //Debug.Log("shoot");
             GameObject newBullet = objectPoolManager.GetFreeObject("AIProjectileProto");
-            //Debug.Log(newBullet);
             Vector3 toPlayer = player.transform.position - this.transform.position;
             AIProjectileScript projScript = newBullet.GetComponent<AIProjectileScript>();
             float bulletMaxAngle = 20.0f;
@@ -237,7 +229,6 @@ public class AISimpleBehaviour : MonoBehaviour
         
         if (takesKnockback && health > 0)
         {
-            //Debug.Log("knocking back");
             gameObject.GetComponent<Rigidbody2D>().velocity = -damageDir.normalized * 4.0f;
         }
     }
@@ -254,7 +245,6 @@ public class AISimpleBehaviour : MonoBehaviour
     {
         if (deadTimer == 0.0f)
         {
-            //Debug.Log("dead");
             
             for (int i = 0; i < 8; i++)
             {

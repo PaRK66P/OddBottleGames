@@ -1,18 +1,27 @@
+using NUnit.Framework.Interfaces;
 using System.Collections.Generic;
 
+public class TwineData
+{
+    public string title = "";
+    public List<string> responseData = new List<string>();
+}
 
 public class DialogueTreeNode
 {
     public DialogueTreeNode()
     {
         sceneData = null;
+        twineData = new TwineData();
     }
     public DialogueTreeNode(VisualNovelScene scene)
     {
         sceneData = scene;
+        twineData = new TwineData();
     }
 
     public DialogueTreeNode parent;
+    public TwineData twineData = new TwineData();
     public List<DialogueTreeNode> children = new List<DialogueTreeNode>();
     public VisualNovelScene sceneData = new VisualNovelScene();
 
@@ -26,7 +35,31 @@ public class DialogueTreeNode
         return !(children.Count > 0);
     }
 
+    // public DialogueTreeNode FindNodeWithTitle(string title)
+    // {
+    //     DialogueTreeNode resultNode = null;
+    //     if (twineData.Title == title)
+    //     {
+    //         resultNode = this;
+    //         return resultNode;
+    //     }
+    //     else
+    //     {
+            
+    //         foreach (DialogueTreeNode child in children)
+    //         {
+    //             resultNode = child.FindNodeWithTitle(title);
+    //             if (resultNode != null)
+    //             {
+    //                 return resultNode;
+    //             }
 
+    //         }
+    //     }
+
+    //     UnityEngine.Debug.LogError("node with given title: " + title + " not found");
+    //     return resultNode;
+    // }
 }
 
 public class DialogueTree

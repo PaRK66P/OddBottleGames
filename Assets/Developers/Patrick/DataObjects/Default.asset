@@ -13,17 +13,27 @@ MonoBehaviour:
   m_Name: Default
   m_EditorClassIdentifier: 
   health: 100
-  healthbar: {fileID: 7940067324356998275, guid: ac8003dc51160644aa424ec898956709, type: 3}
+  healthbar: {fileID: 3386940066090490567, guid: 2b12af912958a8242b3ed9adbd473d6a, type: 3}
   speed: 12
+  acceleration: 0.8
+  accelerationRate: 40
+  deceleration: 0.7
+  decelerationRate: 35
   dashChargeUIObject: {fileID: 454602280210619587, guid: 15acabbdf8d62154f9216abc70b7a442, type: 3}
+  dashRechargeUIObject: {fileID: 454602280210619587, guid: fb993dada00dc344dae6409bd2fc1b3e, type: 3}
   dashTime: 0.2
-  dashDistance: 5
+  dashDistance: 6
+  evolvedDashExtraDistance: 2
   dashCooldown: 0.15
   numberOfDashCharges: 3
   dashRechargeTime: 1
+  evolvedDashDamage: 5
   damageLayers:
     serializedVersion: 2
     m_Bits: 2048
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 512
   ammoUIObject: {fileID: 454602280210619587, guid: 0e0c634a477346b49b37aaa0420069ad, type: 3}
   reloadUISlider: {fileID: 3879835711551141049, guid: 63ae1eef363df214399e44c5f4769354, type: 3}
   fireRate: 0.4
@@ -35,5 +45,5 @@ MonoBehaviour:
   reloadTime: 1
   damageMultiplier: 1.5
   baseProjectileType: {fileID: 1223489425459614113, guid: 50e3b8fba1c074f4ba558c89a7b1613e, type: 3}
-  baseProjectileSpeed: 15
+  baseProjectileSpeed: 20
   controlLossTime: 0.2

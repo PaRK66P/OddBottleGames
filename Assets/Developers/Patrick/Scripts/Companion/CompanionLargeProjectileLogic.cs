@@ -12,11 +12,12 @@ public class CompanionLargeProjectileLogic : MonoBehaviour
     private string _name;
     private float _startTime;
     private float _lifespan;
+    private float _damage;
     private Vector2 _startPosition;
     private Vector2 _endPosition;
     private bool _isActive = false;
 
-    public void Initialise(ref ObjectPoolManager poolManagerRef, string name, float lifespan, Vector2 startPosition, Vector2 endPosition)
+    public void Initialise(ref ObjectPoolManager poolManagerRef, string name, float lifespan, float size, float damage, Vector2 startPosition, Vector2 endPosition)
     {
         _startTime = Time.time;
         _lifespan = lifespan;
@@ -24,6 +25,10 @@ public class CompanionLargeProjectileLogic : MonoBehaviour
         poolManager = poolManagerRef;
 
         _name = name;
+
+        _damage = damage;
+
+        transform.localScale = new Vector3(size, size, 1.0f);
 
         transform.position = startPosition;
         _startPosition = startPosition;
@@ -59,7 +64,10 @@ public class CompanionLargeProjectileLogic : MonoBehaviour
             if (collision.tag == "Player")
             {
                 Vector2 damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
-                collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 10, 10);
+                if (collision.gameObject.GetComponent<PlayerManager>().CanBeDamaged())
+                {
+                    collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 10, _damage);
+                }
             }
         }
     }

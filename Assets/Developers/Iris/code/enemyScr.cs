@@ -9,7 +9,7 @@ public class enemyScr : MonoBehaviour
     ObjectPoolManager pooler;
     string prefabName;
 
-    public void InstantiateEnemy(ref ObjectPoolManager poolMan, string prefName, ref enemyManager enemyMan, ref Canvas UICanvas, ref GameObject dPlayer)
+    public void InstantiateEnemy(ref ObjectPoolManager poolMan, string prefName, ref enemyManager enemyMan, ref Canvas UICanvas, ref GameObject dPlayer, ref PathfindingManager dPathfinder)
     {
         pooler = poolMan;
         prefabName = prefName;
@@ -24,15 +24,13 @@ public class enemyScr : MonoBehaviour
         }
         if(GetComponent<CompanionManager>())
         {
-            //Debug.Log("spawning companion manager " + poolMan.name);
-            GetComponent<CompanionManager>().InitialiseEnemy(ref dPlayer, ref poolMan, ref UICanvas);
+            GetComponent<CompanionManager>().InitialiseEnemy(ref dPlayer, ref poolMan, ref dPathfinder, ref UICanvas);
         }
         //transform.position = pos;
         //transform.rotation = UnityEngine.Quaternion.Euler(rot);
         //timeElapsed = 0;
         //damage = false;
         //changeColor(new Color(1, 1, 0, 1));
-        //Debug.Log("instantiated " + prefName);
     }
 
     public void releaseEnemy()

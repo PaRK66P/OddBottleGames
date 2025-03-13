@@ -6,12 +6,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private PlayerManager _playerManager;
     private Rigidbody2D rb;
     private GameObject UICanvas;
+    private HealthBarScript healthBarScript;
 
     private Vector2 movementInput;
 
     private GameObject[] dashChargesUIObjects;
+    private GameObject[] dashRechargesUIObjects;
 
     public bool dash = false;
     private float dashTimer = 0.0f;
@@ -26,34 +29,33 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 knockbackForce = Vector2.zero;
 
+    private bool evolved = false;
+
     private PlayerData _playerData;
     private PlayerDebugData _debugData;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();        
     }
 
-    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas)
+    public void InitialiseComponent(ref PlayerManager playerManager, ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas, ref HealthBarScript dHealthbarScript)
     {
+        _playerManager = playerManager;
+
         UICanvas = dUICanvas;
 
         _playerData = playerData;
         _debugData = debugData;
 
+        healthBarScript = dHealthbarScript;
+
         dashChargesNumber = 1;
         maxDashCharges = 1;
 
-        dashChargesUIObjects = new GameObject[maxDashCharges];
 
-        for (int i = 0; i < maxDashCharges; i++)
-        {
-            dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
-
-            dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
-        }
+        healthBarScript.setDashUI(dashChargesNumber);
     }
 
     // Update is called once per frame
@@ -62,6 +64,8 @@ public class PlayerMovement : MonoBehaviour
         if(dashChargesNumber < maxDashCharges)
         {
             dashChargeTimer += Time.deltaTime;
+
+            //dashRechargesUIObjects[dashChargesNumber].GetComponent<RectTransform>().localScale = new Vector3(dashChargeTimer / _playerData.dashRechargeTime, dashChargeTimer / _playerData.dashRechargeTime, 1);
         }
         if(dashChargeTimer >= _playerData.dashRechargeTime)
         {
@@ -69,22 +73,31 @@ public class PlayerMovement : MonoBehaviour
 
             if (dashChargesNumber < maxDashCharges)
             {
-                //Debug.Log("recharged dash");
+                //dashRechargesUIObjects[dashChargesNumber].GetComponent<RectTransform>().localScale = new Vector3(0, 0, 1);
                 dashChargesNumber++;
+                healthBarScript.setDashUI(dashChargesNumber);
             }
         }
 
-        for(int i = 0; i < maxDashCharges; ++i)
-        {
-            if(dashChargesNumber > i)
-            {
-                dashChargesUIObjects[i].SetActive(true);
-            }
-            else
-            {
-                dashChargesUIObjects[i].SetActive(false);
-            }
-        }
+        //for(int i = 0; i < maxDashCharges; ++i)
+        //{
+        //    if(dashChargesNumber > i)
+        //    {
+        //        dashChargesUIObjects[i].SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        dashChargesUIObjects[i].SetActive(false);
+        //    }
+        //    if(dashChargesNumber == i)
+        //    {
+        //        dashRechargesUIObjects[i].SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        dashRechargesUIObjects[i].SetActive(false);
+        //    }
+        //}
     }
 
     private void FixedUpdate()
@@ -138,19 +151,22 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(DashColor());
                 dashTimer += Time.fixedDeltaTime;
 
-                rb.excludeLayers = _playerData.damageLayers;
+                _playerManager.SetDashInvulnerability(true);
+                //GetComponentInChildren<EvolveDashDamage>().UpdateCollisionLayer(_playerData.damageLayers);
+                // Update evolve dash collision layers if active
 
-                rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * _playerData.dashDistance, Mathf.Min(dashTimer / _playerData.dashTime, 1.0f)));
+                rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * (evolved ? _playerData.dashDistance + _playerData.evolvedDashExtraDistance : _playerData.dashDistance), Mathf.Min(dashTimer / _playerData.dashTime, 1.0f)));
 
                 if (dashTimer >= _playerData.dashTime)
                 {
-                    rb.excludeLayers = 0;
+                    _playerManager.SetDashInvulnerability(false);
 
                     dash = false;
 
                     lastDashTime = Time.time;
 
                     dashChargesNumber--;
+                    healthBarScript.setDashUI(dashChargesNumber);
                 }
 
                 return;
@@ -170,12 +186,12 @@ public class PlayerMovement : MonoBehaviour
         // Get the speed the player wants to move at
         Vector2 targetSpeed = movementInput * _playerData.speed;
 
-        // Can implement acceleration in the future but not sure if necessary for this style of game
+        // Calculate acceleration type
+        float accelerationRate = (targetSpeed.sqrMagnitude > 0.0001f) ? _playerData.accelerationRate : _playerData.decelerationRate;
 
         Vector2 speedDiff = targetSpeed - rb.velocity;
 
-        // Normally apply acceleration but we want instant so just use speed
-        Vector2 movement =  speedDiff * _playerData.speed;
+        Vector2 movement =  speedDiff * accelerationRate;
 
         rb.AddForce(movement, ForceMode2D.Force);
     }
@@ -191,7 +207,6 @@ public class PlayerMovement : MonoBehaviour
         lastDashInputTime = Time.time;
         if (!dash)
         {
-            //Debug.Log(dashTowardsMouse);
             dash = true;
             dashTimer = 0.0f;
             dashStart = new Vector2(transform.position.x, transform.position.y);
@@ -212,27 +227,59 @@ public class PlayerMovement : MonoBehaviour
         SpriteRenderer spriteRenderer = this.gameObject.GetComponentInChildren<SpriteRenderer>();
         spriteRenderer.color = Color.cyan;
         yield return new WaitForSeconds(_playerData.dashTime);
-        spriteRenderer.color = Color.white;
+        if (spriteRenderer.color == Color.cyan)
+        {
+            spriteRenderer.color = Color.white;
+        }
     }
 
     public void EvolveDash()
     {
-        for (int i = 0; i < maxDashCharges; i++)
-        {
-            Destroy(dashChargesUIObjects[i]);
-        }
+        //for (int i = 0; i < maxDashCharges; i++)
+        //{
+        //    Destroy(dashRechargesUIObjects[i]);
+        //    Destroy(dashChargesUIObjects[i]);
+        //}
 
         maxDashCharges = _playerData.numberOfDashCharges;
         dashChargesNumber = maxDashCharges;
 
-        dashChargesUIObjects = new GameObject[maxDashCharges];
+        //dashRechargesUIObjects = new GameObject[maxDashCharges];
+        //dashChargesUIObjects = new GameObject[maxDashCharges];
 
-        for (int i = 0; i < maxDashCharges; i++)
+        //for (int i = 0; i < maxDashCharges; i++)
+        //{
+        //    dashRechargesUIObjects[i] = Instantiate(_playerData.dashRechargeUIObject, UICanvas.transform);
+        //    dashRechargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
+        //    dashRechargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
+        //    //dashRechargesUIObjects[i].GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
+
+        //    dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
+        //    dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
+        //    dashChargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
+        //}
+
+        evolved = true;
+    }
+
+    public void RechargeDashes(int n = 3)
+    {
+        if (maxDashCharges != _playerData.numberOfDashCharges)
         {
-            dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
-
-            dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-            dashChargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
+            if(n > 1)
+            {
+                n = 1;
+            }
         }
+
+        dashChargesNumber += n;
+
+        if(dashChargesNumber > _playerData.numberOfDashCharges)
+        {
+            dashChargesNumber = _playerData.numberOfDashCharges;
+            dashChargeTimer = 0.0f;
+        }
+
+        healthBarScript.setDashUI(dashChargesNumber);
     }
 }

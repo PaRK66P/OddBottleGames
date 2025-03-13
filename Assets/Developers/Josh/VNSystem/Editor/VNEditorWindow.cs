@@ -4,12 +4,7 @@ using UnityEngine.UIElements;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-using UnityEditor.SceneManagement;
-using UnityEngine.Rendering;
-using System.Runtime.CompilerServices;
-using NUnit.Framework.Constraints;
-using UnityEditor.PackageManager.Requests;
-using System.Linq;
+
 
 public class VNEditorWindow : EditorWindow
 {
@@ -42,6 +37,9 @@ public class VNEditorWindow : EditorWindow
     [SerializeField]
     private int fontSize = 18;
 
+    [SerializeField]
+    private string twineTitle = "";
+
     Sprite selectedSprite;
     Sprite defaultSprite;
 
@@ -64,7 +62,6 @@ public class VNEditorWindow : EditorWindow
         //define max and min sizes
         wnd.minSize = new Vector2(450, 200);
         wnd.maxSize = new Vector2(1400, 900);
-
 
     }
 
@@ -186,10 +183,26 @@ public class VNEditorWindow : EditorWindow
         newBranchButton.clicked += CreateNewScene;
         ButtonContainer.Add(newBranchButton);
 
+        var twineTitleField = new TextField("Twine title");
+        twineTitleField.value = twineTitle;
+        twineTitleField.RegisterValueChangedCallback(evt =>
+        {
+            twineTitle = evt.newValue;
+            UpdateViewPort();
+        });
+        ButtonContainer.Add(twineTitleField);
+
+        var loadTwineButton = new UnityEngine.UIElements.Button();
+        loadTwineButton.text = "Load Twine File";
+        loadTwineButton.clicked += OnLoadTwineClick;
+        ButtonContainer.Add(loadTwineButton);
+
         var compileButton = new UnityEngine.UIElements.Button();
         compileButton.text = "Generate Scene";
         compileButton.clicked += OnGenerateClick;
         ButtonContainer.Add(compileButton);
+
+        
 
 
 
@@ -520,7 +533,7 @@ public class VNEditorWindow : EditorWindow
         ScrollView treeRoot = new ScrollView(ScrollViewMode.Vertical);
 
         treeRoot.style.width = 1400;
-        treeRoot.style.height = 200;
+        treeRoot.style.height = 1000;
 
         if (workingRoot == null)
         {
@@ -536,48 +549,115 @@ public class VNEditorWindow : EditorWindow
         return treeRoot;
     }
 
+    //private void DrawTreeNode(VisualElement nodeDrawingCanvas, DialogueTreeNode node, Vector2 position, string nodeName)
+    //{
+    //    VisualElement nodeDrawing = new VisualElement();
+    //    nodeDrawing.style.width = 50;
+    //    nodeDrawing.style.height = 50;
+    //    nodeDrawing.style.position = Position.Absolute;
+    //    if (node == currentNode)
+    //    {
+    //        nodeDrawing.style.color = new StyleColor(Color.red);
+    //    }
+    //    else
+    //    {
+    //        nodeDrawing.style.color = new StyleColor(Color.white);
+    //    }
+    //    nodeDrawing.style.transformOrigin = nodeDrawingCanvas.style.transformOrigin;
+    //    nodeDrawing.style.marginBottom = 10;
+    //    nodeDrawing.style.translate = new Translate(position.x, position.y);
+
+    //    var nodeLabel = new Label(nodeName);
+    //    nodeLabel.style.unityTextAlign = TextAnchor.MiddleCenter;
+    //    nodeLabel.style.backgroundColor = new StyleColor(new Color(0.3f, 0.3f, 0.3f, 0.5f));
+    //    nodeDrawing.Add(nodeLabel);
+
+    //    float totalChildHeight = 0.0f;
+    //    foreach (var child in node.children)
+    //    {
+    //        totalChildHeight += GetSubTreeHeight(child, 20) - 10;
+    //    }
+    //    float newYPos = position.y - totalChildHeight;
+    //    float index = 0;
+    //    foreach (var child in node.children)
+    //    {
+    //        float subTreeHeight = GetSubTreeHeight(child, 20);
+    //        float childPositionY = newYPos + (subTreeHeight / 2.0f);
+
+    //        lines.Add((new Vector2(position.x + 50.0f, position.y + 8.0f),
+    //            new Vector2(position.x + 60.0f, childPositionY + 8.0f)));
+
+
+    //        DrawTreeNode(nodeDrawingCanvas, child, new Vector2(position.x + 60, childPositionY), index.ToString());
+    //        newYPos += subTreeHeight;
+    //        index++;
+    //    }
+
+    //    nodeDrawingCanvas.Add(nodeDrawing);
+    //}
+
     private void DrawTreeNode(VisualElement nodeDrawingCanvas, DialogueTreeNode node, Vector2 position, string nodeName)
     {
         VisualElement nodeDrawing = new VisualElement();
         nodeDrawing.style.width = 50;
         nodeDrawing.style.height = 50;
         nodeDrawing.style.position = Position.Absolute;
+       
+        nodeDrawing.style.transformOrigin = nodeDrawingCanvas.style.transformOrigin;
+        nodeDrawing.style.marginBottom = 10;
+        nodeDrawing.style.translate = new Translate(position.x, position.y); 
+
         if (node == currentNode)
         {
             nodeDrawing.style.color = new StyleColor(Color.red);
+        }
+        else if (node.sceneData.CharacterAsset == null)
+        {
+            nodeDrawing.style.color = new StyleColor(Color.blue);
         }
         else
         {
             nodeDrawing.style.color = new StyleColor(Color.white);
         }
-        nodeDrawing.style.transformOrigin = nodeDrawingCanvas.style.transformOrigin;
-        nodeDrawing.style.marginBottom = 10;
-        nodeDrawing.style.translate = new Translate(position.x, position.y);
+
 
         var nodeLabel = new Label(nodeName);
         nodeLabel.style.unityTextAlign = TextAnchor.MiddleCenter;
         nodeLabel.style.backgroundColor = new StyleColor(new Color(0.3f, 0.3f, 0.3f, 0.5f));
         nodeDrawing.Add(nodeLabel);
 
-        float totalChildHeight = 0.0f;
-        foreach (var child in node.children)
+        if (node.children.Count > 0)
         {
-            totalChildHeight += GetSubTreeHeight(child, 20) - 10;
-        }
-        float newYPos = position.y - totalChildHeight;
-        float index = 0;
-        foreach (var child in node.children)
-        {
-            float subTreeHeight = GetSubTreeHeight(child, 20);
-            float childPositionY = newYPos + (subTreeHeight / 2.0f);
+            float totalChildHeight = 0.0f;
+            List<float> childHeights = new List<float>();
 
-            lines.Add((new Vector2(position.x + 50.0f, position.y + 8.0f),
-                new Vector2(position.x + 60.0f, childPositionY + 8.0f)));
+            // Calculate total subtree height and gather individual child heights
+            foreach (var child in node.children)
+            {
+                float subTreeHeight = GetSubTreeHeight(child, 20);
+                childHeights.Add(subTreeHeight);
+                totalChildHeight += subTreeHeight;
+            }
 
+            // Start from the center of total child height and distribute evenly
+            float newYPos = position.y - (totalChildHeight / 2.0f);
+            float index = 0;
 
-            DrawTreeNode(nodeDrawingCanvas, child, new Vector2(position.x + 60, childPositionY), index.ToString());
-            newYPos += subTreeHeight;
-            index++;
+            foreach (var child in node.children)
+            {
+                float subTreeHeight = childHeights[(int)index];
+                float childPositionY = newYPos + (subTreeHeight / 2.0f); // Center each child in its "space"
+
+                // Draw line from parent to child
+                lines.Add((new Vector2(position.x + 50.0f, position.y + 8.0f),
+                    new Vector2(position.x + 60.0f, childPositionY + 8.0f)));
+
+                // Recursively draw child node
+                DrawTreeNode(nodeDrawingCanvas, child, new Vector2(position.x + 60, childPositionY), index.ToString());
+
+                newYPos += subTreeHeight; // Move down by the height of the subtree
+                index++;
+            }
         }
 
         nodeDrawingCanvas.Add(nodeDrawing);
@@ -600,22 +680,130 @@ public class VNEditorWindow : EditorWindow
 
     private void DrawLines(MeshGenerationContext mgc)
     {
-        Vector2 scrollOffset = (mgc.visualElement as ScrollView)?.scrollOffset ?? Vector2.zero;
+        ScrollView scrollView = mgc.visualElement as ScrollView;
+
+        Vector2 scrollOffset = scrollView.scrollOffset;
+
+        float scrollViewWidth = scrollView.resolvedStyle.width;
+        float scrollViewHeight = scrollView.resolvedStyle.height;
 
         foreach (var (start, end) in lines)
         {
             Vector2 adjustedStart = start - scrollOffset;
             Vector2 adjustedEnd = end - scrollOffset;
 
-
-            var painter = mgc.painter2D;
-            painter.strokeColor = Color.gray;
-            painter.lineWidth = 2;
-            painter.BeginPath();
-            painter.MoveTo(adjustedStart);
-            painter.LineTo(adjustedEnd);
-            painter.Stroke();
+            if (ClipLineToBounds(ref adjustedStart, ref adjustedEnd, 0, 0, scrollViewWidth, scrollViewHeight))
+            {
+                var painter = mgc.painter2D;
+                painter.strokeColor = Color.gray;
+                painter.lineWidth = 2;
+                painter.BeginPath();
+                painter.MoveTo(adjustedStart);
+                painter.LineTo(adjustedEnd);
+                painter.Stroke();
+            }
         }
+    }
+
+    private bool ClipLineToBounds(ref Vector2 start, ref Vector2 end, float minX, float minY, float maxX, float maxY)
+    {
+        // Use Liang-Barsky or a similar method for clipping
+        // Return true if the line is visible after clipping, otherwise false
+
+        float dx = end.x - start.x;
+        float dy = end.y - start.y;
+
+        // Clip against each boundary (left, right, bottom, top)
+        if (ClipAgainstEdge(ref start, ref end, minX, minY, maxX, maxY, dx, dy))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool ClipAgainstEdge(ref Vector2 start, ref Vector2 end, float minX, float minY, float maxX, float maxY, float dx, float dy)
+    {
+        // Implement Liang-Barsky or another algorithm to clip the line
+        // Adjust the start and end points to clip to the scroll view's bounds
+        float t0 = 0.0f;
+        float t1 = 1.0f;
+
+        float p, q;
+
+        // Left
+        p = -dx;
+        q = start.x - minX;
+        if (p == 0.0f && q < 0.0f) return false;
+        if (p < 0.0f)
+        {
+            float r = q / p;
+            if (r > t1) return false;
+            if (r > t0) t0 = r;
+        }
+        else if (p > 0.0f)
+        {
+            float r = q / p;
+            if (r < t0) return false;
+            if (r < t1) t1 = r;
+        }
+
+        // Right
+        p = dx;
+        q = maxX - start.x;
+        if (p == 0.0f && q < 0.0f) return false;
+        if (p < 0.0f)
+        {
+            float r = q / p;
+            if (r > t1) return false;
+            if (r > t0) t0 = r;
+        }
+        else if (p > 0.0f)
+        {
+            float r = q / p;
+            if (r < t0) return false;
+            if (r < t1) t1 = r;
+        }
+
+        // Bottom
+        p = -dy;
+        q = start.y - minY;
+        if (p == 0.0f && q < 0.0f) return false;
+        if (p < 0.0f)
+        {
+            float r = q / p;
+            if (r > t1) return false;
+            if (r > t0) t0 = r;
+        }
+        else if (p > 0.0f)
+        {
+            float r = q / p;
+            if (r < t0) return false;
+            if (r < t1) t1 = r;
+        }
+
+        // Top
+        p = dy;
+        q = maxY - start.y;
+        if (p == 0.0f && q < 0.0f) return false;
+        if (p < 0.0f)
+        {
+            float r = q / p;
+            if (r > t1) return false;
+            if (r > t0) t0 = r;
+        }
+        else if (p > 0.0f)
+        {
+            float r = q / p;
+            if (r < t0) return false;
+            if (r < t1) t1 = r;
+        }
+
+        // Adjust the start and end points to the clipped positions
+        start = start + t0 * (end - start);
+        end = start + t1 * (end - start);
+
+        return true;
     }
 
     private void UpdateGraphPane()
@@ -624,4 +812,35 @@ public class VNEditorWindow : EditorWindow
         graphPane = GenerateTreeDiagram();
         graphSplitView.Add(graphPane);
     }
+
+    private void OnLoadTwineClick()
+    {
+        LoadInTwineScene(twineTitle);
+    }
+
+    private void LoadInTwineScene(string title)
+    {
+        TextAsset myTwineData = Resources.Load("TwineFiles/" + title) as TextAsset;
+        
+        if (myTwineData != null)
+        {
+            DialogueTree twineTree = TwineParser.ConstructTwineTree(TwineParser.ParseTwineText(myTwineData.text));
+
+            workingRoot = twineTree.rootNode;
+            currentNode = twineTree.rootNode;
+
+            entryTextString = workingRoot.twineData.title;
+            textFieldInput = workingRoot.sceneData.text;
+            selectedSprite = workingRoot.sceneData.CharacterAsset;
+
+
+            UpdateGraphPane();
+        }
+        else
+        {
+            Debug.LogError("No twine file with title '" + title + "' found");
+        }
+    }
+
+        
 }

@@ -12,12 +12,13 @@ public class CompanionCollisionDamage : MonoBehaviour
     }
 
     private CollisionDamageStates _collisionDamageState;
-
+    private CompanionBossData _bossData;
     private CompanionFriendData _friendData;
 
 
-    public void InitialiseComponent(ref CompanionFriendData friendData)
+    public void InitialiseComponent(ref CompanionBossData bossData, ref CompanionFriendData friendData)
     {
+        _bossData = bossData;
         _friendData = friendData;
     }
 
@@ -33,7 +34,10 @@ public class CompanionCollisionDamage : MonoBehaviour
                 if (collision.tag == "Player")
                 {
                     damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
-                    collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 30, 20);
+                    if (collision.gameObject.GetComponent<PlayerManager>().CanBeDamaged())
+                    {
+                        collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 30, _bossData.leapDamage);
+                    }
                     return;
                 }
                 break;
@@ -65,7 +69,10 @@ public class CompanionCollisionDamage : MonoBehaviour
                 if(collision.tag == "Player")
                 {
                     damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
-                    collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection);
+                    if (collision.gameObject.GetComponent<PlayerManager>().CanBeDamaged())
+                    {
+                        collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection);
+                    }
                 }
                 break;
             case CollisionDamageStates.ENEMY:

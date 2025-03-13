@@ -18,27 +18,33 @@ public class PlayerManager : MonoBehaviour
     private PlayerData playerData;
     [SerializeField]
     private PlayerDebugData debugData;
+    [SerializeField]
+    private GameObject _evolveDashCollider;
 
     private PlayerInputManager playerInputManager;
     private PlayerMovement playerMovement;
+    private InteractComponent playerInteract;
     private PlayerShooting playerShooting;
 
-    private GameObject weaponDrop;
+    //private GameObject weaponDrop;
 
-    private bool hasWeapon = true;
+    //private bool hasWeapon = true;
     private bool isDamaged = false;
 
     private float timeOfDamage = -10.0f;
     private float invulnerableTime = 1.0f;
     private float regenTimer = 0.0f;
 
-    private int health = 100;
+    private float health = 100;
     private GameObject healthbar;
+    private HealthBarScript healthBarScript;
 
     private event EventHandler OnDamageTaken;
 
     private Rigidbody2D rb;
     private SpriteRenderer image;
+
+    private bool isDashing = false;
 
     private CanvasGroup canvGroup;
     [SerializeField]
@@ -57,24 +63,29 @@ public class PlayerManager : MonoBehaviour
         playerInputManager = gameObject.AddComponent<PlayerInputManager>();
         playerMovement = gameObject.AddComponent<PlayerMovement>();
         playerShooting = gameObject.AddComponent<PlayerShooting>();
+        playerInteract = gameObject.AddComponent<InteractComponent>();
+
+        _evolveDashCollider.GetComponent<EvolveDashDamage>().InitialiseScript(ref playerData);
+        _evolveDashCollider.SetActive(false);
+
+        health = playerData.health;
+        healthbar = Instantiate(playerData.healthbar, UICanvas.transform.Find("PlayerUI"), true);
+        healthBarScript = healthbar.GetComponent<HealthBarScript>();
+        healthBarScript.SetMaxHealth(health);
+
+        PlayerManager manager = this;
         //movement component
-        playerMovement.InitialiseComponent(ref playerData, ref debugData, ref UICanvas);
+        playerMovement.InitialiseComponent(ref manager, ref playerData, ref debugData, ref UICanvas, ref healthBarScript);
         //shooting component
         playerShooting.InitialiseComponent(ref playerData, ref debugData, ref poolManager, ref PlayerCanvas);
-        playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
+        playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting, ref playerInteract);
 
         playerInputManager.EnableInput();
 
-        if (debugData.canDropWeapon)
-        {
-            OnDamageTaken += DropWeapon;
-        }
-
-
-        healthbar = Instantiate(playerData.healthbar, UICanvas.transform);
-        healthbar.GetComponent<RectTransform>().position = new Vector3(Screen.width / 6, Screen.height / 15, 0);
-        healthbar.GetComponent<Slider>().maxValue = playerData.health;
-        health = playerData.health;
+        //if (debugData.canDropWeapon)
+        //{
+        //    OnDamageTaken += DropWeapon;
+        //}
 
         canvGroup = gameObject.transform.Find("PlayerCanvas").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
 
@@ -82,11 +93,11 @@ public class PlayerManager : MonoBehaviour
 
     private void OnDisable()
     {
-        // Improper event subscription, need to update later
-        if (debugData.canDropWeapon)
-        {
-            OnDamageTaken -= DropWeapon;
-        }
+        //// Improper event subscription, need to update later
+        //if (debugData.canDropWeapon)
+        //{
+        //    OnDamageTaken -= DropWeapon;
+        //}
     }
 
     // Update is called once per frame
@@ -102,18 +113,22 @@ public class PlayerManager : MonoBehaviour
             {
                 rb.excludeLayers = 0;
                 isDamaged = false;
-                image.color = Color.white;
+                if (image.color == Color.red)
+                {
+                    image.color = Color.white;
+                }
+                //image.color = Color.white;
             }
         }
 
         regenTimer += Time.deltaTime;
-        if(regenTimer >= 1)
+        if(regenTimer >= 1.0f)
         {
-            health += 1;
-            regenTimer = 0;
+            Heal(1.0f);
+            regenTimer = 0; 
         }
 
-        healthbar.GetComponent<Slider>().value = health;
+        //healthbar.GetComponent<Slider>().value = health;
 
 
         if (fadeIn)
@@ -144,9 +159,9 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f, int ammount = 10)
+    public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f, float ammount = 10)
     {
-        if (isDamaged) { return; }
+        if (!CanBeDamaged()) { return; }
 
         rb.excludeLayers = playerData.damageLayers;
         isDamaged = true;
@@ -158,13 +173,15 @@ public class PlayerManager : MonoBehaviour
         playerShooting.InterruptFiring();
         fadeOut = true;
 
+        
         OnDamageTaken?.Invoke(this, EventArgs.Empty);
 
         health -= ammount;
-        if(health <= 1)
+        if(health <= 1.0f)
         {
-            health = 1;
+            health = 1.0f;
         }
+        healthBarScript.SetValue(health);
     }
 
     //public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f)
@@ -184,34 +201,34 @@ public class PlayerManager : MonoBehaviour
         
     //}
 
-    public void Heal(int ammount)
+    public void Heal(float ammount)
     {
         health += ammount;
         if(health >= playerData.health)
         {
             health = playerData.health;
         }
-
+        healthBarScript.SetValue(health);
     }
 
-    private void DropWeapon(object sender, EventArgs e)
-    {
-        if (hasWeapon && !playerMovement.dash)
-        {
-            hasWeapon = false;
-            playerShooting.DisableFire();
+    //private void DropWeapon(object sender, EventArgs e)
+    //{
+    //    if (hasWeapon && !playerMovement.dash)
+    //    {
+    //        hasWeapon = false;
+    //        playerShooting.DisableFire();
 
-            float randomAngle = UnityEngine.Random.Range(0, 360);
-            Vector3 weaponPos = new Vector3(5 * Mathf.Cos(randomAngle), 5 * Mathf.Sin(randomAngle)) + transform.position;
-            Instantiate(weaponDrop, weaponPos, Quaternion.identity);
-        }
-    }
+    //        float randomAngle = UnityEngine.Random.Range(0, 360);
+    //        Vector3 weaponPos = new Vector3(5 * Mathf.Cos(randomAngle), 5 * Mathf.Sin(randomAngle)) + transform.position;
+    //        Instantiate(weaponDrop, weaponPos, Quaternion.identity);
+    //    }
+    //}
 
-    public void RegainWeapon()
-    {
-        hasWeapon = true;
-        playerShooting.EnableFire();
-    }
+    //public void RegainWeapon()
+    //{
+    //    hasWeapon = true;
+    //    playerShooting.EnableFire();
+    //}
 
     public void DisableInput()
     {
@@ -238,5 +255,36 @@ public class PlayerManager : MonoBehaviour
     public void EvolveDash(bool toggle)
     {
         playerMovement.EvolveDash();
+        _evolveDashCollider.SetActive(true);
+        playerMovement.RechargeDashes();
+    }
+
+    public void GainDashCharges()
+    {
+        playerMovement.RechargeDashes();
+    }
+
+    public void SetDashInvulnerability(bool invulnerability)
+    {
+        isDashing = invulnerability;
+    }
+
+    public bool CanBeDamaged()
+    {
+        if(isDamaged || isDashing) { return false; }
+        return true;
+    }
+
+    public bool isInteracting()
+    {
+        return playerInteract.GetInteract();
+    }
+
+    private void OnDrawGizmos()
+    {
+        //Gizmos.color = Color.green;
+        //Gizmos.DrawLine(transform.position, transform.position + Vector3.right * playerData.dashDistance);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawLine(transform.position + Vector3.right * playerData.dashDistance, transform.position + Vector3.right * (playerData.dashDistance + playerData.evolvedDashExtraDistance));
     }
 }

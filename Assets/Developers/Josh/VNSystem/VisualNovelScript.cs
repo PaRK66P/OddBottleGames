@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 
 [System.Serializable]
@@ -55,6 +57,8 @@ public class VisualNovelScript : MonoBehaviour
 
     public bool typingTextToggle = true;
 
+    public UnityEvent onNovelFinish;
+
     void Start()
     {
         canv = GameObject.Find("Canvas").transform.Find("VisualNovelCanvas").gameObject;
@@ -67,10 +71,8 @@ public class VisualNovelScript : MonoBehaviour
         GameObject[] VisualNovelPrefabs = Resources.LoadAll<GameObject>("VisualNovelScenes");
         foreach (GameObject prefab in VisualNovelPrefabs)
         {
-            //Debug.Log("found scene");
             if (prefab != null)
             {
-                //Debug.Log("not null");
                 VNPrefabScript script = Instantiate(prefab).GetComponent<VNPrefabScript>();
                 if (script != null)
                 {
@@ -83,7 +85,6 @@ public class VisualNovelScript : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("fixedupdate");
         if (fadeIn)
         {
             canv.SetActive(true);
@@ -109,9 +110,9 @@ public class VisualNovelScript : MonoBehaviour
 
     public void StartNovelScene(int NovelSceneID)
     {
-        //Debug.Log(NovelSceneID);
         if (!isNovelSection)
         {
+            canvGroup.alpha = 0;
             Time.timeScale = 0;
             playerRef.GetComponent<PlayerManager>().DisableInput();
             currentVNPrefabIndex = NovelSceneID;
@@ -127,7 +128,6 @@ public class VisualNovelScript : MonoBehaviour
             {
                 DialogueTree tree = new DialogueTree(ReconstructTree(VNScenes[currentVNPrefabIndex].tree));
                 currentNode = tree.rootNode;
-                //Debug.Log(typingTextToggle);
                 if (typingTextToggle == true)
                 {
                     typingText = TypewriterText(currentNode.sceneData.text);
@@ -140,7 +140,8 @@ public class VisualNovelScript : MonoBehaviour
                 sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
                 sprite.GetComponent<Image>().SetNativeSize();
 
-                IDSelectionOptions(currentNode, 0);
+                int count = -1;
+                IDSelectionOptions(currentNode, ref count);
                 CreateButtons();
             }
             else
@@ -158,7 +159,6 @@ public class VisualNovelScript : MonoBehaviour
         int index = 0;
         foreach (var scene in VNScenes)
         {
-            //Debug.Log(scene.name + ", " + name);
             if (scene.name == name)
             {
                 StartNovelScene(index);
@@ -170,6 +170,7 @@ public class VisualNovelScript : MonoBehaviour
     }
     void NextScene(int index)
     {
+        ClearButtons();
         //StopCoroutine(typingText);
         if (!currentNode.isLeaf())
         {
@@ -186,7 +187,7 @@ public class VisualNovelScript : MonoBehaviour
                 {
                     text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
                 }
-                CreateButtons();
+                //CreateButtons();
             }
             else
             {
@@ -197,21 +198,22 @@ public class VisualNovelScript : MonoBehaviour
         {
 
             lastSelectionID = currentNode.sceneData.selectionID;
-            //Debug.Log("selectionID: " + lastSelectionID);
             isNovelSection = false;
             playerRef.GetComponent<PlayerManager>().EnableInput();
             Time.timeScale = 1.0f;
             fadeOut = true;
             //canv.SetActive(false);
             playerUI.SetActive(true);
-           
+            if (onNovelFinish != null)
+            {
+                onNovelFinish?.Invoke();
+            }
 
         }
     }
 
     public DialogueTreeNode ReconstructTree(SerializedTree serializedTree)
     {
-        //Debug.Log(serializedTree);
         var nodeDict = new Dictionary<int, DialogueTreeNode>();
 
         foreach (var serializedNode in serializedTree.nodes)
@@ -232,13 +234,17 @@ public class VisualNovelScript : MonoBehaviour
         return nodeDict[serializedTree.nodes[0].id];
     }
 
-    public void CreateButtons()
+    public void ClearButtons()
     {
         foreach (GameObject button in buttons)
         {
             Destroy(button);
         }
         buttons.Clear();
+    }
+    public void CreateButtons()
+    {
+        ClearButtons();
 
         if (currentNode.isLeaf())
         {
@@ -274,6 +280,7 @@ public class VisualNovelScript : MonoBehaviour
             if (buttonText != null)
             {
                 buttonText.text = currentNode.children[i].sceneData.entryText;
+                buttonText.fontSize = 12;
             }
 
             int index = i;
@@ -287,24 +294,22 @@ public class VisualNovelScript : MonoBehaviour
         }
     }
 
-    int IDSelectionOptions(DialogueTreeNode node, int currentIDCount)
+    void IDSelectionOptions(DialogueTreeNode node, ref int currentIDCount)
     {
+        if (node == null)
+            Debug.LogError("null node when assigning IDs");
+
         if (node.isLeaf())
         {
-            node.sceneData.selectionID = currentIDCount;
-            return 0;
+            node.sceneData.selectionID = ++currentIDCount;
+            //Debug.Log(currentIDCount);
         }
         else
         {
-            int it = currentIDCount - 1;
             foreach (var child in node.children)
             {
-                it++;
-                int id = IDSelectionOptions(child, it);
-                it += id;
-
+                IDSelectionOptions(child, ref currentIDCount);
             }
-            return it;
         }
     }
 
@@ -316,14 +321,20 @@ public class VisualNovelScript : MonoBehaviour
     private IEnumerator TypewriterText(string targetText)
     {
         string textToAdd = "";
+        TMP_Text TMP = text.GetComponent<TMP_Text>();
         for (int i = 0; i < targetText.Length; i++)
         {
-            //Debug.Log(i + ", " + targetText.Length);
             textToAdd += targetText[i];
-            text.GetComponent<TMP_Text>().text = textToAdd;
+            TMP.text = textToAdd;
+            
             yield return new WaitForSecondsRealtime(0.05f / typeTextSpeed);
+            if (Input.GetMouseButton(0))
+            {
+                TMP.text = targetText;
+                break;
+            }
         }
-        //Debug.Log("done");
+        CreateButtons();
         yield return null;
     }
 }
