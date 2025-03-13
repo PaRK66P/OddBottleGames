@@ -37,6 +37,7 @@ public class CompanionFriend : MonoBehaviour
     private bool _isDashRefreshSpawned;
 
     private Node _lastPlayerNode;
+    private Node _lastTargetNode;
     private Node _lastNode;
     private Vector2 _lastPathDirection;
 
@@ -87,20 +88,22 @@ public class CompanionFriend : MonoBehaviour
                 Debug.Log("Start");
                 if (!_isReadyToLeap)
                 {
-                    Node playerNode = _pathfindingManager.NodeFromWorldPosition(_player.transform.position);
+                    Node targetNode = _pathfindingManager.NodeFromWorldPosition(_player.transform.position);
                     Node currentNode = _pathfindingManager.NodeFromWorldPosition(transform.position);
 
                     Vector2 pathfindingDirection = _lastPathDirection;
 
-                    if (_lastPlayerNode != playerNode || _lastNode != currentNode)
+                    if (_lastTargetNode != targetNode || _lastNode != currentNode)
                     {
+                        Debug.Log("Finding direction");
                         pathfindingDirection = _pathfindingManager.GetPathDirection(transform.position, _target.transform.position);
 
-                        _lastPlayerNode = playerNode;
+                        _lastTargetNode = targetNode;
                         _lastNode = currentNode;
                         _lastPathDirection = pathfindingDirection;
                     }
 
+                    Debug.Log("Direction: " + pathfindingDirection);
                     _rb.MovePosition(new Vector2(transform.position.x, transform.position.y) + pathfindingDirection * _dataObj.moveSpeed * Time.fixedDeltaTime);
 
                     if (WithinLeapRange(_dataObj.leapDistance))
