@@ -200,6 +200,8 @@ public class PlayerShooting : MonoBehaviour
     {
         reloading = true;
 
+        _bulletUIManager.StartReloadAnim();
+
         //foreach (GameObject obj in ammoUIObjects)
         //{
         //    obj.GetComponent<Image>().color = Color.white;
@@ -207,14 +209,14 @@ public class PlayerShooting : MonoBehaviour
 
         float startTime = Time.time;
 
-        reloadUISlider.SetActive(true);
-        reloadUISlider.GetComponent<Slider>().value = 0;
+        //reloadUISlider.SetActive(true);
+        //reloadUISlider.GetComponent<Slider>().value = 0;
         while (Time.time - startTime <= _playerData.reloadTime)
         {
-            reloadUISlider.GetComponent<Slider>().value = (Time.time - startTime) / _playerData.reloadTime * 100;
+        //    reloadUISlider.GetComponent<Slider>().value = (Time.time - startTime) / _playerData.reloadTime * 100;
             yield return null;
         }
-        reloadUISlider.SetActive(false);
+        //reloadUISlider.SetActive(false);
 
         currentAmmo = _playerData.maxAmmo;
 
@@ -225,7 +227,7 @@ public class PlayerShooting : MonoBehaviour
         //    obj.SetActive(true);
         //}
 
-        _bulletUIManager.ReactivateAll();
+        _bulletUIManager.EndReloadAnim();
 
         _bulletUIManager.UpdateLoadedBullets(currentAmmo);
     }
