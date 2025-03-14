@@ -25,6 +25,7 @@ public class TriggerScript : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
+                collision.gameObject.GetComponent<PlayerManager>().ReturnAllyCompanions();
                 enemyMan.lockDoors();
             }
         }

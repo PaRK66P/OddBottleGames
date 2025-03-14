@@ -54,6 +54,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private float fadeTextTimer = 0.0f;
 
+    private bool _hasCompanion = false;
+    private CompanionManager _companionManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -177,9 +180,9 @@ public class PlayerManager : MonoBehaviour
         OnDamageTaken?.Invoke(this, EventArgs.Empty);
 
         health -= ammount;
-        if(health <= 1.0f)
+        if(health <= 20.0f)
         {
-            health = 1.0f;
+            health = 20.0f;
         }
         healthBarScript.SetValue(health);
     }
@@ -254,7 +257,6 @@ public class PlayerManager : MonoBehaviour
 
     public void EvolveDash(bool toggle)
     {
-        Debug.Log("evolving dash");
         playerMovement.EvolveDash(toggle);
         _evolveDashCollider.SetActive(toggle);
         playerMovement.RechargeDashes();
@@ -279,6 +281,21 @@ public class PlayerManager : MonoBehaviour
     public bool isInteracting()
     {
         return playerInteract.GetInteract();
+    }
+
+    public void SetAllyCompanion(bool isAdding, ref CompanionManager companionManager)
+    {
+        _hasCompanion = isAdding;
+        _companionManager = companionManager;
+    }
+
+    public void ReturnAllyCompanions()
+    {
+        if (_hasCompanion)
+        {
+            _companionManager.TeleportToPosition(transform.position);
+            _companionManager.ChangeToIdleForTime(1.0f);
+        }
     }
 
     private void OnDrawGizmos()
