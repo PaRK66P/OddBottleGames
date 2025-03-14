@@ -302,7 +302,6 @@ public class VisualNovelScript : MonoBehaviour
         if (node.isLeaf())
         {
             node.sceneData.selectionID = ++currentIDCount;
-            //Debug.Log(currentIDCount);
         }
         else
         {

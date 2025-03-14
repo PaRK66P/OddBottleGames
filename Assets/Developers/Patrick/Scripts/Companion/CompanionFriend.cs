@@ -85,7 +85,6 @@ public class CompanionFriend : MonoBehaviour
                 break;
             case CompanionStates.ATTACKING:
 
-                Debug.Log("Start");
                 if (!_isReadyToLeap)
                 {
                     Node targetNode = _pathfindingManager.NodeFromWorldPosition(_player.transform.position);
@@ -95,7 +94,6 @@ public class CompanionFriend : MonoBehaviour
 
                     if (_lastTargetNode != targetNode || _lastNode != currentNode)
                     {
-                        Debug.Log("Finding direction");
                         pathfindingDirection = _pathfindingManager.GetPathDirection(transform.position, _target.transform.position);
 
                         _lastTargetNode = targetNode;
@@ -103,7 +101,6 @@ public class CompanionFriend : MonoBehaviour
                         _lastPathDirection = pathfindingDirection;
                     }
 
-                    Debug.Log("Direction: " + pathfindingDirection);
                     _rb.MovePosition(new Vector2(transform.position.x, transform.position.y) + pathfindingDirection * _dataObj.moveSpeed * Time.fixedDeltaTime);
 
                     if (WithinLeapRange(_dataObj.leapDistance))
