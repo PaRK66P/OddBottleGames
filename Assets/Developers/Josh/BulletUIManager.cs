@@ -20,11 +20,10 @@ public class BulletUIManager : MonoBehaviour
         loadedBulletCount = numBullets;
         for (int i = 0; i < bulletObjects.Count; i++)
         {
-            bulletObjects[i].SetActive(false);        
+            bulletObjects[i].GetComponent<Image>().sprite = emptyBulletSprite;
         }
         for (int i = 0; i < loadedBulletCount; i++)
         {
-            bulletObjects[i].SetActive(true);
             bulletObjects[i].GetComponent<Image>().sprite = normalBulletSprite;
         }
     }
@@ -37,10 +36,6 @@ public class BulletUIManager : MonoBehaviour
         {
             bulletObjects[i].GetComponent<Image>().sprite = chargedBulletSprite;
         }
-        for (int i = chargedBulletCount; i < bulletObjects.Count; i++)
-        {
-            bulletObjects[i].GetComponent<Image>().sprite = normalBulletSprite;
-        }
     }
 
     public void DeactivateAll()
@@ -48,6 +43,14 @@ public class BulletUIManager : MonoBehaviour
         foreach (GameObject obj in  bulletObjects)
         {
             obj.SetActive(false);
+        }
+    }
+
+    public void ReactivateAll()
+    {
+        foreach (GameObject obj in bulletObjects)
+        {
+            obj.SetActive(true);
         }
     }
 

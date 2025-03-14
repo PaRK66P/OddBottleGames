@@ -225,6 +225,8 @@ public class PlayerShooting : MonoBehaviour
         //    obj.SetActive(true);
         //}
 
+        _bulletUIManager.ReactivateAll();
+
         _bulletUIManager.UpdateLoadedBullets(currentAmmo);
     }
 
