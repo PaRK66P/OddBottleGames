@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
 {
-    private GameObject[] ammoUIObjects;
+    //private GameObject[] ammoUIObjects;
     private GameObject reloadUISlider;
 
     private bool canFire = true;
@@ -28,6 +28,8 @@ public class PlayerShooting : MonoBehaviour
 
     private PlayerData _playerData;
     private PlayerDebugData _debugData;
+    private GameObject _bulletUIObject;
+    private BulletUIManager _bulletUIManager;
 
     public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref ObjectPoolManager poolManager, ref GameObject dUICanvas)
     {
@@ -38,16 +40,19 @@ public class PlayerShooting : MonoBehaviour
 
         _poolManager = poolManager;
 
-        ammoUIObjects = new GameObject[_playerData.maxAmmo];
+        //ammoUIObjects = new GameObject[_playerData.maxAmmo];
 
-        float offset = (_playerData.maxAmmo / 2) * 0.3f - 0.2f;
-        for (int i = 0; i < _playerData.maxAmmo; i++)
-        {
-            ammoUIObjects[i] = Instantiate(_playerData.ammoUIObject, dUICanvas.transform);
+        //float offset = (_playerData.maxAmmo / 2) * 0.3f - 0.2f;
+        //for (int i = 0; i < _playerData.maxAmmo; i++)
+        //{
+        //    ammoUIObjects[i] = Instantiate(_playerData.ammoUIObject, dUICanvas.transform);
 
-            ammoUIObjects[i].GetComponent<RectTransform>().position = transform.position;
-            ammoUIObjects[i].GetComponent<RectTransform>().Translate(new Vector3(-offset + (i * 0.3f), 1.45f, 0));
-        }
+        //    ammoUIObjects[i].GetComponent<RectTransform>().position = transform.position;
+        //    ammoUIObjects[i].GetComponent<RectTransform>().Translate(new Vector3(-offset + (i * 0.3f), 1.45f, 0));
+        //}
+
+        _bulletUIObject = Instantiate(_playerData.ammoUIPrefab, dUICanvas.transform);
+        _bulletUIManager = _bulletUIObject.GetComponent<BulletUIManager>();
 
         reloadUISlider = Instantiate(_playerData.reloadUISlider, dUICanvas.transform);
         reloadUISlider.SetActive(false);
@@ -143,10 +148,11 @@ public class PlayerShooting : MonoBehaviour
     {
         if(charging || reloading || currentAmmo == _playerData.maxAmmo) { return; }
 
-        for (int i = 0; i < currentAmmo; i++)
-        {
-            ammoUIObjects[i].SetActive(false);
-        }
+        //for (int i = 0; i < currentAmmo; i++)
+        //{
+        //    ammoUIObjects[i].SetActive(false);
+        //}
+        _bulletUIManager.DeactivateAll();
 
         StartCoroutine(ReloadAmmo());
     }
@@ -181,10 +187,7 @@ public class PlayerShooting : MonoBehaviour
 
         currentAmmo -= ammoUsed;
 
-        for (int i = currentAmmo; i < currentAmmo + ammoUsed; i++)
-        {
-            ammoUIObjects[i].SetActive(false);
-        }
+        _bulletUIManager.UpdateLoadedBullets(currentAmmo);
 
         if (currentAmmo <= 0 && !reloading) // Trying to shoot with no ammo
         {
@@ -197,10 +200,10 @@ public class PlayerShooting : MonoBehaviour
     {
         reloading = true;
 
-        foreach (GameObject obj in ammoUIObjects)
-        {
-            obj.GetComponent<Image>().color = Color.white;
-        }
+        //foreach (GameObject obj in ammoUIObjects)
+        //{
+        //    obj.GetComponent<Image>().color = Color.white;
+        //}
 
         float startTime = Time.time;
 
@@ -217,10 +220,12 @@ public class PlayerShooting : MonoBehaviour
 
         reloading = false;
 
-        foreach (GameObject obj in ammoUIObjects)
-        {
-            obj.SetActive(true);
-        }
+        //foreach (GameObject obj in ammoUIObjects)
+        //{
+        //    obj.SetActive(true);
+        //}
+
+        _bulletUIManager.UpdateLoadedBullets(currentAmmo);
     }
 
     public void InterruptFiring()
@@ -237,7 +242,8 @@ public class PlayerShooting : MonoBehaviour
     private void ChargeAmmo()
     {
         chargedAmmo++;
-        ammoUIObjects[currentAmmo - chargedAmmo].GetComponent<Image>().color = Color.blue;
+        //ammoUIObjects[currentAmmo - chargedAmmo].GetComponent<Image>().color = Color.blue;
+        _bulletUIManager.UpdateChargedBulletsUI(chargedAmmo);
     }
 
     private void FireChargedShots(Vector2 direction, Vector3 rotation)
@@ -256,12 +262,14 @@ public class PlayerShooting : MonoBehaviour
 
     private void ReleaseChargedShots()
     {
-        foreach (GameObject obj in ammoUIObjects)
-        {
-            obj.GetComponent<Image>().color = Color.white;
-        }
+        //foreach (GameObject obj in ammoUIObjects)
+        //{
+        //    obj.GetComponent<Image>().color = Color.white;
+        //}
 
         chargedAmmo = 0;
+
+        _bulletUIManager.UpdateChargedBulletsUI(chargedAmmo);
     }
     #endregion
 

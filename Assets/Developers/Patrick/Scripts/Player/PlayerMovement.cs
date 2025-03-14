@@ -54,7 +54,6 @@ public class PlayerMovement : MonoBehaviour
         dashChargesNumber = 1;
         maxDashCharges = 1;
 
-
         healthBarScript.setDashUI(dashChargesNumber);
     }
 
