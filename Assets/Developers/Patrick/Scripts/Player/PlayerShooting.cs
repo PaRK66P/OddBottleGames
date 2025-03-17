@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEngine.GridBrushBase;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class PlayerShooting : MonoBehaviour
     private GameObject reloadUISlider;
 
     private bool canFire = true;
+
+    private Vector2 aimInput;
+    private Vector3 shotRotation = new Vector3(0,0,0);
 
     private ObjectPoolManager _poolManager;
 
@@ -40,17 +44,6 @@ public class PlayerShooting : MonoBehaviour
 
         _poolManager = poolManager;
 
-        //ammoUIObjects = new GameObject[_playerData.maxAmmo];
-
-        //float offset = (_playerData.maxAmmo / 2) * 0.3f - 0.2f;
-        //for (int i = 0; i < _playerData.maxAmmo; i++)
-        //{
-        //    ammoUIObjects[i] = Instantiate(_playerData.ammoUIObject, dUICanvas.transform);
-
-        //    ammoUIObjects[i].GetComponent<RectTransform>().position = transform.position;
-        //    ammoUIObjects[i].GetComponent<RectTransform>().Translate(new Vector3(-offset + (i * 0.3f), 1.45f, 0));
-        //}
-
         _bulletUIObject = Instantiate(_playerData.ammoUIPrefab, dUICanvas.transform);
         _bulletUIManager = _bulletUIObject.GetComponent<BulletUIManager>();
 
@@ -61,26 +54,23 @@ public class PlayerShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawLine(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)));
+        Debug.DrawLine(transform.position, transform.position + new Vector3(aimInput.x, aimInput.y, 0.0f) * 10.0f);
 
-        if(interrupted) { return; }
+        if (interrupted) { return; }
 
         if (takeShot)
         {
-            if(Time.time - lastShotTime >= _playerData.fireRate) // Waits until the can shoot (works from buffer)
+            if (Time.time - lastShotTime >= _playerData.fireRate) // Waits until the can shoot (works from buffer)
             {
                 takeShot = false;
                 if (chargedAmmo == 0)
                 {
-                    Fire((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)),
-                        Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)) - transform.position,
-                        1); // Regular shot
+                    Fire(aimInput, 1); // Regular shot
                     return;
                 }
 
                 // Charged shot
-                FireChargedShots((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)),
-                    Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)) - transform.position);
+                FireChargedShots(aimInput);
             }
         }
         else if (startCharging)
@@ -137,6 +127,25 @@ public class PlayerShooting : MonoBehaviour
         takeShot = true;
     }
 
+    public void SetMouseAimInput(InputAction.CallbackContext context)
+    {
+        Vector2 inputValue = context.ReadValue<Vector2>();
+        if(inputValue == new Vector2(transform.position.x, transform.position.y)) { return; }
+
+        Vector3 worldPoint = Camera.main.ScreenToWorldPoint(new Vector3(inputValue.x, inputValue.y, Camera.main.transform.position.z));
+        Vector2 aimDirection = new Vector2(worldPoint.x - transform.position.x, worldPoint.y - transform.position.y);
+
+        aimInput = aimDirection.normalized;
+    }
+
+    public void SetControllerAimInput(InputAction.CallbackContext context)
+    {
+        Vector2 inputValue = context.ReadValue<Vector2>();
+        if (inputValue == Vector2.zero) { return; }
+
+        aimInput = inputValue;
+    }
+
     public void PlayerFireInput(InputAction.CallbackContext context)
     {
         if(charging || !CanFire()) { return; }
@@ -170,9 +179,9 @@ public class PlayerShooting : MonoBehaviour
         return (Time.time - lastShotTime >= _playerData.fireRate - _debugData.firingInputBuffer && !reloading);
     }
 
-    private void Fire(Vector2 fireDirection, Vector3 rotation, int ammoUsed, float fireMultiplier = 1.0f)
+    private void Fire(Vector2 fireDirection, int ammoUsed, float fireMultiplier = 1.0f)
     {
-        float rotz = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+        float rotz = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
 
         GameObject projectile = _poolManager.GetFreeObject(_playerData.baseProjectileType.name);
         projectile.transform.position = transform.position + new Vector3(fireDirection.normalized.x, fireDirection.normalized.y, 0)*2.0f;
@@ -250,7 +259,7 @@ public class PlayerShooting : MonoBehaviour
         _bulletUIManager.UpdateChargedBulletsUI(chargedAmmo);
     }
 
-    private void FireChargedShots(Vector2 direction, Vector3 rotation)
+    private void FireChargedShots(Vector2 direction)
     {
         float localDamageMultiplier = 1;
 
@@ -259,7 +268,7 @@ public class PlayerShooting : MonoBehaviour
             localDamageMultiplier *= _playerData.damageMultiplier;
         }
 
-        Fire(direction, rotation, chargedAmmo, localDamageMultiplier);
+        Fire(direction, chargedAmmo, localDamageMultiplier);
 
         ReleaseChargedShots();
     }
@@ -276,22 +285,4 @@ public class PlayerShooting : MonoBehaviour
         _bulletUIManager.UpdateChargedBulletsUI(chargedAmmo);
     }
     #endregion
-
-    //#region Weapon Drop
-    //public void DisableFire()
-    //{
-    //    if (_debugData.canDropWeapon)
-    //    {
-    //        canFire = false;
-    //    }
-    //}
-
-    //public void EnableFire()
-    //{
-    //    if (_debugData.canDropWeapon)
-    //    {
-    //        canFire = true;
-    //    }
-    //}
-    //#endregion
 }
