@@ -45,6 +45,15 @@ public class NPlayerInput : MonoBehaviour
 
         isInitialised = true;
 
+        if(playerIn.currentControlScheme == "Keyboard")
+        {
+            isUsingController = false;
+        }
+        else
+        {
+            isUsingController = true;
+        }
+
         EnableInput();
     }
 
