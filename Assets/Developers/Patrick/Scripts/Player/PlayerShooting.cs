@@ -12,7 +12,7 @@ public class PlayerShooting : MonoBehaviour
 
     private bool canFire = true;
 
-    private Vector2 aimInput;
+    private Vector2 aimInput = Vector2.right;
     private Vector3 shotRotation = new Vector3(0,0,0);
 
     private ObjectPoolManager _poolManager;
