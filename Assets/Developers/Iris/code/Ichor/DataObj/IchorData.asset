@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777262f019e0f144da6c54904ca69d74, type: 3}
+  m_Name: IchorData
+  m_EditorClassIdentifier: 
+  health: 100
+  healthbar: {fileID: 0}
+  speed: 0
+  dashChargeUIObject: {fileID: 0}
+  dashRechargeUIObject: {fileID: 0}
+  dashTime: 0
+  dashDistance: 0
+  evolvedDashExtraDistance: 0
+  dashCooldown: 0
+  numberOfDashCharges: 0
+  dashRechargeTime: 0
+  evolvedDashDamage: 0
+  damageLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  ammoUIObject: {fileID: 0}
+  reloadUISlider: {fileID: 0}
+  fireRate: 0
+  maxTimeToChargeShot: 0
+  minTimeToChargeShot: 0
+  shotsTillFullCharge: 0
+  chargeShotIntervals: 0
+  maxAmmo: 0
+  reloadTime: 0
+  damageMultiplier: 0
+  baseProjectileType: {fileID: 0}
+  baseProjectileSpeed: 0
+  controlLossTime: 0
