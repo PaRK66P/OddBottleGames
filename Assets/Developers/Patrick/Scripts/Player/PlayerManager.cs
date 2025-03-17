@@ -83,22 +83,13 @@ public class PlayerManager : MonoBehaviour
         playerShooting.InitialiseComponent(ref playerData, ref debugData, ref poolManager, ref PlayerCanvas);
         playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
 
-        //if (debugData.canDropWeapon)
-        //{
-        //    OnDamageTaken += DropWeapon;
-        //}
-
         canvGroup = gameObject.transform.Find("PlayerCanvas").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
 
     }
 
     private void OnDisable()
     {
-        //// Improper event subscription, need to update later
-        //if (debugData.canDropWeapon)
-        //{
-        //    OnDamageTaken -= DropWeapon;
-        //}
+
     }
 
     // Update is called once per frame
@@ -118,7 +109,6 @@ public class PlayerManager : MonoBehaviour
                 {
                     image.color = Color.white;
                 }
-                //image.color = Color.white;
             }
         }
 
@@ -128,8 +118,6 @@ public class PlayerManager : MonoBehaviour
             Heal(1.0f);
             regenTimer = 0; 
         }
-
-        //healthbar.GetComponent<Slider>().value = health;
 
 
         if (fadeIn)
@@ -185,23 +173,6 @@ public class PlayerManager : MonoBehaviour
         healthBarScript.SetValue(health);
     }
 
-    //public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f)
-    //{
-    //    if (isDamaged) { return; }
-
-    //    rb.excludeLayers = playerData.damageLayers;
-    //    isDamaged = true;
-    //    playerInputManager.DisableInput();
-    //    image.color = Color.blue;
-    //    timeOfDamage = Time.time;
-    //    invulnerableTime = damageTime;
-    //    playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);
-
-    //    OnDamageTaken?.Invoke(this, EventArgs.Empty);
-
-        
-    //}
-
     public void Heal(float ammount)
     {
         health += ammount;
@@ -211,25 +182,6 @@ public class PlayerManager : MonoBehaviour
         }
         healthBarScript.SetValue(health);
     }
-
-    //private void DropWeapon(object sender, EventArgs e)
-    //{
-    //    if (hasWeapon && !playerMovement.dash)
-    //    {
-    //        hasWeapon = false;
-    //        playerShooting.DisableFire();
-
-    //        float randomAngle = UnityEngine.Random.Range(0, 360);
-    //        Vector3 weaponPos = new Vector3(5 * Mathf.Cos(randomAngle), 5 * Mathf.Sin(randomAngle)) + transform.position;
-    //        Instantiate(weaponDrop, weaponPos, Quaternion.identity);
-    //    }
-    //}
-
-    //public void RegainWeapon()
-    //{
-    //    hasWeapon = true;
-    //    playerShooting.EnableFire();
-    //}
 
     public void DisableInput()
     {
