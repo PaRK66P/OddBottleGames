@@ -10,31 +10,31 @@ public class PlayerInputManager : MonoBehaviour
     private InputAction dashAction;
     private InputAction fireAction;
     private InputAction reloadAction;
-    private InputAction interactAction;
     private InputAction chargeAction;
+
+    private InputAction aimAction;
 
     public PlayerMovement playerMovement;
     public PlayerShooting playerShooting;
-    public InteractComponent interactComponent;
 
     public bool isInitialised = false;
 
     public void setInitialised(bool state) { isInitialised = state; }
 
     // Start is called before the first frame update
-    public void InitialiseComponent(ref PlayerMovement dPlayerMovement, ref PlayerShooting dPlayerShooting, ref InteractComponent dInteractComponent)
+    public void InitialiseComponent(ref PlayerMovement dPlayerMovement, ref PlayerShooting dPlayerShooting)
     {
         actionMap = new PlayerInputs_ActionMap();
         movementAction = actionMap.Player.Movement;
         dashAction = actionMap.Player.Dash;
         fireAction = actionMap.Player.Shoot;
         reloadAction = actionMap.Player.Reload;
-        interactAction = actionMap.Player.Interact;
         chargeAction = actionMap.Player.Charge;
+
+        aimAction = actionMap.Player.Aim;
 
         playerMovement = dPlayerMovement;
         playerShooting = dPlayerShooting;
-        interactComponent = dInteractComponent;
 
         isInitialised = true;
     }
@@ -56,8 +56,9 @@ public class PlayerInputManager : MonoBehaviour
         dashAction.Enable();
         fireAction.Enable();
         reloadAction.Enable();
-        interactAction.Enable();
         chargeAction.Enable();
+
+        aimAction.Enable();
 
         movementAction.performed += playerMovement.SetMovementInput;
         movementAction.canceled += playerMovement.SetMovementInput;
@@ -66,7 +67,9 @@ public class PlayerInputManager : MonoBehaviour
         chargeAction.canceled += playerShooting.PlayerStopChargeInput;
         fireAction.performed += playerShooting.PlayerFireInput;
         reloadAction.performed += playerShooting.PlayerReloadAction;
-        interactAction.performed += interactComponent.OnInteract;
+
+        aimAction.performed += playerShooting.SetAimInput;
+        aimAction.canceled += playerShooting.SetAimInput;
     }
 
     public void DisableInput()
@@ -75,8 +78,9 @@ public class PlayerInputManager : MonoBehaviour
         dashAction.Disable();
         fireAction.Disable();
         reloadAction.Disable();
-        interactAction.Disable();
         chargeAction.Disable();
+
+        aimAction.Disable();
 
         movementAction.performed -= playerMovement.SetMovementInput;
         movementAction.canceled -= playerMovement.SetMovementInput;
@@ -85,6 +89,8 @@ public class PlayerInputManager : MonoBehaviour
         chargeAction.canceled -= playerShooting.PlayerStopChargeInput;
         fireAction.performed -= playerShooting.PlayerFireInput;
         reloadAction.performed -= playerShooting.PlayerReloadAction;
-        interactAction.performed -= interactComponent.OnInteract;
+
+        aimAction.performed -= playerShooting.SetAimInput;
+        aimAction.canceled -= playerShooting.SetAimInput;
     }
 }

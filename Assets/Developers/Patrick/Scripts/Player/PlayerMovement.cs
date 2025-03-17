@@ -290,4 +290,9 @@ public class PlayerMovement : MonoBehaviour
 
         healthBarScript.setDashUI(dashChargesNumber);
     }
+
+    public Vector2 getMovementInput()
+    {
+        return movementInput;
+    }
 }

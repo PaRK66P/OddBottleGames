@@ -11,6 +11,10 @@ public class PlayerShooting : MonoBehaviour
 
     private bool canFire = true;
 
+    private Vector2 aimInput;
+    private Vector2 lastAimInput;
+    private Vector3 shotRotation = new Vector3(0,0,0);
+
     private ObjectPoolManager _poolManager;
 
     private bool startCharging = false;
@@ -61,26 +65,81 @@ public class PlayerShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawLine(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)));
 
-        if(interrupted) { return; }
+
+
+        //if (aimInput != Vector2.zero)
+        //{
+        //    // Do we need this?
+        //    aimInput = aimInput.normalized;
+        //    lastAimInput = aimInput;
+        //}
+
+        //Debug.DrawLine(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)));
+
+        //if(interrupted) { return; }
+
+        //if (takeShot)
+        //{
+        //    if(Time.time - lastShotTime >= _playerData.fireRate) // Waits until the can shoot (works from buffer)
+        //    {
+        //        takeShot = false;
+        //        if (chargedAmmo == 0)
+        //        {
+        //            Fire((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)),
+        //                Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)) - transform.position,
+        //                1); // Regular shot
+        //            return;
+        //        }
+
+        //        // Charged shot
+        //        FireChargedShots((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)),
+        //            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)) - transform.position);
+        //    }
+        //}
+
+        if (GetComponent<NPlayerInput>().isInputKeyboard())
+        {
+            aimInput = new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y);
+            shotRotation = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)) - transform.position;
+        }
+        else if(aimInput == Vector2.zero)
+        {
+            aimInput = GetComponent<PlayerMovement>().getMovementInput();
+            if (aimInput == Vector2.zero)
+            {
+                aimInput = lastAimInput;
+            }
+            shotRotation = aimInput;
+        }
+        else
+        {
+            shotRotation = aimInput;
+        }
+
+        lastAimInput = aimInput;
+
+        Debug.DrawLine(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(lastAimInput.x, lastAimInput.y, 10.0f)));
+
+        if (interrupted) { return; }
 
         if (takeShot)
         {
-            if(Time.time - lastShotTime >= _playerData.fireRate) // Waits until the can shoot (works from buffer)
+            if (Time.time - lastShotTime >= _playerData.fireRate) // Waits until the can shoot (works from buffer)
             {
                 takeShot = false;
                 if (chargedAmmo == 0)
                 {
-                    Fire((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)),
-                        Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)) - transform.position,
-                        1); // Regular shot
+                    Fire(lastAimInput, shotRotation, 1); // Regular shot
+                    //Fire((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(lastAimInput.x, lastAimInput.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(lastAimInput.x, lastAimInput.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)),
+                    //    Camera.main.ScreenToWorldPoint(new Vector3(lastAimInput.x, lastAimInput.y, 10.0f)) - transform.position,
+                    //    1); // Regular shot
                     return;
                 }
 
                 // Charged shot
-                FireChargedShots((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)),
-                    Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)) - transform.position);
+                FireChargedShots((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(lastAimInput.x, lastAimInput.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(lastAimInput.x, lastAimInput.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)),
+                    Camera.main.ScreenToWorldPoint(new Vector3(lastAimInput.x, lastAimInput.y, 10.0f)) - transform.position);
             }
         }
         else if (startCharging)
@@ -135,6 +194,12 @@ public class PlayerShooting : MonoBehaviour
 
         // Signals we want to fire
         takeShot = true;
+    }
+
+    public void SetAimInput(InputAction.CallbackContext context)
+    {
+        aimInput = context.ReadValue<Vector2>();
+        Debug.Log(aimInput);
     }
 
     public void PlayerFireInput(InputAction.CallbackContext context)
