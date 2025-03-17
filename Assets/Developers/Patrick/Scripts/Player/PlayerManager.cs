@@ -81,9 +81,7 @@ public class PlayerManager : MonoBehaviour
         playerMovement.InitialiseComponent(ref manager, ref playerData, ref debugData, ref UICanvas, ref healthBarScript);
         //shooting component
         playerShooting.InitialiseComponent(ref playerData, ref debugData, ref poolManager, ref PlayerCanvas);
-        playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting, ref playerInteract);
-
-        playerInputManager.EnableInput();
+        playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
 
         //if (debugData.canDropWeapon)
         //{

@@ -15,7 +15,16 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Aim",
+                    "name": "AimDirection",
+                    "type": "Value",
+                    "id": "f8160834-ec99-42c6-953e-37f3dcc729ac",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "AimPosition",
                     "type": "Value",
                     "id": "06868999-c934-4daa-8c0c-8e88ab538288",
                     "expectedControlType": "Vector2",
@@ -294,23 +303,23 @@
                 },
                 {
                     "name": "",
-                    "id": "ff413ae0-9006-4995-880e-c2bd63d8ed50",
+                    "id": "0d3a70c6-aa05-4302-aefe-dd5165ad151f",
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Aim",
+                    "action": "AimPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "78b049a5-411f-4e18-a50e-664411e1404c",
+                    "id": "3be33981-9909-4ec0-b0e9-eef1b2215bbd",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "groups": "Controller",
-                    "action": "Aim",
+                    "action": "AimDirection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

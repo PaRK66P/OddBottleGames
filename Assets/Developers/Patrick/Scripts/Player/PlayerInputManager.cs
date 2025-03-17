@@ -67,9 +67,6 @@ public class PlayerInputManager : MonoBehaviour
         chargeAction.canceled += playerShooting.PlayerStopChargeInput;
         fireAction.performed += playerShooting.PlayerFireInput;
         reloadAction.performed += playerShooting.PlayerReloadAction;
-
-        aimAction.performed += playerShooting.SetAimInput;
-        aimAction.canceled += playerShooting.SetAimInput;
     }
 
     public void DisableInput()
@@ -89,8 +86,5 @@ public class PlayerInputManager : MonoBehaviour
         chargeAction.canceled -= playerShooting.PlayerStopChargeInput;
         fireAction.performed -= playerShooting.PlayerFireInput;
         reloadAction.performed -= playerShooting.PlayerReloadAction;
-
-        aimAction.performed -= playerShooting.SetAimInput;
-        aimAction.canceled -= playerShooting.SetAimInput;
     }
 }

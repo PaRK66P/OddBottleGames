@@ -37,7 +37,16 @@ public partial class @NewPlayerInputMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Aim"",
+                    ""name"": ""AimDirection"",
+                    ""type"": ""Value"",
+                    ""id"": ""f8160834-ec99-42c6-953e-37f3dcc729ac"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""AimPosition"",
                     ""type"": ""Value"",
                     ""id"": ""06868999-c934-4daa-8c0c-8e88ab538288"",
                     ""expectedControlType"": ""Vector2"",
@@ -316,23 +325,23 @@ public partial class @NewPlayerInputMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ff413ae0-9006-4995-880e-c2bd63d8ed50"",
+                    ""id"": ""0d3a70c6-aa05-4302-aefe-dd5165ad151f"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Aim"",
+                    ""action"": ""AimPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""78b049a5-411f-4e18-a50e-664411e1404c"",
+                    ""id"": ""3be33981-9909-4ec0-b0e9-eef1b2215bbd"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""groups"": ""Controller"",
-                    ""action"": ""Aim"",
+                    ""action"": ""AimDirection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -372,7 +381,8 @@ public partial class @NewPlayerInputMap: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        m_Player_AimDirection = m_Player.FindAction("AimDirection", throwIfNotFound: true);
+        m_Player_AimPosition = m_Player.FindAction("AimPosition", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
@@ -439,7 +449,8 @@ public partial class @NewPlayerInputMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_Aim;
+    private readonly InputAction m_Player_AimDirection;
+    private readonly InputAction m_Player_AimPosition;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Reload;
@@ -449,7 +460,8 @@ public partial class @NewPlayerInputMap: IInputActionCollection2, IDisposable
         private @NewPlayerInputMap m_Wrapper;
         public PlayerActions(@NewPlayerInputMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @Aim => m_Wrapper.m_Player_Aim;
+        public InputAction @AimDirection => m_Wrapper.m_Player_AimDirection;
+        public InputAction @AimPosition => m_Wrapper.m_Player_AimPosition;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
@@ -466,9 +478,12 @@ public partial class @NewPlayerInputMap: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
-            @Aim.started += instance.OnAim;
-            @Aim.performed += instance.OnAim;
-            @Aim.canceled += instance.OnAim;
+            @AimDirection.started += instance.OnAimDirection;
+            @AimDirection.performed += instance.OnAimDirection;
+            @AimDirection.canceled += instance.OnAimDirection;
+            @AimPosition.started += instance.OnAimPosition;
+            @AimPosition.performed += instance.OnAimPosition;
+            @AimPosition.canceled += instance.OnAimPosition;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
@@ -488,9 +503,12 @@ public partial class @NewPlayerInputMap: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
-            @Aim.started -= instance.OnAim;
-            @Aim.performed -= instance.OnAim;
-            @Aim.canceled -= instance.OnAim;
+            @AimDirection.started -= instance.OnAimDirection;
+            @AimDirection.performed -= instance.OnAimDirection;
+            @AimDirection.canceled -= instance.OnAimDirection;
+            @AimPosition.started -= instance.OnAimPosition;
+            @AimPosition.performed -= instance.OnAimPosition;
+            @AimPosition.canceled -= instance.OnAimPosition;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
@@ -541,7 +559,8 @@ public partial class @NewPlayerInputMap: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnAim(InputAction.CallbackContext context);
+        void OnAimDirection(InputAction.CallbackContext context);
+        void OnAimPosition(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
