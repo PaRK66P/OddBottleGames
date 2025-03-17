@@ -55,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
         maxDashCharges = 1;
 
         healthBarScript.setDashUI(dashChargesNumber);
+
+        EvolveDash(true);
     }
 
     // Update is called once per frame
@@ -63,8 +65,6 @@ public class PlayerMovement : MonoBehaviour
         if(dashChargesNumber < maxDashCharges)
         {
             dashChargeTimer += Time.deltaTime;
-
-            //dashRechargesUIObjects[dashChargesNumber].GetComponent<RectTransform>().localScale = new Vector3(dashChargeTimer / _playerData.dashRechargeTime, dashChargeTimer / _playerData.dashRechargeTime, 1);
         }
         if(dashChargeTimer >= _playerData.dashRechargeTime)
         {
@@ -72,31 +72,10 @@ public class PlayerMovement : MonoBehaviour
 
             if (dashChargesNumber < maxDashCharges)
             {
-                //dashRechargesUIObjects[dashChargesNumber].GetComponent<RectTransform>().localScale = new Vector3(0, 0, 1);
-                dashChargesNumber++;
+                dashChargesNumber = maxDashCharges;
                 healthBarScript.setDashUI(dashChargesNumber);
             }
         }
-
-        //for(int i = 0; i < maxDashCharges; ++i)
-        //{
-        //    if(dashChargesNumber > i)
-        //    {
-        //        dashChargesUIObjects[i].SetActive(true);
-        //    }
-        //    else
-        //    {
-        //        dashChargesUIObjects[i].SetActive(false);
-        //    }
-        //    if(dashChargesNumber == i)
-        //    {
-        //        dashRechargesUIObjects[i].SetActive(true);
-        //    }
-        //    else
-        //    {
-        //        dashRechargesUIObjects[i].SetActive(false);
-        //    }
-        //}
     }
 
     private void FixedUpdate()
@@ -116,42 +95,15 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        //if (dash)
-        //{
-        //    if(Time.time - lastDashTime >= dashCooldown) // Off cooldown
-        //    {
-        //        dashTimer += Time.fixedDeltaTime;
-
-        //        rb.excludeLayers = damageLayers;
-
-        //        rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * dashDistance, Mathf.Min(dashTimer / dashTime, 1.0f)));
-
-        //        if (dashTimer >= dashTime)
-        //        {
-        //            rb.excludeLayers = 0;
-
-        //            dash = false;
-
-        //            lastDashTime = Time.time;
-        //        }
-        //        return;
-        //    }
-        //    else if (Time.time - lastDashInputTime > dashInputBuffer) // Buffer has been exceeded
-        //    {
-        //        dash = false;
-        //    }
-
-        //}
-
         if (dash)
         {
             if (Time.time - lastDashTime >= _playerData.dashCooldown && dashChargesNumber > 0) // Off cooldown
             {
+                dashChargeTimer = 0.0f;
                 StartCoroutine(DashColor());
                 dashTimer += Time.fixedDeltaTime;
 
                 _playerManager.SetDashInvulnerability(true);
-                //GetComponentInChildren<EvolveDashDamage>().UpdateCollisionLayer(_playerData.damageLayers);
                 // Update evolve dash collision layers if active
 
                 rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * (evolved ? _playerData.dashDistance + _playerData.evolvedDashExtraDistance : _playerData.dashDistance), Mathf.Min(dashTimer / _playerData.dashTime, 1.0f)));
