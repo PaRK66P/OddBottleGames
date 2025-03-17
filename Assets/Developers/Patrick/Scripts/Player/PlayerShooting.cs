@@ -35,6 +35,9 @@ public class PlayerShooting : MonoBehaviour
     private GameObject _bulletUIObject;
     private BulletUIManager _bulletUIManager;
 
+    private bool _hasCompanion = false;
+    private CompanionManager _companionManager;
+
     public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref ObjectPoolManager poolManager, ref GameObject dUICanvas)
     {
         _playerData = playerData;
@@ -87,6 +90,12 @@ public class PlayerShooting : MonoBehaviour
                 timeForChargedShot = Time.time;
             }
         }
+    }
+
+    public void UpdateCompanionData(bool isAdding, ref CompanionManager companionManager)
+    {
+        _hasCompanion = isAdding;
+        _companionManager = companionManager;
     }
 
     #region Input

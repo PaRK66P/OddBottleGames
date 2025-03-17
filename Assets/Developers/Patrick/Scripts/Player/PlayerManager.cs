@@ -237,6 +237,8 @@ public class PlayerManager : MonoBehaviour
     {
         _hasCompanion = isAdding;
         _companionManager = companionManager;
+
+        playerShooting.UpdateCompanionData(_hasCompanion, ref _companionManager);
     }
 
     public void ReturnAllyCompanions()
