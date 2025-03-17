@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class PlayerData : ScriptableObject
 {
     [Header("Health")]
-    public int health = 100;
+    public float health = 100;
     public GameObject healthbar;
 
     [Header("Movement")]

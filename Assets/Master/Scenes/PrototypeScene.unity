@@ -196,7 +196,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 8
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.125, y: 0.125, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -4464,6 +4464,7 @@ MonoBehaviour:
   typingSpeedSlider: {fileID: 1031734417}
   dashToggle: {fileID: 1236939986}
   autoTypeToggle: {fileID: 611875105}
+  player: {fileID: 0}
   pauseMenuContainer: {fileID: 1900862261}
   visualNovelManager: {fileID: 823530271}
 --- !u!4 &585065423
@@ -5912,7 +5913,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.125, y: 0.125, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -27361,6 +27362,9 @@ MonoBehaviour:
   fadeOut: 0
   typeTextSpeed: 1
   typingTextToggle: 1
+  onNovelFinish:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &823530272
 Transform:
   m_ObjectHideFlags: 0
@@ -35416,7 +35420,7 @@ MonoBehaviour:
     m_ActionId: e5444130-687d-47d4-899a-c33e7737fe29
     m_ActionName: 'Player/Charge[/Mouse/rightButton,/XInputControllerWindows/rightTrigger]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard
+  m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
