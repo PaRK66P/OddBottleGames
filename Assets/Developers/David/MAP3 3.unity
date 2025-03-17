@@ -80887,8 +80887,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 444338187}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.341894, y: 4.836502, z: -10}
+  m_LocalRotation: {x: -0.000000031607552, y: 4.7169078e-24, z: 1.4908991e-31, w: 1}
+  m_LocalPosition: {x: -13.341894, y: 4.836502, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -83839,11 +83839,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3016445019156514198, guid: be5583fba378cfe47aecd0882d812e1a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -35.43
+      value: -42.5
       objectReference: {fileID: 0}
     - target: {fileID: 3016445019156514198, guid: be5583fba378cfe47aecd0882d812e1a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -83.04
+      value: -148.9
       objectReference: {fileID: 0}
     - target: {fileID: 3016445019156514198, guid: be5583fba378cfe47aecd0882d812e1a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -83937,7 +83937,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 362993934}
   m_Follow: {fileID: 362993934}
   m_Lens:
     FieldOfView: 60
@@ -83966,8 +83966,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772041020}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.341894, y: 4.836502, z: -10}
+  m_LocalRotation: {x: -0.000000031607552, y: 2.4222974e-24, z: -7.259691e-17, w: 1}
+  m_LocalPosition: {x: -13.341894, y: 4.836502, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -94271,9 +94271,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: -10}
-  m_XDamping: 0.5
-  m_YDamping: 0.5
+  m_FollowOffset: {x: 0, y: 0, z: 0}
+  m_XDamping: 1
+  m_YDamping: 1
   m_ZDamping: 1
   m_AngularDampingMode: 0
   m_PitchDamping: 0
@@ -94294,7 +94294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
   m_LookaheadTime: 0.2
-  m_LookaheadSmoothing: 0
+  m_LookaheadSmoothing: 0.2
   m_LookaheadIgnoreY: 0
   m_HorizontalDamping: 0.5
   m_VerticalDamping: 0.5
@@ -95345,6 +95345,7 @@ MonoBehaviour:
   typingSpeedSlider: {fileID: 1280082962}
   dashToggle: {fileID: 697714752}
   autoTypeToggle: {fileID: 1413974371}
+  player: {fileID: 1931782336}
   pauseMenuContainer: {fileID: 2074380372}
   visualNovelManager: {fileID: 88376871}
 --- !u!4 &1987335265
