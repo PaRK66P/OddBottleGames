@@ -103,6 +103,8 @@ public class CompanionManager : MonoBehaviour
         healthbar.GetComponent<UnityEngine.UI.Slider>().value = bossData.health;
 
         ChangeToEnemy();
+        ChangeToIdleForTime(3.0f);
+        
     }
 
     // Update is called once per frame

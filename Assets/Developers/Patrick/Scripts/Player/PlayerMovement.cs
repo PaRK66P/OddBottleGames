@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
         healthBarScript.setDashUI(dashChargesNumber);
 
-        EvolveDash(true);
+        //EvolveDash(true);
     }
 
     // Update is called once per frame
