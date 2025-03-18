@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
                 dashTimer += Time.fixedDeltaTime;
 
                 rb.excludeLayers = damageLayers;
-                soundManager.PlayPDash();
+                soundManager.PlayPDash(); //Bugged; need to play once, not every second
                 rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * dashDistance, Mathf.Min(dashTimer / dashTime, 1.0f)));
 
                 if (dashTimer >= dashTime)
