@@ -261,6 +261,9 @@ public class CompanionManager : MonoBehaviour
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.ENEMY);
 
         detectionScript.gameObject.SetActive(true);
+
+        // Quick fix as will never change from friendly->enemy
+        rb.excludeLayers = friendData.playerAttacksLayer;
     }
 
     private bool WaitForIdle(CompanionStates newState)

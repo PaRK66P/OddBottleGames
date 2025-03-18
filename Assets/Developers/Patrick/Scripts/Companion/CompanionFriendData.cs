@@ -8,6 +8,7 @@ public class CompanionFriendData : ScriptableObject
     [Header("Collisions")]
     public LayerMask environmentLayer;
     public LayerMask enemyLayer;
+    public LayerMask playerAttacksLayer;
     public float detectionRadius;
 
     [Header("Idle")]
