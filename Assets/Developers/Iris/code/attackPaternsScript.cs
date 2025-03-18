@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class attackPaternsScript : MonoBehaviour
 {
+    public int phaseNo;
+
     public string pattern;
     List<List<int>> patList = new List<List<int>>();
     public float timeBetweenAttacks;

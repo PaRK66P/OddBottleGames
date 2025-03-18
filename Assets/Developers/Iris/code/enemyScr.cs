@@ -22,7 +22,11 @@ public class enemyScr : MonoBehaviour
         {
             GetComponent<boss>().InsantiateComponent(ref pooler, prefName, ref enemyManager, ref UICanvas);
         }
-        if(GetComponent<CompanionManager>())
+        if (GetComponent<IchorManager>())
+        {
+            GetComponent<IchorManager>().InsantiateComponent(ref pooler);
+        }
+        if (GetComponent<CompanionManager>())
         {
             GetComponent<CompanionManager>().InitialiseEnemy(ref dPlayer, ref poolMan, ref dPathfinder, ref UICanvas);
         }

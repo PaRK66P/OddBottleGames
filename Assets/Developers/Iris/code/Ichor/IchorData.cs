@@ -9,38 +9,24 @@ public class IchorData : ScriptableObject
     [Header("Health")]
     public float health = 100;
     public GameObject healthbar;
+    public int hpPhase2 = 80;
+    public int hpPhase3 = 60;
 
-    [Header("Dashing")]
-    public GameObject dashChargeUIObject;
-    public GameObject dashRechargeUIObject;
-    [Min(0.0f)] public float dashTime;
-    [Min(0.0f)] public float dashDistance;
-    [Min(0.0f)] public float evolvedDashExtraDistance;
-    [Min(0.0f)] public float dashCooldown;
-    [Min(0)] public int numberOfDashCharges;
-    [Min(0.0f)] public float dashRechargeTime;
-    [Min(0.0f)] public float evolvedDashDamage;
+    [Space]
 
-    [Header("Collisions")]
-    public LayerMask damageLayers;
-    public LayerMask enemyLayers;
+    [Header("Sprites")]
+    public GameObject weakPontsPrefab;
+    public float WeakPointsHP = 1;
+    public int weakPontsPhase1 = 3;
+    public int weakPontsPhase2 = 4;
+    public int weakPontsPhase3 = 5;
 
-    [Header("Shooting")]
-    public GameObject ammoUIObject;
-    public GameObject reloadUISlider;
-    [Min(0.0f)] public float fireRate;
-    [Min(0.0f)] public float maxTimeToChargeShot;
-    [Min(0.0f)] public float minTimeToChargeShot;
-    [Min(1)] public int shotsTillFullCharge;
-    [Min(0.0f)] public float chargeShotIntervals;
-    [Min(1)] public int maxAmmo;
-    [Min(0.0f)] public float reloadTime;
-    [Min(1.0f)] public float damageMultiplier;
+    [Space]
 
-    [Header("Projectile")]
-    public GameObject baseProjectileType;
-    [Min(0.0f)] public float baseProjectileSpeed;
+    [Header("Sprites")]
+    public Sprite Idle;
+    public Sprite Hurt;
+    public Sprite Armored;
+    public Sprite Dead;
 
-    [Header("Damage")]
-    [Min(0.0f)] public float controlLossTime;
 }
