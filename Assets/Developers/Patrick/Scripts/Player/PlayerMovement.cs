@@ -184,8 +184,7 @@ public class PlayerMovement : MonoBehaviour
             dash = true;
             dashTimer = 0.0f;
             dashStart = new Vector2(transform.position.x, transform.position.y);
-            dashDirection = _debugData.dashTowardsMouse ? new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x - transform.position.x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y - transform.position.y).normalized
-                : movementDirection;
+            dashDirection = movementDirection;
 
             _isDashStarted = false;
         }
