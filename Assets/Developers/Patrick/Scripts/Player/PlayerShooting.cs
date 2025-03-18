@@ -201,6 +201,12 @@ public class PlayerShooting : MonoBehaviour
             _playerData.baseProjectileType.name,
             gameObject,
             fireMultiplier);
+
+        if (_hasCompanion)
+        {
+            projectile.GetComponent<ProjectileBehaviour>().AddCompanionTargetting(ref _companionManager);
+        }
+
         lastShotTime = Time.time;
 
         currentAmmo -= ammoUsed;
