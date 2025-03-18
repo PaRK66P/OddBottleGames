@@ -35,6 +35,8 @@ public class PlayerShooting : MonoBehaviour
     private bool interrupted = false;
     private bool charging = false;
 
+    private SoundManager soundManager;
+
     public AudioClip AudioPlayerGunFireClip; //NEED TO MAKE PRIVATE BUT UNSURE HOW TO REFER TO CLIP FILE
     private AudioSource AudioPlayerGun;
     // Start is called before the first frame update
@@ -49,7 +51,8 @@ public class PlayerShooting : MonoBehaviour
         int dMaxAmmo, float dReloadTime,
         GameObject dBaseProjectileType, float dBaseProjectileSpeed, 
         float dFiringInputBuffer, bool dCanDropWeapon, 
-        ref ObjectPoolManager dPoolManager, ref GameObject dUICanvas)
+        ref ObjectPoolManager dPoolManager, ref GameObject dUICanvas,
+        ref SoundManager dSoundManager)
     {
 
         fireRate = dFireRate;
@@ -78,6 +81,8 @@ public class PlayerShooting : MonoBehaviour
 
         AudioPlayerGun = GetComponent<AudioSource>();
 
+        soundManager = dSoundManager;
+
     }
 
     // Update is called once per frame
@@ -95,7 +100,6 @@ public class PlayerShooting : MonoBehaviour
                 if (chargedAmmo == 0)
                 {
                     Fire(); // Regular shot
-                    PlayGunFire();
                     return;
                 }
 
@@ -105,6 +109,7 @@ public class PlayerShooting : MonoBehaviour
         }
         else if (startCharging)
         {
+            
             if(Time.time - timeForChargedShot >= chargeUpShotTime)
             {
                 if(currentAmmo - chargedAmmo <= 0)
@@ -164,6 +169,7 @@ public class PlayerShooting : MonoBehaviour
 
     private void Fire()
     {
+        soundManager.PlayPGunFire();
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
 
         Vector3 rotation = mouseWorldPos - transform.position;
@@ -192,7 +198,7 @@ public class PlayerShooting : MonoBehaviour
     private IEnumerator ReloadAmmo()
     {
         reloading = true;
-
+        soundManager.PlayGunReload();
         foreach (GameObject obj in ammoUIObjects)
         {
             obj.GetComponent<Image>().color = Color.white;
@@ -227,6 +233,7 @@ public class PlayerShooting : MonoBehaviour
     private void ChargeAmmo()
     {
         chargedAmmo++;
+        soundManager.PlayGunChargeUp();
         ammoUIObjects[currentAmmo - chargedAmmo].GetComponent<Image>().color = Color.blue;
     }
 
@@ -235,7 +242,7 @@ public class PlayerShooting : MonoBehaviour
         firingChargedShot = true;
 
         float startTime;
-
+        soundManager.PlayGunChargeFire();
         for (int i = 0; i < chargedAmmo; i++)
         {
             if (interrupted)
@@ -286,9 +293,5 @@ public class PlayerShooting : MonoBehaviour
         }
     }
     #endregion
-    private void PlayGunFire()
-    {
-        AudioPlayerGun.pitch = Random.Range(0.7f,1f); //randomise pitch
-        AudioPlayerGun.PlayOneShot(AudioPlayerGunFireClip);
-    }
+   
 }

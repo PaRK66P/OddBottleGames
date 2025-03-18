@@ -4,37 +4,33 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+
+    [SerializeField] private AudioSource audioSource;
     //Back Ground Music (PLACEHOLDER)
-    private AudioSource BGM;
-    private AudioClip BGMClip;
+    [SerializeField] private AudioSource BGM;
+    [SerializeField] private AudioClip BGMClip;
 
     //Player Footsteps Sound
-    private AudioSource PFootsteps; //NOTE: FIND HOW TO COMPLIE ARRAY
-    private AudioClip SFootstepsClips;
+    [SerializeField] private AudioSource PFootsteps; //NOTE: FIND HOW TO COMPLIE ARRAY
+    [SerializeField] private AudioClip SFootstepsClips;
 
     //Player Gun sounds
-    private AudioSource PGunSFX;
-    private AudioClip SGunFire;
-    private AudioClip SGunCock;
-    private AudioClip SGunReload;
-    private AudioClip SGunChargeFire;
-    private AudioClip SGunChargeUp;
+    [SerializeField] private AudioClip SGunFire;
+    [SerializeField] private AudioClip SGunCock;
+    [SerializeField] private AudioClip SGunReload;
+    [SerializeField] private AudioClip SGunChargeFire;
+    [SerializeField] private AudioClip SGunChargeUp;
 
     //Player Dash Sounds
-    private AudioSource PDash; //NOTE; FIND HOW TO COMPLIE ARRAY
-    private AudioSource PDashStatus;
-    private AudioClip SDash;
-    private AudioClip SDashEmpty;
-    private AudioClip SDashReady;
+    [SerializeField] private AudioSource PDash; //NOTE; FIND HOW TO COMPLIE ARRAY
+    [SerializeField] private AudioClip SDash;
+    [SerializeField] private AudioClip SDashEmpty;
+    [SerializeField] private AudioClip SDashReady;
 
     //Player Other Sounds
-    private AudioSource PHit;
-    private AudioClip SHit;
 
-    public void InitialiseSFX()
-    {
-        //SGunCock.Load<AudioClip>("");
-    }
+    [SerializeField] private AudioClip SHit;
+
     public void PlayBGM()
     {
         BGM.clip = BGMClip;
@@ -45,46 +41,46 @@ public class SoundManager : MonoBehaviour
     public void PlayPGunFire()
     {
         //set the random pitch
-        PGunSFX.pitch = Random.Range(0.8f, 1.2f);
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
         //play sound
-        PGunSFX.PlayOneShot(SGunFire);
+        audioSource.PlayOneShot(SGunFire);
     }
     public void PlayPGunCock()
     {
         //reset pitch
-        PGunSFX.pitch = 1f;
+        audioSource.pitch = 1f;
         //play sound
-        PGunSFX.PlayOneShot(SGunCock);
+        audioSource.PlayOneShot(SGunCock);
     }
     public void PlayGunReload()
     {
         //reset pitch
-        PGunSFX.pitch = 1f;
+        audioSource.pitch = 1f;
         //play sound
-        PGunSFX.PlayOneShot(SGunReload);
+        audioSource.PlayOneShot(SGunReload);
     }
     public void PlayGunChargeUp()
     {
         //incease pitch
-        PGunSFX.pitch += 0.15f;
+        audioSource.pitch += 0.15f;
         //play sound
-        PGunSFX.PlayOneShot(SGunChargeUp);
+        audioSource.PlayOneShot(SGunChargeUp);
     }
     public void PlayGunChargeFire()
     {
         //Randomise pitch
-        PGunSFX.pitch = Random.Range(0.8f,1.2f);
-        PGunSFX.PlayOneShot(SGunChargeFire);
+        audioSource.pitch = Random.Range(0.8f,1.2f);
+        audioSource.PlayOneShot(SGunChargeFire);
     }
     public void PlayPDash()
     {
         //set ptich
-        PDash.pitch = Random.Range(0.9f, 1.2f);
-        PDash.PlayOneShot(SDash);
+        audioSource.pitch = Random.Range(0.9f, 1.2f);
+        audioSource.PlayOneShot(SDash);
     }
     public void PlayDashEmpty()
     {
-        PDash.pitch = 1f;
-        PDash.PlayOneShot(SDashEmpty);
+        audioSource.pitch = 1f;
+        audioSource.PlayOneShot(SDashEmpty);
     }
 }
