@@ -6389,21 +6389,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc007a5129938fb48b2dab0667384a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 1372013934}
+  pAudioSource: {fileID: 1372013934}
   BGM: {fileID: 0}
   BGMClip: {fileID: 8300000, guid: c15a837f65bbdfc48addee543e587a2a, type: 3}
-  PFootsteps: {fileID: 1372013934}
-  SFootstepsClips: {fileID: 0}
+  SFootsteps:
+  - {fileID: 8300000, guid: 9176a4c013d8ee0448d69388269a0569, type: 3}
+  - {fileID: 8300000, guid: 4d0fe38d027aae74daacaf77bd82f5d9, type: 3}
+  - {fileID: 8300000, guid: 18667e9da26ac254e81b414004942d67, type: 3}
+  - {fileID: 8300000, guid: a720597762650274a91c6e0b28d40e6a, type: 3}
+  - {fileID: 8300000, guid: 6b041aceb9ebf3d43800aa419a93af82, type: 3}
+  - {fileID: 8300000, guid: e72a2f1d96b409e40aa8acf676fa4c42, type: 3}
+  - {fileID: 8300000, guid: 8ee5a30b1f9f081479fe96dd650670b1, type: 3}
+  - {fileID: 8300000, guid: 585309ea7b357f4419824ad20c4ff20a, type: 3}
+  - {fileID: 8300000, guid: af6930de57a73bd4b9babeb818702660, type: 3}
+  - {fileID: 8300000, guid: 5f5e2738a3590f343b5296fcde950fa5, type: 3}
+  - {fileID: 8300000, guid: 44e381056649a9c43825390b4d3e841d, type: 3}
+  - {fileID: 8300000, guid: b9d69e708a2222e4e8a4be3ccd2d4c24, type: 3}
+  - {fileID: 8300000, guid: 37a69dbd786e98a438e36bccfde22dc7, type: 3}
+  - {fileID: 8300000, guid: 4fc4f1311d51d484e86f9d9ea8ac775d, type: 3}
+  - {fileID: 8300000, guid: 59b1dd03221c79b4a9cb678cdcaccd45, type: 3}
+  - {fileID: 8300000, guid: 52e385f16650645498551e1b19ed0a99, type: 3}
+  - {fileID: 8300000, guid: 202214f5baeb1e442a809b62d43a33be, type: 3}
+  - {fileID: 8300000, guid: 95ccf89dfba253a43af18b0a1b85aa49, type: 3}
+  - {fileID: 8300000, guid: 813b6318739d1df4b8e4f413424bbd2c, type: 3}
+  - {fileID: 8300000, guid: 0c8cd14f4eaf96c4697440cbcacc44e9, type: 3}
+  - {fileID: 8300000, guid: 512b5a4e5c97aed4697d150289a0d76c, type: 3}
+  - {fileID: 8300000, guid: 1380da3d7ca28c849994de9ec2f6baaa, type: 3}
+  - {fileID: 8300000, guid: ce4b479fd0f005941a20fae04008ed3c, type: 3}
+  - {fileID: 8300000, guid: caaffc80a96712b46ae32f4a1a4124a0, type: 3}
   SGunFire: {fileID: 8300000, guid: f94295e60b9018248bbc7988c7c83c22, type: 3}
   SGunCock: {fileID: 8300000, guid: a245dd7856dddb4439e5fb1d69d5df5e, type: 3}
   SGunReload: {fileID: 8300000, guid: f6fb243624ba58c4593d73efac2e05ca, type: 3}
   SGunChargeFire: {fileID: 8300000, guid: 6099b250ac6d28d4cb03fef6a2384339, type: 3}
   SGunChargeUp: {fileID: 8300000, guid: f3f384d34616b114d9c8d10bb5ff33b0, type: 3}
-  PDash: {fileID: 0}
-  SDash: {fileID: 0}
+  SDashes:
+  - {fileID: 8300000, guid: 1f44212f56e355847a2e264d30331f22, type: 3}
+  - {fileID: 8300000, guid: 316514ce1deed9442a1896bb6284d52f, type: 3}
+  - {fileID: 8300000, guid: ba1af322be4bae1418e1ff18dac3af9d, type: 3}
+  - {fileID: 8300000, guid: fec39a3fe5813e144882cd7876104d5a, type: 3}
   SDashEmpty: {fileID: 8300000, guid: bbd36957890dd264a8441bcf827ccc7d, type: 3}
   SDashReady: {fileID: 8300000, guid: 6b6133e0066e73f4c89883efab13032b, type: 3}
   SHit: {fileID: 8300000, guid: 129d952eba8654642a927edd3ed06aa0, type: 3}
+  eAudioSource: {fileID: 0}
+  SEnHit: {fileID: 0}
 --- !u!4 &1389334084
 Transform:
   m_ObjectHideFlags: 0
