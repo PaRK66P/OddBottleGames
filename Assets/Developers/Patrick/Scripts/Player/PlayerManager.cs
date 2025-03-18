@@ -208,7 +208,6 @@ public class PlayerManager : MonoBehaviour
     public void EvolveDash(bool toggle)
     {
         playerMovement.EvolveDash(toggle);
-        _evolveDashCollider.SetActive(toggle);
         playerMovement.RechargeDashes();
     }
 
