@@ -14,6 +14,7 @@ public class PlayerShooting : MonoBehaviour
 
     private Vector2 aimInput = Vector2.right;
     private Vector3 shotRotation = new Vector3(0,0,0);
+    private bool _isUsingMovementToAim = false;
 
     private ObjectPoolManager _poolManager;
 
@@ -32,16 +33,19 @@ public class PlayerShooting : MonoBehaviour
 
     private PlayerData _playerData;
     private PlayerDebugData _debugData;
+    private PlayerMovement _playerMovement;
     private GameObject _bulletUIObject;
     private BulletUIManager _bulletUIManager;
 
     private bool _hasCompanion = false;
     private CompanionManager _companionManager;
 
-    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref ObjectPoolManager poolManager, ref GameObject dUICanvas)
+    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref PlayerMovement playerMovement, ref ObjectPoolManager poolManager, ref GameObject dUICanvas)
     {
         _playerData = playerData;
         _debugData = debugData;
+
+        _playerMovement = playerMovement;
 
         currentAmmo = _playerData.maxAmmo;
 
@@ -66,6 +70,12 @@ public class PlayerShooting : MonoBehaviour
             if (Time.time - lastShotTime >= _playerData.fireRate) // Waits until the can shoot (works from buffer)
             {
                 takeShot = false;
+
+                if (_isUsingMovementToAim)
+                {
+                    aimInput = _playerMovement.GetMovementDirection();
+                }
+
                 if (chargedAmmo == 0)
                 {
                     Fire(aimInput, 1); // Regular shot
@@ -138,6 +148,8 @@ public class PlayerShooting : MonoBehaviour
 
     public void SetMouseAimInput(InputAction.CallbackContext context)
     {
+        _isUsingMovementToAim = false;
+
         Vector2 inputValue = context.ReadValue<Vector2>();
         if(inputValue == new Vector2(transform.position.x, transform.position.y)) { return; }
 
@@ -149,10 +161,17 @@ public class PlayerShooting : MonoBehaviour
 
     public void SetControllerAimInput(InputAction.CallbackContext context)
     {
+        _isUsingMovementToAim = false;
+
         Vector2 inputValue = context.ReadValue<Vector2>();
         if (inputValue == Vector2.zero) { return; }
 
         aimInput = inputValue;
+    }
+
+    public void SetAimToMovement(InputAction.CallbackContext context)
+    {
+        _isUsingMovementToAim = true;
     }
 
     public void PlayerFireInput(InputAction.CallbackContext context)

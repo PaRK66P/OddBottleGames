@@ -165,6 +165,11 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(movement, ForceMode2D.Force);
     }
 
+    public Vector2 GetMovementDirection()
+    {
+        return movementDirection;
+    }
+
     public void SetMovementInput(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
