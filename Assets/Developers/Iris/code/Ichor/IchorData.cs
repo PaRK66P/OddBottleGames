@@ -7,19 +7,29 @@ using UnityEngine.UIElements;
 public class IchorData : ScriptableObject
 {
     [Header("Health")]
-    public float health = 100;
+    public float health = 200;
     public GameObject healthbar;
-    public int hpPhase2 = 80;
-    public int hpPhase3 = 60;
+    public Sprite healthbarNormalSprite;
+    public Sprite healthbarArmoredSprite;
+
+    [Space]
+
+    [Header("Phases")]
+    public float weakPointHealth = 15;
+    public float weakFinishDamage = 30;
+
+    [Space]
+
+    [Header("Phases")]
+    public int[] nextPhaseHpPoint = new int[3] { 80, 50, 20};
+
 
     [Space]
 
     [Header("Sprites")]
     public GameObject weakPontsPrefab;
     public float WeakPointsHP = 1;
-    public int weakPontsPhase1 = 3;
-    public int weakPontsPhase2 = 4;
-    public int weakPontsPhase3 = 5;
+    public int[] weakPointsNo = new int[3] { 3, 4, 5 };
 
     [Space]
 

@@ -9,7 +9,7 @@ public class enemyScr : MonoBehaviour
     ObjectPoolManager pooler;
     string prefabName;
 
-    public void InstantiateEnemy(ref ObjectPoolManager poolMan, string prefName, ref enemyManager enemyMan, ref Canvas UICanvas, ref GameObject dPlayer, ref PathfindingManager dPathfinder)
+    public void InstantiateEnemy(ref ObjectPoolManager poolMan, string prefName, ref enemyManager enemyMan, ref Canvas UICanvas, ref GameObject dPlayer, ref PathfindingManager dPathfinder, ref List<GameObject> dWeakPos)
     {
         pooler = poolMan;
         prefabName = prefName;
@@ -24,7 +24,7 @@ public class enemyScr : MonoBehaviour
         }
         if (GetComponent<IchorManager>())
         {
-            GetComponent<IchorManager>().InsantiateComponent(ref pooler);
+            GetComponent<IchorManager>().InsantiateComponent(ref pooler, ref dWeakPos);
         }
         if (GetComponent<CompanionManager>())
         {

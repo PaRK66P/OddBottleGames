@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Schema;
@@ -11,11 +12,11 @@ public class IchorManager : MonoBehaviour
     private int phase = 0;
     private GameObject[] weakPoints;
 
-    public void InsantiateComponent(ref ObjectPoolManager dPooler)
+    private List<GameObject> weakPointSpawnPos;
+
+    public void InsantiateComponent(ref ObjectPoolManager dPooler, ref List<GameObject> dWeakPos)
     {
         health = data.health;
-
-        weakPoints = new GameObject[data.weakPontsPhase3];
 
         foreach(attackPaternsScript c in GetComponents<attackPaternsScript>())
         {
@@ -29,16 +30,31 @@ public class IchorManager : MonoBehaviour
             }
         }
 
-        for (int i = 0; i <= data.weakPontsPhase3; i++)
+        weakPoints = new GameObject[data.weakPointsNo[phase]];
+
+        for (int i = 0; i <= data.weakPointsNo[phase]; i++)
         {
-            
+            weakPoints[i] = Instantiate(data.weakPontsPrefab, gameObject.transform);
+            weakPoints[i].SetActive(false);
         }
+
+        weakPointSpawnPos = dWeakPos;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(health <= data.nextPhaseHpPoint[phase])
+        {
+            
+
+            for(int i = 0; i < data.weakPointsNo[phase]; i++)
+            {
+
+            }
+
+            phase++;
+        }
     }
 
     public void takeDamage(float dmg)
