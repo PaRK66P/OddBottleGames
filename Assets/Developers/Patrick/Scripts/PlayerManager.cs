@@ -14,6 +14,8 @@ public class PlayerManager : MonoBehaviour
     private PlayerData playerData;
     [SerializeField]
     private PlayerDebugData debugData;
+    [SerializeField]  
+    private SoundManager soundManager;
 
     private PlayerInputManager playerInputManager;
     private PlayerMovement playerMovement;
@@ -42,14 +44,15 @@ public class PlayerManager : MonoBehaviour
         playerMovement = gameObject.AddComponent<PlayerMovement>();
         playerShooting = gameObject.AddComponent<PlayerShooting>();
 
-        playerMovement.InitialiseComponent(playerData.speed, playerData.dashTime, playerData.dashDistance, playerData.dashCooldown, debugData.dashInputBuffer, playerData.damageLayers, debugData.dashTowardsMouse);
+        playerMovement.InitialiseComponent(playerData.speed, playerData.dashTime, playerData.dashDistance, playerData.dashCooldown, debugData.dashInputBuffer, playerData.damageLayers, debugData.dashTowardsMouse, soundManager);
         playerShooting.InitialiseComponent(playerData.ammoUIObject,
             playerData.fireRate,
             playerData.timeToChargeShot, playerData.chargeShotIntervals,
             playerData.maxAmmo, playerData.reloadTime,
             playerData.baseProjectileType, playerData.baseProjectileSpeed, 
             debugData.firingInputBuffer, debugData.canDropWeapon, 
-            ref poolManager, ref UICanvas);
+            ref poolManager, ref UICanvas,
+            ref soundManager);
         playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
 
         playerInputManager.EnableInput();

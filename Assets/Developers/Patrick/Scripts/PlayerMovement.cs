@@ -29,13 +29,15 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 knockbackForce = Vector2.zero;
 
+    private SoundManager soundManager;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void InitialiseComponent(float dSpeed, float dDashTime, float dDashDistance, float dDashCooldown, float dDashInputBuffer, LayerMask dDamageLayers, bool dashingTowardsMouse)
+    public void InitialiseComponent(float dSpeed, float dDashTime, float dDashDistance, float dDashCooldown, float dDashInputBuffer, LayerMask dDamageLayers, bool dashingTowardsMouse, SoundManager dSoundManager)
     {
         speed = dSpeed;
         dashTime = dDashTime;
@@ -44,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         dashInputBuffer = dDashInputBuffer;
         damageLayers = dDamageLayers;
         dashTowardsMouse = dashingTowardsMouse;
+        soundManager = dSoundManager;
     }
 
     // Update is called once per frame
@@ -75,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
                 dashTimer += Time.fixedDeltaTime;
 
                 rb.excludeLayers = damageLayers;
-
+                soundManager.PlayPDash(); //Bugged; need to play once, not every second
                 rb.MovePosition(Vector2.Lerp(dashStart, dashStart + dashDirection * dashDistance, Mathf.Min(dashTimer / dashTime, 1.0f)));
 
                 if (dashTimer >= dashTime)
