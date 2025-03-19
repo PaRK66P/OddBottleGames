@@ -20,7 +20,9 @@ public class CompanionFriend : MonoBehaviour
     private GameObject _player;
     private GameObject _dashRechargeZone;
 
-    private GameObject _target;
+    private GameObject _nearestTarget;
+    private GameObject _playerTarget;
+    private GameObject _currentTarget;
 
     private CompanionStates _state;
 
@@ -78,7 +80,7 @@ public class CompanionFriend : MonoBehaviour
                     break;
                 }
 
-                Vector2 travelDirection = CompanionPathfinding();
+                Vector2 travelDirection = CompanionPathfindingToPlayer();
 
                 _rb.MovePosition(new Vector2(_rb.position.x, _rb.position.y) + travelDirection * travelDistance);
 
@@ -87,14 +89,14 @@ public class CompanionFriend : MonoBehaviour
 
                 if (!_isReadyToLeap)
                 {
-                    Node targetNode = _pathfindingManager.NodeFromWorldPosition(_player.transform.position);
+                    Node targetNode = _pathfindingManager.NodeFromWorldPosition(_currentTarget.transform.position);
                     Node currentNode = _pathfindingManager.NodeFromWorldPosition(transform.position);
 
                     Vector2 pathfindingDirection = _lastPathDirection;
 
                     if (_lastTargetNode != targetNode || _lastNode != currentNode)
                     {
-                        pathfindingDirection = _pathfindingManager.GetPathDirection(transform.position, _target.transform.position);
+                        pathfindingDirection = _pathfindingManager.GetPathDirection(transform.position, _currentTarget.transform.position);
 
                         _lastTargetNode = targetNode;
                         _lastNode = currentNode;
@@ -103,9 +105,9 @@ public class CompanionFriend : MonoBehaviour
 
                     _rb.MovePosition(new Vector2(transform.position.x, transform.position.y) + pathfindingDirection * _dataObj.moveSpeed * Time.fixedDeltaTime);
 
-                    if (WithinLeapRange(_dataObj.leapDistance))
+                    if (WithinLeapRange(_dataObj.leapDistance, _currentTarget))
                     {
-                        Vector2 targetDirection = _target.transform.position - transform.position;
+                        Vector2 targetDirection = _currentTarget.transform.position - transform.position;
                         Vector2 leapDirection = targetDirection.normalized;
                         if (targetDirection == Vector2.zero)
                         {
@@ -145,6 +147,7 @@ public class CompanionFriend : MonoBehaviour
 
                 if (travelPosition >= 1)
                 {
+                    _currentTarget = null;
                     _isLeapFinished = true;
                 }
 
@@ -152,16 +155,16 @@ public class CompanionFriend : MonoBehaviour
 
         }
     }
-    private bool WithinLeapRange(float leapTravelDistance)
+    private bool WithinLeapRange(float leapTravelDistance, GameObject target)
     {
         // Leaping
-        Vector3 playerDirection = _player.transform.position - transform.position;
-        Vector3 leapDirection = playerDirection.normalized;
+        Vector3 targetDirection = target.transform.position - transform.position;
+        Vector3 leapDirection = targetDirection.normalized;
 
         float leapDistance = leapTravelDistance * _dataObj.leapTargetTravelPercentage;
         leapDistance *= leapDistance;
 
-        if ((_target.transform.position - transform.position).sqrMagnitude > leapDistance)
+        if ((target.transform.position - transform.position).sqrMagnitude > leapDistance)
         {
             return false;
         }
@@ -179,7 +182,7 @@ public class CompanionFriend : MonoBehaviour
         return true;
     }
 
-    private Vector2 CompanionPathfinding()
+    private Vector2 CompanionPathfindingToPlayer()
     {
         Node playerNode = _pathfindingManager.NodeFromWorldPosition(_player.transform.position);
         Node currentNode = _pathfindingManager.NodeFromWorldPosition(transform.position);
@@ -195,11 +198,33 @@ public class CompanionFriend : MonoBehaviour
         return direction;
     }
 
+    public void SetPlayerTarget(GameObject target)
+    {
+        _playerTarget = target;
+    }
+
+    public void RemovePlayerTarget(GameObject target)
+    {
+        if(_playerTarget == target)
+        {
+            _playerTarget = null;
+        }
+    }
+
     public void IdleAction()
     {
-        _target = _detectionScript.GetTarget();
+        _nearestTarget = _detectionScript.GetTarget();
 
-        if (_target != null) // Found target to attack
+        if(_nearestTarget != null)
+        {
+            _currentTarget = _nearestTarget;
+        }
+        if(_playerTarget != null) 
+        {
+            _currentTarget = _playerTarget;
+        }
+
+        if (_currentTarget != null) // Found target to attack
         {
             _state = CompanionStates.ATTACKING;
             _leapTimer = Time.time;
@@ -208,11 +233,11 @@ public class CompanionFriend : MonoBehaviour
             _isDashRefreshSpawned = false;
 
             // To be updated later
-            if (_target.transform.position.x - transform.position.x < 0)
+            if (_currentTarget.transform.position.x - transform.position.x < 0)
             {
                 _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.LEFT);
             }
-            else if (_target.transform.position.x - transform.position.x > 0)
+            else if (_currentTarget.transform.position.x - transform.position.x > 0)
             {
                 _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.RIGHT);
             }
@@ -247,15 +272,5 @@ public class CompanionFriend : MonoBehaviour
         //DespawnDashRefresh();
         _state = CompanionStates.IDLE;
 
-    }
-
-    private void SpawnDashRefresh()
-    {
-        _dashRechargeZone.SetActive(true);
-    }
-
-    private void DespawnDashRefresh()
-    {
-        _dashRechargeZone.SetActive(false);
     }
 }

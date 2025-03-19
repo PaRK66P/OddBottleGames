@@ -78,9 +78,9 @@ public class PlayerManager : MonoBehaviour
 
         PlayerManager manager = this;
         //movement component
-        playerMovement.InitialiseComponent(ref manager, ref playerData, ref debugData, ref UICanvas, ref healthBarScript);
+        playerMovement.InitialiseComponent(ref manager, ref playerData, ref debugData, ref UICanvas, ref healthBarScript, ref _evolveDashCollider);
         //shooting component
-        playerShooting.InitialiseComponent(ref playerData, ref debugData, ref poolManager, ref PlayerCanvas);
+        playerShooting.InitialiseComponent(ref playerData, ref debugData, ref playerMovement, ref poolManager, ref PlayerCanvas);
         playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
 
         canvGroup = gameObject.transform.Find("PlayerCanvas").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
@@ -208,7 +208,6 @@ public class PlayerManager : MonoBehaviour
     public void EvolveDash(bool toggle)
     {
         playerMovement.EvolveDash(toggle);
-        _evolveDashCollider.SetActive(toggle);
         playerMovement.RechargeDashes();
     }
 
@@ -237,6 +236,8 @@ public class PlayerManager : MonoBehaviour
     {
         _hasCompanion = isAdding;
         _companionManager = companionManager;
+
+        playerShooting.UpdateCompanionData(_hasCompanion, ref _companionManager);
     }
 
     public void ReturnAllyCompanions()

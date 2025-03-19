@@ -37,6 +37,7 @@ public class CompanionManager : MonoBehaviour
     private CompanionCollisionDamage collisionDamageScript;
     private CompanionDetection detectionScript;
 
+    private CompanionManager _managerRef;
     private CompanionBoss bossScript;
     private CompanionFriend friendScript;
     private CompanionAnimations animationsScript;
@@ -55,6 +56,8 @@ public class CompanionManager : MonoBehaviour
 
     public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref PathfindingManager pathfindingManager, ref Canvas dUICanvas)
     {
+        _managerRef = this;
+
         _playerObject = playerObject;
         _poolManager = poolManager;
         _pathfindingManager = pathfindingManager;
@@ -260,6 +263,9 @@ public class CompanionManager : MonoBehaviour
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.ENEMY);
 
         detectionScript.gameObject.SetActive(true);
+
+        // Quick fix as will never change from friendly->enemy
+        rb.excludeLayers = friendData.playerAttacksLayer;
     }
 
     private bool WaitForIdle(CompanionStates newState)
@@ -337,6 +343,16 @@ public class CompanionManager : MonoBehaviour
         //yield return null;
     }
 
+    public void SetPlayerTarget(GameObject target)
+    {
+        friendScript.SetPlayerTarget(target);
+    }
+
+    public void RemovePlayerTarget(GameObject target)
+    {
+        friendScript.RemovePlayerTarget(target);
+    }
+
     // Just a direct move, be careful when calling
     public void TeleportToPosition(Vector3 newPosition)
     {
@@ -359,6 +375,7 @@ public class CompanionManager : MonoBehaviour
             case 21:
                 gameObject.GetComponent<enemyScr>().DecreaseEnemyCount();
                 ChangeToFriendly();
+                _playerObject.GetComponent<PlayerManager>().SetAllyCompanion(true, ref _managerRef);
                 break;
             case 1:
             case 3:

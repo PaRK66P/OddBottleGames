@@ -14,6 +14,9 @@ public class ProjectileBehaviour : MonoBehaviour
     private float minLife = 0.05f;
     private int damage = 1;
 
+    private bool _hasCompanion = false;
+    private CompanionManager _companionManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,8 +88,22 @@ public class ProjectileBehaviour : MonoBehaviour
                 collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(damage, gameObject.transform.position - collision.gameObject.transform.position);
             }
 
+            if (_hasCompanion)
+            {
+                if (collision.gameObject.GetComponent<CompanionTargettingHandler>() != null)
+                {
+                    collision.gameObject.GetComponent<CompanionTargettingHandler>().InitialiseTargetting(ref _companionManager);
+                }
+            }
+
             lifeSpan = minLife;
             toBeReleased = true;
         }
+    }
+
+    public void AddCompanionTargetting(ref CompanionManager companionManager)
+    {
+        _hasCompanion = true;
+        _companionManager = companionManager;
     }
 }
