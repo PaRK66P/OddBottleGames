@@ -30,6 +30,7 @@ public class PlayerShooting : MonoBehaviour
     private bool firingChargedShot = false;
     private bool interrupted = false;
     private bool charging = false;
+    private bool _isCocking = false;
 
     private PlayerData _playerData;
     private PlayerDebugData _debugData;
@@ -62,6 +63,18 @@ public class PlayerShooting : MonoBehaviour
     void Update()
     {
         Debug.DrawLine(transform.position, transform.position + new Vector3(aimInput.x, aimInput.y, 0.0f) * 10.0f);
+
+        if (_isCocking)
+        {
+            if(Time.time - lastShotTime >= _playerData.fireRate)
+            {
+                _isCocking = false;
+                if (!charging)
+                {
+                    //PlayPGunCock();
+                }
+            }
+        }
 
         if (interrupted) { return; }
 
@@ -123,6 +136,8 @@ public class PlayerShooting : MonoBehaviour
         startCharging = true;
         interrupted = false;
         charging = true;
+
+        //PlayGunChargeUp();
     }
 
     public void PlayerStopChargeInput(InputAction.CallbackContext context)
@@ -221,6 +236,9 @@ public class PlayerShooting : MonoBehaviour
             gameObject,
             fireMultiplier);
 
+        //PlayPGunFire();
+        _isCocking = true;
+
         if (_hasCompanion)
         {
             projectile.GetComponent<ProjectileBehaviour>().AddCompanionTargetting(ref _companionManager);
@@ -242,6 +260,8 @@ public class PlayerShooting : MonoBehaviour
     private IEnumerator ReloadAmmo()
     {
         reloading = true;
+
+        //PlayGunReload();
 
         _bulletUIManager.StartReloadAnim();
 
@@ -301,6 +321,8 @@ public class PlayerShooting : MonoBehaviour
         {
             localDamageMultiplier *= _playerData.damageMultiplier;
         }
+
+        //PlayGunChargeFire();
 
         Fire(direction, chargedAmmo, localDamageMultiplier);
 

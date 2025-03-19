@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 dashDirection = Vector2.zero;
     private float lastDashTime = -10.0f;
     private float lastDashInputTime = -10.0f;
+    private bool _isMoving = false;
 
     private Vector2 knockbackForce = Vector2.zero;
 
@@ -81,6 +82,8 @@ public class PlayerMovement : MonoBehaviour
                 healthBarScript.setDashUI(dashChargesNumber);
             }
         }
+
+        // Check for _isMoving to update footstep sound
     }
 
     private void FixedUpdate()
@@ -97,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
             rb.AddForce(knockbackForce, ForceMode2D.Impulse);
             knockbackForce = Vector2.zero;
+            _isMoving = false;
             return;
         }
 
@@ -107,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
                 if (!_isDashStarted)
                 {
                     _isDashStarted = true;
+                    //PlayPDash
                     if (evolved)
                     {
                         _evolveDashCollider.SetActive(true);
@@ -138,10 +143,12 @@ public class PlayerMovement : MonoBehaviour
                     }
                 }
 
+                _isMoving = false;
                 return;
             }
             else if (Time.time - lastDashInputTime > _debugData.dashInputBuffer) // Buffer has been exceeded
             {
+                //PlayDashEmpty
                 dash = false;
             }
 
@@ -152,6 +159,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement()
     {
+        _isMoving = (movementInput != Vector2.zero);
+
         // Get the speed the player wants to move at
         Vector2 targetSpeed = movementInput * _playerData.speed;
 
