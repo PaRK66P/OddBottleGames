@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEngine.GridBrushBase;
 
 public class PlayerShooting : MonoBehaviour
 {
-    private GameObject[] ammoUIObjects;
+    //private GameObject[] ammoUIObjects;
     private GameObject reloadUISlider;
 
     private bool canFire = true;
+
+    private Vector2 aimInput = Vector2.right;
+    private Vector3 shotRotation = new Vector3(0,0,0);
 
     private ObjectPoolManager _poolManager;
 
@@ -28,6 +32,8 @@ public class PlayerShooting : MonoBehaviour
 
     private PlayerData _playerData;
     private PlayerDebugData _debugData;
+    private GameObject _bulletUIObject;
+    private BulletUIManager _bulletUIManager;
 
     public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref ObjectPoolManager poolManager, ref GameObject dUICanvas)
     {
@@ -38,16 +44,8 @@ public class PlayerShooting : MonoBehaviour
 
         _poolManager = poolManager;
 
-        ammoUIObjects = new GameObject[_playerData.maxAmmo];
-
-        float offset = (_playerData.maxAmmo / 2) * 0.3f - 0.2f;
-        for (int i = 0; i < _playerData.maxAmmo; i++)
-        {
-            ammoUIObjects[i] = Instantiate(_playerData.ammoUIObject, dUICanvas.transform);
-
-            ammoUIObjects[i].GetComponent<RectTransform>().position = transform.position;
-            ammoUIObjects[i].GetComponent<RectTransform>().Translate(new Vector3(-offset + (i * 0.3f), 1.45f, 0));
-        }
+        _bulletUIObject = Instantiate(_playerData.ammoUIPrefab, dUICanvas.transform);
+        _bulletUIManager = _bulletUIObject.GetComponent<BulletUIManager>();
 
         reloadUISlider = Instantiate(_playerData.reloadUISlider, dUICanvas.transform);
         reloadUISlider.SetActive(false);
@@ -56,26 +54,23 @@ public class PlayerShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawLine(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)));
+        Debug.DrawLine(transform.position, transform.position + new Vector3(aimInput.x, aimInput.y, 0.0f) * 10.0f);
 
-        if(interrupted) { return; }
+        if (interrupted) { return; }
 
         if (takeShot)
         {
-            if(Time.time - lastShotTime >= _playerData.fireRate) // Waits until the can shoot (works from buffer)
+            if (Time.time - lastShotTime >= _playerData.fireRate) // Waits until the can shoot (works from buffer)
             {
                 takeShot = false;
                 if (chargedAmmo == 0)
                 {
-                    Fire((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)),
-                        Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)) - transform.position,
-                        1); // Regular shot
+                    Fire(aimInput, 1); // Regular shot
                     return;
                 }
 
                 // Charged shot
-                FireChargedShots((new Vector2(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).x, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)).y) - new Vector2(transform.position.x, transform.position.y)),
-                    Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f)) - transform.position);
+                FireChargedShots(aimInput);
             }
         }
         else if (startCharging)
@@ -132,6 +127,25 @@ public class PlayerShooting : MonoBehaviour
         takeShot = true;
     }
 
+    public void SetMouseAimInput(InputAction.CallbackContext context)
+    {
+        Vector2 inputValue = context.ReadValue<Vector2>();
+        if(inputValue == new Vector2(transform.position.x, transform.position.y)) { return; }
+
+        Vector3 worldPoint = Camera.main.ScreenToWorldPoint(new Vector3(inputValue.x, inputValue.y, Camera.main.transform.position.z));
+        Vector2 aimDirection = new Vector2(worldPoint.x - transform.position.x, worldPoint.y - transform.position.y);
+
+        aimInput = aimDirection.normalized;
+    }
+
+    public void SetControllerAimInput(InputAction.CallbackContext context)
+    {
+        Vector2 inputValue = context.ReadValue<Vector2>();
+        if (inputValue == Vector2.zero) { return; }
+
+        aimInput = inputValue;
+    }
+
     public void PlayerFireInput(InputAction.CallbackContext context)
     {
         if(charging || !CanFire()) { return; }
@@ -143,10 +157,11 @@ public class PlayerShooting : MonoBehaviour
     {
         if(charging || reloading || currentAmmo == _playerData.maxAmmo) { return; }
 
-        for (int i = 0; i < currentAmmo; i++)
-        {
-            ammoUIObjects[i].SetActive(false);
-        }
+        //for (int i = 0; i < currentAmmo; i++)
+        //{
+        //    ammoUIObjects[i].SetActive(false);
+        //}
+        _bulletUIManager.DeactivateAll();
 
         StartCoroutine(ReloadAmmo());
     }
@@ -164,9 +179,9 @@ public class PlayerShooting : MonoBehaviour
         return (Time.time - lastShotTime >= _playerData.fireRate - _debugData.firingInputBuffer && !reloading);
     }
 
-    private void Fire(Vector2 fireDirection, Vector3 rotation, int ammoUsed, float fireMultiplier = 1.0f)
+    private void Fire(Vector2 fireDirection, int ammoUsed, float fireMultiplier = 1.0f)
     {
-        float rotz = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+        float rotz = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
 
         GameObject projectile = _poolManager.GetFreeObject(_playerData.baseProjectileType.name);
         projectile.transform.position = transform.position + new Vector3(fireDirection.normalized.x, fireDirection.normalized.y, 0)*2.0f;
@@ -181,10 +196,7 @@ public class PlayerShooting : MonoBehaviour
 
         currentAmmo -= ammoUsed;
 
-        for (int i = currentAmmo; i < currentAmmo + ammoUsed; i++)
-        {
-            ammoUIObjects[i].SetActive(false);
-        }
+        _bulletUIManager.UpdateLoadedBullets(currentAmmo);
 
         if (currentAmmo <= 0 && !reloading) // Trying to shoot with no ammo
         {
@@ -197,30 +209,36 @@ public class PlayerShooting : MonoBehaviour
     {
         reloading = true;
 
-        foreach (GameObject obj in ammoUIObjects)
-        {
-            obj.GetComponent<Image>().color = Color.white;
-        }
+        _bulletUIManager.StartReloadAnim();
+
+        //foreach (GameObject obj in ammoUIObjects)
+        //{
+        //    obj.GetComponent<Image>().color = Color.white;
+        //}
 
         float startTime = Time.time;
 
-        reloadUISlider.SetActive(true);
-        reloadUISlider.GetComponent<Slider>().value = 0;
+        //reloadUISlider.SetActive(true);
+        //reloadUISlider.GetComponent<Slider>().value = 0;
         while (Time.time - startTime <= _playerData.reloadTime)
         {
-            reloadUISlider.GetComponent<Slider>().value = (Time.time - startTime) / _playerData.reloadTime * 100;
+        //    reloadUISlider.GetComponent<Slider>().value = (Time.time - startTime) / _playerData.reloadTime * 100;
             yield return null;
         }
-        reloadUISlider.SetActive(false);
+        //reloadUISlider.SetActive(false);
 
         currentAmmo = _playerData.maxAmmo;
 
         reloading = false;
 
-        foreach (GameObject obj in ammoUIObjects)
-        {
-            obj.SetActive(true);
-        }
+        //foreach (GameObject obj in ammoUIObjects)
+        //{
+        //    obj.SetActive(true);
+        //}
+
+        _bulletUIManager.EndReloadAnim();
+
+        _bulletUIManager.UpdateLoadedBullets(currentAmmo);
     }
 
     public void InterruptFiring()
@@ -237,10 +255,11 @@ public class PlayerShooting : MonoBehaviour
     private void ChargeAmmo()
     {
         chargedAmmo++;
-        ammoUIObjects[currentAmmo - chargedAmmo].GetComponent<Image>().color = Color.blue;
+        //ammoUIObjects[currentAmmo - chargedAmmo].GetComponent<Image>().color = Color.blue;
+        _bulletUIManager.UpdateChargedBulletsUI(chargedAmmo);
     }
 
-    private void FireChargedShots(Vector2 direction, Vector3 rotation)
+    private void FireChargedShots(Vector2 direction)
     {
         float localDamageMultiplier = 1;
 
@@ -249,37 +268,21 @@ public class PlayerShooting : MonoBehaviour
             localDamageMultiplier *= _playerData.damageMultiplier;
         }
 
-        Fire(direction, rotation, chargedAmmo, localDamageMultiplier);
+        Fire(direction, chargedAmmo, localDamageMultiplier);
 
         ReleaseChargedShots();
     }
 
     private void ReleaseChargedShots()
     {
-        foreach (GameObject obj in ammoUIObjects)
-        {
-            obj.GetComponent<Image>().color = Color.white;
-        }
+        //foreach (GameObject obj in ammoUIObjects)
+        //{
+        //    obj.GetComponent<Image>().color = Color.white;
+        //}
 
         chargedAmmo = 0;
+
+        _bulletUIManager.UpdateChargedBulletsUI(chargedAmmo);
     }
     #endregion
-
-    //#region Weapon Drop
-    //public void DisableFire()
-    //{
-    //    if (_debugData.canDropWeapon)
-    //    {
-    //        canFire = false;
-    //    }
-    //}
-
-    //public void EnableFire()
-    //{
-    //    if (_debugData.canDropWeapon)
-    //    {
-    //        canFire = true;
-    //    }
-    //}
-    //#endregion
 }

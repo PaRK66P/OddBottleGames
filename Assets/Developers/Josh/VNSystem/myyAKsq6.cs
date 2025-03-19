@@ -49,7 +49,6 @@ public class TwineParser
                     endOfFirstLine = currLineText.IndexOf("\n");
                 }
 
-                //UnityEngine.Debug.Log( endOfFirstLine + ", " + tagsPresent );
 
                 int startOfResponses = -1;
                 int startOfResponseDestinations = currLineText.IndexOf( "[[" );
@@ -64,7 +63,6 @@ public class TwineParser
                     {
                         startOfResponses = currLineText.IndexOf("\n");
                     }
-                //UnityEngine.Debug.Log(currLineText.Substring(0, startOfResponseDestinations).LastIndexOf( "\r\n" ));
             }
                 // if (endOfFirstLine == -1)
                 // {
@@ -106,7 +104,6 @@ public class TwineParser
                     messsageText = currLineText.Substring( endOfFirstLine, startOfResponses - endOfFirstLine).Trim();
                     responseText = currLineText.Substring( startOfResponses ).Trim();
                 }
-                //UnityEngine.Debug.Log(messsageText);
 
                 DialogueTreeNode curNode = new DialogueTreeNode();
                 //curNode.sceneData. = title;
@@ -127,8 +124,6 @@ public class TwineParser
                 //     With Message Format: "\r\n Message[[Response One]]"
                 //     Message - less Format: "\r\n [[Response One]]"
                 //curNode.responses = new List<Response>();
-                
-                //UnityEngine.Debug.Log(responseText);
 
                 if ( !lastNode )
                 {
@@ -137,10 +132,8 @@ public class TwineParser
                     {
                         responseData = new List<string>(responseText.Split(new string[] { "\n" }, System.StringSplitOptions.None));
                     }
-                //UnityEngine.Debug.Log(responseData);
                     foreach (string response in responseData)
                     {
-                    //UnityEngine.Debug.Log(response);
                         curNode.twineData.responseData.Add(response);
                     }
                     // for ( int k = responseData.Count - 1; k >= 0; k-- )
@@ -196,7 +189,6 @@ public class TwineParser
                 for (int j = 0; j < node.twineData.responseData.Count; j++)
                 {
                     string response = node.twineData.responseData[j];
-                    UnityEngine.Debug.Log(response);
                     if (string.IsNullOrEmpty(response))
                     {
                         //node.twineData.responseData.Remove(response);

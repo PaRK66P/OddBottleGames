@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class PlayerData : ScriptableObject
 {
     [Header("Health")]
-    public int health = 100;
+    public float health = 100;
     public GameObject healthbar;
 
     [Header("Movement")]
@@ -18,8 +18,6 @@ public class PlayerData : ScriptableObject
     [HideInInspector] public float decelerationRate;
 
     [Header("Dashing")]
-    public GameObject dashChargeUIObject;
-    public GameObject dashRechargeUIObject;
     [Min(0.0f)] public float dashTime;
     [Min(0.0f)] public float dashDistance;
     [Min(0.0f)] public float evolvedDashExtraDistance;
@@ -33,6 +31,7 @@ public class PlayerData : ScriptableObject
     public LayerMask enemyLayers;
 
     [Header("Shooting")]
+    public GameObject ammoUIPrefab;
     public GameObject ammoUIObject;
     public GameObject reloadUISlider;
     [Min(0.0f)] public float fireRate;

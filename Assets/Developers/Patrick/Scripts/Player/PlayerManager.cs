@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private GameObject _evolveDashCollider;
 
-    private PlayerInputManager playerInputManager;
+    private NPlayerInput playerInputManager;
     private PlayerMovement playerMovement;
     private InteractComponent playerInteract;
     private PlayerShooting playerShooting;
@@ -54,13 +54,16 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private float fadeTextTimer = 0.0f;
 
+    private bool _hasCompanion = false;
+    private CompanionManager _companionManager;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         image = GetComponentInChildren<SpriteRenderer>();
 
-        playerInputManager = gameObject.AddComponent<PlayerInputManager>();
+        playerInputManager = gameObject.AddComponent<NPlayerInput>();
         playerMovement = gameObject.AddComponent<PlayerMovement>();
         playerShooting = gameObject.AddComponent<PlayerShooting>();
         playerInteract = gameObject.AddComponent<InteractComponent>();
@@ -78,14 +81,7 @@ public class PlayerManager : MonoBehaviour
         playerMovement.InitialiseComponent(ref manager, ref playerData, ref debugData, ref UICanvas, ref healthBarScript);
         //shooting component
         playerShooting.InitialiseComponent(ref playerData, ref debugData, ref poolManager, ref PlayerCanvas);
-        playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting, ref playerInteract);
-
-        playerInputManager.EnableInput();
-
-        //if (debugData.canDropWeapon)
-        //{
-        //    OnDamageTaken += DropWeapon;
-        //}
+        playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
 
         canvGroup = gameObject.transform.Find("PlayerCanvas").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
 
@@ -93,11 +89,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnDisable()
     {
-        //// Improper event subscription, need to update later
-        //if (debugData.canDropWeapon)
-        //{
-        //    OnDamageTaken -= DropWeapon;
-        //}
+
     }
 
     // Update is called once per frame
@@ -117,7 +109,6 @@ public class PlayerManager : MonoBehaviour
                 {
                     image.color = Color.white;
                 }
-                //image.color = Color.white;
             }
         }
 
@@ -127,8 +118,6 @@ public class PlayerManager : MonoBehaviour
             Heal(1.0f);
             regenTimer = 0; 
         }
-
-        //healthbar.GetComponent<Slider>().value = health;
 
 
         if (fadeIn)
@@ -177,29 +166,12 @@ public class PlayerManager : MonoBehaviour
         OnDamageTaken?.Invoke(this, EventArgs.Empty);
 
         health -= ammount;
-        if(health <= 1.0f)
+        if(health <= 20.0f)
         {
-            health = 1.0f;
+            health = 20.0f;
         }
         healthBarScript.SetValue(health);
     }
-
-    //public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f)
-    //{
-    //    if (isDamaged) { return; }
-
-    //    rb.excludeLayers = playerData.damageLayers;
-    //    isDamaged = true;
-    //    playerInputManager.DisableInput();
-    //    image.color = Color.blue;
-    //    timeOfDamage = Time.time;
-    //    invulnerableTime = damageTime;
-    //    playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);
-
-    //    OnDamageTaken?.Invoke(this, EventArgs.Empty);
-
-        
-    //}
 
     public void Heal(float ammount)
     {
@@ -210,25 +182,6 @@ public class PlayerManager : MonoBehaviour
         }
         healthBarScript.SetValue(health);
     }
-
-    //private void DropWeapon(object sender, EventArgs e)
-    //{
-    //    if (hasWeapon && !playerMovement.dash)
-    //    {
-    //        hasWeapon = false;
-    //        playerShooting.DisableFire();
-
-    //        float randomAngle = UnityEngine.Random.Range(0, 360);
-    //        Vector3 weaponPos = new Vector3(5 * Mathf.Cos(randomAngle), 5 * Mathf.Sin(randomAngle)) + transform.position;
-    //        Instantiate(weaponDrop, weaponPos, Quaternion.identity);
-    //    }
-    //}
-
-    //public void RegainWeapon()
-    //{
-    //    hasWeapon = true;
-    //    playerShooting.EnableFire();
-    //}
 
     public void DisableInput()
     {
@@ -254,7 +207,6 @@ public class PlayerManager : MonoBehaviour
 
     public void EvolveDash(bool toggle)
     {
-        Debug.Log("evolving dash");
         playerMovement.EvolveDash(toggle);
         _evolveDashCollider.SetActive(toggle);
         playerMovement.RechargeDashes();
@@ -279,6 +231,21 @@ public class PlayerManager : MonoBehaviour
     public bool isInteracting()
     {
         return playerInteract.GetInteract();
+    }
+
+    public void SetAllyCompanion(bool isAdding, ref CompanionManager companionManager)
+    {
+        _hasCompanion = isAdding;
+        _companionManager = companionManager;
+    }
+
+    public void ReturnAllyCompanions()
+    {
+        if (_hasCompanion)
+        {
+            _companionManager.TeleportToPosition(transform.position);
+            _companionManager.ChangeToIdleForTime(1.0f);
+        }
     }
 
     private void OnDrawGizmos()

@@ -11,7 +11,8 @@ public class CompanionManager : MonoBehaviour
     {
         NONE = 0,
         ENEMY = 1,
-        FRIEND = 2
+        FRIEND = 2,
+        IDLE_TIMED = 3,
     }
 
     [Header("Testing")]
@@ -41,8 +42,11 @@ public class CompanionManager : MonoBehaviour
     private CompanionAnimations animationsScript;
 
     private CompanionStates _currentState;
+    private CompanionStates _stateToChangeTo;
     private float _health;
     private GameObject healthbar;
+
+    private bool isIdleTimedCoroutineRunning = false;
 
     private VisualNovelScript visualNovelManager;
     private bool hasPlayedNovel = false;
@@ -99,6 +103,8 @@ public class CompanionManager : MonoBehaviour
         healthbar.GetComponent<UnityEngine.UI.Slider>().value = bossData.health;
 
         ChangeToEnemy();
+        ChangeToIdleForTime(3.0f);
+        
     }
 
     // Update is called once per frame
@@ -206,6 +212,11 @@ public class CompanionManager : MonoBehaviour
 
     public void ChangeToNone()
     {
+        if (WaitForIdle(CompanionStates.NONE))
+        {
+            return;
+        }
+
         _currentState = CompanionStates.NONE;
 
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.NONE);
@@ -216,11 +227,18 @@ public class CompanionManager : MonoBehaviour
 
     public void ChangeToEnemy()
     {
-        Debug.Log("changing to enemy");
+        if (WaitForIdle(CompanionStates.ENEMY))
+        {
+            return;
+        }
+
         //_playerObject.GetComponent<PlayerManager>().EvolveDash(true);
         _health = bossData.health;
         bossScript.SetupEnemy();
         _currentState = CompanionStates.ENEMY;
+
+        CompanionManager companionManager = this;
+        _playerObject.GetComponent<PlayerManager>().SetAllyCompanion(false, ref companionManager);
 
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.PLAYER);
 
@@ -229,13 +247,67 @@ public class CompanionManager : MonoBehaviour
 
     public void ChangeToFriendly()
     {
-        Debug.Log("change to friendly");
+        if (WaitForIdle(CompanionStates.FRIEND))
+        {
+            return;
+        }
+
         //_playerObject.GetComponent<PlayerManager>().EvolveDash(false);
         _currentState = CompanionStates.FRIEND;
+        CompanionManager companionManager = this;
+        _playerObject.GetComponent<PlayerManager>().SetAllyCompanion(true, ref companionManager);
 
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.ENEMY);
 
         detectionScript.gameObject.SetActive(true);
+    }
+
+    private bool WaitForIdle(CompanionStates newState)
+    {
+        if(_currentState != CompanionStates.IDLE_TIMED)
+        {
+            return false;
+        }
+
+        _stateToChangeTo = newState;
+
+        return true;
+    }
+
+    public void ChangeToIdleForTime(float timeForIdle)
+    {
+        if(isIdleTimedCoroutineRunning)
+        {
+            StopCoroutine("SetIdle");
+        }
+
+        _stateToChangeTo = _currentState;
+        _currentState = CompanionStates.IDLE_TIMED;
+
+        StartCoroutine("SetIdle", timeForIdle);
+    }
+
+    private IEnumerator SetIdle(float idleTime)
+    {
+        isIdleTimedCoroutineRunning = true;
+
+        yield return new WaitForSeconds(idleTime);
+
+        _currentState = _stateToChangeTo;
+        switch (_stateToChangeTo)
+        {
+            case CompanionStates.NONE:
+                ChangeToNone();
+                break;
+            case CompanionStates.ENEMY:
+                ChangeToEnemy();
+                break;
+            case CompanionStates.FRIEND:
+                ChangeToFriendly();
+                break;
+        }
+
+        isIdleTimedCoroutineRunning = false;
     }
 
     IEnumerator DamageColor()
@@ -265,9 +337,14 @@ public class CompanionManager : MonoBehaviour
         //yield return null;
     }
 
+    // Just a direct move, be careful when calling
+    public void TeleportToPosition(Vector3 newPosition)
+    {
+        transform.position = newPosition;
+    }
+
     private void GetVisualNovelResult()
     {
-        //Debug.Log("getting vis novel result");
         switch (visualNovelManager.GetLastSelectionID())
         {
             case 0:
@@ -279,7 +356,8 @@ public class CompanionManager : MonoBehaviour
             case 12:
             case 14:
             case 16:
-            case 21: 
+            case 21:
+                gameObject.GetComponent<enemyScr>().DecreaseEnemyCount();
                 ChangeToFriendly();
                 break;
             case 1:

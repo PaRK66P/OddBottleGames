@@ -33,7 +33,6 @@ public class HealthBarScript : MonoBehaviour
 
     public void SetMaxHealth(float hp)
     {
-        //Debug.Log("setting max health to: " + hp);
         maxHealth = hp;
     }
 
@@ -41,11 +40,8 @@ public class HealthBarScript : MonoBehaviour
 
     public void SetValue(float newValue)
     {
-        //Debug.Log("settings health to: " + newValue);
         float targetWidth = newValue * (maxRightMask / maxHealth);
-        //Debug.Log("target width: " + targetWidth);
         float newRightMask = initialRightMask + maxRightMask - targetWidth;
-        //Debug.Log("new right mask: " + newRightMask);
         Vector4 padding = rectMask.padding;
         padding.z = newRightMask;
         rectMask.padding = padding;

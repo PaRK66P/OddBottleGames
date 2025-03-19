@@ -10,8 +10,8 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] UnityEngine.UI.Toggle dashToggle;
     [SerializeField] UnityEngine.UI.Toggle autoTypeToggle;
 
-    private GameObject player;
     [Header("Important references")]
+    [SerializeField] private GameObject player;
     [SerializeField] private GameObject pauseMenuContainer;
     [SerializeField] private VisualNovelScript visualNovelManager;
     private bool isPaused = false;
@@ -24,7 +24,7 @@ public class PauseMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("PlayerProto");
+        //player = GameObject.Find("Player");
         //pauseMenuContainer = GameObject.Find("Canvas").transform.Find("PauseMenu").gameObject;
         //visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
 
@@ -77,7 +77,6 @@ public class PauseMenuManager : MonoBehaviour
         pauseMenuContainer.transform.Find("MainPause").gameObject.SetActive(true);
         pauseMenuContainer.transform.Find("SettingsScreen").gameObject.SetActive(false);
         isPaused = true;
-
     }
 
     private void OnUnpause()
