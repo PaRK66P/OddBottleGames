@@ -19,9 +19,14 @@ public class IchorManager : MonoBehaviour
     private List<GameObject> weakPointSpawnPos;
     private bool[] occupiedWeakPoints;
 
-    public void InsantiateComponent(ref ObjectPoolManager dPooler, ref List<GameObject> dWeakPos, ref Canvas dUICanvas)
+    private ObjectPoolManager pooler;
+    private string prefabName;
+
+    public void InsantiateComponent(ref ObjectPoolManager dPooler, string dPrefabName, ref List<GameObject> dWeakPos, ref Canvas dUICanvas)
     {
         health = data.health;
+        pooler = dPooler;
+        prefabName = dPrefabName;
 
         foreach(attackPaternsScript c in GetComponents<attackPaternsScript>())
         {
@@ -89,8 +94,11 @@ public class IchorManager : MonoBehaviour
         {
             health -= dmg;
 
-            if()
-
+            if(health <= 0)
+            {
+                health = 0;
+                pooler.ReleaseObject(prefabName, gameObject);
+            }
             healthbar.GetComponent<Slider>().value = health;
         }
     }
