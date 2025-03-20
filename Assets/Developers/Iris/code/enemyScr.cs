@@ -24,7 +24,7 @@ public class enemyScr : MonoBehaviour
         }
         if (GetComponent<IchorManager>())
         {
-            GetComponent<IchorManager>().InsantiateComponent(ref pooler, ref dWeakPos);
+            GetComponent<IchorManager>().InsantiateComponent(ref pooler, ref dWeakPos, ref UICanvas);
         }
         if (GetComponent<CompanionManager>())
         {

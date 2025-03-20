@@ -48,7 +48,7 @@ public class WeakPointScript : MonoBehaviour
 
         if(health <= 0)
         {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
 

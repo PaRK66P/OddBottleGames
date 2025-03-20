@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseNo: 0
-  pattern: 0/1,2/3,4/5/6,
+  pattern: 0/1,
   timeBetweenAttacks: 1.5
   attackList:
   - {fileID: 2472219134077984931, guid: 68b2924def505054287b192c24f567c7, type: 3}
@@ -91,7 +91,7 @@ MonoBehaviour:
   - {fileID: 8979594851478723655, guid: 5dca40a6389637b4f966665cfff1c444, type: 3}
   - {fileID: 8751244404110851157, guid: e20070b5c4a80a14984c950a5dcf4fce, type: 3}
   pooler: {fileID: 0}
-  stunned: 1
+  stunned: 0
 --- !u!114 &2995313866300269876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseNo: 1
-  pattern: 0/1,2/3,4/5/6,
+  pattern: 2,
   timeBetweenAttacks: 1.5
   attackList:
   - {fileID: 2472219134077984931, guid: 68b2924def505054287b192c24f567c7, type: 3}
@@ -116,7 +116,7 @@ MonoBehaviour:
   - {fileID: 8979594851478723655, guid: 5dca40a6389637b4f966665cfff1c444, type: 3}
   - {fileID: 8751244404110851157, guid: e20070b5c4a80a14984c950a5dcf4fce, type: 3}
   pooler: {fileID: 0}
-  stunned: 1
+  stunned: 0
 --- !u!114 &4690416888767236606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseNo: 2
-  pattern: 0/1,2/3,4/5/6,
+  pattern: 4/5/6,
   timeBetweenAttacks: 1.5
   attackList:
   - {fileID: 2472219134077984931, guid: 68b2924def505054287b192c24f567c7, type: 3}
@@ -141,7 +141,7 @@ MonoBehaviour:
   - {fileID: 8979594851478723655, guid: 5dca40a6389637b4f966665cfff1c444, type: 3}
   - {fileID: 8751244404110851157, guid: e20070b5c4a80a14984c950a5dcf4fce, type: 3}
   pooler: {fileID: 0}
-  stunned: 1
+  stunned: 0
 --- !u!58 &4128831174864724833
 CircleCollider2D:
   m_ObjectHideFlags: 0
