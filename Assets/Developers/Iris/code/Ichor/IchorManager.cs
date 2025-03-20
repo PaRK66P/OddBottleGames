@@ -24,6 +24,7 @@ public class IchorManager : MonoBehaviour
 
         foreach(attackPaternsScript c in GetComponents<attackPaternsScript>())
         {
+            c.InstantiateComponent(ref dPooler);
             if(c.phaseNo == phase)
             {
                 c.enabled = true;
@@ -59,9 +60,10 @@ public class IchorManager : MonoBehaviour
         if(health <= data.nextPhaseHpPoint[phase])
         {
             spawnWeakPoints();
-            changePhase();
 
             phase++;
+            
+            changePhase();
         }
     }
 
