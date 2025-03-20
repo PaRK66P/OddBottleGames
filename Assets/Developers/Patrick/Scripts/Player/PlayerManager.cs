@@ -20,6 +20,8 @@ public class PlayerManager : MonoBehaviour
     private PlayerDebugData debugData;
     [SerializeField]
     private GameObject _evolveDashCollider;
+    [SerializeField]
+    private SoundManager _soundManager;
 
     private NPlayerInput playerInputManager;
     private PlayerMovement playerMovement;
@@ -78,9 +80,9 @@ public class PlayerManager : MonoBehaviour
 
         PlayerManager manager = this;
         //movement component
-        playerMovement.InitialiseComponent(ref manager, ref playerData, ref debugData, ref UICanvas, ref healthBarScript, ref _evolveDashCollider);
+        playerMovement.InitialiseComponent(ref manager, ref playerData, ref debugData, ref UICanvas, ref _soundManager, ref healthBarScript, ref _evolveDashCollider);
         //shooting component
-        playerShooting.InitialiseComponent(ref playerData, ref debugData, ref playerMovement, ref poolManager, ref PlayerCanvas);
+        playerShooting.InitialiseComponent(ref playerData, ref debugData, ref playerMovement, ref poolManager, ref _soundManager, ref PlayerCanvas);
         playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
 
         canvGroup = gameObject.transform.Find("PlayerCanvas").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();

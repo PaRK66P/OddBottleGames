@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerManager _playerManager;
     private Rigidbody2D rb;
     private GameObject UICanvas;
+    private SoundManager _soundManager;
     private HealthBarScript healthBarScript;
 
     private Vector2 movementInput;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private float lastDashTime = -10.0f;
     private float lastDashInputTime = -10.0f;
     private bool _isMoving = false;
+    private bool _isMovingLastState = false;
 
     private Vector2 knockbackForce = Vector2.zero;
 
@@ -44,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();        
     }
 
-    public void InitialiseComponent(ref PlayerManager playerManager, ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas, ref HealthBarScript dHealthbarScript, ref GameObject evolveDashCollider)
+    public void InitialiseComponent(ref PlayerManager playerManager, ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas, ref SoundManager soundManager, ref HealthBarScript dHealthbarScript, ref GameObject evolveDashCollider)
     {
         _playerManager = playerManager;
 
@@ -52,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
 
         _playerData = playerData;
         _debugData = debugData;
+
+        _soundManager = soundManager;
 
         healthBarScript = dHealthbarScript;
 
@@ -83,7 +87,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Check for _isMoving to update footstep sound
+        if (_isMoving != _isMovingLastState)
+        {
+            _soundManager.SetWalking(_isMoving);
+            _isMovingLastState = _isMoving;
+        }
     }
 
     private void FixedUpdate()
@@ -111,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
                 if (!_isDashStarted)
                 {
                     _isDashStarted = true;
-                    //PlayPDash
+                    _soundManager.SetDashing(true);
                     if (evolved)
                     {
                         _evolveDashCollider.SetActive(true);
@@ -137,6 +145,7 @@ public class PlayerMovement : MonoBehaviour
 
                     dashChargesNumber--;
                     healthBarScript.setDashUI(dashChargesNumber);
+                    _soundManager.SetDashing(false);
                     if (evolved)
                     {
                         _evolveDashCollider.SetActive(false);
@@ -148,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (Time.time - lastDashInputTime > _debugData.dashInputBuffer) // Buffer has been exceeded
             {
-                //PlayDashEmpty
+                _soundManager.PlayDashEmpty();
                 dash = false;
             }
 
@@ -217,11 +226,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void EvolveDash(bool toggle)
     {
-        //for (int i = 0; i < maxDashCharges; i++)
-        //{
-        //    Destroy(dashRechargesUIObjects[i]);
-        //    Destroy(dashChargesUIObjects[i]);
-        //}
         if (toggle)
         {
             maxDashCharges = _playerData.numberOfDashCharges;
@@ -234,22 +238,6 @@ public class PlayerMovement : MonoBehaviour
             dashChargesNumber = maxDashCharges;
             evolved = false;
         }
-
-        //dashRechargesUIObjects = new GameObject[maxDashCharges];
-        //dashChargesUIObjects = new GameObject[maxDashCharges];
-
-        //for (int i = 0; i < maxDashCharges; i++)
-        //{
-        //    dashRechargesUIObjects[i] = Instantiate(_playerData.dashRechargeUIObject, UICanvas.transform);
-        //    dashRechargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-        //    dashRechargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
-        //    //dashRechargesUIObjects[i].GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
-
-        //    dashChargesUIObjects[i] = Instantiate(_playerData.dashChargeUIObject, UICanvas.transform);
-        //    dashChargesUIObjects[i].GetComponent<RectTransform>().Translate(Vector3.down * 100 * (i + 1));
-        //    dashChargesUIObjects[i].transform.SetParent(UICanvas.transform, true);
-        //}
-
         
     }
 
