@@ -14,6 +14,7 @@ public class IchorManager : MonoBehaviour
     private GameObject healthbar;
     private int phase = 0;
     private GameObject[] weakPoints;
+    private bool isArmored = false;
 
     private List<GameObject> weakPointSpawnPos;
     private bool[] occupiedWeakPoints;
@@ -40,6 +41,7 @@ public class IchorManager : MonoBehaviour
         for (int i = 0; i < data.weakPointsNo[2]; i++)
         {
             weakPoints[i] = Instantiate(data.weakPontsPrefab);
+            weakPoints[i].GetComponent<WeakPointScript>().InsantiateComponent(data.WeakPointsHP, data.weakPointSpriteNorm, data.weakPointSpriteHurt, data.weakPointDamageTimer);
             weakPoints[i].SetActive(false);
         }
 
@@ -57,21 +59,40 @@ public class IchorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(health <= data.nextPhaseHpPoint[phase])
+        if(health <= data.nextPhaseHpPoint[phase] && !isArmored)
         {
             spawnWeakPoints();
-
-            phase++;
-            
-            changePhase();
+            isArmored = true;
+        }
+        if(isArmored)
+        {
+            int activeWeakPoints = 0;
+            for(int i = 0; i < weakPoints.Count(); ++i)
+            {
+                if (weakPoints[i].activeSelf == true)
+                {
+                    activeWeakPoints++;
+                }
+            }
+            if(activeWeakPoints == 0)
+            {
+                isArmored = false;
+                phase++;
+                changePhase();
+            }
         }
     }
 
     public void takeDamage(float dmg)
     {
-        health -= dmg;
+        if(!isArmored)
+        {
+            health -= dmg;
 
-        healthbar.GetComponent<Slider>().value = health;
+            if()
+
+            healthbar.GetComponent<Slider>().value = health;
+        }
     }
 
     public void setStun(bool b)
@@ -115,6 +136,7 @@ public class IchorManager : MonoBehaviour
             occupiedWeakPoints[x] = true;
 
             weakPoints[i].transform.position = weakPointSpawnPos[x].transform.position;
+            weakPoints[i].GetComponent<WeakPointScript>().spawn();
             weakPoints[i].SetActive(true);
         }
 

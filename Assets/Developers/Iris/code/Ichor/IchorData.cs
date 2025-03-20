@@ -17,6 +17,7 @@ public class IchorData : ScriptableObject
     [Header("Weak Points")]
     public float weakPointHealth = 15;
     public float weakFinishDamage = 30;
+    public float weakPointDamageTimer = 0.5f;
     public Sprite weakPointSpriteNorm;
     public Sprite weakPointSpriteHurt;
 
@@ -24,7 +25,6 @@ public class IchorData : ScriptableObject
 
     [Header("Phases")]
     public int[] nextPhaseHpPoint = new int[3] { 80, 50, 20};
-
 
     [Space]
 

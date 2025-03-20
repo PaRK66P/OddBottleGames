@@ -14,7 +14,7 @@ public class WeakPointScript : MonoBehaviour
     private Sprite normalSprite;
     private Sprite damagedSprite;
 
-    public void InsantiateComponent(ref ObjectPoolManager dPooler, float dHealth, Sprite dNormalSprite, Sprite dDamagedSprite, float dDamagedTimer)
+    public void InsantiateComponent(float dHealth, Sprite dNormalSprite, Sprite dDamagedSprite, float dDamagedTimer)
     {
         maxHealth = dHealth;
 
@@ -26,9 +26,10 @@ public class WeakPointScript : MonoBehaviour
 
     public void spawn()
     {
+        gameObject.SetActive(true);
         health = maxHealth;
         damaged = false;
-        damagedTimer = 0;
+        damagedTimer = 1;
 
         GetComponentInChildren<SpriteRenderer>().sprite = normalSprite;
     }
@@ -39,7 +40,7 @@ public class WeakPointScript : MonoBehaviour
         if(damaged)
         {
             damagedTimer -= Time.deltaTime;
-            if(damagedTimer <= 0)
+            if(damagedTimer < 0)
             {
                 damaged = false;
                 GetComponentInChildren<SpriteRenderer>().sprite = normalSprite;
@@ -48,7 +49,7 @@ public class WeakPointScript : MonoBehaviour
 
         if(health <= 0)
         {
-            //gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 
