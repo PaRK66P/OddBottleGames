@@ -44,11 +44,20 @@ public class SoundManager : MonoBehaviour
     [Header("Enemy Sounds")]
     //small enemy sounds
     [SerializeField] private AudioClip EnHit;
+    [SerializeField] private AudioClip EnDead;
+    [SerializeField] private AudioClip EnShoot;
 
     [Header("Ambrosia Sounds")]
     //Ambrosia Sounds
     [SerializeField] private AudioClip[] AmbFootstepsClips;
-    private bool isWalkingAmb= false;
+    [SerializeField] private AudioClip AmbDashReady;
+    [SerializeField] private AudioClip AmbDashAttack;
+    [SerializeField] private AudioClip AmbSpitAttack;
+    [SerializeField] private AudioClip AmbLickAttack;
+    [SerializeField] private AudioClip AmbHit;
+    [SerializeField] private AudioClip AmbDown;
+    [SerializeField] private AudioClip AmbConsume;
+    private bool isWalkingAmb = false;
     private float footstepLengthAmb;
 
     public void Update()
