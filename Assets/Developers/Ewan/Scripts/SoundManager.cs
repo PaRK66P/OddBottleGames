@@ -26,6 +26,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip[] SDashes;
     [SerializeField] private AudioClip SDashEmpty;
     [SerializeField] private AudioClip SDashReady;
+    private bool isDashing = false;
+    private float dashLength;
 
     //Player Other Sounds
     [SerializeField] private AudioClip SHit;
@@ -39,6 +41,9 @@ public class SoundManager : MonoBehaviour
         footstepLength -= Time.deltaTime;
         PlayFootstep();
         if (footstepLength < 0f) footstepLength = 0f;
+        dashLength -= Time.deltaTime;
+        PlayPDash();
+        if (dashLength < 0f) dashLength = 0f;
     }
     public void PlayBGM()
     {
@@ -101,13 +106,21 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayPDash()
     {
-        //set ptich
-        pAudioSource.pitch = Random.Range(0.9f, 1.2f);
-        //pick random from array
-        int index = Random.Range(0, SDashes.Length);
-        AudioClip dashClip = SDashes[index];
-        //play sound
-        pAudioSource.PlayOneShot(dashClip);
+        if (isDashing && dashLength > 0)
+        {
+            //set ptich
+            pAudioSource.pitch = Random.Range(0.9f, 1.2f);
+            //pick random from array
+            int index = Random.Range(0, SDashes.Length);
+            AudioClip dashClip = SDashes[index];
+            dashLength = dashClip.length;
+            //play sound
+            pAudioSource.PlayOneShot(dashClip);
+        }
+    }
+    public void SetDashing(bool value)
+    {
+        isDashing = value;
     }
     public void PlayDashEmpty()
     {
