@@ -12,6 +12,8 @@ public class SoundManager : MonoBehaviour
 
     //Player Footsteps Sound
     [SerializeField] private AudioClip[] SFootsteps;
+    bool isWalking = false;
+    private float footstepLength;
 
     //Player Gun sounds
     [SerializeField] private AudioClip SGunFire;
@@ -32,6 +34,10 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource eAudioSource;
     [SerializeField] private AudioClip SEnHit;
 
+    public void Update()
+    {
+        footstepLength -= Time.deltaTime;
+    }
     public void PlayBGM()
     {
         BGM.clip = BGMClip;
@@ -41,15 +47,22 @@ public class SoundManager : MonoBehaviour
 
     public void PlayFootstep()
     {
+        if (isWalking && footstepLength > 0f) 
+        {         
         //set ptich
         pAudioSource.pitch = Random.Range(0.9f, 1.2f);
         //pick random from array
         int index = Random.Range(0, SFootsteps.Length);
         AudioClip footstepClip = SFootsteps[index];
+        footstepLength = footstepClip.length;
         //play sound
         pAudioSource.PlayOneShot(footstepClip);
+        }
     }
-
+    public void SetWalking(bool value)
+    {
+        isWalking = value;
+    }
     public void PlayPGunFire()
     {
         //set the random pitch
