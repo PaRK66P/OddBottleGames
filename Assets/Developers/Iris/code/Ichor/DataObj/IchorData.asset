@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IchorData
   m_EditorClassIdentifier: 
   health: 100
-  healthbar: {fileID: 0}
+  healthbar: {fileID: 7940067324356998275, guid: ace6fbf26c5479d4d870cd37326fbc3d, type: 3}
   healthbarNormalSprite: {fileID: 0}
   healthbarArmoredSprite: {fileID: 0}
   weakPointHealth: 15
