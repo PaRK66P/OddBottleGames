@@ -37,6 +37,8 @@ public class SoundManager : MonoBehaviour
     public void Update()
     {
         footstepLength -= Time.deltaTime;
+        PlayFootstep();
+        if (footstepLength < 0f) footstepLength = 0f;
     }
     public void PlayBGM()
     {
@@ -47,7 +49,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlayFootstep()
     {
-        if (isWalking && footstepLength > 0f) 
+        if (isWalking && footstepLength < 0f) 
         {         
         //set ptich
         pAudioSource.pitch = Random.Range(0.9f, 1.2f);
