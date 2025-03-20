@@ -74,6 +74,10 @@ public class ProjectileBehaviour : MonoBehaviour
             {
                 collision.gameObject.GetComponent<IchorManager>().takeDamage(damage);
             }
+            else if (collision.gameObject.tag == "WeakPoint")
+            {
+                collision.gameObject.GetComponent<WeakPointScript>().takeDamage(damage);
+            }
             else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
             {
                 collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(damage, gameObject.transform.position - collision.gameObject.transform.position);
