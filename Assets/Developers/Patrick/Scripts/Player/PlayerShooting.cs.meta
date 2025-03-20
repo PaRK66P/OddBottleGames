@@ -1,2 +1,12 @@
 fileFormatVersion: 2
 guid: cac119657ff08184aafbf6ddc8ae34c2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - AudioPlayerGunFireClip: {fileID: 8300000, guid: f94295e60b9018248bbc7988c7c83c22, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
