@@ -41,7 +41,9 @@ public class PlayerShooting : MonoBehaviour
     private bool _hasCompanion = false;
     private CompanionManager _companionManager;
 
-    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref PlayerMovement playerMovement, ref ObjectPoolManager poolManager, ref GameObject dUICanvas)
+    private SoundManager _soundManager;
+
+    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref PlayerMovement playerMovement, ref ObjectPoolManager poolManager, ref SoundManager soundManager, ref GameObject dUICanvas)
     {
         _playerData = playerData;
         _debugData = debugData;
@@ -51,6 +53,8 @@ public class PlayerShooting : MonoBehaviour
         currentAmmo = _playerData.maxAmmo;
 
         _poolManager = poolManager;
+
+        _soundManager = soundManager;
 
         _bulletUIObject = Instantiate(_playerData.ammoUIPrefab, dUICanvas.transform);
         _bulletUIManager = _bulletUIObject.GetComponent<BulletUIManager>();
@@ -71,7 +75,7 @@ public class PlayerShooting : MonoBehaviour
                 _isCocking = false;
                 if (!charging)
                 {
-                    //PlayPGunCock();
+                    _soundManager.PlayPGunCock();
                 }
             }
         }
@@ -137,7 +141,7 @@ public class PlayerShooting : MonoBehaviour
         interrupted = false;
         charging = true;
 
-        //PlayGunChargeUp();
+        _soundManager.PlayGunChargeUp();
     }
 
     public void PlayerStopChargeInput(InputAction.CallbackContext context)
@@ -236,7 +240,7 @@ public class PlayerShooting : MonoBehaviour
             gameObject,
             fireMultiplier);
 
-        //PlayPGunFire();
+        _soundManager.PlayPGunFire();
         _isCocking = true;
 
         if (_hasCompanion)
@@ -261,7 +265,7 @@ public class PlayerShooting : MonoBehaviour
     {
         reloading = true;
 
-        //PlayGunReload();
+        _soundManager.PlayGunReload();
 
         _bulletUIManager.StartReloadAnim();
 
@@ -322,7 +326,7 @@ public class PlayerShooting : MonoBehaviour
             localDamageMultiplier *= _playerData.damageMultiplier;
         }
 
-        //PlayGunChargeFire();
+        _soundManager.PlayGunChargeFire();
 
         Fire(direction, chargedAmmo, localDamageMultiplier);
 
