@@ -14,6 +14,7 @@ public class PlayerShooting : MonoBehaviour
 
     private Vector2 aimInput = Vector2.right;
     private Vector3 shotRotation = new Vector3(0,0,0);
+    private bool _isUsingMovementToAim = false;
 
     private ObjectPoolManager _poolManager;
 
@@ -29,20 +30,31 @@ public class PlayerShooting : MonoBehaviour
     private bool firingChargedShot = false;
     private bool interrupted = false;
     private bool charging = false;
+    private bool _isCocking = false;
 
     private PlayerData _playerData;
     private PlayerDebugData _debugData;
+    private PlayerMovement _playerMovement;
     private GameObject _bulletUIObject;
     private BulletUIManager _bulletUIManager;
 
-    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref ObjectPoolManager poolManager, ref GameObject dUICanvas)
+    private bool _hasCompanion = false;
+    private CompanionManager _companionManager;
+
+    private SoundManager _soundManager;
+
+    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref PlayerMovement playerMovement, ref ObjectPoolManager poolManager, ref SoundManager soundManager, ref GameObject dUICanvas)
     {
         _playerData = playerData;
         _debugData = debugData;
 
+        _playerMovement = playerMovement;
+
         currentAmmo = _playerData.maxAmmo;
 
         _poolManager = poolManager;
+
+        _soundManager = soundManager;
 
         _bulletUIObject = Instantiate(_playerData.ammoUIPrefab, dUICanvas.transform);
         _bulletUIManager = _bulletUIObject.GetComponent<BulletUIManager>();
@@ -56,6 +68,18 @@ public class PlayerShooting : MonoBehaviour
     {
         Debug.DrawLine(transform.position, transform.position + new Vector3(aimInput.x, aimInput.y, 0.0f) * 10.0f);
 
+        if (_isCocking)
+        {
+            if(Time.time - lastShotTime >= _playerData.fireRate)
+            {
+                _isCocking = false;
+                if (!charging)
+                {
+                    _soundManager.PlayPGunCock();
+                }
+            }
+        }
+
         if (interrupted) { return; }
 
         if (takeShot)
@@ -63,6 +87,12 @@ public class PlayerShooting : MonoBehaviour
             if (Time.time - lastShotTime >= _playerData.fireRate) // Waits until the can shoot (works from buffer)
             {
                 takeShot = false;
+
+                if (_isUsingMovementToAim)
+                {
+                    aimInput = _playerMovement.GetMovementDirection();
+                }
+
                 if (chargedAmmo == 0)
                 {
                     Fire(aimInput, 1); // Regular shot
@@ -89,6 +119,12 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
+    public void UpdateCompanionData(bool isAdding, ref CompanionManager companionManager)
+    {
+        _hasCompanion = isAdding;
+        _companionManager = companionManager;
+    }
+
     #region Input
 
     public void PlayerChargeInput(InputAction.CallbackContext context)
@@ -104,6 +140,8 @@ public class PlayerShooting : MonoBehaviour
         startCharging = true;
         interrupted = false;
         charging = true;
+
+        _soundManager.PlayGunChargeUp();
     }
 
     public void PlayerStopChargeInput(InputAction.CallbackContext context)
@@ -129,6 +167,8 @@ public class PlayerShooting : MonoBehaviour
 
     public void SetMouseAimInput(InputAction.CallbackContext context)
     {
+        _isUsingMovementToAim = false;
+
         Vector2 inputValue = context.ReadValue<Vector2>();
         if(inputValue == new Vector2(transform.position.x, transform.position.y)) { return; }
 
@@ -140,10 +180,17 @@ public class PlayerShooting : MonoBehaviour
 
     public void SetControllerAimInput(InputAction.CallbackContext context)
     {
+        _isUsingMovementToAim = false;
+
         Vector2 inputValue = context.ReadValue<Vector2>();
         if (inputValue == Vector2.zero) { return; }
 
         aimInput = inputValue;
+    }
+
+    public void SetAimToMovement(InputAction.CallbackContext context)
+    {
+        _isUsingMovementToAim = true;
     }
 
     public void PlayerFireInput(InputAction.CallbackContext context)
@@ -192,6 +239,15 @@ public class PlayerShooting : MonoBehaviour
             _playerData.baseProjectileType.name,
             gameObject,
             fireMultiplier);
+
+        _soundManager.PlayPGunFire();
+        _isCocking = true;
+
+        if (_hasCompanion)
+        {
+            projectile.GetComponent<ProjectileBehaviour>().AddCompanionTargetting(ref _companionManager);
+        }
+
         lastShotTime = Time.time;
 
         currentAmmo -= ammoUsed;
@@ -208,6 +264,8 @@ public class PlayerShooting : MonoBehaviour
     private IEnumerator ReloadAmmo()
     {
         reloading = true;
+
+        _soundManager.PlayGunReload();
 
         _bulletUIManager.StartReloadAnim();
 
@@ -267,6 +325,8 @@ public class PlayerShooting : MonoBehaviour
         {
             localDamageMultiplier *= _playerData.damageMultiplier;
         }
+
+        _soundManager.PlayGunChargeFire();
 
         Fire(direction, chargedAmmo, localDamageMultiplier);
 

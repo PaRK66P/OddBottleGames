@@ -1,0 +1,185 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SoundManager : MonoBehaviour
+{
+    [Header("Audio Sources")]
+    //Audio Sources
+    [SerializeField] private AudioSource PlayerAudioSource;
+    [SerializeField] private AudioSource BGMAudioSource;
+    [SerializeField] private AudioSource EnemyAudioSource;
+    [SerializeField] private AudioSource AmbrosiaAudioSource;
+
+    [Header("Music")]
+    //Back Ground Music (PLACEHOLDER)
+    [SerializeField] private AudioClip BGMClip;
+
+    [Header("Player Footsteps")]
+    //Player Footsteps Sound
+    [SerializeField] private AudioClip[] PlyrFootstepsClips;
+    bool isWalking = false;
+    private float footstepLength;
+
+    [Header("Player Gun")]
+    //Player Gun sounds
+    [SerializeField] private AudioClip PlyrGunFire;
+    [SerializeField] private AudioClip PlyrGunCock;
+    [SerializeField] private AudioClip PlyrGunReload;
+    [SerializeField] private AudioClip PlyrGunChargeFire;
+    [SerializeField] private AudioClip PlyrGunChargeUp;
+
+    [Header("Player Dash")]
+    //Player Dash Sounds
+    [SerializeField] private AudioClip[] PlyrDashClips;
+    [SerializeField] private AudioClip PlyrDashEmpty;
+    [SerializeField] private AudioClip PlyrDashReady;
+    private bool isDashing = false;
+    private float dashLength;
+
+    [Header("Player Player Hit")]
+    //Player Other Sounds
+    [SerializeField] private AudioClip PlyrHit;
+
+    [Header("Enemy Sounds")]
+    //small enemy sounds
+    [SerializeField] private AudioClip EnHit;
+    [SerializeField] private AudioClip EnDead;
+    [SerializeField] private AudioClip EnShoot;
+
+    [Header("Ambrosia Sounds")]
+    //Ambrosia Sounds
+    [SerializeField] private AudioClip[] AmbFootstepsClips;
+    [SerializeField] private AudioClip AmbDashReady;
+    [SerializeField] private AudioClip AmbDashAttack;
+    [SerializeField] private AudioClip AmbSpitAttack;
+    [SerializeField] private AudioClip AmbLickAttack;
+    [SerializeField] private AudioClip AmbHit;
+    [SerializeField] private AudioClip AmbDown;
+    [SerializeField] private AudioClip AmbConsume;
+    private bool isWalkingAmb = false;
+    private float footstepLengthAmb;
+
+    public void Update()
+    {
+        //Player footsteps
+        footstepLength -= Time.deltaTime;
+        PlayFootstep();
+        if (footstepLength < 0f) footstepLength = 0f;
+        //Player Dash
+        dashLength -= Time.deltaTime;
+        PlayPDash();
+        if (dashLength < 0f) dashLength = 0f;
+        //Ambrosia Footsteps
+        footstepLengthAmb -= Time.deltaTime;
+        PlayAmbFootsteps();
+        if (footstepLengthAmb < 0f) footstepLengthAmb = 0f;
+    }
+    public void PlayBGM()
+    {
+        BGMAudioSource.clip = BGMClip;
+        BGMAudioSource.loop = true;
+        BGMAudioSource.Play();
+    }
+
+    public void PlayFootstep()
+    {
+        if (isWalking && footstepLength < 0f) 
+        {         
+        //set ptich
+        PlayerAudioSource.pitch = Random.Range(0.9f, 1.2f);
+        //pick random from array
+        int index = Random.Range(0, PlyrFootstepsClips.Length);
+        AudioClip footstepClip = PlyrFootstepsClips[index];
+        footstepLength = footstepClip.length;
+        //play sound
+        PlayerAudioSource.PlayOneShot(footstepClip);
+        }
+    }
+    public void SetWalking(bool value)
+    {
+        isWalking = value;
+    }
+    public void PlayPGunFire()
+    {
+        //set the random pitch
+        PlayerAudioSource.pitch = Random.Range(0.8f, 1.2f);
+        //play sound
+        PlayerAudioSource.PlayOneShot(PlyrGunFire);
+    }
+    public void PlayPGunCock()
+    {
+        //reset pitch
+        PlayerAudioSource.pitch = 1f;
+        //play sound
+        PlayerAudioSource.PlayOneShot(PlyrGunCock);
+    }
+    public void PlayGunReload()
+    {
+        //reset pitch
+        PlayerAudioSource.pitch = 1f;
+        //play sound
+        PlayerAudioSource.PlayOneShot(PlyrGunReload);
+    }   
+    public void PlayGunChargeUp()
+    {
+        //incease pitch
+        PlayerAudioSource.pitch += 0.15f;
+        //play sound
+        PlayerAudioSource.PlayOneShot(PlyrGunChargeUp);
+    }
+    public void PlayGunChargeFire()
+    {
+        //Randomise pitch
+        PlayerAudioSource.pitch = Random.Range(0.8f,1.2f);
+        PlayerAudioSource.PlayOneShot(PlyrGunChargeFire);
+    }
+    public void PlayPDash()
+    {
+        if (isDashing && dashLength > 0)
+        {
+            //set ptich
+            PlayerAudioSource.pitch = Random.Range(0.9f, 1.2f);
+            //pick random from array
+            int index = Random.Range(0, PlyrDashClips.Length);
+            AudioClip dashClip = PlyrDashClips[index];
+            dashLength = dashClip.length;
+            //play sound
+            PlayerAudioSource.PlayOneShot(dashClip);
+        }
+    }
+    public void SetDashing(bool value)
+    {
+        isDashing = value;
+    }
+    public void PlayDashEmpty()
+    {
+        PlayerAudioSource.pitch = 1f;
+        PlayerAudioSource.PlayOneShot(PlyrDashEmpty);
+    }
+    public void PlayPDashReady()
+    {
+        PlayerAudioSource.pitch = 1f;
+        PlayerAudioSource.PlayOneShot(PlyrDashReady);
+    }
+    public void PlayEnemyHit()
+    {
+        //randomise pitch
+        EnemyAudioSource.pitch = Random.Range(0.5f, 1.5f);
+        EnemyAudioSource.PlayOneShot(EnHit);
+    }
+    public void PlayAmbFootsteps()
+    {
+        if (isWalkingAmb && footstepLengthAmb < 0f)
+        {
+            //set ptich
+            AmbrosiaAudioSource.pitch = Random.Range(0.9f, 1.2f);
+            //pick random from array
+            int index = Random.Range(0, AmbFootstepsClips.Length);
+            AudioClip footstepClip = AmbFootstepsClips[index];
+            footstepLengthAmb = footstepClip.length;
+            //play sound
+            AmbrosiaAudioSource.PlayOneShot(footstepClip);
+        }
+    }
+}

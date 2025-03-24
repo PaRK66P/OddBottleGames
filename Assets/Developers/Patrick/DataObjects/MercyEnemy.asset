@@ -117,8 +117,8 @@ MonoBehaviour:
   screamChargeSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   screamAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   screamEndSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
-  drawRange: 0
-  drawLeaps: 0
+  drawRange: 1
+  drawLeaps: 1
   drawSpit: 0
   drawLick: 0
   drawScream: 0
