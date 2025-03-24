@@ -28,11 +28,11 @@ public class PlayerAnimationHandler : MonoBehaviour
     [SpineAnimation]
     public string dashAnimation;
 
-    [Header("Transitions")]
+    [Header("Gun Arms")]
     [SpineAnimation]
-    public string turnLeftTransition;
+    public string leftSide;
     [SpineAnimation]
-    public string turnRightTransition;
+    public string rightSide;
 
     private SkeletonAnimation skeletonAnimation;
 
@@ -44,18 +44,28 @@ public class PlayerAnimationHandler : MonoBehaviour
     private bool _isMoving = false;
     private bool _isDashing = false;
 
+    private Spine.TrackEntry _gunArmTrack;
+    private float _currentArmRotationAngleFromRight;
+    private bool _isUsingLeftSide = true;
+
+    public float frame;
+
     // Start is called before the first frame update
     void Start()
     {
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         spineAnimationState = skeletonAnimation.AnimationState;
         skeleton = skeletonAnimation.Skeleton;
+
+        _gunArmTrack = spineAnimationState.SetAnimation(2, rightSide, true);
+        _gunArmTrack.TimeScale = 0.0f;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        _gunArmTrack.TrackTime = frame / 30.0f;
     }
 
     public void UpdateFacingDirection(FacingDirection facingDirection)
@@ -88,11 +98,13 @@ public class PlayerAnimationHandler : MonoBehaviour
 
     public void EndDashAnimation()
     {
-        spineAnimationState.SetEmptyAnimation(1, 0.0f);
-
         if (_isMoving)
         {
             spineAnimationState.SetAnimation(1, runAnimation, true);
+        }
+        else
+        {
+            spineAnimationState.SetEmptyAnimation(1, 0.0f);
         }
         
     }
@@ -105,11 +117,81 @@ public class PlayerAnimationHandler : MonoBehaviour
 
         if (_isDashing) {  return; }
 
-        spineAnimationState.SetEmptyAnimation(1, 0.0f);
-
         if (_isMoving)
         {
             spineAnimationState.SetAnimation(1, runAnimation, true);
+        }
+        else
+        {
+            spineAnimationState.SetEmptyAnimation(1, 0.0f);
+        }
+    }
+
+    public void SetAimDirection(Vector2 direction)
+    {
+        float AngleFromRight = Vector3.SignedAngle(Vector3.right, direction, new Vector3(0.0f, 0.0f, 1.0f));
+
+        if (Mathf.Sign(AngleFromRight) == -1.0f)
+        {
+            AngleFromRight += 360.0f;
+        }
+
+        _currentArmRotationAngleFromRight = AngleFromRight;
+        UpdateAimDirection();
+    }
+
+    private void UpdateAimDirection()
+    {
+        if (_isUsingLeftSide)
+        {
+            if(_currentArmRotationAngleFromRight < 90.0f)
+            {
+                // At   0 degrees it is at frame 0
+                // At  90 degrees it is at frame 10
+                // ((10 * x) / 90) * (1 / 30) = x / 270
+                _gunArmTrack.TrackTime = _currentArmRotationAngleFromRight / 270.0f;
+            }
+            else if(_currentArmRotationAngleFromRight <= 315.0f)
+            {
+                // At  90 degrees it is at frame 10
+                // At 315 degrees it is at frame 60
+                // ((x - 90) / (315 - 90)) * (60 - 10) + 10 * (1 / 30) = (x - 45) / 135
+                _gunArmTrack.TrackTime = (_currentArmRotationAngleFromRight - 45.0f) / 135.0f;
+            }
+            else 
+            {
+                Debug.LogWarning("Shouldn't be using this side arm right now (LEFT)");
+                _gunArmTrack.TrackTime = 2.0f;
+            }
+        }
+        else
+        {
+            if (_currentArmRotationAngleFromRight <= 180.0f && _currentArmRotationAngleFromRight > 90.0f)
+            {
+                // At 180 degrees it is at frame 0
+                // At  90 degrees it is at frame 10
+                // (1 - (x - 90) / 90) * 10 * (1 / 30) = (180 - x) / 270
+                _gunArmTrack.TrackTime = (180 - _currentArmRotationAngleFromRight) / 270.0f;
+            }
+            else if (_currentArmRotationAngleFromRight <= 90.0f)
+            {
+                // At  90 degrees it is at frame 10
+                // At   0 degrees it is at frame 30
+                // (((1 - (x / 90)) * 20) + 10) * (1 / 30) = (135 - x) / 135
+                _gunArmTrack.TrackTime = (135.0f - _currentArmRotationAngleFromRight) / 135.0f;
+            }
+            else if(_currentArmRotationAngleFromRight <= 360.0f && _currentArmRotationAngleFromRight >= 225.0f)
+            {
+                // At 360 degrees it is at frame 30
+                // At 225 degrees it is at frame 60
+                // (((1 - ((x - 225) / (360 - 225))) * 30) + 30) * (1 / 30) = (495 - x) / 135 
+                _gunArmTrack.TrackTime = (495.0f - _currentArmRotationAngleFromRight) / 135.0f; // Just the above equation + (360 / 135)
+            }
+            else
+            {
+                Debug.LogWarning("Shouldn't be using this side arm right now (RIGHT)");
+                _gunArmTrack.TrackTime = 2.0f;
+            }
         }
     }
 }
