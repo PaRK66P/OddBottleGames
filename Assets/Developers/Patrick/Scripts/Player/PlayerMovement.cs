@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     private PlayerManager _playerManager;
+    private PlayerAnimationHandler _playerAnimationHandler;
     private Rigidbody2D rb;
     private GameObject UICanvas;
     private SoundManager _soundManager;
@@ -46,9 +47,10 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();        
     }
 
-    public void InitialiseComponent(ref PlayerManager playerManager, ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas, ref SoundManager soundManager, ref HealthBarScript dHealthbarScript, ref GameObject evolveDashCollider)
+    public void InitialiseComponent(ref PlayerManager playerManager, ref PlayerAnimationHandler playerAnimationHandler, ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas, ref SoundManager soundManager, ref HealthBarScript dHealthbarScript, ref GameObject evolveDashCollider)
     {
         _playerManager = playerManager;
+        _playerAnimationHandler = playerAnimationHandler;
 
         UICanvas = dUICanvas;
 
@@ -109,6 +111,8 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(knockbackForce, ForceMode2D.Impulse);
             knockbackForce = Vector2.zero;
             _isMoving = false;
+
+            _playerAnimationHandler.UpdateMovementAnimation(false);
             return;
         }
 
@@ -124,10 +128,11 @@ public class PlayerMovement : MonoBehaviour
                     {
                         _evolveDashCollider.SetActive(true);
                     }
+
+                    _playerAnimationHandler.StartDashAnimation();
                 }
 
                 dashChargeTimer = 0.0f;
-                StartCoroutine(DashColor());
                 dashTimer += Time.fixedDeltaTime;
 
                 _playerManager.SetDashInvulnerability(true);
@@ -150,9 +155,12 @@ public class PlayerMovement : MonoBehaviour
                     {
                         _evolveDashCollider.SetActive(false);
                     }
+
+                    _playerAnimationHandler.EndDashAnimation();
                 }
 
                 _isMoving = false;
+
                 return;
             }
             else if (Time.time - lastDashInputTime > _debugData.dashInputBuffer) // Buffer has been exceeded
@@ -164,6 +172,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Movement();
+
+        _playerAnimationHandler.UpdateMovementAnimation(_isMoving);
     }
 
     private void Movement()
