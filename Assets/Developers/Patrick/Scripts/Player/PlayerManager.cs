@@ -22,6 +22,8 @@ public class PlayerManager : MonoBehaviour
     private GameObject _evolveDashCollider;
     [SerializeField]
     private SoundManager _soundManager;
+    [SerializeField]
+    private PlayerAnimationHandler _playerAnimationHandler;
 
     private NPlayerInput playerInputManager;
     private PlayerMovement playerMovement;
@@ -44,7 +46,6 @@ public class PlayerManager : MonoBehaviour
     private event EventHandler OnDamageTaken;
 
     private Rigidbody2D rb;
-    private SpriteRenderer image;
 
     private bool isDashing = false;
 
@@ -63,7 +64,6 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        image = GetComponentInChildren<SpriteRenderer>();
 
         playerInputManager = gameObject.AddComponent<NPlayerInput>();
         playerMovement = gameObject.AddComponent<PlayerMovement>();
@@ -80,9 +80,9 @@ public class PlayerManager : MonoBehaviour
 
         PlayerManager manager = this;
         //movement component
-        playerMovement.InitialiseComponent(ref manager, ref playerData, ref debugData, ref UICanvas, ref _soundManager, ref healthBarScript, ref _evolveDashCollider);
+        playerMovement.InitialiseComponent(ref manager, ref _playerAnimationHandler, ref playerData, ref debugData, ref UICanvas, ref _soundManager, ref healthBarScript, ref _evolveDashCollider);
         //shooting component
-        playerShooting.InitialiseComponent(ref playerData, ref debugData, ref playerMovement, ref poolManager, ref _soundManager, ref PlayerCanvas);
+        playerShooting.InitialiseComponent(ref playerData, ref debugData, ref playerMovement, ref _playerAnimationHandler, ref poolManager, ref _soundManager, ref PlayerCanvas);
         playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
 
         canvGroup = gameObject.transform.Find("PlayerCanvas").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
@@ -107,10 +107,6 @@ public class PlayerManager : MonoBehaviour
             {
                 rb.excludeLayers = 0;
                 isDamaged = false;
-                if (image.color == Color.red)
-                {
-                    image.color = Color.white;
-                }
             }
         }
 
@@ -157,7 +153,6 @@ public class PlayerManager : MonoBehaviour
         rb.excludeLayers = playerData.damageLayers;
         isDamaged = true;
         playerInputManager.DisableInput();
-        image.color = Color.red;
         timeOfDamage = Time.time;
         invulnerableTime = damageTime;
         playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);

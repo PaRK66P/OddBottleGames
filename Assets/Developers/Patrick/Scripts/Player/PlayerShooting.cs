@@ -10,9 +10,8 @@ public class PlayerShooting : MonoBehaviour
     //private GameObject[] ammoUIObjects;
     private GameObject reloadUISlider;
 
-    private bool canFire = true;
-
     private Vector2 aimInput = Vector2.right;
+    private Vector2 lastAimInput = Vector2.right;
     private Vector3 shotRotation = new Vector3(0,0,0);
     private bool _isUsingMovementToAim = false;
 
@@ -35,6 +34,7 @@ public class PlayerShooting : MonoBehaviour
     private PlayerData _playerData;
     private PlayerDebugData _debugData;
     private PlayerMovement _playerMovement;
+    private PlayerAnimationHandler _playerAnimationHandler;
     private GameObject _bulletUIObject;
     private BulletUIManager _bulletUIManager;
 
@@ -43,12 +43,13 @@ public class PlayerShooting : MonoBehaviour
 
     private SoundManager _soundManager;
 
-    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref PlayerMovement playerMovement, ref ObjectPoolManager poolManager, ref SoundManager soundManager, ref GameObject dUICanvas)
+    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref PlayerMovement playerMovement, ref PlayerAnimationHandler playerAnimations, ref ObjectPoolManager poolManager, ref SoundManager soundManager, ref GameObject dUICanvas)
     {
         _playerData = playerData;
         _debugData = debugData;
 
         _playerMovement = playerMovement;
+        _playerAnimationHandler = playerAnimations;
 
         currentAmmo = _playerData.maxAmmo;
 
@@ -91,6 +92,7 @@ public class PlayerShooting : MonoBehaviour
                 if (_isUsingMovementToAim)
                 {
                     aimInput = _playerMovement.GetMovementDirection();
+                    UpdateFacingDirection(aimInput);
                 }
 
                 if (chargedAmmo == 0)
@@ -176,6 +178,7 @@ public class PlayerShooting : MonoBehaviour
         Vector2 aimDirection = new Vector2(worldPoint.x - transform.position.x, worldPoint.y - transform.position.y);
 
         aimInput = aimDirection.normalized;
+        UpdateFacingDirection(aimInput);
     }
 
     public void SetControllerAimInput(InputAction.CallbackContext context)
@@ -186,6 +189,7 @@ public class PlayerShooting : MonoBehaviour
         if (inputValue == Vector2.zero) { return; }
 
         aimInput = inputValue;
+        UpdateFacingDirection(aimInput);
     }
 
     public void SetAimToMovement(InputAction.CallbackContext context)
@@ -345,4 +349,18 @@ public class PlayerShooting : MonoBehaviour
         _bulletUIManager.UpdateChargedBulletsUI(chargedAmmo);
     }
     #endregion
+
+    private void UpdateFacingDirection(Vector2 direction)
+    {
+        if(lastAimInput == direction) { return; }
+        lastAimInput = direction;
+
+        float AngleFromRight = Vector3.SignedAngle(Vector3.right, direction, new Vector3(0.0f, 0.0f, 1.0f));
+        if (AngleFromRight > -45.0f && AngleFromRight < 45.0f) { _playerAnimationHandler.UpdateFacingDirection(PlayerAnimationHandler.FacingDirection.RIGHT); }
+        else if (AngleFromRight >= 45.0f && AngleFromRight <= 135.0f) { _playerAnimationHandler.UpdateFacingDirection(PlayerAnimationHandler.FacingDirection.BACK); }
+        else if (AngleFromRight > 135.0f || AngleFromRight < -135.0f) { _playerAnimationHandler.UpdateFacingDirection(PlayerAnimationHandler.FacingDirection.LEFT); }
+        else if (AngleFromRight >= -135.0f || AngleFromRight <= -45.0f) { _playerAnimationHandler.UpdateFacingDirection(PlayerAnimationHandler.FacingDirection.FRONT); }
+
+        _playerAnimationHandler.SetAimDirection(direction);
+    }
 }
