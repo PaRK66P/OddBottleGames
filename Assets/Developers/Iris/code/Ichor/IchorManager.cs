@@ -6,12 +6,22 @@ using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.UI;
 
+enum EN_STATES { NORMAL, DAMAGED, ARMORED, STUNNED, DEAD};
+
 public class IchorManager : MonoBehaviour
 {
     public IchorData data;
-    
+
+    private EN_STATES state;
+
     private float health;
     private GameObject healthbar;
+    private float damageTimer = 0;
+    private float deathTimer = 0;
+
+    private bool isStunned = false;
+    private float stunTimer = 0;
+
     private int phase = 0;
     private GameObject[] weakPoints;
     private bool isArmored = false;
@@ -27,6 +37,8 @@ public class IchorManager : MonoBehaviour
         health = data.health;
         pooler = dPooler;
         prefabName = dPrefabName;
+
+        state = EN_STATES.NORMAL;
 
         foreach(attackPaternsScript c in GetComponents<attackPaternsScript>())
         {
@@ -46,7 +58,7 @@ public class IchorManager : MonoBehaviour
         for (int i = 0; i < data.weakPointsNo[2]; i++)
         {
             weakPoints[i] = Instantiate(data.weakPontsPrefab);
-            weakPoints[i].GetComponent<WeakPointScript>().InsantiateComponent(data.WeakPointsHP, data.weakPointSpriteNorm, data.weakPointSpriteHurt, data.weakPointDamageTimer);
+            weakPoints[i].GetComponent<WeakPointScript>().InsantiateComponent(data.weakPointHealth, data.weakPointSpriteNorm, data.weakPointSpriteHurt, data.weakPointDamageTimer);
             weakPoints[i].SetActive(false);
         }
 
@@ -64,28 +76,69 @@ public class IchorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(health <= data.nextPhaseHpPoint[phase] && !isArmored)
+        if(state == EN_STATES.DEAD)
         {
-            spawnWeakPoints();
-            isArmored = true;
-        }
-        if(isArmored)
-        {
-            int activeWeakPoints = 0;
-            for(int i = 0; i < weakPoints.Count(); ++i)
+            deathTimer -= Time.deltaTime;
+            if(deathTimer <= 0)
             {
-                if (weakPoints[i].activeSelf == true)
+                pooler.ReleaseObject(prefabName, gameObject);
+            }
+        }
+        else
+        {
+            if (isStunned)
+            {
+                stunTimer -= Time.deltaTime;
+                if (stunTimer <= 0)
                 {
-                    activeWeakPoints++;
+                    setStun(false);
                 }
             }
-            if(activeWeakPoints == 0)
+
+            if (state == EN_STATES.DAMAGED)
             {
-                isArmored = false;
-                phase++;
-                changePhase();
+                damageTimer -= Time.deltaTime;
+                if (damageTimer <= 0)
+                {
+                    damageTimer = 0;
+                    if(isStunned)
+                    {
+                        state = EN_STATES.STUNNED;
+                    }
+                    else
+                    {
+                        state = EN_STATES.NORMAL;
+                    }
+                }
+            }
+
+            if (health <= data.nextPhaseHpPoint[phase] && !isArmored)
+            {
+                spawnWeakPoints();
+                isArmored = true;
+                state = EN_STATES.ARMORED;
+            }
+            if (isArmored)
+            {
+                int activeWeakPoints = 0;
+                for (int i = 0; i < weakPoints.Count(); ++i)
+                {
+                    if (weakPoints[i].activeSelf == true)
+                    {
+                        activeWeakPoints++;
+                    }
+                }
+                if (activeWeakPoints == 0)
+                {
+                    isArmored = false;
+                    phase++;
+                    setStun(true);
+                    takeDamage(data.weakFinishDamage);
+                    changePhase();
+                }
             }
         }
+        UpdateSprite();
     }
 
     public void takeDamage(float dmg)
@@ -93,11 +146,14 @@ public class IchorManager : MonoBehaviour
         if(!isArmored)
         {
             health -= dmg;
+            damageTimer = data.damageTimer;
+            state = EN_STATES.DAMAGED;
 
             if(health <= 0)
             {
                 health = 0;
-                pooler.ReleaseObject(prefabName, gameObject);
+                state = EN_STATES.DEAD;
+                deathTimer = data.deathTimer;
             }
             healthbar.GetComponent<Slider>().value = health;
         }
@@ -105,9 +161,22 @@ public class IchorManager : MonoBehaviour
 
     public void setStun(bool b)
     {
+        isStunned = b;
+
+        if(isStunned)
+        {
+            stunTimer = data.stunTimer;
+            state = EN_STATES.STUNNED;
+        }
+        else
+        {
+            stunTimer = 0;
+            state = EN_STATES.NORMAL;
+        }
+
         foreach (attackPaternsScript c in GetComponents<attackPaternsScript>())
         {
-            c.stunned = b;
+            c.stunned = isStunned;
         }
     }
 
@@ -151,6 +220,43 @@ public class IchorManager : MonoBehaviour
         for(int i = 0; i <occupiedWeakPoints.Count(); ++i)
         {
             occupiedWeakPoints[i] = false;
+        }
+    }
+
+    private void UpdateSprite()
+    {
+        switch (state)
+        {
+            case EN_STATES.NORMAL:
+                {
+                    GetComponentInChildren<SpriteRenderer>().sprite = data.Idle;
+                    break;
+                }
+            case EN_STATES.ARMORED:
+                {
+                    GetComponentInChildren<SpriteRenderer>().sprite = data.Armored;
+                    break;
+                }
+            case EN_STATES.DAMAGED:
+                {
+                    GetComponentInChildren<SpriteRenderer>().sprite = data.Hurt;
+                    break;
+                }
+            case EN_STATES.STUNNED:
+                {
+                    GetComponentInChildren<SpriteRenderer>().sprite = data.Stunned;
+                    break;
+                }
+            case EN_STATES.DEAD:
+                {
+                    GetComponentInChildren<SpriteRenderer>().sprite = data.Dead;
+                    break;
+                }
+            default:
+                {
+                    GetComponentInChildren<SpriteRenderer>().sprite = data.Idle;
+                    break;
+                }
         }
     }
 }

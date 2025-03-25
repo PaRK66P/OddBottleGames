@@ -8,6 +8,8 @@ public class IchorData : ScriptableObject
 {
     [Header("Health")]
     public float health = 200;
+    public float damageTimer = 0.5f;
+    public float deathTimer = 0.5f;
     public GameObject healthbar;
     public Sprite healthbarNormalSprite;
     public Sprite healthbarArmoredSprite;
@@ -15,6 +17,8 @@ public class IchorData : ScriptableObject
     [Space]
 
     [Header("Weak Points")]
+    public GameObject weakPontsPrefab;
+    public int[] weakPointsNo = new int[3] { 3, 4, 5 };
     public float weakPointHealth = 15;
     public float weakFinishDamage = 30;
     public float weakPointDamageTimer = 0.5f;
@@ -25,13 +29,7 @@ public class IchorData : ScriptableObject
 
     [Header("Phases")]
     public int[] nextPhaseHpPoint = new int[3] { 80, 50, 20};
-
-    [Space]
-
-    [Header("Sprites")]
-    public GameObject weakPontsPrefab;
-    public float WeakPointsHP = 1;
-    public int[] weakPointsNo = new int[3] { 3, 4, 5 };
+    public float stunTimer = 3;
 
     [Space]
 
@@ -39,6 +37,7 @@ public class IchorData : ScriptableObject
     public Sprite Idle;
     public Sprite Hurt;
     public Sprite Armored;
+    public Sprite Stunned;
     public Sprite Dead;
 
 }
