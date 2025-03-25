@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
+using Spine;
 
 public class PlayerAnimationHandler : MonoBehaviour
 {
@@ -57,7 +58,7 @@ public class PlayerAnimationHandler : MonoBehaviour
         spineAnimationState = skeletonAnimation.AnimationState;
         skeleton = skeletonAnimation.Skeleton;
 
-        _gunArmTrack = spineAnimationState.SetAnimation(2, rightSide, true);
+        _gunArmTrack = spineAnimationState.SetAnimation(2, leftSide, true);
         _gunArmTrack.TimeScale = 0.0f;
 
     }
@@ -65,7 +66,7 @@ public class PlayerAnimationHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _gunArmTrack.TrackTime = frame / 30.0f;
+
     }
 
     public void UpdateFacingDirection(FacingDirection facingDirection)
@@ -75,18 +76,28 @@ public class PlayerAnimationHandler : MonoBehaviour
         switch (facingDirection)
         {
             case FacingDirection.FRONT:
+                skeleton.ScaleX = 1.0f;
+                SetArmSide(true);
                 spineAnimationState.SetAnimation(0, frontDirection, skeletonAnimation);
                 break;
             case FacingDirection.BACK:
+                skeleton.ScaleX = 1.0f;
+                SetArmSide(false);
                 spineAnimationState.SetAnimation(0, backDirection, skeletonAnimation);
                 break;
             case FacingDirection.LEFT:
-            case FacingDirection.RIGHT:
+                skeleton.ScaleX = 1.0f;
+                SetArmSide(true);
+                spineAnimationState.SetAnimation(0, sideDirection, skeletonAnimation);
+                break;
+            case FacingDirection.RIGHT: // Right side animations are funky as the whole skeleton's scale is reversed
+                skeleton.ScaleX = -1.0f;
+                SetArmSide(true);
                 spineAnimationState.SetAnimation(0, sideDirection, skeletonAnimation);
                 break;
         }
 
-        skeleton.ScaleX = (facingDirection == FacingDirection.RIGHT) ? -1.0f : 1.0f;
+        UpdateAimDirection();
 
         currentDirection = facingDirection;
     }
@@ -127,8 +138,29 @@ public class PlayerAnimationHandler : MonoBehaviour
         }
     }
 
+    private void SetArmSide(bool isLeftSide)
+    {
+        if (isLeftSide == _isUsingLeftSide) { return; }
+        _isUsingLeftSide = isLeftSide;
+
+        if (_isUsingLeftSide)
+        {
+            _gunArmTrack = spineAnimationState.SetAnimation(2, leftSide, true);
+        }
+        else
+        {
+            _gunArmTrack = spineAnimationState.SetAnimation(2, rightSide, true);
+        }
+
+        _gunArmTrack.TimeScale = 0.0f;
+
+    }
+
+
     public void SetAimDirection(Vector2 direction)
     {
+        if(currentDirection == FacingDirection.RIGHT) { direction.x *= -1.0f; }
+
         float AngleFromRight = Vector3.SignedAngle(Vector3.right, direction, new Vector3(0.0f, 0.0f, 1.0f));
 
         if (Mathf.Sign(AngleFromRight) == -1.0f)

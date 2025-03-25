@@ -355,11 +355,12 @@ public class PlayerShooting : MonoBehaviour
         if(lastAimInput == direction) { return; }
         lastAimInput = direction;
 
-
         float AngleFromRight = Vector3.SignedAngle(Vector3.right, direction, new Vector3(0.0f, 0.0f, 1.0f));
         if (AngleFromRight > -45.0f && AngleFromRight < 45.0f) { _playerAnimationHandler.UpdateFacingDirection(PlayerAnimationHandler.FacingDirection.RIGHT); }
         else if (AngleFromRight >= 45.0f && AngleFromRight <= 135.0f) { _playerAnimationHandler.UpdateFacingDirection(PlayerAnimationHandler.FacingDirection.BACK); }
         else if (AngleFromRight > 135.0f || AngleFromRight < -135.0f) { _playerAnimationHandler.UpdateFacingDirection(PlayerAnimationHandler.FacingDirection.LEFT); }
         else if (AngleFromRight >= -135.0f || AngleFromRight <= -45.0f) { _playerAnimationHandler.UpdateFacingDirection(PlayerAnimationHandler.FacingDirection.FRONT); }
+
+        _playerAnimationHandler.SetAimDirection(direction);
     }
 }

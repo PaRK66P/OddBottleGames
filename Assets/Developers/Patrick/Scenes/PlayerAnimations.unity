@@ -210,7 +210,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 13.9
+  orthographic size: 3.26
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -511,12 +511,24 @@ PrefabInstance:
       value: Directions/Front
       objectReference: {fileID: 0}
     - target: {fileID: 7124493148972535769, guid: 21aad766301008646808e8ca518c582b, type: 3}
+      propertyPath: leftSide
+      value: GunTurn_WithBody_L
+      objectReference: {fileID: 0}
+    - target: {fileID: 7124493148972535769, guid: 21aad766301008646808e8ca518c582b, type: 3}
+      propertyPath: rightSide
+      value: GunTurn_WithBody_R
+      objectReference: {fileID: 0}
+    - target: {fileID: 7124493148972535769, guid: 21aad766301008646808e8ca518c582b, type: 3}
       propertyPath: dashAnimation
       value: Dash
       objectReference: {fileID: 0}
     - target: {fileID: 8400696822411840112, guid: 21aad766301008646808e8ca518c582b, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771183044379199280, guid: 21aad766301008646808e8ca518c582b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.96
       objectReference: {fileID: 0}
     - target: {fileID: 9014771222190238073, guid: 21aad766301008646808e8ca518c582b, type: 3}
       propertyPath: UICanvas

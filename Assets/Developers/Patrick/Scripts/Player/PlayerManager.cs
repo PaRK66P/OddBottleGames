@@ -46,7 +46,6 @@ public class PlayerManager : MonoBehaviour
     private event EventHandler OnDamageTaken;
 
     private Rigidbody2D rb;
-    private SpriteRenderer image;
 
     private bool isDashing = false;
 
@@ -65,7 +64,6 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        image = GetComponentInChildren<SpriteRenderer>();
 
         playerInputManager = gameObject.AddComponent<NPlayerInput>();
         playerMovement = gameObject.AddComponent<PlayerMovement>();
@@ -109,10 +107,6 @@ public class PlayerManager : MonoBehaviour
             {
                 rb.excludeLayers = 0;
                 isDamaged = false;
-                if (image.color == Color.red)
-                {
-                    image.color = Color.white;
-                }
             }
         }
 
@@ -159,7 +153,6 @@ public class PlayerManager : MonoBehaviour
         rb.excludeLayers = playerData.damageLayers;
         isDamaged = true;
         playerInputManager.DisableInput();
-        image.color = Color.red;
         timeOfDamage = Time.time;
         invulnerableTime = damageTime;
         playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);
