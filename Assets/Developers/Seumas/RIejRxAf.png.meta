@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 00882d215b6b26748baa6f8b34883001
+guid: 7c0bd26271b1de2408363f2cda3d9f45
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3867290839764089625
-    second: Wallbig_0
+      213: 4318193431045292114
+    second: RIejRxAf_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -84,7 +84,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Standalone
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -97,7 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -165,7 +165,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Wallbig_0
+      name: RIejRxAf_0
       rect:
         serializedVersion: 2
         x: 0
@@ -177,16 +177,16 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7e44db4987f945ac0800000000000000
-      internalID: -3867290839764089625
+      spriteID: d1c337cb20f0b8f45b5cf7b918b63030
+      internalID: -400814973
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_1
+      name: RIejRxAf_1
       rect:
         serializedVersion: 2
         x: 150
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0096735762dc9fa40a1997dce692c4eb
-      internalID: 1161582232
+      spriteID: f5c44c61b2ff81643bad7428977fe883
+      internalID: -146641322
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_2
+      name: RIejRxAf_2
       rect:
         serializedVersion: 2
         x: 300
@@ -221,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8584c19b8beccd84cbf2c002558bb7f0
-      internalID: -638134247
+      spriteID: 4f55adc93f1abdc43847ba2683550cdc
+      internalID: 2077886896
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_3
+      name: RIejRxAf_3
       rect:
         serializedVersion: 2
         x: 450
@@ -242,14 +242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2222fd72a05211e48b7b9f690b3a3154
-      internalID: -1177414632
+      spriteID: c064476f57fd4344ea9b40b82c0e3325
+      internalID: 295257853
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_4
+      name: RIejRxAf_4
       rect:
         serializedVersion: 2
         x: 0
@@ -263,14 +263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2cec8daf8f58c0345be84cea216c7ffd
-      internalID: 284197457
+      spriteID: ce4ca8d4b9a314f4584689330fe8a43c
+      internalID: 505412822
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_5
+      name: RIejRxAf_5
       rect:
         serializedVersion: 2
         x: 150
@@ -284,14 +284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 146dfd8a85bd16f419195d5be264ae84
-      internalID: -1294427730
+      spriteID: f474fd7911e6fd146a3d6c1110f73991
+      internalID: -1431701155
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_6
+      name: RIejRxAf_6
       rect:
         serializedVersion: 2
         x: 300
@@ -305,14 +305,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9308f7d289902a43b1d0773158386ce
-      internalID: 607903536
+      spriteID: af3efab0ad265274aa4d8fb8f6798732
+      internalID: 1696063509
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_7
+      name: RIejRxAf_7
       rect:
         serializedVersion: 2
         x: 450
@@ -326,14 +326,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a2264e5d916f7e49bab8426d0b242e2
-      internalID: -660711419
+      spriteID: 26404edaa1442ab48bf927505635f96d
+      internalID: 701827229
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_8
+      name: RIejRxAf_8
       rect:
         serializedVersion: 2
         x: 0
@@ -347,14 +347,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d329d2ba3af4f543a453ca18f4d7efa
-      internalID: -2060664064
+      spriteID: ca98eb77e76c0ed46981b77f2c78f3d6
+      internalID: -1870795490
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_9
+      name: RIejRxAf_9
       rect:
         serializedVersion: 2
         x: 150
@@ -368,14 +368,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2360aebc0efce794c8f6e84d895c0fac
-      internalID: -566556274
+      spriteID: 2b93bbc3e1d8af045aacaebc69fb09f0
+      internalID: -1733783237
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_10
+      name: RIejRxAf_10
       rect:
         serializedVersion: 2
         x: 300
@@ -389,14 +389,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1785ed529d0b9a0438b48bc9c22084ae
-      internalID: -1733706617
+      spriteID: ba86c61dc9bfeb14d8e66056a841c1fb
+      internalID: -809846312
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_11
+      name: RIejRxAf_11
       rect:
         serializedVersion: 2
         x: 450
@@ -410,14 +410,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29200c547de55f14c9256915f1ce8d20
-      internalID: 747117406
+      spriteID: bc964870f4f5d0041b9487cf5096c93b
+      internalID: -256133128
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_12
+      name: RIejRxAf_12
       rect:
         serializedVersion: 2
         x: 0
@@ -431,14 +431,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a297c0f5b9a6644aa28b0c7b7d5cddf
-      internalID: 1924808800
+      spriteID: 0bd6fb589f57a7e4a89378691540df6d
+      internalID: -728780638
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_13
+      name: RIejRxAf_13
       rect:
         serializedVersion: 2
         x: 150
@@ -452,14 +452,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 144c3e4cf7ab318499163147a92bbe35
-      internalID: -1829227411
+      spriteID: 4c765b5834a357443818b26416d9f82f
+      internalID: 1891765449
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_14
+      name: RIejRxAf_14
       rect:
         serializedVersion: 2
         x: 300
@@ -473,14 +473,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6285d30d7dd1dc645872e389ace8668e
-      internalID: 1463994794
+      spriteID: d99a594bc63597549b0444d58b33ab4a
+      internalID: 1641087664
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wallbig_15
+      name: RIejRxAf_15
       rect:
         serializedVersion: 2
         x: 450
@@ -494,8 +494,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3dd40e50da348fd4a9d615f4dadbf70d
-      internalID: -741127675
+      spriteID: 6452bfd53b43de24ca1b2367d5e0dd8f
+      internalID: 724030060
       vertices: []
       indices: 
       edges: []
@@ -503,7 +503,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 1200231b040cce14093182dbc3db4033
+    spriteID: 2f9038a6e37e63449b0e63da20a051c5
     internalID: 0
     vertices: []
     indices: 
@@ -511,22 +511,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Wallbig_0: -3867290839764089625
-      Wallbig_1: 1161582232
-      Wallbig_10: -1733706617
-      Wallbig_11: 747117406
-      Wallbig_12: 1924808800
-      Wallbig_13: -1829227411
-      Wallbig_14: 1463994794
-      Wallbig_15: -741127675
-      Wallbig_2: -638134247
-      Wallbig_3: -1177414632
-      Wallbig_4: 284197457
-      Wallbig_5: -1294427730
-      Wallbig_6: 607903536
-      Wallbig_7: -660711419
-      Wallbig_8: -2060664064
-      Wallbig_9: -566556274
+      RIejRxAf_0: -400814973
+      RIejRxAf_1: -146641322
+      RIejRxAf_10: -809846312
+      RIejRxAf_11: -256133128
+      RIejRxAf_12: -728780638
+      RIejRxAf_13: 1891765449
+      RIejRxAf_14: 1641087664
+      RIejRxAf_15: 724030060
+      RIejRxAf_2: 2077886896
+      RIejRxAf_3: 295257853
+      RIejRxAf_4: 505412822
+      RIejRxAf_5: -1431701155
+      RIejRxAf_6: 1696063509
+      RIejRxAf_7: 701827229
+      RIejRxAf_8: -1870795490
+      RIejRxAf_9: -1733783237
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
