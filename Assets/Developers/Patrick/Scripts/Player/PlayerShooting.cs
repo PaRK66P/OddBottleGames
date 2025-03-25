@@ -16,6 +16,7 @@ public class PlayerShooting : MonoBehaviour
     private bool _isUsingMovementToAim = false;
 
     private ObjectPoolManager _poolManager;
+    private TimeManager _timeManager;
 
     private bool startCharging = false;
     private float timeForChargedShot = 1.0f;
@@ -43,7 +44,7 @@ public class PlayerShooting : MonoBehaviour
 
     private SoundManager _soundManager;
 
-    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref PlayerMovement playerMovement, ref PlayerAnimationHandler playerAnimations, ref ObjectPoolManager poolManager, ref SoundManager soundManager, ref GameObject dUICanvas)
+    public void InitialiseComponent(ref PlayerData playerData, ref PlayerDebugData debugData, ref PlayerMovement playerMovement, ref PlayerAnimationHandler playerAnimations, ref ObjectPoolManager poolManager, ref TimeManager timeManager, ref SoundManager soundManager, ref GameObject dUICanvas)
     {
         _playerData = playerData;
         _debugData = debugData;
@@ -54,6 +55,7 @@ public class PlayerShooting : MonoBehaviour
         currentAmmo = _playerData.maxAmmo;
 
         _poolManager = poolManager;
+        _timeManager = timeManager;
 
         _soundManager = soundManager;
 
@@ -143,6 +145,7 @@ public class PlayerShooting : MonoBehaviour
         interrupted = false;
         charging = true;
 
+        _playerMovement.SetSpeedScale(_playerData.chargeSlowDown);
         _soundManager.PlayGunChargeUp();
     }
 
@@ -332,6 +335,9 @@ public class PlayerShooting : MonoBehaviour
 
         _soundManager.PlayGunChargeFire();
 
+        float impactFrameTimescale = 1.0f + (((float)chargedAmmo) * (_playerData.maxChargeShotImpactSlowDown - 1.0f)) / ((float)_playerData.maxAmmo);
+        _timeManager.AddTimescaleForDuration(impactFrameTimescale, _playerData.chargeShotImpactFrameDuration);
+
         Fire(direction, chargedAmmo, localDamageMultiplier);
 
         ReleaseChargedShots();
@@ -346,7 +352,8 @@ public class PlayerShooting : MonoBehaviour
 
         chargedAmmo = 0;
 
-        _bulletUIManager.UpdateChargedBulletsUI(chargedAmmo);
+        _playerMovement.ResetSpeedScale();
+        _bulletUIManager.UpdateLoadedBullets(currentAmmo);
     }
     #endregion
 

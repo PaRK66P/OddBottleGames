@@ -9,6 +9,8 @@ public class PlayerData : ScriptableObject
     [Header("Health")]
     public float health = 100;
     public GameObject healthbar;
+    [Range(0.0f, 1.0f)] public float damageImpactFrameScale;
+    [Min(0.0f)] public float damageImpactFrameDuration;
 
     [Header("Movement")]
     [Min(0.0f)] public float speed;
@@ -42,6 +44,9 @@ public class PlayerData : ScriptableObject
     [Min(1)] public int maxAmmo;
     [Min(0.0f)] public float reloadTime;
     [Min(1.0f)] public float damageMultiplier;
+    [Range(0.0f, 1.0f)] public float chargeSlowDown;
+    [Range(0.0f, 1.0f)] public float maxChargeShotImpactSlowDown;
+    [Min(0.0f)] public float chargeShotImpactFrameDuration;
 
     [Header("Projectile")]
     public GameObject baseProjectileType;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private float lastDashInputTime = -10.0f;
     private bool _isMoving = false;
     private bool _isMovingLastState = false;
+    private float _speedScale = 1.0f;
 
     private Vector2 knockbackForce = Vector2.zero;
 
@@ -181,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
         _isMoving = (movementInput != Vector2.zero);
 
         // Get the speed the player wants to move at
-        Vector2 targetSpeed = movementInput * _playerData.speed;
+        Vector2 targetSpeed = movementInput * _playerData.speed * _speedScale;
 
         // Calculate acceleration type
         float accelerationRate = (targetSpeed.sqrMagnitude > 0.0001f) ? _playerData.accelerationRate : _playerData.decelerationRate;
@@ -249,6 +251,18 @@ public class PlayerMovement : MonoBehaviour
             evolved = false;
         }
         
+    }
+
+    public void SetSpeedScale(float scale)
+    {
+        _speedScale = scale;
+        _playerAnimationHandler.UpdateMovementScale(scale);
+    }
+
+    public void ResetSpeedScale()
+    {
+        _speedScale = 1.0f;
+        _playerAnimationHandler.UpdateMovementScale(1.0f);
     }
 
     public void RechargeDashes(int n = 3)

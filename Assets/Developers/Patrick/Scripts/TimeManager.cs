@@ -42,7 +42,10 @@ public class TimeManager : MonoBehaviour
             {
                 _currentTimescale = GetLowestTimescale();
                 Time.timeScale = _currentTimescale;
-                _checkTimer = _timeList[_currentTimescale];
+                if(_currentTimescale != _defaultTimescale)
+                {
+                    _checkTimer = _timeList[_currentTimescale];
+                }
             }
         }
     }
@@ -60,6 +63,11 @@ public class TimeManager : MonoBehaviour
     public void SetDefaultTimescale(float timescale)
     {
         _defaultTimescale = timescale;
+
+        if (_defaultTimescale < _currentTimescale)
+        {
+            _currentTimescale = _defaultTimescale;
+        }
     }
 
     public void AddTimescaleForDuration(float timescale, float duration)

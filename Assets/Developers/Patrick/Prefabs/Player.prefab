@@ -591,7 +591,8 @@ MonoBehaviour:
   debugData: {fileID: 11400000, guid: 4d082aba971073f4eb298f409e371475, type: 2}
   _evolveDashCollider: {fileID: 2293566067234523102}
   _soundManager: {fileID: 0}
-  _playerAnimationHandler: {fileID: 0}
+  _timeManager: {fileID: 0}
+  _playerAnimationHandler: {fileID: 7124493148972535769}
   fadeIn: 0
   fadeOut: 0
   fadeTextTimer: 0
