@@ -35,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 6827650287450667780}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5067, y: 0.5067, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -80,8 +80,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseNo: 0
-  pattern: 0/1,
-  timeBetweenAttacks: 1.5
+  pattern: 7,
+  timeBetweenAttacks: 2
   attackList:
   - {fileID: 2472219134077984931, guid: 68b2924def505054287b192c24f567c7, type: 3}
   - {fileID: 283872786456334360, guid: 9d9997f6426b88845a6fea70f47e30c2, type: 3}
@@ -90,6 +90,7 @@ MonoBehaviour:
   - {fileID: 8618366252599702755, guid: fb6a72a3e5ba6144f9d3bd9a4ac441e3, type: 3}
   - {fileID: 8979594851478723655, guid: 5dca40a6389637b4f966665cfff1c444, type: 3}
   - {fileID: 8751244404110851157, guid: e20070b5c4a80a14984c950a5dcf4fce, type: 3}
+  - {fileID: 5169843901188423363, guid: 81d6f229c6112e34089c92b2c835c40c, type: 3}
   pooler: {fileID: 0}
   stunned: 0
 --- !u!114 &2995313866300269876
@@ -115,6 +116,7 @@ MonoBehaviour:
   - {fileID: 8618366252599702755, guid: fb6a72a3e5ba6144f9d3bd9a4ac441e3, type: 3}
   - {fileID: 8979594851478723655, guid: 5dca40a6389637b4f966665cfff1c444, type: 3}
   - {fileID: 8751244404110851157, guid: e20070b5c4a80a14984c950a5dcf4fce, type: 3}
+  - {fileID: 5169843901188423363, guid: 81d6f229c6112e34089c92b2c835c40c, type: 3}
   pooler: {fileID: 0}
   stunned: 0
 --- !u!114 &4690416888767236606
@@ -140,6 +142,7 @@ MonoBehaviour:
   - {fileID: 8618366252599702755, guid: fb6a72a3e5ba6144f9d3bd9a4ac441e3, type: 3}
   - {fileID: 8979594851478723655, guid: 5dca40a6389637b4f966665cfff1c444, type: 3}
   - {fileID: 8751244404110851157, guid: e20070b5c4a80a14984c950a5dcf4fce, type: 3}
+  - {fileID: 5169843901188423363, guid: 81d6f229c6112e34089c92b2c835c40c, type: 3}
   pooler: {fileID: 0}
   stunned: 0
 --- !u!58 &4128831174864724833
