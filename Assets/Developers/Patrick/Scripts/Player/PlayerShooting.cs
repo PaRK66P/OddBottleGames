@@ -174,6 +174,8 @@ public class PlayerShooting : MonoBehaviour
         Vector2 inputValue = context.ReadValue<Vector2>();
         if(inputValue == new Vector2(transform.position.x, transform.position.y)) { return; }
 
+        Debug.Log(Camera.main);
+
         Vector3 worldPoint = Camera.main.ScreenToWorldPoint(new Vector3(inputValue.x, inputValue.y, Camera.main.transform.position.z));
         Vector2 aimDirection = new Vector2(worldPoint.x - transform.position.x, worldPoint.y - transform.position.y);
 
