@@ -15,6 +15,7 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
+        // Doesn't work for default timescales below 1.0f
         if (_isNotDefaultTimescale)
         {
             foreach (float key in _timeList.Keys.ToArray())
@@ -64,9 +65,10 @@ public class TimeManager : MonoBehaviour
     {
         _defaultTimescale = timescale;
 
-        if (_defaultTimescale < _currentTimescale)
+        if (timescale < _currentTimescale)
         {
-            _currentTimescale = _defaultTimescale;
+            _currentTimescale = timescale;
+            Time.timeScale = timescale;
         }
     }
 
