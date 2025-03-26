@@ -6,7 +6,7 @@ public class bossProjectile : MonoBehaviour
 {
     public float speed;
     public Rigidbody2D rb;
-    ObjectPoolManager pooler;
+    public ObjectPoolManager pooler;
     string prefabName;
 
     // Start is called before the first frame update
