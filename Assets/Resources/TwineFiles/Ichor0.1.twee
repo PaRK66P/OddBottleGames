@@ -13,7 +13,7 @@ Ichor 0.1
 
 
 :: 1 {"position":"200,300","size":"100,100"}
-Ichor: It is...a feat that your recklessness has...brought, you so far. [[Next->2]]
+Ichor: It is...a feat that your recklessness has...brought, you so far. [[2]]
 
 
 
@@ -27,4 +27,4 @@ Ichor: But so far, only, shall you go. [[Begin]]
 
 
 :: Untitled Passage {"position":"0,300","size":"100,100"}
-Ichor: At last... [[Next->1]]
+Ichor: At last... [[1]]
