@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   healthbar: {fileID: 3386940066090490567, guid: 2b12af912958a8242b3ed9adbd473d6a, type: 3}
+  damageImpactFrameScale: 0.2
+  damageImpactFrameDuration: 0.05
   speed: 12
   acceleration: 0.8
   accelerationRate: 40
@@ -43,6 +45,9 @@ MonoBehaviour:
   maxAmmo: 6
   reloadTime: 1
   damageMultiplier: 1.5
+  chargeSlowDown: 0.444
+  maxChargeShotImpactSlowDown: 0.5
+  chargeShotImpactFrameDuration: 0.05
   baseProjectileType: {fileID: 1223489425459614113, guid: 50e3b8fba1c074f4ba558c89a7b1613e, type: 3}
   baseProjectileSpeed: 20
   controlLossTime: 0.2

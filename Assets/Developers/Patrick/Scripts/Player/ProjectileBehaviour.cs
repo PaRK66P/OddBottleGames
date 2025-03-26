@@ -79,9 +79,17 @@ public class ProjectileBehaviour : MonoBehaviour
             {
                 collision.gameObject.GetComponentInParent<CompanionManager>().TakeDamage(damage);
             }
-            else if(collision.gameObject.tag == "Boss")
+            //else if(collision.gameObject.tag == "Boss")
+            //{
+            //    collision.gameObject.GetComponent<boss>().takeDamage(damage);
+            //}
+            else if (collision.gameObject.tag == "Boss")
             {
-                collision.gameObject.GetComponent<boss>().takeDamage(damage);
+                collision.gameObject.GetComponent<IchorManager>().takeDamage(damage);
+            }
+            else if (collision.gameObject.tag == "WeakPoint")
+            {
+                collision.gameObject.GetComponent<WeakPointScript>().takeDamage(damage);
             }
             else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
             {

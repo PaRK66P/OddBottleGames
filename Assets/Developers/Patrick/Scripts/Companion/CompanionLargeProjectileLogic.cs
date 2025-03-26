@@ -34,6 +34,11 @@ public class CompanionLargeProjectileLogic : MonoBehaviour
         _startPosition = startPosition;
         _endPosition = endPosition;
 
+        //Right is default forwards
+        Vector2 _direction = _endPosition - _startPosition;
+        float AngleFromRight = Vector3.SignedAngle(Vector3.right, new Vector3(_direction.x, _direction.y, Vector3.right.z), new Vector3(0.0f, 0.0f, 1.0f));
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, AngleFromRight);
+
         rb = GetComponent<Rigidbody2D>();
         _isActive = true;
     }
