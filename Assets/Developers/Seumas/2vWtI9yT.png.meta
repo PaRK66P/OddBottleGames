@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a4ffc3a5d15956e47985449205d8ada8
+guid: 0820061ed46f29a42834d02491c16645
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5374415733535220155
-    second: wallbrick4_0
+      213: 6297563708136061436
+    second: 2vWtI9yT_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -84,7 +84,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Standalone
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -97,7 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -165,13 +165,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: wallbrick4_0
+      name: 2vWtI9yT_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 150
-        height: 150
+        width: 180
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +179,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 54edc5f7d5d3a65b0800000000000000
-      internalID: -5374415733535220155
+      spriteID: cf977dd93d0756750800000000000000
+      internalID: 6297563708136061436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2vWtI9yT_1
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 180
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dafe6cd8839f334e8fe860ad6540ba7
+      internalID: 2094012499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2vWtI9yT_2
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 180
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01c87827e1ae0fc41b1b86b0832fa188
+      internalID: -207082845
       vertices: []
       indices: 
       edges: []
@@ -188,7 +230,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 26ab6dfdfc61b5443831e67b31b1cb4c
     internalID: 0
     vertices: []
     indices: 
@@ -196,7 +238,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      wallbrick4_0: -5374415733535220155
+      2vWtI9yT_0: 6297563708136061436
+      2vWtI9yT_1: 2094012499
+      2vWtI9yT_2: -207082845
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
