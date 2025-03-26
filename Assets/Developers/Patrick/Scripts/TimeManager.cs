@@ -15,6 +15,7 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
+        // Doesn't work for default timescales below 1.0f
         if (_isNotDefaultTimescale)
         {
             foreach (float key in _timeList.Keys.ToArray())
@@ -42,7 +43,10 @@ public class TimeManager : MonoBehaviour
             {
                 _currentTimescale = GetLowestTimescale();
                 Time.timeScale = _currentTimescale;
-                _checkTimer = _timeList[_currentTimescale];
+                if(_currentTimescale != _defaultTimescale)
+                {
+                    _checkTimer = _timeList[_currentTimescale];
+                }
             }
         }
     }
@@ -60,6 +64,12 @@ public class TimeManager : MonoBehaviour
     public void SetDefaultTimescale(float timescale)
     {
         _defaultTimescale = timescale;
+
+        if (timescale < _currentTimescale)
+        {
+            _currentTimescale = timescale;
+            Time.timeScale = timescale;
+        }
     }
 
     public void AddTimescaleForDuration(float timescale, float duration)

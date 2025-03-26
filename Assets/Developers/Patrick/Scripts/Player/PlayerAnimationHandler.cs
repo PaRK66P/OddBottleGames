@@ -46,7 +46,9 @@ public class PlayerAnimationHandler : MonoBehaviour
     private bool _isDashing = false;
 
     private Spine.TrackEntry _gunArmTrack;
+    private Spine.TrackEntry _movementTrack;
     private float _currentArmRotationAngleFromRight;
+    private float _currentMovementScale = 1.0f;
     private bool _isUsingLeftSide = true;
 
     public float frame;
@@ -60,13 +62,6 @@ public class PlayerAnimationHandler : MonoBehaviour
 
         _gunArmTrack = spineAnimationState.SetAnimation(2, leftSide, true);
         _gunArmTrack.TimeScale = 0.0f;
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void UpdateFacingDirection(FacingDirection facingDirection)
@@ -111,7 +106,8 @@ public class PlayerAnimationHandler : MonoBehaviour
     {
         if (_isMoving)
         {
-            spineAnimationState.SetAnimation(1, runAnimation, true);
+            _movementTrack = spineAnimationState.SetAnimation(1, runAnimation, true);
+            _movementTrack.TimeScale = _currentMovementScale;
         }
         else
         {
@@ -130,11 +126,22 @@ public class PlayerAnimationHandler : MonoBehaviour
 
         if (_isMoving)
         {
-            spineAnimationState.SetAnimation(1, runAnimation, true);
+            _movementTrack = spineAnimationState.SetAnimation(1, runAnimation, true);
+            _movementTrack.TimeScale = _currentMovementScale;
         }
         else
         {
             spineAnimationState.SetEmptyAnimation(1, 0.0f);
+        }
+    }
+
+    public void UpdateMovementScale(float scale)
+    {
+        _currentMovementScale = scale;
+
+        if (_isMoving)
+        {
+            _movementTrack.TimeScale = scale;
         }
     }
 

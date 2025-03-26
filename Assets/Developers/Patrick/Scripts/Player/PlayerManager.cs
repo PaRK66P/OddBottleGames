@@ -23,6 +23,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private SoundManager _soundManager;
     [SerializeField]
+    private TimeManager _timeManager;
+    [SerializeField]
     private PlayerAnimationHandler _playerAnimationHandler;
 
     private NPlayerInput playerInputManager;
@@ -82,7 +84,7 @@ public class PlayerManager : MonoBehaviour
         //movement component
         playerMovement.InitialiseComponent(ref manager, ref _playerAnimationHandler, ref playerData, ref debugData, ref UICanvas, ref _soundManager, ref healthBarScript, ref _evolveDashCollider);
         //shooting component
-        playerShooting.InitialiseComponent(ref playerData, ref debugData, ref playerMovement, ref _playerAnimationHandler, ref poolManager, ref _soundManager, ref PlayerCanvas);
+        playerShooting.InitialiseComponent(ref playerData, ref debugData, ref playerMovement, ref _playerAnimationHandler, ref poolManager, ref _timeManager, ref _soundManager, ref PlayerCanvas);
         playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
 
         canvGroup = gameObject.transform.Find("PlayerCanvas").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
@@ -146,7 +148,7 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 1.0f, float ammount = 10)
+    public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 10.0f, float ammount = 10)
     {
         if (!CanBeDamaged()) { return; }
 
@@ -168,6 +170,8 @@ public class PlayerManager : MonoBehaviour
             health = 20.0f;
         }
         healthBarScript.SetValue(health);
+
+        _timeManager.AddTimescaleForDuration(playerData.damageImpactFrameScale, playerData.damageImpactFrameDuration * (ammount / 10.0f));
     }
 
     public void Heal(float ammount)
