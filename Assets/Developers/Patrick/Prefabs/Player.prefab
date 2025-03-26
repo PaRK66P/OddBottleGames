@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: cfdc09bbf77d53641b68c22aa3fc2178, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 685d8e1385f4aa2498fc962917d2c934, type: 2}
   initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
@@ -467,10 +467,9 @@ MonoBehaviour:
   sideDirection: Directions/Side
   runAnimation: Run
   dashAnimation: Dash
-  damageAnimation: Dash
+  damageAnimation: Hurt
   leftSide: GunTurn_WithBody_L
   rightSide: GunTurn_WithBody_R
-  frame: 0
 --- !u!1 &7717079466058900521
 GameObject:
   m_ObjectHideFlags: 0
