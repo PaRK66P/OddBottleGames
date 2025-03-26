@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 06e648fa4e37c1f48b3b9b261ca35559
+guid: d291f01dd3027684cb2fe64bfe8be1e0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1329260211267162383
-    second: wallbrick3_0
+      213: -2269425278539920199
+    second: walltopplaceholderTiles_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 120
+  spritePixelsToUnits: 150
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +75,20 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,24 +110,11 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -127,7 +127,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -140,7 +140,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -153,7 +153,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -165,13 +165,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: wallbrick3_0
+      name: walltopplaceholderTiles_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 150
-        height: 150
+        width: 180
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +179,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1fe2c5d61e48d8de0800000000000000
-      internalID: -1329260211267162383
+      spriteID: 9bc065cabb16180e0800000000000000
+      internalID: -2269425278539920199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walltopplaceholderTiles_1
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 180
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88f6e6299bf61174d93cb49dd22573b3
+      internalID: 22367789
       vertices: []
       indices: 
       edges: []
@@ -188,7 +209,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 04aafcbe2a8dacb4385a650afdbcf217
     internalID: 0
     vertices: []
     indices: 
@@ -196,7 +217,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      wallbrick3_0: -1329260211267162383
+      walltopplaceholderTiles_0: -2269425278539920199
+      walltopplaceholderTiles_1: 22367789
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
