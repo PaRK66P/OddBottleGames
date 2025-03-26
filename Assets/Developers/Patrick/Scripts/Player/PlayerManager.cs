@@ -103,6 +103,7 @@ public class PlayerManager : MonoBehaviour
         {
             if(Time.time - timeOfDamage >= playerData.controlLossTime) // Exceeded the time for player to not have control
             {
+                _playerAnimationHandler.EndDamageAnimation();
                 playerInputManager.EnableInput();
             }
             if(Time.time - timeOfDamage > invulnerableTime) // We've exceeded the time for being invulnerable
@@ -160,7 +161,7 @@ public class PlayerManager : MonoBehaviour
         playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);
         playerShooting.InterruptFiring();
         fadeOut = true;
-
+        _playerAnimationHandler.StartDamageAnimation();
         
         OnDamageTaken?.Invoke(this, EventArgs.Empty);
 

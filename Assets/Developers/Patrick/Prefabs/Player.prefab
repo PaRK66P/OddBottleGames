@@ -467,6 +467,7 @@ MonoBehaviour:
   sideDirection: Directions/Side
   runAnimation: Run
   dashAnimation: Dash
+  damageAnimation: Dash
   leftSide: GunTurn_WithBody_L
   rightSide: GunTurn_WithBody_R
   frame: 0
