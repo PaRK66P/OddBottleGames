@@ -41,12 +41,17 @@ public class AISimpleBehaviour : MonoBehaviour
 
     private Color currentColor;
 
-    // Start is called before the first frame update
-    void Start()
+
+    public void Instantiate(ref ObjectPoolManager bObjectPoolManager, ref GameObject bPlayer)
     {
-        player = GameObject.Find("Player");
-        objectPoolManager = GameObject.Find("ObjectPoolManager").GetComponent<ObjectPoolManager>();
-        currentColor = gameObject.GetComponent<SpriteRenderer>().color;
+        isDead = false;
+        shootingTimer = 0.0f;
+        deadTimer = 0.0f;
+        health = 6.0f;
+        inStun = false;
+        objectPoolManager = bObjectPoolManager;
+        player = bPlayer;
+        currentColor = GetComponent<SpriteRenderer>().color;
     }
 
     // Update is called once per frame

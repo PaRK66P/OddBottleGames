@@ -26,6 +26,10 @@ public class enemyScr : MonoBehaviour
         {
             GetComponent<CompanionManager>().InitialiseEnemy(ref dPlayer, ref poolMan, ref dPathfinder, ref UICanvas);
         }
+        if(GetComponent<AISimpleBehaviour>())
+        {
+            GetComponent<AISimpleBehaviour>().Instantiate(ref poolMan, ref dPlayer);
+        }
         //transform.position = pos;
         //transform.rotation = UnityEngine.Quaternion.Euler(rot);
         //timeElapsed = 0;
