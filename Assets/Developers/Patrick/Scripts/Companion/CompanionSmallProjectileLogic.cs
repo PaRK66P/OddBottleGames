@@ -26,6 +26,10 @@ public class CompanionSmallProjectileLogic : MonoBehaviour
         transform.position = startPosition;
 
         _direction = direction;
+        //Right is default forwards
+        float AngleFromRight = Vector3.SignedAngle(Vector3.right, new Vector3(direction.x, direction.y, Vector3.right.z), new Vector3(0.0f, 0.0f, 1.0f));
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, AngleFromRight);
+
         _speed = speed;
         transform.localScale = new Vector3(size, size, 1.0f);
         _damage = damage;

@@ -168,7 +168,7 @@ public class PlayerAnimationHandler : MonoBehaviour
     {
         if(currentDirection == FacingDirection.RIGHT) { direction.x *= -1.0f; }
 
-        float AngleFromRight = Vector3.SignedAngle(Vector3.right, direction, new Vector3(0.0f, 0.0f, 1.0f));
+        float AngleFromRight = Vector3.SignedAngle(Vector3.right, new Vector3(direction.x, direction.y, Vector3.right.z), new Vector3(0.0f, 0.0f, 1.0f));
 
         if (Mathf.Sign(AngleFromRight) == -1.0f)
         {
