@@ -1,0 +1,631 @@
+:: StoryTitle
+Ambrosia 1.0
+
+
+:: StoryData
+{
+  "ifid": "497A82E0-575C-4CAF-8087-3B0A2E06B956",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Untitled Passage",
+  "zoom": 0.6
+}
+
+
+:: 0.1 {"position":"125,3775","size":"100,100"}
+If I could acquire that power or get that Ghoul on my side...
+[[0.2]]
+
+
+:: 0.2 {"position":"225,3775","size":"100,100"}
+This would be a whole lot easier. 
+[[1]]
+
+
+:: 1 {"position":"325,3775","size":"100,100"}
+Ambrosia: Such boldness...sauntering in here so full of vigor, so full of *life*. 
+[[1.1]]
+
+
+:: 1.1 {"position":"425,3775","size":"100,100"}
+Ambrosia: A worthy adversary, all the better that your blood tastes so sweet. 
+[[C1]]
+
+
+:: 1.2.1 {"position":"525,3375","size":"100,100"}
+Ambrosia: Honed for survival. You do what you must down here. 
+[[1.2.1.1]]
+
+
+:: 1.2.1.1 {"position":"425,3375","size":"100,100"}
+Ambrosia: Your own skills are to be praised. And I do not do so often.
+[[C1.2.1]]
+
+
+:: 1.2.1.1.1 {"position":"225,3375","size":"100,100"}
+Ambrosia: If you wish to hear more from me... 
+[[1.2.1.1.1.1]]
+
+
+:: 1.2.1.1.1.1 {"position":"125,3375","size":"100,100"}
+Ambrosia: I shall have to see more of you fighting...perhaps as allies.
+[[C1.2.1.1]]
+
+
+:: 1.2.1.1.1.1.1.1 {"position":"125,3175","size":"100,100"}
+Ambrosia: I've had enough, simply put. There will be nothing left here... 
+[[1.2.1.1.1.1.1.1.1]]
+
+
+:: 1.2.1.1.1.1.1.1.1 {"position":"125,3075","size":"100,100"}
+Ambrosia: You are the first human I have spoken to in a long time.
+[[1.2.1.1.1.1.1.1.1.1]]
+
+
+:: 1.2.1.1.1.1.1.1.1.1 {"position":"125,2975","size":"100,100"}
+Ambrosia: I will not stoop to convince you. But I shall die honourably regardless. 
+[[C1.2.1.1.1]]
+
+
+:: 1.2.1.1.2 {"position":"325,3275","size":"100,100"}
+Ambrosia: It is simply not my...style. But enough. Idle chatter does not suit this end. [[C1.2.1.2]]
+
+
+:: 1.2.2 {"position":"625,3375","size":"100,100"}
+Ambrosia: No one's been there in a thousand years. Or has it been longer... 
+[[1.2.2.1]]
+
+
+:: 1.2.2.1 {"position":"625,3275","size":"100,100"}
+Ambrosia: Who knows what you're going to find in there,
+[[1.2.2.1.1]]
+
+
+:: 1.2.2.1.1 {"position":"625,3175","size":"100,100"}
+Ambrosia: I heard the last only survived a century. But, why do you wish to reach it? 
+[[C1.2.2]]
+
+
+:: 1.2.2.1.1.1 {"position":"525,2975","size":"100,100"}
+Ambrosia: Hm. How about we strike a deal?
+[[1.2.2.1.1.1.1]]
+
+
+:: 1.2.2.1.1.1.1 {"position":"525,2875","size":"100,100"}
+Ambrosia: You've proven your capabilities, so I'll help you. Take me with you to the core, 
+[[1.2.2.1.1.1.1.1]]
+
+
+:: 1.2.2.1.1.1.1.1 {"position":"525,2775","size":"100,100"}
+Ambrosia: And once we've defeated it, I want to see the surface. 
+[[C1.2.2.2]]
+
+
+:: 1.2.2.1.1.2 {"position":"725,2975","size":"100,100"}
+Ambrosia: There's no acquiescing here. You can try to finish me. 
+[[1.2.2.1.1.2.1]]
+
+
+:: 1.2.2.1.1.2.1 {"position":"725,2875","size":"100,100"}
+Ambrosia: Or, if you wish to kill it, my services would be...available.
+[[C1.2.2.2.2]]
+
+
+:: 1.2.3 {"position":"625,3475","size":"100,100"}
+Ambrosia: You don't owe me anything. But it has been so long since I've seen a Hunter. 
+[[1.2.3.1]]
+
+
+:: 1.2.3.1 {"position":"725,3475","size":"100,100"}
+Ambrosia: Humour me, is it just to kill? Or do you wish for more...
+[[C1.2.3]]
+
+
+:: 1.2.3.1.1 {"position":"825,3375","size":"100,100"}
+Ambrosia: More...Power. The core is the strongest source of that.
+[[1.2.3.1.1.1]]
+
+
+:: 1.2.3.1.1.1 {"position":"825,3275","size":"100,100"}
+Ambrosia: Complete control. Total domination. But only over the Dungeon. 
+[[1.2.3.1.1.1.1]]
+
+
+:: 1.2.3.1.1.1.1 {"position":"825,3175","size":"100,100"}
+Ambrosia: And with the Dungeon in this state...I don't quite believe that power will last. 
+[[1.2.3.1.1.1.1.1]]
+
+
+:: 1.2.3.1.1.1.1.1 {"position":"925,3175","size":"100,100"}
+Ambrosia: I would quite like to see the outcome regardless. Hunter, take me with you. 
+[[C1.2.3.1]]
+
+
+:: 1.2.3.1.2 {"position":"925,3475","size":"100,100"}
+Ambrosia:  Of course, which is why I intend to help. 
+[[1.2.3.1.2.1]]
+
+
+:: 1.2.3.1.2.1 {"position":"1025,3475","size":"100,100"}
+Ambrosia: You're the first living being I've seen in over six decades,
+[[1.2.3.1.2.1.1]]
+
+
+:: 1.2.3.1.2.1.1 {"position":"1125,3475","size":"100,100"}
+Ambrosia: Or has it been more...Either way, I'm sick of waiting. Take me with you. 
+[[C1.2.3.2]]
+
+
+:: 2 {"position":"525,3675","size":"100,100"}
+Ambrosia: Hm...as intended. Tell me, Hunter, why have you come this far? 
+[[2.1]]
+
+
+:: 2.1 {"position":"525,3575","size":"100,100"}
+Ambrosia: Your eyes don't look like that of one who wishes to die.
+[[C1.2]]
+
+
+:: 3 {"position":"625,3775","size":"100,100"}
+Ambrosia: So serious, although your way of fighting already showed as much. 
+[[3.1]]
+
+
+:: 3.1 {"position":"725,3775","size":"100,100"}
+Ambrosia: Surely there's no harm in humouring me for a moment, 
+[[C3]]
+
+
+:: 3.1.1 {"position":"925,3775","size":"100,100"}
+Ambrosia: So *gracious*. You've proven your strength, surely you feel I've proven mine.
+[[3.1.1.1]]
+
+
+:: 3.1.1.1 {"position":"1025,3775","size":"100,100"}
+Ambrosia: So let me proposition you, I'll help you get to the core...
+[[3.1.1.1.1]]
+
+
+:: 3.1.1.1.1 {"position":"1125,3775","size":"100,100"}
+Ambrosia: If you take me out of here with you. 
+[[C3.1]]
+
+
+:: 3.1.1.1.1.1 {"position":"1325,3775","size":"100,100"}
+Ambrosia:  You have eyes, no? Look around. This place doesn't have much longer left. 
+[[3.1.1.1.1.1.1]]
+
+
+:: 3.1.1.1.1.1.1 {"position":"1425,3775","size":"100,100"}
+Ambrosia: My chances up there are better than the definitive death that awaits me here.
+[[C3.1.1]]
+
+
+:: 3.1.1.1.1.2 {"position":"1225,3875","size":"100,100"}
+Ambrosia: Of course not, I thought you'd use that pretty little head of yours, 
+[[3.1.1.1.1.2.1]]
+
+
+:: 3.1.1.1.1.2.1 {"position":"1225,3975","size":"100,100"}
+Ambrosia: I'm dead regardless, so what's the loss for you? 
+[[C3.2]]
+
+
+:: 3.1.2 {"position":"825,3875","size":"100,100"}
+Ambrosia: Then why exactly are you asking me to surrender? 
+[[3.1.2.1]]
+
+
+:: 3.1.2.1 {"position":"825,3975","size":"100,100"}
+Ambrosia: It seems you are slightly intrigued, after all, you haven't killed me yet. 
+[[3.1.2.1.1]]
+
+
+:: 3.1.2.1.1 {"position":"825,4075","size":"100,100"}
+Ambrosia: Perhaps I am to mention my desire to go further.
+[[C3.3]]
+
+
+:: 3.1.2.1.1.1 {"position":"725,4175","size":"100,100"}
+Ambrosia: Good. *sigh* This place is dying, I have no intention of waiting to die with it. 
+[[3.1.2.1.1.1.1]]
+
+
+:: 3.1.2.1.1.1.1 {"position":"625,4175","size":"100,100"}
+Ambrosia: I'll help you get to the core, defeat it if you so wish. 
+[[3.1.2.1.1.1.1.1]]
+
+
+:: 3.1.2.1.1.1.1.1 {"position":"525,4175","size":"100,100"}
+Ambrosia: *If*, you'll bring me up to the surface. 
+[[C3.3.1]]
+
+
+:: 3.1.2.1.1.2 {"position":"925,4175","size":"100,100"}
+Ambrosia: Hold on!
+[[3.1.2.1.1.2.1]]
+
+
+:: 3.1.2.1.1.2.1 {"position":"925,4275","size":"100,100"}
+Ambrosia: This brings me no pleasure to offer my services in such a position. 
+[[3.1.2.1.1.2.1.1]]
+
+
+:: 3.1.2.1.1.2.1.1 {"position":"1025,4275","size":"100,100"}
+Ambrosia: But I can help you get to the core. 
+[[3.1.2.1.1.2.1.1.1]]
+
+
+:: 3.1.2.1.1.2.1.1.1 {"position":"1125,4275","size":"100,100"}
+Ambrosia: Just bring me to the surface when you're done. 
+[[C3.3.2]]
+
+
+:: 4 {"position":"100,4600","size":"100,100"}
+Ambrosia: Hearty, aren't we. As much as I'd love to enable your theatrics, 
+[[4.1]]
+
+
+:: 4.1 {"position":"200,4600","size":"100,100"}
+Ambrosia: I have a feeling you have the intention of following through, 
+[[C4]]
+
+
+:: 4.1.1 {"position":"400,4600","size":"100,100"}
+Ambrosia: Only when someone interesting catches my eye. 
+[[4.1.1.1]]
+
+
+:: 4.1.1.1 {"position":"500,4600","size":"100,100"}
+Ambrosia: Your strength is to be admired, 
+[[4.1.1.1.1]]
+
+
+:: 4.1.1.1.1 {"position":"600,4600","size":"100,100"}
+Ambrosia: It's been too long since I've met someone of your prowess,
+[[4.1.1.1.1.1]]
+
+
+:: 4.1.1.1.1.1 {"position":"700,4600","size":"100,100"}
+Ambrosia: You're sure to give this place a good run.
+[[C4.1]]
+
+
+:: 4.1.1.1.1.1.1 {"position":"900,4600","size":"100,100"}
+Ambrosia:  I've long accepted my death, I'd rather it be by the hands of a valiant fighter,
+[[4.1.1.1.1.1.1.1]]
+
+
+:: 4.1.1.1.1.1.1.1 {"position":"1000,4600","size":"100,100"}
+Ambrosia: Than the alternative of simply wasting away here.
+[[C4.1.1]]
+
+
+:: 4.1.1.1.1.1.1.1.1 {"position":"1200,4600","size":"100,100"}
+Ambrosia: This dungeon won't be alive for much longer. I know you're strong, 
+[[4.1.1.1.1.1.1.1.1.1]]
+
+
+:: 4.1.1.1.1.1.1.1.1.1 {"position":"1300,4600","size":"100,100"}
+Ambrosia: You must have fought plenty of Ghouls before,
+[[4.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: 4.1.1.1.1.1.1.1.1.1.1 {"position":"1400,4600","size":"100,100"}
+Ambrosia: So you must feel that we, down here...we're not exactly a challenge. 
+[[C4.1.1.1]]
+
+
+:: 4.1.1.1.1.1.1.1.1.1.1.1 {"position":"1600,4600","size":"100,100"}
+Ambrosia: ...It's...not that simple...Perhaps, ah to hell with it!
+[[4.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: 4.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"1700,4600","size":"100,100"}
+Ambrosia: I want to live. Take me with you. 
+[[C4.1.1.1.1.]]
+
+
+:: 4.1.1.1.1.1.2 {"position":"800,4700","size":"100,100"}
+Ambrosia: That wasn't the intention, but if it were to work...
+[[4.1.1.1.1.1.2.1]]
+
+
+:: 4.1.1.1.1.1.2.1 {"position":"800,4800","size":"100,100"}
+Ambrosia: I may be so bold to comment on your capabilities, 
+[[4.1.1.1.1.1.2.1.1]]
+
+
+:: 4.1.1.1.1.1.2.1.1 {"position":"800,4900","size":"100,100"}
+Ambrosia: Perhaps the very real possibility of you making it out of here alive. 
+[[C4.1.2]]
+
+
+:: 4.1.1.1.1.1.2.1.1.1 {"position":"900,5000","size":"100,100"}
+Ambrosia: You're impatient, clearly. I'll get to it. I don't wish to die here. 
+[[4.1.1.1.1.1.2.1.1.1.1]]
+
+
+:: 4.1.1.1.1.1.2.1.1.1.1 {"position":"1000,5000","size":"100,100"}
+Ambrosia: With my help, you're sure to stand a chance. So I want in.
+[[C4.1.2.1]]
+
+
+:: Ally1 {"position":"0,3275","size":"100,100"}
+Ambrosia: Good. I shall be watching you closely.
+
+
+:: Ally10 {"position":"325,4175","size":"100,100"}
+Ambrosia: There's more extra parts than just hands. I'll show you what I can do.
+
+
+:: Ally11 {"position":"1225,4375","size":"100,100"}
+Ambrosia: Ha...let us go forth.
+
+
+:: Ally14 {"position":"1900,4600","size":"100,100"}
+Ambrosia: Excellent. We march on.
+
+
+:: Ally15 {"position":"1100,5100","size":"100,100"}
+Ambrosia: Keep your eyes on me all you like.
+
+
+:: Ally2 {"position":"25,2775","size":"100,100"}
+Ambrosia: Charming...let us get out of this state then.
+
+
+:: Ally3 {"position":"425,3175","size":"100,100"}
+Ambrosia: I shall not be a fool to turn down an offer made in arms. Lead on.
+
+
+:: Ally4 {"position":"525,2575","size":"100,100"}
+Ambrosia: A wise choice. Let us go forth.
+
+
+:: Ally5 {"position":"825,2675","size":"100,100"}
+Ambrosia: Then we must waste no time. You will answer my question later.
+
+
+:: Ally6 {"position":"925,3075","size":"100,100"}
+Ambrosia: And help you shall have, let us go on.
+
+
+:: Ally7 {"position":"1225,3375","size":"100,100"}
+Ambrosia: By all means, lead the way.
+
+
+:: Ally8 {"position":"1525,3675","size":"100,100"}
+Ambrosia: Especially considering I know the heart. Let us press on.
+
+
+:: Ally9 {"position":"1425,3975","size":"100,100"}
+Ambrosia: That goes without saying...I'll be right behind you.
+
+
+:: C1 {"position":"525,3775","size":"100,100"}
+I'll take that as a compliment.  [[2]] 
+
+Enjoy it while it lasts, now surrender. [[3]]
+
+It'll be the last you taste, you *Ghoul*[[4]]
+
+
+:: C1.2 {"position":"525,3475","size":"100,100"}
+My eyes are just on you, your fighting skills are...impressive. [[1.2.1]]
+
+I'm reaching the core, no matter what it takes. [[1.2.2]]
+
+I don't owe you an explanation. [[1.2.3]]
+
+
+:: C1.2.1 {"position":"325,3375","size":"100,100"}
+Perhaps I can convince you to do more of that? [[1.2.1.1.1]]
+
+Why not? [[1.2.1.1.2]]
+
+
+:: C1.2.1.1 {"position":"125,3275","size":"100,100"}
+Perhaps, I would like that. [[Ally1]]
+
+Why would you wish to be allies? [[1.2.1.1.1.1.1.1]]
+
+
+:: C1.2.1.1.1 {"position":"125,2875","size":"100,100"}
+If you're going to die, at least do so by my side then. [[Ally2]]
+
+Ghouls are not to be trusted, so you shall die here. [[Kill1]]
+
+
+:: C1.2.1.2 {"position":"325,3175","size":"100,100"}
+End? No I quite like this idle chatter. Join me. [[Ally3]]
+
+Indeed. Your end shall be swift. [[Kill2]]
+
+
+:: C1.2.2 {"position":"625,3075","size":"100,100"}
+To kill it...to take it. I'll know when I'm there. [[1.2.2.1.1.1]]
+
+That's none of your concern, step aside or I'll deal with you here. [[1.2.2.1.1.2]]
+
+
+:: C1.2.2.2 {"position":"525,2675","size":"100,100"}
+Your strength will be a valuable asset. I accept. [[Ally4]]
+
+I'm not into your kind. [[Kill3]]
+
+
+:: C1.2.2.2.2 {"position":"725,2775","size":"100,100"}
+...Perhaps I do wish to kill it. [[Ally5]]
+
+I don't need your help. [[Kill4]]
+
+
+:: C1.2.3 {"position":"825,3475","size":"100,100"}
+...More? [[1.2.3.1.1]]
+
+Killing is the only thing on the table. [[1.2.3.1.2]]
+
+
+:: C1.2.3.1 {"position":"1025,3175","size":"100,100"}
+...So be it. I could use the extra...help. [[Ally6]]
+
+And chance you taking it? No. [[Kill5]]
+
+
+:: C1.2.3.2 {"position":"1225,3475","size":"100,100"}
+Don't get in my way. [[Ally7]]
+
+A bold demand, I decline. [[Kill6]]
+
+
+:: C3 {"position":"825,3775","size":"100,100"}
+You have one minute.[[3.1.1]]
+
+I don't have time to humour you. [[3.1.2]]
+
+
+:: C3.1 {"position":"1225,3775","size":"100,100"}
+Why would you want to leave? [[3.1.1.1.1.1]]
+
+You think I'm going to trust you? [[3.1.1.1.1.2]]
+
+
+:: C3.1.1 {"position":"1525,3775","size":"100,100"}
+I suppose it'd be an easier fight with you on my side.[[Ally8]]
+
+I'll be damned if I help you terrorise the surface. [[Kill7]]
+
+
+:: C3.2 {"position":"1325,3975","size":"100,100"}
+...You're dead the second you make a wrong move[[Ally9]]
+
+I won't be taken for a fool. [[Kill8]]
+
+
+:: C3.3 {"position":"825,4175","size":"100,100"}
+Fine, state your piece. Quickly. [[3.1.2.1.1.1]]
+
+If you're that eager for me to finish the job [[3.1.2.1.1.2]]
+
+
+:: C3.3.1 {"position":"425,4175","size":"100,100"}
+An extra hand can't hurt. [[Ally10]]
+
+As if I'd believe that. [[Kill9]]
+
+
+:: C3.3.2 {"position":"1225,4275","size":"100,100"}
+If you'd just said that to begin with. [[Ally11]]
+
+No chance. [[Kill10]]
+
+
+:: C4 {"position":"300,4600","size":"100,100"}
+Perceptive are we. [[4.1.1]]
+
+Your feeling would be correct. [[Kill11]]
+
+
+:: C4.1 {"position":"800,4600","size":"100,100"}
+You don't sound like someone who's about to die. [[4.1.1.1.1.1.1]]
+
+Flattery won't save you here. [[4.1.1.1.1.1.2]]
+
+
+:: C4.1.1 {"position":"1100,4600","size":"100,100"}
+Wasting away? [[4.1.1.1.1.1.1.1.1]]
+
+Then I'll grant that. [[Kill12]]
+
+
+:: C4.1.1.1 {"position":"1500,4600","size":"100,100"}
+Then why not leave? [[4.1.1.1.1.1.1.1.1.1.1.1]]
+
+Insult my strength, I'll show you. [[Kill13]]
+
+
+:: C4.1.1.1.1. {"position":"1800,4600","size":"100,100"}
+I like your spirit. Why not, come with me. [[Ally14]]
+
+No. [[Kill14]]
+
+
+:: C4.1.2 {"position":"800,5000","size":"100,100"}
+What are you trying to say? [[4.1.1.1.1.1.2.1.1.1]]
+
+I'm done playing around. [[Kill15]]
+
+
+:: C4.1.2.1 {"position":"1100,5000","size":"100,100"}
+...I'll be watching you. [[Ally15]]
+
+Your wishes mean nothing to me. [[Kill16]]
+
+
+:: Kill1 {"position":"125,2775","size":"100,100"}
+Eat it
+
+
+:: Kill10 {"position":"1325,4275","size":"100,100"}
+Eat it
+
+
+:: Kill11 {"position":"300,4700","size":"100,100"}
+Eat it
+
+
+:: Kill12 {"position":"1100,4725","size":"100,100"}
+Eat it
+
+
+:: Kill13 {"position":"1500,4700","size":"100,100"}
+Eat it
+
+
+:: Kill14 {"position":"1800,4700","size":"100,100"}
+Eat it
+
+
+:: Kill15 {"position":"800,5100","size":"100,100"}
+Eat it
+
+
+:: Kill16 {"position":"1200,5000","size":"100,100"}
+Eat it
+
+
+:: Kill2 {"position":"325,3075","size":"100,100"}
+Eat it
+
+
+:: Kill3 {"position":"425,2575","size":"100,100"}
+Eat it
+
+
+:: Kill4 {"position":"725,2675","size":"100,100"}
+Eat it
+
+
+:: Kill5 {"position":"1025,3075","size":"100,100"}
+Eat it
+
+
+:: Kill6 {"position":"1325,3475","size":"100,100"}
+Eat it
+
+
+:: Kill7 {"position":"1625,3775","size":"100,100"}
+Eat it
+
+
+:: Kill8 {"position":"1325,4075","size":"100,100"}
+Eat it
+
+
+:: Kill9 {"position":"425,4275","size":"100,100"}
+Eat it
+
+
+:: Untitled Passage {"position":"25,3775","size":"100,100"}
+*pant pant* That speed... [[0.1]]
