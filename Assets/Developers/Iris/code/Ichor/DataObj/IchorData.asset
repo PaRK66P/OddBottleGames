@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: IchorData
   m_EditorClassIdentifier: 
   health: 200
+  initialStunTimer: 1
   damageTimer: 0.2
   deathTimer: 0.5
   healthbar: {fileID: 7940067324356998275, guid: ace6fbf26c5479d4d870cd37326fbc3d, type: 3}
@@ -25,7 +26,7 @@ MonoBehaviour:
   weakPointDamageTimer: 0.5
   weakPointSpriteNorm: {fileID: 3651451398234915377, guid: d2d13ef769aeb23448023c895d469218, type: 3}
   weakPointSpriteHurt: {fileID: 3641224709901303, guid: f2951676b1d8f4847b141888ad4d6913, type: 3}
-  nextPhaseHpPoint: 8c0000005000000014000000
+  nextPhaseHpPoint: a00000006400000014000000
   stunTimer: 3
   Idle: {fileID: 7467783598227658634, guid: ec3761175c5bdff4da853053e1575fb8, type: 3}
   Hurt: {fileID: -1979172429440992320, guid: 3364fd90e0b779f4e8a708030201ae2a, type: 3}

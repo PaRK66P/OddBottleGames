@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6999997035610048594
+--- !u!1 &8370027259003148965
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2976673232067903077}
-  - component: {fileID: 6328029358862118428}
+  - component: {fileID: 3827439990105406245}
+  - component: {fileID: 5169843901188423363}
   m_Layer: 0
-  m_Name: IchorSpiralAttack
+  m_Name: SweepAttack3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2976673232067903077
+--- !u!4 &3827439990105406245
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6999997035610048594}
+  m_GameObject: {fileID: 8370027259003148965}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.599869, y: 1.8536662, z: -0.14699423}
+  m_LocalPosition: {x: -14.901303, y: 27.135958, z: -0.29990372}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6328029358862118428
+--- !u!114 &5169843901188423363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6999997035610048594}
+  m_GameObject: {fileID: 8370027259003148965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d8ad4a816f3f47408c497dc70361222, type: 3}
+  m_Script: {fileID: 11500000, guid: 5736b495c9dc8c549965a7831175b3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallProjectilePrefab: {fileID: 2374814210022972564, guid: f1ea22512ff8cee4cb36bd1f44521642, type: 3}
-  largeProjectilePrefab: {fileID: 2374814210022972564, guid: 78dbba5d98dac444da200f2c61f7db0b, type: 3}
-  largeProjTravelTime: 1
-  largeProjectileLifetime: 3.5
-  chargeTimer: 1.2
-  timeBetweenWaves: 0.15
-  projectilePerWaveNo: 8
-  numberOfWaves: 12
-  angleBetweenWaves: 5
-  largeProjectileSpeed: 7
-  smallProjectileSpeed: 10
+  projectilePrefab: {fileID: 7241303215407426317, guid: 3794600c18a351a44a1d299476b2e027, type: 3}
+  projectileNo: 10
+  chargeUpTimer: 0.5
+  projectileSpeed: 10
+  waves: 2
+  timeBetweenWaves: 1.5
+  waveLifespan: 0.8
+  TopLimit: 7
+  BottomLimit: -10
+  LeftLimit: 66
+  collideWithWalls: 0

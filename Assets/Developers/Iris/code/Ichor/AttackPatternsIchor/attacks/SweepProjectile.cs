@@ -31,9 +31,8 @@ public class SweepProjectile : MonoBehaviour
         {
             Vector2 damageDirection = new Vector2(collision.gameObject.transform.position.x - transform.position.x, collision.gameObject.transform.position.y - transform.position.y);
             collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized, 1, 15);
-            pooler.ReleaseObject(prefabName, gameObject);
         }
-        else if (collision.gameObject.layer == 6 && wallCollision)
+        if (collision.gameObject.layer == 6 && wallCollision)
         {
             pooler.ReleaseObject(prefabName, gameObject);
         }

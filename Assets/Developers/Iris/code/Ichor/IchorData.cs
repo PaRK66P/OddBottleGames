@@ -8,6 +8,7 @@ public class IchorData : ScriptableObject
 {
     [Header("Health")]
     public float health = 200;
+    public float initialStunTimer = 2;
     public float damageTimer = 0.5f;
     public float deathTimer = 0.5f;
     public GameObject healthbar;

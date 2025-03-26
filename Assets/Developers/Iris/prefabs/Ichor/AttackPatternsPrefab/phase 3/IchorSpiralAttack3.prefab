@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2976673232067903077}
   - component: {fileID: 6328029358862118428}
   m_Layer: 0
-  m_Name: IchorSpiralAttack
+  m_Name: IchorSpiralAttack3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,9 +49,9 @@ MonoBehaviour:
   largeProjTravelTime: 1
   largeProjectileLifetime: 3.5
   chargeTimer: 1.2
-  timeBetweenWaves: 0.15
-  projectilePerWaveNo: 8
-  numberOfWaves: 12
+  timeBetweenWaves: 0.18
+  projectilePerWaveNo: 10
+  numberOfWaves: 10
   angleBetweenWaves: 5
   largeProjectileSpeed: 7
   smallProjectileSpeed: 10

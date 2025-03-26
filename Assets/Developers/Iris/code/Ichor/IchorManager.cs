@@ -38,6 +38,9 @@ public class IchorManager : MonoBehaviour
         pooler = dPooler;
         prefabName = dPrefabName;
 
+        stunTimer = data.initialStunTimer;
+        isStunned = true;
+
         state = EN_STATES.NORMAL;
 
         foreach(attackPaternsScript c in GetComponents<attackPaternsScript>())
@@ -51,7 +54,9 @@ public class IchorManager : MonoBehaviour
             {
                 c.enabled = false;
             }
+            c.stunned = isStunned;
         }
+
 
         weakPoints = new GameObject[data.weakPointsNo[2]];
 

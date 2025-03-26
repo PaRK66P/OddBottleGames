@@ -80,18 +80,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseNo: 0
-  pattern: 8,
-  timeBetweenAttacks: 2
+  pattern: 0,1/2,3/4,1,0,3/4,1/2,1,
+  timeBetweenAttacks: 0.25
   attackList:
-  - {fileID: 2472219134077984931, guid: 68b2924def505054287b192c24f567c7, type: 3}
-  - {fileID: 283872786456334360, guid: 9d9997f6426b88845a6fea70f47e30c2, type: 3}
-  - {fileID: 3347065349177360490, guid: 7ebaa6e2edd1a4e43ab5dab466033370, type: 3}
-  - {fileID: 312214928314215403, guid: a910b990519e6fe4591fc7d14d8d1327, type: 3}
-  - {fileID: 8618366252599702755, guid: fb6a72a3e5ba6144f9d3bd9a4ac441e3, type: 3}
-  - {fileID: 8979594851478723655, guid: 5dca40a6389637b4f966665cfff1c444, type: 3}
-  - {fileID: 8751244404110851157, guid: e20070b5c4a80a14984c950a5dcf4fce, type: 3}
-  - {fileID: 5169843901188423363, guid: 81d6f229c6112e34089c92b2c835c40c, type: 3}
-  - {fileID: 6328029358862118428, guid: 774765a627bda624d903999b6daec55f, type: 3}
+  - {fileID: 5169843901188423363, guid: 8e98f6482aedd9946b8707b2b15a08e4, type: 3}
+  - {fileID: 2472219134077984931, guid: 5129f518322ab0c4ea8561349347f597, type: 3}
+  - {fileID: 283872786456334360, guid: 56283b86724d4ee4eb6638a4c43526e7, type: 3}
+  - {fileID: 6328029358862118428, guid: 7dcd67430580cbe48bfb37931f7d5551, type: 3}
+  - {fileID: 6328029358862118428, guid: b11165996ec05cc4a866b162224b1057, type: 3}
   stunned: 0
 --- !u!114 &2995313866300269876
 MonoBehaviour:
@@ -105,18 +101,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30de30e18e55bc74d97fb60c0293dee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phaseNo: 1
-  pattern: 2,
-  timeBetweenAttacks: 1.5
+  phaseNo: 2
+  pattern: 0,1/2,3/4,1,0,3/4,1/2,1,
+  timeBetweenAttacks: 0.35
   attackList:
-  - {fileID: 2472219134077984931, guid: 68b2924def505054287b192c24f567c7, type: 3}
-  - {fileID: 283872786456334360, guid: 9d9997f6426b88845a6fea70f47e30c2, type: 3}
-  - {fileID: 3347065349177360490, guid: 7ebaa6e2edd1a4e43ab5dab466033370, type: 3}
-  - {fileID: 312214928314215403, guid: a910b990519e6fe4591fc7d14d8d1327, type: 3}
-  - {fileID: 8618366252599702755, guid: fb6a72a3e5ba6144f9d3bd9a4ac441e3, type: 3}
-  - {fileID: 8979594851478723655, guid: 5dca40a6389637b4f966665cfff1c444, type: 3}
-  - {fileID: 8751244404110851157, guid: e20070b5c4a80a14984c950a5dcf4fce, type: 3}
-  - {fileID: 5169843901188423363, guid: 81d6f229c6112e34089c92b2c835c40c, type: 3}
+  - {fileID: 5169843901188423363, guid: 9e1bf9c74753c9f40a790704269a08e8, type: 3}
+  - {fileID: 2472219134077984931, guid: 845ecdc67bade40479dc2066dd7d9196, type: 3}
+  - {fileID: 283872786456334360, guid: ab4bdc95ef2ff2444a66b58ac159f375, type: 3}
+  - {fileID: 6328029358862118428, guid: 091e16b9bb930a64e877eaec64f6b916, type: 3}
+  - {fileID: 6328029358862118428, guid: 2122b99bd17aa534d8269febb641eb03, type: 3}
   stunned: 0
 --- !u!114 &4690416888767236606
 MonoBehaviour:
@@ -130,18 +123,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30de30e18e55bc74d97fb60c0293dee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phaseNo: 2
-  pattern: 4/5/6,
-  timeBetweenAttacks: 1.5
+  phaseNo: 1
+  pattern: 0,1/2,3/4,1,0,3/4,1/2,1,
+  timeBetweenAttacks: 0.4
   attackList:
-  - {fileID: 2472219134077984931, guid: 68b2924def505054287b192c24f567c7, type: 3}
-  - {fileID: 283872786456334360, guid: 9d9997f6426b88845a6fea70f47e30c2, type: 3}
-  - {fileID: 3347065349177360490, guid: 7ebaa6e2edd1a4e43ab5dab466033370, type: 3}
-  - {fileID: 312214928314215403, guid: a910b990519e6fe4591fc7d14d8d1327, type: 3}
-  - {fileID: 8618366252599702755, guid: fb6a72a3e5ba6144f9d3bd9a4ac441e3, type: 3}
-  - {fileID: 8979594851478723655, guid: 5dca40a6389637b4f966665cfff1c444, type: 3}
-  - {fileID: 8751244404110851157, guid: e20070b5c4a80a14984c950a5dcf4fce, type: 3}
-  - {fileID: 5169843901188423363, guid: 81d6f229c6112e34089c92b2c835c40c, type: 3}
+  - {fileID: 5169843901188423363, guid: 63d6b702a467fe64fbf6ff4842978a5c, type: 3}
+  - {fileID: 2472219134077984931, guid: 12b4aa4a17d2e7e46aab602940bbc264, type: 3}
+  - {fileID: 283872786456334360, guid: fa4c5d40dd323864582328af144e872f, type: 3}
+  - {fileID: 6328029358862118428, guid: 36cb3c55b1c728044a58a9b194f679a0, type: 3}
+  - {fileID: 6328029358862118428, guid: 31a1db7914576f441b2058bec62bc91e, type: 3}
   stunned: 0
 --- !u!58 &4128831174864724833
 CircleCollider2D:
