@@ -5,25 +5,25 @@ using UnityEngine;
 
 public class attackPaternsScript : MonoBehaviour
 {
+    public int phaseNo;
     public string pattern;
     List<List<int>> patList = new List<List<int>>();
     public float timeBetweenAttacks;
-    float attackTimer;
 
     [Space]
     public List<AttackClass> attackList = new List<AttackClass>();
+    public bool stunned = false;
 
-    int currentAttack = 0;
-    int attackItterator = 0;
-    bool inAttack = new bool();
-    List<int> itterators = new List<int>();
-    List<float> timers = new List<float>();
+    private int currentAttack = 0;
+    private int attackItterator = 0;
+    private bool inAttack = new bool();
+    private List<int> itterators = new List<int>();
+    private List<float> timers = new List<float>();
+    private float attackTimer;
 
-    [Space]
-    public ObjectPoolManager pooler;
+    private ObjectPoolManager pooler;
 
     private GameObject myself;
-    public bool stunned = false;
 
     public void InstantiateComponent(ref ObjectPoolManager objPooler)
     {
