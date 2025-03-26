@@ -17,14 +17,15 @@ public class AISimpleBehaviour : MonoBehaviour
     public float shootingRange = 9;
     public float speed = 2;
     public float fireRate = 2.0f;
+    public float maxHealth = 6.0f;
+    [Range(0.0f, 1.0f)] public float hitStunLength = 0.2f;
 
     private float health = 6.0f;
     private bool seePlayer = true;
     private bool playerInRange = false;
     private float shootingTimer = 0.0f;
-
     private float hitStunTimer = 1.0f;
-    private float hitStunLength = 0.2f;
+    
     private bool inStun = false;
     private bool isDead = false;
     private float deadTimer = 0.0f;
@@ -47,7 +48,7 @@ public class AISimpleBehaviour : MonoBehaviour
         isDead = false;
         shootingTimer = 0.0f;
         deadTimer = 0.0f;
-        health = 6.0f;
+        health = maxHealth;
         inStun = false;
         objectPoolManager = bObjectPoolManager;
         player = bPlayer;
