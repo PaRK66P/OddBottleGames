@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    private float volume;
     [Header("Audio Sources")]
     //Audio Sources
     [SerializeField] private AudioSource PlayerAudioSource;
@@ -62,6 +63,14 @@ public class SoundManager : MonoBehaviour
 
     public void Update()
     {
+        //update volume
+        volume = PlayerPrefs.GetFloat("volume", volume);
+        PlayerAudioSource.volume = volume;
+        BGMAudioSource.volume = volume;
+        EnemyAudioSource.volume = volume;
+        AmbrosiaAudioSource.volume = volume;
+
+
         //Player footsteps
         footstepLength -= Time.deltaTime;
         PlayFootstep();
@@ -91,7 +100,7 @@ public class SoundManager : MonoBehaviour
         //pick random from array
         int index = Random.Range(0, PlyrFootstepsClips.Length);
         AudioClip footstepClip = PlyrFootstepsClips[index];
-        footstepLength = footstepClip.length;
+        footstepLength = footstepClip.length+0.3f;
         //play sound
         PlayerAudioSource.PlayOneShot(footstepClip);
         }
