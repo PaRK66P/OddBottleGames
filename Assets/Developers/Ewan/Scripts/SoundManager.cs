@@ -58,6 +58,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip AmbSpitAttack;
     [SerializeField] private AudioClip AmbLickPrep;
     [SerializeField] private AudioClip AmbLickAttack;
+    [SerializeField] private AudioClip AmbScreamAttack;
     [SerializeField] private AudioClip AmbHit;
     [SerializeField] private AudioClip AmbDown;
     [SerializeField] private AudioClip AmbConsume;
@@ -219,5 +220,39 @@ public class SoundManager : MonoBehaviour
         //Randomise Pitch
         AmbrosiaAudioSource.pitch = Random.Range(0.8f, 1.2f);
         AmbrosiaAudioSource.PlayOneShot(AmbDashAttack[state - 1]);
+    }
+    public void PlayAmbLickPrep()
+    {
+        //Randomise Pitch
+        AmbrosiaAudioSource.pitch = Random.Range(0.8f, 1.2f);
+        AmbrosiaAudioSource.PlayOneShot(AmbLickPrep);
+    }
+    public void PlayAmbLickAttack()
+    {
+        //Randomise Pitch
+        AmbrosiaAudioSource.pitch = Random.Range(0.8f, 1.2f);
+        AmbrosiaAudioSource.PlayOneShot(AmbLickAttack);
+    }
+    public void PlayAmbScreamAttack()
+    {
+        //Randomise Pitch
+        AmbrosiaAudioSource.pitch = Random.Range(0.8f, 1.2f);
+        AmbrosiaAudioSource.PlayOneShot(AmbScreamAttack);
+    }
+    public void PlayAmbHit()
+    {
+        //Randomise Pitch
+        AmbrosiaAudioSource.pitch = Random.Range(0.6f, 1.4f);
+        AmbrosiaAudioSource.PlayOneShot(AmbHit);
+    }
+    public void PlayAmbDown()
+    {
+        //Reset Pitch
+        AmbrosiaAudioSource.pitch = 1f;
+        AmbrosiaAudioSource.PlayOneShot(AmbDown);
+    }
+    public void PlayAmbConsume()
+    {
+        AmbrosiaAudioSource.PlayOneShot(AmbConsume);
     }
 }
