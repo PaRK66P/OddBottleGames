@@ -1,0 +1,1004 @@
+:: StoryTitle
+Ichor 1.0
+
+
+:: StoryData
+{
+  "ifid": "192D94AE-938B-4BAE-A7F4-9EF2514AEC11",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Start",
+  "zoom": 0.6
+}
+
+
+:: 1 {"position":"100,2200","size":"100,100"}
+Ichor: Hunter...it is...commendable, that you made it, this far. [[C1]]
+
+
+:: C1 {"position":"200,2200","size":"100,100"}
+Everyone's full of flattery today. [[R1]]
+
+It is commendable you lasted so long. [[R2]]
+
+Your power is mine. [[R3]]
+
+
+:: CR1 {"position":"300,1800","size":"100,100"}
+I wouldn't be aversed to helping you remember. [[R1.1.1.1]]
+
+I though you'd want a little bit of small talk before your death. [[R1.1.1.2]]
+
+
+:: CR1.1 {"position":"100,1600","size":"100,100"}
+The Hunter: Freedom. [[R1.1.1.1.1.1]]
+
+Reprieve. [[R1.1.1.1.1.1.2]]
+
+
+:: CR1.1.1 {"position":"50,1200","size":"100,100"}
+You do not control the surface. [[R1.1.1.1.1.1.1.1.1.1.1.1]]
+
+Destroying the Dungeons solves that. [[R1.1.1.1.1.1.1.1.1.1.1.2]]
+
+
+:: CR1.1.1.1 {"position":"50,800","size":"100,100"}
+...I do not wish to fight anymore. [[R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+The cores power...it's more extensive that I realised. [[R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2]]
+
+
+:: CR1.1.1.1.1 {"position":"50,600","size":"100,100"}
+Freedom is what you make of it. Up there we can be free from these places.  [[R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+Freedom can mean many things, death will be your freedom. [[Kill2]]
+
+
+:: CR1.1.1.1.1.1 {"position":"50,300","size":"100,100"}
+Have you ever even tried? [[Leave Together1]]
+
+Then I shall put you out of your misery. [[Kill1]]
+
+
+:: CR1.1.1.1.2 {"position":"350,800","size":"100,100"}
+Power is not what I seek, it can't control me. [[R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.1.1]]
+
+You will submit to me. [[Kill4]]
+
+
+:: CR1.1.1.1.2.1 {"position":"350,600","size":"100,100"}
+I will leave, but with you. [[Leave Together2]]
+
+I will destroy this place. [[Kill3]]
+
+
+:: CR1.1.1.2 {"position":"350,1200","size":"100,100"}
+Removing a heart should destroy the Dungeon, I just have to get you out. [[R1.1.1.1.1.1.1.1.1.1.1.2.1.1]]
+
+So kill you I shall. [[Kill6]]
+
+
+:: CR1.1.1.2.1 {"position":"350,1000","size":"100,100"}
+Have you even tried? [[Leave Together3]]
+
+Then...my only option is to destroy you. [[Kill5]]
+
+
+:: CR1.1.2 {"position":"650,1400","size":"100,100"}
+My resolve is strong, I can get you out. [[R1.1.1.1.1.1.2.1.1.1.1.1.1]]
+
+It will not ensnare me, I will conquer it. [[Kill8]]
+
+
+:: CR1.1.2.1 {"position":"650,1000","size":"100,100"}
+I did not come here to be the first to do so, but I will. [[Leave Together4]]
+
+You do not know me, I am stronger than you think. [[Kill7]]
+
+
+:: CR1.2 {"position":"675,1700","size":"100,100"}
+Surely if you leave, the voices will stop? [[R1.1.1.2.1.1.1]]
+
+I can grant that request. [[Kill10]]
+
+
+:: CR1.2.1 {"position":"875,1600","size":"100,100"}
+You have paid your dues. It's time to move on. [[Leave Together9]]
+
+If you want to spend your life wallowing. I might as well end it. [[Kill9]]
+
+
+:: CR2 {"position":"600,2200","size":"100,100"}
+What do you mean? [[R2.1.1]]
+
+Well...this isn't what I expected. [[R2.1.2]]
+
+
+:: CR2.1 {"position":"700,1900","size":"100,100"}
+You suffer this pain? [[R2.1.1.1.1.1.1]]
+
+You're trying to talk me out of it...I won't be denied this. [[Kill13]]
+
+
+:: CR2.1.1 {"position":"1100,1900","size":"100,100"}
+I came here with the intention of reaching the heart of the Dungeon. [[R2.1.1.1.1.1.1.1.1.1]]
+
+I came here to fight, to see if the heart is anything worth taking. [[R2.1.1.1.1.1.1.1.1.1.2]]
+
+
+:: CR2.1.1.1 {"position":"1600,1900","size":"100,100"}
+What about you? [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1]]
+
+It's not over until this place is destroyed. [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1.2]]
+
+
+:: CR2.1.1.1.1 {"position":"1800,1600","size":"100,100"}
+Why not try to leave before then? [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1.1.1.1]]
+
+I can put an end to it now. [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1.1.1.1.2]]
+
+
+:: CR2.1.1.1.1.1 {"position":"1800,1300","size":"100,100"}
+It's not like you'll be alone. [[Leave Together17]]
+
+If you can't leave...I'll put an end to your miserable fate. [[Kill15]]
+
+
+:: CR2.1.1.1.1.2 {"position":"2100,1600","size":"100,100"}
+No, I must help you, I can get you out. [[Leave Together18]]
+
+A mercy killing is the honourable thing to do... [[Kill16]]
+
+
+:: CR2.1.1.1.2 {"position":"1900,1900","size":"100,100"}
+My fate was sealed the moment I decided to destroy this place, I will see it through. [[Kill17]]
+
+Surely there's more than one way to go about this [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1.2.1.1]]
+
+
+:: CR2.1.1.1.2.1 {"position":"2200,1900","size":"100,100"}
+...I don't need to take your place. I can just take you. Out. Outside [[Leave Together19]]
+
+It appears there is only one option then. I will kill you. [[Kill20]]
+
+
+:: CR2.1.1.2 {"position":"1100,1500","size":"100,100"}
+I can't just...leave? [[R2.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+If I leave, you're coming with me. [[R2.1.1.1.1.1.1.1.1.1.1.1.2]]
+
+
+:: CR2.1.1.2.1 {"position":"1100,1100","size":"100,100"}
+You don't sound like your mind is gone. [[R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+If I've lasted this long...I can last long enough to get you out too. [[Leave Together12]
+
+
+:: CR2.1.1.2.1.1 {"position":"1100,800","size":"100,100"}
+Surely getting you out of here would...help? [[R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+What you once were? [[R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2]
+
+
+:: CR2.1.1.2.1.1.1 {"position":"1100,400","size":"100,100"}
+You're not in any position to resist my help. [[Leave Together10]]
+
+Then a mercy killing is all I can offer. [[Kill11]]
+
+
+:: CR2.1.1.2.1.1.1.1 {"position":"1600,800","size":"100,100"}
+You were a human once, surely that part of you is still there. [[Leave Together11]]
+
+Leaving you like this...I must put an end to it. [[Kill12]]
+
+
+:: CR2.1.1.2.2 {"position":"1400,1400","size":"100,100"}
+I hadn't even thought of that. [[R2.1.1.1.1.1.1.1.1.1.1.1.2.1.1.1]]
+
+I hadn't even thought of that... [[R2.1.1.1.1.1.1.1.1.1.1.1.2.1.1.2]]
+
+
+:: CR2.1.1.2.2.1 {"position":"1400,1100","size":"100,100"}
+A friend. [[Leave Together13]]
+
+I haven't thought further than freeing you from here. [[R2.1.1.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1]]
+
+
+:: CR2.1.1.2.2.1.1 {"position":"1600,1100","size":"100,100"}
+Maybe lacking those traits is what got you here...let me teach you. [[Leave Together14]]
+
+If you won't come with me, there's only one thing I can do. [[Kill14]]
+
+
+:: CR2.1.1.2.2.2 {"position":"1600,1400","size":"100,100"}
+I jest, once I get you out you're free to do as you wish. [[Leave Together15]]
+
+I'm sure you've wondered what it feels like to be the one getting conquered for once. [[Leave Together16]]
+
+
+:: CR2.2 {"position":"1200,2200","size":"100,100"}
+...I do. [[R2.1.2.1.1.1.1.1]]
+
+Then you are finished. [[Kill25]]
+
+
+:: CR2.2.1 {"position":"1600,2200","size":"100,100"}
+I'm different. [[R2.1.2.1.1.1.1.1.1.1.1]]
+
+I don't want to kill you. [[R2.1.2.1.1.1.1.1.1.1.2]]
+
+
+:: CR2.2.1.1 {"position":"1900,2100","size":"100,100"}
+How will it all end? [[R2.1.2.1.1.1.1.1.1.1.1.1.1.1]]
+
+I AM different. [[Kill21]]
+
+
+:: CR2.2.1.2 {"position":"1800,2300","size":"100,100"}
+Why can't you leave? [[R2.1.2.1.1.1.1.1.1.1.2.12.2.1.2.1]]
+
+If this will put you at peace... [[Kill22]]
+
+
+:: CR2.2.1.2.1 {"position":"2000,2300","size":"100,100"}
+You don't have to do it alone. [[Leave Together21]]
+
+If it's not possible then...I'll grant you a swift end. [[Kill23]]
+
+
+:: CR2.2.2.1.1.1 {"position":"2300,2100","size":"100,100"}
+Why have you accepted this? [[R2.1.2.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+I'll move it along then. [[Kill18]]
+
+
+:: CR2.2.2.1.1.1.1 {"position":"2600,2100","size":"100,100"}
+Well that won't do. I'll give you a reason to live. [[Leave Together20]]
+
+I still can't just leave...I can end it now. [[Kill19]]
+
+
+:: CR3 {"position":"600,2600","size":"100,100"}
+What do you mean, voices? [[R3.1.1.1.1.1.1]]
+
+And be reborn, more powerful than ever before. [[R3.1.1.1.1.1.2]]
+
+
+:: CR3.1 {"position":"1100,2500","size":"100,100"}
+You...live like this? [[1->R3.1.1.1.1.1.1.1.1.1.1]]
+
+That is exactly what I want. [[End it->Kill26]]
+
+
+:: CR3.1.1 {"position":"1700,2500","size":"100,100"}
+It isn't...right, leaving you here. [[1->R3.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+You will not fool me, that power will be mine. [[End it->Kill27]]
+
+
+:: CR3.2 {"position":"1000,2700","size":"100,100"}
+I will be different. [[R3.1.1.1.1.1.2.1.1.1]]
+
+A life outside of this place is not worth living. [[Kill28]]
+
+
+:: CR3.2.1 {"position":"1500,2700","size":"100,100"}
+Pity? There is nothing to pity about me, nor my choice. [[R3.1.1.1.1.1.2.1.1.1.1.1.1.1]]
+
+Do not look down on me. I am your end. [[Kill29]]
+
+
+:: CR3.2.1.1 {"position":"1900,2700","size":"100,100"}
+My fate is my own to conquer. [[Kill31]]
+
+As will yours. [[Kill30]]
+
+
+:: CR31.1.1 {"position":"2000,2500","size":"100,100"}
+I can make up for my wrongdoings. I can try. [[Give it Hope->Leave Together22]]
+
+This place truly does corrupt...I will end this. [[End it->Kill24]]
+
+
+:: Kill1 {"position":"125,150","size":"100,100"}
+*Eat it*
+
+
+:: Kill10 {"position":"800,1775","size":"100,100"}
+*Eat it*
+
+
+:: Kill11 {"position":"1250,400","size":"100,100"}
+*Eat it*
+
+
+:: Kill12 {"position":"1725,700","size":"100,100"}
+*Eat it*
+
+
+:: Kill13 {"position":"825,2025","size":"100,100"}
+*Eat it*
+
+
+:: Kill14 {"position":"1675,975","size":"100,100"}
+*Eat it*
+
+
+:: Kill15 {"position":"1925,1300","size":"100,100"}
+*Eat it*
+
+
+:: Kill16 {"position":"2225,1475","size":"100,100"}
+*Eat it*
+
+
+:: Kill17 {"position":"1925,1750","size":"100,100"}
+*Eat it*
+
+
+:: Kill18 {"position":"2375,1950","size":"100,100"}
+*Eat it*
+
+
+:: Kill19 {"position":"2725,2175","size":"100,100"}
+*Eat it*
+
+
+:: Kill2 {"position":"200,475","size":"100,100"}
+*Eat it*
+
+
+:: Kill20 {"position":"2150,1775","size":"100,100"}
+*Eat it*
+
+
+:: Kill21 {"position":"2175,2225","size":"100,100"}
+*Eat it*
+
+
+:: Kill22 {"position":"1800,2225","size":"100,100"}
+*Eat it*
+
+
+:: Kill23 {"position":"2300,2325","size":"100,100"}
+*Eat it*
+
+
+:: Kill24 {"position":"2250,2525","size":"100,100"}
+*Eat it*
+
+
+:: Kill25 {"position":"1275,2075","size":"100,100"}
+*Eat it*
+
+
+:: Kill26 {"position":"1175,2325","size":"100,100"}
+*Eat it*
+
+
+:: Kill27 {"position":"1700,2425","size":"100,100"}
+*Eat it*
+
+
+:: Kill28 {"position":"1000,2825","size":"100,100"}
+*Eat it*
+
+
+:: Kill29 {"position":"1500,2825","size":"100,100"}
+*Eat it*
+
+
+:: Kill3 {"position":"525,500","size":"100,100"}
+*Eat it*
+
+
+:: Kill30 {"position":"1900,2825","size":"100,100"}
+*Eat it*
+
+
+:: Kill31 {"position":"2025,2825","size":"100,100"}
+*Eat it*
+
+
+:: Kill4 {"position":"475,775","size":"100,100"}
+*Eat it*
+
+
+:: Kill5 {"position":"450,1025","size":"100,100"}
+*Eat it*
+
+
+:: Kill6 {"position":"475,1200","size":"100,100"}
+*Eat it*
+
+
+:: Kill7 {"position":"775,925","size":"100,100"}
+*Eat it*
+
+
+:: Kill8 {"position":"750,1350","size":"100,100"}
+*Eat it*
+
+
+:: Kill9 {"position":"925,1450","size":"100,100"}
+*Eat it*
+
+
+:: Leave Together1 {"position":"25,150","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together10 {"position":"1225,250","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together11 {"position":"1625,600","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together12 {"position":"1250,1125","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together13 {"position":"1400,975","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together14 {"position":"1775,1100","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together15 {"position":"1650,1275","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together16 {"position":"1550,1275","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together17 {"position":"1900,1175","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together18 {"position":"2250,1575","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together19 {"position":"2275,1775","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together2 {"position":"375,475","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together20 {"position":"2700,1975","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together21 {"position":"2125,2425","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together22 {"position":"2125,2625","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together3 {"position":"475,925","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together4 {"position":"700,825","size":"100,100"}
+Ichor: ...
+
+
+:: Leave Together9 {"position":"950,1725","size":"100,100"}
+Ichor: ...
+
+
+:: R1 {"position":"300,2100","size":"100,100"}
+Ichor: Is that..how you, interpreted it? [[R1.1]]
+
+
+:: R1.1 {"position":"300,2000","size":"100,100"}
+Ichor: Even longer, it has been, since I've...had to...converse, with a...human. [[R1.1.1]]
+
+
+:: R1.1.1 {"position":"300,1900","size":"100,100"}
+Ichor: I have far surprassed, the need for...pleasantries. [[CR1]]
+
+
+:: R1.1.1.1 {"position":"200,1700","size":"100,100"}
+Ichor: ...what a...quaint way of, speaking, you have. [[R1.1.1.1.1]]
+
+
+:: R1.1.1.1.1 {"position":"125,1700","size":"100,100"}
+Ichor: I am in, a, position, to do nothing but inquire... as to what you have to offer, Hunter? [[CR1.1]]
+
+
+:: R1.1.1.1.1.1 {"position":"50,1500","size":"100,100"}
+Ichor: Freedom? Ha! Such a thing, it does not exist. [[R1.1.1.1.1.1.1.1]]
+
+
+:: R1.1.1.1.1.1.1.1 {"position":"50,1400","size":"100,100"}
+Ichor: A mere...fantasy. Everything, in this...world, Is controlled, by the plague. [[R1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R1.1.1.1.1.1.1.1.1.1.1 {"position":"50,1300","size":"100,100"}
+Ichor: The hearts it festers, we control, everything. [[CR1.1.1]]
+
+
+:: R1.1.1.1.1.1.1.1.1.1.1.1 {"position":"50,1100","size":"100,100"}
+Ichor: Not...directly, but our, influence, extends far into, the surface. [[R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"50,1000","size":"100,100"}
+Ichor: And...life, up there. Our, Ghouls, can go, only so far, but... [[R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.]]
+
+
+:: R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"50,500","size":"100,100"}
+Ichor: You suggest...never, returning to...these places? [[R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1. {"position":"50,900","size":"100,100"}
+Ichor: Hunters' lives. *Your* life, is dictated by...clearing these, Dungeons. [[CR1.1.1.1]]
+
+
+:: R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"50,700","size":"100,100"}
+Ichor: Oh? That does not change, your promise of...freedom from being impossible [[CR1.1.1.1.1]]
+
+
+:: R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"50,400","size":"100,100"}
+Ichor: I do not know, if I can leave this room, let alone this place. [[CR1.1.1.1.1.1]]
+
+
+:: R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2 {"position":"150,800","size":"100,100"}
+Ichor: It is the...ultimate form, of Power. It is why...none, can resist. [[R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.1]]
+
+
+:: R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.1 {"position":"250,800","size":"100,100"}
+Ichor: I do not need to...sway you. You will, submit, to it's...temptations. [[CR1.1.1.1.2]]
+
+
+:: R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.1.1 {"position":"350,700","size":"100,100"}
+Ichor: Truly? Then...leave. None before you, have done so, After...making it this, far. [[CR1.1.1.1.2.1]]
+
+
+:: R1.1.1.1.1.1.1.1.1.1.1.2 {"position":"150,1200","size":"100,100"}
+Ichor: And to destroy a Dungeon...you must destroy the heart. [[R1.1.1.1.1.1.1.1.1.1.1.2.1]]
+
+
+:: R1.1.1.1.1.1.1.1.1.1.1.2.1 {"position":"250,1200","size":"100,100"}
+Ichor: The answer lies, with you. [[CR1.1.1.2]]
+
+
+:: R1.1.1.1.1.1.1.1.1.1.1.2.1.1 {"position":"350,1100","size":"100,100"}
+Ichor: I *am* this Dungeon. I cannot simply...leave. [[CR1.1.1.2.1]]
+
+
+:: R1.1.1.1.1.1.2 {"position":"150,1500","size":"100,100"}
+Ichor: Reprieve? This...confinement could be, seen as a punishment. [[R1.1.1.1.1.1.2.1]]
+
+
+:: R1.1.1.1.1.1.2.1 {"position":"250,1500","size":"100,100"}
+Ichor: My...fate, here. Doomed to decay, alongside these...Ghouls is my choice. [[R1.1.1.1.1.1.2.1.1]]
+
+
+:: R1.1.1.1.1.1.2.1.1 {"position":"350,1500","size":"100,100"}
+Ichor: My....consequences for my greed. [[R1.1.1.1.1.1.2.1.1.1]]
+
+
+:: R1.1.1.1.1.1.2.1.1.1 {"position":"350,1400","size":"100,100"}
+Ichor I do not, wish for...anyone to fall to this same, prison. [[R1.1.1.1.1.1.2.1.1.1.1]]
+
+
+:: R1.1.1.1.1.1.2.1.1.1.1 {"position":"450,1400","size":"100,100"}
+Ichor: So, leave me. Hunter. If you, try to...help me, [[R1.1.1.1.1.1.2.1.1.1.1.1]]
+
+
+:: R1.1.1.1.1.1.2.1.1.1.1.1 {"position":"550,1400","size":"100,100"}
+Ichor: To...kill me. It will ensnare you. [[CR1.1.2]]
+
+
+:: R1.1.1.1.1.1.2.1.1.1.1.1.1 {"position":"650,1300","size":"100,100"}
+Ichor: You will do no such thing. No one has, escaped, this place. [[R1.1.1.1.1.1.2.1.1.1.1.1.1.1]]
+
+
+:: R1.1.1.1.1.1.2.1.1.1.1.1.1.1 {"position":"650,1200","size":"100,100"}
+Ichor: No one enters the heart, without losing their free will. [[R1.1.1.1.1.1.2.1.1.1.1.1.1.1.1]]
+
+
+:: R1.1.1.1.1.1.2.1.1.1.1.1.1.1.1 {"position":"650,1100","size":"100,100"}
+Ichor: You will become that, of the Dungeon. Death will greet you here. [[CR1.1.2.1]]]]
+
+
+:: R1.1.1.2 {"position":"375,1700","size":"100,100"}
+Ichor: I only wish for, one thing now. [[R1.1.1.2.1]]
+
+
+:: R1.1.1.2.1 {"position":"475,1700","size":"100,100"}
+It is, amusing how being so close to...the end, ss what has quietened the voices. [[R1.1.1.2.1.1]]
+
+
+:: R1.1.1.2.1.1 {"position":"575,1700","size":"100,100"}
+Ichor: I can think, for myself...again. I now...I only wish for this to be over. [[CR1.2]]
+
+
+:: R1.1.1.2.1.1.1 {"position":"675,1600","size":"100,100"}
+Ichor:  Such a thing...is unheard of. Not once has...leaving been an, option. [[R1.1.1.2.1.1.1.1]]
+
+
+:: R1.1.1.2.1.1.1.1 {"position":"775,1600","size":"100,100"}
+Ichor: This is our...repentance for, choosing to be here. To become, this. [[CR1.2.1]]
+
+
+:: R2 {"position":"400,2200","size":"100,100"}
+Ichor: : I have, no need, for your...praise. [[R2.1]]
+
+
+:: R2.1 {"position":"500,2200","size":"100,100"}
+Ichor: Be with it, I have...long, accepted, this fate, as those...before me. [[CR2]]
+
+
+:: R2.1.1 {"position":"600,2100","size":"100,100"}
+Ichor: Choose to, kill me...and you will know. [[R2.1.1.1]]
+
+
+:: R2.1.1.1 {"position":"600,2000","size":"100,100"}
+Ichor: Even for you, I am sure...you may think you know, what you will get. [[R2.1.1.1.1]]
+
+
+:: R2.1.1.1.1 {"position":"600,1900","size":"100,100"}
+Ichor: But it is never as...ideallic. You will suffer the pain of the thousands who reside here. [[CR2.1]]
+
+
+:: R2.1.1.1.1.1.1 {"position":"800,1900","size":"100,100"}
+Ichor: For the avarice I suffered, it is my...damnation[[R2.1.1.1.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1 {"position":"900,1900","size":"100,100"}
+Ichor: But it does not seem, you are here for the same...reason. [[R2.1.1.1.1.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1 {"position":"1000,1900","size":"100,100"}
+Ichor: Why are you here, Hunter? [[CR2.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1 {"position":"1100,1800","size":"100,100"}
+Ichor: Well here you are. And here I am. Behold me in all of my...glory. [[R2.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1 {"position":"1100,1700","size":"100,100"}
+Ichor: The very being that holds this, Dungeon together. [[R2.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1 {"position":"1100,1600","size":"100,100"}
+Ichor: None who have entered this room, have lived to tell the tale. Be the first. [[CR2.1.1.2]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"1100,1400","size":"100,100"}
+Ichor: You can, and you will. It is...to your merit, that you have not been swayed...yet. [[R2.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"1100,1300","size":"100,100"}
+Ichor: Most who lay eyes on the heart, already have been corrupted. [[R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"1100,1200","size":"100,100"}
+Ichor: Seeing it, is just the death warrant. Go, while you still have your sanity. [[CR2.1.1.2.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"1100,1000","size":"100,100"}
+Ichor: Don't expect a, reasonable explanation for my...clarity. [[R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"1100,900","size":"100,100"}
+Ichor: Perhaps, conversing with someone...fresh, has reminded me of what I once was. [[CR2.1.1.2.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"1100,700","size":"100,100"}
+Ichor: Do you not see my...dissposition? [[R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"1100,600","size":"100,100"}
+Ichor: I cannot just...leave. [[R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"1100,500","size":"100,100"}
+Ichor I cannot... [[CR2.1.1.2.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2 {"position":"1200,800","size":"100,100"}
+Ichor: The memories are hazy, after so long. [[R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.1 {"position":"1300,800","size":"100,100"}
+Ichor: But, I ended up here...by the same means as you, Hunter. [[R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.1.1 {"position":"1400,800","size":"100,100"}
+Ichor: I could not...resist the temptations of, the heart. [[R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2.1.1.1 {"position":"1500,800","size":"100,100"}
+Ichor: Which is why I, urge you to leave. [[CR2.1.1.2.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.2 {"position":"1200,1500","size":"100,100"}
+Ichor: These confines will not, release me. Such a thought, is not comprehensible. [[R2.1.1.1.1.1.1.1.1.1.1.1.2.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.2.1 {"position":"1300,1500","size":"100,100"}
+Ichor: Even if they would...I am not your conquest to, trophy around. [[R2.1.1.1.1.1.1.1.1.1.1.1.2.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.2.1.1 {"position":"1400,1500","size":"100,100"}
+Ichor: It is unspeakable to think of, consigning...myself to such a fate. [[CR2.1.1.2.2]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.2.1.1.1 {"position":"1400,1300","size":"100,100"}
+Ichor: Then what could you...possibly want from it? [[R2.1.1.1.1.1.1.1.1.1.1.1.2.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.2.1.1.1.1 {"position":"1400,1200","size":"100,100"}
+Ichor: What are you hoping to gain from, getting me out of here? [[CR2.1.1.2.2.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1 {"position":"1500,1100","size":"100,100"}
+Ichor: Brash decisions, so forthcoming. I shall not vest myself on such traits. [[CR2.1.1.2.2.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.1.1.2.1.1.2 {"position":"1500,1400","size":"100,100"}
+Ichor: Leave me here. Leave me...or kill me. Both have become more, favourable options. [[CR2.1.1.2.2.2]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2 {"position":"1200,1900","size":"100,100"}
+Ichor: It seems I was mistaken. There has never been anyone, strong enough to resist. [[R2.1.1.1.1.1.1.1.1.1.2.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1 {"position":"1300,1900","size":"100,100"}
+Ichor: To resist the pull of the heart...everyone falls to it's whims. [[R2.1.1.1.1.1.1.1.1.1.2.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1.1 {"position":"1400,1900","size":"100,100"}
+Ichor: I do not wish for anyone else to suffer as I have. [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1.1.1 {"position":"1500,1900","size":"100,100"}
+Ichor: Hunter, you must leave. Your fight is over. [[CR2.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1 {"position":"1600,1800","size":"100,100"}
+Ichor: What about me? There is, nothing to say. [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1 {"position":"1600,1700","size":"100,100"}
+Ichor: I will continue here, for not much longer. [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1.1 {"position":"1600,1600","size":"100,100"}
+Ichor: This Dungeon is near it's collapse, it cannot...sustain itself. [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1.1.1 {"position":"1700,1600","size":"100,100"}
+Ichor: With no more humans...entering, it will not be able to survive. [[CR2.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1.1.1.1 {"position":"1800,1500","size":"100,100"}
+Ichor: Leave? I cannot leave myself, I am this Dungeon. [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1.1.1.1.1 {"position":"1800,1400","size":"100,100"}
+Ichor: I have been down here...for so long. You see what it has done to me. [[CR2.1.1.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1.1.1.1.2 {"position":"1900,1600","size":"100,100"}
+Ichor: An end...this place will only end in one way. [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1.1.1.1.2.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1.1.1.1.2.1 {"position":"2000,1600","size":"100,100"}
+Ichor: Leave, let nature...run its course. I am...beyond, help. [[CR2.1.1.1.1.2]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1.1.1.2 {"position":"1700,1900","size":"100,100"}
+Ichor: This place will be destroyed, just...leave. [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1.2.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1.1.1.2.1 {"position":"1800,1900","size":"100,100"}
+Ichor: Trying to...bring it down, bring me down. It will only seal your fate...here, till the end. [[CR2.1.1.1.2]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1.1.1.2.1.1 {"position":"2000,1900","size":"100,100"}
+Ichor: The choice has only ever been to...take the place. [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1.2.1.1.1]]
+
+
+:: R2.1.1.1.1.1.1.1.1.1.2.1.1.1.2.1.1.1 {"position":"2100,1900","size":"100,100"}
+Ichor: That is the only path taken, from everyone who...entered. [[CR2.1.1.1.2.1]]
+
+
+:: R2.1.2 {"position":"700,2200","size":"100,100"}
+Ichor: I am far past my, days of grandiosity. [[R2.1.2.1]]
+
+
+:: R2.1.2.1 {"position":"800,2200","size":"100,100"}
+Ichor: I no longer have the...energy nor the, will to give you a spectacle. [[R2.1.2.1.1]]
+
+
+:: R2.1.2.1.1 {"position":"900,2200","size":"100,100"}
+Ichor: This..repitition, the cycle of...death. [[R2.1.2.1.1.1]]
+
+
+:: R2.1.2.1.1.1 {"position":"1000,2200","size":"100,100"}
+Ichor: I have witnessed it, the memories of all those before. [[R2.1.2.1.1.1.1]]
+
+
+:: R2.1.2.1.1.1.1 {"position":"1100,2200","size":"100,100"}
+Ichor: It is the same. And I do not have the power to stop it. [[CR2.2]]
+
+
+:: R2.1.2.1.1.1.1.1 {"position":"1300,2200","size":"100,100"}
+Ichor: You do not. No one has any, power of their own once they...are tempted. [[R2.1.2.1.1.1.1.1.1]]
+
+
+:: R2.1.2.1.1.1.1.1.1 {"position":"1400,2200","size":"100,100"}
+Ichor: You will kill me. And then you will die. [[R2.1.2.1.1.1.1.1.1.1]]
+
+
+:: R2.1.2.1.1.1.1.1.1.1 {"position":"1500,2200","size":"100,100"}
+Ichor: It is the way of, the dungeon, the rule of the heart. [[CR2.2.1]]
+
+
+:: R2.1.2.1.1.1.1.1.1.1.1 {"position":"1600,2100","size":"100,100"}
+Ichor: You are not, nobody is...the power of the heart is too strong, even for you. [[R2.1.2.1.1.1.1.1.1.1.1.1]]
+
+
+:: R2.1.2.1.1.1.1.1.1.1.1.1 {"position":"1700,2100","size":"100,100"}
+Ichor: It is a testament you have made it this far, I will give you that. [[R2.1.2.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R2.1.2.1.1.1.1.1.1.1.1.1.1 {"position":"1800,2100","size":"100,100"}
+Ichor: But you shall go no further. Leave this place, it will all end soon enough. [[CR2.2.1.1]]
+
+
+:: R2.1.2.1.1.1.1.1.1.1.1.1.1.1 {"position":"2000,2100","size":"100,100"}
+Ichor: It will die...naturally. This place is...alive. [[R2.1.2.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R2.1.2.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"2100,2100","size":"100,100"}
+Ichor: You are the first Hunter to enter in a...long, time. [[R2.1.2.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R2.1.2.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"2200,2100","size":"100,100"}
+Ichor: It has not eaten, you would die in the same...circumstance. As I will. [[CR2.2.2.1.1.1]]
+
+
+:: R2.1.2.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"2400,2100","size":"100,100"}
+Ichor: I have had enough...time to contemplate my, fate. [[R2.1.2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R2.1.2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"2500,2100","size":"100,100"}
+Ichor: Long ago I accepted it as, the only option. This clarity, only confirms my resolve. [[CR2.2.2.1.1.1.1]]
+
+
+:: R2.1.2.1.1.1.1.1.1.1.2 {"position":"1600,2300","size":"100,100"}
+Ichor: Then leave, no other choices are before you. My time is up, regardless your decision. [[R2.1.2.1.1.1.1.1.1.1.2.1]]
+
+
+:: R2.1.2.1.1.1.1.1.1.1.2.1 {"position":"1700,2300","size":"100,100"}
+Ichor: I will be at peace. [[CR2.2.1.2]]
+
+
+:: R2.1.2.1.1.1.1.1.1.1.2.12.2.1.2.1 {"position":"1900,2300","size":"100,100"}
+Ichor: Is it not obvious? Even if it was possible, there is nothing for me...above. [[CR2.2.1.2.1]]
+
+
+:: R3 {"position":"300,2300","size":"100,100"}
+Ichor: Hunter, you...must not be swayed by the...power within this, room. [[R3.1]]
+
+
+:: R3.1 {"position":"300,2400","size":"100,100"}
+Ichor: I once was, tempted, as you are...now [[R3.1.1]]
+
+
+:: R3.1.1 {"position":"300,2500","size":"100,100"}
+Ichor: But...look what it has done to me. I am...not human. [[R3.1.1.1]]
+
+
+:: R3.1.1.1 {"position":"300,2600","size":"100,100"}
+Ichor: My thoughts are...clouded by others, before me. If you try to do, as I did... [[R3.1.1.1.1]]
+
+
+:: R3.1.1.1.1 {"position":"400,2600","size":"100,100"}
+Ichor: My voice will become another...amongst the, cacophony, within your head. [[R3.1.1.1.1.1]]
+
+
+:: R3.1.1.1.1.1 {"position":"500,2600","size":"100,100"}
+Ichor: You will die. [[CR3]]
+
+
+:: R3.1.1.1.1.1.1 {"position":"700,2500","size":"100,100"}
+Ichor: No one, truly dies in the...Dungeon. It is alive. [[Next->R3.1.1.1.1.1.1.1]]
+
+
+:: R3.1.1.1.1.1.1.1 {"position":"800,2500","size":"100,100"}
+Ichor: I am simply...the heart of it all. If you choose, to kill me...then it will take you. [[Next->R3.1.1.1.1.1.1.1.1]]
+
+
+:: R3.1.1.1.1.1.1.1.1 {"position":"900,2500","size":"100,100"}
+Ichor: The Dungeon has a mind of it's own, And you will, be swallowed into it. [[Next->R3.1.1.1.1.1.1.1.1.1]]
+
+
+:: R3.1.1.1.1.1.1.1.1.1 {"position":"1000,2500","size":"100,100"}
+Ichor: Then you will hear...everything. [[Next->CR3.1]]
+
+
+:: R3.1.1.1.1.1.1.1.1.1.1 {"position":"1200,2500","size":"100,100"}
+Ichor: To call it living, such a thing does not make...sense. [[Next->R3.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R3.1.1.1.1.1.1.1.1.1.1.1 {"position":"1300,2500","size":"100,100"}
+Ichor: Heed my warning, young Hunter, it is no feat. [[Next->R3.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R3.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"1400,2500","size":"100,100"}
+Ichor: You may think, you want this, but you do not know... [[Next->R3.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R3.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"1500,2500","size":"100,100"}
+The horrors I have seen. The pain I endure. With you, it shall only multiply. [[Next->R3.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R3.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"1600,2500","size":"100,100"}
+Ichor: Leave now, whilst you still can. [[Next->CR3.1.1]]
+
+
+:: R3.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"1800,2500","size":"100,100"}
+Ichor: So fickle to think that now. It does not matter. [[Next->R3.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
+
+
+:: R3.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1 {"position":"1900,2500","size":"100,100"}
+Ichor: If you try anything foolish, you will be consumed. [[Next->CR31.1.1]]
+
+
+:: R3.1.1.1.1.1.2 {"position":"700,2700","size":"100,100"}
+Ichor: It's not, as it is told, this, is your...last chance, to turn back. To keep...*living*. [[R3.1.1.1.1.1.2.1]]
+
+
+:: R3.1.1.1.1.1.2.1 {"position":"800,2700","size":"100,100"}
+Ichor: It is no life here, part of the Dungeon. And no life will come, it is dying. [[R3.1.1.1.1.1.2.1.1]]
+
+
+:: R3.1.1.1.1.1.2.1.1 {"position":"900,2700","size":"100,100"}
+Ichor: I...it cannot live when no one enters,when no life is near to steal. [[CR3.2]]
+
+
+:: R3.1.1.1.1.1.2.1.1.1 {"position":"1100,2700","size":"100,100"}
+Ichor: You are not different. You will not be, different. [[R3.1.1.1.1.1.2.1.1.1.1]]
+
+
+:: R3.1.1.1.1.1.2.1.1.1.1 {"position":"1200,2700","size":"100,100"}
+Ichor: I will die in this place regardless of your...choice. [[R3.1.1.1.1.1.2.1.1.1.1.1]]
+
+
+:: R3.1.1.1.1.1.2.1.1.1.1.1 {"position":"1300,2700","size":"100,100"}
+Ichor: If your arrogance is so much as to, resign yourself to wither away in this hell, [[R3.1.1.1.1.1.2.1.1.1.1.1.1]]
+
+
+:: R3.1.1.1.1.1.2.1.1.1.1.1.1 {"position":"1400,2700","size":"100,100"}
+Ichor: No more pity I shall take on your...weak soul. [[CR3.2.1]]
+
+
+:: R3.1.1.1.1.1.2.1.1.1.1.1.1.1 {"position":"1600,2700","size":"100,100"}
+Ichor: You do not know anything. Are you not...listening? [[R3.1.1.1.1.1.2.1.1.1.1.1.1.1.1]]
+
+
+:: R3.1.1.1.1.1.2.1.1.1.1.1.1.1.1 {"position":"1700,2700","size":"100,100"}
+Ichor: Coming to this place with you mind set on, solely acquiring power. [[R3.1.1.1.1.1.2.1.1.1.1.1.1.1.1.1]]
+
+
+:: R3.1.1.1.1.1.2.1.1.1.1.1.1.1.1.1 {"position":"1800,2700","size":"100,100"}
+Ichor: No matter the cost. Kill me if you must. Your fate will be deserved. [[CR3.2.1.1]]
+
+
+:: Start {"position":"0,2200","size":"100,100"}
+Ichor: It's been...so long. I almost forgot what this *actually* feels like, [[1]]
