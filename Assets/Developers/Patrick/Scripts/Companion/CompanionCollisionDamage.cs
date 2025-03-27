@@ -48,6 +48,10 @@ public class CompanionCollisionDamage : MonoBehaviour
                     {
                         collision.gameObject.GetComponent<IchorManager>().takeDamage((int)_friendData.leapDamage);
                     }
+                    else if (collision.gameObject.tag == "WeakPoint")
+                    {
+                        collision.gameObject.GetComponent<WeakPointScript>().takeDamage((int)_friendData.leapDamage);
+                    }
                     else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
                     {
                         collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(_friendData.leapDamage, gameObject.transform.position - collision.gameObject.transform.position);

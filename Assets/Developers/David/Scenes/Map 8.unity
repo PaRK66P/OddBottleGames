@@ -15433,6 +15433,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: PreFightDialogueTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 6809961152444228999, guid: 8cdc1eb41ef6b9e4a93134a11ab46b33, type: 3}
+      propertyPath: m_Size.x
+      value: 7.4395537
+      objectReference: {fileID: 0}
+    - target: {fileID: 6809961152444228999, guid: 8cdc1eb41ef6b9e4a93134a11ab46b33, type: 3}
+      propertyPath: m_Size.y
+      value: 31.927795
+      objectReference: {fileID: 0}
+    - target: {fileID: 6809961152444228999, guid: 8cdc1eb41ef6b9e4a93134a11ab46b33, type: 3}
+      propertyPath: m_Offset.x
+      value: -3.2197769
+      objectReference: {fileID: 0}
+    - target: {fileID: 6809961152444228999, guid: 8cdc1eb41ef6b9e4a93134a11ab46b33, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.0791893
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -122350,10 +122366,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 84365524}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1503966002
 PrefabInstance:
