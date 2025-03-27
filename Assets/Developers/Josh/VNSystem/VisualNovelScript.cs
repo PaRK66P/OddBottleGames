@@ -178,6 +178,7 @@ public class VisualNovelScript : MonoBehaviour
             {
                 currentNode = currentNode.children[index];
                 sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
+                sprite.GetComponent<Image>().SetNativeSize();
                 if (typingTextToggle)
                 {
                     typingText = TypewriterText(currentNode.sceneData.text);
