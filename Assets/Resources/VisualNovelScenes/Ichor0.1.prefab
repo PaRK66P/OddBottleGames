@@ -48,7 +48,7 @@ MonoBehaviour:
   tree:
     nodes:
     - id: -1678349122
-      parentId: 1370211596
+      parentId: 0
       sceneData:
         entryText: 1
         text: 'Ichor: It is...a feat that your recklessness has...brought, you so
