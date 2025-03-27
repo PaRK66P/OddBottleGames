@@ -66,6 +66,7 @@ public class SoundManager : MonoBehaviour
     private bool isWalkingAmb = false;
     private float footstepLengthAmb;
 
+    [Header("Ichor Sounds")]
     //Ichor Sounds
     [SerializeField] private AudioClip IchorStndAttack;
     [SerializeField] private AudioClip IchorBlastAttack;
