@@ -21,7 +21,7 @@ MonoBehaviour:
   healthbarArmoredSprite: {fileID: 0}
   weakPontsPrefab: {fileID: 3231380814657301356, guid: 6ac7c8a5c43dca34fa8c401fb1723cfc, type: 3}
   weakPointsNo: 030000000400000005000000
-  weakPointHealth: 10
+  weakPointHealth: 3
   weakFinishDamage: 20
   weakPointDamageTimer: 0.5
   weakPointSpriteNorm: {fileID: 21300000, guid: f0a2bde2a11659747be6d1428cc136b4, type: 3}

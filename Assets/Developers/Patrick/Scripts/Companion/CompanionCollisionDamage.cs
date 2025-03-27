@@ -46,7 +46,7 @@ public class CompanionCollisionDamage : MonoBehaviour
                 {
                     if (collision.gameObject.tag == "Boss")
                     {
-                        collision.gameObject.GetComponent<boss>().takeDamage((int)_friendData.leapDamage);
+                        collision.gameObject.GetComponent<IchorManager>().takeDamage((int)_friendData.leapDamage);
                     }
                     else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
                     {

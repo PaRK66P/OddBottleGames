@@ -49,5 +49,5 @@ MonoBehaviour:
   maxChargeShotImpactSlowDown: 0.5
   chargeShotImpactFrameDuration: 0.05
   baseProjectileType: {fileID: 1223489425459614113, guid: 50e3b8fba1c074f4ba558c89a7b1613e, type: 3}
-  baseProjectileSpeed: 20
+  baseProjectileSpeed: 32
   controlLossTime: 0.2

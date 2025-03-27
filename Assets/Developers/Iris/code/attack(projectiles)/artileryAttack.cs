@@ -7,6 +7,7 @@ public class artileryAttack : MonoBehaviour
 {
     public Sprite normalSprite;
     public Sprite damageSprite;
+    public GameObject imageRef;
 
     public float delay = 1;
     public float activeTime = 1;
@@ -30,7 +31,7 @@ public class artileryAttack : MonoBehaviour
         if(timeElapsed >= delay)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = damageSprite;
-            //GetComponentInChildren<Transform>().position = new Vector3(0, 0.5f, 0);
+            imageRef.transform.localPosition = new Vector3(0, 0.5f, 0);
             gameObject.layer = LayerMask.NameToLayer("EnemyAttack");
             damage = true;
         }
@@ -59,6 +60,7 @@ public class artileryAttack : MonoBehaviour
         transform.rotation = UnityEngine.Quaternion.Euler(rot);
         timeElapsed = 0;
         damage = false;
+        imageRef.transform.localPosition = new Vector3(0, 0, 0);
         GetComponentInChildren<SpriteRenderer>().sprite = normalSprite;
     }
 }

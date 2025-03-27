@@ -179,6 +179,11 @@ public class CompanionManager : MonoBehaviour
         DamageVisual();
     }
 
+    public bool IsFriendly()
+    {
+        return _currentState == CompanionStates.FRIEND;
+    }
+
     private void CompanionDeath()
     {
         _currentState = CompanionStates.NONE;
@@ -401,6 +406,8 @@ public class CompanionManager : MonoBehaviour
                 gameObject.GetComponent<enemyScr>().releaseEnemy();
                 break;
             default:
+                _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
+                gameObject.GetComponent<enemyScr>().releaseEnemy();
                 Debug.LogError("Visual novel selection of " + visualNovelManager.GetLastSelectionID() + " not supported. make sure to update selection code in miniboss as well as the novel that plays");
                 break;
         }
