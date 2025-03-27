@@ -46,7 +46,7 @@ Destroying the Dungeons solves that. [[R1.1.1.1.1.1.1.1.1.1.1.2]]
 :: CR1.1.1.1 {"position":"50,800","size":"100,100"}
 ...I do not wish to fight anymore. [[R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
 
-The cores power...it's more extensive that I realised. [[R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2]]
+The hearts power...it's more extensive that I realised. [[R1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2]]
 
 
 :: CR1.1.1.1.1 {"position":"50,600","size":"100,100"}
@@ -56,7 +56,7 @@ Freedom can mean many things, death will be your freedom. [[Kill2]]
 
 
 :: CR1.1.1.1.1.1 {"position":"50,300","size":"100,100"}
-Have you ever even tried? [[Leave Together1]]
+Have you ever even tried? [[LeaveTogether1]]
 
 Then I shall put you out of your misery. [[Kill1]]
 
@@ -68,7 +68,7 @@ You will submit to me. [[Kill4]]
 
 
 :: CR1.1.1.1.2.1 {"position":"350,600","size":"100,100"}
-I will leave, but with you. [[Leave Together2]]
+I will leave, but with you. [[LeaveTogether2]]
 
 I will destroy this place. [[Kill3]]
 
@@ -80,7 +80,7 @@ So kill you I shall. [[Kill6]]
 
 
 :: CR1.1.1.2.1 {"position":"350,1000","size":"100,100"}
-Have you even tried? [[Leave Together3]]
+Have you even tried? [[LeaveTogether3]]
 
 Then...my only option is to destroy you. [[Kill5]]
 
@@ -92,7 +92,7 @@ It will not ensnare me, I will conquer it. [[Kill8]]
 
 
 :: CR1.1.2.1 {"position":"650,1000","size":"100,100"}
-I did not come here to be the first to do so, but I will. [[Leave Together4]]
+I did not come here to be the first to do so, but I will. [[LeaveTogether4]]
 
 You do not know me, I am stronger than you think. [[Kill7]]
 
@@ -104,7 +104,7 @@ I can grant that request. [[Kill10]]
 
 
 :: CR1.2.1 {"position":"875,1600","size":"100,100"}
-You have paid your dues. It's time to move on. [[Leave Together9]]
+You have paid your dues. It's time to move on. [[LeaveTogether9]]
 
 If you want to spend your life wallowing. I might as well end it. [[Kill9]]
 
@@ -140,13 +140,13 @@ I can put an end to it now. [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1.1.1.1.2]]
 
 
 :: CR2.1.1.1.1.1 {"position":"1800,1300","size":"100,100"}
-It's not like you'll be alone. [[Leave Together17]]
+It's not like you'll be alone. [[LeaveTogether17]]
 
 If you can't leave...I'll put an end to your miserable fate. [[Kill15]]
 
 
 :: CR2.1.1.1.1.2 {"position":"2100,1600","size":"100,100"}
-No, I must help you, I can get you out. [[Leave Together18]]
+No, I must help you, I can get you out. [[LeaveTogether18]]
 
 A mercy killing is the honourable thing to do... [[Kill16]]
 
@@ -158,7 +158,7 @@ Surely there's more than one way to go about this [[R2.1.1.1.1.1.1.1.1.1.2.1.1.1
 
 
 :: CR2.1.1.1.2.1 {"position":"2200,1900","size":"100,100"}
-...I don't need to take your place. I can just take you. Out. Outside [[Leave Together19]]
+...I don't need to take your place. I can just take you. Out. Outside [[LeaveTogether19]]
 
 It appears there is only one option then. I will kill you. [[Kill20]]
 
@@ -172,7 +172,7 @@ If I leave, you're coming with me. [[R2.1.1.1.1.1.1.1.1.1.1.1.2]]
 :: CR2.1.1.2.1 {"position":"1100,1100","size":"100,100"}
 You don't sound like your mind is gone. [[R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1]]
 
-If I've lasted this long...I can last long enough to get you out too. [[Leave Together12]]
+If I've lasted this long...I can last long enough to get you out too. [[LeaveTogether12]]
 
 
 :: CR2.1.1.2.1.1 {"position":"1100,800","size":"100,100"}
@@ -182,13 +182,13 @@ What you once were? [[R2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.2]]
 
 
 :: CR2.1.1.2.1.1.1 {"position":"1100,400","size":"100,100"}
-You're not in any position to resist my help. [[Leave Together10]]
+You're not in any position to resist my help. [[LeaveTogether10]]
 
 Then a mercy killing is all I can offer. [[Kill11]]
 
 
 :: CR2.1.1.2.1.1.1.1 {"position":"1600,800","size":"100,100"}
-You were a human once, surely that part of you is still there. [[Leave Together11]]
+You were a human once, surely that part of you is still there. [[LeaveTogether11]]
 
 Leaving you like this...I must put an end to it. [[Kill12]]
 
@@ -200,21 +200,21 @@ I hadn't even thought of that... [[R2.1.1.1.1.1.1.1.1.1.1.1.2.1.1.2]]
 
 
 :: CR2.1.1.2.2.1 {"position":"1400,1100","size":"100,100"}
-A friend. [[Leave Together13]]
+A friend. [[LeaveTogether13]]
 
 I haven't thought further than freeing you from here. [[R2.1.1.1.1.1.1.1.1.1.1.1.2.1.1.1.1.1]]
 
 
 :: CR2.1.1.2.2.1.1 {"position":"1600,1100","size":"100,100"}
-Maybe lacking those traits is what got you here...let me teach you. [[Leave Together14]]
+Maybe lacking those traits is what got you here...let me teach you. [[LeaveTogether14]]
 
 If you won't come with me, there's only one thing I can do. [[Kill14]]
 
 
 :: CR2.1.1.2.2.2 {"position":"1600,1400","size":"100,100"}
-I jest, once I get you out you're free to do as you wish. [[Leave Together15]]
+I jest, once I get you out you're free to do as you wish. [[LeaveTogether15]]
 
-I'm sure you've wondered what it feels like to be the one getting conquered for once. [[Leave Together16]]
+I'm sure you've wondered what it feels like to be the one getting conquered for once. [[LeaveTogether16]]
 
 
 :: CR2.2 {"position":"1200,2200","size":"100,100"}
@@ -242,7 +242,7 @@ If this will put you at peace... [[Kill22]]
 
 
 :: CR2.2.1.2.1 {"position":"2000,2300","size":"100,100"}
-You don't have to do it alone. [[Leave Together21]]
+You don't have to do it alone. [[LeaveTogether21]]
 
 If it's not possible then...I'll grant you a swift end. [[Kill23]]
 
@@ -254,7 +254,7 @@ I'll move it along then. [[Kill18]]
 
 
 :: CR2.2.2.1.1.1.1 {"position":"2600,2100","size":"100,100"}
-Well that won't do. I'll give you a reason to live. [[Leave Together20]]
+Well that won't do. I'll give you a reason to live. [[LeaveTogether20]]
 
 I still can't just leave...I can end it now. [[Kill19]]
 
@@ -296,7 +296,7 @@ As will yours. [[Kill30]]
 
 
 :: CR31.1.1 {"position":"2000,2500","size":"100,100"}
-I can make up for my wrongdoings. I can try. [[Leave Together22]]
+I can make up for my wrongdoings. I can try. [[LeaveTogether22]]
 
 This place truly does corrupt...I will end this. [[Kill24]]
 
@@ -425,75 +425,75 @@ This place truly does corrupt...I will end this. [[Kill24]]
 *Eat it*
 
 
-:: Leave Together1 {"position":"25,150","size":"100,100"}
+:: LeaveTogether1 {"position":"25,150","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together10 {"position":"1225,250","size":"100,100"}
+:: LeaveTogether10 {"position":"1225,250","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together11 {"position":"1625,600","size":"100,100"}
+:: LeaveTogether11 {"position":"1625,600","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together12 {"position":"1250,1125","size":"100,100"}
+:: LeaveTogether12 {"position":"1250,1125","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together13 {"position":"1400,975","size":"100,100"}
+:: LeaveTogether13 {"position":"1400,975","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together14 {"position":"1775,1100","size":"100,100"}
+:: LeaveTogether14 {"position":"1775,1100","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together15 {"position":"1650,1275","size":"100,100"}
+:: LeaveTogether15 {"position":"1650,1275","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together16 {"position":"1550,1275","size":"100,100"}
+:: LeaveTogether16 {"position":"1550,1275","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together17 {"position":"1900,1175","size":"100,100"}
+:: LeaveTogether17 {"position":"1900,1175","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together18 {"position":"2250,1575","size":"100,100"}
+:: LeaveTogether18 {"position":"2250,1575","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together19 {"position":"2275,1775","size":"100,100"}
+:: LeaveTogether19 {"position":"2275,1775","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together2 {"position":"375,475","size":"100,100"}
+:: LeaveTogether2 {"position":"375,475","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together20 {"position":"2700,1975","size":"100,100"}
+:: LeaveTogether20 {"position":"2700,1975","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together21 {"position":"2125,2425","size":"100,100"}
+:: LeaveTogether21 {"position":"2125,2425","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together22 {"position":"2125,2625","size":"100,100"}
+:: LeaveTogether22 {"position":"2125,2625","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together3 {"position":"475,925","size":"100,100"}
+:: LeaveTogether3 {"position":"475,925","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together4 {"position":"700,825","size":"100,100"}
+:: LeaveTogether4 {"position":"700,825","size":"100,100"}
 Ichor: ...
 
 
-:: Leave Together9 {"position":"950,1725","size":"100,100"}
+:: LeaveTogether9 {"position":"950,1725","size":"100,100"}
 Ichor: ...
 
 
@@ -648,7 +648,7 @@ Ichor: I only wish for, one thing now.
 
 
 :: R1.1.1.2.1 {"position":"475,1700","size":"100,100"}
-It is, amusing how being so close to...the end, ss what has quietened the voices. 
+Ichor: It is, amusing how being so close to...the end, is what has quietened the voices. 
 .. [[R1.1.1.2.1.1]]
 
 
