@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2796b0e14fbd8294db513ab46083882c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  artileryPrefab: {fileID: 4466490144154200171, guid: 14a89200231f33d4ea5e829d03261a58, type: 3}
-  randomArtileryProjectileNo: 14
-  horizantalUnitsFromOrigin: 10
-  verticalUnitsFromOrigin: 8
-  originX: 81
-  originY: 0
+  artileryPrefab: {fileID: 4466490144154200171, guid: 202c6d44a90518a46bc9ebaad56ac058, type: 3}
+  randomArtileryProjectileNo: 70
+  horizantalUnitsFromOrigin: 25
+  verticalUnitsFromOrigin: 29
+  originX: 80
+  originY: 149
