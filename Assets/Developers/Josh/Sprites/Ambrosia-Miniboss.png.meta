@@ -195,7 +195,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Ambrosia-Miniboss_0: -5758878991093501949
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
