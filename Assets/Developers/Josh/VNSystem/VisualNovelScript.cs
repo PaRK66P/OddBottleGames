@@ -214,18 +214,16 @@ public class VisualNovelScript : MonoBehaviour
 
     public DialogueTreeNode ReconstructTree(SerializedTree serializedTree)
     {
-        if (serializedTree != null)
-        {
-            Debug.Log("reconstruct tree");
-        }
+        // if (serializedTree != null)
+        // {
+        //     Debug.Log("reconstruct tree");
+        // }
         var nodeDict = new Dictionary<int, DialogueTreeNode>();
 
         foreach (var serializedNode in serializedTree.nodes)
         {
             var node = new DialogueTreeNode(serializedNode.sceneData);
             nodeDict[serializedNode.id] = node;
-
-
         }
         foreach (var serializedNode in serializedTree.nodes)
         {
