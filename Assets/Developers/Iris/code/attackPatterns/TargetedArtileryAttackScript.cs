@@ -7,7 +7,7 @@ public class attack2 : AttackClass
 {
     public GameObject artileryPrefab;
     ObjectPoolManager pooler;
-    public int targetedArtileryProjectileNo = 5;
+    public int targetedArtileryProjectileNo = 3;
     public float timeBetweenStrikes = 0.5f;
 
     public override void Attack(ref bool b, ref List<int> itt, ref List<float> tim, ref ObjectPoolManager poolMan, ref GameObject callingObj)
@@ -23,7 +23,7 @@ public class attack2 : AttackClass
         if (tim[0] >= timeBetweenStrikes)
         {
             tim[0] = 0;
-            if (itt[0] < 5)
+            if (itt[0] < targetedArtileryProjectileNo)
             {
                 UnityEngine.Vector3 pos = new UnityEngine.Vector3(0, 0, 0);
 
