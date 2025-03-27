@@ -10,6 +10,7 @@ public class NPlayerInput : MonoBehaviour
     private PlayerInput playerIn;
     public PlayerMovement playerMovement;
     public PlayerShooting playerShooting;
+    public PlayerAimReticle _playerAimReticle;
 
     private NewPlayerInputMap playerInputActions;
 
@@ -33,13 +34,14 @@ public class NPlayerInput : MonoBehaviour
         playerIn.onControlsChanged -= OnChangeControls;
     }
 
-    public void InitialiseComponent(ref PlayerMovement dPlayerMovement, ref PlayerShooting dPlayerShooting)
+    public void InitialiseComponent(ref PlayerMovement dPlayerMovement, ref PlayerShooting dPlayerShooting, ref PlayerAimReticle playerAimReticle)
     {
         playerIn = GetComponent<PlayerInput>();
         playerIn.onControlsChanged += OnChangeControls;
 
         playerMovement = dPlayerMovement;
         playerShooting = dPlayerShooting;
+        _playerAimReticle = playerAimReticle;
 
         playerInputActions = new NewPlayerInputMap();
 
@@ -48,10 +50,12 @@ public class NPlayerInput : MonoBehaviour
         if(playerIn.currentControlScheme == "Keyboard")
         {
             isUsingController = false;
+            playerAimReticle.SwitchToMouse();
         }
         else
         {
             isUsingController = true;
+            playerAimReticle.SwitchToController();
         }
 
         EnableInput();
@@ -69,12 +73,14 @@ public class NPlayerInput : MonoBehaviour
             isUsingController = true;
             EnableControllerAim();
             DisableMouseAim();
+            _playerAimReticle.SwitchToController();
         }
         else if(input.currentControlScheme == "Keyboard")
         {
             isUsingController = false;
             EnableMouseAim();
             DisableControllerAim();
+            _playerAimReticle.SwitchToMouse();
         }
         else
         {

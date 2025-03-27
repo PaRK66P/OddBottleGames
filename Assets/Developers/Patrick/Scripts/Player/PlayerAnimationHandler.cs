@@ -37,6 +37,9 @@ public class PlayerAnimationHandler : MonoBehaviour
     [SpineAnimation]
     public string rightSide;
 
+    [Header("Temp")]
+    public PlayerAimReticle _aimReticle;
+
     private SkeletonAnimation skeletonAnimation;
 
     public Spine.AnimationState spineAnimationState;
@@ -170,7 +173,8 @@ public class PlayerAnimationHandler : MonoBehaviour
 
     public void SetAimDirection(Vector2 direction)
     {
-        if(_currentDirection == FacingDirection.RIGHT) { direction.x *= -1.0f; }
+        _aimReticle.UpdateDirection(direction);
+        if (_currentDirection == FacingDirection.RIGHT) { direction.x *= -1.0f; }
 
         float AngleFromRight = Vector3.SignedAngle(Vector3.right, new Vector3(direction.x, direction.y, Vector3.right.z), new Vector3(0.0f, 0.0f, 1.0f));
 

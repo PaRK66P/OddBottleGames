@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 88f192ceab50e144aada4905ab759695
+guid: a968519904cb5d04c907c08b199c5f1c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 855346576621704845
-    second: Ambrosia_Projectile 1_0
+      213: -1074614960960222088
+    second: Ambrosia_Projectile_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -165,13 +165,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ambrosia_Projectile 1_0
+      name: Ambrosia_Projectile_0
       rect:
         serializedVersion: 2
-        x: 40
-        y: 3
-        width: 399
-        height: 492
+        x: 0
+        y: 0
+        width: 232
+        height: 316
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d86126bfd2dcedb00800000000000000
-      internalID: 855346576621704845
+      spriteID: 87c45a5f2633611f0800000000000000
+      internalID: -1074614960960222088
       vertices: []
       indices: 
       edges: []
@@ -188,7 +188,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -196,7 +196,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Ambrosia_Projectile 1_0: 855346576621704845
+      Ambrosia_Projectile_0: -1074614960960222088
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
