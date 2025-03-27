@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 8695463969144503389}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.9565253, y: -2.4258802, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -6.3267, y: -1.796, z: 0}
+  m_LocalScale: {x: 2.2597, y: 2.2597, z: 2.2597}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -193,6 +193,8 @@ MonoBehaviour:
   shootingRange: 6
   speed: 2
   fireRate: 2
+  maxHealth: 10
+  hitStunLength: 0.2
   takesKnockback: 1
   AIProjectilePrefab: {fileID: 0}
   projectiles: []

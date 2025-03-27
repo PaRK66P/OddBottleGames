@@ -191,8 +191,10 @@ MonoBehaviour:
   particle: {fileID: 7317420507254709891, guid: e44d4902256532545890d4ebc28a53ac, type: 3}
   detectionRange: 20
   shootingRange: 6
-  speed: 2
+  speed: 3
   fireRate: 2
+  maxHealth: 8
+  hitStunLength: 0.2
   takesKnockback: 1
   AIProjectilePrefab: {fileID: 0}
   projectiles: []
