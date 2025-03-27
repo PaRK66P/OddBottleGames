@@ -1,0 +1,3 @@
+Hannah is creditted for all the twine files and visual novel segments found in Assets/Resources
+Due to the way the games systems work, these need to be placed in specific directories
+so while the folder here is empty, work has been done and is in the game
