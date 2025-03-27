@@ -205,7 +205,7 @@ public class CompanionManager : MonoBehaviour
             hasPlayedNovel = true;
 
 
-            visualNovelManager.StartNovelSceneByName("AmbrosiaTempDialogue");
+            visualNovelManager.StartNovelSceneByName("Ambrosia1");
             visualNovelManager.onNovelFinish.AddListener(GetVisualNovelResult);
 
             //GetComponent<enemyScr>().DecreaseEnemyCount();
@@ -364,19 +364,6 @@ public class CompanionManager : MonoBehaviour
         switch (visualNovelManager.GetLastSelectionID())
         {
             case 0:
-            case 2:
-            case 4:
-            case 6:
-            case 8:
-            case 10:
-            case 12:
-            case 14:
-            case 16:
-            case 21:
-                gameObject.GetComponent<enemyScr>().DecreaseEnemyCount();
-                ChangeToFriendly();
-                _playerObject.GetComponent<PlayerManager>().SetAllyCompanion(true, ref _managerRef);
-                break;
             case 1:
             case 3:
             case 5:
@@ -386,11 +373,27 @@ public class CompanionManager : MonoBehaviour
             case 13:
             case 15:
             case 17:
+            case 21:
+            case 24:
+                gameObject.GetComponent<enemyScr>().DecreaseEnemyCount();
+                ChangeToFriendly();
+                _playerObject.GetComponent<PlayerManager>().SetAllyCompanion(true, ref _managerRef);
+                break;
+            case 2:
+            case 4:
+            case 6:
+            case 8:
+            case 10:
+            case 12:
+            case 14:
+            case 16:
             case 18:
             case 19:
             case 20:
             case 22:
             case 23:
+            case 25:
+            case 26:
                 ChangeToEnemy();
                 _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
                 gameObject.GetComponent<enemyScr>().releaseEnemy();
