@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Master/Scenes/MainMenuScene.unity
     guid: 04dad629687c0d64f9c8e2b6646e0621
-  - enabled: 0
-    path: Assets/Developers/David/MAP3 3.unity
-    guid: f1f09d254eaae2a459923adde1343271
   - enabled: 1
     path: Assets/Developers/David/Scenes/Map 8.unity
     guid: 085938c3114b2d34fba9180d9e38a39f
