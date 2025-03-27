@@ -1,0 +1,1077 @@
+fileFormatVersion: 2
+guid: 6893ff2f95ccf29439dd7a0fee35ff8f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 507710337407048174
+    second: Boss_Artillery_Warning_0
+  - first:
+      213: 3360967130937151305
+    second: Boss_Artillery_Warning_1
+  - first:
+      213: -7638283498146952977
+    second: Boss_Artillery_Warning_2
+  - first:
+      213: 4633380001392264570
+    second: Boss_Artillery_Warning_3
+  - first:
+      213: 628733028064528918
+    second: Boss_Artillery_Warning_4
+  - first:
+      213: -935754318717532208
+    second: Boss_Artillery_Warning_5
+  - first:
+      213: 755061450923275777
+    second: Boss_Artillery_Warning_6
+  - first:
+      213: -6854596408004343570
+    second: Boss_Artillery_Warning_7
+  - first:
+      213: 6196703025128244922
+    second: Boss_Artillery_Warning_8
+  - first:
+      213: -3549573655195307251
+    second: Boss_Artillery_Warning_9
+  - first:
+      213: 8456459937623353078
+    second: Boss_Artillery_Warning_10
+  - first:
+      213: -3763577255556001929
+    second: Boss_Artillery_Warning_11
+  - first:
+      213: -2406657798673493314
+    second: Boss_Artillery_Warning_12
+  - first:
+      213: -8105482329903865949
+    second: Boss_Artillery_Warning_13
+  - first:
+      213: -6166092804985049130
+    second: Boss_Artillery_Warning_14
+  - first:
+      213: -3220998749738229411
+    second: Boss_Artillery_Warning_15
+  - first:
+      213: -6686411469528775842
+    second: Boss_Artillery_Warning_16
+  - first:
+      213: -1458207569625543215
+    second: Boss_Artillery_Warning_17
+  - first:
+      213: -1986385452254947155
+    second: Boss_Artillery_Warning_18
+  - first:
+      213: -4059636979725835104
+    second: Boss_Artillery_Warning_19
+  - first:
+      213: 3799214426717053724
+    second: Boss_Artillery_Warning_20
+  - first:
+      213: -2873445806175077815
+    second: Boss_Artillery_Warning_21
+  - first:
+      213: -5140513115360392543
+    second: Boss_Artillery_Warning_22
+  - first:
+      213: 6177828841545307503
+    second: Boss_Artillery_Warning_23
+  - first:
+      213: -1028532264519347781
+    second: Boss_Artillery_Warning_24
+  - first:
+      213: 6704909788373728374
+    second: Boss_Artillery_Warning_25
+  - first:
+      213: 1780356337880036217
+    second: Boss_Artillery_Warning_26
+  - first:
+      213: -874584730888143311
+    second: Boss_Artillery_Warning_27
+  - first:
+      213: -6297216506010647599
+    second: Boss_Artillery_Warning_28
+  - first:
+      213: 6674832989264422517
+    second: Boss_Artillery_Warning_29
+  - first:
+      213: 5211664694052700958
+    second: Boss_Artillery_Warning_30
+  - first:
+      213: 7688368657516101460
+    second: Boss_Artillery_Warning_31
+  - first:
+      213: 8641930622518084574
+    second: Boss_Artillery_Warning_32
+  - first:
+      213: 8331423361794426797
+    second: Boss_Artillery_Warning_33
+  - first:
+      213: -9196202771470268493
+    second: Boss_Artillery_Warning_34
+  - first:
+      213: -383313890189004037
+    second: Boss_Artillery_Warning_35
+  - first:
+      213: 2894016350711803504
+    second: Boss_Artillery_Warning_36
+  - first:
+      213: 401067602911365912
+    second: Boss_Artillery_Warning_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_0
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 357
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee9d0f5acdfbb0700800000000000000
+      internalID: 507710337407048174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 355
+        width: 21
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94fc5456ccd84ae20800000000000000
+      internalID: 3360967130937151305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_2
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 366
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe80937b0ad5ff590800000000000000
+      internalID: -7638283498146952977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_3
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 370
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a75826400921d4040800000000000000
+      internalID: 4633380001392264570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_4
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 339
+        width: 51
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61a875c9b55b9b800800000000000000
+      internalID: 628733028064528918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_5
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 370
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d7cdcba7688303f0800000000000000
+      internalID: -935754318717532208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_6
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 366
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1067fdd93648a7a00800000000000000
+      internalID: 755061450923275777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_7
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 355
+        width: 21
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee88b3652e49fd0a0800000000000000
+      internalID: -6854596408004343570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_8
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 357
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab68b5fd19c1ff550800000000000000
+      internalID: 6196703025128244922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_9
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 324
+        width: 43
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d03bff921916dbec0800000000000000
+      internalID: -3549573655195307251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_10
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 343
+        width: 25
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f6ac5f42816b5570800000000000000
+      internalID: 8456459937623353078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_11
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 158
+        width: 182
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77f48d52d6615cbc0800000000000000
+      internalID: -3763577255556001929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_12
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 343
+        width: 25
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb2942eab75d99ed0800000000000000
+      internalID: -2406657798673493314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_13
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 324
+        width: 43
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3afdfd004ca838f80800000000000000
+      internalID: -8105482329903865949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_14
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 317
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6df26c26343ad6aa0800000000000000
+      internalID: -6166092804985049130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_15
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 322
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5120e3e3b6bc43d0800000000000000
+      internalID: -3220998749738229411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_16
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 322
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e53c3a0d1381533a0800000000000000
+      internalID: -6686411469528775842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_17
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 317
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1dd0fabf0f763cbe0800000000000000
+      internalID: -1458207569625543215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_18
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 225
+        width: 146
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da8175b94f0fe64e0800000000000000
+      internalID: -1986385452254947155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_19
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 225
+        width: 146
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a4e6620da549a7c0800000000000000
+      internalID: -4059636979725835104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_20
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 273
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c13620a546589b430800000000000000
+      internalID: 3799214426717053724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_21
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 179
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94a399173487f18d0800000000000000
+      internalID: -2873445806175077815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_22
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 172
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aa05b3ae8a39a8b0800000000000000
+      internalID: -5140513115360392543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_23
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 172
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f65987f899e0cb550800000000000000
+      internalID: 6177828841545307503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_24
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 179
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb1db45da5be9b1f0800000000000000
+      internalID: -1028532264519347781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_25
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 150
+        width: 43
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67c3e0badef9c0d50800000000000000
+      internalID: 6704909788373728374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_26
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 133
+        width: 25
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97374f418a815b810800000000000000
+      internalID: 1780356337880036217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_27
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 17
+        width: 51
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13e7e6d22d9dcd3f0800000000000000
+      internalID: -874584730888143311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_28
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 133
+        width: 25
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d3428da3facb98a0800000000000000
+      internalID: -6297216506010647599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_29
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 150
+        width: 43
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5762a2c2d35c1ac50800000000000000
+      internalID: 6674832989264422517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_30
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 126
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e13c4793d6d835840800000000000000
+      internalID: 5211664694052700958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_31
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 111
+        width: 21
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45f7e7d2f8292ba60800000000000000
+      internalID: 7688368657516101460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_32
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 116
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed3c2c04d1e4ee770800000000000000
+      internalID: 8641930622518084574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_33
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 118
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da7c521e7692f9370800000000000000
+      internalID: 8331423361794426797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_34
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 118
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b74d0c8d46806080800000000000000
+      internalID: -9196202771470268493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_35
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 116
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf2bfc93c023eaaf0800000000000000
+      internalID: -383313890189004037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_36
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 111
+        width: 21
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07e695ea98c992820800000000000000
+      internalID: 2894016350711803504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Artillery_Warning_37
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 126
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81b03722cd0e09500800000000000000
+      internalID: 401067602911365912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Boss_Artillery_Warning_0: 507710337407048174
+      Boss_Artillery_Warning_1: 3360967130937151305
+      Boss_Artillery_Warning_10: 8456459937623353078
+      Boss_Artillery_Warning_11: -3763577255556001929
+      Boss_Artillery_Warning_12: -2406657798673493314
+      Boss_Artillery_Warning_13: -8105482329903865949
+      Boss_Artillery_Warning_14: -6166092804985049130
+      Boss_Artillery_Warning_15: -3220998749738229411
+      Boss_Artillery_Warning_16: -6686411469528775842
+      Boss_Artillery_Warning_17: -1458207569625543215
+      Boss_Artillery_Warning_18: -1986385452254947155
+      Boss_Artillery_Warning_19: -4059636979725835104
+      Boss_Artillery_Warning_2: -7638283498146952977
+      Boss_Artillery_Warning_20: 3799214426717053724
+      Boss_Artillery_Warning_21: -2873445806175077815
+      Boss_Artillery_Warning_22: -5140513115360392543
+      Boss_Artillery_Warning_23: 6177828841545307503
+      Boss_Artillery_Warning_24: -1028532264519347781
+      Boss_Artillery_Warning_25: 6704909788373728374
+      Boss_Artillery_Warning_26: 1780356337880036217
+      Boss_Artillery_Warning_27: -874584730888143311
+      Boss_Artillery_Warning_28: -6297216506010647599
+      Boss_Artillery_Warning_29: 6674832989264422517
+      Boss_Artillery_Warning_3: 4633380001392264570
+      Boss_Artillery_Warning_30: 5211664694052700958
+      Boss_Artillery_Warning_31: 7688368657516101460
+      Boss_Artillery_Warning_32: 8641930622518084574
+      Boss_Artillery_Warning_33: 8331423361794426797
+      Boss_Artillery_Warning_34: -9196202771470268493
+      Boss_Artillery_Warning_35: -383313890189004037
+      Boss_Artillery_Warning_36: 2894016350711803504
+      Boss_Artillery_Warning_37: 401067602911365912
+      Boss_Artillery_Warning_4: 628733028064528918
+      Boss_Artillery_Warning_5: -935754318717532208
+      Boss_Artillery_Warning_6: 755061450923275777
+      Boss_Artillery_Warning_7: -6854596408004343570
+      Boss_Artillery_Warning_8: 6196703025128244922
+      Boss_Artillery_Warning_9: -3549573655195307251
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class artileryAttack : MonoBehaviour
 {
+    public Sprite normalSprite;
+    public Sprite damageSprite;
+
     public float delay = 1;
     public float activeTime = 1;
     ObjectPoolManager pooler;
@@ -26,7 +29,8 @@ public class artileryAttack : MonoBehaviour
 
         if(timeElapsed >= delay)
         {
-            changeColor(new Color(1, 0, 0, 1));
+            GetComponentInChildren<SpriteRenderer>().sprite = damageSprite;
+            //GetComponentInChildren<Transform>().position = new Vector3(0, 0.5f, 0);
             gameObject.layer = LayerMask.NameToLayer("EnemyAttack");
             damage = true;
         }
@@ -55,11 +59,6 @@ public class artileryAttack : MonoBehaviour
         transform.rotation = UnityEngine.Quaternion.Euler(rot);
         timeElapsed = 0;
         damage = false;
-        changeColor(new Color(1, 1, 0, 1));
-    }
-
-    void changeColor(Color c)
-    {
-        GetComponent<SpriteRenderer>().color = c;
+        GetComponentInChildren<SpriteRenderer>().sprite = normalSprite;
     }
 }
