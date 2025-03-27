@@ -5,22 +5,23 @@ using UnityEngine;
 
 public class attackPaternsScript : MonoBehaviour
 {
+    public int phaseNo;
     public string pattern;
     List<List<int>> patList = new List<List<int>>();
     public float timeBetweenAttacks;
-    float attackTimer;
 
     [Space]
     public List<AttackClass> attackList = new List<AttackClass>();
+    public bool stunned = false;
 
-    int currentAttack = 0;
-    int attackItterator = 0;
-    bool inAttack = new bool();
-    List<int> itterators = new List<int>();
-    List<float> timers = new List<float>();
+    private int currentAttack = 0;
+    private int attackItterator = 0;
+    private bool inAttack = new bool();
+    private List<int> itterators = new List<int>();
+    private List<float> timers = new List<float>();
+    private float attackTimer;
 
-    [Space]
-    public ObjectPoolManager pooler;
+    private ObjectPoolManager pooler;
 
     private GameObject myself;
 
@@ -70,7 +71,7 @@ public class attackPaternsScript : MonoBehaviour
         n = 0;
         if (patList[0].Count() > 1)
         {
-            n = UnityEngine.Random.Range(0, patList[0].Count() + 1);
+            n = UnityEngine.Random.Range(0, patList[0].Count());
             currentAttack = patList[0][n];
         }
         currentAttack = patList[0][n];
@@ -81,31 +82,34 @@ public class attackPaternsScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!inAttack)
+        if (!stunned)
         {
-            attackTimer += Time.deltaTime;
-            if(attackTimer >= timeBetweenAttacks)
+            if (!inAttack)
             {
-                inAttack = true;
-                attackTimer = 0;
-                int n = 0;
-                if (patList[attackItterator].Count() > 1)
+                attackTimer += Time.deltaTime;
+                if (attackTimer >= timeBetweenAttacks)
                 {
-                    n = UnityEngine.Random.Range(0, patList[attackItterator].Count());
+                    inAttack = true;
+                    attackTimer = 0;
+                    int n = 0;
+                    if (patList[attackItterator].Count() > 1)
+                    {
+                        n = UnityEngine.Random.Range(0, patList[attackItterator].Count());
+                        currentAttack = patList[attackItterator][n];
+                    }
                     currentAttack = patList[attackItterator][n];
+                    attackItterator++;
                 }
-                currentAttack = patList[attackItterator][n];
-                attackItterator++;
             }
-        }
-        else
-        {
-            attackList[currentAttack].Attack(ref inAttack, ref itterators, ref timers, ref pooler, ref myself);
-        }
+            else
+            {
+                attackList[currentAttack].Attack(ref inAttack, ref itterators, ref timers, ref pooler, ref myself);
+            }
 
-        if (attackItterator == patList.Count())
-        {
-            attackItterator = 0;
+            if (attackItterator == patList.Count())
+            {
+                attackItterator = 0;
+            }
         }
     }
 }

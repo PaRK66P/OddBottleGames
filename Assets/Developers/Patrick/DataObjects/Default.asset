@@ -12,19 +12,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e6244bdc64379d4abe988fd44c0b134, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  speed: 5
+  health: 100
+  healthbar: {fileID: 3386940066090490567, guid: 2b12af912958a8242b3ed9adbd473d6a, type: 3}
+  damageImpactFrameScale: 0.2
+  damageImpactFrameDuration: 0.05
+  speed: 12
+  acceleration: 0.8
+  accelerationRate: 40
+  deceleration: 0.7
+  decelerationRate: 35
   dashTime: 0.2
-  dashDistance: 5
-  dashCooldown: 0.5
+  dashDistance: 6
+  evolvedDashExtraDistance: 2
+  dashCooldown: 0.15
+  numberOfDashCharges: 3
+  dashRechargeTime: 1
+  evolvedDashDamage: 5
   damageLayers:
     serializedVersion: 2
     m_Bits: 2048
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  ammoUIPrefab: {fileID: 1705883947001659697, guid: 5ce2f6dea12434847baa5c6e38868e0a, type: 3}
   ammoUIObject: {fileID: 454602280210619587, guid: 0e0c634a477346b49b37aaa0420069ad, type: 3}
-  fireRate: 0.3
-  timeToChargeShot: 0.15
+  reloadUISlider: {fileID: 3879835711551141049, guid: 63ae1eef363df214399e44c5f4769354, type: 3}
+  fireRate: 0.4
+  maxTimeToChargeShot: 0.4
+  minTimeToChargeShot: 0.05
+  shotsTillFullCharge: 4
   chargeShotIntervals: 0.1
   maxAmmo: 6
   reloadTime: 1
+  damageMultiplier: 1.4
+  chargeSlowDown: 0.444
+  maxChargeShotImpactSlowDown: 0.5
+  chargeShotImpactFrameDuration: 0.05
   baseProjectileType: {fileID: 1223489425459614113, guid: 50e3b8fba1c074f4ba558c89a7b1613e, type: 3}
-  baseProjectileSpeed: 15
+  baseProjectileSpeed: 20
   controlLossTime: 0.2

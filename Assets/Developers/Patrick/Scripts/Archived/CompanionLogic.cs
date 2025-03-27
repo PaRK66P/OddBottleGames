@@ -1,0 +1,375 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
+
+public enum CompanionMode
+{
+    MINIBOSS,
+    COMPANION,
+    //BOSSALLY
+}
+
+
+public class CompanionLogic : MonoBehaviour
+{
+    [SerializeField]
+    private bool companion;
+    [SerializeField]
+    private float speed;
+    [SerializeField]
+    private float jumpTime;
+
+    [SerializeField]
+    private GameObject hitBoxObject;
+
+    private LayerMask targetLayer;
+    
+    [SerializeField] 
+    private float explosionSize;
+
+    [SerializeField]
+    private Transform idlePosition;
+
+    private float currentHealth = 15;
+
+    [SerializeField]
+    private List<GameObject> currentTargets;
+    private int targetIndex = 0;
+
+    [SerializeField]
+    ObjectPoolManager objectPoolManager;
+
+    private bool selectedAction = false;
+    private int currentAttackType = 1;
+    private int shockwaveIterations = 0;
+
+    private Vector3 selectedTargetPosition;
+    private Vector3 startingPosition;
+    private float timer;
+    private bool alive = true;
+
+    private bool modeLayerSelected = false;
+
+    [SerializeField]
+    private CompanionMode companionMode = CompanionMode.MINIBOSS;
+
+    private bool displayVN = true;
+
+    private Slider healthSlider;
+
+    private MinibossRoomManager room2;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        currentTargets = new List<GameObject>();
+        if (companionMode == CompanionMode.MINIBOSS)
+        {
+            targetLayer = LayerMask.GetMask("Player");
+        }
+        else if (companionMode == CompanionMode.COMPANION)
+        {
+            targetLayer = LayerMask.GetMask("Enemy");
+        }
+        idlePosition = new GameObject("mimiTrans").transform;
+        idlePosition.position = this.transform.position;
+        objectPoolManager = GameObject.Find("ObjectPoolManager").GetComponent<ObjectPoolManager>();
+
+        displayVN = true;
+
+        healthSlider = GetComponentInChildren<Slider>();
+        healthSlider.maxValue = currentHealth;
+        healthSlider.minValue = 0;
+        healthSlider.value = currentHealth;
+
+        room2 = GameObject.Find("Room2").GetComponent<MinibossRoomManager>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!alive)
+        {
+            return;
+        }
+
+        if (!modeLayerSelected)
+        {
+            if (companionMode == CompanionMode.MINIBOSS)
+            {
+                targetLayer = LayerMask.GetMask("Player");
+            }
+            else if (companionMode == CompanionMode.COMPANION)
+            {
+                targetLayer = LayerMask.GetMask("Enemy");
+            }
+            modeLayerSelected = true;
+        }
+    
+
+        timer += Time.deltaTime;
+        if (!selectedAction)
+        {
+            GameObject targetObject = GetClosestTarget();
+            if(targetObject == null)
+            {
+                if ((idlePosition.position - transform.position + Vector3.down * 1.5f).magnitude > 0.1f)
+                {
+                    Vector3 direction = idlePosition.position - transform.position + Vector3.down * 1.5f;
+                    float distance = direction.magnitude;
+                    direction = direction.normalized;
+                    if (distance > 4)
+                    {
+                        speed = Mathf.Lerp(speed, 6, 0.3f);
+                    }
+                    else if (distance > 3)
+                    {
+                        speed = Mathf.Lerp(speed, 5, 0.3f);
+                    }
+                    else if (distance > 2)
+                    {
+                        speed = Mathf.Lerp(speed, 4, 0.3f);
+                    }
+                    else
+                    {
+                        speed = Mathf.Lerp(speed, 3, 0.3f);
+                    }
+                    transform.position += direction * speed * Time.deltaTime;
+                }
+            }
+            else
+            {
+                if(timer < 0)
+                {
+                    return;
+                }
+
+                Vector3 target = targetObject.transform.position;
+
+                if (currentAttackType == 1)
+                {
+                    currentAttackType = -1;
+                }
+
+                currentAttackType++;
+                selectedAction = true;
+                selectedTargetPosition = target;
+                startingPosition = transform.position;
+                timer = 0;
+                shockwaveIterations = 0;
+            }
+        }
+        else
+        {
+            if (currentAttackType == 0)
+            {
+
+                transform.position = Vector3.Lerp(startingPosition, selectedTargetPosition - (selectedTargetPosition - startingPosition).normalized * explosionSize, Mathf.Min(timer / jumpTime, 1));
+
+                if(timer > jumpTime)
+                {
+                    CreateExplosion(selectedTargetPosition);
+                    selectedAction = false;
+                    //Delay before next action
+                    timer = -0.5f;
+                }
+            }
+            else if (currentAttackType == 1)
+            {
+                if(timer > 1 + shockwaveIterations * 0.15f)
+                {
+                    CreateShockwave(selectedTargetPosition);
+                    shockwaveIterations++;
+                    if(shockwaveIterations > 2)
+                    {
+                        selectedAction = false;
+                        //Delay before next action
+                        timer -= 0.5f;
+                    }
+                }
+            }
+        }
+    }
+
+    private void CreateExplosion(Vector3 targetPosition)
+    {
+       // Instantiate(explosionObject, targetPosition, Quaternion.identity).GetComponent<ExplosionLogic>().InitialiseEffect(targetLayer, 5, 20, 0.5f, 1);
+
+        GameObject newExplosion = objectPoolManager.GetFreeObject("Explosion");
+
+        newExplosion.transform.rotation = Quaternion.identity;
+        newExplosion.transform.position = targetPosition;
+
+        ExplosionLogic newShockwaveScript = newExplosion.GetComponent<ExplosionLogic>();
+        newShockwaveScript.InitialiseEffect(targetLayer, 3, 3, 0.5f, 0.7f, objectPoolManager);
+    }
+
+    private void CreateShockwave(Vector3 targetPosition)
+    {
+        Vector3 rotation = targetPosition - transform.position;
+        float rotz = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+
+        GameObject newShockwave = objectPoolManager.GetFreeObject("Shockwave");
+        
+        newShockwave.transform.rotation = Quaternion.Euler(0, 0, rotz);
+        newShockwave.transform.position = transform.position;
+
+        ShockwaveLogic newShockwaveScript = newShockwave.GetComponent<ShockwaveLogic>();
+        newShockwaveScript.InitialiseEffect(targetLayer, 1, rotation.normalized, 12, objectPoolManager);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        if((1 << collision.gameObject.layer) == targetLayer.value)
+        {
+            AddTarget(collision.gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if ((1 << collision.gameObject.layer) == targetLayer.value)
+        {
+            RemoveTarget(collision.gameObject);
+        }
+    }
+
+    private void AddTarget(GameObject target)
+    {
+        currentTargets.Add(target);
+    }
+
+    private void RemoveTarget(GameObject target)
+    {
+        currentTargets.Remove(target);
+    }
+
+    private GameObject GetClosestTarget()
+    {
+        if (targetIndex < 0)
+        {
+            return null;
+        }
+
+        GameObject closestObject = null;
+        Vector3 currentPosition = transform.position;
+        float currentDistance = 10000.0f;
+        float testingDistance;
+
+        foreach (GameObject target in currentTargets)
+        {
+            if (target == null)
+            {
+                continue;
+            }
+            testingDistance = (target.transform.position - currentPosition).magnitude;
+            if (testingDistance < currentDistance)
+            {
+                currentDistance = testingDistance;
+                closestObject = target;
+            }
+        }
+
+        return closestObject;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        healthSlider.value = currentHealth;
+        StartCoroutine(DamageColor());
+        if (currentHealth < 0)
+        {
+            alive = false;
+            GetComponent<enemyScr>().DecreaseEnemyCount();
+            StartCoroutine(WaitForRoomEnd());
+        }
+    }
+
+    private IEnumerator WaitForRoomEnd()
+    {
+        yield return new WaitUntil(() => room2.roomStart == false);
+        yield return Defeated();
+    }
+
+    private IEnumerator Defeated()
+    {
+        if (!displayVN)
+        {
+            objectPoolManager.ReleaseObject("Mercy", gameObject);
+            yield break;
+        }
+
+        alive = false;
+        VisualNovelScript visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+        visualNovelManager.StartNovelSceneByName("Miniboss tester");
+        selectedAction = false;
+        currentAttackType = 0;
+        shockwaveIterations = 0;
+        timer = 0.0f;
+        yield return WaitForNovel();
+        if (visualNovelManager.GetLastSelectionID() == 0)
+        {
+            JoinPlayer();
+        }
+        else
+        {
+            JoinBoss();
+        }
+        displayVN = false;
+    }
+
+    IEnumerator WaitForNovel()
+    {
+        VisualNovelScript visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+        yield return new WaitWhile(() => visualNovelManager.isNovelSection == true);
+    }
+    public void JoinBoss()
+    {
+        this.companionMode = CompanionMode.MINIBOSS;
+        modeLayerSelected = false;
+        alive = true;
+        // STOP USING FIND FUNCTIONS
+        transform.position = new Vector3(95.0f, 0.0f, 0.0f);
+        idlePosition.position = new Vector3(95.0f, 0.0f, 0.0f);
+        currentHealth = 15;
+        healthSlider.value = currentHealth;
+
+        GetComponent<CircleCollider2D>().enabled = false;
+        currentTargets.Clear();
+        GetComponent<CircleCollider2D>().enabled = true;
+        GetClosestTarget();
+    }
+
+    public void JoinPlayer()
+    {
+        gameObject.layer = 0;
+        hitBoxObject.layer = 0;
+        this.companionMode = CompanionMode.COMPANION;
+        idlePosition = GameObject.Find("PlayerProto").GetComponent<Transform>();
+        currentHealth = 15;
+        healthSlider.value = currentHealth;
+        //targetIndex = -1;
+        modeLayerSelected = false;
+        alive = true;
+        selectedAction = false;
+
+        GetComponent<CircleCollider2D>().enabled = false;
+        currentTargets.Clear();
+        GetComponent<CircleCollider2D>().enabled = true;
+        GetClosestTarget();
+    }
+
+    IEnumerator DamageColor()
+    {
+        SpriteRenderer spriteRenderer = this.gameObject.transform.Find("Image").GetComponent<SpriteRenderer>();
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white;
+    }
+}
