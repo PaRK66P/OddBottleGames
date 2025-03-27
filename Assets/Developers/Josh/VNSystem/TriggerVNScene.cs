@@ -8,7 +8,7 @@ public class TriggerVNScene : MonoBehaviour
 
     private void Start()
     {
-        VNSceneManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+        //VNSceneManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -17,7 +17,7 @@ public class TriggerVNScene : MonoBehaviour
         {
             if (!VNSceneManager.isNovelSection)
             {
-                if (collision.gameObject == GameObject.Find("PlayerProto"))
+                if (collision.gameObject == GameObject.Find("Player"))
                 {
                     VNSceneManager.StartNovelSceneByName(sceneName);
                 }

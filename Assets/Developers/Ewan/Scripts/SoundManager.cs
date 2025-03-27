@@ -69,9 +69,9 @@ public class SoundManager : MonoBehaviour
         //update volume
         volume = PlayerPrefs.GetFloat("volume", volume);
         PlayerAudioSource.volume = volume;
-        BGMAudioSource.volume = volume;
-        EnemyAudioSource.volume = volume;
-        AmbrosiaAudioSource.volume = volume;
+        //BGMAudioSource.volume = volume;
+        //EnemyAudioSource.volume = volume;
+        //AmbrosiaAudioSource.volume = volume;
 
 
         //Player footsteps
