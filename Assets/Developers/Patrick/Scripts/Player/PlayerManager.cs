@@ -81,6 +81,7 @@ public class PlayerManager : MonoBehaviour
         healthbar = Instantiate(playerData.healthbar, UICanvas.transform.Find("PlayerUI"), true);
         healthBarScript = healthbar.GetComponent<HealthBarScript>();
         healthBarScript.SetMaxHealth(health);
+        healthBarScript.SetValue(health);
 
         PlayerManager manager = this;
         //movement component
