@@ -72,7 +72,6 @@ public class IchorManager : MonoBehaviour
         occupiedWeakPoints = new bool[weakPointSpawnPos.Count];
 
         healthbar = Instantiate(data.healthbar, dUICanvas.transform);
-        healthbar.GetComponent<RectTransform>().Translate(new Vector3(Screen.width / 2 - 400, Screen.height - 240, 0));
 
         healthbar.GetComponent<Slider>().maxValue = health;
         healthbar.GetComponent<Slider>().value = health;
