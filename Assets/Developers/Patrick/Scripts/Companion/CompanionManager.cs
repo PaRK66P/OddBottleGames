@@ -30,8 +30,6 @@ public class CompanionManager : MonoBehaviour
     private CompanionFriendData friendData;
     [SerializeField]
     private SpriteRenderer _companionImage;
-    [SerializeField]
-    private GameObject dashRechargeZone;
 
     private Rigidbody2D rb;
     private CompanionCollisionDamage collisionDamageScript;
@@ -64,9 +62,6 @@ public class CompanionManager : MonoBehaviour
 
         visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
 
-        dashRechargeZone.GetComponent<CircleCollider2D>().radius = friendData.rechargeZoneRadius;
-        dashRechargeZone.gameObject.GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector3(friendData.rechargeZoneRadius * 2.0f, friendData.rechargeZoneRadius * 2.0f, 1.0f);
-
         if (rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
@@ -96,7 +91,7 @@ public class CompanionManager : MonoBehaviour
         if (friendScript == null)
         {
             friendScript = gameObject.AddComponent<CompanionFriend>();
-            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref _pathfindingManager, ref rb, ref _playerObject, ref dashRechargeZone);
+            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref _pathfindingManager, ref rb, ref _playerObject);
         }
 
         healthbar = Instantiate(bossData.healthbar, dUICanvas.transform);
@@ -186,7 +181,7 @@ public class CompanionManager : MonoBehaviour
 
     private void CompanionDeath()
     {
-        _currentState = CompanionStates.NONE;
+        ChangeToNone();
         RemoveHealthBar();
         StartCoroutine(PlayDeathEffects());
     }
@@ -212,9 +207,6 @@ public class CompanionManager : MonoBehaviour
 
             visualNovelManager.StartNovelSceneByName("Ambrosia1");
             visualNovelManager.onNovelFinish.AddListener(GetVisualNovelResult);
-
-            //GetComponent<enemyScr>().DecreaseEnemyCount();
-            //gameObject.SetActive(false);
         }
     }
 
@@ -230,7 +222,6 @@ public class CompanionManager : MonoBehaviour
         collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.NONE);
 
         detectionScript.gameObject.SetActive(false);
-        dashRechargeZone.gameObject.SetActive(false);
     }
 
     public void ChangeToEnemy()
@@ -401,7 +392,6 @@ public class CompanionManager : MonoBehaviour
             case 25:
             case 27:
             case 28:
-                ChangeToEnemy();
                 _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
                 gameObject.GetComponent<enemyScr>().releaseEnemy();
                 break;

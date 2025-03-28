@@ -49,6 +49,7 @@ public class WeakPointScript : MonoBehaviour
 
         if(health <= 0)
         {
+            GetComponent<CompanionTargettingHandler>().ReleaseAsTarget();
             gameObject.SetActive(false);
         }
     }

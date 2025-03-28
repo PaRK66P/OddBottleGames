@@ -18,7 +18,6 @@ public class CompanionFriend : MonoBehaviour
     private PathfindingManager _pathfindingManager;
     private Rigidbody2D _rb;
     private GameObject _player;
-    private GameObject _dashRechargeZone;
 
     private GameObject _nearestTarget;
     private GameObject _playerTarget;
@@ -43,7 +42,7 @@ public class CompanionFriend : MonoBehaviour
     private Node _lastNode;
     private Vector2 _lastPathDirection;
 
-    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimations animationScript, ref PathfindingManager pathfindingManager, ref Rigidbody2D rb, ref GameObject player, ref GameObject dashRechargeZone)
+    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimations animationScript, ref PathfindingManager pathfindingManager, ref Rigidbody2D rb, ref GameObject player)
     {
         _dataObj = dataObj;
         _detectionScript = detectionScript;
@@ -51,7 +50,6 @@ public class CompanionFriend : MonoBehaviour
         _pathfindingManager = pathfindingManager;
         _rb = rb;
         _player = player;
-        _dashRechargeZone = dashRechargeZone;
     }
 
     public void CompanionUpdate()
@@ -259,7 +257,6 @@ public class CompanionFriend : MonoBehaviour
 
         if (!_isDashRefreshSpawned)
         {
-            //SpawnDashRefresh();
             _leapEndTimer = Time.time;
             _isDashRefreshSpawned = true;
         }
@@ -269,7 +266,6 @@ public class CompanionFriend : MonoBehaviour
             return;
         }
 
-        //DespawnDashRefresh();
         _state = CompanionStates.IDLE;
 
     }
