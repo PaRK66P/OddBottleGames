@@ -17,6 +17,8 @@ public class CompanionSmallProjectileLogic : MonoBehaviour
     private float _damage;
     private bool _isActive = false;
 
+    private float _lifespan = 0.0f;
+
     public void Initialise(ref ObjectPoolManager poolManagerRef, string name, Vector2 startPosition, Vector2 direction, float speed, float size, float damage, LayerMask environmentMask, LayerMask playerMask)
     {
         poolManager = poolManagerRef;
@@ -36,6 +38,9 @@ public class CompanionSmallProjectileLogic : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         _isActive = true;
+
+        _environmentMask = environmentMask;
+        _playerMask = playerMask;
     }
 
     private void FixedUpdate()
@@ -50,7 +55,7 @@ public class CompanionSmallProjectileLogic : MonoBehaviour
     {
         if (_isActive)
         {
-            if (collision.gameObject.tag == "Player")
+            if (((1 << collision.gameObject.layer) & _playerMask) != 0)
             {
                 Vector2 damageDirection = (collision.gameObject.transform.position - transform.position).normalized;
                 if (collision.gameObject.GetComponent<PlayerManager>().CanBeDamaged())
@@ -60,6 +65,11 @@ public class CompanionSmallProjectileLogic : MonoBehaviour
                     _isActive = false;
                     poolManager.ReleaseObject(_name, gameObject);
                 }
+            }
+            else if(((1 << collision.gameObject.layer) & _environmentMask) != 0)
+            {
+                _isActive = false;
+                poolManager.ReleaseObject(_name, gameObject);
             }
         }
     }

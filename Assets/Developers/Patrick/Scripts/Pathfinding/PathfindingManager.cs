@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 // Node position is at the center
@@ -41,6 +42,9 @@ public class PathfindingManager : MonoBehaviour
     private Vector2 _gridWorldSize;
     private int _gridSizeX;
     private int _gridSizeY;
+
+    private List<Node> _neighbourNodes;
+    private Node _targetNode;
 
     private List<Node> _debugPath;
 
@@ -145,6 +149,7 @@ public class PathfindingManager : MonoBehaviour
     {
         Node startNode = NodeFromWorldPosition(startPosition); // Node should never be blocked
         Node targetNode = GetNearestNodeInDirection(NodeFromWorldPosition(targetPosition).worldPosition, startPosition - targetPosition);
+        _targetNode = targetNode;
 
         List<Node> path = _pathfindingScript.GetPath(startNode, targetNode);
         if (path.Count > 1)
@@ -158,14 +163,22 @@ public class PathfindingManager : MonoBehaviour
 
         _debugPath = path;
 
+        if (NodeFromWorldPosition(targetPosition).isBlocked)
+        {
+            return targetNode.worldPosition - startPosition;
+        }
+
         return targetPosition - startPosition;
     }
 
     public Node GetNearestNodeInDirection(Vector3 target, Vector3 direction)
     {
+        direction.Normalize();
         Node returnNode = NodeFromWorldPosition(target);
         if(!returnNode.isBlocked) { return returnNode; }
         List<Node> neighbourNodes;
+
+        _neighbourNodes = new List<Node>();
 
         bool isPositiveXDirection = direction.x >= 0.0f ? true : false;
         bool isPositiveYDirection = direction.y >= 0.0f ? true : false;
@@ -190,14 +203,21 @@ public class PathfindingManager : MonoBehaviour
                         || (isSameYDirection && neighbourDirection.x == 0.0f) // Check for only Y direction
                         || (isSameXDirection && isSameYDirection)) // Check for matching both
                     {
-                        return neighbour;
+                        if(!neighbour.isBlocked) 
+                        {
+                            Debug.Log("Found neighbour");
+                            return neighbour; 
+                        }
+                        _neighbourNodes.Add(neighbour);
                     }
                 }
             }
 
             returnNode = NodeFromWorldPosition(returnNode.worldPosition + direction * nodeSize);
+            _neighbourNodes.Add(returnNode);
         }
 
+        Debug.Log("Returned position");
         return returnNode;
     } 
 
@@ -224,6 +244,21 @@ public class PathfindingManager : MonoBehaviour
                 Gizmos.color = Color.green;
                 Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeSize - 0.1f));
             }
+        }
+
+        if (_neighbourNodes != null)
+        {
+            foreach (Node node in _neighbourNodes)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeSize - 0.1f));
+            }
+        }
+
+        if (_targetNode != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawCube(_targetNode.worldPosition, Vector3.one * (nodeSize - 0.1f));
         }
     }
 }
