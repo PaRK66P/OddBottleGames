@@ -80,6 +80,7 @@ public class AISimpleBehaviour : MonoBehaviour
         }
         if (health <= 0)
         {
+            GetComponent<CompanionTargettingHandler>().ReleaseAsTarget();
             isDead = true;
             OnDeath();
         }

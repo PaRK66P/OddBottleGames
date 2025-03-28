@@ -9,19 +9,23 @@ public class CompanionTargettingHandler : MonoBehaviour
 
     public void InitialiseTargetting(ref CompanionManager companionManager)
     {
-        //_hasCompanion = true;
-        //_companionManager = companionManager;
-        //_companionManager.SetPlayerTarget(gameObject);
+        Debug.Log("Add target: " + gameObject.name);
+        _hasCompanion = true;
+        _companionManager = companionManager;
+        _companionManager.SetPlayerTarget(gameObject);
     }
 
     // Called when enemy dies
     public void ReleaseAsTarget()
     {
-        //if (!_hasCompanion)
-        //{
-        //    return;
-        //}
+        if (!_hasCompanion)
+        {
+            Debug.Log("Called but no release needed: " + gameObject.name);
+            return;
+        }
 
-        //_companionManager.RemovePlayerTarget(gameObject);
+        Debug.Log("Remove target: " + gameObject.name);
+
+        _companionManager.RemovePlayerTarget(gameObject);
     }
 }

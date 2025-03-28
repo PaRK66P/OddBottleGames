@@ -160,6 +160,7 @@ public class IchorManager : MonoBehaviour
 
             if(health <= 0)
             {
+                GetComponent<CompanionTargettingHandler>().ReleaseAsTarget();
                 health = 0;
                 state = EN_STATES.DEAD;
                 deathTimer = data.deathTimer;
