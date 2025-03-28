@@ -88,6 +88,7 @@ public class IchorManager : MonoBehaviour
             deathTimer -= Time.deltaTime;
             if(deathTimer <= 0)
             {
+                healthbar.SetActive(false);
                 visualNovelManager.StartNovelSceneByName("Ichor1.0");
                 pooler.ReleaseObject(prefabName, gameObject);
             }
