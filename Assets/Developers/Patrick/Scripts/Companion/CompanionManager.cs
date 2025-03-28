@@ -95,13 +95,12 @@ public class CompanionManager : MonoBehaviour
         }
 
         healthbar = Instantiate(bossData.healthbar, dUICanvas.transform);
-        healthbar.GetComponent<RectTransform>().Translate(new Vector3(Screen.width / 2 - 400, Screen.height - 240, 0));
 
         healthbar.GetComponent<UnityEngine.UI.Slider>().maxValue = bossData.health;
         healthbar.GetComponent<UnityEngine.UI.Slider>().value = bossData.health;
 
         ChangeToEnemy();
-        ChangeToIdleForTime(3.0f);
+        ChangeToIdleForTime(1.0f);
         
     }
 

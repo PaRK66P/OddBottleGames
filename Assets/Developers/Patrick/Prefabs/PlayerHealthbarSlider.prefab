@@ -629,6 +629,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 1291532288988864751}
-  Dash1: {fileID: 6129873048932017044}
+  Dash1: {fileID: 6415946461931011560}
   Dash2: {fileID: 8108661082367418474}
-  Dash3: {fileID: 6415946461931011560}
+  Dash3: {fileID: 6129873048932017044}
