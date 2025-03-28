@@ -77,12 +77,12 @@ public class ProjectileBehaviour : MonoBehaviour
 
             if(collision.gameObject.tag == "Companion")
             {
+                if (collision.gameObject.GetComponentInParent<CompanionManager>().IsFriendly())
+                {
+                    return;
+                }
                 collision.gameObject.GetComponentInParent<CompanionManager>().TakeDamage(damage);
             }
-            //else if(collision.gameObject.tag == "Boss")
-            //{
-            //    collision.gameObject.GetComponent<boss>().takeDamage(damage);
-            //}
             else if (collision.gameObject.tag == "Boss")
             {
                 collision.gameObject.GetComponent<IchorManager>().takeDamage(damage);

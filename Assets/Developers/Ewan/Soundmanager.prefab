@@ -88,6 +88,8 @@ MonoBehaviour:
   PlyrDashReady: {fileID: 8300000, guid: 6b6133e0066e73f4c89883efab13032b, type: 3}
   PlyrHit: {fileID: 8300000, guid: 129d952eba8654642a927edd3ed06aa0, type: 3}
   EnHit: {fileID: 8300000, guid: f994d9306da5eaf499f90de348cc22a2, type: 3}
+  EnDead: {fileID: 0}
+  EnShoot: {fileID: 0}
   AmbFootstepsClips:
   - {fileID: 8300000, guid: e1de95e9b7eb0b742937e13efcf406be, type: 3}
   - {fileID: 8300000, guid: 67e3a3d14e451d547bec3f52ecc0033b, type: 3}
@@ -117,3 +119,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 97b62eb3748a200459ba33e7cb0f63c0, type: 3}
   - {fileID: 8300000, guid: 238f559cf53522b47a64dfef171269e3, type: 3}
   - {fileID: 8300000, guid: 7d7c25b33b2cf1244889995a785e3d3b, type: 3}
+  AmbDashReady:
+  - {fileID: 8300000, guid: bc61522a73dc003418125726f0890de4, type: 3}
+  - {fileID: 8300000, guid: 8b677013658b843448e63b6f9c9893f4, type: 3}
+  - {fileID: 8300000, guid: 6e3c11a19c6ee5a4c9438607332a76f3, type: 3}
+  AmbDashAttack:
+  - {fileID: 8300000, guid: 9ba412d7c1f1c4643a945a78f372f138, type: 3}
+  - {fileID: 8300000, guid: ac9517303f6ad2144abed4cfda482e5e, type: 3}
+  - {fileID: 8300000, guid: cb5cf5b79333fd440817bfecd421c875, type: 3}
+  AmbSpitAttack: {fileID: 0}
+  AmbLickAttack: {fileID: 0}
+  AmbHit: {fileID: 0}
+  AmbDown: {fileID: 0}
+  AmbConsume: {fileID: 0}

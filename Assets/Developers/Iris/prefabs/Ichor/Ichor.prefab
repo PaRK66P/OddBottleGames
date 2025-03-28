@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 691744685774774764}
   - component: {fileID: 3350081660825221458}
   - component: {fileID: 930090235128559601}
+  - component: {fileID: 8240068687900869003}
   m_Layer: 9
   m_Name: Ichor
   m_TagString: Boss
@@ -334,6 +335,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.17574704, y: 0.76166177}
   m_EdgeRadius: 0
+--- !u!114 &8240068687900869003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6827650287450667780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b76371ebdf3a9374581ca762dfe3d483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9053097441138629926
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,12 +422,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 14
-  m_Sprite: {fileID: 7467783598227658634, guid: 710a83438620fd94986790983ed84ed8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f8fa7647ee8ad0d4fa77fb8544020d87, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5, y: 4.8}
+  m_Size: {x: 5, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

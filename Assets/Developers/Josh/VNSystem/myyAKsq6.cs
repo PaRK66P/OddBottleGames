@@ -7,6 +7,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 using System.Collections.Generic;
+using System.Diagnostics;
 
 
 public class TwineParser
@@ -59,11 +60,13 @@ public class TwineParser
                 {
                     // Last new line before "[["
                     startOfResponses = currLineText.Substring( 0, startOfResponseDestinations ).LastIndexOf( "\r\n" );
+                
                     if (startOfResponses == -1)
                     {
-                        startOfResponses = currLineText.IndexOf("\n");
+                        //UnityEngine.Debug.Log("oops " + startOfResponses + ", " + startOfResponseDestinations);
+                        startOfResponses = currLineText.IndexOf("\r\n");
                     }
-            }
+                }
                 // if (endOfFirstLine == -1)
                 // {
                 //     endOfFirstLine = currLineText.IndexOf(" ");
@@ -78,6 +81,7 @@ public class TwineParser
                 string title = "";
                 if (titleEnd <=  0)
                 {
+                UnityEngine.Debug.Log("title end not found");
                     title = GetFirstWordOfString(currLineText.Trim());
                     title.Trim();
                 }
@@ -85,7 +89,7 @@ public class TwineParser
                 {
                     title = currLineText.Substring(titleStart, titleEnd).Trim();
                 }
-
+                //UnityEngine.Debug.Log(title + ", " + startOfResponses + ", " + startOfResponseDestinations);
                 // Extract Tags (if any)
                 string tags = tagsPresent
                     ? currLineText.Substring( titleEnd + 1, (endOfFirstLine - titleEnd)-2)
@@ -130,11 +134,12 @@ public class TwineParser
                     List<string> responseData = new List<string>(responseText.Split( new string [] { "\r\n" }, System.StringSplitOptions.None ));
                     if (responseData.Count == 1 && responseData[0] == responseText)
                     {
-                        responseData = new List<string>(responseText.Split(new string[] { "\n" }, System.StringSplitOptions.None));
+                        responseData = new List<string>(responseText.Split(new string[] { "\r\n" }, System.StringSplitOptions.None));
                     }
                     foreach (string response in responseData)
                     {
                         curNode.twineData.responseData.Add(response);
+                    //UnityEngine.Debug.Log(title + ", " + response);
                     }
                     // for ( int k = responseData.Count - 1; k >= 0; k-- )
                     // {
@@ -181,7 +186,7 @@ public class TwineParser
             DialogueTreeNode root = new DialogueTreeNode();
             for (int i = 0; i < nodes.Count; i++)
             {
-                DialogueTreeNode node = nodes[i];
+                DialogueTreeNode node = nodes[i]; 
                 if (i == 0)
                 {
                     root = node;
@@ -189,6 +194,7 @@ public class TwineParser
                 for (int j = 0; j < node.twineData.responseData.Count; j++)
                 {
                     string response = node.twineData.responseData[j];
+                    //UnityEngine.Debug.Log(response);
                     if (string.IsNullOrEmpty(response))
                     {
                         //node.twineData.responseData.Remove(response);
@@ -199,6 +205,7 @@ public class TwineParser
                     int destinationStart = response.IndexOf("[[");
                     int destinationEnd = response.IndexOf("]]");
 
+                //UnityEngine.Debug.Log(response);
                     
                     UnityEngine.Assertions.Assert.IsFalse( destinationStart == -1, "No destination around in node titled, '" + node.twineData.title + "': " + destinationStart + ", " + destinationEnd );
                     UnityEngine.Assertions.Assert.IsFalse( destinationEnd == -1, "No destination around in node titled, '" + node.twineData.title + "'" );
@@ -209,11 +216,13 @@ public class TwineParser
                     {
                         //int count = node.children.Count;
                         DialogueTreeNode responseNode = FindNodeWithTwineTitle(destination, ref nodes);
-                        responseNode.sceneData.entryText = response;
+                        //UnityEngine.Debug.Log(responseNode.twineData.title);
+                        responseNode.sceneData.entryText = response.Remove(destinationStart);
                         responseNode.parent = node;
                         node.children.Add(responseNode);
                     }
                 }
+                //UnityEngine.Debug.Log(node.twineData.title + ": " + node.children.Count);
             }
             return new DialogueTree(root);
         }
@@ -222,6 +231,7 @@ public class TwineParser
         {
             foreach (DialogueTreeNode node in nodes)
             {
+            //UnityEngine.Debug.Log(node.twineData.title);
                 if (node.twineData.title.Trim() == title)
                 {
                     return node;

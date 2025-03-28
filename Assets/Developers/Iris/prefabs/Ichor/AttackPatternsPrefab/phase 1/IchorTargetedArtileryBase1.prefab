@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91cc16f312da50e438d4888c11fe9482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  artileryPrefab: {fileID: 4466490144154200171, guid: 650636a1860d1694a9de48abd2e92e16, type: 3}
+  artileryPrefab: {fileID: 4466490144154200171, guid: bb77fcab59664e84681c5ecbc5cca610, type: 3}
   targetedArtileryProjectileNo: 3
   timeBetweenStrikes: 0.8

@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SoundManager : MonoBehaviour
 {
+    private float volume;
     [Header("Audio Sources")]
     //Audio Sources
     [SerializeField] private AudioSource PlayerAudioSource;
@@ -50,9 +52,11 @@ public class SoundManager : MonoBehaviour
     [Header("Ambrosia Sounds")]
     //Ambrosia Sounds
     [SerializeField] private AudioClip[] AmbFootstepsClips;
-    [SerializeField] private AudioClip AmbDashReady;
-    [SerializeField] private AudioClip AmbDashAttack;
+    [SerializeField] private AudioClip[] AmbDashReady;
+    [SerializeField] private AudioClip[] AmbDashAttack;
+    [SerializeField] private AudioClip AmbSpitPrep;
     [SerializeField] private AudioClip AmbSpitAttack;
+    [SerializeField] private AudioClip AmbLickPrep;
     [SerializeField] private AudioClip AmbLickAttack;
     [SerializeField] private AudioClip AmbHit;
     [SerializeField] private AudioClip AmbDown;
@@ -62,6 +66,14 @@ public class SoundManager : MonoBehaviour
 
     public void Update()
     {
+        //update volume
+        volume = PlayerPrefs.GetFloat("volume", volume);
+        PlayerAudioSource.volume = volume;
+        //BGMAudioSource.volume = volume;
+        //EnemyAudioSource.volume = volume;
+        //AmbrosiaAudioSource.volume = volume;
+
+
         //Player footsteps
         footstepLength -= Time.deltaTime;
         PlayFootstep();
@@ -91,7 +103,7 @@ public class SoundManager : MonoBehaviour
         //pick random from array
         int index = Random.Range(0, PlyrFootstepsClips.Length);
         AudioClip footstepClip = PlyrFootstepsClips[index];
-        footstepLength = footstepClip.length;
+        footstepLength = footstepClip.length+0.3f;
         //play sound
         PlayerAudioSource.PlayOneShot(footstepClip);
         }
@@ -143,7 +155,7 @@ public class SoundManager : MonoBehaviour
             //pick random from array
             int index = Random.Range(0, PlyrDashClips.Length);
             AudioClip dashClip = PlyrDashClips[index];
-            dashLength = dashClip.length;
+            dashLength = dashClip.length + 0.3f;
             //play sound
             PlayerAudioSource.PlayOneShot(dashClip);
         }
@@ -162,11 +174,21 @@ public class SoundManager : MonoBehaviour
         PlayerAudioSource.pitch = 1f;
         PlayerAudioSource.PlayOneShot(PlyrDashReady);
     }
+    public void PlayEnemyShoot()
+    {
+        EnemyAudioSource.pitch = Random.Range(0.5f, 1.5f);
+        EnemyAudioSource.PlayOneShot(EnShoot);
+    }
     public void PlayEnemyHit()
     {
         //randomise pitch
         EnemyAudioSource.pitch = Random.Range(0.5f, 1.5f);
         EnemyAudioSource.PlayOneShot(EnHit);
+    }
+    public void PlayenDead()
+    {
+        EnemyAudioSource.pitch = Random.Range(0.5f, 1.5f);
+        EnemyAudioSource.PlayOneShot(EnDead);
     }
     public void PlayAmbFootsteps()
     {
@@ -177,9 +199,25 @@ public class SoundManager : MonoBehaviour
             //pick random from array
             int index = Random.Range(0, AmbFootstepsClips.Length);
             AudioClip footstepClip = AmbFootstepsClips[index];
-            footstepLengthAmb = footstepClip.length;
+            footstepLengthAmb = footstepClip.length + 0.2f;
             //play sound
             AmbrosiaAudioSource.PlayOneShot(footstepClip);
         }
+    }
+    public void SetWalkingAmb(bool value)
+    {
+        isWalkingAmb = value;
+    }
+    public void PlayAmbDashReady(int state)
+    {
+        //Randomise Pitch
+        AmbrosiaAudioSource.pitch = Random.Range(0.8f, 1.2f);
+        AmbrosiaAudioSource.PlayOneShot(AmbDashReady[state - 1]);
+    }
+    public void PlayAmbDashAttack(int state)
+    {
+        //Randomise Pitch
+        AmbrosiaAudioSource.pitch = Random.Range(0.8f, 1.2f);
+        AmbrosiaAudioSource.PlayOneShot(AmbDashAttack[state - 1]);
     }
 }

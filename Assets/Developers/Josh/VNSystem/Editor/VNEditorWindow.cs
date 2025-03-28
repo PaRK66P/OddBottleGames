@@ -456,6 +456,10 @@ public class VNEditorWindow : EditorWindow
                     textFieldInput = currentNode.sceneData.text;
                     entryTextString = currentNode.sceneData.entryText;
                     integerFieldInput = 0;
+                    if (selectedSprite == null)
+                    {
+                        selectedSprite = defaultSprite;
+                    }
                     UpdateGraphPane();
                 }
                 else
@@ -508,7 +512,7 @@ public class VNEditorWindow : EditorWindow
 
     private void OnPrevSceneClick()
     {
-        if (currentNode.parent != null)
+        if (currentNode.parent != null || currentNode == workingRoot)
         {
             VisualNovelScene sceneData = new VisualNovelScene();
             sceneData.text = textFieldInput;
@@ -611,7 +615,7 @@ public class VNEditorWindow : EditorWindow
         {
             nodeDrawing.style.color = new StyleColor(Color.red);
         }
-        else if (node.sceneData.CharacterAsset == null)
+        else if (node.sceneData.CharacterAsset == null || node.sceneData.CharacterAsset == defaultSprite)
         {
             nodeDrawing.style.color = new StyleColor(Color.blue);
         }

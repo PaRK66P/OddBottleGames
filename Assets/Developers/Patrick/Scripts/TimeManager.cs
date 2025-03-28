@@ -65,11 +65,7 @@ public class TimeManager : MonoBehaviour
     {
         _defaultTimescale = timescale;
 
-        if (timescale < _currentTimescale)
-        {
-            _currentTimescale = timescale;
-            Time.timeScale = timescale;
-        }
+        _currentTimescale = GetLowestTimescale();
     }
 
     public void AddTimescaleForDuration(float timescale, float duration)

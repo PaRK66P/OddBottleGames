@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artileryPrefab: {fileID: 4466490144154200171, guid: 14a89200231f33d4ea5e829d03261a58, type: 3}
   randomArtileryProjectileNo: 15
-  horizantalUnitsFromOrigin: 12
-  verticalUnitsFromOrigin: 8
-  originX: 81
-  originY: 0
+  horizantalUnitsFromOrigin: 20
+  verticalUnitsFromOrigin: 22
+  originX: -7
+  originY: 27

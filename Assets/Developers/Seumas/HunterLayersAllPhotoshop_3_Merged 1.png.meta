@@ -1,0 +1,3454 @@
+fileFormatVersion: 2
+guid: 9e49ffcca999c584a9723d406825f31c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5096455810863820347
+    second: HunterLayersAllPhotoshop_3_Merged 1_0
+  - first:
+      213: 6936328711443881574
+    second: HunterLayersAllPhotoshop_3_Merged 1_1
+  - first:
+      213: -9210998312430026452
+    second: HunterLayersAllPhotoshop_3_Merged 1_2
+  - first:
+      213: 1208520522721281117
+    second: HunterLayersAllPhotoshop_3_Merged 1_3
+  - first:
+      213: -6006499619552955980
+    second: HunterLayersAllPhotoshop_3_Merged 1_4
+  - first:
+      213: -2841097288090972019
+    second: HunterLayersAllPhotoshop_3_Merged 1_5
+  - first:
+      213: -3771350373429167806
+    second: HunterLayersAllPhotoshop_3_Merged 1_6
+  - first:
+      213: -144880423010259988
+    second: HunterLayersAllPhotoshop_3_Merged 1_7
+  - first:
+      213: -508584209865033839
+    second: HunterLayersAllPhotoshop_3_Merged 1_8
+  - first:
+      213: -7840777566464330175
+    second: HunterLayersAllPhotoshop_3_Merged 1_9
+  - first:
+      213: -6710067622772200337
+    second: HunterLayersAllPhotoshop_3_Merged 1_10
+  - first:
+      213: -6654801845911864677
+    second: HunterLayersAllPhotoshop_3_Merged 1_11
+  - first:
+      213: -1744507339397262502
+    second: HunterLayersAllPhotoshop_3_Merged 1_12
+  - first:
+      213: -5592656319049555475
+    second: HunterLayersAllPhotoshop_3_Merged 1_13
+  - first:
+      213: 6646373530582934508
+    second: HunterLayersAllPhotoshop_3_Merged 1_14
+  - first:
+      213: 4775775468028819361
+    second: HunterLayersAllPhotoshop_3_Merged 1_15
+  - first:
+      213: 8562906308039771152
+    second: HunterLayersAllPhotoshop_3_Merged 1_16
+  - first:
+      213: 8234631356622801412
+    second: HunterLayersAllPhotoshop_3_Merged 1_17
+  - first:
+      213: -6795527705195010109
+    second: HunterLayersAllPhotoshop_3_Merged 1_18
+  - first:
+      213: -5068530074040596875
+    second: HunterLayersAllPhotoshop_3_Merged 1_19
+  - first:
+      213: -6620468399915117341
+    second: HunterLayersAllPhotoshop_3_Merged 1_20
+  - first:
+      213: -3455160672473060818
+    second: HunterLayersAllPhotoshop_3_Merged 1_21
+  - first:
+      213: 8871755834577402492
+    second: HunterLayersAllPhotoshop_3_Merged 1_22
+  - first:
+      213: 6009600168565977288
+    second: HunterLayersAllPhotoshop_3_Merged 1_23
+  - first:
+      213: 8042435860189329684
+    second: HunterLayersAllPhotoshop_3_Merged 1_24
+  - first:
+      213: 4485226424385281113
+    second: HunterLayersAllPhotoshop_3_Merged 1_25
+  - first:
+      213: -4883745851386491133
+    second: HunterLayersAllPhotoshop_3_Merged 1_26
+  - first:
+      213: 5901179926856705248
+    second: HunterLayersAllPhotoshop_3_Merged 1_27
+  - first:
+      213: 5300118703636726335
+    second: HunterLayersAllPhotoshop_3_Merged 1_28
+  - first:
+      213: -2193633018140333683
+    second: HunterLayersAllPhotoshop_3_Merged 1_29
+  - first:
+      213: 4496943022197388028
+    second: HunterLayersAllPhotoshop_3_Merged 1_30
+  - first:
+      213: 8455911120869587016
+    second: HunterLayersAllPhotoshop_3_Merged 1_31
+  - first:
+      213: -1383920039092104411
+    second: HunterLayersAllPhotoshop_3_Merged 1_32
+  - first:
+      213: 1212403829104666230
+    second: HunterLayersAllPhotoshop_3_Merged 1_33
+  - first:
+      213: 5324378505361590077
+    second: HunterLayersAllPhotoshop_3_Merged 1_34
+  - first:
+      213: -9007290661925215434
+    second: HunterLayersAllPhotoshop_3_Merged 1_35
+  - first:
+      213: -2405830983062382107
+    second: HunterLayersAllPhotoshop_3_Merged 1_36
+  - first:
+      213: -2962131046537369897
+    second: HunterLayersAllPhotoshop_3_Merged 1_37
+  - first:
+      213: 3797825204054481040
+    second: HunterLayersAllPhotoshop_3_Merged 1_38
+  - first:
+      213: 3569430766859249151
+    second: HunterLayersAllPhotoshop_3_Merged 1_39
+  - first:
+      213: 492479845793364587
+    second: HunterLayersAllPhotoshop_3_Merged 1_40
+  - first:
+      213: -6148976378570348707
+    second: HunterLayersAllPhotoshop_3_Merged 1_41
+  - first:
+      213: -1359584108202145667
+    second: HunterLayersAllPhotoshop_3_Merged 1_42
+  - first:
+      213: -3025627810712499162
+    second: HunterLayersAllPhotoshop_3_Merged 1_43
+  - first:
+      213: 7021929488084097291
+    second: HunterLayersAllPhotoshop_3_Merged 1_44
+  - first:
+      213: -5620954662561659653
+    second: HunterLayersAllPhotoshop_3_Merged 1_45
+  - first:
+      213: 3409194785875880051
+    second: HunterLayersAllPhotoshop_3_Merged 1_46
+  - first:
+      213: 4286944324012596063
+    second: HunterLayersAllPhotoshop_3_Merged 1_47
+  - first:
+      213: -2259289447824061780
+    second: HunterLayersAllPhotoshop_3_Merged 1_48
+  - first:
+      213: -4146284272812755140
+    second: HunterLayersAllPhotoshop_3_Merged 1_49
+  - first:
+      213: 4882982510404184941
+    second: HunterLayersAllPhotoshop_3_Merged 1_50
+  - first:
+      213: 5144690218487786252
+    second: HunterLayersAllPhotoshop_3_Merged 1_51
+  - first:
+      213: -1586198452543453070
+    second: HunterLayersAllPhotoshop_3_Merged 1_52
+  - first:
+      213: 7968795918369308211
+    second: HunterLayersAllPhotoshop_3_Merged 1_53
+  - first:
+      213: -1135213770566646567
+    second: HunterLayersAllPhotoshop_3_Merged 1_54
+  - first:
+      213: -1598839636266080116
+    second: HunterLayersAllPhotoshop_3_Merged 1_55
+  - first:
+      213: -5970832111745442261
+    second: HunterLayersAllPhotoshop_3_Merged 1_56
+  - first:
+      213: -7189251803602977401
+    second: HunterLayersAllPhotoshop_3_Merged 1_57
+  - first:
+      213: 2132036011040055243
+    second: HunterLayersAllPhotoshop_3_Merged 1_58
+  - first:
+      213: -6449506708044346851
+    second: HunterLayersAllPhotoshop_3_Merged 1_59
+  - first:
+      213: 3344994080775330319
+    second: HunterLayersAllPhotoshop_3_Merged 1_60
+  - first:
+      213: 1490305002249212794
+    second: HunterLayersAllPhotoshop_3_Merged 1_61
+  - first:
+      213: 179627173249689317
+    second: HunterLayersAllPhotoshop_3_Merged 1_62
+  - first:
+      213: 1477411249815622118
+    second: HunterLayersAllPhotoshop_3_Merged 1_63
+  - first:
+      213: -4998154110133086897
+    second: HunterLayersAllPhotoshop_3_Merged 1_64
+  - first:
+      213: -3295007530756327274
+    second: HunterLayersAllPhotoshop_3_Merged 1_65
+  - first:
+      213: 6597147033115892890
+    second: HunterLayersAllPhotoshop_3_Merged 1_66
+  - first:
+      213: 2343032958357795021
+    second: HunterLayersAllPhotoshop_3_Merged 1_67
+  - first:
+      213: -7797826684532569010
+    second: HunterLayersAllPhotoshop_3_Merged 1_68
+  - first:
+      213: 1168867818169194544
+    second: HunterLayersAllPhotoshop_3_Merged 1_69
+  - first:
+      213: -1540226916843722296
+    second: HunterLayersAllPhotoshop_3_Merged 1_70
+  - first:
+      213: -1887889774761460680
+    second: HunterLayersAllPhotoshop_3_Merged 1_71
+  - first:
+      213: 7903360373104474550
+    second: HunterLayersAllPhotoshop_3_Merged 1_72
+  - first:
+      213: 4596665025364627361
+    second: HunterLayersAllPhotoshop_3_Merged 1_73
+  - first:
+      213: 955900982221870692
+    second: HunterLayersAllPhotoshop_3_Merged 1_74
+  - first:
+      213: 7832411430443284156
+    second: HunterLayersAllPhotoshop_3_Merged 1_75
+  - first:
+      213: 149369619703486781
+    second: HunterLayersAllPhotoshop_3_Merged 1_76
+  - first:
+      213: -1014266181073553694
+    second: HunterLayersAllPhotoshop_3_Merged 1_77
+  - first:
+      213: -6943512563250557104
+    second: HunterLayersAllPhotoshop_3_Merged 1_78
+  - first:
+      213: -228201564970646906
+    second: HunterLayersAllPhotoshop_3_Merged 1_79
+  - first:
+      213: -7450386282856472969
+    second: HunterLayersAllPhotoshop_3_Merged 1_80
+  - first:
+      213: -2395623410861002798
+    second: HunterLayersAllPhotoshop_3_Merged 1_81
+  - first:
+      213: -3700427404435268581
+    second: HunterLayersAllPhotoshop_3_Merged 1_82
+  - first:
+      213: -8268176651251238864
+    second: HunterLayersAllPhotoshop_3_Merged 1_83
+  - first:
+      213: 3662869346552523099
+    second: HunterLayersAllPhotoshop_3_Merged 1_84
+  - first:
+      213: -579328250588395107
+    second: HunterLayersAllPhotoshop_3_Merged 1_85
+  - first:
+      213: -9079008790856209038
+    second: HunterLayersAllPhotoshop_3_Merged 1_86
+  - first:
+      213: -4295036737296263808
+    second: HunterLayersAllPhotoshop_3_Merged 1_87
+  - first:
+      213: -2654104070858726173
+    second: HunterLayersAllPhotoshop_3_Merged 1_88
+  - first:
+      213: -883769027192728464
+    second: HunterLayersAllPhotoshop_3_Merged 1_89
+  - first:
+      213: -5558085008800198865
+    second: HunterLayersAllPhotoshop_3_Merged 1_90
+  - first:
+      213: 546922774814165767
+    second: HunterLayersAllPhotoshop_3_Merged 1_91
+  - first:
+      213: -1197912806793708299
+    second: HunterLayersAllPhotoshop_3_Merged 1_92
+  - first:
+      213: 4232700343107404483
+    second: HunterLayersAllPhotoshop_3_Merged 1_93
+  - first:
+      213: -146953262536881438
+    second: HunterLayersAllPhotoshop_3_Merged 1_94
+  - first:
+      213: 6982542118198390022
+    second: HunterLayersAllPhotoshop_3_Merged 1_95
+  - first:
+      213: -1966484903466207182
+    second: HunterLayersAllPhotoshop_3_Merged 1_96
+  - first:
+      213: -8217917733426845358
+    second: HunterLayersAllPhotoshop_3_Merged 1_97
+  - first:
+      213: -1556534575012881001
+    second: HunterLayersAllPhotoshop_3_Merged 1_98
+  - first:
+      213: 7020207611881230067
+    second: HunterLayersAllPhotoshop_3_Merged 1_99
+  - first:
+      213: -6207881809341988053
+    second: HunterLayersAllPhotoshop_3_Merged 1_100
+  - first:
+      213: -7783485057178589263
+    second: HunterLayersAllPhotoshop_3_Merged 1_101
+  - first:
+      213: 3511409736524269414
+    second: HunterLayersAllPhotoshop_3_Merged 1_102
+  - first:
+      213: -1309257840973244713
+    second: HunterLayersAllPhotoshop_3_Merged 1_103
+  - first:
+      213: -9106181229514366928
+    second: HunterLayersAllPhotoshop_3_Merged 1_104
+  - first:
+      213: 4954890775744408268
+    second: HunterLayersAllPhotoshop_3_Merged 1_105
+  - first:
+      213: -6272119256795937190
+    second: HunterLayersAllPhotoshop_3_Merged 1_106
+  - first:
+      213: 6206121667617233572
+    second: HunterLayersAllPhotoshop_3_Merged 1_107
+  - first:
+      213: 8812913898995157704
+    second: HunterLayersAllPhotoshop_3_Merged 1_108
+  - first:
+      213: 7507443230300470950
+    second: HunterLayersAllPhotoshop_3_Merged 1_109
+  - first:
+      213: -8433066113120589649
+    second: HunterLayersAllPhotoshop_3_Merged 1_110
+  - first:
+      213: 384409050709870283
+    second: HunterLayersAllPhotoshop_3_Merged 1_111
+  - first:
+      213: 1931363179826371722
+    second: HunterLayersAllPhotoshop_3_Merged 1_112
+  - first:
+      213: 9047206484661559304
+    second: HunterLayersAllPhotoshop_3_Merged 1_113
+  - first:
+      213: 8032401032973608595
+    second: HunterLayersAllPhotoshop_3_Merged 1_114
+  - first:
+      213: 4868064010957892469
+    second: HunterLayersAllPhotoshop_3_Merged 1_115
+  - first:
+      213: -5539140945927338891
+    second: HunterLayersAllPhotoshop_3_Merged 1_116
+  - first:
+      213: -476536808378478815
+    second: HunterLayersAllPhotoshop_3_Merged 1_117
+  - first:
+      213: -1327391543923598691
+    second: HunterLayersAllPhotoshop_3_Merged 1_118
+  - first:
+      213: -4284962449055870653
+    second: HunterLayersAllPhotoshop_3_Merged 1_119
+  - first:
+      213: -2169319436160381310
+    second: HunterLayersAllPhotoshop_3_Merged 1_120
+  - first:
+      213: -8750932442087433033
+    second: HunterLayersAllPhotoshop_3_Merged 1_121
+  - first:
+      213: -6438892643697526809
+    second: HunterLayersAllPhotoshop_3_Merged 1_122
+  - first:
+      213: 7809319883402448945
+    second: HunterLayersAllPhotoshop_3_Merged 1_123
+  - first:
+      213: 8670820642517023788
+    second: HunterLayersAllPhotoshop_3_Merged 1_124
+  - first:
+      213: 2323618932896622953
+    second: HunterLayersAllPhotoshop_3_Merged 1_125
+  - first:
+      213: 7117522280374257733
+    second: HunterLayersAllPhotoshop_3_Merged 1_126
+  - first:
+      213: 3475077543236152719
+    second: HunterLayersAllPhotoshop_3_Merged 1_127
+  - first:
+      213: -6370441494454453829
+    second: HunterLayersAllPhotoshop_3_Merged 1_128
+  - first:
+      213: 1355669152290738375
+    second: HunterLayersAllPhotoshop_3_Merged 1_129
+  - first:
+      213: -1247725273315161445
+    second: HunterLayersAllPhotoshop_3_Merged 1_130
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 177
+        width: 99
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3e630cce8f3ab640800000000000000
+      internalID: 5096455810863820347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_1
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 177
+        width: 99
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66e94fa763ac24060800000000000000
+      internalID: 6936328711443881574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_2
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 249
+        width: 45
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c21c2e836d5fb2080800000000000000
+      internalID: -9210998312430026452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_3
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 249
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d54429c230785c010800000000000000
+      internalID: 1208520522721281117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_4
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 203
+        width: 60
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b1f6097b60a4aca0800000000000000
+      internalID: -6006499619552955980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_5
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 204
+        width: 26
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d80130bb1156298d0800000000000000
+      internalID: -2841097288090972019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_6
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 202
+        width: 25
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 249b73c11d879abc0800000000000000
+      internalID: -3771350373429167806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_7
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 202
+        width: 26
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ceba09bd5084dfdf0800000000000000
+      internalID: -144880423010259988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_8
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 244
+        width: 60
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1973f901b5521f8f0800000000000000
+      internalID: -508584209865033839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_9
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 244
+        width: 60
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 146ba047856ff2390800000000000000
+      internalID: -7840777566464330175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_10
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 244
+        width: 44
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6c20dd6c0d01e2a0800000000000000
+      internalID: -6710067622772200337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_11
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 244
+        width: 35
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9a3fc3daf465a3a0800000000000000
+      internalID: -6654801845911864677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_12
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 240
+        width: 34
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a531a2f41d34ac7e0800000000000000
+      internalID: -1744507339397262502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_13
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 224
+        width: 21
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de1253085b4e262b0800000000000000
+      internalID: -5592656319049555475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_14
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 222
+        width: 34
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce364f61389ac3c50800000000000000
+      internalID: 6646373530582934508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_15
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 222
+        width: 34
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a7f1ea2c76f64240800000000000000
+      internalID: 4775775468028819361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_16
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 233
+        width: 29
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01489af3bed85d670800000000000000
+      internalID: 8562906308039771152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_17
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 233
+        width: 28
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40a8bc30799474270800000000000000
+      internalID: 8234631356622801412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_18
+      rect:
+        serializedVersion: 2
+        x: 813
+        y: 240
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c7a68e6e8f61b1a0800000000000000
+      internalID: -6795527705195010109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_19
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 240
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5760d6b70c6f8a9b0800000000000000
+      internalID: -5068530074040596875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_20
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 240
+        width: 26
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e45c58211f5f14a0800000000000000
+      internalID: -6620468399915117341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_21
+      rect:
+        serializedVersion: 2
+        x: 892
+        y: 238
+        width: 36
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2ae753bcadcc00d0800000000000000
+      internalID: -3455160672473060818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_22
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 238
+        width: 24
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7a3cfd4deece1b70800000000000000
+      internalID: 8871755834577402492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_23
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 239
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c0b0895383666350800000000000000
+      internalID: 6009600168565977288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_24
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 239
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 419b27fddc87c9f60800000000000000
+      internalID: 8042435860189329684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_25
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 239
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95c1ea25ba9be3e30800000000000000
+      internalID: 4485226424385281113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_26
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 239
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30f02daf503793cb0800000000000000
+      internalID: -4883745851386491133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_27
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 237
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e4a5ffa0e335e150800000000000000
+      internalID: 5901179926856705248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_28
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 250
+        width: 26
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f32cba531edcd8940800000000000000
+      internalID: 5300118703636726335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_29
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 164
+        width: 67
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d896d227466ae81e0800000000000000
+      internalID: -2193633018140333683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_30
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 204
+        width: 66
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf23f355ad9586e30800000000000000
+      internalID: 4496943022197388028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_31
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 218
+        width: 70
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 848f4b3fc5e695570800000000000000
+      internalID: 8455911120869587016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_32
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 201
+        width: 33
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 523de588e045bcce0800000000000000
+      internalID: -1383920039092104411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_33
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 234
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6766b16ebd253d010800000000000000
+      internalID: 1212403829104666230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_34
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 218
+        width: 40
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d378dc57a0ef3e940800000000000000
+      internalID: 5324378505361590077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_35
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 233
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 633214b9ddcaff280800000000000000
+      internalID: -9007290661925215434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_36
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 200
+        width: 25
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e910f0b775cc9ed0800000000000000
+      internalID: -2405830983062382107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_37
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 205
+        width: 38
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d6ebf8d18564e6d0800000000000000
+      internalID: -2962131046537369897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_38
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 205
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09851beb6e594b430800000000000000
+      internalID: 3797825204054481040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_39
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 216
+        width: 37
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff5eefcee5a298130800000000000000
+      internalID: 3569430766859249151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_40
+      rect:
+        serializedVersion: 2
+        x: 1011
+        y: 218
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6a7d8b7fc3a5d600800000000000000
+      internalID: 492479845793364587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_41
+      rect:
+        serializedVersion: 2
+        x: 1037
+        y: 218
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d57eb07ff827aaaa0800000000000000
+      internalID: -6148976378570348707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_42
+      rect:
+        serializedVersion: 2
+        x: 1058
+        y: 218
+        width: 24
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d78485cf479c12de0800000000000000
+      internalID: -1359584108202145667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_43
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 216
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62c40ff598fc206d0800000000000000
+      internalID: -3025627810712499162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_44
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 216
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b09d7176aa7e27160800000000000000
+      internalID: 7021929488084097291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_45
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 203
+        width: 40
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf4cf67f38b5ef1b0800000000000000
+      internalID: -5620954662561659653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_46
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 203
+        width: 18
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 378ee365894ef4f20800000000000000
+      internalID: 3409194785875880051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_47
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 201
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5bd5a446294e7b30800000000000000
+      internalID: 4286944324012596063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_48
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 154
+        width: 40
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caa88a9a73465a0e0800000000000000
+      internalID: -2259289447824061780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_49
+      rect:
+        serializedVersion: 2
+        x: 654
+        y: 198
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c37f43dfb607576c0800000000000000
+      internalID: -4146284272812755140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_50
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 196
+        width: 77
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6b2619d8b6d3c340800000000000000
+      internalID: 4882982510404184941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_51
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 201
+        width: 35
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0b2468fe7c956740800000000000000
+      internalID: 5144690218487786252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_52
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 205
+        width: 31
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2788fd459e0bcf9e0800000000000000
+      internalID: -1586198452543453070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_53
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 203
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33e3cf1daa9d69e60800000000000000
+      internalID: 7968795918369308211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_54
+      rect:
+        serializedVersion: 2
+        x: 881
+        y: 198
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d44e3d1719ee30f0800000000000000
+      internalID: -1135213770566646567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_55
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 185
+        width: 38
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c88ab8362d7cfc9e0800000000000000
+      internalID: -1598839636266080116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_56
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 186
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2edae544d7532da0800000000000000
+      internalID: -5970832111745442261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_57
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 186
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78d786d2395aa3c90800000000000000
+      internalID: -7189251803602977401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_58
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 186
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcf126eb473869d10800000000000000
+      internalID: 2132036011040055243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_59
+      rect:
+        serializedVersion: 2
+        x: 1097
+        y: 186
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1a848ae1dfbe76a0800000000000000
+      internalID: -6449506708044346851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_60
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 202
+        width: 22
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0ad568d46ecb6e20800000000000000
+      internalID: 3344994080775330319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_61
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 202
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a735d0ae080aea410800000000000000
+      internalID: 1490305002249212794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_62
+      rect:
+        serializedVersion: 2
+        x: 1175
+        y: 202
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e62e8d56f92e7200800000000000000
+      internalID: 179627173249689317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_63
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 155
+        width: 80
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e11d6c34b1d08410800000000000000
+      internalID: 1477411249815622118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_64
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 155
+        width: 62
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f45dbd4715df2aab0800000000000000
+      internalID: -4998154110133086897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_65
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 155
+        width: 60
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6983805cb18c542d0800000000000000
+      internalID: -3295007530756327274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_66
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 154
+        width: 60
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9c15eff546cd8b50800000000000000
+      internalID: 6597147033115892890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_67
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 154
+        width: 62
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc0f2fbcf00248020800000000000000
+      internalID: 2343032958357795021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_68
+      rect:
+        serializedVersion: 2
+        x: 654
+        y: 154
+        width: 19
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4ccf50f1fd88c390800000000000000
+      internalID: -7797826684532569010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_69
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 127
+        width: 83
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0385c537617a83010800000000000000
+      internalID: 1168867818169194544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_70
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 127
+        width: 29
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c9e80497c300aae0800000000000000
+      internalID: -1540226916843722296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_71
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 126
+        width: 30
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83c3048904edcc5e0800000000000000
+      internalID: -1887889774761460680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_72
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 127
+        width: 24
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b97ac2b2606ead60800000000000000
+      internalID: 7903360373104474550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_73
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 126
+        width: 29
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1af02548c72aacf30800000000000000
+      internalID: 4596665025364627361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_74
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 170
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46618c5f0ea044d00800000000000000
+      internalID: 955900982221870692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_75
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 172
+        width: 40
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb6f746b2b052bc60800000000000000
+      internalID: 7832411430443284156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_76
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 181
+        width: 33
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3959a2b0eaa21200800000000000000
+      internalID: 149369619703486781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_77
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 163
+        width: 40
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e63b69384a9ce1f0800000000000000
+      internalID: -1014266181073553694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_78
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 163
+        width: 37
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05f0dfdac10b3af90800000000000000
+      internalID: -6943512563250557104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_79
+      rect:
+        serializedVersion: 2
+        x: 1062
+        y: 161
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6828cbeb2e345dcf0800000000000000
+      internalID: -228201564970646906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_80
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 161
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77e95ea4629ea9890800000000000000
+      internalID: -7450386282856472969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_81
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 178
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2df250c433901ced0800000000000000
+      internalID: -2395623410861002798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_82
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 177
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1cd381a1e075acc0800000000000000
+      internalID: -3700427404435268581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_83
+      rect:
+        serializedVersion: 2
+        x: 1156
+        y: 178
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 038bdf17429814d80800000000000000
+      internalID: -8268176651251238864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_84
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1
+        width: 140
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b592ee3934025d230800000000000000
+      internalID: 3662869346552523099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_85
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 164
+        width: 39
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9984578600d5f7f0800000000000000
+      internalID: -579328250588395107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_86
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 164
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27ded5c7b91e00280800000000000000
+      internalID: -9079008790856209038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_87
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 122
+        width: 21
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0851430f7d6f464c0800000000000000
+      internalID: -4295036737296263808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_88
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 152
+        width: 42
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e42c8bd86aba2bd0800000000000000
+      internalID: -2654104070858726173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_89
+      rect:
+        serializedVersion: 2
+        x: 947
+        y: 154
+        width: 32
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0745fae80c83cb3f0800000000000000
+      internalID: -883769027192728464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_90
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 151
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2f4a0be127bdd2b0800000000000000
+      internalID: -5558085008800198865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_91
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 153
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70b8e50bd5f079700800000000000000
+      internalID: 546922774814165767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_92
+      rect:
+        serializedVersion: 2
+        x: 1156
+        y: 154
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fc7b2726a8206fe0800000000000000
+      internalID: -1197912806793708299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_93
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 2
+        width: 132
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c2479749829dba30800000000000000
+      internalID: 4232700343107404483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_94
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 91
+        width: 197
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ea87eb49cae5fdf0800000000000000
+      internalID: -146953262536881438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_95
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 91
+        width: 197
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60d2b68bf09f6e060800000000000000
+      internalID: 6982542118198390022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_96
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 121
+        width: 42
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2387ab03664a5b4e0800000000000000
+      internalID: -1966484903466207182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_97
+      rect:
+        serializedVersion: 2
+        x: 947
+        y: 121
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 259a5b1ac5714fd80800000000000000
+      internalID: -8217917733426845358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_98
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 130
+        width: 40
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79d5eb70d04166ae0800000000000000
+      internalID: -1556534575012881001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_99
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 131
+        width: 36
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fe8cabd0a9cc6160800000000000000
+      internalID: 7020207611881230067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_100
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 131
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b23cf8a926c29d9a0800000000000000
+      internalID: -6207881809341988053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_101
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 127
+        width: 23
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b72f4444918bf390800000000000000
+      internalID: -7783485057178589263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_102
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 127
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66780661d880bb030800000000000000
+      internalID: 3511409736524269414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_103
+      rect:
+        serializedVersion: 2
+        x: 1137
+        y: 127
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d6156d2ee494dde0800000000000000
+      internalID: -1309257840973244713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_104
+      rect:
+        serializedVersion: 2
+        x: 1164
+        y: 127
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 030677a1b6850a180800000000000000
+      internalID: -9106181229514366928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_105
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 66
+        width: 88
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccaea1d88ee43c440800000000000000
+      internalID: 4954890775744408268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_106
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 65
+        width: 88
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a568acd54c4f4f8a0800000000000000
+      internalID: -6272119256795937190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_107
+      rect:
+        serializedVersion: 2
+        x: 862
+        y: 66
+        width: 26
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4aa1e2776c2902650800000000000000
+      internalID: 6206121667617233572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_108
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 92
+        width: 46
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ca85b19f72cd4a70800000000000000
+      internalID: 8812913898995157704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_109
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 92
+        width: 43
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ae787187dbcf2860800000000000000
+      internalID: 7507443230300470950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_110
+      rect:
+        serializedVersion: 2
+        x: 983
+        y: 92
+        width: 43
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa82018ec0bb7fa80800000000000000
+      internalID: -8433066113120589649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_111
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 108
+        width: 37
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc6c104bef1b55500800000000000000
+      internalID: 384409050709870283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_112
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 102
+        width: 32
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8cd1d944949dca10800000000000000
+      internalID: 1931363179826371722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_113
+      rect:
+        serializedVersion: 2
+        x: 1113
+        y: 102
+        width: 32
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 800ecd71d522e8d70800000000000000
+      internalID: 9047206484661559304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_114
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 102
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3966fd79e22d87f60800000000000000
+      internalID: 8032401032973608595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_115
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 2
+        width: 200
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57b22050d66de8340800000000000000
+      internalID: 4868064010957892469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_116
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 2
+        width: 200
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5740e2548a40123b0800000000000000
+      internalID: -5539140945927338891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_117
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 65
+        width: 71
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12fc33e2c400369f0800000000000000
+      internalID: -476536808378478815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_118
+      rect:
+        serializedVersion: 2
+        x: 963
+        y: 65
+        width: 67
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9a93927c68249de0800000000000000
+      internalID: -1327391543923598691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_119
+      rect:
+        serializedVersion: 2
+        x: 1032
+        y: 85
+        width: 37
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3411324fa51c884c0800000000000000
+      internalID: -4284962449055870653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_120
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 79
+        width: 47
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28e4f43677705e1e0800000000000000
+      internalID: -2169319436160381310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_121
+      rect:
+        serializedVersion: 2
+        x: 1128
+        y: 79
+        width: 47
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bcdfefee417e8680800000000000000
+      internalID: -8750932442087433033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_122
+      rect:
+        serializedVersion: 2
+        x: 1032
+        y: 65
+        width: 45
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e77889514574a6a0800000000000000
+      internalID: -6438892643697526809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_123
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 40
+        width: 99
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1301993fe07406c60800000000000000
+      internalID: 7809319883402448945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_124
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 2
+        width: 197
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2cf9543f61f45870800000000000000
+      internalID: 8670820642517023788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_125
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 2
+        width: 197
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 969eca0cb172f3020800000000000000
+      internalID: 2323618932896622953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_126
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 53
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 548c2a2cdc486c260800000000000000
+      internalID: 7117522280374257733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_127
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 41
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8d27832d94f93030800000000000000
+      internalID: 3475077543236152719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_128
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 2
+        width: 99
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb932ac7635a797a0800000000000000
+      internalID: -6370441494454453829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_129
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 28
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c09e3f49ed40d210800000000000000
+      internalID: 1355669152290738375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterLayersAllPhotoshop_3_Merged 1_130
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 2
+        width: 8
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9ac5c289703faee0800000000000000
+      internalID: -1247725273315161445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      HunterLayersAllPhotoshop_3_Merged 1_0: 5096455810863820347
+      HunterLayersAllPhotoshop_3_Merged 1_1: 6936328711443881574
+      HunterLayersAllPhotoshop_3_Merged 1_10: -6710067622772200337
+      HunterLayersAllPhotoshop_3_Merged 1_100: -6207881809341988053
+      HunterLayersAllPhotoshop_3_Merged 1_101: -7783485057178589263
+      HunterLayersAllPhotoshop_3_Merged 1_102: 3511409736524269414
+      HunterLayersAllPhotoshop_3_Merged 1_103: -1309257840973244713
+      HunterLayersAllPhotoshop_3_Merged 1_104: -9106181229514366928
+      HunterLayersAllPhotoshop_3_Merged 1_105: 4954890775744408268
+      HunterLayersAllPhotoshop_3_Merged 1_106: -6272119256795937190
+      HunterLayersAllPhotoshop_3_Merged 1_107: 6206121667617233572
+      HunterLayersAllPhotoshop_3_Merged 1_108: 8812913898995157704
+      HunterLayersAllPhotoshop_3_Merged 1_109: 7507443230300470950
+      HunterLayersAllPhotoshop_3_Merged 1_11: -6654801845911864677
+      HunterLayersAllPhotoshop_3_Merged 1_110: -8433066113120589649
+      HunterLayersAllPhotoshop_3_Merged 1_111: 384409050709870283
+      HunterLayersAllPhotoshop_3_Merged 1_112: 1931363179826371722
+      HunterLayersAllPhotoshop_3_Merged 1_113: 9047206484661559304
+      HunterLayersAllPhotoshop_3_Merged 1_114: 8032401032973608595
+      HunterLayersAllPhotoshop_3_Merged 1_115: 4868064010957892469
+      HunterLayersAllPhotoshop_3_Merged 1_116: -5539140945927338891
+      HunterLayersAllPhotoshop_3_Merged 1_117: -476536808378478815
+      HunterLayersAllPhotoshop_3_Merged 1_118: -1327391543923598691
+      HunterLayersAllPhotoshop_3_Merged 1_119: -4284962449055870653
+      HunterLayersAllPhotoshop_3_Merged 1_12: -1744507339397262502
+      HunterLayersAllPhotoshop_3_Merged 1_120: -2169319436160381310
+      HunterLayersAllPhotoshop_3_Merged 1_121: -8750932442087433033
+      HunterLayersAllPhotoshop_3_Merged 1_122: -6438892643697526809
+      HunterLayersAllPhotoshop_3_Merged 1_123: 7809319883402448945
+      HunterLayersAllPhotoshop_3_Merged 1_124: 8670820642517023788
+      HunterLayersAllPhotoshop_3_Merged 1_125: 2323618932896622953
+      HunterLayersAllPhotoshop_3_Merged 1_126: 7117522280374257733
+      HunterLayersAllPhotoshop_3_Merged 1_127: 3475077543236152719
+      HunterLayersAllPhotoshop_3_Merged 1_128: -6370441494454453829
+      HunterLayersAllPhotoshop_3_Merged 1_129: 1355669152290738375
+      HunterLayersAllPhotoshop_3_Merged 1_13: -5592656319049555475
+      HunterLayersAllPhotoshop_3_Merged 1_130: -1247725273315161445
+      HunterLayersAllPhotoshop_3_Merged 1_14: 6646373530582934508
+      HunterLayersAllPhotoshop_3_Merged 1_15: 4775775468028819361
+      HunterLayersAllPhotoshop_3_Merged 1_16: 8562906308039771152
+      HunterLayersAllPhotoshop_3_Merged 1_17: 8234631356622801412
+      HunterLayersAllPhotoshop_3_Merged 1_18: -6795527705195010109
+      HunterLayersAllPhotoshop_3_Merged 1_19: -5068530074040596875
+      HunterLayersAllPhotoshop_3_Merged 1_2: -9210998312430026452
+      HunterLayersAllPhotoshop_3_Merged 1_20: -6620468399915117341
+      HunterLayersAllPhotoshop_3_Merged 1_21: -3455160672473060818
+      HunterLayersAllPhotoshop_3_Merged 1_22: 8871755834577402492
+      HunterLayersAllPhotoshop_3_Merged 1_23: 6009600168565977288
+      HunterLayersAllPhotoshop_3_Merged 1_24: 8042435860189329684
+      HunterLayersAllPhotoshop_3_Merged 1_25: 4485226424385281113
+      HunterLayersAllPhotoshop_3_Merged 1_26: -4883745851386491133
+      HunterLayersAllPhotoshop_3_Merged 1_27: 5901179926856705248
+      HunterLayersAllPhotoshop_3_Merged 1_28: 5300118703636726335
+      HunterLayersAllPhotoshop_3_Merged 1_29: -2193633018140333683
+      HunterLayersAllPhotoshop_3_Merged 1_3: 1208520522721281117
+      HunterLayersAllPhotoshop_3_Merged 1_30: 4496943022197388028
+      HunterLayersAllPhotoshop_3_Merged 1_31: 8455911120869587016
+      HunterLayersAllPhotoshop_3_Merged 1_32: -1383920039092104411
+      HunterLayersAllPhotoshop_3_Merged 1_33: 1212403829104666230
+      HunterLayersAllPhotoshop_3_Merged 1_34: 5324378505361590077
+      HunterLayersAllPhotoshop_3_Merged 1_35: -9007290661925215434
+      HunterLayersAllPhotoshop_3_Merged 1_36: -2405830983062382107
+      HunterLayersAllPhotoshop_3_Merged 1_37: -2962131046537369897
+      HunterLayersAllPhotoshop_3_Merged 1_38: 3797825204054481040
+      HunterLayersAllPhotoshop_3_Merged 1_39: 3569430766859249151
+      HunterLayersAllPhotoshop_3_Merged 1_4: -6006499619552955980
+      HunterLayersAllPhotoshop_3_Merged 1_40: 492479845793364587
+      HunterLayersAllPhotoshop_3_Merged 1_41: -6148976378570348707
+      HunterLayersAllPhotoshop_3_Merged 1_42: -1359584108202145667
+      HunterLayersAllPhotoshop_3_Merged 1_43: -3025627810712499162
+      HunterLayersAllPhotoshop_3_Merged 1_44: 7021929488084097291
+      HunterLayersAllPhotoshop_3_Merged 1_45: -5620954662561659653
+      HunterLayersAllPhotoshop_3_Merged 1_46: 3409194785875880051
+      HunterLayersAllPhotoshop_3_Merged 1_47: 4286944324012596063
+      HunterLayersAllPhotoshop_3_Merged 1_48: -2259289447824061780
+      HunterLayersAllPhotoshop_3_Merged 1_49: -4146284272812755140
+      HunterLayersAllPhotoshop_3_Merged 1_5: -2841097288090972019
+      HunterLayersAllPhotoshop_3_Merged 1_50: 4882982510404184941
+      HunterLayersAllPhotoshop_3_Merged 1_51: 5144690218487786252
+      HunterLayersAllPhotoshop_3_Merged 1_52: -1586198452543453070
+      HunterLayersAllPhotoshop_3_Merged 1_53: 7968795918369308211
+      HunterLayersAllPhotoshop_3_Merged 1_54: -1135213770566646567
+      HunterLayersAllPhotoshop_3_Merged 1_55: -1598839636266080116
+      HunterLayersAllPhotoshop_3_Merged 1_56: -5970832111745442261
+      HunterLayersAllPhotoshop_3_Merged 1_57: -7189251803602977401
+      HunterLayersAllPhotoshop_3_Merged 1_58: 2132036011040055243
+      HunterLayersAllPhotoshop_3_Merged 1_59: -6449506708044346851
+      HunterLayersAllPhotoshop_3_Merged 1_6: -3771350373429167806
+      HunterLayersAllPhotoshop_3_Merged 1_60: 3344994080775330319
+      HunterLayersAllPhotoshop_3_Merged 1_61: 1490305002249212794
+      HunterLayersAllPhotoshop_3_Merged 1_62: 179627173249689317
+      HunterLayersAllPhotoshop_3_Merged 1_63: 1477411249815622118
+      HunterLayersAllPhotoshop_3_Merged 1_64: -4998154110133086897
+      HunterLayersAllPhotoshop_3_Merged 1_65: -3295007530756327274
+      HunterLayersAllPhotoshop_3_Merged 1_66: 6597147033115892890
+      HunterLayersAllPhotoshop_3_Merged 1_67: 2343032958357795021
+      HunterLayersAllPhotoshop_3_Merged 1_68: -7797826684532569010
+      HunterLayersAllPhotoshop_3_Merged 1_69: 1168867818169194544
+      HunterLayersAllPhotoshop_3_Merged 1_7: -144880423010259988
+      HunterLayersAllPhotoshop_3_Merged 1_70: -1540226916843722296
+      HunterLayersAllPhotoshop_3_Merged 1_71: -1887889774761460680
+      HunterLayersAllPhotoshop_3_Merged 1_72: 7903360373104474550
+      HunterLayersAllPhotoshop_3_Merged 1_73: 4596665025364627361
+      HunterLayersAllPhotoshop_3_Merged 1_74: 955900982221870692
+      HunterLayersAllPhotoshop_3_Merged 1_75: 7832411430443284156
+      HunterLayersAllPhotoshop_3_Merged 1_76: 149369619703486781
+      HunterLayersAllPhotoshop_3_Merged 1_77: -1014266181073553694
+      HunterLayersAllPhotoshop_3_Merged 1_78: -6943512563250557104
+      HunterLayersAllPhotoshop_3_Merged 1_79: -228201564970646906
+      HunterLayersAllPhotoshop_3_Merged 1_8: -508584209865033839
+      HunterLayersAllPhotoshop_3_Merged 1_80: -7450386282856472969
+      HunterLayersAllPhotoshop_3_Merged 1_81: -2395623410861002798
+      HunterLayersAllPhotoshop_3_Merged 1_82: -3700427404435268581
+      HunterLayersAllPhotoshop_3_Merged 1_83: -8268176651251238864
+      HunterLayersAllPhotoshop_3_Merged 1_84: 3662869346552523099
+      HunterLayersAllPhotoshop_3_Merged 1_85: -579328250588395107
+      HunterLayersAllPhotoshop_3_Merged 1_86: -9079008790856209038
+      HunterLayersAllPhotoshop_3_Merged 1_87: -4295036737296263808
+      HunterLayersAllPhotoshop_3_Merged 1_88: -2654104070858726173
+      HunterLayersAllPhotoshop_3_Merged 1_89: -883769027192728464
+      HunterLayersAllPhotoshop_3_Merged 1_9: -7840777566464330175
+      HunterLayersAllPhotoshop_3_Merged 1_90: -5558085008800198865
+      HunterLayersAllPhotoshop_3_Merged 1_91: 546922774814165767
+      HunterLayersAllPhotoshop_3_Merged 1_92: -1197912806793708299
+      HunterLayersAllPhotoshop_3_Merged 1_93: 4232700343107404483
+      HunterLayersAllPhotoshop_3_Merged 1_94: -146953262536881438
+      HunterLayersAllPhotoshop_3_Merged 1_95: 6982542118198390022
+      HunterLayersAllPhotoshop_3_Merged 1_96: -1966484903466207182
+      HunterLayersAllPhotoshop_3_Merged 1_97: -8217917733426845358
+      HunterLayersAllPhotoshop_3_Merged 1_98: -1556534575012881001
+      HunterLayersAllPhotoshop_3_Merged 1_99: 7020207611881230067
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

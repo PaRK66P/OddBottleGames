@@ -21,15 +21,15 @@ MonoBehaviour:
   healthbarArmoredSprite: {fileID: 0}
   weakPontsPrefab: {fileID: 3231380814657301356, guid: 6ac7c8a5c43dca34fa8c401fb1723cfc, type: 3}
   weakPointsNo: 030000000400000005000000
-  weakPointHealth: 10
+  weakPointHealth: 3
   weakFinishDamage: 20
   weakPointDamageTimer: 0.5
-  weakPointSpriteNorm: {fileID: 3651451398234915377, guid: d2d13ef769aeb23448023c895d469218, type: 3}
-  weakPointSpriteHurt: {fileID: 3641224709901303, guid: f2951676b1d8f4847b141888ad4d6913, type: 3}
-  nextPhaseHpPoint: a00000006400000014000000
+  weakPointSpriteNorm: {fileID: 21300000, guid: f0a2bde2a11659747be6d1428cc136b4, type: 3}
+  weakPointSpriteHurt: {fileID: 21300000, guid: a9b15790752fd174eb60099dc4fb8287, type: 3}
+  nextPhaseHpPoint: a00000006400000028000000
   stunTimer: 3
-  Idle: {fileID: 7467783598227658634, guid: ec3761175c5bdff4da853053e1575fb8, type: 3}
-  Hurt: {fileID: -1979172429440992320, guid: 3364fd90e0b779f4e8a708030201ae2a, type: 3}
-  Armored: {fileID: -8420630515964266281, guid: 5aea9cbcb64f48c41beddc6ffffeda73, type: 3}
-  Stunned: {fileID: 1942160828762253353, guid: 1a8ad6da8e3fe77418182bf7c8ff166f, type: 3}
-  Dead: {fileID: -1946621180050194699, guid: 006b8607ddcfde148bab376c058532a6, type: 3}
+  Idle: {fileID: 21300000, guid: f8fa7647ee8ad0d4fa77fb8544020d87, type: 3}
+  Hurt: {fileID: 21300000, guid: 1bd9427cbea4f044cbba38dbde35e834, type: 3}
+  Armored: {fileID: 21300000, guid: 942592b7c3548b148a1e4d5d1d7ef063, type: 3}
+  Stunned: {fileID: 21300000, guid: dc7edc44ea4a091479e36e33415e3ae2, type: 3}
+  Dead: {fileID: 21300000, guid: c6b009f878d1ebd4c9350b656a074eaa, type: 3}

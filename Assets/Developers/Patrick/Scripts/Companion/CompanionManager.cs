@@ -179,6 +179,11 @@ public class CompanionManager : MonoBehaviour
         DamageVisual();
     }
 
+    public bool IsFriendly()
+    {
+        return _currentState == CompanionStates.FRIEND;
+    }
+
     private void CompanionDeath()
     {
         _currentState = CompanionStates.NONE;
@@ -205,7 +210,7 @@ public class CompanionManager : MonoBehaviour
             hasPlayedNovel = true;
 
 
-            visualNovelManager.StartNovelSceneByName("AmbrosiaTempDialogue");
+            visualNovelManager.StartNovelSceneByName("Ambrosia1");
             visualNovelManager.onNovelFinish.AddListener(GetVisualNovelResult);
 
             //GetComponent<enemyScr>().DecreaseEnemyCount();
@@ -364,38 +369,45 @@ public class CompanionManager : MonoBehaviour
         switch (visualNovelManager.GetLastSelectionID())
         {
             case 0:
-            case 2:
+            case 1:
             case 4:
             case 6:
             case 8:
-            case 10:
-            case 12:
-            case 14:
-            case 16:
-            case 21:
-                gameObject.GetComponent<enemyScr>().DecreaseEnemyCount();
-                ChangeToFriendly();
-                _playerObject.GetComponent<PlayerManager>().SetAllyCompanion(true, ref _managerRef);
-                break;
-            case 1:
-            case 3:
-            case 5:
-            case 7:
             case 9:
             case 11:
             case 13:
             case 15:
-            case 17:
             case 18:
-            case 19:
             case 20:
+            case 21:
+            case 26:
+                gameObject.GetComponent<enemyScr>().DecreaseEnemyCount();
+                ChangeToFriendly();
+                _playerObject.GetComponent<PlayerManager>().SetAllyCompanion(true, ref _managerRef);
+                break;
+            case 2:
+            case 3:
+            case 5:
+            case 7:
+            case 10:
+            case 12:
+            case 14:
+            case 16:
+            case 17:
+            case 19:
             case 22:
             case 23:
+            case 24:
+            case 25:
+            case 27:
+            case 28:
                 ChangeToEnemy();
                 _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
                 gameObject.GetComponent<enemyScr>().releaseEnemy();
                 break;
             default:
+                _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
+                gameObject.GetComponent<enemyScr>().releaseEnemy();
                 Debug.LogError("Visual novel selection of " + visualNovelManager.GetLastSelectionID() + " not supported. make sure to update selection code in miniboss as well as the novel that plays");
                 break;
         }

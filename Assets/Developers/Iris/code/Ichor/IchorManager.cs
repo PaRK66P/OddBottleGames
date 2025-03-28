@@ -1,4 +1,3 @@
-using Mono.Cecil;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +30,8 @@ public class IchorManager : MonoBehaviour
 
     private ObjectPoolManager pooler;
     private string prefabName;
+
+    private VisualNovelScript visualNovelManager;
 
     public void InsantiateComponent(ref ObjectPoolManager dPooler, string dPrefabName, ref List<GameObject> dWeakPos, ref Canvas dUICanvas)
     {
@@ -76,6 +77,8 @@ public class IchorManager : MonoBehaviour
         healthbar.GetComponent<Slider>().maxValue = health;
         healthbar.GetComponent<Slider>().value = health;
 
+        visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+
     }
 
     // Update is called once per frame
@@ -86,6 +89,7 @@ public class IchorManager : MonoBehaviour
             deathTimer -= Time.deltaTime;
             if(deathTimer <= 0)
             {
+                visualNovelManager.StartNovelSceneByName("Ichor1.0");
                 pooler.ReleaseObject(prefabName, gameObject);
             }
         }

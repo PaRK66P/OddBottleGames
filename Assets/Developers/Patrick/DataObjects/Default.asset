@@ -22,8 +22,8 @@ MonoBehaviour:
   deceleration: 0.7
   decelerationRate: 35
   dashTime: 0.2
-  dashDistance: 6
-  evolvedDashExtraDistance: 2
+  dashDistance: 5
+  evolvedDashExtraDistance: 3
   dashCooldown: 0.15
   numberOfDashCharges: 3
   dashRechargeTime: 1
@@ -44,10 +44,10 @@ MonoBehaviour:
   chargeShotIntervals: 0.1
   maxAmmo: 6
   reloadTime: 1
-  damageMultiplier: 1.5
+  damageMultiplier: 1.4
   chargeSlowDown: 0.444
   maxChargeShotImpactSlowDown: 0.5
   chargeShotImpactFrameDuration: 0.05
   baseProjectileType: {fileID: 1223489425459614113, guid: 50e3b8fba1c074f4ba558c89a7b1613e, type: 3}
-  baseProjectileSpeed: 20
+  baseProjectileSpeed: 32
   controlLossTime: 0.2

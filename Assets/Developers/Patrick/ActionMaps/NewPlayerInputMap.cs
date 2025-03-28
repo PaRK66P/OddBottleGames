@@ -259,6 +259,17 @@ public partial class @NewPlayerInputMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""4007304f-9d93-4b64-a1e3-c419ef64af27"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""9da22823-8d75-402d-969a-29f776d3ada8"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -339,7 +350,7 @@ public partial class @NewPlayerInputMap: IInputActionCollection2, IDisposable
                     ""id"": ""3be33981-9909-4ec0-b0e9-eef1b2215bbd"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": ""NormalizeVector2,StickDeadzone"",
                     ""groups"": ""Controller"",
                     ""action"": ""AimDirection"",
                     ""isComposite"": false,

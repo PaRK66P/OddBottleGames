@@ -1,0 +1,1117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7891825817778434982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7801366066636655746}
+  - component: {fileID: 7694390712790291691}
+  m_Layer: 0
+  m_Name: Ambrosia1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7801366066636655746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7891825817778434982}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7694390712790291691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7891825817778434982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71bfef80ec99bae43b5a69ec1f2ade9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VNname: 
+  tree:
+    nodes:
+    - id: 824597510
+      parentId: 0
+      sceneData:
+        entryText: 0.1
+        text: If I could acquire that power or get that Ghoul on my side...
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -415317348
+      parentId: 824597510
+      sceneData:
+        entryText: '.. '
+        text: This would be a whole lot easier.
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 316073588
+      parentId: -415317348
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: Such boldness...sauntering in here so full of vigor, so
+          full of *life*.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1641892446
+      parentId: 316073588
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: A worthy adversary, all the better that your blood tastes
+          so sweet.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 486406222
+      parentId: -1641892446
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1968072896
+      parentId: 486406222
+      sceneData:
+        entryText: 'I''ll take that as a compliment.  '
+        text: 'Ambrosia: Hm...as intended. Tell me, Hunter, why have you come this
+          far?'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -525096580
+      parentId: 1968072896
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: Your eyes don''t look like that of one who wishes to die.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 852101690
+      parentId: -525096580
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 618213874
+      parentId: 852101690
+      sceneData:
+        entryText: 'My eyes are just on you, your fighting skills are...impressive. '
+        text: 'Ambrosia: Honed for survival. You do what you must down here.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 631553634
+      parentId: 618213874
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: Your own skills are to be praised. And I do not do so often.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1823915520
+      parentId: 631553634
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1180096836
+      parentId: -1823915520
+      sceneData:
+        entryText: 'Perhaps I can convince you to do more of that? '
+        text: 'Ambrosia: If you wish to hear more from me...'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -2031123816
+      parentId: 1180096836
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: I shall have to see more of you fighting...perhaps as allies.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1717962728
+      parentId: -2031123816
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1272109512
+      parentId: -1717962728
+      sceneData:
+        entryText: 'Perhaps, I would like that. '
+        text: 'Ambrosia: Good. I shall be watching you closely.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 2084858464
+      parentId: 1272109512
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1980564902
+      parentId: -1717962728
+      sceneData:
+        entryText: 'Why would you wish to be allies? '
+        text: 'Ambrosia: I''ve had enough, simply put. There will be nothing left
+          here...'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1230655750
+      parentId: 1980564902
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: You are the first human I have spoken to in a long time.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 571142070
+      parentId: -1230655750
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: I will not stoop to convince you. But I shall die honourably
+          regardless.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -99012642
+      parentId: 571142070
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1873058440
+      parentId: -99012642
+      sceneData:
+        entryText: 'If you''re going to die, at least do so by my side then. '
+        text: 'Ambrosia: Charming...let us get out of this state then.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1472100352
+      parentId: -99012642
+      sceneData:
+        entryText: 'Ghouls are not to be trusted, so you shall die here. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -133569346
+      parentId: -1823915520
+      sceneData:
+        entryText: 'Why not? '
+        text: 'Ambrosia: It is simply not my...style. But enough. Idle chatter does
+          not suit this end.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -986571792
+      parentId: -133569346
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -2056213388
+      parentId: -986571792
+      sceneData:
+        entryText: 'End? No I quite like this idle chatter. Join me. '
+        text: 'Ambrosia: I shall not be a fool to turn down an offer made in arms.
+          Lead on.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1666404488
+      parentId: -2056213388
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 214936828
+      parentId: -986571792
+      sceneData:
+        entryText: 'Indeed. Your end shall be swift. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -1098023438
+      parentId: 852101690
+      sceneData:
+        entryText: 'I''m reaching the core, no matter what it takes. '
+        text: 'Ambrosia: No one''s been there in a thousand years. Or has it been
+          longer...'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -366632502
+      parentId: -1098023438
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: Who knows what you''re going to find in there,'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1606547360
+      parentId: -366632502
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: I heard the last only survived a century. But, why do you
+          wish to reach it?'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -620876324
+      parentId: -1606547360
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -174353914
+      parentId: -620876324
+      sceneData:
+        entryText: 'To kill it...to take it. I''ll know when I''m there. '
+        text: 'Ambrosia: Hm. How about we strike a deal?'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1092240464
+      parentId: -174353914
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: You''ve proven your capabilities, so I''ll help you. Take
+          me with you to the core,'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -682877836
+      parentId: 1092240464
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: And once we''ve defeated it, I want to see the surface.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 998073762
+      parentId: -682877836
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1351194758
+      parentId: 998073762
+      sceneData:
+        entryText: 'Your strength will be a valuable asset. I accept. '
+        text: 'Ambrosia: A wise choice. Let us go forth.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1076021034
+      parentId: 1351194758
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -1925876940
+      parentId: 998073762
+      sceneData:
+        entryText: 'I''m not into your kind. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 2098796872
+      parentId: -1925876940
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -1204741518
+      parentId: -620876324
+      sceneData:
+        entryText: 'That''s none of your concern, step aside or I''ll deal with you
+          here. '
+        text: 'Ambrosia: There''s no acquiescing here. You can try to finish me.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1342048024
+      parentId: -1204741518
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: Or, if you wish to kill it, my services would be...available.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1366372308
+      parentId: -1342048024
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -1324822452
+      parentId: -1366372308
+      sceneData:
+        entryText: '...Perhaps I do wish to kill it. '
+        text: 'Ambrosia: Then we must waste no time. You will answer my question
+          later.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 2070815006
+      parentId: -1324822452
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -1024978030
+      parentId: -1366372308
+      sceneData:
+        entryText: 'I don''t need your help. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 888745796
+      parentId: -1024978030
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 459749796
+      parentId: 852101690
+      sceneData:
+        entryText: 'I don''t owe you an explanation. '
+        text: 'Ambrosia: You don''t owe me anything. But it has been so long since
+          I''ve seen a Hunter.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1008292998
+      parentId: 459749796
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: Humour me, is it just to kill? Or do you wish for more...'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 2041035838
+      parentId: 1008292998
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -66022792
+      parentId: 2041035838
+      sceneData:
+        entryText: '...More? '
+        text: 'Ambrosia: More...Power. The core is the strongest source of that.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -770734208
+      parentId: -66022792
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: Complete control. Total domination. But only over the Dungeon.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1031063612
+      parentId: -770734208
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: And with the Dungeon in this state...I don''t quite believe
+          that power will last.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 2114810256
+      parentId: 1031063612
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: I would quite like to see the outcome regardless. Hunter,
+          take me with you.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1888235990
+      parentId: 2114810256
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -1328731358
+      parentId: -1888235990
+      sceneData:
+        entryText: '...So be it. I could use the extra...help. '
+        text: 'Ambrosia: And help you shall have, let us go on.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1208098382
+      parentId: -1328731358
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1129175498
+      parentId: -1888235990
+      sceneData:
+        entryText: 'And chance you taking it? No. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -112162774
+      parentId: 1129175498
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 156844222
+      parentId: 2041035838
+      sceneData:
+        entryText: 'Killing is the only thing on the table. '
+        text: 'Ambrosia:  Of course, which is why I intend to help.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 335783050
+      parentId: 156844222
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: You''re the first living being I''ve seen in over six decades,'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 884326252
+      parentId: 335783050
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: Or has it been more...Either way, I''m sick of waiting.
+          Take me with you.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -269285904
+      parentId: 884326252
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 825422170
+      parentId: -269285904
+      sceneData:
+        entryText: 'Don''t get in my way. '
+        text: 'Ambrosia: By all means, lead the way.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1967834968
+      parentId: 825422170
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1546841712
+      parentId: -269285904
+      sceneData:
+        entryText: 'A bold demand, I decline. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -1747683932
+      parentId: -1546841712
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1515286344
+      parentId: 486406222
+      sceneData:
+        entryText: 'Enjoy it while it lasts, now surrender. '
+        text: 'Ambrosia: So serious, although your way of fighting already showed
+          as much.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1695934308
+      parentId: 1515286344
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: Surely there''s no harm in humouring me for a moment,'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 96409564
+      parentId: -1695934308
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1894321572
+      parentId: 96409564
+      sceneData:
+        entryText: You have one minute.
+        text: 'Ambrosia: So *gracious*. You''ve proven your strength, surely you
+          feel I''ve proven mine.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1189610156
+      parentId: 1894321572
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: So let me proposition you, I''ll help you get to the core...'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 2013614124
+      parentId: 1189610156
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: If you take me out of here with you.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 462105032
+      parentId: 2013614124
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -831911060
+      parentId: 462105032
+      sceneData:
+        entryText: 'Why would you want to leave? '
+        text: 'Ambrosia:  You have eyes, no? Look around. This place doesn''t have
+          much longer left.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1353774742
+      parentId: -831911060
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: My chances up there are better than the definitive death
+          that awaits me here.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1938451412
+      parentId: -1353774742
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -62136980
+      parentId: -1938451412
+      sceneData:
+        entryText: I suppose it'd be an easier fight with you on my side.
+        text: 'Ambrosia: Especially considering I know the heart. Let us press on.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1208083072
+      parentId: -62136980
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -645942802
+      parentId: -1938451412
+      sceneData:
+        entryText: 'I''ll be damned if I help you terrorise the surface. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -676996910
+      parentId: -645942802
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1441535020
+      parentId: 462105032
+      sceneData:
+        entryText: 'You think I''m going to trust you? '
+        text: 'Ambrosia: Of course not, I thought you''d use that pretty little head
+          of yours,'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -2122041340
+      parentId: 1441535020
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: I''m dead regardless, so what''s the loss for you?'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1572755944
+      parentId: -2122041340
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 838761930
+      parentId: -1572755944
+      sceneData:
+        entryText: ...You're dead the second you make a wrong move
+        text: 'Ambrosia: That goes without saying...I''ll be right behind you.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1025980362
+      parentId: 838761930
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1508210726
+      parentId: -1572755944
+      sceneData:
+        entryText: 'I won''t be taken for a fool. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -2080695880
+      parentId: 1508210726
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -137395786
+      parentId: 96409564
+      sceneData:
+        entryText: 'I don''t have time to humour you. '
+        text: 'Ambrosia: Then why exactly are you asking me to surrender?'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -124056026
+      parentId: -137395786
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: It seems you are slightly intrigued, after all, you haven''t
+          killed me yet.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 2026188596
+      parentId: -124056026
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: Perhaps I am to mention my desire to go further.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1834652202
+      parentId: 2026188596
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1321477180
+      parentId: 1834652202
+      sceneData:
+        entryText: 'Fine, state your piece. Quickly. '
+        text: 'Ambrosia: Good. *sigh* This place is dying, I have no intention of
+          waiting to die with it.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1334816940
+      parentId: 1321477180
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: I''ll help you get to the core, defeat it if you so wish.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1418095212
+      parentId: 1334816940
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: *If*, you''ll bring me up to the surface.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -2094619626
+      parentId: -1418095212
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1009035192
+      parentId: -2094619626
+      sceneData:
+        entryText: 'An extra hand can''t hurt. '
+        text: 'Ambrosia: There''s more extra parts than just hands. I''ll show you
+          what I can do.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -999442772
+      parentId: 1009035192
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -357142276
+      parentId: -2094619626
+      sceneData:
+        entryText: 'As if I''d believe that. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -814166982
+      parentId: -357142276
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1636957226
+      parentId: 1834652202
+      sceneData:
+        entryText: 'If you''re that eager for me to finish the job '
+        text: 'Ambrosia: Hold on!'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -856212250
+      parentId: 1636957226
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: This brings me no pleasure to offer my services in such
+          a position.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -307669048
+      parentId: -856212250
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: But I can help you get to the core.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1842575574
+      parentId: -307669048
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: Just bring me to the surface when you''re done.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1312788520
+      parentId: 1842575574
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -413727400
+      parentId: 1312788520
+      sceneData:
+        entryText: 'If you''d just said that to begin with. '
+        text: 'Ambrosia: Ha...let us go forth.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1280382572
+      parentId: -413727400
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -1646507268
+      parentId: 1312788520
+      sceneData:
+        entryText: 'No chance. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -662924268
+      parentId: -1646507268
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 250305008
+      parentId: 486406222
+      sceneData:
+        entryText: It'll be the last you taste, you *Ghoul*
+        text: 'Ambrosia: Hearty, aren''t we. As much as I''d love to enable your
+          theatrics,'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1707661026
+      parentId: 250305008
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: I have a feeling you have the intention of following through,'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1363228690
+      parentId: -1707661026
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 629340236
+      parentId: -1363228690
+      sceneData:
+        entryText: 'Perceptive are we. '
+        text: 'Ambrosia: Only when someone interesting catches my eye.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 845154726
+      parentId: 629340236
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: Your strength is to be admired,'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -2000370458
+      parentId: 845154726
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: It''s been too long since I''ve met someone of your prowess,'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1237529714
+      parentId: -2000370458
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: You''re sure to give this place a good run.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 531182162
+      parentId: 1237529714
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -1904613808
+      parentId: 531182162
+      sceneData:
+        entryText: 'You don''t sound like someone who''s about to die. '
+        text: 'Ambrosia:  I''ve long accepted my death, I''d rather it be by the
+          hands of a valiant fighter,'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 615235188
+      parentId: -1904613808
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: Than the alternative of simply wasting away here.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -356376988
+      parentId: 615235188
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -93385134
+      parentId: -356376988
+      sceneData:
+        entryText: 'Wasting away? '
+        text: 'Ambrosia: This dungeon won''t be alive for much longer. I know you''re
+          strong,'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1333299992
+      parentId: -93385134
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: You must have fought plenty of Ghouls before,'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -249553348
+      parentId: -1333299992
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: So you must feel that we, down here...we''re not exactly
+          a challenge.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 9318480
+      parentId: -249553348
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 834193296
+      parentId: 9318480
+      sceneData:
+        entryText: 'Then why not leave? '
+        text: 'Ambrosia: ...It''s...not that simple...Perhaps, ah to hell with it!'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1917939940
+      parentId: 834193296
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: I want to live. Take me with you.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 375013948
+      parentId: 1917939940
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -935591082
+      parentId: 375013948
+      sceneData:
+        entryText: 'I like your spirit. Why not, come with me. '
+        text: 'Ambrosia: Excellent. We march on.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1363033338
+      parentId: -935591082
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -366573130
+      parentId: 375013948
+      sceneData:
+        entryText: 'No. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -205653290
+      parentId: -366573130
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1774240638
+      parentId: 9318480
+      sceneData:
+        entryText: 'Insult my strength, I''ll show you. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -1633167508
+      parentId: -356376988
+      sceneData:
+        entryText: 'Then I''ll grant that. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1379012344
+      parentId: -1633167508
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -1407051316
+      parentId: 531182162
+      sceneData:
+        entryText: 'Flattery won''t save you here. '
+        text: 'Ambrosia: That wasn''t the intention, but if it were to work...'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1210863822
+      parentId: -1407051316
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: I may be so bold to comment on your capabilities,'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1014676328
+      parentId: -1210863822
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: Perhaps the very real possibility of you making it out of
+          here alive.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 740709416
+      parentId: -1014676328
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1062582258
+      parentId: 740709416
+      sceneData:
+        entryText: 'What are you trying to say? '
+        text: 'Ambrosia: You''re impatient, clearly. I''ll get to it. I don''t wish
+          to die here.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1793973194
+      parentId: 1062582258
+      sceneData:
+        entryText: '.. '
+        text: 'Ambrosia: With my help, you''re sure to stand a chance. So I want
+          in.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: 1106404884
+      parentId: 1793973194
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -646790556
+      parentId: 1106404884
+      sceneData:
+        entryText: '...I''ll be watching you. '
+        text: 'Ambrosia: Keep your eyes on me all you like.'
+        CharacterAsset: {fileID: -5758878991093501949, guid: 815609dd2ed62fc4d810a014b764d21f, type: 3}
+        selectionID: 0
+    - id: -1699954478
+      parentId: -646790556
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -1606487988
+      parentId: 1106404884
+      sceneData:
+        entryText: 'Your wishes mean nothing to me. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -2082157998
+      parentId: -1606487988
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 1787580398
+      parentId: 740709416
+      sceneData:
+        entryText: 'I''m done playing around. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: -1806704276
+      parentId: 1787580398
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 507646260
+      parentId: -1363228690
+      sceneData:
+        entryText: 'Your feeling would be correct. '
+        text: Eat it
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0
+    - id: 309279938
+      parentId: 507646260
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -8691388363461335661, guid: b61ee17e22635314b817321764bb7621, type: 3}
+        selectionID: 0

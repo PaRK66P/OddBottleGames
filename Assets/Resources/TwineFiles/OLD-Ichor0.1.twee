@@ -1,0 +1,30 @@
+:: StoryTitle
+Ichor 0.1
+
+
+:: StoryData
+{
+  "ifid": "A9BF6D03-3D7D-4319-AD94-AE938B4BAE27",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Untitled Passage",
+  "zoom": 1
+}
+
+
+:: 1 {"position":"200,300","size":"100,100"}
+Ichor: It is...a feat that your recklessness has...brought, you so far. [[Next->2]]
+
+
+
+
+:: 2 {"position":"400,300","size":"100,100"}
+Ichor: But so far, only, shall you go. [[Begin]]
+
+
+:: Begin {"position":"600,300","size":"100,100"}
+
+
+
+:: Untitled Passage {"position":"0,300","size":"100,100"}
+Ichor: At last... [[Next->1]]

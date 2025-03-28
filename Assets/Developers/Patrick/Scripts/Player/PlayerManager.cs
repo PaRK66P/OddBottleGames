@@ -26,6 +26,8 @@ public class PlayerManager : MonoBehaviour
     private TimeManager _timeManager;
     [SerializeField]
     private PlayerAnimationHandler _playerAnimationHandler;
+    [SerializeField]
+    private PlayerAimReticle _playerAimReticle;
 
     private NPlayerInput playerInputManager;
     private PlayerMovement playerMovement;
@@ -82,10 +84,10 @@ public class PlayerManager : MonoBehaviour
 
         PlayerManager manager = this;
         //movement component
-        playerMovement.InitialiseComponent(ref manager, ref _playerAnimationHandler, ref playerData, ref debugData, ref UICanvas, ref _soundManager, ref healthBarScript, ref _evolveDashCollider);
+        playerMovement.InitialiseComponent(ref manager, ref playerShooting, ref _playerAnimationHandler, ref playerData, ref debugData, ref UICanvas, ref _soundManager, ref healthBarScript, ref _evolveDashCollider);
         //shooting component
         playerShooting.InitialiseComponent(ref playerData, ref debugData, ref playerMovement, ref _playerAnimationHandler, ref poolManager, ref _timeManager, ref _soundManager, ref PlayerCanvas);
-        playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting);
+        playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting, ref _playerAimReticle);
 
         canvGroup = gameObject.transform.Find("PlayerCanvas").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
 
@@ -103,6 +105,7 @@ public class PlayerManager : MonoBehaviour
         {
             if(Time.time - timeOfDamage >= playerData.controlLossTime) // Exceeded the time for player to not have control
             {
+                _playerAnimationHandler.EndDamageAnimation();
                 playerInputManager.EnableInput();
             }
             if(Time.time - timeOfDamage > invulnerableTime) // We've exceeded the time for being invulnerable
@@ -160,7 +163,7 @@ public class PlayerManager : MonoBehaviour
         playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);
         playerShooting.InterruptFiring();
         fadeOut = true;
-
+        _playerAnimationHandler.StartDamageAnimation();
         
         OnDamageTaken?.Invoke(this, EventArgs.Empty);
 

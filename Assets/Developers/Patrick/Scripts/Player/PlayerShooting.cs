@@ -91,12 +91,6 @@ public class PlayerShooting : MonoBehaviour
             {
                 takeShot = false;
 
-                if (_isUsingMovementToAim)
-                {
-                    aimInput = _playerMovement.GetMovementDirection();
-                    UpdateFacingDirection(aimInput);
-                }
-
                 if (chargedAmmo == 0)
                 {
                     Fire(aimInput, 1); // Regular shot
@@ -198,6 +192,15 @@ public class PlayerShooting : MonoBehaviour
     public void SetAimToMovement(InputAction.CallbackContext context)
     {
         _isUsingMovementToAim = true;
+    }
+
+    public void UpdateAimDirectionToMovement(Vector2 direction)
+    {
+        if (_isUsingMovementToAim)
+        {
+            aimInput = direction;
+            UpdateFacingDirection(direction);
+        }
     }
 
     public void PlayerFireInput(InputAction.CallbackContext context)

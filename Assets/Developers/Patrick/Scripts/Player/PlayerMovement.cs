@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class PlayerMovement : MonoBehaviour
 {
     private PlayerManager _playerManager;
+    private PlayerShooting _playerShooting;
     private PlayerAnimationHandler _playerAnimationHandler;
     private Rigidbody2D rb;
     private GameObject UICanvas;
@@ -49,9 +50,11 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();        
     }
 
-    public void InitialiseComponent(ref PlayerManager playerManager, ref PlayerAnimationHandler playerAnimationHandler, ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas, ref SoundManager soundManager, ref HealthBarScript dHealthbarScript, ref GameObject evolveDashCollider)
+    public void InitialiseComponent(ref PlayerManager playerManager, ref PlayerShooting playerShooting, ref PlayerAnimationHandler playerAnimationHandler, ref PlayerData playerData, ref PlayerDebugData debugData, ref GameObject dUICanvas, ref SoundManager soundManager, ref HealthBarScript dHealthbarScript, ref GameObject evolveDashCollider)
     {
         _playerManager = playerManager;
+        _playerShooting = playerShooting;
+
         _playerAnimationHandler = playerAnimationHandler;
 
         UICanvas = dUICanvas;
@@ -104,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
         {
             // Do we need this?
             movementDirection = movementInput.normalized;
+            _playerShooting.UpdateAimDirectionToMovement(movementDirection);
         }
 
         if (knockbackForce != Vector2.zero)
