@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class PlayerShooting : MonoBehaviour
 {
     // Objects
-    private GameObject _reloadUISlider;
     private ObjectPoolManager _objectPoolManager;
     private TimeManager _timeManager;
     private GameObject _bulletUIObject;
@@ -57,9 +56,6 @@ public class PlayerShooting : MonoBehaviour
 
         _bulletUIObject = Instantiate(_playerData.AmmoUIPrefab, canvasUI.transform);
         _bulletUIManager = _bulletUIObject.GetComponent<BulletUIManager>();
-
-        _reloadUISlider = Instantiate(_playerData.ReloadUISlider, canvasUI.transform);
-        _reloadUISlider.SetActive(false);
     }
 
     // Update is called once per frame

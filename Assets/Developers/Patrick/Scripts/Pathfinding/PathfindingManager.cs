@@ -49,10 +49,11 @@ public class PathfindingManager : MonoBehaviour
     private int _gridSizeY;
 
     // Debugging
-    [Header("DEBUG")]
     private List<Node> _debugPath; 
     private List<Node> _neighbourNodes;
     private Node _targetNode;
+
+    [Header("DEBUG")]
     [SerializeField]
     private bool _showGrid;
     [SerializeField]
