@@ -205,6 +205,7 @@ public class CompanionBoss : MonoBehaviour
         {
             if (!_isLeapChargeStarted)
             {
+                _isLeapChargeStarted = true;
                 _soundManager.PlayAmbDashReady(_heatUpStage);
             }
 

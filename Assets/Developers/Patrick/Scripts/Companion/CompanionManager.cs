@@ -86,7 +86,7 @@ public class CompanionManager : MonoBehaviour
         _bossScript.InitialiseComponent(ref _bossData, ref _rb, ref _animationsScript, ref _pathfindingManager, ref _playerObject, ref _poolManager, ref _soundManager);
 
         _friendScript = gameObject.AddComponent<CompanionFriend>();
-        _friendScript.InitialiseComponent(ref _friendData, ref _detectionScript, ref _animationsScript, ref _pathfindingManager, ref _rb, ref _playerObject, ref _soundManager);
+        _friendScript.InitialiseComponent(ref _friendData, ref _detectionScript, ref _animationsScript, ref _pathfindingManager, ref _soundManager, ref _rb, ref _playerObject);
 
         _healthbar = Instantiate(_bossData.Healthbar, dUICanvas.transform);
         _healthbar.GetComponent<UnityEngine.UI.Slider>().maxValue = _bossData.Health;

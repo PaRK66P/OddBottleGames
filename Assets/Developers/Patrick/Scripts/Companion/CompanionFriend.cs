@@ -19,6 +19,7 @@ public class CompanionFriend : MonoBehaviour
     private GameObject _playerTarget;
     private GameObject _currentTarget;
     private PathfindingManager _pathfindingManager;
+    private SoundManager _soundManager;
 
     // Components
     private Rigidbody2D _rb;
@@ -39,16 +40,18 @@ public class CompanionFriend : MonoBehaviour
     private float _leapEndTimer;
 
     private bool _isReadyToLeap;
+    private bool _isLeapChargeStarted;
 
     private Vector2 _leapStart;
     private Vector2 _leapEnd;
 
-    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimations animationScript, ref PathfindingManager pathfindingManager, ref Rigidbody2D rb, ref GameObject player)
+    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimations animationScript, ref PathfindingManager pathfindingManager, ref SoundManager soundManager, ref Rigidbody2D rb, ref GameObject player)
     {
         _dataObj = dataObj;
         _detectionScript = detectionScript;
         _animationScript = animationScript;
         _pathfindingManager = pathfindingManager;
+        _soundManager = soundManager;
         _rb = rb;
         _player = player;
     }
@@ -71,6 +74,7 @@ public class CompanionFriend : MonoBehaviour
 
     public void CompanionFixedUpdate()
     {
+        _soundManager.SetWalkingAmb(false);
         // Fixed update based on state
         switch (_state)
         {
@@ -85,6 +89,7 @@ public class CompanionFriend : MonoBehaviour
 
                 Vector2 travelDirection = CompanionPathfindingToPlayer();
 
+                _soundManager.SetWalkingAmb(true);
                 _rb.MovePosition(new Vector2(_rb.position.x, _rb.position.y) + travelDirection * travelDistance);
 
                 break;
@@ -106,6 +111,7 @@ public class CompanionFriend : MonoBehaviour
                         _lastPathDirection = pathfindingDirection;
                     }
 
+                    _soundManager.SetWalkingAmb(true);
                     // Move closer to the target
                     _rb.MovePosition(new Vector2(transform.position.x, transform.position.y) + pathfindingDirection * _dataObj.MoveSpeed * Time.fixedDeltaTime);
 
@@ -134,6 +140,7 @@ public class CompanionFriend : MonoBehaviour
                         _leapTimer = Time.time;
 
                         _isReadyToLeap = true;
+                        _isLeapChargeStarted = false;
 
                         _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapMove);
                     }
@@ -143,6 +150,12 @@ public class CompanionFriend : MonoBehaviour
                 // Charge up
                 if (Time.time - _leapTimer < _dataObj.LeapChargeTime)
                 {
+                    if (!_isLeapChargeStarted)
+                    {
+                        _isLeapChargeStarted = true;
+                        _soundManager.PlayAmbDashReady(2);
+                    }
+
                     _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapCharge);
                     _leapMoveTimer = Time.time;
                     return;
@@ -156,6 +169,8 @@ public class CompanionFriend : MonoBehaviour
 
                 if (travelPosition >= 1) // Once the leap is finished
                 {
+                    _soundManager.PlayAmbDashAttack(2);
+
                     _currentTarget = null;
                     _isLeapFinished = true;
                 }
