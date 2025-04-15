@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +6,16 @@ public class PathfindingComponent : MonoBehaviour
     private PathfindingManager _manager;
     private List<Node> _path;
 
+    // Sets up the component
     public void Initialise(ref PathfindingManager manager)
     {
         _manager = manager;
     }
 
+    // Returns the path from the start node to the target node
+    /*
+     * Uses A* pathfinding algorithm
+     */
     public List<Node> GetPath(Node startNode, Node targetNode)
     {
         _path = new List<Node>();
@@ -36,15 +40,17 @@ public class PathfindingComponent : MonoBehaviour
                 }
             }
 
+            // Update sets
             openSet.Remove(currentNode);
             closedSet.Add(currentNode);
 
-            if (currentNode == targetNode)
+            if (currentNode == targetNode) // Found path
             {
                 RetracePath(startNode, targetNode);
                 return _path;
             }
 
+            // Add valid neighbours to the open set
             foreach (Node neighbour in _manager.GetNeighbourNodes(currentNode))
             {
                 if (neighbour.isBlocked || closedSet.Contains(neighbour))
@@ -55,6 +61,10 @@ public class PathfindingComponent : MonoBehaviour
                 int newCostToNeighbour = currentNode.gCost + GetDistance(neighbour, targetNode);
                 if (newCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                 {
+                    // Updates the grid nodes with these values
+                    /*
+                     * Only one path is calculated at a time so this should be fine and shouldn't disrupt other paths
+                     */
                     neighbour.gCost = newCostToNeighbour;
                     neighbour.hCost = GetDistance(neighbour, targetNode);
                     neighbour.parentNode = currentNode;
@@ -67,9 +77,15 @@ public class PathfindingComponent : MonoBehaviour
             }
         }
 
+        // All nodes exhausted, no path was found
         return null;
     }
 
+    // Updates the _path to trace from the start node to the end node
+    /*
+     * The nodes themselves contain their parent node for the current path
+     * Using this the path is retraced and reversed to be from the start to the end
+     */
     private void RetracePath(Node startNode, Node endNode)
     {
         List<Node> path = new List<Node>();
@@ -85,6 +101,7 @@ public class PathfindingComponent : MonoBehaviour
         _path = path;
     }
 
+    // Returns the distance between the two nodes (unsigned)
     private int GetDistance(Node startNode, Node endNode)
     {
         int distanceX = Mathf.Abs(startNode.gridX - endNode.gridX);

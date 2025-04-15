@@ -1,30 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CompanionFriend : MonoBehaviour
 {
     enum CompanionStates
     {
-        IDLE = 0,
-        ATTACKING = 1,
-        DELAY = 2,
-        STATIC = 3
+        Idle,
+        Attacking,
+        Delay,
+        Static
     }
 
+    // Data
     private CompanionFriendData _dataObj;
-    private CompanionDetection _detectionScript;
-    private CompanionAnimations _animationScript;
-    private PathfindingManager _pathfindingManager;
-    private Rigidbody2D _rb;
-    private GameObject _player;
 
+    // Objects
+    private GameObject _player;
     private GameObject _nearestTarget;
     private GameObject _playerTarget;
     private GameObject _currentTarget;
+    private PathfindingManager _pathfindingManager;
 
+    // Components
+    private Rigidbody2D _rb;
+    private CompanionDetection _detectionScript;
+    private CompanionAnimations _animationScript;
+
+    // Values
     private CompanionStates _state;
+    private Node _lastPlayerNode;
+    private Node _lastTargetNode;
+    private Node _lastNode;
+    private Vector2 _lastPathDirection;
 
+    // Leap attack
     private float _leapTimer;
     private bool _isLeapFinished;
     private float _leapMoveTimer;
@@ -34,13 +42,6 @@ public class CompanionFriend : MonoBehaviour
 
     private Vector2 _leapStart;
     private Vector2 _leapEnd;
-
-    private bool _isDashRefreshSpawned;
-
-    private Node _lastPlayerNode;
-    private Node _lastTargetNode;
-    private Node _lastNode;
-    private Vector2 _lastPathDirection;
 
     public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimations animationScript, ref PathfindingManager pathfindingManager, ref Rigidbody2D rb, ref GameObject player)
     {
@@ -52,14 +53,16 @@ public class CompanionFriend : MonoBehaviour
         _player = player;
     }
 
+    #region Update
     public void CompanionUpdate()
     {
+        // Update based on state
         switch (_state)
         {
-            case CompanionStates.IDLE:
+            case CompanionStates.Idle:
                 IdleAction();
                 break;
-            case CompanionStates.ATTACKING:
+            case CompanionStates.Attacking:
                 Leap();
                 break;
         }
@@ -67,13 +70,14 @@ public class CompanionFriend : MonoBehaviour
 
     public void CompanionFixedUpdate()
     {
+        // Fixed update based on state
         switch (_state)
         {
-            case CompanionStates.IDLE:
-                float travelDistance = _dataObj.idleSpeed * Time.fixedDeltaTime;
+            case CompanionStates.Idle: // Move towards the player
+                float travelDistance = _dataObj.IdleSpeed * Time.fixedDeltaTime;
                 Vector2 playerDistance = new Vector2(_player.transform.position.x, _player.transform.position.y) - _rb.position;
 
-                if(playerDistance.sqrMagnitude <= _dataObj.idleDistance * _dataObj.idleDistance)
+                if(playerDistance.sqrMagnitude <= _dataObj.IdleDistance * _dataObj.IdleDistance) // If the player is close enough, no need to move
                 {
                     break;
                 }
@@ -83,8 +87,8 @@ public class CompanionFriend : MonoBehaviour
                 _rb.MovePosition(new Vector2(_rb.position.x, _rb.position.y) + travelDirection * travelDistance);
 
                 break;
-            case CompanionStates.ATTACKING:
-
+            case CompanionStates.Attacking: // Attack is the leap attack
+                // Not ready when not in range to leap yet
                 if (!_isReadyToLeap)
                 {
                     Node targetNode = _pathfindingManager.NodeFromWorldPosition(_currentTarget.transform.position);
@@ -92,7 +96,7 @@ public class CompanionFriend : MonoBehaviour
 
                     Vector2 pathfindingDirection = _lastPathDirection;
 
-                    if (_lastTargetNode != targetNode || _lastNode != currentNode)
+                    if (_lastTargetNode != targetNode || _lastNode != currentNode) // Only need to pathfind if positions change
                     {
                         pathfindingDirection = _pathfindingManager.GetPathDirection(transform.position, _currentTarget.transform.position);
 
@@ -101,9 +105,11 @@ public class CompanionFriend : MonoBehaviour
                         _lastPathDirection = pathfindingDirection;
                     }
 
-                    _rb.MovePosition(new Vector2(transform.position.x, transform.position.y) + pathfindingDirection * _dataObj.moveSpeed * Time.fixedDeltaTime);
+                    // Move closer to the target
+                    _rb.MovePosition(new Vector2(transform.position.x, transform.position.y) + pathfindingDirection * _dataObj.MoveSpeed * Time.fixedDeltaTime);
 
-                    if (WithinLeapRange(_dataObj.leapDistance, _currentTarget))
+                    // Check if ready
+                    if (WithinLeapRange(_dataObj.LeapDistance, _currentTarget))
                     {
                         Vector2 targetDirection = _currentTarget.transform.position - transform.position;
                         Vector2 leapDirection = targetDirection.normalized;
@@ -112,9 +118,10 @@ public class CompanionFriend : MonoBehaviour
                             leapDirection = (_leapEnd - _leapStart).normalized;
                         }
                         _leapStart = transform.position;
-                        _leapEnd = _leapStart + leapDirection * _dataObj.leapDistance;
+                        _leapEnd = _leapStart + leapDirection * _dataObj.LeapDistance;
 
-                        RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, _dataObj.leapDistance, _dataObj.environmentLayer);
+                        // Ensures the end is not on the opposite side of a wall
+                        RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, _dataObj.LeapDistance, _dataObj.EnvironmentLayer);
                         if (wallCheck)
                         {
                             _leapEnd = wallCheck.point;
@@ -127,23 +134,26 @@ public class CompanionFriend : MonoBehaviour
 
                         _isReadyToLeap = true;
 
-                        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_MOVING);
+                        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapMove);
                     }
                     return;
                 }
 
-                if (Time.time - _leapTimer < _dataObj.leapChargeTime)
+                // Charge up
+                if (Time.time - _leapTimer < _dataObj.LeapChargeTime)
                 {
-                    _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_CHARGE);
+                    _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapCharge);
                     _leapMoveTimer = Time.time;
                     return;
                 }
 
-                float travelPosition = (Time.time - _leapMoveTimer) / _dataObj.leapTravelTime;
+                // Movement
+
+                float travelPosition = (Time.time - _leapMoveTimer) / _dataObj.LeapTravelTime;
 
                 _rb.MovePosition(Vector2.Lerp(_leapStart, _leapEnd, travelPosition));
 
-                if (travelPosition >= 1)
+                if (travelPosition >= 1) // Once the leap is finished
                 {
                     _currentTarget = null;
                     _isLeapFinished = true;
@@ -153,21 +163,27 @@ public class CompanionFriend : MonoBehaviour
 
         }
     }
+    #endregion
+
+    #region Helper Methods
+    // Returns if the target is within the leap distance of the companion (takes environment into account)
     private bool WithinLeapRange(float leapTravelDistance, GameObject target)
     {
         // Leaping
         Vector3 targetDirection = target.transform.position - transform.position;
         Vector3 leapDirection = targetDirection.normalized;
 
-        float leapDistance = leapTravelDistance * _dataObj.leapTargetTravelPercentage;
-        leapDistance *= leapDistance;
+        float leapDistance = leapTravelDistance * _dataObj.LeapTargetTravelPercentage;
+        leapDistance *= leapDistance; // Cheaper to compare square magnitudes than square roots of magnitudes
 
+        // Check if the target is within the distance
         if ((target.transform.position - transform.position).sqrMagnitude > leapDistance)
         {
             return false;
         }
 
-        RaycastHit2D wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, leapTravelDistance, _dataObj.environmentLayer); // Update layer mask variable
+        // Check if the target is on the other side of a wall
+        RaycastHit2D wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, leapTravelDistance, _dataObj.EnvironmentLayer); // Update layer mask variable
         if (wallCheck)
         {
             float wallDistance = (wallCheck.point - new Vector2(transform.position.x, transform.position.y)).sqrMagnitude;
@@ -177,14 +193,17 @@ public class CompanionFriend : MonoBehaviour
                 return false;
             }
         }
+
+        // Target is within the distance and not behind a wall
         return true;
     }
 
+    // Returns the direction of the path towards the player
     private Vector2 CompanionPathfindingToPlayer()
     {
         Node playerNode = _pathfindingManager.NodeFromWorldPosition(_player.transform.position);
         Node currentNode = _pathfindingManager.NodeFromWorldPosition(transform.position);
-        if (_lastPlayerNode == playerNode && _lastNode == currentNode)
+        if (_lastPlayerNode == playerNode && _lastNode == currentNode) // Only need to pathfind if positions change
         {
             return _lastPathDirection;
         }
@@ -196,11 +215,13 @@ public class CompanionFriend : MonoBehaviour
         return direction;
     }
 
+    // Sets the enemy the player is targetting
     public void SetPlayerTarget(GameObject target)
     {
         _playerTarget = target;
     }
 
+    // Removes the enemy the player's targetting
     public void RemovePlayerTarget(GameObject target)
     {
         if(_playerTarget == target)
@@ -208,9 +229,13 @@ public class CompanionFriend : MonoBehaviour
             _playerTarget = null;
         }
     }
+    #endregion
 
+    #region Actions
+    // Will move towards the player
     public void IdleAction()
     {
+        // Checks if there is a target to go after
         _nearestTarget = _detectionScript.GetTarget();
 
         if(_nearestTarget != null)
@@ -224,49 +249,49 @@ public class CompanionFriend : MonoBehaviour
 
         if (_currentTarget != null) // Found target to attack
         {
-            _state = CompanionStates.ATTACKING;
+            _state = CompanionStates.Attacking;
             _leapTimer = Time.time;
             _isReadyToLeap = false;
             _isLeapFinished = false;
-            _isDashRefreshSpawned = false;
 
             // To be updated later
             if (_currentTarget.transform.position.x - transform.position.x < 0)
             {
-                _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.LEFT);
+                _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.Left);
             }
             else if (_currentTarget.transform.position.x - transform.position.x > 0)
             {
-                _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.RIGHT);
+                _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.Right);
             }
 
             return;
         }
 
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.IDLE);
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.Idle);
     }
 
+    // Companion will jump towards the target, damaging on collision
+    /*
+     * Because the leap attack is mainly movement
+     * Most of the attack is handled within the fixed update loop
+     */
     public void Leap()
     {
+        // Wait for leap to finish in fixed update
         if (!_isLeapFinished)
         {
             return;
         }
 
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_END);
-
-        if (!_isDashRefreshSpawned)
-        {
-            _leapEndTimer = Time.time;
-            _isDashRefreshSpawned = true;
-        }
-
-        if(Time.time - _leapEndTimer < _dataObj.leapEndTime)
+        // Delay for the end of the attack
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapEnd);
+        if(Time.time - _leapEndTimer < _dataObj.LeapEndTime)
         {
             return;
         }
 
-        _state = CompanionStates.IDLE;
-
+        // End attack
+        _state = CompanionStates.Idle;
     }
+    #endregion
 }

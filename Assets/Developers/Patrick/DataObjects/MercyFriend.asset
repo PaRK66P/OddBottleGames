@@ -12,26 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c648b908d437d11499f1a3f8e88b1938, type: 3}
   m_Name: MercyFriend
   m_EditorClassIdentifier: 
-  environmentLayer:
+  EnvironmentLayer:
     serializedVersion: 2
     m_Bits: 64
-  enemyLayer:
+  EnemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  playerAttacksLayer:
+  PlayerAttacksLayer:
     serializedVersion: 2
     m_Bits: 256
-  detectionRadius: 12
-  idleSpeed: 12
-  idleDistance: 3.06
-  moveSpeed: 8
-  leapTravelTime: 0.2
-  leapChargeTime: 0.8
-  leapDistance: 12
-  leapTargetTravelPercentage: 0.8
-  leapDamage: 3
-  leapEndTime: 0.5
-  rechargeZoneRadius: 5
-  drawDetectionRange: 0
-  drawRechargeZone: 0
-  drawIdleDistance: 0
+  DetectionRadius: 12
+  IdleSpeed: 12
+  IdleDistance: 3.06
+  MoveSpeed: 8
+  LeapTravelTime: 0.2
+  LeapChargeTime: 0.8
+  LeapDistance: 12
+  LeapTargetTravelPercentage: 0.8
+  LeapDamage: 3
+  LeapEndTime: 0.5
+  DrawDetectionRange: 0
+  DrawIdleDistance: 0

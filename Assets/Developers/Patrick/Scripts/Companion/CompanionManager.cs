@@ -1,57 +1,59 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class CompanionManager : MonoBehaviour
 {
     enum CompanionStates
     {
-        NONE = 0,
-        ENEMY = 1,
-        FRIEND = 2,
-        IDLE_TIMED = 3,
+        None,
+        Enemy,
+        Friend,
+        Idle
     }
 
-    [Header("Testing")]
+    [Header("NECESSARY")]
+    // Data
     [SerializeField]
+    private CompanionBossData _bossData;
+    [SerializeField]
+    private CompanionFriendData _friendData;
+    [SerializeField]
+    private SpriteRenderer _companionImage; // TO BE REMOVED
+
+    // Objects
     private GameObject _playerObject;
-    [SerializeField]
+    private GameObject _healthbar;
+
+    // Managers
     private ObjectPoolManager _poolManager;
-    [SerializeField]
     private PathfindingManager _pathfindingManager;
+    private VisualNovelScript _visualNovelManager;
 
-    [Header("Prefab Necessary")]
-    [SerializeField]
-    private CompanionBossData bossData;
-    [SerializeField]
-    private CompanionFriendData friendData;
-    [SerializeField]
-    private SpriteRenderer _companionImage;
-
-    private Rigidbody2D rb;
-    private CompanionCollisionDamage collisionDamageScript;
-    private CompanionDetection detectionScript;
-
+    // Components
+    private Rigidbody2D _rb;
+    private CompanionCollisionDamage _collisionDamageScript;
+    private CompanionDetection _detectionScript;
     private CompanionManager _managerRef;
-    private CompanionBoss bossScript;
-    private CompanionFriend friendScript;
-    private CompanionAnimations animationsScript;
+    private CompanionBoss _bossScript;
+    private CompanionFriend _friendScript;
+    private CompanionAnimations _animationsScript;
 
+    // Values
     private CompanionStates _currentState;
     private CompanionStates _stateToChangeTo;
     private float _health;
-    private GameObject healthbar;
+    private bool _isIdleTimedCoroutineRunning = false;
+    private bool _hasPlayedNovel = false;
 
-    private bool isIdleTimedCoroutineRunning = false;
+    [Header("GIZMOS")]
+    // Gizmos
+    [SerializeField]
+    private GameObject gizmosPlayerReference;
 
-    private VisualNovelScript visualNovelManager;
-    private bool hasPlayedNovel = false;
-
-    // No protection for uninitialised Companion
-
+    // Sets up the object
+    /*
+     * MUST BE CALLED BEFORE THIS OBJECT'S FIRST UPDATE FRAME
+     */
     public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref PathfindingManager pathfindingManager, ref Canvas dUICanvas)
     {
         _managerRef = this;
@@ -60,122 +62,106 @@ public class CompanionManager : MonoBehaviour
         _poolManager = poolManager;
         _pathfindingManager = pathfindingManager;
 
-        visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
+        _visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
 
-        if (rb == null)
-        {
-            rb = GetComponent<Rigidbody2D>();
-        }
-        if (collisionDamageScript == null)
-        {
-            collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
-            collisionDamageScript.InitialiseComponent(ref bossData, ref friendData);
-        }
-        if (detectionScript == null)
-        {
-            detectionScript = GetComponentInChildren<CompanionDetection>();
-            detectionScript.InitialiseComponent(ref friendData);
+        _rb = GetComponent<Rigidbody2D>();
 
-            detectionScript.GetComponent<CircleCollider2D>().radius = friendData.detectionRadius;
-        }
-        if (animationsScript == null)
-        {
-            animationsScript = gameObject.AddComponent<CompanionAnimations>();
-            animationsScript.InitialiseComponent(ref bossData, ref friendData, ref _companionImage);
-        }
-        if (bossScript == null)
-        {
-            bossScript = gameObject.AddComponent<CompanionBoss>();
-            bossScript.InitialiseComponent(ref bossData, ref rb, ref animationsScript, ref _pathfindingManager, ref _playerObject, ref _poolManager);
-        }
-        if (friendScript == null)
-        {
-            friendScript = gameObject.AddComponent<CompanionFriend>();
-            friendScript.InitialiseComponent(ref friendData, ref detectionScript, ref animationsScript, ref _pathfindingManager, ref rb, ref _playerObject);
-        }
+        _collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
+        _collisionDamageScript.InitialiseComponent(ref _bossData, ref _friendData);
 
-        healthbar = Instantiate(bossData.healthbar, dUICanvas.transform);
+        _detectionScript = GetComponentInChildren<CompanionDetection>();
+        _detectionScript.InitialiseComponent(ref _friendData);
+        _detectionScript.GetComponent<CircleCollider2D>().radius = _friendData.DetectionRadius;
 
-        healthbar.GetComponent<UnityEngine.UI.Slider>().maxValue = bossData.health;
-        healthbar.GetComponent<UnityEngine.UI.Slider>().value = bossData.health;
+        _animationsScript = gameObject.AddComponent<CompanionAnimations>();
+        _animationsScript.InitialiseComponent(ref _bossData, ref _companionImage);
 
+        _bossScript = gameObject.AddComponent<CompanionBoss>();
+        _bossScript.InitialiseComponent(ref _bossData, ref _rb, ref _animationsScript, ref _pathfindingManager, ref _playerObject, ref _poolManager);
+
+        _friendScript = gameObject.AddComponent<CompanionFriend>();
+        _friendScript.InitialiseComponent(ref _friendData, ref _detectionScript, ref _animationsScript, ref _pathfindingManager, ref _rb, ref _playerObject);
+
+        _healthbar = Instantiate(_bossData.Healthbar, dUICanvas.transform);
+        _healthbar.GetComponent<UnityEngine.UI.Slider>().maxValue = _bossData.Health;
+        _healthbar.GetComponent<UnityEngine.UI.Slider>().value = _bossData.Health;
+
+        // Only created as an enemy so change to that state
         ChangeToEnemy();
-        ChangeToIdleForTime(1.0f);
-        
+        ChangeToIdleForTime(1.0f); // So they don't immediately charge the player
     }
 
+    #region Update
     // Update is called once per frame
     void Update()
     {
-        
+        // Runs the update function for the current state
         switch (_currentState)
         {
-            case CompanionStates.NONE:
+            case CompanionStates.None:
                 break;
-            case CompanionStates.ENEMY:
-                bossScript.CompanionUpdate();
+            case CompanionStates.Enemy:
+                _bossScript.CompanionUpdate();
                 break;
-            case CompanionStates.FRIEND:
-                friendScript.CompanionUpdate();
+            case CompanionStates.Friend:
+                _friendScript.CompanionUpdate();
                 break;
         }
     }
-
 
     private void FixedUpdate()
     {
+        // Runs the fixed update function for the current state
         switch (_currentState)
         {
-            case CompanionStates.NONE:
+            case CompanionStates.None:
                 break;
-            case CompanionStates.ENEMY:
-                bossScript.CompanionFixedUpdate();
+            case CompanionStates.Enemy:
+                _bossScript.CompanionFixedUpdate();
                 break;
-            case CompanionStates.FRIEND:
-                friendScript.CompanionFixedUpdate();
+            case CompanionStates.Friend:
+                _friendScript.CompanionFixedUpdate();
                 break;
         }
     }
+    #endregion
 
+    #region Damage
     public void TakeDamage(float damage)
     {
-        if(_currentState == CompanionStates.NONE) { return; }
+        if(_currentState != CompanionStates.Enemy) { return; } // Can only take damage in enemy state
 
         _health -= damage;
-        if(_health <= 0 && !hasPlayedNovel)
+        if(_health <= 0 && !_hasPlayedNovel)
         {
             CompanionDeath();
             return;
         }
 
-        switch (bossScript.GetHeatUpStage())
+        // Check for heat up thresholds
+        switch (_bossScript.GetHeatUpStage())
         {
             case 1:
-                if(_health < bossData.stageTwoHealthThreshold * bossData.health)
+                if(_health < _bossData.StageTwoHealthThreshold * _bossData.Health)
                 {
-                    bossScript.HeatUp();
+                    _bossScript.HeatUp();
                 }
                 break;
             case 2:
-                if(_health < bossData.stageThreeHealthThreshold * bossData.health)
+                if(_health < _bossData.StageThreeHealthThreshold * _bossData.Health)
                 {
-                    bossScript.HeatUp();
+                    _bossScript.HeatUp();
                 }
                 break;
             case 3:
                 break;
             default:
-                Debug.LogWarning("Heat up stage not accounted for: " + bossScript.GetHeatUpStage());
+                Debug.LogWarning("Heat up stage not accounted for: " + _bossScript.GetHeatUpStage());
                 break;
         }
 
-        healthbar.GetComponent<UnityEngine.UI.Slider>().value = _health;
+        _healthbar.GetComponent<UnityEngine.UI.Slider>().value = _health;
         DamageVisual();
-    }
-
-    public bool IsFriendly()
-    {
-        return _currentState == CompanionStates.FRIEND;
     }
 
     private void CompanionDeath()
@@ -187,7 +173,7 @@ public class CompanionManager : MonoBehaviour
 
     private void RemoveHealthBar()
     {
-        healthbar.SetActive(false);
+        _healthbar.SetActive(false);
     }
 
     private void DamageVisual()
@@ -197,120 +183,15 @@ public class CompanionManager : MonoBehaviour
 
     private void DefeatVisualNovel()
     {
-        // To be removed
-        
-        if (!hasPlayedNovel)
+        if (!_hasPlayedNovel)
         {
-            hasPlayedNovel = true;
+            _hasPlayedNovel = true;
 
 
-            visualNovelManager.StartNovelSceneByName("Ambrosia1");
-            visualNovelManager.onNovelFinish.AddListener(GetVisualNovelResult);
+            _visualNovelManager.StartNovelSceneByName("Ambrosia1");
+            _visualNovelManager.onNovelFinish.AddListener(GetVisualNovelResult);
         }
     }
-
-    public void ChangeToNone()
-    {
-        if (WaitForIdle(CompanionStates.NONE))
-        {
-            return;
-        }
-
-        _currentState = CompanionStates.NONE;
-
-        collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.NONE);
-
-        detectionScript.gameObject.SetActive(false);
-    }
-
-    public void ChangeToEnemy()
-    {
-        if (WaitForIdle(CompanionStates.ENEMY))
-        {
-            return;
-        }
-
-        //_playerObject.GetComponent<PlayerManager>().EvolveDash(true);
-        _health = bossData.health;
-        bossScript.SetupEnemy();
-        _currentState = CompanionStates.ENEMY;
-
-        CompanionManager companionManager = this;
-        _playerObject.GetComponent<PlayerManager>().SetAllyCompanion(false, ref companionManager);
-
-        collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.PLAYER);
-
-        detectionScript.gameObject.SetActive(false);
-    }
-
-    public void ChangeToFriendly()
-    {
-        if (WaitForIdle(CompanionStates.FRIEND))
-        {
-            return;
-        }
-
-        //_playerObject.GetComponent<PlayerManager>().EvolveDash(false);
-        _currentState = CompanionStates.FRIEND;
-        CompanionManager companionManager = this;
-        _playerObject.GetComponent<PlayerManager>().SetAllyCompanion(true, ref companionManager);
-
-        collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.ENEMY);
-
-        detectionScript.gameObject.SetActive(true);
-
-        // Quick fix as will never change from friendly->enemy
-        rb.excludeLayers = friendData.playerAttacksLayer;
-    }
-
-    private bool WaitForIdle(CompanionStates newState)
-    {
-        if(_currentState != CompanionStates.IDLE_TIMED)
-        {
-            return false;
-        }
-
-        _stateToChangeTo = newState;
-
-        return true;
-    }
-
-    public void ChangeToIdleForTime(float timeForIdle)
-    {
-        if(isIdleTimedCoroutineRunning)
-        {
-            StopCoroutine("SetIdle");
-        }
-
-        _stateToChangeTo = _currentState;
-        _currentState = CompanionStates.IDLE_TIMED;
-
-        StartCoroutine("SetIdle", timeForIdle);
-    }
-
-    private IEnumerator SetIdle(float idleTime)
-    {
-        isIdleTimedCoroutineRunning = true;
-
-        yield return new WaitForSeconds(idleTime);
-
-        _currentState = _stateToChangeTo;
-        switch (_stateToChangeTo)
-        {
-            case CompanionStates.NONE:
-                ChangeToNone();
-                break;
-            case CompanionStates.ENEMY:
-                ChangeToEnemy();
-                break;
-            case CompanionStates.FRIEND:
-                ChangeToFriendly();
-                break;
-        }
-
-        isIdleTimedCoroutineRunning = false;
-    }
-
     IEnumerator DamageColor()
     {
         _companionImage.color = UnityEngine.Color.red;
@@ -322,6 +203,13 @@ public class CompanionManager : MonoBehaviour
     {
         // maake sure to wait for stuff to finish in this function
         // or the visual novel will start playing over the top of it
+
+        // TO DO
+        /*
+         * Designate an actual death effect as this is a placeholder
+         * Move any time scale changes to the time manager (might be redundant if the effect changes)
+         */
+
         float targetTime = 0.5f;
         while (Time.timeScale > targetTime)
         {
@@ -332,20 +220,138 @@ public class CompanionManager : MonoBehaviour
             }
             yield return null;
         }
-        
+
 
         DefeatVisualNovel();
         //yield return null;
     }
+    #endregion
 
-    public void SetPlayerTarget(GameObject target)
+    #region State Management
+    public void ChangeToNone()
     {
-        friendScript.SetPlayerTarget(target);
+        if (WaitForIdle(CompanionStates.None))
+        {
+            return;
+        }
+
+        _currentState = CompanionStates.None;
+
+        _collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.None);
+
+        _detectionScript.gameObject.SetActive(false);
     }
 
+    public void ChangeToEnemy()
+    {
+        if (WaitForIdle(CompanionStates.Enemy))
+        {
+            return;
+        }
+
+        _health = _bossData.Health;
+        _bossScript.SetupEnemy();
+        _currentState = CompanionStates.Enemy;
+
+        CompanionManager companionManager = this;
+        _playerObject.GetComponent<PlayerManager>().SetAllyCompanion(false, ref companionManager);
+
+        _collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.Player);
+
+        _detectionScript.gameObject.SetActive(false);
+    }
+
+    public void ChangeToFriendly()
+    {
+        if (WaitForIdle(CompanionStates.Friend))
+        {
+            return;
+        }
+
+        _currentState = CompanionStates.Friend;
+        CompanionManager companionManager = this;
+        _playerObject.GetComponent<PlayerManager>().SetAllyCompanion(true, ref companionManager);
+
+        _collisionDamageScript.ChangeState(CompanionCollisionDamage.CollisionDamageStates.Enemy);
+
+        _detectionScript.gameObject.SetActive(true);
+
+        // Quick fix as will never change from friendly->enemy
+        _rb.excludeLayers = _friendData.PlayerAttacksLayer;
+    }
+
+    // Updates the Idle state for when it's over to change to the new state
+    private bool WaitForIdle(CompanionStates newState)
+    {
+        if(_currentState != CompanionStates.Idle)
+        {
+            return false;
+        }
+
+        _stateToChangeTo = newState;
+
+        return true;
+    }
+
+    public void ChangeToIdleForTime(float timeForIdle)
+    {
+        // TO DO
+        /*
+         * Check if the idle for time is shorter than the remaining idle time
+         * If so then don't do anything (similar to time manager)
+         */
+
+        if(_isIdleTimedCoroutineRunning) // Need to idle for a different amount
+        {
+            StopCoroutine("SetIdle");
+        }
+
+        _stateToChangeTo = _currentState;
+        _currentState = CompanionStates.Idle;
+
+        StartCoroutine("SetIdle", timeForIdle);
+    }
+
+    private IEnumerator SetIdle(float idleTime)
+    {
+        _isIdleTimedCoroutineRunning = true;
+
+        yield return new WaitForSeconds(idleTime);
+
+        _currentState = _stateToChangeTo;
+        switch (_stateToChangeTo)
+        {
+            case CompanionStates.None:
+                ChangeToNone();
+                break;
+            case CompanionStates.Enemy:
+                ChangeToEnemy();
+                break;
+            case CompanionStates.Friend:
+                ChangeToFriendly();
+                break;
+        }
+
+        _isIdleTimedCoroutineRunning = false;
+    }
+    public bool IsFriendly()
+    {
+        return _currentState == CompanionStates.Friend;
+    }
+
+    #endregion
+
+    #region Friendly Companion Communication
+    // Sets the target that the player is currently fighting for the companion to also target them
+    public void SetPlayerTarget(GameObject target)
+    {
+        _friendScript.SetPlayerTarget(target);
+    }
+
+    // Removes the target the player is currently fighting
     public void RemovePlayerTarget(GameObject target)
     {
-        friendScript.RemovePlayerTarget(target);
+        _friendScript.RemovePlayerTarget(target);
     }
 
     // Just a direct move, be careful when calling
@@ -353,10 +359,11 @@ public class CompanionManager : MonoBehaviour
     {
         transform.position = newPosition;
     }
+    #endregion
 
     private void GetVisualNovelResult()
     {
-        switch (visualNovelManager.GetLastSelectionID())
+        switch (_visualNovelManager.GetLastSelectionID())
         {
             case 0:
             case 1:
@@ -397,141 +404,256 @@ public class CompanionManager : MonoBehaviour
             default:
                 _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
                 gameObject.GetComponent<enemyScr>().releaseEnemy();
-                Debug.LogError("Visual novel selection of " + visualNovelManager.GetLastSelectionID() + " not supported. make sure to update selection code in miniboss as well as the novel that plays");
+                Debug.LogError("Visual novel selection of " + _visualNovelManager.GetLastSelectionID() + " not supported. make sure to update selection code in miniboss as well as the novel that plays");
                 break;
         }
-        visualNovelManager.onNovelFinish.RemoveListener(GetVisualNovelResult);
+        _visualNovelManager.onNovelFinish.RemoveListener(GetVisualNovelResult);
     }
 
     #region Gizmos
     private void OnDrawGizmos()
     {
-        if(_playerObject == null)
+        if (_bossData.DrawRange)
+        {
+            Gizmos.color = UnityEngine.Color.cyan;
+            Gizmos.DrawWireSphere(transform.position, _bossData.CloseRangeDistance);
+        }
+
+        if (_friendData.DrawDetectionRange)
+        {
+            Gizmos.color = new UnityEngine.Color(1.0f, 0.753f, 0.796f);
+            Gizmos.DrawWireSphere(transform.position, _friendData.DetectionRadius);
+        }
+
+        // Draw Companion
+        if (_bossData.DrawLeap || _bossData.DrawFeralLeap)
+        {
+            GizmoDrawCompanion(transform.position);
+        }
+
+        // Gizmos that require the player
+        if (gizmosPlayerReference == null)
         {
             return;
         }
 
         RaycastHit2D wallCheck;
 
-        if (bossData.drawRange)
+        if (_bossData.DrawLeap)
         {
-            Gizmos.color = UnityEngine.Color.cyan;
-            Gizmos.DrawWireSphere(transform.position, bossData.closeRangeDistance);
+            // Leaping
+            float leapTravelDistance = 0.0f;
+
+            switch (_bossData.HeatUpStage)
+            {
+                case 1:
+                    leapTravelDistance = _bossData.LeapTravelDistanceStage1;
+                    break;
+                case 2:
+                    leapTravelDistance = _bossData.LeapTravelDistanceStage2;
+                    break;
+                case 3:
+                    leapTravelDistance = _bossData.LeapTravelDistanceStage3;
+                    break;
+            }
+
+            Vector3 playerDirection = gizmosPlayerReference.transform.position - transform.position;
+            Vector3 leapDirection = playerDirection.normalized;
+            Vector3 leapEnd = transform.position + leapDirection * leapTravelDistance;
+
+            Vector3 targetPosition = transform.position + leapDirection * leapTravelDistance * _bossData.LeapTargetTravelPercentage;
+            float targetDistance = (targetPosition - transform.position).sqrMagnitude;
+            bool drawTarget = true;
+
+            if ((gizmosPlayerReference.transform.position - transform.position).sqrMagnitude > targetDistance)
+            {
+                drawTarget = false;
+            }
+
+            if (playerDirection.sqrMagnitude < (leapTravelDistance * leapTravelDistance * _bossData.LeapTargetTravelPercentage) * (leapTravelDistance * leapTravelDistance * _bossData.LeapTargetTravelPercentage))
+            {
+                targetPosition = gizmosPlayerReference.transform.position;
+                targetDistance = (targetPosition - transform.position).sqrMagnitude;
+
+            }
+
+            wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, leapTravelDistance, _bossData.EnvironmentMask); // Update layer mask variable
+            if (wallCheck)
+            {
+                float wallDistance = (wallCheck.point - new Vector2(transform.position.x, transform.position.y)).sqrMagnitude;
+
+                leapEnd = wallCheck.point;
+
+                if (wallDistance < targetDistance)
+                {
+                    drawTarget = false;
+                }
+            }
+
+            Gizmos.color = UnityEngine.Color.red;
+            Gizmos.DrawWireSphere(transform.position, leapTravelDistance * _bossData.LeapTargetTravelPercentage);
+
+            Gizmos.color = new UnityEngine.Color(1, 0.5f, 0);
+            Gizmos.DrawLine(transform.position, leapEnd);
+            if (drawTarget)
+            {
+                GizmoDrawCompanion(leapEnd);
+            }
+
         }
 
-        //if (bossData.drawLeaps)
-        //{
-        //    // Leaping
-        //    Vector3 playerDirection = _playerObject.transform.position - transform.position;
-        //    Vector3 leapDirection = playerDirection.normalized;
-        //    Vector3 leapEnd = transform.position + leapDirection * bossData.leapTravelDistance;
+        if (_bossData.DrawFeralLeap)
+        {
+            // Leaping
+            float leapTravelDistance = 0.0f;
 
-        //    Vector3 targetPosition = transform.position + leapDirection * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage;
-        //    float targetDistance = (targetPosition - transform.position).sqrMagnitude;
-        //    bool drawTarget = true;
+            switch (_bossData.HeatUpStage)
+            {
+                case 1:
+                    leapTravelDistance = _bossData.FeralLeapDistanceStage1;
+                    break;
+                case 2:
+                    leapTravelDistance = _bossData.FeralLeapDistanceStage2;
+                    break;
+                case 3:
+                    leapTravelDistance = _bossData.FeralLeapDistanceStage3;
+                    break;
+            }
 
-        //    if((_playerObject.transform.position - transform.position).sqrMagnitude > targetDistance)
-        //    {
-        //        drawTarget = false;
-        //    }
+            Vector3 playerDirection = gizmosPlayerReference.transform.position - transform.position;
+            Vector3 leapDirection = playerDirection.normalized;
+            Vector3 leapEnd = transform.position + leapDirection * leapTravelDistance;
 
-        //    if (playerDirection.sqrMagnitude < (bossData.leapTravelDistance * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage) * (bossData.leapTravelDistance * bossData.leapTravelDistance * bossData.leapTargetTravelPercentage))
-        //    {
-        //        targetPosition = _playerObject.transform.position;
-        //        targetDistance = (targetPosition - transform.position).sqrMagnitude;
+            Vector3 targetPosition = transform.position + leapDirection * leapTravelDistance * _bossData.LeapTargetTravelPercentage;
+            float targetDistance = (targetPosition - transform.position).sqrMagnitude;
+            bool drawTarget = true;
 
-        //    }
+            if ((gizmosPlayerReference.transform.position - transform.position).sqrMagnitude > targetDistance)
+            {
+                drawTarget = false;
+            }
 
-        //    wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, bossData.leapTravelDistance, bossData.environmentMask); // Update layer mask variable
-        //    if (wallCheck)
-        //    {
-        //        float wallDistance = (wallCheck.point - new Vector2(transform.position.x, transform.position.y)).sqrMagnitude;
-                
-        //        leapEnd = wallCheck.point;
+            if (playerDirection.sqrMagnitude < (leapTravelDistance * leapTravelDistance * _bossData.LeapTargetTravelPercentage) * (leapTravelDistance * leapTravelDistance * _bossData.LeapTargetTravelPercentage))
+            {
+                targetPosition = gizmosPlayerReference.transform.position;
+                targetDistance = (targetPosition - transform.position).sqrMagnitude;
 
-        //        if(wallDistance < targetDistance)
-        //        {
-        //            drawTarget = false;
-        //        }
-        //    }
+            }
 
-        //    Gizmos.color = UnityEngine.Color.red;
-        //    Gizmos.DrawWireSphere(transform.position, bossData.leapTravelDistance * bossData.leapTargetTravelPercentage);
-        //    Gizmos.color = UnityEngine.Color.yellow;
-        //    Gizmos.DrawWireSphere(transform.position, (bossData.leapTravelDistance + bossData.feralLeapAdditionalDistance) * bossData.leapTargetTravelPercentage);
+            wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, leapTravelDistance, _bossData.EnvironmentMask); // Update layer mask variable
+            if (wallCheck)
+            {
+                float wallDistance = (wallCheck.point - new Vector2(transform.position.x, transform.position.y)).sqrMagnitude;
 
-        //    Gizmos.color = new UnityEngine.Color(1, 0.5f, 0);
-        //    Gizmos.DrawLine(transform.position, leapEnd);
-        //    Gizmos.color = new UnityEngine.Color(1, 1, 1);
-        //    Gizmos.DrawLine(leapEnd, transform.position + leapDirection * (bossData.leapTravelDistance + bossData.feralLeapAdditionalDistance));
-        //    if (drawTarget)
-        //    {
-        //        Gizmos.DrawWireSphere(targetPosition, 1.0f);
-        //    }
+                leapEnd = wallCheck.point;
 
-        //}
+                if (wallDistance < targetDistance)
+                {
+                    drawTarget = false;
+                }
+            }
+            Gizmos.color = UnityEngine.Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, leapTravelDistance * _bossData.LeapTargetTravelPercentage);
 
-        //if (bossData.drawSpit)
-        //{
-        //    Vector2 forwardDirection = (_playerObject.transform.position - transform.position).normalized;
-        //    float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f));
+            Gizmos.color = new UnityEngine.Color(1, 1, 1);
+            Gizmos.DrawLine(transform.position, leapEnd);
+            if (drawTarget)
+            {
+                GizmoDrawCompanion(leapEnd);
+            }
+        }
 
-        //    // Spit
-        //    Gizmos.color = UnityEngine.Color.green;
-        //    Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * forwardAngleFromRight), Mathf.Sin(Mathf.Deg2Rad * forwardAngleFromRight), 0.0f) * bossData.spitSpawnDistance, bossData.spitProjectile.transform.localScale.x / 2.0f);
-        //    Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + bossData.spitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + bossData.spitSpawnAngle)), 0.0f) * bossData.spitSpawnDistance, bossData.spitProjectile.transform.localScale.x / 2.0f);
-        //    Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - bossData.spitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - bossData.spitSpawnAngle)), 0.0f) * bossData.spitSpawnDistance, bossData.spitProjectile.transform.localScale.x / 2.0f);
+        if (_bossData.DrawSpit)
+        {
+            float spitProjectileTravelDistance = 0.0f;
 
-        //    Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * forwardAngleFromRight), Mathf.Sin(Mathf.Deg2Rad * forwardAngleFromRight), 0.0f) * (bossData.spitSpawnDistance + bossData.spitProjectileTravelDistance), bossData.spitProjectile.transform.localScale.x / 2.0f);
-        //    Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + bossData.spitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + bossData.spitSpawnAngle)), 0.0f) * (bossData.spitSpawnDistance + bossData.spitProjectileTravelDistance), bossData.spitProjectile.transform.localScale.x / 2.0f);
-        //    Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - bossData.spitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - bossData.spitSpawnAngle)), 0.0f) * (bossData.spitSpawnDistance + bossData.spitProjectileTravelDistance), bossData.spitProjectile.transform.localScale.x / 2.0f);
+            switch (_bossData.HeatUpStage)
+            {
+                case 1:
+                    spitProjectileTravelDistance = _bossData.SpitProjectileTravelDistance1;
+                    break;
+                case 2:
+                    spitProjectileTravelDistance = _bossData.SpitProjectileTravelDistance2;
+                    break;
+                case 3:
+                    spitProjectileTravelDistance = _bossData.SpitProjectileTravelDistance3;
+                    break;
+            }
 
-        //}
+            Vector2 forwardDirection = (gizmosPlayerReference.transform.position - transform.position).normalized;
+            float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f));
 
-        //if (bossData.drawLick)
-        //{
-        //    Gizmos.color = UnityEngine.Color.yellow;
+            // Spit
+            Gizmos.color = UnityEngine.Color.green;
+            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * forwardAngleFromRight), Mathf.Sin(Mathf.Deg2Rad * forwardAngleFromRight), 0.0f) * _bossData.SpitSpawnDistance, _bossData.SpitProjectile.transform.localScale.x / 2.0f);
+            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + _bossData.SpitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + _bossData.SpitSpawnAngle)), 0.0f) * _bossData.SpitSpawnDistance, _bossData.SpitProjectile.transform.localScale.x / 2.0f);
+            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - _bossData.SpitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - _bossData.SpitSpawnAngle)), 0.0f) * _bossData.SpitSpawnDistance, _bossData.SpitProjectile.transform.localScale.x / 2.0f);
 
-        //    Vector3 forwardVector = (_playerObject.transform.position - transform.position).normalized;
-        //    Vector3 rightVector = new Vector3( forwardVector.y, -forwardVector.x, forwardVector.z);
+            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * forwardAngleFromRight), Mathf.Sin(Mathf.Deg2Rad * forwardAngleFromRight), 0.0f) * (_bossData.SpitSpawnDistance + spitProjectileTravelDistance), _bossData.SpitProjectile.transform.localScale.x / 2.0f);
+            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + _bossData.SpitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + _bossData.SpitSpawnAngle)), 0.0f) * (_bossData.SpitSpawnDistance + spitProjectileTravelDistance), _bossData.SpitProjectile.transform.localScale.x / 2.0f);
+            Gizmos.DrawWireSphere(transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - _bossData.SpitSpawnAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - _bossData.SpitSpawnAngle)), 0.0f) * (_bossData.SpitSpawnDistance + spitProjectileTravelDistance), _bossData.SpitProjectile.transform.localScale.x / 2.0f);
 
-        //    float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardVector, new Vector3(0.0f, 0.0f, 1.0f));
+        }
 
-        //    float spawnShifts = (bossData.lickProjectileNumber - 1) / 2.0f;
+        if (_bossData.DrawLick)
+        {
+            int lickProjectileNumber = 0;
 
-        //    Vector3 startSpawnPosition = transform.position + forwardVector * bossData.lickProjectileSpawnDistance - rightVector * bossData.lickProjectileSeperationDistance * spawnShifts;
+            switch (_bossData.HeatUpStage)
+            {
+                case 1:
+                    lickProjectileNumber = _bossData.LickLastWaveProjectilesStage1;
+                    break;
+                case 2:
+                    lickProjectileNumber = _bossData.LickLastWaveProjectilesStage1;
+                    break;
+                case 3:
+                    lickProjectileNumber = _bossData.LickLastWaveProjectilesStage1;
+                    break;
+            }
 
-        //    Vector3 projectileDirection;
-        //    float arcAngle = (bossData.lickProjectileAngle * 2.0f) / (bossData.lickProjectileNumber - 1);
-        //    float currentAngle = 0.0f;
+            Gizmos.color = UnityEngine.Color.yellow;
 
-        //    // Draws left to right
-        //    for (int i = 0; i < bossData.lickProjectileNumber; i++)
-        //    {
-        //        Gizmos.DrawWireSphere(startSpawnPosition + rightVector * i * bossData.lickProjectileSeperationDistance, bossData.lickProjectile.transform.localScale.x);
+            Vector3 forwardVector = (gizmosPlayerReference.transform.position - transform.position).normalized;
+            Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
 
-        //        currentAngle = bossData.lickProjectileAngle - arcAngle * (bossData.lickProjectileNumber - 1 - i);
+            float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardVector, new Vector3(0.0f, 0.0f, 1.0f));
 
-        //        projectileDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), 0.0f) * bossData.screamProjectileSpawnDistance;
+            float spawnShifts = (lickProjectileNumber - 1) / 2.0f;
 
-        //        Gizmos.DrawLine(startSpawnPosition + rightVector * i * bossData.lickProjectileSeperationDistance, startSpawnPosition + rightVector * i * bossData.lickProjectileSeperationDistance + projectileDirection.normalized * 10);
-        //    }
-        //}
+            Vector3 startSpawnPosition = transform.position + forwardVector * _bossData.LickProjectileSpawnDistance - rightVector * _bossData.LickProjectileSeperationDistance * spawnShifts;
 
-        if (bossData.drawScream)
+            Vector3 projectileDirection;
+            float arcAngle = (_bossData.LickProjectileAngle * 2.0f) / (lickProjectileNumber - 1);
+            float currentAngle = 0.0f;
+
+            // Draws left to right
+            for (int i = 0; i < lickProjectileNumber; i++)
+            {
+                Gizmos.DrawWireSphere(startSpawnPosition + rightVector * i * _bossData.LickProjectileSeperationDistance, _bossData.LickProjectile.transform.localScale.x);
+
+                currentAngle = _bossData.LickProjectileAngle - arcAngle * (lickProjectileNumber - 1 - i);
+
+                projectileDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), 0.0f) * _bossData.ScreamProjectileSpawnDistance;
+
+                Gizmos.DrawLine(startSpawnPosition + rightVector * i * _bossData.LickProjectileSeperationDistance, startSpawnPosition + rightVector * i * _bossData.LickProjectileSeperationDistance + projectileDirection.normalized * 10);
+            }
+        }
+
+        if (_bossData.DrawScream)
         {
 
             //Scream
             Gizmos.color = new UnityEngine.Color(148.0f / 255.0f, 17.0f / 255.0f, 255.0f / 255.0f);
-            Vector2 forwardDirection = (_playerObject.transform.position - transform.position).normalized;
+            Vector2 forwardDirection = (gizmosPlayerReference.transform.position - transform.position).normalized;
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f));
-            float screamAngle = 360.0f / (float) bossData.numberOfScreamProjectiles;
+            float screamAngle = 360.0f / (float) _bossData.NumberOfScreamProjectiles;
             Vector3 projectileSpawnPosition;
-            for(int i = 0; i < bossData.numberOfScreamProjectiles; i++)
+            for(int i = 0; i < _bossData.NumberOfScreamProjectiles; i++)
             {
-                projectileSpawnPosition = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * i)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * i)), 0.0f) * bossData.screamProjectileSpawnDistance;
-                Gizmos.DrawWireSphere(transform.position + projectileSpawnPosition, bossData.screamProjectile.transform.localScale.x);
-                wallCheck = Physics2D.Raycast(transform.position + projectileSpawnPosition, projectileSpawnPosition.normalized, 100.0f, bossData.environmentMask); // Update layer mask variable
+                projectileSpawnPosition = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * i)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * i)), 0.0f) * _bossData.ScreamProjectileSpawnDistance;
+                Gizmos.DrawWireSphere(transform.position + projectileSpawnPosition, _bossData.ScreamProjectile.transform.localScale.x);
+                wallCheck = Physics2D.Raycast(transform.position + projectileSpawnPosition, projectileSpawnPosition.normalized, 100.0f, _bossData.EnvironmentMask); // Update layer mask variable
                 
                 if (wallCheck)
                 {
@@ -544,23 +666,19 @@ public class CompanionManager : MonoBehaviour
             }
         }
 
-        if (friendData.drawDetectionRange)
-        {
-            Gizmos.color = new UnityEngine.Color(1.0f, 0.753f, 0.796f);
-            Gizmos.DrawWireSphere(transform.position, friendData.detectionRadius);
-        }
-
-        if (friendData.drawRechargeZone)
-        {
-            Gizmos.color = UnityEngine.Color.cyan;
-            Gizmos.DrawWireSphere(transform.position, friendData.rechargeZoneRadius);
-        }
-
-        if (friendData.drawIdleDistance)
+        if (_friendData.DrawIdleDistance)
         {
             Gizmos.color = UnityEngine.Color.green;
-            Gizmos.DrawWireSphere(_playerObject.transform.position, friendData.idleDistance);
+            Gizmos.DrawWireSphere(gizmosPlayerReference.transform.position, _friendData.IdleDistance);
         }
+    }
+
+    private void GizmoDrawCompanion(Vector3 drawPosition)
+    {
+        UnityEngine.Color originalColor = Gizmos.color;
+        Gizmos.color = new UnityEngine.Color(1.0f, 0.7f, 0.6f);
+        Gizmos.DrawWireCube(drawPosition + new Vector3(_bossData.WidthOffset, _bossData.HeightOffset, 0.0f), new Vector3(_bossData.CompanionWidth, _bossData.CompanionHeight, 0.0f));
+        Gizmos.color = originalColor;
     }
     #endregion
 }

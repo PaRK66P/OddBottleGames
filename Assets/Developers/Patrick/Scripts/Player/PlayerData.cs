@@ -7,57 +7,55 @@ using UnityEngine.UIElements;
 public class PlayerData : ScriptableObject
 {
     [Header("Health")]
-    public float health = 100;
-    public GameObject healthbar;
-    [Range(0.0f, 1.0f)] public float damageImpactFrameScale;
-    [Min(0.0f)] public float damageImpactFrameDuration;
+    public float Health = 100;
+    public GameObject Healthbar;
+    [Range(0.0f, 1.0f)] public float DamageImpactFrameScale;
+    [Min(0.0f)] public float DamageImpactFrameDuration;
 
     [Header("Movement")]
-    [Min(0.0f)] public float speed;
-    [Range(0.0f, 1.0f)] public float acceleration;
-    [HideInInspector] public float accelerationRate;
-    [Range(0.0f, 1.0f)] public float deceleration;
-    [HideInInspector] public float decelerationRate;
+    [Min(0.0f)] public float Speed;
+    [Range(0.0f, 1.0f)] public float Acceleration;
+    [HideInInspector] public float AccelerationRate;
+    [Range(0.0f, 1.0f)] public float Deceleration;
+    [HideInInspector] public float DecelerationRate;
 
     [Header("Dashing")]
-    [Min(0.0f)] public float dashTime;
-    [Min(0.0f)] public float dashDistance;
-    [Min(0.0f)] public float evolvedDashExtraDistance;
-    [Min(0.0f)] public float dashCooldown;
-    [Min(0)] public int numberOfDashCharges;
-    [Min(0.0f)] public float dashRechargeTime;
-    [Min(0.0f)] public float evolvedDashDamage;
+    [Min(0.0f)] public float DashTime;
+    [Min(0.0f)] public float DashDistance;
+    [Min(0.0f)] public float EvolvedDashExtraDistance;
+    [Min(0.0f)] public float DashCooldown;
+    [Min(0)] public int NumberOfDashCharges;
+    [Min(0.0f)] public float DashRechargeTime;
+    [Min(0.0f)] public float EvolvedDashDamage;
 
     [Header("Collisions")]
-    public LayerMask damageLayers;
-    public LayerMask enemyLayers;
+    public LayerMask DamageLayers;
+    public LayerMask EnemyLayers;
 
     [Header("Shooting")]
-    public GameObject ammoUIPrefab;
-    public GameObject ammoUIObject;
-    public GameObject reloadUISlider;
-    [Min(0.0f)] public float fireRate;
-    [Min(0.0f)] public float maxTimeToChargeShot;
-    [Min(0.0f)] public float minTimeToChargeShot;
-    [Min(1)] public int shotsTillFullCharge;
-    [Min(0.0f)] public float chargeShotIntervals;
-    [Min(1)] public int maxAmmo;
-    [Min(0.0f)] public float reloadTime;
-    [Min(1.0f)] public float damageMultiplier;
-    [Range(0.0f, 1.0f)] public float chargeSlowDown;
-    [Range(0.0f, 1.0f)] public float maxChargeShotImpactSlowDown;
-    [Min(0.0f)] public float chargeShotImpactFrameDuration;
+    public GameObject AmmoUIPrefab;
+    [Min(0.0f)] public float FireRate;
+    [Min(0.0f)] public float MaxTimeToChargeShot;
+    [Min(0.0f)] public float MinTimeToChargeShot;
+    [Min(1)] public int ShotsTillFullCharge;
+    [Min(0.0f)] public float ChargeShotIntervals;
+    [Min(1)] public int MaxAmmo;
+    [Min(0.0f)] public float ReloadTime;
+    [Min(1.0f)] public float DamageMultiplier;
+    [Range(0.0f, 1.0f)] public float ChargeSlowDown;
+    [Range(0.0f, 1.0f)] public float MaxChargeShotImpactSlowDown;
+    [Min(0.0f)] public float ChargeShotImpactFrameDuration;
 
     [Header("Projectile")]
-    public GameObject baseProjectileType;
-    [Min(0.0f)] public float baseProjectileSpeed;
+    public GameObject BaseProjectileType;
+    [Min(0.0f)] public float BaseProjectileSpeed;
 
     [Header("Damage")]
-    [Min(0.0f)] public float controlLossTime;
+    [Min(0.0f)] public float ControlLossTime;
 
     private void OnValidate()
     {
-        accelerationRate = (50 * (acceleration * speed)) / speed;
-        decelerationRate = (50 * (deceleration * speed)) / speed;
+        AccelerationRate = (50 * (Acceleration * Speed)) / Speed;
+        DecelerationRate = (50 * (Deceleration * Speed)) / Speed;
     }
 }

@@ -19,7 +19,7 @@ public class roughDashUIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(playerData.numberOfDashCharges)
+        switch(playerData.NumberOfDashCharges)
         {
             case 0:
                 for(int i =0; i<3; i++)

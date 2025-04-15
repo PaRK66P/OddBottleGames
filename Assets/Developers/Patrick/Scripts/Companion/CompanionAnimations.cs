@@ -1,81 +1,79 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CompanionAnimations : MonoBehaviour
 {
     public enum AnimationState
     {
-        IDLE,
+        Idle,
 
-        LEAP_CHARGE,
-        LEAP_MOVING,
-        LEAP_END,
+        LeapCharge,
+        LeapMove,
+        LeapEnd,
 
-        SPIT_CHARGE,
-        SPIT_ATTACK,
-        SPIT_END,
+        SpitCharge,
+        SpitAttack,
+        SpitEnd,
 
-        LICK_CHARGE,
-        LICK_ATTACK,
-        LICK_END,
+        LickCharge,
+        LickAttack,
+        LickEnd,
 
-        SCREAM_CHARGE,
-        SCREAM_ATTACK,
-        SCREAM_END
+        ScreamCharge,
+        ScreamAttack,
+        ScreamEnd
     }
 
     public enum FacingDirection
     {
-        LEFT,
-        RIGHT,
-        UP,
-        DOWN
+        Left,
+        Right,
+        Up,
+        Down
     }
 
+    // Data
     CompanionBossData _bossData;
-    CompanionFriendData _friendData;
+
+    // Components
     SpriteRenderer _spriteRenderer;
 
+    // Values
     private AnimationState _animState;
-    private FacingDirection _facingDirection;
-
     private bool _isFacingRightLast; // Between left and right
 
-    public void InitialiseComponent(ref CompanionBossData bossData, ref CompanionFriendData friendData, ref SpriteRenderer spriteRenderer)
+    public void InitialiseComponent(ref CompanionBossData bossData, ref SpriteRenderer spriteRenderer)
     {
         _bossData = bossData;
-        _friendData = friendData;
         _spriteRenderer = spriteRenderer;
     }
 
+    // To be changed
+    // Works with specific animations (not modular)
     public void ChangeAnimationState(AnimationState animation)
     {
         if(_animState == animation) return;
 
         _animState = animation;
-        if (_animState == AnimationState.LEAP_CHARGE)
+        if (_animState == AnimationState.LeapCharge) // Has different sprites for direction so don't change transform
         {
             _spriteRenderer.transform.localScale = new Vector3(Mathf.Abs(_spriteRenderer.transform.localScale.x), _spriteRenderer.transform.localScale.y, _spriteRenderer.transform.localScale.z);
         }
-        else
+        else // Update facing direction
         {
             _spriteRenderer.transform.localScale = new Vector3(Mathf.Abs(_spriteRenderer.transform.localScale.x) * (_isFacingRightLast ? 1 : -1), _spriteRenderer.transform.localScale.y, _spriteRenderer.transform.localScale.z);
         }
-        _spriteRenderer.sprite = _bossData.GetSprite(_animState, _isFacingRightLast);
+        _spriteRenderer.sprite = _bossData.GetSprite(_animState, _isFacingRightLast); // Change animation based on boss data
     }
 
     public void ChangeAnimationDirection(FacingDirection direction)
     {
-        if (direction == FacingDirection.LEFT)
+        if (direction == FacingDirection.Left)
         {
             _isFacingRightLast = false;
         }
-        else if (direction == FacingDirection.RIGHT)
+        else if (direction == FacingDirection.Right)
         {
             _isFacingRightLast = true;
         }
-
-        _facingDirection = direction;
     }
 }

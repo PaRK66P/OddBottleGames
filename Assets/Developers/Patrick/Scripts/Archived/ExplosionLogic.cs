@@ -1,40 +1,43 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ExplosionLogic : MonoBehaviour
 {
-    private LayerMask target;
-    private float damage;
-    private float radius;
-    private float delay;
-    private float removal;
+    // Explosion
+    private LayerMask _target;
+    private float _damage;
+    private float _delay;
+    private float _removal;
 
-    private float timer;
-    private bool firedDamage;
+    // Delay
+    private float _timer;
+    private bool _isFiredDamage;
 
-    private GameObject[] objectsToDamage;
-    private int targetIndex = -1;
+    // Damage detection
+    private GameObject[] _objectsToDamage;
+    private int _targetIndex = -1;
 
-    private ObjectPoolManager objectPoolManager;
+    // Managers
+    private ObjectPoolManager _objectPoolManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        timer = 0;
-        firedDamage = false;
+        _timer = 0;
+        _isFiredDamage = false;
 
-        objectsToDamage = new GameObject[1];
+        _objectsToDamage = new GameObject[1];
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > delay && !firedDamage)
+        // Wait for the delay time
+        _timer += Time.deltaTime;
+        if (_timer > _delay && !_isFiredDamage)
         {
-            foreach (GameObject obj in objectsToDamage)
+            // Damage all objects in the explosion radius
+            foreach (GameObject obj in _objectsToDamage)
             {
                 if(obj == null)
                 {
@@ -49,40 +52,43 @@ public class ExplosionLogic : MonoBehaviour
                 }
                 else if (obj.GetComponent<AISimpleBehaviour>() != null)
                 {
-                    obj.GetComponent<AISimpleBehaviour>().TakeDamage(damage, gameObject.transform.position - obj.transform.position);
+                    obj.GetComponent<AISimpleBehaviour>().TakeDamage(_damage, gameObject.transform.position - obj.transform.position);
                 }
                 else if (obj.GetComponent<bossScript>() != null)
                 {
                     obj.GetComponent<bossScript>().takeDamage(1);
                 }
             }
-            firedDamage = true;
+            _isFiredDamage = true;
             GetComponent<SpriteRenderer>().color = Color.red;
         }
-        else if (timer > removal)
+        else if (_timer > _removal)
         {
-            objectPoolManager.ReleaseObject("Explosion", this.gameObject);
+            // Remove after removal delay
+            _objectPoolManager.ReleaseObject("Explosion", this.gameObject);
         }
 
     }
 
+    // Sets up the explosion
     public void InitialiseEffect(LayerMask damageLayer, float totalDamage, float explosionRadius, float explosionDelay, float removalTime, ObjectPoolManager objMgr)
     {
-        target = damageLayer;
-        damage = totalDamage;
+        _target = damageLayer;
+        _damage = totalDamage;
         gameObject.transform.localScale = Vector3.one * explosionRadius;
-        delay = explosionDelay;
-        removal = removalTime;
-        timer = 0;
-        firedDamage = false;
-        objectPoolManager = objMgr;
+        _delay = explosionDelay;
+        _removal = removalTime;
+        _timer = 0;
+        _isFiredDamage = false;
+        _objectPoolManager = objMgr;
 
         GetComponent<SpriteRenderer>().color = new Color(222.0f / 256.0f, 170.0f / 256.0f, 65.0f / 256.0f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if((1 << collision.gameObject.layer) == target.value)
+        // Add targets that enter the collision
+        if((1 << collision.gameObject.layer) == _target.value)
         {
             AddTarget(collision.gameObject);
         }
@@ -90,44 +96,47 @@ public class ExplosionLogic : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if ((1 << collision.gameObject.layer) == target.value)
+        // Remove targets that leave the collision
+        if ((1 << collision.gameObject.layer) == _target.value)
         {
             RemoveTarget(collision.gameObject);
         }
     }
 
+    // Adds the target game object to the damage list
     private void AddTarget(GameObject target)
     {
-        targetIndex++;
-        if (targetIndex == objectsToDamage.Length)
+        _targetIndex++;
+        if (_targetIndex == _objectsToDamage.Length)
         {
-            GameObject[] newList = new GameObject[objectsToDamage.Length + 1];
-            for (int i = 0; i < objectsToDamage.Length; i++)
+            GameObject[] newList = new GameObject[_objectsToDamage.Length + 1];
+            for (int i = 0; i < _objectsToDamage.Length; i++)
             {
-                newList[i] = objectsToDamage[i];
+                newList[i] = _objectsToDamage[i];
             }
 
-            objectsToDamage = newList;
+            _objectsToDamage = newList;
         }
 
-        objectsToDamage[targetIndex] = target;
+        _objectsToDamage[_targetIndex] = target;
     }
 
+    // Removes the target game object from the damage list
     private void RemoveTarget(GameObject target)
     {
-        int removalIndex = Array.IndexOf(objectsToDamage, target);
+        int removalIndex = Array.IndexOf(_objectsToDamage, target);
         if (removalIndex == -1)
         {
             return;
         }
 
-        GameObject[] newList = new GameObject[objectsToDamage.Length - 1];
+        GameObject[] newList = new GameObject[_objectsToDamage.Length - 1];
 
-        objectsToDamage[removalIndex] = null;
-        targetIndex--;
+        _objectsToDamage[removalIndex] = null;
+        _targetIndex--;
 
         int i = 0;
-        foreach (GameObject obj in objectsToDamage)
+        foreach (GameObject obj in _objectsToDamage)
         {
             if (obj == null)
             {

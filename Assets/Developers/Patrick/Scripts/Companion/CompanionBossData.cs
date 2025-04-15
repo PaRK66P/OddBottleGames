@@ -1,201 +1,207 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CompanionBossData", menuName = "DataObject/CompanionBossData", order = 3)]
 public class CompanionBossData : ScriptableObject
 {
     [Header("Attacks")]
-    public float health;
-    public GameObject healthbar;
-    public int leapsBeforeFeral;
-    public float closeRangeDistance;
-    public float moveSpeed;
-    public float moveSpeedMultiplier; // The multiplier that effects the speed the longer they move towards the player
-    public LayerMask environmentMask;
-    public LayerMask playerMask;
-    public Sprite idleSprite;
-    [Range(0f, 1f)] public float stageTwoHealthThreshold;
-    [Range(0f, 1f)] public float stageThreeHealthThreshold;
+    public float Health;
+    public GameObject Healthbar;
+    public int LeapsBeforeFeral;
+    public float CloseRangeDistance;
+    public float MoveSpeed;
+    public float MoveSpeedMultiplier; // The multiplier that effects the speed the longer they move towards the player
+    public LayerMask EnvironmentMask;
+    public LayerMask PlayerMask;
+    public Sprite IdleSprite;
+    [Range(0f, 1f)] public float StageTwoHealthThreshold;
+    [Range(0f, 1f)] public float StageThreeHealthThreshold;
 
     [Space(16)]
     [Header("Leap")]
-    public float leapDamage;
-    public float leapEndTime;
-    [Range(0.0f, 1.0f)] public float leapTargetTravelPercentage; // Where along the leap would the target be at the start of the leap as a percentage of the leap line
+    public float LeapDamage;
+    public float LeapEndTime;
+    [Range(0.0f, 1.0f)] public float LeapTargetTravelPercentage; // Where along the leap would the target be at the start of the leap as a percentage of the leap line
     [Header("Stage 1")]
-    public float leapChargeTimeStage1;
-    public float leapTravelTimeStage1;
-    public float leapTravelDistanceStage1;
+    public float LeapChargeTimeStage1;
+    public float LeapTravelTimeStage1;
+    public float LeapTravelDistanceStage1;
     [Header("Stage 2")]
-    public float leapChargeTimeStage2;
-    public float leapTravelTimeStage2;
-    public float leapTravelDistanceStage2;
+    public float LeapChargeTimeStage2;
+    public float LeapTravelTimeStage2;
+    public float LeapTravelDistanceStage2;
     [Header("Stage 3")]
-    public float leapChargeTimeStage3;
-    public float leapTravelTimeStage3;
-    public float leapTravelDistanceStage3;
+    public float LeapChargeTimeStage3;
+    public float LeapTravelTimeStage3;
+    public float LeapTravelDistanceStage3;
     [Header("Animations")]
-    public Sprite leapChargeSpriteLeft;
-    public Sprite leapChargeSpriteRight;
-    public Sprite leapMoveSprite;
-    public Sprite leapEndSprite;
+    public Sprite LeapChargeSpriteLeft;
+    public Sprite LeapChargeSpriteRight;
+    public Sprite LeapMoveSprite;
+    public Sprite LeapEndSprite;
 
     [Space(16)]
     [Header("Feral")]
-    public float feralLeapRestTime;
+    public float FeralLeapRestTime;
     [Header("Stage 1")]
-    public int feralLeapAmountStage1;
-    public float feralLeapDelayStage1;
-    public float feralLeapTravelTimeStage1;
-    public float feralLeapDistanceStage1;
+    public int FeralLeapAmountStage1;
+    public float FeralLeapDelayStage1;
+    public float FeralLeapTravelTimeStage1;
+    public float FeralLeapDistanceStage1;
     [Header("Stage 2")]
-    public int feralLeapAmountStage2;
-    public float feralLeapDelayStage2;
-    public float feralLeapTravelTimeStage2;
-    public float feralLeapDistanceStage2;
+    public int FeralLeapAmountStage2;
+    public float FeralLeapDelayStage2;
+    public float FeralLeapTravelTimeStage2;
+    public float FeralLeapDistanceStage2;
     [Header("Stage 3")]
-    public int feralLeapAmountStage3;
-    public float feralLeapDelayStage3;
-    public float feralLeapTravelTimeStage3;
-    public float feralLeapDistanceStage3;
+    public int FeralLeapAmountStage3;
+    public float FeralLeapDelayStage3;
+    public float FeralLeapTravelTimeStage3;
+    public float FeralLeapDistanceStage3;
 
     [Space(16)]
     [Header("Spit")]
-    public GameObject spitProjectile;
-    public float spitProjectileLifespan;
-    public float spitChargeTime;
-    public float spitSpawnDistance;
-    public float spitSpawnAngle;
-    public float spitEndTime;
-    public float spitProjectileDamage;
+    public GameObject SpitProjectile;
+    public float SpitProjectileLifespan;
+    public float SpitChargeTime;
+    public float SpitSpawnDistance;
+    public float SpitSpawnAngle;
+    public float SpitEndTime;
+    public float SpitProjectileDamage;
     [Header("Stage 1")]
-    public float spitProjectileTravelDistance1;
-    public float spitProjectileSize1;
+    public float SpitProjectileTravelDistance1;
+    public float SpitProjectileSize1;
     [Header("Stage 2")]
-    public float spitProjectileTravelDistance2;
-    public float spitProjectileSize2;
+    public float SpitProjectileTravelDistance2;
+    public float SpitProjectileSize2;
     [Header("Stage 3")]
-    public float spitProjectileTravelDistance3;
-    public float spitProjectileSize3;
+    public float SpitProjectileTravelDistance3;
+    public float SpitProjectileSize3;
     [Header("Animations")]
-    public Sprite spitChargeSprite;
-    public Sprite spitAttackSprite;
-    public Sprite spitEndSprite;
+    public Sprite SpitChargeSprite;
+    public Sprite SpitAttackSprite;
+    public Sprite SpitEndSprite;
 
     [Space(16)]
     [Header("Lick")]
-    public GameObject lickProjectile;
-    public float lickProjectileSpawnDistance;
-    public float lickProjectileSeperationDistance;
-    public float lickProjectileAngle;
-    public float lickProjectileSize;
-    public float lickProjectileDamage;
-    public float lickChargeTime;
-    public float lickEndTime;
+    public GameObject LickProjectile;
+    public float LickProjectileSpawnDistance;
+    public float LickProjectileSeperationDistance;
+    public float LickProjectileAngle;
+    public float LickProjectileSize;
+    public float LickProjectileDamage;
+    public float LickChargeTime;
+    public float LickEndTime;
     [Header("Stage 1")]
-    public float lickProjectileSpeed1;
-    public float lickWaveGapStage1;
-    public int lickWavesStage1;
-    public int lickProjectilesStage1;
-    public int lickLastWaveProjectilesStage1;
+    public float LickProjectileSpeed1;
+    public float LickWaveGapStage1;
+    public int LickWavesStage1;
+    public int LickProjectilesStage1;
+    public int LickLastWaveProjectilesStage1;
     [Header("Stage 2")]
-    public float lickProjectileSpeed2;
-    public float lickWaveGapStage2;
-    public int lickWavesStage2;
-    public int lickProjectilesStage2;
-    public int lickLastWaveProjectilesStage2;
+    public float LickProjectileSpeed2;
+    public float LickWaveGapStage2;
+    public int LickWavesStage2;
+    public int LickProjectilesStage2;
+    public int LickLastWaveProjectilesStage2;
     [Header("Stage 3")]
-    public float lickProjectileSpeed3;
-    public float lickWaveGapStage3;
-    public int lickWavesStage3;
-    public int lickProjectilesStage3;
-    public int lickLastWaveProjectilesStage3;
+    public float LickProjectileSpeed3;
+    public float LickWaveGapStage3;
+    public int LickWavesStage3;
+    public int LickProjectilesStage3;
+    public int LickLastWaveProjectilesStage3;
     [Header("Animations")]
-    public Sprite lickChargeSprite;
-    public Sprite lickAttackSprite;
-    public Sprite lickEndSprite;
+    public Sprite LickChargeSprite;
+    public Sprite LickAttackSprite;
+    public Sprite LickEndSprite;
 
     [Space(16)]
     [Header("Scream")]
-    public GameObject screamProjectile;
-    public float screamProjectileSize;
-    public float screamProjectileDamage;
-    public float screamProjectileSpawnDistance;
-    public int numberOfScreamProjectiles;
-    public float screamChargeTime;
-    public float screamEndTime;
+    public GameObject ScreamProjectile;
+    public float ScreamProjectileSize;
+    public float ScreamProjectileDamage;
+    public float ScreamProjectileSpawnDistance;
+    public int NumberOfScreamProjectiles;
+    public float ScreamChargeTime;
+    public float ScreamEndTime;
     [Header("Stage 1")]
-    public float screamProjectileSpeed1;
-    public float screamWaveGapStage1;
-    public int screamWavesStage1;
+    public float ScreamProjectileSpeed1;
+    public float ScreamWaveGapStage1;
+    public int ScreamWavesStage1;
     [Header("Stage 2")]
-    public float screamProjectileSpeed2;
-    public float screamWaveGapStage2;
-    public int screamWavesStage2;
+    public float ScreamProjectileSpeed2;
+    public float ScreamWaveGapStage2;
+    public int ScreamWavesStage2;
     [Header("Stage 3")]
-    public float screamProjectileSpeed3;
-    public float screamWaveGapStage3;
-    public int screamWavesStage3;
+    public float ScreamProjectileSpeed3;
+    public float ScreamWaveGapStage3;
+    public int ScreamWavesStage3;
     [Header("Animations")]
-    public Sprite screamChargeSprite;
-    public Sprite screamAttackSprite;
-    public Sprite screamEndSprite;
+    public Sprite ScreamChargeSprite;
+    public Sprite ScreamAttackSprite;
+    public Sprite ScreamEndSprite;
 
 
     [Header("Debug")]
-    public bool drawRange;
-    public bool drawLeaps;
-    public bool drawSpit;
-    public bool drawLick;
-    public bool drawScream;
+    [Min(0.0f)] public float CompanionHeight;
+    [Min(0.0f)] public float CompanionWidth;
+    public float HeightOffset;
+    public float WidthOffset;
 
+    [Range(1, 3)] public int HeatUpStage;
+    public bool DrawRange;
+    public bool DrawLeap;
+    public bool DrawFeralLeap;
+    public bool DrawSpit;
+    public bool DrawLick;
+    public bool DrawScream;
+
+    // TO BE REMOVED
     public Sprite GetSprite(CompanionAnimations.AnimationState animation, bool isFacingRight)
     {
         switch (animation)
         {
-            case CompanionAnimations.AnimationState.IDLE:
-                return idleSprite;
+            case CompanionAnimations.AnimationState.Idle:
+                return IdleSprite;
 
-            case CompanionAnimations.AnimationState.LEAP_CHARGE:
+            case CompanionAnimations.AnimationState.LeapCharge:
                 if (isFacingRight)
                 {
-                    return leapChargeSpriteRight;
+                    return LeapChargeSpriteRight;
                 }
-                return leapChargeSpriteLeft;
+                return LeapChargeSpriteLeft;
 
-            case CompanionAnimations.AnimationState.LEAP_MOVING:
-                return leapMoveSprite;
+            case CompanionAnimations.AnimationState.LeapMove:
+                return LeapMoveSprite;
 
-            case CompanionAnimations.AnimationState.LEAP_END:
-                return leapEndSprite;
+            case CompanionAnimations.AnimationState.LeapEnd:
+                return LeapEndSprite;
 
-            case CompanionAnimations.AnimationState.SPIT_CHARGE:
-                return spitChargeSprite;
+            case CompanionAnimations.AnimationState.SpitCharge:
+                return SpitChargeSprite;
 
-            case CompanionAnimations.AnimationState.SPIT_ATTACK:
-                return spitAttackSprite;
+            case CompanionAnimations.AnimationState.SpitAttack:
+                return SpitAttackSprite;
 
-            case CompanionAnimations.AnimationState.SPIT_END:
-                return spitEndSprite;
+            case CompanionAnimations.AnimationState.SpitEnd:
+                return SpitEndSprite;
 
-            case CompanionAnimations.AnimationState.LICK_CHARGE:
-                return lickChargeSprite;
+            case CompanionAnimations.AnimationState.LickCharge:
+                return LickChargeSprite;
 
-            case CompanionAnimations.AnimationState.LICK_ATTACK:
-                return lickAttackSprite;
+            case CompanionAnimations.AnimationState.LickAttack:
+                return LickAttackSprite;
 
-            case CompanionAnimations.AnimationState.LICK_END:
-                return lickEndSprite;
+            case CompanionAnimations.AnimationState.LickEnd:
+                return LickEndSprite;
 
-            case CompanionAnimations.AnimationState.SCREAM_CHARGE:
-                return screamChargeSprite;
+            case CompanionAnimations.AnimationState.ScreamCharge:
+                return ScreamChargeSprite;
 
-            case CompanionAnimations.AnimationState.SCREAM_ATTACK:
-                return screamAttackSprite;
+            case CompanionAnimations.AnimationState.ScreamAttack:
+                return ScreamAttackSprite;
 
-            case CompanionAnimations.AnimationState.SCREAM_END:
-                return screamEndSprite;
+            case CompanionAnimations.AnimationState.ScreamEnd:
+                return ScreamEndSprite;
 
             default:
                 return null;

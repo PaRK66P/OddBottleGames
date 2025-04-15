@@ -1,14 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    private float _defaultTimescale = 1.0f;
-
+    // Dictionary of all time scale changes and how long they last for
     private Dictionary<float, float> _timeList = new Dictionary<float, float>();
 
+    // Values
+    private float _defaultTimescale = 1.0f;
     private float _currentTimescale = 1.0f;
     private float _checkTimer = 0.0f;
     private bool _isNotDefaultTimescale = false;
@@ -16,19 +16,23 @@ public class TimeManager : MonoBehaviour
     private void Update()
     {
         // Doesn't work for default timescales below 1.0f
+
+        // Check other timescales if they exist
         if (_isNotDefaultTimescale)
         {
+            // Decrease the time of each value
             foreach (float key in _timeList.Keys.ToArray())
             {
-                if (_timeList[key] <= 0.0f)
+                if (_timeList[key] <= 0.0f) // If the time has ended remove from dictionary
                 {
                     _timeList.Remove(key);
                     continue;
                 }
 
-                _timeList[key] -= GetRealtimeDeltaTime();
+                _timeList[key] -= Time.unscaledDeltaTime;
             }
 
+            // When dictionary is empty just use default time scale
             if(_timeList.Count <= 0)
             {
                 _isNotDefaultTimescale = false;
@@ -37,8 +41,9 @@ public class TimeManager : MonoBehaviour
                 return;
             }
 
-            _checkTimer -= GetRealtimeDeltaTime();
+            _checkTimer -= Time.unscaledDeltaTime;
 
+            // Checks for lowest timescale when previous one has finished
             if (_checkTimer <= 0.0f)
             {
                 _currentTimescale = GetLowestTimescale();
@@ -51,16 +56,7 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    public float GetRealtimeDeltaTime()
-    {
-        return Time.deltaTime / _currentTimescale;
-    }
-
-    public float GetRealtimeFixedDeltaTime()
-    {
-        return Time.fixedDeltaTime / _currentTimescale;
-    }
-
+    // Changes the default timescale
     public void SetDefaultTimescale(float timescale)
     {
         _defaultTimescale = timescale;
@@ -68,13 +64,17 @@ public class TimeManager : MonoBehaviour
         _currentTimescale = GetLowestTimescale();
     }
 
+    // Adds a timescale to the dictionary for the specified duration
     public void AddTimescaleForDuration(float timescale, float duration)
     {
         _isNotDefaultTimescale = true;
+
+        // If the timescale doesn't already exist, add it to the dictionary
         if (!_timeList.ContainsKey(timescale))
         {
             _timeList.Add(timescale, duration);
 
+            // Check if it is now the lowest timescale
             if(timescale < _currentTimescale)
             {
                 _currentTimescale = timescale;
@@ -85,12 +85,14 @@ public class TimeManager : MonoBehaviour
             return;
         }
 
+        // If it already exists change the duration to the higher of the two
         if (_timeList[timescale] < duration)
         {
             _timeList[timescale] = duration;
         }
     }
 
+    // Checks the timescales for the lowest value and returns it
     private float GetLowestTimescale()
     {
         float lowestTimescale = _defaultTimescale;

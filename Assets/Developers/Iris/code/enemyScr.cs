@@ -14,7 +14,7 @@ public class enemyScr : MonoBehaviour
         pooler = poolMan;
         prefabName = prefName;
         enemyManager = enemyMan;
-        if(GetComponent<attackPaternsScript>())
+        if (GetComponent<attackPaternsScript>())
         {
             GetComponent<attackPaternsScript>().InstantiateComponent(ref pooler);
         }
@@ -30,7 +30,7 @@ public class enemyScr : MonoBehaviour
         {
             GetComponent<CompanionManager>().InitialiseEnemy(ref dPlayer, ref poolMan, ref dPathfinder, ref UICanvas);
         }
-        if(GetComponent<AISimpleBehaviour>())
+        if (GetComponent<AISimpleBehaviour>())
         {
             GetComponent<AISimpleBehaviour>().Instantiate(ref poolMan, ref dPlayer);
         }

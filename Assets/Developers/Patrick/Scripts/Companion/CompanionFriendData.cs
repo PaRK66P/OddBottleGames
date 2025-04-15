@@ -1,37 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "FriendData", menuName = "DataObject/CompanionFriendData", order = 4)]
 public class CompanionFriendData : ScriptableObject
 {
     [Header("Collisions")]
-    public LayerMask environmentLayer;
-    public LayerMask enemyLayer;
-    public LayerMask playerAttacksLayer;
-    public float detectionRadius;
+    public LayerMask EnvironmentLayer;
+    public LayerMask EnemyLayer;
+    public LayerMask PlayerAttacksLayer;
+    public float DetectionRadius;
 
     [Header("Idle")]
-    public float idleSpeed;
-    public float idleDistance;
+    public float IdleSpeed;
+    public float IdleDistance;
 
     [Header("Attack")]
-    public float moveSpeed;
+    public float MoveSpeed;
 
     [Header("Leap")]
-    public float leapTravelTime;
-    public float leapChargeTime;
-    public float leapDistance;
-    [Range(0.0f, 1.0f)] public float leapTargetTravelPercentage; // Where along the leap would the target be at the start of the leap as a percentage of the leap line
+    public float LeapTravelTime;
+    public float LeapChargeTime;
+    public float LeapDistance;
+    [Range(0.0f, 1.0f)] public float LeapTargetTravelPercentage; // Where along the leap would the target be at the start of the leap as a percentage of the leap line
 
-    public float leapDamage;
-    public float leapEndTime;
-
-    [Header("Recharge Zone")]
-    public float rechargeZoneRadius;
+    public float LeapDamage;
+    public float LeapEndTime;
 
     [Header("Gizmos")]
-    public bool drawDetectionRange;
-    public bool drawRechargeZone;
-    public bool drawIdleDistance;
+    public bool DrawDetectionRange;
+    public bool DrawIdleDistance;
 }

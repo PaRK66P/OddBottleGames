@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CompanionTargettingHandler : MonoBehaviour
@@ -9,7 +7,6 @@ public class CompanionTargettingHandler : MonoBehaviour
 
     public void InitialiseTargetting(ref CompanionManager companionManager)
     {
-        Debug.Log("Add target: " + gameObject.name);
         _hasCompanion = true;
         _companionManager = companionManager;
         _companionManager.SetPlayerTarget(gameObject);
@@ -18,13 +15,10 @@ public class CompanionTargettingHandler : MonoBehaviour
     // Called when enemy dies
     public void ReleaseAsTarget()
     {
-        if (!_hasCompanion)
+        if (!_hasCompanion) // Do nothing if the player doesn't have a companion
         {
-            Debug.Log("Called but no release needed: " + gameObject.name);
             return;
         }
-
-        Debug.Log("Remove target: " + gameObject.name);
 
         _companionManager.RemovePlayerTarget(gameObject);
     }
