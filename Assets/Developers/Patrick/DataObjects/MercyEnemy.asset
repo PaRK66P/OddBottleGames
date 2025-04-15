@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MercyEnemy
   m_EditorClassIdentifier: 
   health: 100
-  healthbar: {fileID: 7940067324356998275, guid: ace6fbf26c5479d4d870cd37326fbc3d, type: 3}
+  healthbar: {fileID: 7940067324356998275, guid: 4f5f0935f0e41cc4f9d16432a9b5bcdc, type: 3}
   leapsBeforeFeral: 3
   closeRangeDistance: 5.63
   moveSpeed: 6
