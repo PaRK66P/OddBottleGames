@@ -108,9 +108,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7df6809adadbb34f8ac526e3012e5ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockingLayer:
+  _blockingLayer:
     serializedVersion: 2
     m_Bits: 64
-  gridBottomLeft: {fileID: 7461955397410415998}
-  gridTopRight: {fileID: 7948774885364334342}
-  nodeSize: 1
+  _nodeSize: 1
+  _gridBottomLeft: {fileID: 0}
+  _gridTopRight: {fileID: 0}
+  _showGrid: 0
+  _showBlockedNodes: 0
+  _showRecentPath: 0
+  _showRecentNeighbours: 0
+  _showTargetNode: 0
