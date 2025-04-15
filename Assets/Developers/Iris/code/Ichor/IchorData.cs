@@ -11,9 +11,8 @@ public class IchorData : ScriptableObject
     public float initialStunTimer = 2;
     public float damageTimer = 0.5f;
     public float deathTimer = 0.5f;
-    public GameObject healthbar;
-    public Sprite healthbarNormalSprite;
-    public Sprite healthbarArmoredSprite;
+    public GameObject healthbarNormalPref;
+    public GameObject healthbarArmoredPref;
 
     [Space]
 

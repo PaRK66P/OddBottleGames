@@ -14,7 +14,8 @@ public class IchorManager : MonoBehaviour
     private EN_STATES state;
 
     private float health;
-    private GameObject healthbar;
+    private GameObject healthbarNormal;
+    private GameObject healthbarArmored;
     private float damageTimer = 0;
     private float deathTimer = 0;
 
@@ -71,10 +72,14 @@ public class IchorManager : MonoBehaviour
         weakPointSpawnPos = dWeakPos;
         occupiedWeakPoints = new bool[weakPointSpawnPos.Count];
 
-        healthbar = Instantiate(data.healthbar, dUICanvas.transform);
+        healthbarNormal = Instantiate(data.healthbarNormalPref, dUICanvas.transform);
+        healthbarNormal.GetComponent<Slider>().maxValue = health;
+        healthbarNormal.GetComponent<Slider>().value = health;
 
-        healthbar.GetComponent<Slider>().maxValue = health;
-        healthbar.GetComponent<Slider>().value = health;
+        healthbarArmored = Instantiate(data.healthbarArmoredPref, dUICanvas.transform);
+        healthbarArmored.GetComponent<Slider>().maxValue = health;
+        healthbarArmored.GetComponent<Slider>().value = health;
+        healthbarArmored.SetActive(false);
 
         visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
 
@@ -88,7 +93,8 @@ public class IchorManager : MonoBehaviour
             deathTimer -= Time.deltaTime;
             if(deathTimer <= 0)
             {
-                healthbar.SetActive(false);
+                healthbarArmored.SetActive(false);
+                healthbarNormal.SetActive(false);
                 visualNovelManager.StartNovelSceneByName("Ichor1.0");
                 pooler.ReleaseObject(prefabName, gameObject);
             }
@@ -121,12 +127,18 @@ public class IchorManager : MonoBehaviour
                 }
             }
 
-            if (health <= data.nextPhaseHpPoint[phase] && !isArmored)
+            if(phase < 3)
             {
-                spawnWeakPoints();
-                isArmored = true;
-                state = EN_STATES.ARMORED;
+                if (health <= data.nextPhaseHpPoint[phase] && !isArmored)
+                {
+                    spawnWeakPoints();
+                    isArmored = true;
+                    state = EN_STATES.ARMORED;
+                    healthbarNormal.SetActive(false);
+                    healthbarArmored.SetActive(true);
+                }
             }
+            
             if (isArmored)
             {
                 int activeWeakPoints = 0;
@@ -165,7 +177,8 @@ public class IchorManager : MonoBehaviour
                 state = EN_STATES.DEAD;
                 deathTimer = data.deathTimer;
             }
-            healthbar.GetComponent<Slider>().value = health;
+            healthbarArmored.GetComponent<Slider>().value = health;
+            healthbarNormal.GetComponent<Slider>().value = health;
         }
     }
 
@@ -177,6 +190,8 @@ public class IchorManager : MonoBehaviour
         {
             stunTimer = data.stunTimer;
             state = EN_STATES.STUNNED;
+            healthbarArmored.SetActive(false);
+            healthbarNormal.SetActive(true);
         }
         else
         {
