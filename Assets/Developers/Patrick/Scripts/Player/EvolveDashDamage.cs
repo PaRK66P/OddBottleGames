@@ -13,15 +13,15 @@ public class EvolveDashDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(((1 << collision.gameObject.layer) & _playerData.enemyLayers) != 0)
+        if(((1 << collision.gameObject.layer) & _playerData.EnemyLayers) != 0)
         {
-            if (collision.gameObject.tag == "Boss")
+            if (collision.gameObject.tag == "Boss") // Damage boss
             {
-                collision.gameObject.GetComponent<boss>().takeDamage((int) _playerData.evolvedDashDamage);
+                collision.gameObject.GetComponent<boss>().takeDamage((int) _playerData.EvolvedDashDamage);
             }
-            else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
+            else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null) // Damage basic enemies
             {
-                collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(_playerData.evolvedDashDamage, gameObject.transform.position - collision.gameObject.transform.position);
+                collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(_playerData.EvolvedDashDamage, gameObject.transform.position - collision.gameObject.transform.position);
             }
         }
     }

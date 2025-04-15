@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CompanionSmallProjectileLogic : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    // Objects
+    private ObjectPoolManager _objectPoolManager;
 
-    private ObjectPoolManager poolManager;
+    // Components
+    private Rigidbody2D _rigidbody;
 
+    // Values
     private LayerMask _environmentMask;
     private LayerMask _playerMask;
 
@@ -17,11 +18,9 @@ public class CompanionSmallProjectileLogic : MonoBehaviour
     private float _damage;
     private bool _isActive = false;
 
-    private float _lifespan = 0.0f;
-
-    public void Initialise(ref ObjectPoolManager poolManagerRef, string name, Vector2 startPosition, Vector2 direction, float speed, float size, float damage, LayerMask environmentMask, LayerMask playerMask)
+    public void Initialise(ref ObjectPoolManager objectPoolManager, string name, Vector2 startPosition, Vector2 direction, float speed, float size, float damage, LayerMask environmentMask, LayerMask playerMask)
     {
-        poolManager = poolManagerRef;
+        _objectPoolManager = objectPoolManager;
 
         _name = name;
 
@@ -36,7 +35,7 @@ public class CompanionSmallProjectileLogic : MonoBehaviour
         transform.localScale = new Vector3(size, size, 1.0f);
         _damage = damage;
 
-        rb = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         _isActive = true;
 
         _environmentMask = environmentMask;
@@ -47,10 +46,11 @@ public class CompanionSmallProjectileLogic : MonoBehaviour
     {
         if (_isActive)
         {
-            rb.MovePosition(rb.position + _direction * _speed * Time.fixedDeltaTime);
+            _rigidbody.MovePosition(_rigidbody.position + _direction * _speed * Time.fixedDeltaTime);
         }
     }
 
+    // Checks for player or environmental collision
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (_isActive)
@@ -63,13 +63,13 @@ public class CompanionSmallProjectileLogic : MonoBehaviour
                     collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 10, _damage);
 
                     _isActive = false;
-                    poolManager.ReleaseObject(_name, gameObject);
+                    _objectPoolManager.ReleaseObject(_name, gameObject);
                 }
             }
             else if(((1 << collision.gameObject.layer) & _environmentMask) != 0)
             {
                 _isActive = false;
-                poolManager.ReleaseObject(_name, gameObject);
+                _objectPoolManager.ReleaseObject(_name, gameObject);
             }
         }
     }

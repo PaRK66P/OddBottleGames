@@ -6,30 +6,14 @@ using UnityEngine;
 public class PlayerDebugData : ScriptableObject
 {
     [Header("Input")]
-    [Min(0.0f)] public float dashInputBuffer;
-    [Min(0.0f)] public float firingInputBuffer;
-
-    [Header("Weapon Dropping")]
-    public bool canDropWeapon = false;
-    public GameObject weaponObject;
+    [Min(0.0f)] public float DashInputBuffer;
+    [Min(0.0f)] public float FiringInputBuffer;
 
     [Header("Dashing")]
-    public bool dashTowardsMouse = false;
+    public bool CanDashTowardsMouse = false;
 
     [Header("Charging")]
-    public bool slowOnCharge = false;
-    public bool constantChargeTime = false;
-    public float contantChargeTimeValue = 0.15f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public bool IsSlowedOnCharge = false;
+    public bool IsUsingConstantChargeTime = false;
+    public float ConstantChargeTimeValue = 0.15f;
 }

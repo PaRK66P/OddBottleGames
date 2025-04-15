@@ -8,44 +8,48 @@ public class PlayerAnimationHandler : MonoBehaviour
 {
     public enum FacingDirection
     {
-        FRONT,
-        BACK,
-        LEFT,
-        RIGHT
+        Front,
+        Back,
+        Left,
+        Right
     }
 
-
+    // Animations
     [Header("Directions")]
     [SpineAnimation]
-    public string frontDirection;
+    public string FrontDirection;
     [SpineAnimation]
-    public string backDirection;
+    public string BackDirection;
     [SpineAnimation]
-    public string sideDirection;
+    public string SideDirection;
 
     [Header("Animations")]
     [SpineAnimation]
-    public string runAnimation;
+    public string RunAnimation;
     [SpineAnimation]
-    public string dashAnimation;
+    public string DashAnimation;
     [SpineAnimation]
-    public string damageAnimation;
+    public string DamageAnimation;
 
     [Header("Gun Arms")]
     [SpineAnimation]
-    public string leftSide;
+    public string LeftSide;
     [SpineAnimation]
-    public string rightSide;
+    public string RightSide;
 
-    [Header("Temp")]
-    public PlayerAimReticle _aimReticle;
+    // Objects
+    [Header("Reticle")]
+    [SerializeField]
+    private PlayerAimReticle _aimReticle;
 
-    private SkeletonAnimation skeletonAnimation;
+    // Components
+    private SkeletonAnimation _skeletonAnimation;
 
-    public Spine.AnimationState spineAnimationState;
-    public Spine.Skeleton skeleton;
+    // Values
+    public Spine.AnimationState SpineAnimationState;
+    public Spine.Skeleton SpineSkeleton;
 
-    private FacingDirection _currentDirection = FacingDirection.FRONT;
+    private FacingDirection _currentDirection = FacingDirection.Front;
 
     private bool _isMoving = false;
     private bool _isTakingDamage = false;
@@ -60,14 +64,15 @@ public class PlayerAnimationHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        skeletonAnimation = GetComponent<SkeletonAnimation>();
-        spineAnimationState = skeletonAnimation.AnimationState;
-        skeleton = skeletonAnimation.Skeleton;
+        _skeletonAnimation = GetComponent<SkeletonAnimation>();
+        SpineAnimationState = _skeletonAnimation.AnimationState;
+        SpineSkeleton = _skeletonAnimation.Skeleton;
 
-        _gunArmTrack = spineAnimationState.SetAnimation(2, leftSide, true);
-        _gunArmTrack.TimeScale = 0.0f;
+        _gunArmTrack = SpineAnimationState.SetAnimation(2, LeftSide, true);
+        _gunArmTrack.TimeScale = 0.0f; // Gun arm is a frame of the arm animation
     }
 
+    // Changes player facing direction to the passed through direction
     public void UpdateFacingDirection(FacingDirection facingDirection)
     {
         if (facingDirection == _currentDirection) { return; }
@@ -78,49 +83,47 @@ public class PlayerAnimationHandler : MonoBehaviour
 
         switch (facingDirection)
         {
-            case FacingDirection.FRONT:
-                skeleton.ScaleX = 1.0f;
+            case FacingDirection.Front:
+                SpineSkeleton.ScaleX = 1.0f;
                 SetArmSide(true);
-                spineAnimationState.SetAnimation(0, frontDirection, skeletonAnimation);
+                SpineAnimationState.SetAnimation(0, FrontDirection, _skeletonAnimation);
                 break;
-            case FacingDirection.BACK:
-                skeleton.ScaleX = 1.0f;
+            case FacingDirection.Back:
+                SpineSkeleton.ScaleX = 1.0f;
                 SetArmSide(false);
-                spineAnimationState.SetAnimation(0, backDirection, skeletonAnimation);
+                SpineAnimationState.SetAnimation(0, BackDirection, _skeletonAnimation);
                 break;
-            case FacingDirection.LEFT:
-                skeleton.ScaleX = 1.0f;
+            case FacingDirection.Left:
+                SpineSkeleton.ScaleX = 1.0f;
                 SetArmSide(true);
-                spineAnimationState.SetAnimation(0, sideDirection, skeletonAnimation);
+                SpineAnimationState.SetAnimation(0, SideDirection, _skeletonAnimation);
                 break;
-            case FacingDirection.RIGHT: // Right side animations are funky as the whole skeleton's scale is reversed
-                skeleton.ScaleX = -1.0f;
+            case FacingDirection.Right: // Right side animations are funky as the whole SpineSkeleton's scale is reversed
+                SpineSkeleton.ScaleX = -1.0f;
                 SetArmSide(true);
-                spineAnimationState.SetAnimation(0, sideDirection, skeletonAnimation);
+                SpineAnimationState.SetAnimation(0, SideDirection, _skeletonAnimation);
                 break;
         }
 
         UpdateAimDirection();
-
-        
     }
 
     public void StartDashAnimation()
     {
-        spineAnimationState.SetAnimation(1, dashAnimation, false);
+        SpineAnimationState.SetAnimation(1, DashAnimation, false);
     }
 
     public void EndDashAnimation()
     {
-        if (_isTakingDamage) { return;}
+        if (_isTakingDamage) { return;} // Don't change values as currently in damage state
         if (_isMoving)
         {
-            _movementTrack = spineAnimationState.SetAnimation(1, runAnimation, true);
+            _movementTrack = SpineAnimationState.SetAnimation(1, RunAnimation, true);
             _movementTrack.TimeScale = _currentMovementScale;
         }
         else
         {
-            spineAnimationState.SetEmptyAnimation(1, 0.0f);
+            SpineAnimationState.SetEmptyAnimation(1, 0.0f);
         }
     }
 
@@ -130,19 +133,20 @@ public class PlayerAnimationHandler : MonoBehaviour
 
         _isMoving = isMoving;
 
-        if (_isDashing) {  return; }
+        if (_isDashing) {  return; } // Values shouldn't change as would mess with the dash animations
 
         if (_isMoving)
         {
-            _movementTrack = spineAnimationState.SetAnimation(1, runAnimation, true);
+            _movementTrack = SpineAnimationState.SetAnimation(1, RunAnimation, true);
             _movementTrack.TimeScale = _currentMovementScale;
         }
         else
         {
-            spineAnimationState.SetEmptyAnimation(1, 0.0f);
+            SpineAnimationState.SetEmptyAnimation(1, 0.0f);
         }
     }
 
+    // Changes frequency of movement speed
     public void UpdateMovementScale(float scale)
     {
         _currentMovementScale = scale;
@@ -160,11 +164,11 @@ public class PlayerAnimationHandler : MonoBehaviour
 
         if (_isUsingLeftSide)
         {
-            _gunArmTrack = spineAnimationState.SetAnimation(2, leftSide, true);
+            _gunArmTrack = SpineAnimationState.SetAnimation(2, LeftSide, true);
         }
         else
         {
-            _gunArmTrack = spineAnimationState.SetAnimation(2, rightSide, true);
+            _gunArmTrack = SpineAnimationState.SetAnimation(2, RightSide, true);
         }
 
         _gunArmTrack.TimeScale = 0.0f;
@@ -174,11 +178,11 @@ public class PlayerAnimationHandler : MonoBehaviour
     public void SetAimDirection(Vector2 direction)
     {
         _aimReticle.UpdateDirection(direction);
-        if (_currentDirection == FacingDirection.RIGHT) { direction.x *= -1.0f; }
+        if (_currentDirection == FacingDirection.Right) { direction.x *= -1.0f; } // Scale is reversed when facing right
 
         float AngleFromRight = Vector3.SignedAngle(Vector3.right, new Vector3(direction.x, direction.y, Vector3.right.z), new Vector3(0.0f, 0.0f, 1.0f));
 
-        if (Mathf.Sign(AngleFromRight) == -1.0f)
+        if (Mathf.Sign(AngleFromRight) == -1.0f) // Prevent angle being negative
         {
             AngleFromRight += 360.0f;
         }
@@ -208,7 +212,7 @@ public class PlayerAnimationHandler : MonoBehaviour
             }
             else 
             {
-                Debug.LogWarning("Shouldn't be using this side arm right now (LEFT)");
+                Debug.LogWarning("Shouldn't be using this side arm right now (Left)");
                 _gunArmTrack.TrackTime = 2.0f;
             }
         }
@@ -237,7 +241,7 @@ public class PlayerAnimationHandler : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Shouldn't be using this side arm right now (RIGHT)");
+                Debug.LogWarning("Shouldn't be using this side arm right now (Right)");
                 _gunArmTrack.TrackTime = 2.0f;
             }
         }
@@ -246,35 +250,35 @@ public class PlayerAnimationHandler : MonoBehaviour
     public void StartDamageAnimation()
     {
         _isTakingDamage = true;
-        spineAnimationState.SetAnimation(1, damageAnimation, false);
+        SpineAnimationState.SetAnimation(1, DamageAnimation, false);
     }
 
     public void EndDamageAnimation()
     {
         _isTakingDamage = false;
-        spineAnimationState.SetEmptyAnimation(1, 0.0f);
+        SpineAnimationState.SetEmptyAnimation(1, 0.0f);
 
-        switch (_currentDirection)
+        switch (_currentDirection) // Damage animation is flat so need to change based on direction
         {
-            case FacingDirection.FRONT:
-                skeleton.ScaleX = 1.0f;
+            case FacingDirection.Front:
+                SpineSkeleton.ScaleX = 1.0f;
                 SetArmSide(true);
-                spineAnimationState.SetAnimation(0, frontDirection, skeletonAnimation);
+                SpineAnimationState.SetAnimation(0, FrontDirection, _skeletonAnimation);
                 break;
-            case FacingDirection.BACK:
-                skeleton.ScaleX = 1.0f;
+            case FacingDirection.Back:
+                SpineSkeleton.ScaleX = 1.0f;
                 SetArmSide(false);
-                spineAnimationState.SetAnimation(0, backDirection, skeletonAnimation);
+                SpineAnimationState.SetAnimation(0, BackDirection, _skeletonAnimation);
                 break;
-            case FacingDirection.LEFT:
-                skeleton.ScaleX = 1.0f;
+            case FacingDirection.Left:
+                SpineSkeleton.ScaleX = 1.0f;
                 SetArmSide(true);
-                spineAnimationState.SetAnimation(0, sideDirection, skeletonAnimation);
+                SpineAnimationState.SetAnimation(0, SideDirection, _skeletonAnimation);
                 break;
-            case FacingDirection.RIGHT: // Right side animations are funky as the whole skeleton's scale is reversed
-                skeleton.ScaleX = -1.0f;
+            case FacingDirection.Right: // Right side animations are funky as the whole SpineSkeleton's scale is reversed
+                SpineSkeleton.ScaleX = -1.0f;
                 SetArmSide(true);
-                spineAnimationState.SetAnimation(0, sideDirection, skeletonAnimation);
+                SpineAnimationState.SetAnimation(0, SideDirection, _skeletonAnimation);
                 break;
         }
 

@@ -1,29 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CompanionBoss : MonoBehaviour
 {
     enum AttackState
     {
-        LEAP = 0,
-        SPIT = 1,
-        LICK = 2,
-        SCREAM = 3,
-        FERAL_LEAP = 4,
-        DELAY = 5
+        Leap = 0,
+        Spit = 1,
+        Lick = 2,
+        Scream = 3,
+        Feral = 4,
+        Delay = 5
     }
 
-    private AttackState currentState;
+    // Data
+    private CompanionBossData _dataObj;
 
-    private CompanionBossData dataObj;
-    private Rigidbody2D rb;
-    private CompanionAnimations _animationScript;
+    // Objects
+    private GameObject _player;
     private PathfindingManager _pathfindingScript;
-    private GameObject playerObj;
-    private ObjectPoolManager poolManager;
+    private ObjectPoolManager _poolManager;
+
+    // Components
+    private Rigidbody2D _rb;
+    private CompanionAnimations _animationScript;
 
     // Attacks
+    private AttackState _currentState;
     private float _attackEndDelay;
     private bool _isLastAttackLeap;
     private int _leapAmount;
@@ -77,22 +79,24 @@ public class CompanionBoss : MonoBehaviour
     // Heat up
     private int _heatUpStage;
 
-    // Start is called before the first frame update
+    #region Set Up
+    // Sets up the component
     public void InitialiseComponent(ref CompanionBossData bossData, ref Rigidbody2D rigidbodyComp, ref CompanionAnimations animationScript, ref PathfindingManager pathfindingScript, ref GameObject playerObjectRef, ref ObjectPoolManager poolManagerRef)
     {
-        dataObj = bossData;
-        rb = rigidbodyComp;
+        _dataObj = bossData;
+        _rb = rigidbodyComp;
         _animationScript = animationScript;
         _pathfindingScript = pathfindingScript;
-        playerObj = playerObjectRef;
-        poolManager = poolManagerRef;
+        _player = playerObjectRef;
+        _poolManager = poolManagerRef;
 
         _heatUpStage = 1;
     }
 
+    // Sets up the companion to boss mode
     public void SetupEnemy()
     {
-        currentState = AttackState.DELAY;
+        _currentState = AttackState.Delay;
 
         _isLastAttackLeap = false;
         _leapAmount = 0;
@@ -105,31 +109,34 @@ public class CompanionBoss : MonoBehaviour
 
         _feralLeapCurrentAmount = 0;
     }
+    #endregion
 
+    #region Updates
+    // Updates based on the current state
     public void CompanionUpdate()
     {
-        switch (currentState)
+        switch (_currentState)
         {
-            case AttackState.LEAP:
+            case AttackState.Leap:
                 LeapAttack();
                 break;
-            case AttackState.SPIT:
+            case AttackState.Spit:
                 SpitAttack();
                 break;
-            case AttackState.LICK:
+            case AttackState.Lick:
                 LickAttack();
                 break;
-            case AttackState.SCREAM:
+            case AttackState.Scream:
                 ScreamAttack();
                 break;
-            case AttackState.FERAL_LEAP:
+            case AttackState.Feral:
                 FeralLeapAttack();
                 break;
-            case AttackState.DELAY:
+            case AttackState.Delay:
                 Delay();
                 break;
             default:
-                Debug.LogError("Companion currentState is unknown");
+                Debug.LogError("Companion _currentState is unknown");
                 break;
         }
     }
@@ -137,35 +144,39 @@ public class CompanionBoss : MonoBehaviour
     // Only needed for Leap movement
     public void CompanionFixedUpdate()
     {
-        if (currentState != AttackState.LEAP && currentState != AttackState.FERAL_LEAP)
+        if (_currentState != AttackState.Leap && _currentState != AttackState.Feral) // Skip if not leaping
         {
             return;
         }
 
+        // Not ready when not in range to leap yet
         if (!_isReadyToLeap)
         {
-            Node playerNode = _pathfindingScript.NodeFromWorldPosition(playerObj.transform.position);
+            // Find direction
+            Node playerNode = _pathfindingScript.NodeFromWorldPosition(_player.transform.position);
             Node currentNode = _pathfindingScript.NodeFromWorldPosition(transform.position);
-            if (_lastPlayerNode != playerNode || _lastNode != currentNode)
+            if (_lastPlayerNode != playerNode || _lastNode != currentNode) // Only need to pathfind if positions change
             {
-                _lastLeapMoveDirection = _pathfindingScript.GetPathDirection(transform.position, playerObj.transform.position);
+                _lastLeapMoveDirection = _pathfindingScript.GetPathDirection(transform.position, _player.transform.position);
                 _lastPlayerNode = playerNode;
                 _lastNode = currentNode;
             }
 
-            rb.MovePosition(transform.position + _lastLeapMoveDirection * dataObj.moveSpeed * Time.fixedDeltaTime * Mathf.Max((dataObj.moveSpeedMultiplier * (Time.time - _readyStartTime)), 1.0f));
+            // Move closer to the player
+            _rb.MovePosition(transform.position + _lastLeapMoveDirection * _dataObj.MoveSpeed * Time.fixedDeltaTime * Mathf.Max((_dataObj.MoveSpeedMultiplier * (Time.time - _readyStartTime)), 1.0f));
 
+            // Check if ready
             if (WithinLeapRange(_leapTravelDistance))
             {
                 _leapStartTimer = Time.time;
                 _leapStart = transform.position; // Logically will always be in a not blocked node so this SHOULD be safe
-                Vector2 playerDirection = playerObj.transform.position - transform.position;
+                Vector2 playerDirection = _player.transform.position - transform.position;
                 Vector2 leapDirection = playerDirection.normalized;
 
                 _leapEnd = _leapStart + leapDirection * (_leapTravelDistance);
                 
                 // Ensures the end is not on the opposite side of a wall
-                RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, _leapTravelDistance, dataObj.environmentMask);
+                RaycastHit2D wallCheck = Physics2D.Raycast(_leapStart + leapDirection * 0.1f, leapDirection, _leapTravelDistance, _dataObj.EnvironmentMask);
                 if (wallCheck)
                 {
                     _leapEnd = wallCheck.point;
@@ -176,49 +187,54 @@ public class CompanionBoss : MonoBehaviour
                 _leapStartTimer = Time.time;
                 _isReadyToLeap = true;
             }
-
             return;
         }
 
+        // Charge up
         if (Time.time - _leapStartTimer <= _leapChargeTime)
         {
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_CHARGE);
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapCharge);
             return;
         }
 
-        if (!_isLeapMoving)
+        // Movement
+
+        if (!_isLeapMoving) // Only for updating start movement values
         {
             _leapMoveTimer = Time.time;
             _isLeapMoving = true;
 
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_MOVING);
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapMove);
         }
 
         float travelPosition = (Time.time - _leapMoveTimer) / _leapTravelTime;
 
-        rb.MovePosition(Vector2.Lerp(_leapStart, _leapEnd, travelPosition));
+        _rb.MovePosition(Vector2.Lerp(_leapStart, _leapEnd, travelPosition));
 
-        if (travelPosition >= 1)
+        if (travelPosition >= 1) // Once the leap is finished
         {
             _isLeapFinished = true;
         }
     }
+    #endregion
 
+    // Returns if the player is within the leap distance of the companion (takes environment into account)
     private bool WithinLeapRange(float leapDistance)
     {
-        // Leaping
-        Vector3 playerDirection = playerObj.transform.position - transform.position;
+        Vector3 playerDirection = _player.transform.position - transform.position;
         Vector3 leapDirection = playerDirection.normalized;
 
-        float targetDistance = leapDistance * dataObj.leapTargetTravelPercentage;
-        targetDistance *= targetDistance;
+        float targetDistance = leapDistance * _dataObj.LeapTargetTravelPercentage;
+        targetDistance *= targetDistance; // Cheaper to compare square magnitudes than square roots of magnitudes
 
-        if ((playerObj.transform.position - transform.position).sqrMagnitude > targetDistance)
+        // Check if the player is within the distance
+        if ((_player.transform.position - transform.position).sqrMagnitude > targetDistance)
         {
             return false;
         }
 
-        RaycastHit2D wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, leapDistance, dataObj.environmentMask); // Update layer mask variable
+        // Check if the player is on the other side of a wall
+        RaycastHit2D wallCheck = Physics2D.Raycast(transform.position + leapDirection * 0.1f, leapDirection, leapDistance, _dataObj.EnvironmentMask); // Update layer mask variable
         if (wallCheck)
         {
             float wallDistance = (wallCheck.point - new Vector2(transform.position.x, transform.position.y)).sqrMagnitude;
@@ -228,108 +244,127 @@ public class CompanionBoss : MonoBehaviour
                 return false;
             }
         }
+
+        // Player is within the distance and not behind a wall
         return true;
     }
 
     #region Attacks
-
+    // Companion will jump towards the player, damaging on collision
+    /*
+     * Because the leap attack is mainly movement
+     * Most of the attack is handled within the fixed update loop
+     */
     private void LeapAttack()
     {
         // Wait for leap to finish in fixed update
-
         if (!_isLeapFinished)
         {
             return;
         }
 
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LEAP_END);
+        // End leap attack
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapEnd);
 
         _attackEndDelay = _leapEndTime;
-        currentState = AttackState.DELAY;
+        _currentState = AttackState.Delay;
 
         _isLeapMoving = false;
         _isLeapFinished = false;
         _isReadyToLeap = false;
     }
 
+    // Companion will create three slow moving projectiles in front of them
     private void SpitAttack()
     {
-        if (Time.time - _spitStartTimer <= dataObj.spitChargeTime)
+        // Charge
+        if (Time.time - _spitStartTimer <= _dataObj.SpitChargeTime)
         {
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SPIT_CHARGE);
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SpitCharge);
             return;
         }
 
+        // Create projectiles
         GameObject projectileRef;
 
-        Vector3 forwardDirection = (playerObj.transform.position - transform.position).normalized;
-        float angleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f)) - dataObj.spitSpawnAngle;
+        Vector3 forwardDirection = (_player.transform.position - transform.position).normalized;
+        float angleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f)) - _dataObj.SpitSpawnAngle;
 
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SPIT_ATTACK); // Need to setup anim changes on coroutines potentially as this never stays
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SpitAttack); // Need to setup anim changes on coroutines potentially as this never stays
 
         for (int i = 0; i < 3; i++)
         {
-            projectileRef = poolManager.GetFreeObject(dataObj.spitProjectile.name);
+            // TO DO
+            /*
+             * Add linecast to end projectile early at wall
+             */
+
+            projectileRef = _poolManager.GetFreeObject(_dataObj.SpitProjectile.name);
             projectileRef.GetComponent<CompanionLargeProjectileLogic>().Initialise(
-                ref poolManager,
-                dataObj.spitProjectile.name,
-                dataObj.spitProjectileLifespan,
-                _spitSize, dataObj.spitProjectileDamage,
-                transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), Mathf.Sin(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), 0.0f) * dataObj.spitSpawnDistance,
-                transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), Mathf.Sin(Mathf.Deg2Rad * (angleFromRight + (i * dataObj.spitSpawnAngle))), 0.0f) * (dataObj.spitSpawnDistance + _spitTravelDistance)); // Add linecast to end early at wall
+                ref _poolManager,
+                _dataObj.SpitProjectile.name,
+                _dataObj.SpitProjectileLifespan,
+                _spitSize, _dataObj.SpitProjectileDamage,
+                transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (angleFromRight + (i * _dataObj.SpitSpawnAngle))), Mathf.Sin(Mathf.Deg2Rad * (angleFromRight + (i * _dataObj.SpitSpawnAngle))), 0.0f) * _dataObj.SpitSpawnDistance,
+                transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (angleFromRight + (i * _dataObj.SpitSpawnAngle))), Mathf.Sin(Mathf.Deg2Rad * (angleFromRight + (i * _dataObj.SpitSpawnAngle))), 0.0f) * (_dataObj.SpitSpawnDistance + _spitTravelDistance)); 
         }
 
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SPIT_END);
+        // End spit attack
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SpitEnd);
 
-        _attackEndDelay = dataObj.spitEndTime;
-        currentState = AttackState.DELAY;
+        _attackEndDelay = _dataObj.SpitEndTime;
+        _currentState = AttackState.Delay;
     }
 
+    // Companion creates a concentrated arc of projectiles towards the player
     private void LickAttack()
     {
-        // Delay
-        if (Time.time - _lickStartTimer <= dataObj.lickChargeTime)
+        // Charge
+        if (Time.time - _lickStartTimer <= _dataObj.LickChargeTime)
         {
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LICK_CHARGE);
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LickCharge);
 
             return;
         }
 
+        // Each wave before the last one
         if(_lickWaveCurrentCount < _lickWaveCount - 1)
         {
+            // Wait for the delay between waves
             if(Time.time - _lickLastWaveStartTime <= _lickWaveGap) { return; }
 
-            Vector3 forwardVector = (playerObj.transform.position - transform.position).normalized;
+            // Create wave
+            Vector3 forwardVector = (_player.transform.position - transform.position).normalized;
             Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
 
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardVector, new Vector3(0.0f, 0.0f, 1.0f));
 
             float spawnShifts = (_lickProjectiles - 1) / 2.0f;
 
-            Vector3 startSpawnPosition = transform.position + forwardVector * dataObj.lickProjectileSpawnDistance - rightVector * dataObj.lickProjectileSeperationDistance * spawnShifts;
+            Vector3 startSpawnPosition = transform.position + forwardVector * _dataObj.LickProjectileSpawnDistance - rightVector * _dataObj.LickProjectileSeperationDistance * spawnShifts;
 
-            float arcAngle = (dataObj.lickProjectileAngle * 2.0f) / (_lickProjectiles - 1);
+            float arcAngle = (_dataObj.LickProjectileAngle * 2.0f) / (_lickProjectiles - 1);
             Vector3 projectileDirection;
             float currentAngle;
 
             GameObject objectRef;
 
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LICK_ATTACK);
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LickAttack);
 
-            // Draws left to right
+            // Creates projectiles left to right
             for (int i = 0; i < _lickProjectiles; i++)
             {
-                currentAngle = dataObj.lickProjectileAngle - arcAngle * (_lickProjectiles - 1 - i);
+                currentAngle = _dataObj.LickProjectileAngle - arcAngle * (_lickProjectiles - 1 - i);
 
-                projectileDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), 0.0f) * dataObj.screamProjectileSpawnDistance;
+                projectileDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), 0.0f) * _dataObj.ScreamProjectileSpawnDistance;
 
-                objectRef = poolManager.GetFreeObject(dataObj.lickProjectile.name);
+                objectRef = _poolManager.GetFreeObject(_dataObj.LickProjectile.name);
 
-                objectRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref poolManager, dataObj.lickProjectile.name,
-                    startSpawnPosition + rightVector * i * dataObj.lickProjectileSeperationDistance,
+                objectRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref _poolManager, _dataObj.LickProjectile.name,
+                    startSpawnPosition + rightVector * i * _dataObj.LickProjectileSeperationDistance,
                     projectileDirection.normalized,
-                    _lickProjectileSpeed, dataObj.lickProjectileSize, dataObj.lickProjectileDamage,
-                    dataObj.environmentMask, dataObj.playerMask);
+                    _lickProjectileSpeed, _dataObj.LickProjectileSize, _dataObj.LickProjectileDamage,
+                    _dataObj.EnvironmentMask, _dataObj.PlayerMask);
             }
 
             _lickLastWaveStartTime = Time.time;
@@ -338,41 +373,44 @@ public class CompanionBoss : MonoBehaviour
             return;
         }
 
+        // Check for last wave
         if (_lickWaveCurrentCount < _lickWaveCount)
         {
+            // Wait for the delay between waves
             if (Time.time - _lickLastWaveStartTime <= _lickWaveGap) { return; }
 
-            Vector3 forwardVector = (playerObj.transform.position - transform.position).normalized;
+            // Create final wave
+            Vector3 forwardVector = (_player.transform.position - transform.position).normalized;
             Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
 
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, forwardVector, new Vector3(0.0f, 0.0f, 1.0f));
 
             float spawnShifts = (_lickLastWaveProjectiles - 1) / 2.0f;
 
-            Vector3 startSpawnPosition = transform.position + forwardVector * dataObj.lickProjectileSpawnDistance - rightVector * dataObj.lickProjectileSeperationDistance * spawnShifts;
+            Vector3 startSpawnPosition = transform.position + forwardVector * _dataObj.LickProjectileSpawnDistance - rightVector * _dataObj.LickProjectileSeperationDistance * spawnShifts;
 
-            float arcAngle = (dataObj.lickProjectileAngle * 2.0f) / (_lickLastWaveProjectiles - 1);
+            float arcAngle = (_dataObj.LickProjectileAngle * 2.0f) / (_lickLastWaveProjectiles - 1);
             Vector3 projectileDirection;
             float currentAngle;
 
             GameObject objectRef;
 
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LICK_ATTACK);
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LickAttack);
 
-            // Draws left to right
+            // Creates projectiles left to right
             for (int i = 0; i < _lickLastWaveProjectiles; i++)
             {
-                currentAngle = dataObj.lickProjectileAngle - arcAngle * (_lickLastWaveProjectiles - 1 - i);
+                currentAngle = _dataObj.LickProjectileAngle - arcAngle * (_lickLastWaveProjectiles - 1 - i);
 
-                projectileDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), 0.0f) * dataObj.screamProjectileSpawnDistance;
+                projectileDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight - currentAngle)), 0.0f) * _dataObj.ScreamProjectileSpawnDistance;
 
-                objectRef = poolManager.GetFreeObject(dataObj.lickProjectile.name);
+                objectRef = _poolManager.GetFreeObject(_dataObj.LickProjectile.name);
 
-                objectRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref poolManager, dataObj.lickProjectile.name,
-                    startSpawnPosition + rightVector * i * dataObj.lickProjectileSeperationDistance,
+                objectRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref _poolManager, _dataObj.LickProjectile.name,
+                    startSpawnPosition + rightVector * i * _dataObj.LickProjectileSeperationDistance,
                     projectileDirection.normalized,
-                    _lickProjectileSpeed, dataObj.lickProjectileSize, dataObj.lickProjectileDamage,
-                    dataObj.environmentMask, dataObj.playerMask);
+                    _lickProjectileSpeed, _dataObj.LickProjectileSize, _dataObj.LickProjectileDamage,
+                    _dataObj.EnvironmentMask, _dataObj.PlayerMask);
             }
 
             _lickLastWaveStartTime = Time.time;
@@ -381,47 +419,49 @@ public class CompanionBoss : MonoBehaviour
             return;
         }
 
-
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LICK_END);
-        _attackEndDelay = dataObj.lickEndTime;
-        currentState = AttackState.DELAY;
+        // End lick attack
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LickEnd);
+        _attackEndDelay = _dataObj.LickEndTime;
+        _currentState = AttackState.Delay;
     }
 
+    // Companion creates projectiles all around them in a circle
     private void ScreamAttack()
     {
-        // Delay
-        if (Time.time - _screamStartTimer <= dataObj.screamChargeTime)
+        // Charge
+        if (Time.time - _screamStartTimer <= _dataObj.ScreamChargeTime)
         {
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SCREAM_CHARGE);
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.ScreamCharge);
 
             return;
         }
 
-
-        // Firing
+        // Each wave
         if(_screamWaveCurrentCount < _screamWaveCount)
         {
-            if (Time.time - _screamLastWaveStartTime <= _screamWaveGap)
-            {
-                return;
-            }
+            // Wait for the delay between waves
+            if (Time.time - _screamLastWaveStartTime <= _screamWaveGap) { return; }
 
-            // Do scream
+            // Create wave
             GameObject projectileRef;
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, _screamStartDirection, new Vector3(0.0f, 0.0f, 1.0f));
-            float screamAngle = 360.0f / (float)dataObj.numberOfScreamProjectiles;
+            float screamAngle = 360.0f / (float)_dataObj.NumberOfScreamProjectiles;
             Vector3 projectileSpawnPosition;
 
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SCREAM_ATTACK);
+            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.ScreamAttack);
 
-            for (int i = 0; i < dataObj.numberOfScreamProjectiles; i++)
+            for (int i = 0; i < _dataObj.NumberOfScreamProjectiles; i++)
             {
-                projectileSpawnPosition = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * (i + ((_screamWaveCurrentCount % 2) / 2.0f)))), Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * (i + ((_screamWaveCurrentCount % 2) / 2.0f)))), 0.0f) * dataObj.screamProjectileSpawnDistance;
+                projectileSpawnPosition = new Vector3(
+                    Mathf.Cos(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * (i + ((_screamWaveCurrentCount % 2) / 2.0f)))), 
+                    Mathf.Sin(Mathf.Deg2Rad * (forwardAngleFromRight + screamAngle * (i + ((_screamWaveCurrentCount % 2) / 2.0f)))),
+                    0.0f)
+                    * _dataObj.ScreamProjectileSpawnDistance;
 
-                projectileRef = poolManager.GetFreeObject(dataObj.screamProjectile.name);
-                projectileRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref poolManager, dataObj.screamProjectile.name,
-                    transform.position + projectileSpawnPosition, projectileSpawnPosition.normalized, _screamProjectileSpeed, dataObj.screamProjectileSize, dataObj.screamProjectileDamage,
-                    dataObj.environmentMask, dataObj.playerMask);
+                projectileRef = _poolManager.GetFreeObject(_dataObj.ScreamProjectile.name);
+                projectileRef.GetComponent<CompanionSmallProjectileLogic>().Initialise(ref _poolManager, _dataObj.ScreamProjectile.name,
+                    transform.position + projectileSpawnPosition, projectileSpawnPosition.normalized, _screamProjectileSpeed, _dataObj.ScreamProjectileSize, _dataObj.ScreamProjectileDamage,
+                    _dataObj.EnvironmentMask, _dataObj.PlayerMask);
             }
 
             _screamWaveCurrentCount++;
@@ -430,62 +470,73 @@ public class CompanionBoss : MonoBehaviour
             return;
         }
         
+        // End scream attack
+        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.ScreamEnd);
 
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SCREAM_END);
-
-        _attackEndDelay = dataObj.screamEndTime;
-        currentState = AttackState.DELAY;
+        _attackEndDelay = _dataObj.ScreamEndTime;
+        _currentState = AttackState.Delay;
     }
 
+    // Series of leap attacks in quick succession
     private void FeralLeapAttack()
     {
+        // Behaves as a leap attack
         LeapAttack();
 
-        if(currentState != AttackState.DELAY)
+        // Wait until leap attack is over
+        if(_currentState != AttackState.Delay)
         {
             return;
         }
 
-        currentState = AttackState.FERAL_LEAP;
+        // Overwrite the leap attack end values to continue the attack
+        _currentState = AttackState.Feral;
         _feralLeapCurrentAmount++;
 
+        // Check for any more leaps
         if (_feralLeapCurrentAmount < _feralLeapAmount)
         {
+            // Reset leap attack
             _isReadyToLeap = false;
             _readyStartTime = Time.time;
             return;
         }
 
+        // End feral attack as all leaps have been done
         _feralLeapCurrentAmount = 0;
-        currentState = AttackState.DELAY;
+        _currentState = AttackState.Delay;
     }
-
     #endregion
 
-    // Not to be caused from the player but self impossed from attacks
+    #region Selection
+    // The delay that happens between attacks
     private void Delay()
     {
         _attackEndDelay -= Time.deltaTime;
         if(_attackEndDelay < 0)
         {
+            // Select an attack once delay is over
             SelectAttack();
         }
     }
 
-    // Also sets up attack based on stage within select attack (e.g. feral leaps will stay at stage 2 even if the companion goes to stage 3 during it)
+    // Selects the next attack to do
+    /* 
+     * Also sets up attack based on stage within select attack (e.g. feral leaps will stay at stage 2 even if the companion goes to stage 3 during it)
+     */
     private void SelectAttack()
     {
         // To be updated later
-        if (playerObj.transform.position.x - transform.position.x < 0)
+        if (_player.transform.position.x - transform.position.x < 0)
         {
-            _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.LEFT);
+            _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.Left);
         }
-        else if (playerObj.transform.position.x - transform.position.x > 0)
+        else if (_player.transform.position.x - transform.position.x > 0)
         {
-            _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.RIGHT);
+            _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.Right);
         }
 
-        // Does a leap attack between other attacks
+        // Does a leap attack between other attacks (leap or feral)
         if (!_isLastAttackLeap)
         {
             _isLastAttackLeap = true;
@@ -493,61 +544,63 @@ public class CompanionBoss : MonoBehaviour
             _readyStartTime = Time.time;
 
             // Check if feral leap conditions are met
-            if (_leapAmount < dataObj.leapsBeforeFeral)
+            if (_leapAmount < _dataObj.LeapsBeforeFeral)
             {
+                // Selecting normal leap attack
                 _leapAmount++;
-                _leapEndTime = dataObj.leapEndTime;
+                _leapEndTime = _dataObj.LeapEndTime;
 
                 switch (_heatUpStage)
                 {
                     case 1:
-                        _leapChargeTime = dataObj.leapChargeTimeStage1;
-                        _leapTravelTime = dataObj.leapTravelTimeStage1;
-                        _leapTravelDistance = dataObj.leapTravelDistanceStage1;
+                        _leapChargeTime = _dataObj.LeapChargeTimeStage1;
+                        _leapTravelTime = _dataObj.LeapTravelTimeStage1;
+                        _leapTravelDistance = _dataObj.LeapTravelDistanceStage1;
                         break;
                     case 2:
-                        _leapChargeTime = dataObj.leapChargeTimeStage2;
-                        _leapTravelTime = dataObj.leapTravelTimeStage2;
-                        _leapTravelDistance = dataObj.leapTravelDistanceStage2;
+                        _leapChargeTime = _dataObj.LeapChargeTimeStage2;
+                        _leapTravelTime = _dataObj.LeapTravelTimeStage2;
+                        _leapTravelDistance = _dataObj.LeapTravelDistanceStage2;
                         break;
                     case 3:
-                        _leapChargeTime = dataObj.leapChargeTimeStage3;
-                        _leapTravelTime = dataObj.leapTravelTimeStage3;
-                        _leapTravelDistance = dataObj.leapTravelDistanceStage3;
+                        _leapChargeTime = _dataObj.LeapChargeTimeStage3;
+                        _leapTravelTime = _dataObj.LeapTravelTimeStage3;
+                        _leapTravelDistance = _dataObj.LeapTravelDistanceStage3;
                         break;
                 }
 
-                currentState = AttackState.LEAP;
+                _currentState = AttackState.Leap;
 
                 return;
             }
 
-            _leapAmount = 0;
-            _leapEndTime = dataObj.feralLeapRestTime;
+            // Selecting feral attack
+            _leapAmount = 0; // Reset leap amount for feral counter
+            _leapEndTime = _dataObj.FeralLeapRestTime;
 
             switch (_heatUpStage)
             {
                 case 1:
-                    _feralLeapAmount = dataObj.feralLeapAmountStage1;
-                    _leapChargeTime = dataObj.feralLeapDelayStage1;
-                    _leapTravelTime = dataObj.feralLeapTravelTimeStage1;
-                    _leapTravelDistance = dataObj.feralLeapDistanceStage1;
+                    _feralLeapAmount = _dataObj.FeralLeapAmountStage1;
+                    _leapChargeTime = _dataObj.FeralLeapDelayStage1;
+                    _leapTravelTime = _dataObj.FeralLeapTravelTimeStage1;
+                    _leapTravelDistance = _dataObj.FeralLeapDistanceStage1;
                     break;
                 case 2:
-                    _feralLeapAmount = dataObj.feralLeapAmountStage2;
-                    _leapChargeTime = dataObj.feralLeapDelayStage2;
-                    _leapTravelTime = dataObj.feralLeapTravelTimeStage2;
-                    _leapTravelDistance = dataObj.feralLeapDistanceStage2;
+                    _feralLeapAmount = _dataObj.FeralLeapAmountStage2;
+                    _leapChargeTime = _dataObj.FeralLeapDelayStage2;
+                    _leapTravelTime = _dataObj.FeralLeapTravelTimeStage2;
+                    _leapTravelDistance = _dataObj.FeralLeapDistanceStage2;
                     break;
                 case 3:
-                    _feralLeapAmount = dataObj.feralLeapAmountStage3;
-                    _leapChargeTime = dataObj.feralLeapDelayStage3;
-                    _leapTravelTime = dataObj.feralLeapTravelTimeStage3;
-                    _leapTravelDistance = dataObj.feralLeapDistanceStage3;
+                    _feralLeapAmount = _dataObj.FeralLeapAmountStage3;
+                    _leapChargeTime = _dataObj.FeralLeapDelayStage3;
+                    _leapTravelTime = _dataObj.FeralLeapTravelTimeStage3;
+                    _leapTravelDistance = _dataObj.FeralLeapDistanceStage3;
                     break;
             }
 
-            currentState = AttackState.FERAL_LEAP;
+            _currentState = AttackState.Feral;
 
             return;
         }
@@ -555,29 +608,30 @@ public class CompanionBoss : MonoBehaviour
         _isLastAttackLeap = false;
 
         // Check for range
-        float playerDistance = (playerObj.transform.position - transform.position).sqrMagnitude;
+        float playerDistance = (_player.transform.position - transform.position).sqrMagnitude;
 
-        if (playerDistance <= dataObj.closeRangeDistance * dataObj.closeRangeDistance)
+        if (playerDistance <= _dataObj.CloseRangeDistance * _dataObj.CloseRangeDistance) // Check for close range
         {
+            // Selecting spit attack
             _spitStartTimer = Time.time;
 
             switch (_heatUpStage)
             {
                 case 1:
-                    _spitTravelDistance = dataObj.spitProjectileTravelDistance1;
-                    _spitSize = dataObj.spitProjectileSize1;
+                    _spitTravelDistance = _dataObj.SpitProjectileTravelDistance1;
+                    _spitSize = _dataObj.SpitProjectileSize1;
                     break;
                 case 2:
-                    _spitTravelDistance = dataObj.spitProjectileTravelDistance2;
-                    _spitSize = dataObj.spitProjectileSize2;
+                    _spitTravelDistance = _dataObj.SpitProjectileTravelDistance2;
+                    _spitSize = _dataObj.SpitProjectileSize2;
                     break;
                 case 3:
-                    _spitTravelDistance = dataObj.spitProjectileTravelDistance3;
-                    _spitSize = dataObj.spitProjectileSize3;
+                    _spitTravelDistance = _dataObj.SpitProjectileTravelDistance3;
+                    _spitSize = _dataObj.SpitProjectileSize3;
                     break;
             }
 
-            currentState = AttackState.SPIT;
+            _currentState = AttackState.Spit;
 
             return;
         }
@@ -585,72 +639,81 @@ public class CompanionBoss : MonoBehaviour
         // Check which ranged attack
         if (_doLickAttack)
         {
-            _doLickAttack = false;
+            // Selecting lick attack
+            _doLickAttack = false; // Next non-close range attack will be scream
             _lickStartTimer = Time.time;
             _lickWaveCurrentCount = 0;
             switch (_heatUpStage)
             {
                 case 1:
-                    _lickProjectileSpeed = dataObj.lickProjectileSpeed1;
-                    _lickWaveGap = dataObj.lickWaveGapStage1;
-                    _lickWaveCount = dataObj.lickWavesStage1;
-                    _lickProjectiles = dataObj.lickProjectilesStage1;
-                    _lickLastWaveProjectiles = dataObj.lickLastWaveProjectilesStage1;
+                    _lickProjectileSpeed = _dataObj.LickProjectileSpeed1;
+                    _lickWaveGap = _dataObj.LickWaveGapStage1;
+                    _lickWaveCount = _dataObj.LickWavesStage1;
+                    _lickProjectiles = _dataObj.LickProjectilesStage1;
+                    _lickLastWaveProjectiles = _dataObj.LickLastWaveProjectilesStage1;
                     break;
                 case 2:
-                    _lickProjectileSpeed = dataObj.lickProjectileSpeed2;
-                    _lickWaveGap = dataObj.lickWaveGapStage2;
-                    _lickWaveCount = dataObj.lickWavesStage2;
-                    _lickProjectiles = dataObj.lickProjectilesStage2;
-                    _lickLastWaveProjectiles = dataObj.lickLastWaveProjectilesStage2;
+                    _lickProjectileSpeed = _dataObj.LickProjectileSpeed2;
+                    _lickWaveGap = _dataObj.LickWaveGapStage2;
+                    _lickWaveCount = _dataObj.LickWavesStage2;
+                    _lickProjectiles = _dataObj.LickProjectilesStage2;
+                    _lickLastWaveProjectiles = _dataObj.LickLastWaveProjectilesStage2;
                     break;
                 case 3:
-                    _lickProjectileSpeed = dataObj.lickProjectileSpeed3;
-                    _lickWaveGap = dataObj.lickWaveGapStage3;
-                    _lickWaveCount = dataObj.lickWavesStage3;
-                    _lickProjectiles = dataObj.lickProjectilesStage3;
-                    _lickLastWaveProjectiles = dataObj.lickLastWaveProjectilesStage3;
+                    _lickProjectileSpeed = _dataObj.LickProjectileSpeed3;
+                    _lickWaveGap = _dataObj.LickWaveGapStage3;
+                    _lickWaveCount = _dataObj.LickWavesStage3;
+                    _lickProjectiles = _dataObj.LickProjectilesStage3;
+                    _lickLastWaveProjectiles = _dataObj.LickLastWaveProjectilesStage3;
                     break;
             }
 
-            currentState = AttackState.LICK;
+            _currentState = AttackState.Lick;
 
             return;
         }
 
-        _doLickAttack = true;
+        // Selecting scream attack
+        _doLickAttack = true; // Next non-close range attack will be lick
         _screamStartTimer = Time.time;
         _screamWaveCurrentCount = 0;
-        _screamStartDirection = (transform.position - playerObj.transform.position).normalized;
+        _screamStartDirection = (transform.position - _player.transform.position).normalized;
         switch (_heatUpStage)
         {
             case 1:
-                _screamProjectileSpeed = dataObj.screamProjectileSpeed1;
-                _screamWaveGap = dataObj.screamWaveGapStage1;
-                _screamWaveCount = dataObj.screamWavesStage1;
+                _screamProjectileSpeed = _dataObj.ScreamProjectileSpeed1;
+                _screamWaveGap = _dataObj.ScreamWaveGapStage1;
+                _screamWaveCount = _dataObj.ScreamWavesStage1;
                 break;
             case 2:
-                _screamProjectileSpeed = dataObj.screamProjectileSpeed2;
-                _screamWaveGap = dataObj.screamWaveGapStage2;
-                _screamWaveCount = dataObj.screamWavesStage2;
+                _screamProjectileSpeed = _dataObj.ScreamProjectileSpeed2;
+                _screamWaveGap = _dataObj.ScreamWaveGapStage2;
+                _screamWaveCount = _dataObj.ScreamWavesStage2;
                 break;
             case 3:
-                _screamProjectileSpeed = dataObj.screamProjectileSpeed3;
-                _screamWaveGap = dataObj.screamWaveGapStage3;
-                _screamWaveCount = dataObj.screamWavesStage3;
+                _screamProjectileSpeed = _dataObj.ScreamProjectileSpeed3;
+                _screamWaveGap = _dataObj.ScreamWaveGapStage3;
+                _screamWaveCount = _dataObj.ScreamWavesStage3;
                 break;
         }
 
-        currentState = AttackState.SCREAM;
+        _currentState = AttackState.Scream;
     }
+    #endregion
 
+    #region Heat Up
+    // Heat Up is the boss fight increasing in difficulty and goes from 1-3 (1 being the easiest and 3 being the hardest)
+
+    // Called to increase the heat up stage
     public void HeatUp()
     {
         _heatUpStage++;
     }
 
+    // Returns the current heat up stage
     public int GetHeatUpStage()
     {
         return _heatUpStage;
     }
+    #endregion
 }

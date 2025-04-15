@@ -1,250 +1,265 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
+    [Header("NECESSARY SCENE OBJECTS")]
     [SerializeField]
-    private ObjectPoolManager poolManager;
+    private ObjectPoolManager _objectPoolManager;
     [SerializeField]
-    private GameObject UICanvas;
-    [SerializeField]
-    private GameObject PlayerCanvas;
-
-    [SerializeField]
-    private PlayerData playerData;
-    [SerializeField]
-    private PlayerDebugData debugData;
-    [SerializeField]
-    private GameObject _evolveDashCollider;
+    private GameObject _canvasUI;
     [SerializeField]
     private SoundManager _soundManager;
     [SerializeField]
     private TimeManager _timeManager;
+
+    [Header("NECESSARY PREFABS")]
+    [SerializeField]
+    private PlayerData _playerData;
+    [SerializeField]
+    private PlayerDebugData _playerDebugData;
+
+    [Header("NECESSARY INTERNAL OBJECTS")]
+    [SerializeField]
+    private GameObject _canvasPlayer;
+    [SerializeField]
+    private GameObject _evolveDashCollider;
     [SerializeField]
     private PlayerAnimationHandler _playerAnimationHandler;
     [SerializeField]
     private PlayerAimReticle _playerAimReticle;
 
-    private NPlayerInput playerInputManager;
-    private PlayerMovement playerMovement;
-    private InteractComponent playerInteract;
-    private PlayerShooting playerShooting;
-
-    //private GameObject weaponDrop;
-
-    //private bool hasWeapon = true;
-    private bool isDamaged = false;
-
-    private float timeOfDamage = -10.0f;
-    private float invulnerableTime = 1.0f;
-    private float regenTimer = 0.0f;
-
-    private float health = 100;
-    private GameObject healthbar;
-    private HealthBarScript healthBarScript;
-
-    private event EventHandler OnDamageTaken;
-
-    private Rigidbody2D rb;
-
-    private bool isDashing = false;
-
-    private CanvasGroup canvGroup;
-    [SerializeField]
-    private bool fadeIn = false;
-    [SerializeField]
-    private bool fadeOut = false;
-    [SerializeField]
-    private float fadeTextTimer = 0.0f;
-
-    private bool _hasCompanion = false;
+    // Objects
+    private GameObject _healthbar;
+    private HealthBarScript _healthBarScript;
     private CompanionManager _companionManager;
+
+    // Components
+    private PlayerInputManager _playerInputManager;
+    private PlayerMovement _playerMovement;
+    private InteractComponent _playerInteract;
+    private PlayerShooting _playerShooting;
+    private Rigidbody2D _rigidbody;
+
+    // Values
+    private bool _hasCompanion = false;
+    private bool _isDashing = false;
+    private bool _isDamaged = false;
+
+    private float _timeOfDamage = -10.0f;
+    private float _invulnerableTime = 1.0f;
+    private float _regenTimer = 0.0f;
+    private float _health = 100;
+
+    // Dialogue System
+    private CanvasGroup _canvasGroup;
+    [SerializeField]
+    private bool _fadeIn = false;
+    [SerializeField]
+    private bool _fadeOut = false;
+    [SerializeField]
+    private float _fadeTextTimer = 0.0f;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
 
-        playerInputManager = gameObject.AddComponent<NPlayerInput>();
-        playerMovement = gameObject.AddComponent<PlayerMovement>();
-        playerShooting = gameObject.AddComponent<PlayerShooting>();
-        playerInteract = gameObject.AddComponent<InteractComponent>();
+        _playerInputManager = gameObject.AddComponent<PlayerInputManager>();
+        _playerMovement = gameObject.AddComponent<PlayerMovement>();
+        _playerShooting = gameObject.AddComponent<PlayerShooting>();
+        _playerInteract = gameObject.AddComponent<InteractComponent>();
 
-        _evolveDashCollider.GetComponent<EvolveDashDamage>().InitialiseScript(ref playerData);
+        _evolveDashCollider.GetComponent<EvolveDashDamage>().InitialiseScript(ref _playerData);
         _evolveDashCollider.SetActive(false);
 
-        health = playerData.health;
-        healthbar = Instantiate(playerData.healthbar, UICanvas.transform.Find("PlayerUI"), true);
-        healthBarScript = healthbar.GetComponent<HealthBarScript>();
-        healthBarScript.SetMaxHealth(health);
-        healthBarScript.SetValue(health);
+        _health = _playerData.Health;
+        _healthbar = Instantiate(_playerData.Healthbar, _canvasUI.transform.Find("PlayerUI"), true);
+        _healthBarScript = _healthbar.GetComponent<HealthBarScript>();
+        _healthBarScript.SetMaxHealth(_health);
+        _healthBarScript.SetValue(_health);
 
-        PlayerManager manager = this;
-        //movement component
-        playerMovement.InitialiseComponent(ref manager, ref playerShooting, ref _playerAnimationHandler, ref playerData, ref debugData, ref UICanvas, ref _soundManager, ref healthBarScript, ref _evolveDashCollider);
-        //shooting component
-        playerShooting.InitialiseComponent(ref playerData, ref debugData, ref playerMovement, ref _playerAnimationHandler, ref poolManager, ref _timeManager, ref _soundManager, ref PlayerCanvas);
-        playerInputManager.InitialiseComponent(ref playerMovement, ref playerShooting, ref _playerAimReticle);
+        PlayerManager manager = this; // Reference for the manager
+        _playerMovement.InitialiseComponent(ref manager, ref _playerShooting, ref _playerAnimationHandler, ref _playerData, ref _playerDebugData, ref _soundManager, ref _healthBarScript, ref _evolveDashCollider);
+        _playerShooting.InitialiseComponent(ref _playerData, ref _playerDebugData, ref _playerMovement, ref _playerAnimationHandler, ref _objectPoolManager, ref _timeManager, ref _soundManager, ref _canvasPlayer);
+        _playerInputManager.InitialiseComponent(ref _playerMovement, ref _playerShooting, ref _playerAimReticle);
 
-        canvGroup = gameObject.transform.Find("PlayerCanvas").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
-
-    }
-
-    private void OnDisable()
-    {
-
+        _canvasGroup = gameObject.transform.Find("_canvasPlayer").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isDamaged)
+        if (_isDamaged)
         {
-            if(Time.time - timeOfDamage >= playerData.controlLossTime) // Exceeded the time for player to not have control
+            if(Time.time - _timeOfDamage >= _playerData.ControlLossTime) // Exceeded the time for player to not have control
             {
                 _playerAnimationHandler.EndDamageAnimation();
-                playerInputManager.EnableInput();
+                _playerInputManager.EnableInput();
             }
-            if(Time.time - timeOfDamage > invulnerableTime) // We've exceeded the time for being invulnerable
+            if(Time.time - _timeOfDamage > _invulnerableTime) // We've exceeded the time for being invulnerable
             {
-                rb.excludeLayers = 0;
-                isDamaged = false;
+                _rigidbody.excludeLayers = 0;
+                _isDamaged = false;
             }
         }
 
-        regenTimer += Time.deltaTime;
-        if(regenTimer >= 1.0f)
+        // Regeneration
+        _regenTimer += Time.deltaTime;
+        if(_regenTimer >= 1.0f)
         {
             Heal(1.0f);
-            regenTimer = 0; 
+            _regenTimer = 0; 
         }
 
 
-        if (fadeIn)
+        // Dialogue
+        if (_fadeIn)
         {
-            canvGroup.alpha += Time.deltaTime;
-            if (canvGroup.alpha >= 1.0f)
+            _canvasGroup.alpha += Time.deltaTime;
+            if (_canvasGroup.alpha >= 1.0f)
             {
-                fadeIn = false;
+                _fadeIn = false;
             }
         }
-        if (fadeOut && !fadeIn)
+        if (_fadeOut && !_fadeIn)
         {
-            canvGroup.alpha -= Time.deltaTime;
-            if (canvGroup.alpha <= 0.0f)
+            _canvasGroup.alpha -= Time.deltaTime;
+            if (_canvasGroup.alpha <= 0.0f)
             {
-                fadeOut = false;
+                _fadeOut = false;
             }
         }
-        if (canvGroup.alpha >= 1.0f)
+        if (_canvasGroup.alpha >= 1.0f)
         {
-            fadeTextTimer += Time.deltaTime;
+            _fadeTextTimer += Time.deltaTime;
         }
 
-        if (fadeTextTimer > 3.0f)
+        if (_fadeTextTimer > 3.0f)
         {
-            fadeOut = true;
+            _fadeOut = true;
         }
 
     }
 
+    #region Health
+    // Damage function
+    /*
+     * damageDirection - Direction for knockback
+     * damageTime = How long the invulnerable time will last
+     * knockbackScalar - Scalar for the knockback force
+     * ammount - Amount of damage
+     */
     public void TakeDamage(Vector2 damageDirection, float damageTime = 1.0f, float knockbackScalar = 10.0f, float ammount = 10)
     {
         if (!CanBeDamaged()) { return; }
 
-        rb.excludeLayers = playerData.damageLayers;
-        isDamaged = true;
-        playerInputManager.DisableInput();
-        timeOfDamage = Time.time;
-        invulnerableTime = damageTime;
-        playerMovement.KnockbackPlayer(damageDirection, knockbackScalar);
-        playerShooting.InterruptFiring();
-        fadeOut = true;
+        // Update values
+        _rigidbody.excludeLayers = _playerData.DamageLayers; // Prevent collisions whilst taking damage
+        _isDamaged = true;
+        _timeOfDamage = Time.time;
+        _invulnerableTime = damageTime;
+        _fadeOut = true;
+        _playerMovement.KnockbackPlayer(damageDirection, knockbackScalar); // Knockback
         _playerAnimationHandler.StartDamageAnimation();
-        
-        OnDamageTaken?.Invoke(this, EventArgs.Empty);
 
-        health -= ammount;
-        if(health <= 20.0f)
+        // Remove control
+        _playerInputManager.DisableInput();
+        _playerShooting.InterruptFiring();
+
+        // Apply damage
+        _health -= ammount;
+        if(_health <= 20.0f)
         {
-            health = 20.0f;
+            _health = 20.0f;
         }
-        healthBarScript.SetValue(health);
+        _healthBarScript.SetValue(_health);
 
-        _timeManager.AddTimescaleForDuration(playerData.damageImpactFrameScale, playerData.damageImpactFrameDuration * (ammount / 10.0f));
+        // Impact frames
+        _timeManager.AddTimescaleForDuration(_playerData.DamageImpactFrameScale, _playerData.DamageImpactFrameDuration * (ammount / 10.0f));
     }
 
+    // Restore health
     public void Heal(float ammount)
     {
-        health += ammount;
-        if(health >= playerData.health)
+        _health += ammount;
+        if(_health >= _playerData.Health)
         {
-            health = playerData.health;
+            _health = _playerData.Health;
         }
-        healthBarScript.SetValue(health);
+        _healthBarScript.SetValue(_health);
     }
 
-    public void DisableInput()
-    {
-        playerInputManager.DisableInput();
-    }
-
-    public void EnableInput()
-    {
-        playerInputManager.EnableInput();
-    }
-
-    public void StartFadeInSpeech(string text)
-    {
-        fadeIn = true;
-        fadeTextTimer = 0.0f;
-        canvGroup.gameObject.GetComponentInChildren<TMP_Text>().text = text;
-    }
-
-    public void ChangeDashToggle(bool toggle)
-    {
-        debugData.dashTowardsMouse = toggle;
-    }
-
-    public void EvolveDash(bool toggle)
-    {
-        playerMovement.EvolveDash(toggle);
-        playerMovement.RechargeDashes();
-    }
-
-    public void GainDashCharges()
-    {
-        playerMovement.RechargeDashes();
-    }
-
+    // Updates condition value
     public void SetDashInvulnerability(bool invulnerability)
     {
-        isDashing = invulnerability;
+        _isDashing = invulnerability;
     }
 
     public bool CanBeDamaged()
     {
-        if(isDamaged || isDashing) { return false; }
+        if (_isDamaged || _isDashing) { return false; }
         return true;
     }
+    #endregion
 
-    public bool isInteracting()
+    #region Input
+    public void DisableInput()
     {
-        return playerInteract.GetInteract();
+        _playerInputManager.DisableInput();
     }
 
+    public void EnableInput()
+    {
+        _playerInputManager.EnableInput();
+    }
+    #endregion
+
+    public void StartFadeInSpeech(string text)
+    {
+        _fadeIn = true;
+        _fadeTextTimer = 0.0f;
+        _canvasGroup.gameObject.GetComponentInChildren<TMP_Text>().text = text;
+    }
+
+    // Player Settings
+    public void ChangeDashToggle(bool toggle)
+    {
+        _playerDebugData.CanDashTowardsMouse = toggle;
+    }
+
+    #region Movement
+    public void EvolveDash(bool toggle)
+    {
+        _playerMovement.EvolveDash(toggle);
+        _playerMovement.RechargeDashes();
+    }
+
+    public void GainDashCharges()
+    {
+        _playerMovement.RechargeDashes();
+    }
+    #endregion
+
+    
+    public bool isInteracting()
+    {
+        return _playerInteract.GetInteract();
+    }
+
+    #region Companion
+    // Sets the ally companion in the player system
     public void SetAllyCompanion(bool isAdding, ref CompanionManager companionManager)
     {
         _hasCompanion = isAdding;
         _companionManager = companionManager;
 
-        playerShooting.UpdateCompanionData(_hasCompanion, ref _companionManager);
+        _playerShooting.UpdateCompanionData(_hasCompanion, ref _companionManager);
     }
 
+    // Teleports ally companions to the player's position
     public void ReturnAllyCompanions()
     {
         if (_hasCompanion)
@@ -253,12 +268,15 @@ public class PlayerManager : MonoBehaviour
             _companionManager.ChangeToIdleForTime(1.0f);
         }
     }
+    #endregion
 
+    #region Gizmos
     private void OnDrawGizmos()
     {
         //Gizmos.color = Color.green;
-        //Gizmos.DrawLine(transform.position, transform.position + Vector3.right * playerData.dashDistance);
+        //Gizmos.DrawLine(transform.position, transform.position + Vector3.right * _playerData.DashDistance);
         //Gizmos.color = Color.red;
-        //Gizmos.DrawLine(transform.position + Vector3.right * playerData.dashDistance, transform.position + Vector3.right * (playerData.dashDistance + playerData.evolvedDashExtraDistance));
+        //Gizmos.DrawLine(transform.position + Vector3.right * _playerData.DashDistance, transform.position + Vector3.right * (_playerData.DashDistance + _playerData.EvolvedDashExtraDistance));
     }
+    #endregion
 }

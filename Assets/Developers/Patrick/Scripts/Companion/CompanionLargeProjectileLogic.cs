@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class CompanionLargeProjectileLogic : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    // Objects
+    private ObjectPoolManager _objectPoolManager;
 
-    private ObjectPoolManager poolManager;
+    // Components
+    private Rigidbody2D _rigidbody;
 
+    // Values
     private string _name;
     private float _startTime;
     private float _lifespan;
@@ -22,7 +22,7 @@ public class CompanionLargeProjectileLogic : MonoBehaviour
         _startTime = Time.time;
         _lifespan = lifespan;
 
-        poolManager = poolManagerRef;
+        _objectPoolManager = poolManagerRef;
 
         _name = name;
 
@@ -39,7 +39,7 @@ public class CompanionLargeProjectileLogic : MonoBehaviour
         float AngleFromRight = Vector3.SignedAngle(Vector3.right, new Vector3(_direction.x, _direction.y, Vector3.right.z), new Vector3(0.0f, 0.0f, 1.0f));
         transform.rotation = Quaternion.Euler(0.0f, 0.0f, AngleFromRight);
 
-        rb = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         _isActive = true;
     }
 
@@ -47,21 +47,24 @@ public class CompanionLargeProjectileLogic : MonoBehaviour
     {
         if (_isActive)
         {
-            rb.MovePosition(InterpolateMethod());
+            // Move projectile with movement method
+            _rigidbody.MovePosition(InterpolateMethod());
 
             if(Time.time - _startTime >= _lifespan)
             {
                 _isActive = false;
-                poolManager.ReleaseObject(_name, gameObject);
+                _objectPoolManager.ReleaseObject(_name, gameObject);
             }
         }
     }
 
+    // Currently linear interpolation
     private Vector2 InterpolateMethod()
     {
         return Vector2.Lerp(_startPosition, _endPosition, (Time.time - _startTime) / _lifespan);
     }
 
+    // Damages player if in contact
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (_isActive)

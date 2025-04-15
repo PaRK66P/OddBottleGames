@@ -5,86 +5,185 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputManager : MonoBehaviour
 {
-    public PlayerInputs_ActionMap actionMap;
-    private InputAction movementAction;
-    private InputAction dashAction;
-    private InputAction fireAction;
-    private InputAction reloadAction;
-    private InputAction chargeAction;
+    // Objects
+    private NewPlayerInputMap _playerInputActions;
 
-    private InputAction aimAction;
+    // Components
+    private PlayerInput _playerInput;
+    private PlayerMovement _playerMovement;
+    private PlayerShooting _playerShooting;
+    private PlayerAimReticle _playerAimReticle;
 
-    public PlayerMovement playerMovement;
-    public PlayerShooting playerShooting;
-
-    public bool isInitialised = false;
-
-    public void setInitialised(bool state) { isInitialised = state; }
-
-    // Start is called before the first frame update
-    public void InitialiseComponent(ref PlayerMovement dPlayerMovement, ref PlayerShooting dPlayerShooting)
-    {
-        actionMap = new PlayerInputs_ActionMap();
-        movementAction = actionMap.Player.Movement;
-        dashAction = actionMap.Player.Dash;
-        fireAction = actionMap.Player.Shoot;
-        reloadAction = actionMap.Player.Reload;
-        chargeAction = actionMap.Player.Charge;
-
-        aimAction = actionMap.Player.Aim;
-
-        playerMovement = dPlayerMovement;
-        playerShooting = dPlayerShooting;
-
-        isInitialised = true;
-    }
+    // Values
+    private bool _isInitialised = false;
+    private bool _isUsingController = true;
 
     void OnEnable()
     {
-        if (isInitialised) { actionMap.Enable(); EnableInput(); }
+        // Might not be necessary
+        if (_isInitialised)
+        {
+            EnableInput();
+            _playerInput.onControlsChanged += OnChangeControls;
+        }
     }
 
     private void OnDisable()
     {
+        // Might not be necessary
         DisableInput();
-        actionMap.Disable();
+        _playerInput.onControlsChanged -= OnChangeControls;
+    }
+
+    public void InitialiseComponent(ref PlayerMovement playerMovement, ref PlayerShooting playerShooting, ref PlayerAimReticle playerAimReticle)
+    {
+        _playerInput = GetComponent<PlayerInput>();
+        _playerInput.onControlsChanged += OnChangeControls;
+
+        _playerMovement = playerMovement;
+        _playerShooting = playerShooting;
+        _playerAimReticle = playerAimReticle;
+
+        _playerInputActions = new NewPlayerInputMap();
+
+        _isInitialised = true;
+
+        // Setup control scheme
+        if (_playerInput.currentControlScheme == "Keyboard")
+        {
+            _isUsingController = false;
+            playerAimReticle.SwitchToMouse();
+        }
+        else
+        {
+            _isUsingController = true;
+            playerAimReticle.SwitchToController();
+        }
+
+        EnableInput();
+    }
+
+    public void OnChangeControls(PlayerInput input)
+    {
+        if (input.currentControlScheme == "Controller")
+        {
+            _isUsingController = true;
+            EnableControllerAim();
+            DisableMouseAim();
+            _playerAimReticle.SwitchToController();
+        }
+        else if (input.currentControlScheme == "Keyboard")
+        {
+            _isUsingController = false;
+            EnableMouseAim();
+            DisableControllerAim();
+            _playerAimReticle.SwitchToMouse();
+        }
+        else
+        {
+            Debug.LogWarning("Unknown device");
+        }
     }
 
     public void EnableInput()
     {
-        movementAction.Enable();
-        dashAction.Enable();
-        fireAction.Enable();
-        reloadAction.Enable();
-        chargeAction.Enable();
+        // Enable Action
+        _playerInputActions.Player.Movement.Enable();
+        _playerInputActions.Player.Dash.Enable();
+        _playerInputActions.Player.Shoot.Enable();
+        _playerInputActions.Player.Reload.Enable();
+        _playerInputActions.Player.Charge.Enable();
 
-        aimAction.Enable();
+        // Bind input functions
+        _playerInputActions.Player.Movement.performed += _playerMovement.SetMovementInput;
+        _playerInputActions.Player.Movement.canceled += _playerMovement.SetMovementInput;
+        _playerInputActions.Player.Dash.performed += _playerMovement.PlayerDashInput;
+        _playerInputActions.Player.Charge.performed += _playerShooting.PlayerChargeInput;
+        _playerInputActions.Player.Charge.canceled += _playerShooting.PlayerStopChargeInput;
+        _playerInputActions.Player.Shoot.performed += _playerShooting.PlayerFireInput;
+        _playerInputActions.Player.Reload.performed += _playerShooting.PlayerReloadAction;
 
-        movementAction.performed += playerMovement.SetMovementInput;
-        movementAction.canceled += playerMovement.SetMovementInput;
-        dashAction.performed += playerMovement.PlayerDashInput;
-        chargeAction.performed += playerShooting.PlayerChargeInput;
-        chargeAction.canceled += playerShooting.PlayerStopChargeInput;
-        fireAction.performed += playerShooting.PlayerFireInput;
-        reloadAction.performed += playerShooting.PlayerReloadAction;
+        if (_isUsingController)
+        {
+            EnableControllerAim();
+        }
+        else
+        {
+            EnableMouseAim();
+        }
     }
 
     public void DisableInput()
     {
-        movementAction.Disable();
-        dashAction.Disable();
-        fireAction.Disable();
-        reloadAction.Disable();
-        chargeAction.Disable();
+        // Disable Actions
+        _playerInputActions.Player.Movement.Disable();
+        _playerInputActions.Player.Dash.Disable();
+        _playerInputActions.Player.Shoot.Disable();
+        _playerInputActions.Player.Reload.Disable();
+        _playerInputActions.Player.Charge.Disable();
 
-        aimAction.Disable();
+        _playerInputActions.Player.AimDirection.Disable();
+        _playerInputActions.Player.AimPosition.Disable();
 
-        movementAction.performed -= playerMovement.SetMovementInput;
-        movementAction.canceled -= playerMovement.SetMovementInput;
-        dashAction.performed -= playerMovement.PlayerDashInput;
-        chargeAction.performed -= playerShooting.PlayerChargeInput;
-        chargeAction.canceled -= playerShooting.PlayerStopChargeInput;
-        fireAction.performed -= playerShooting.PlayerFireInput;
-        reloadAction.performed -= playerShooting.PlayerReloadAction;
+        // Remove functions
+        _playerInputActions.Player.Movement.performed -= _playerMovement.SetMovementInput;
+        _playerInputActions.Player.Movement.canceled -= _playerMovement.SetMovementInput;
+        _playerInputActions.Player.Dash.performed -= _playerMovement.PlayerDashInput;
+        _playerInputActions.Player.Charge.performed -= _playerShooting.PlayerChargeInput;
+        _playerInputActions.Player.Charge.canceled -= _playerShooting.PlayerStopChargeInput;
+        _playerInputActions.Player.Shoot.performed -= _playerShooting.PlayerFireInput;
+        _playerInputActions.Player.Reload.performed -= _playerShooting.PlayerReloadAction;
+
+        if (_isUsingController)
+        {
+            DisableControllerAim();
+        }
+        else
+        {
+            DisableMouseAim();
+        }
+    }
+
+    private void EnableControllerAim()
+    {
+        _playerInputActions.Player.AimDirection.Enable();
+
+        _playerInputActions.Player.AimDirection.performed += _playerShooting.SetControllerAimInput;
+        _playerInputActions.Player.AimDirection.canceled += _playerShooting.SetAimToMovement;
+    }
+
+    private void DisableControllerAim()
+    {
+        _playerInputActions.Player.AimDirection.Disable();
+
+        _playerInputActions.Player.AimDirection.performed -= _playerShooting.SetControllerAimInput;
+        _playerInputActions.Player.AimDirection.canceled -= _playerShooting.SetAimToMovement;
+    }
+    private void EnableMouseAim()
+    {
+        _playerInputActions.Player.AimPosition.Enable();
+
+        _playerInputActions.Player.AimPosition.performed += _playerShooting.SetMouseAimInput;
+    }
+
+    private void DisableMouseAim()
+    {
+        _playerInputActions.Player.AimPosition.Disable();
+
+        _playerInputActions.Player.AimPosition.performed -= _playerShooting.SetMouseAimInput;
+    }
+
+    public void SetInitialised(bool state) { _isInitialised = state; }
+
+    public bool IsInputKeyboard()
+    {
+        if (_playerInput.currentControlScheme == "Keyboard")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

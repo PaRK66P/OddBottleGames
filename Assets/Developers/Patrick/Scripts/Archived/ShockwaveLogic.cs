@@ -1,70 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class ShockwaveLogic : MonoBehaviour
 {
-    private float speed;
-    private Vector2 directionMovement;
-    private float damage;
-    private LayerMask target;
+    // Values
+    private float _speed;
+    private Vector2 _directionMovement;
+    private float _damage;
+    private LayerMask _target;
 
-    private Rigidbody2D rb;
+    // Components
+    private Rigidbody2D _rb;
 
-    private ObjectPoolManager objectPoolManager;
+    // Managers
+    private ObjectPoolManager _objectPoolManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + directionMovement * speed * Time.fixedDeltaTime);
+        _rb.MovePosition(_rb.position + _directionMovement * _speed * Time.fixedDeltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((1 << collision.gameObject.layer) == target.value)
+        // Target collision
+        if ((1 << collision.gameObject.layer) == _target.value)
         {
-            if (collision.gameObject.GetComponent<PlayerManager>() != null)
+            if (collision.gameObject.GetComponent<PlayerManager>() != null) // Check for player
             {
                 Vector2 damageDirection = new Vector2(collision.gameObject.transform.position.x - transform.position.x,
                     collision.gameObject.transform.position.y - transform.position.y);
                 collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection.normalized, 1, 10);
             }
-            else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null)
+            else if (collision.gameObject.GetComponent<AISimpleBehaviour>() != null) // Check for AI
             {
-                collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(damage, gameObject.transform.position - collision.gameObject.transform.position);
+                collision.gameObject.GetComponent<AISimpleBehaviour>().TakeDamage(_damage, gameObject.transform.position - collision.gameObject.transform.position);
             }
-            else if (collision.gameObject.GetComponent<bossScript>() != null)
+            else if (collision.gameObject.GetComponent<bossScript>() != null) // Check for boss
             {
                 collision.gameObject.GetComponent<bossScript>().takeDamage(1);
             }
         }
+
+        // Environment collision
         if(collision.gameObject.layer == 6)
         {
-            objectPoolManager.ReleaseObject("Shockwave", this.gameObject);
+            _objectPoolManager.ReleaseObject("Shockwave", this.gameObject);
         }
     }
 
+    // Sets up the shockwave
     public void InitialiseEffect(LayerMask damageLayer, float totalDamage, Vector2 direction, float speedMovement, ObjectPoolManager objMgr)
     {
-        target = damageLayer;
-        damage = totalDamage;
-        directionMovement = direction;
-        speed = speedMovement;
-        objectPoolManager = objMgr;
+        _target = damageLayer;
+        _damage = totalDamage;
+        _directionMovement = direction;
+        _speed = speedMovement;
+        _objectPoolManager = objMgr;
     }
-
-
 }
