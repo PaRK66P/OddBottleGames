@@ -76,7 +76,7 @@ public class PlayerManager : MonoBehaviour
         _evolveDashCollider.SetActive(false);
 
         _health = _playerData.Health;
-        _healthbar = Instantiate(_playerData.Healthbar, _canvasUI.transform.Find("PlayerUI"), true);
+        _healthbar = Instantiate(_playerData.Healthbar, _canvasUI.transform.Find("PlayerUI"));
         _healthBarScript = _healthbar.GetComponent<HealthBarScript>();
         _healthBarScript.SetMaxHealth(_health);
         _healthBarScript.SetValue(_health);
@@ -86,7 +86,7 @@ public class PlayerManager : MonoBehaviour
         _playerShooting.InitialiseComponent(ref _playerData, ref _playerDebugData, ref _playerMovement, ref _playerAnimationHandler, ref _objectPoolManager, ref _timeManager, ref _soundManager, ref _canvasPlayer);
         _playerInputManager.InitialiseComponent(ref _playerMovement, ref _playerShooting, ref _playerAimReticle);
 
-        _canvasGroup = gameObject.transform.Find("_canvasPlayer").transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
+        _canvasGroup = _canvasPlayer.transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
     }
 
     // Update is called once per frame

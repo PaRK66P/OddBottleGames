@@ -29,7 +29,7 @@ MonoBehaviour:
   LeapChargeTime: 0.8
   LeapDistance: 12
   LeapTargetTravelPercentage: 0.8
-  LeapDamage: 3
+  LeapDamage: 8
   LeapEndTime: 0.5
   DrawDetectionRange: 0
   DrawIdleDistance: 0

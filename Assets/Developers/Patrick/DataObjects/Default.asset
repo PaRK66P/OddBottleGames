@@ -34,9 +34,7 @@ MonoBehaviour:
   EnemyLayers:
     serializedVersion: 2
     m_Bits: 512
-  AmmoUIPrefab: {fileID: 0}
-  AmmoUIObject: {fileID: 0}
-  ReloadUISlider: {fileID: 0}
+  AmmoUIPrefab: {fileID: 1705883947001659697, guid: 5ce2f6dea12434847baa5c6e38868e0a, type: 3}
   FireRate: 0.4
   MaxTimeToChargeShot: 0.4
   MinTimeToChargeShot: 0.05

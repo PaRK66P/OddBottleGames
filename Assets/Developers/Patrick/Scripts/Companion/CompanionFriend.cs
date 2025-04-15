@@ -57,6 +57,7 @@ public class CompanionFriend : MonoBehaviour
     public void CompanionUpdate()
     {
         // Update based on state
+        Debug.Log("Companion State: " + _state.ToString());
         switch (_state)
         {
             case CompanionStates.Idle:
@@ -253,6 +254,9 @@ public class CompanionFriend : MonoBehaviour
             _leapTimer = Time.time;
             _isReadyToLeap = false;
             _isLeapFinished = false;
+
+
+            Debug.Log("Target: " + _currentTarget.ToString());
 
             // To be updated later
             if (_currentTarget.transform.position.x - transform.position.x < 0)

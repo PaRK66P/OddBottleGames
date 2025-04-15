@@ -112,8 +112,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _nodeSize: 1
-  _gridBottomLeft: {fileID: 0}
-  _gridTopRight: {fileID: 0}
+  _gridBottomLeft: {fileID: 7461955397410415998}
+  _gridTopRight: {fileID: 7948774885364334342}
   _showGrid: 0
   _showBlockedNodes: 0
   _showRecentPath: 0
