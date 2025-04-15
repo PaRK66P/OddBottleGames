@@ -64,6 +64,11 @@ public class SoundManager : MonoBehaviour
     private bool isWalkingAmb = false;
     private float footstepLengthAmb;
 
+    public void SetAmbrosiaAudioSource(ref AudioSource audioSource)
+    {
+        AmbrosiaAudioSource = audioSource;
+    }
+
     public void Update()
     {
         //update volume
@@ -71,7 +76,7 @@ public class SoundManager : MonoBehaviour
         PlayerAudioSource.volume = volume;
         //BGMAudioSource.volume = volume;
         //EnemyAudioSource.volume = volume;
-        //AmbrosiaAudioSource.volume = volume;
+        AmbrosiaAudioSource.volume = volume;
 
 
         //Player footsteps
@@ -87,6 +92,7 @@ public class SoundManager : MonoBehaviour
         PlayAmbFootsteps();
         if (footstepLengthAmb < 0f) footstepLengthAmb = 0f;
     }
+
     public void PlayBGM()
     {
         BGMAudioSource.clip = BGMClip;

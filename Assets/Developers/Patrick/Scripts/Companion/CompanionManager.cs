@@ -19,6 +19,8 @@ public class CompanionManager : MonoBehaviour
     private CompanionFriendData _friendData;
     [SerializeField]
     private SpriteRenderer _companionImage; // TO BE REMOVED
+    [SerializeField]
+    private AudioSource _companionAudioSource;
 
     // Objects
     private GameObject _playerObject;
@@ -28,6 +30,7 @@ public class CompanionManager : MonoBehaviour
     private ObjectPoolManager _poolManager;
     private PathfindingManager _pathfindingManager;
     private VisualNovelScript _visualNovelManager;
+    private SoundManager _soundManager;
 
     // Components
     private Rigidbody2D _rb;
@@ -54,13 +57,16 @@ public class CompanionManager : MonoBehaviour
     /*
      * MUST BE CALLED BEFORE THIS OBJECT'S FIRST UPDATE FRAME
      */
-    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref PathfindingManager pathfindingManager, ref Canvas dUICanvas)
+    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref PathfindingManager pathfindingManager, ref SoundManager soundManager, ref Canvas dUICanvas)
     {
         _managerRef = this;
 
         _playerObject = playerObject;
         _poolManager = poolManager;
         _pathfindingManager = pathfindingManager;
+        _soundManager = soundManager;
+
+        _soundManager.SetAmbrosiaAudioSource(ref _companionAudioSource);
 
         _visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
 
@@ -77,10 +83,10 @@ public class CompanionManager : MonoBehaviour
         _animationsScript.InitialiseComponent(ref _bossData, ref _companionImage);
 
         _bossScript = gameObject.AddComponent<CompanionBoss>();
-        _bossScript.InitialiseComponent(ref _bossData, ref _rb, ref _animationsScript, ref _pathfindingManager, ref _playerObject, ref _poolManager);
+        _bossScript.InitialiseComponent(ref _bossData, ref _rb, ref _animationsScript, ref _pathfindingManager, ref _playerObject, ref _poolManager, ref _soundManager);
 
         _friendScript = gameObject.AddComponent<CompanionFriend>();
-        _friendScript.InitialiseComponent(ref _friendData, ref _detectionScript, ref _animationsScript, ref _pathfindingManager, ref _rb, ref _playerObject);
+        _friendScript.InitialiseComponent(ref _friendData, ref _detectionScript, ref _animationsScript, ref _pathfindingManager, ref _rb, ref _playerObject, ref _soundManager);
 
         _healthbar = Instantiate(_bossData.Healthbar, dUICanvas.transform);
         _healthbar.GetComponent<UnityEngine.UI.Slider>().maxValue = _bossData.Health;
@@ -131,6 +137,7 @@ public class CompanionManager : MonoBehaviour
     {
         if(_currentState != CompanionStates.Enemy) { return; } // Can only take damage in enemy state
 
+        _soundManager.PlayEnemyHit();
         _health -= damage;
         if(_health <= 0 && !_hasPlayedNovel)
         {
@@ -166,6 +173,7 @@ public class CompanionManager : MonoBehaviour
 
     private void CompanionDeath()
     {
+        _soundManager.PlayenDead();
         ChangeToNone();
         RemoveHealthBar();
         StartCoroutine(PlayDeathEffects());

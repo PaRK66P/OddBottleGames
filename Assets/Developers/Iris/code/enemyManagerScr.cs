@@ -12,6 +12,7 @@ public class enemyManager : MonoBehaviour
     public Canvas UICanvas;
     public GameObject player;
     public PathfindingManager pathfinder;
+    public SoundManager SoundManagerObject;
     public List<GameObject> weakPointsList;
 
     private enemyManager myself;
@@ -29,7 +30,7 @@ public class enemyManager : MonoBehaviour
         }
         foreach (spawnerScript s in spawners)
         {
-            s.setUp(ref pooler, ref myself, ref UICanvas, ref player, ref pathfinder, ref weakPointsList);
+            s.setUp(ref pooler, ref myself, ref UICanvas, ref player, ref pathfinder, ref SoundManagerObject, ref weakPointsList);
             s.spawn();
             enemyNumber++;
         }

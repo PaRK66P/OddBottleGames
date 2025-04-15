@@ -19,6 +19,7 @@ public class CompanionBoss : MonoBehaviour
     private GameObject _player;
     private PathfindingManager _pathfindingScript;
     private ObjectPoolManager _poolManager;
+    private SoundManager _soundManager;
 
     // Components
     private Rigidbody2D _rb;
@@ -47,6 +48,7 @@ public class CompanionBoss : MonoBehaviour
     private float _leapChargeTime;
     private float _leapTravelTime;
     private float _leapEndTime;
+    private bool _isLeapChargeStarted;
 
     // Feral Attack
     private int _feralLeapAmount;
@@ -81,14 +83,18 @@ public class CompanionBoss : MonoBehaviour
 
     #region Set Up
     // Sets up the component
-    public void InitialiseComponent(ref CompanionBossData bossData, ref Rigidbody2D rigidbodyComp, ref CompanionAnimations animationScript, ref PathfindingManager pathfindingScript, ref GameObject playerObjectRef, ref ObjectPoolManager poolManagerRef)
+    public void InitialiseComponent(ref CompanionBossData bossData, 
+        ref Rigidbody2D rigidbodyComp, ref CompanionAnimations animationScript, 
+        ref PathfindingManager pathfindingScript, ref GameObject playerObject, 
+        ref ObjectPoolManager poolManager, ref SoundManager soundManager)
     {
         _dataObj = bossData;
         _rb = rigidbodyComp;
         _animationScript = animationScript;
         _pathfindingScript = pathfindingScript;
-        _player = playerObjectRef;
-        _poolManager = poolManagerRef;
+        _player = playerObject;
+        _poolManager = poolManager;
+        _soundManager = soundManager;
 
         _heatUpStage = 1;
     }
@@ -152,6 +158,8 @@ public class CompanionBoss : MonoBehaviour
         // Not ready when not in range to leap yet
         if (!_isReadyToLeap)
         {
+            _soundManager.SetWalkingAmb(true);
+
             // Find direction
             Node playerNode = _pathfindingScript.NodeFromWorldPosition(_player.transform.position);
             Node currentNode = _pathfindingScript.NodeFromWorldPosition(transform.position);
@@ -186,13 +194,20 @@ public class CompanionBoss : MonoBehaviour
 
                 _leapStartTimer = Time.time;
                 _isReadyToLeap = true;
+                _isLeapChargeStarted = false;
             }
             return;
         }
+        _soundManager.SetWalkingAmb(false);
 
         // Charge up
         if (Time.time - _leapStartTimer <= _leapChargeTime)
         {
+            if (!_isLeapChargeStarted)
+            {
+                _soundManager.PlayAmbDashReady(_heatUpStage);
+            }
+
             _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapCharge);
             return;
         }
@@ -201,6 +216,8 @@ public class CompanionBoss : MonoBehaviour
 
         if (!_isLeapMoving) // Only for updating start movement values
         {
+            _soundManager.PlayAmbDashAttack(_heatUpStage);
+
             _leapMoveTimer = Time.time;
             _isLeapMoving = true;
 
@@ -309,6 +326,8 @@ public class CompanionBoss : MonoBehaviour
                 transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (angleFromRight + (i * _dataObj.SpitSpawnAngle))), Mathf.Sin(Mathf.Deg2Rad * (angleFromRight + (i * _dataObj.SpitSpawnAngle))), 0.0f) * (_dataObj.SpitSpawnDistance + _spitTravelDistance)); 
         }
 
+        _soundManager.PlayEnemyShoot();
+
         // End spit attack
         _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SpitEnd);
 
@@ -334,6 +353,8 @@ public class CompanionBoss : MonoBehaviour
             if(Time.time - _lickLastWaveStartTime <= _lickWaveGap) { return; }
 
             // Create wave
+            _soundManager.PlayEnemyShoot();
+
             Vector3 forwardVector = (_player.transform.position - transform.position).normalized;
             Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
 
@@ -380,6 +401,8 @@ public class CompanionBoss : MonoBehaviour
             if (Time.time - _lickLastWaveStartTime <= _lickWaveGap) { return; }
 
             // Create final wave
+            _soundManager.PlayEnemyShoot();
+
             Vector3 forwardVector = (_player.transform.position - transform.position).normalized;
             Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
 
@@ -443,6 +466,8 @@ public class CompanionBoss : MonoBehaviour
             if (Time.time - _screamLastWaveStartTime <= _screamWaveGap) { return; }
 
             // Create wave
+            _soundManager.PlayEnemyShoot();
+
             GameObject projectileRef;
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, _screamStartDirection, new Vector3(0.0f, 0.0f, 1.0f));
             float screamAngle = 360.0f / (float)_dataObj.NumberOfScreamProjectiles;
