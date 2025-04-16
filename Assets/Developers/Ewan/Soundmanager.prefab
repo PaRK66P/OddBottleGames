@@ -135,7 +135,7 @@ MonoBehaviour:
   AmbScreamAttack: {fileID: 8300000, guid: db60fe1c35e2b204da4d81d3a239f335, type: 3}
   AmbHit: {fileID: 8300000, guid: 4f78045b9ddb97a4eab830c393f560d0, type: 3}
   AmbDown: {fileID: 8300000, guid: 49a2d3e4d54e96849999a719e4efa1ad, type: 3}
-  AmbConsume: {fileID: 8300000, guid: 5bd7ba22ad37b434696c5a28583a1f39, type: 3}
+  AmbConsume: {fileID: 8300000, guid: 8a98ff49d2f8c614c9d82ac193875338, type: 3}
   IchorStndAttack: {fileID: 0}
   IchorBlastAttack: {fileID: 0}
   IchorScreenAttack: {fileID: 0}
