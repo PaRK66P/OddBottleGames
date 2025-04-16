@@ -1,0 +1,1964 @@
+fileFormatVersion: 2
+guid: 873aa98acab596744b2228a5565d6c2a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 538600282480388270
+    second: Sprite_Breakdown(1)_0
+  - first:
+      213: -4114683705741521197
+    second: Sprite_Breakdown(1)_1
+  - first:
+      213: 574666676912742934
+    second: Sprite_Breakdown(1)_2
+  - first:
+      213: -901333796109315415
+    second: Sprite_Breakdown(1)_3
+  - first:
+      213: 5567176023373609324
+    second: Sprite_Breakdown(1)_4
+  - first:
+      213: 7847752409525253238
+    second: Sprite_Breakdown(1)_5
+  - first:
+      213: -2920949127992407119
+    second: Sprite_Breakdown(1)_6
+  - first:
+      213: 406447824890093472
+    second: Sprite_Breakdown(1)_7
+  - first:
+      213: 7220195379628994502
+    second: Sprite_Breakdown(1)_8
+  - first:
+      213: -6126286100275261575
+    second: Sprite_Breakdown(1)_9
+  - first:
+      213: 4581072409195270599
+    second: Sprite_Breakdown(1)_10
+  - first:
+      213: -8178448277087181181
+    second: Sprite_Breakdown(1)_11
+  - first:
+      213: 1001480636034334661
+    second: Sprite_Breakdown(1)_12
+  - first:
+      213: 6172793853276084560
+    second: Sprite_Breakdown(1)_13
+  - first:
+      213: -1652363177843505052
+    second: Sprite_Breakdown(1)_14
+  - first:
+      213: 6009510574456471543
+    second: Sprite_Breakdown(1)_15
+  - first:
+      213: 7271347131833342597
+    second: Sprite_Breakdown(1)_16
+  - first:
+      213: 1095151380880854607
+    second: Sprite_Breakdown(1)_17
+  - first:
+      213: -3673792592799517563
+    second: Sprite_Breakdown(1)_18
+  - first:
+      213: 1156555053326791577
+    second: Sprite_Breakdown(1)_19
+  - first:
+      213: 5426700836509848593
+    second: Sprite_Breakdown(1)_20
+  - first:
+      213: 3042516296395966998
+    second: Sprite_Breakdown(1)_21
+  - first:
+      213: 3612058856106948907
+    second: Sprite_Breakdown(1)_22
+  - first:
+      213: 8646677791377948664
+    second: Sprite_Breakdown(1)_23
+  - first:
+      213: 154935191706975979
+    second: Sprite_Breakdown(1)_24
+  - first:
+      213: 1695633698177426625
+    second: Sprite_Breakdown(1)_25
+  - first:
+      213: 3526774304817944756
+    second: Sprite_Breakdown(1)_26
+  - first:
+      213: -316556829064645988
+    second: Sprite_Breakdown(1)_27
+  - first:
+      213: -1869388920307227393
+    second: Sprite_Breakdown(1)_28
+  - first:
+      213: 8489036652116543951
+    second: Sprite_Breakdown(1)_29
+  - first:
+      213: 7195742615201143929
+    second: Sprite_Breakdown(1)_30
+  - first:
+      213: -4972398336206192341
+    second: Sprite_Breakdown(1)_31
+  - first:
+      213: 1415610207406501653
+    second: Sprite_Breakdown(1)_32
+  - first:
+      213: -1227370496887470013
+    second: Sprite_Breakdown(1)_33
+  - first:
+      213: 3231210084494825920
+    second: Sprite_Breakdown(1)_34
+  - first:
+      213: -4127647878855934824
+    second: Sprite_Breakdown(1)_35
+  - first:
+      213: 4904018273701601064
+    second: Sprite_Breakdown(1)_36
+  - first:
+      213: 7074043180546547644
+    second: Sprite_Breakdown(1)_37
+  - first:
+      213: 659677214942349014
+    second: Sprite_Breakdown(1)_38
+  - first:
+      213: 7589776906957100078
+    second: Sprite_Breakdown(1)_39
+  - first:
+      213: -6919722319421279780
+    second: Sprite_Breakdown(1)_40
+  - first:
+      213: 6585031869492469399
+    second: Sprite_Breakdown(1)_41
+  - first:
+      213: -5395049290299395861
+    second: Sprite_Breakdown(1)_42
+  - first:
+      213: 1634869191214132466
+    second: Sprite_Breakdown(1)_43
+  - first:
+      213: -2262585890132233137
+    second: Sprite_Breakdown(1)_44
+  - first:
+      213: -8592461303046318005
+    second: Sprite_Breakdown(1)_45
+  - first:
+      213: -467312646743853427
+    second: Sprite_Breakdown(1)_46
+  - first:
+      213: 3906912265026429560
+    second: Sprite_Breakdown(1)_47
+  - first:
+      213: -2189257831435957999
+    second: Sprite_Breakdown(1)_48
+  - first:
+      213: 1032445722737972612
+    second: Sprite_Breakdown(1)_49
+  - first:
+      213: -737385745463734416
+    second: Sprite_Breakdown(1)_50
+  - first:
+      213: -8227678013629403411
+    second: Sprite_Breakdown(1)_51
+  - first:
+      213: 8206585838538676706
+    second: Sprite_Breakdown(1)_52
+  - first:
+      213: -5653380782994952093
+    second: Sprite_Breakdown(1)_53
+  - first:
+      213: 6077240245026104479
+    second: Sprite_Breakdown(1)_54
+  - first:
+      213: -1116077666903105500
+    second: Sprite_Breakdown(1)_55
+  - first:
+      213: 4089658342680234868
+    second: Sprite_Breakdown(1)_56
+  - first:
+      213: -9105521108257596631
+    second: Sprite_Breakdown(1)_57
+  - first:
+      213: 6120065474260667576
+    second: Sprite_Breakdown(1)_58
+  - first:
+      213: 5343638587438807825
+    second: Sprite_Breakdown(1)_59
+  - first:
+      213: 3729089838640324111
+    second: Sprite_Breakdown(1)_60
+  - first:
+      213: 3883309185146269570
+    second: Sprite_Breakdown(1)_61
+  - first:
+      213: 5288095035038565976
+    second: Sprite_Breakdown(1)_62
+  - first:
+      213: -6346099575434666213
+    second: Sprite_Breakdown(1)_63
+  - first:
+      213: 6464264256810435799
+    second: Sprite_Breakdown(1)_64
+  - first:
+      213: -6299020059214799373
+    second: Sprite_Breakdown(1)_65
+  - first:
+      213: -446396720061311773
+    second: Sprite_Breakdown(1)_66
+  - first:
+      213: 8017835042981935883
+    second: Sprite_Breakdown(1)_67
+  - first:
+      213: -7227528221224254556
+    second: Sprite_Breakdown(1)_68
+  - first:
+      213: 6582810398280767279
+    second: Sprite_Breakdown(1)_69
+  - first:
+      213: -4481205004248482140
+    second: Sprite_Breakdown(1)_70
+  - first:
+      213: -3882990063069629296
+    second: Sprite_Breakdown(1)_71
+  - first:
+      213: 740046989950304520
+    second: Sprite_Breakdown(1)_72
+  - first:
+      213: 5783193288262390467
+    second: Sprite_Breakdown(1)_73
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 158
+        width: 62
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea82b217a1e797700800000000000000
+      internalID: 538600282480388270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 158
+        width: 62
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3de403c58f4b5e6c0800000000000000
+      internalID: -4114683705741521197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 137
+        width: 41
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61263a54c40a9f700800000000000000
+      internalID: 574666676912742934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_3
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 136
+        width: 78
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a299da10b1dd73f0800000000000000
+      internalID: -901333796109315415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_4
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 131
+        width: 104
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c69714bd815924d40800000000000000
+      internalID: 5567176023373609324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_5
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 129
+        width: 77
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 674f7febc31d8ec60800000000000000
+      internalID: 7847752409525253238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_6
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 124
+        width: 113
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bb86037e34b677d0800000000000000
+      internalID: -2920949127992407119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_7
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 122
+        width: 28
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0afdd4ea42ef3a500800000000000000
+      internalID: 406447824890093472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_8
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 122
+        width: 71
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cfe3bb8179433460800000000000000
+      internalID: 7220195379628994502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_9
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 122
+        width: 38
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97f0ea0104f0bfaa0800000000000000
+      internalID: -6126286100275261575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_10
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 123
+        width: 36
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c15d68a51d339f30800000000000000
+      internalID: 4581072409195270599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_11
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 121
+        width: 33
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 386205e8f90508e80800000000000000
+      internalID: -8178448277087181181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_12
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 121
+        width: 45
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cf32481559f5ed00800000000000000
+      internalID: 1001480636034334661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_13
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 116
+        width: 49
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0595c300e4b2aa550800000000000000
+      internalID: 6172793853276084560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_14
+      rect:
+        serializedVersion: 2
+        x: 867
+        y: 114
+        width: 49
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 468c3b0c170a119e0800000000000000
+      internalID: -1652363177843505052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_15
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 115
+        width: 33
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ff7e681702166350800000000000000
+      internalID: 6009510574456471543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_16
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 109
+        width: 83
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58a5b7fe0b309e460800000000000000
+      internalID: 7271347131833342597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_17
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 108
+        width: 37
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4e8ea8e062c23f00800000000000000
+      internalID: 1095151380880854607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_18
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 108
+        width: 37
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58439b7f911140dc0800000000000000
+      internalID: -3673792592799517563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_19
+      rect:
+        serializedVersion: 2
+        x: 1117
+        y: 108
+        width: 50
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 993f9bc71b8ec0010800000000000000
+      internalID: 1156555053326791577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_20
+      rect:
+        serializedVersion: 2
+        x: 1169
+        y: 108
+        width: 30
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1141c7ea8a38f4b40800000000000000
+      internalID: 5426700836509848593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_21
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 108
+        width: 30
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61ac40e9370393a20800000000000000
+      internalID: 3042516296395966998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_22
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 105
+        width: 20
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b29fe02646c902230800000000000000
+      internalID: 3612058856106948907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_23
+      rect:
+        serializedVersion: 2
+        x: 1255
+        y: 105
+        width: 213
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ff7752a3ab2ff770800000000000000
+      internalID: 8646677791377948664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_24
+      rect:
+        serializedVersion: 2
+        x: 1469
+        y: 105
+        width: 36
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: beeb6e86cb0762200800000000000000
+      internalID: 154935191706975979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_25
+      rect:
+        serializedVersion: 2
+        x: 1507
+        y: 162
+        width: 42
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c42c095dd9188710800000000000000
+      internalID: 1695633698177426625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_26
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 163
+        width: 42
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b816a96b8e91f030800000000000000
+      internalID: 3526774304817944756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_27
+      rect:
+        serializedVersion: 2
+        x: 1609
+        y: 157
+        width: 38
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c92b06cbd3d5b9bf0800000000000000
+      internalID: -316556829064645988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_28
+      rect:
+        serializedVersion: 2
+        x: 1648
+        y: 158
+        width: 38
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff469027ea89e06e0800000000000000
+      internalID: -1869388920307227393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_29
+      rect:
+        serializedVersion: 2
+        x: 1687
+        y: 158
+        width: 37
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc98da6bbdd1fc570800000000000000
+      internalID: 8489036652116543951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_30
+      rect:
+        serializedVersion: 2
+        x: 1726
+        y: 156
+        width: 40
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97c543aa8c96cd360800000000000000
+      internalID: 7195742615201143929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_31
+      rect:
+        serializedVersion: 2
+        x: 1769
+        y: 102
+        width: 82
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b21cfa0ee0e7efab0800000000000000
+      internalID: -4972398336206192341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_32
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 100
+        width: 37
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51fa1e0cbf145a310800000000000000
+      internalID: 1415610207406501653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_33
+      rect:
+        serializedVersion: 2
+        x: 1891
+        y: 100
+        width: 37
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3484a35390187fee0800000000000000
+      internalID: -1227370496887470013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_34
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 2
+        width: 64
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c959f0c37097dc20800000000000000
+      internalID: 3231210084494825920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_35
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 2
+        width: 66
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89cb5e69f16a7b6c0800000000000000
+      internalID: -4127647878855934824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_36
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 2
+        width: 59
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82f120823a29e0440800000000000000
+      internalID: 4904018273701601064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_37
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 2
+        width: 116
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbf5046facc0c2260800000000000000
+      internalID: 7074043180546547644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_38
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 2
+        width: 53
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d6ce0f8ee4a72900800000000000000
+      internalID: 659677214942349014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_39
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 2
+        width: 53
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2414af62ed445960800000000000000
+      internalID: 7589776906957100078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_40
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 2
+        width: 46
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd17d86763538ff90800000000000000
+      internalID: -6919722319421279780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_41
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 110
+        width: 6
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79e99b7a89bb26b50800000000000000
+      internalID: 6585031869492469399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_42
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 2
+        width: 46
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be03bf1314fe025b0800000000000000
+      internalID: -5395049290299395861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_43
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 110
+        width: 6
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fc6c841ed830b610800000000000000
+      internalID: 1634869191214132466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_44
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 2
+        width: 201
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f447bd0ee1ea990e0800000000000000
+      internalID: -2262585890132233137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_45
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 2
+        width: 67
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4852ad38f171c880800000000000000
+      internalID: -8592461303046318005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_46
+      rect:
+        serializedVersion: 2
+        x: 1507
+        y: 104
+        width: 35
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d86f8cbaf95c389f0800000000000000
+      internalID: -467312646743853427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_47
+      rect:
+        serializedVersion: 2
+        x: 1544
+        y: 104
+        width: 35
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 872648d5104283630800000000000000
+      internalID: 3906912265026429560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_48
+      rect:
+        serializedVersion: 2
+        x: 1580
+        y: 104
+        width: 28
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 119848bf9913e91e0800000000000000
+      internalID: -2189257831435957999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_49
+      rect:
+        serializedVersion: 2
+        x: 1610
+        y: 104
+        width: 97
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4851ba92aebf35e00800000000000000
+      internalID: 1032445722737972612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_50
+      rect:
+        serializedVersion: 2
+        x: 1708
+        y: 104
+        width: 50
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07f8233429744c5f0800000000000000
+      internalID: -737385745463734416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_51
+      rect:
+        serializedVersion: 2
+        x: 1930
+        y: 119
+        width: 43
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: deee35f407a61dd80800000000000000
+      internalID: -8227678013629403411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_52
+      rect:
+        serializedVersion: 2
+        x: 1975
+        y: 94
+        width: 31
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e959dcf656a3e170800000000000000
+      internalID: 8206585838538676706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_53
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 3
+        width: 73
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 360f09971282b81b0800000000000000
+      internalID: -5653380782994952093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_54
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 2
+        width: 75
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f942d73edc1b65450800000000000000
+      internalID: 6077240245026104479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_55
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 2
+        width: 88
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4206e727645e280f0800000000000000
+      internalID: -1116077666903105500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_56
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 2
+        width: 88
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47b0b20489261c830800000000000000
+      internalID: 4089658342680234868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_57
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 2
+        width: 89
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92b1c7f8bc0b2a180800000000000000
+      internalID: -9105521108257596631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_58
+      rect:
+        serializedVersion: 2
+        x: 1207
+        y: 3
+        width: 35
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bc80739f17dee450800000000000000
+      internalID: 6120065474260667576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_59
+      rect:
+        serializedVersion: 2
+        x: 1244
+        y: 2
+        width: 35
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11b3c54cbfa682a40800000000000000
+      internalID: 5343638587438807825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_60
+      rect:
+        serializedVersion: 2
+        x: 1281
+        y: 2
+        width: 235
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0edcaf537360c330800000000000000
+      internalID: 3729089838640324111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_61
+      rect:
+        serializedVersion: 2
+        x: 1518
+        y: 2
+        width: 235
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28fa7a5112944e530800000000000000
+      internalID: 3883309185146269570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_62
+      rect:
+        serializedVersion: 2
+        x: 1755
+        y: 3
+        width: 33
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8560bf5ba66136940800000000000000
+      internalID: 5288095035038565976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_63
+      rect:
+        serializedVersion: 2
+        x: 1790
+        y: 2
+        width: 33
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1f95f82f002ee7a0800000000000000
+      internalID: -6346099575434666213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_64
+      rect:
+        serializedVersion: 2
+        x: 1825
+        y: 2
+        width: 44
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d4c079a71ea5b950800000000000000
+      internalID: 6464264256810435799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_65
+      rect:
+        serializedVersion: 2
+        x: 1869
+        y: 2
+        width: 44
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fd117931a26598a0800000000000000
+      internalID: -6299020059214799373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_66
+      rect:
+        serializedVersion: 2
+        x: 1914
+        y: 55
+        width: 27
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e498d75c841ec9f0800000000000000
+      internalID: -446396720061311773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_67
+      rect:
+        serializedVersion: 2
+        x: 1943
+        y: 82
+        width: 31
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0bfd94cd72154f60800000000000000
+      internalID: 8017835042981935883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_68
+      rect:
+        serializedVersion: 2
+        x: 1978
+        y: 60
+        width: 35
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a341d93069a2bb90800000000000000
+      internalID: -7227528221224254556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_69
+      rect:
+        serializedVersion: 2
+        x: 1943
+        y: 55
+        width: 33
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f27d5451e27da5b50800000000000000
+      internalID: 6582810398280767279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_70
+      rect:
+        serializedVersion: 2
+        x: 1977
+        y: 32
+        width: 37
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4aef0148acf8fc1c0800000000000000
+      internalID: -4481205004248482140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_71
+      rect:
+        serializedVersion: 2
+        x: 1930
+        y: 28
+        width: 46
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 094fc505c19dc1ac0800000000000000
+      internalID: -3882990063069629296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_72
+      rect:
+        serializedVersion: 2
+        x: 1978
+        y: 2
+        width: 37
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 801c51101dc254a00800000000000000
+      internalID: 740046989950304520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Breakdown(1)_73
+      rect:
+        serializedVersion: 2
+        x: 1930
+        y: 2
+        width: 46
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c29d4ea7a7024050800000000000000
+      internalID: 5783193288262390467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Sprite_Breakdown(1)_0: 538600282480388270
+      Sprite_Breakdown(1)_1: -4114683705741521197
+      Sprite_Breakdown(1)_10: 4581072409195270599
+      Sprite_Breakdown(1)_11: -8178448277087181181
+      Sprite_Breakdown(1)_12: 1001480636034334661
+      Sprite_Breakdown(1)_13: 6172793853276084560
+      Sprite_Breakdown(1)_14: -1652363177843505052
+      Sprite_Breakdown(1)_15: 6009510574456471543
+      Sprite_Breakdown(1)_16: 7271347131833342597
+      Sprite_Breakdown(1)_17: 1095151380880854607
+      Sprite_Breakdown(1)_18: -3673792592799517563
+      Sprite_Breakdown(1)_19: 1156555053326791577
+      Sprite_Breakdown(1)_2: 574666676912742934
+      Sprite_Breakdown(1)_20: 5426700836509848593
+      Sprite_Breakdown(1)_21: 3042516296395966998
+      Sprite_Breakdown(1)_22: 3612058856106948907
+      Sprite_Breakdown(1)_23: 8646677791377948664
+      Sprite_Breakdown(1)_24: 154935191706975979
+      Sprite_Breakdown(1)_25: 1695633698177426625
+      Sprite_Breakdown(1)_26: 3526774304817944756
+      Sprite_Breakdown(1)_27: -316556829064645988
+      Sprite_Breakdown(1)_28: -1869388920307227393
+      Sprite_Breakdown(1)_29: 8489036652116543951
+      Sprite_Breakdown(1)_3: -901333796109315415
+      Sprite_Breakdown(1)_30: 7195742615201143929
+      Sprite_Breakdown(1)_31: -4972398336206192341
+      Sprite_Breakdown(1)_32: 1415610207406501653
+      Sprite_Breakdown(1)_33: -1227370496887470013
+      Sprite_Breakdown(1)_34: 3231210084494825920
+      Sprite_Breakdown(1)_35: -4127647878855934824
+      Sprite_Breakdown(1)_36: 4904018273701601064
+      Sprite_Breakdown(1)_37: 7074043180546547644
+      Sprite_Breakdown(1)_38: 659677214942349014
+      Sprite_Breakdown(1)_39: 7589776906957100078
+      Sprite_Breakdown(1)_4: 5567176023373609324
+      Sprite_Breakdown(1)_40: -6919722319421279780
+      Sprite_Breakdown(1)_41: 6585031869492469399
+      Sprite_Breakdown(1)_42: -5395049290299395861
+      Sprite_Breakdown(1)_43: 1634869191214132466
+      Sprite_Breakdown(1)_44: -2262585890132233137
+      Sprite_Breakdown(1)_45: -8592461303046318005
+      Sprite_Breakdown(1)_46: -467312646743853427
+      Sprite_Breakdown(1)_47: 3906912265026429560
+      Sprite_Breakdown(1)_48: -2189257831435957999
+      Sprite_Breakdown(1)_49: 1032445722737972612
+      Sprite_Breakdown(1)_5: 7847752409525253238
+      Sprite_Breakdown(1)_50: -737385745463734416
+      Sprite_Breakdown(1)_51: -8227678013629403411
+      Sprite_Breakdown(1)_52: 8206585838538676706
+      Sprite_Breakdown(1)_53: -5653380782994952093
+      Sprite_Breakdown(1)_54: 6077240245026104479
+      Sprite_Breakdown(1)_55: -1116077666903105500
+      Sprite_Breakdown(1)_56: 4089658342680234868
+      Sprite_Breakdown(1)_57: -9105521108257596631
+      Sprite_Breakdown(1)_58: 6120065474260667576
+      Sprite_Breakdown(1)_59: 5343638587438807825
+      Sprite_Breakdown(1)_6: -2920949127992407119
+      Sprite_Breakdown(1)_60: 3729089838640324111
+      Sprite_Breakdown(1)_61: 3883309185146269570
+      Sprite_Breakdown(1)_62: 5288095035038565976
+      Sprite_Breakdown(1)_63: -6346099575434666213
+      Sprite_Breakdown(1)_64: 6464264256810435799
+      Sprite_Breakdown(1)_65: -6299020059214799373
+      Sprite_Breakdown(1)_66: -446396720061311773
+      Sprite_Breakdown(1)_67: 8017835042981935883
+      Sprite_Breakdown(1)_68: -7227528221224254556
+      Sprite_Breakdown(1)_69: 6582810398280767279
+      Sprite_Breakdown(1)_7: 406447824890093472
+      Sprite_Breakdown(1)_70: -4481205004248482140
+      Sprite_Breakdown(1)_71: -3882990063069629296
+      Sprite_Breakdown(1)_72: 740046989950304520
+      Sprite_Breakdown(1)_73: 5783193288262390467
+      Sprite_Breakdown(1)_8: 7220195379628994502
+      Sprite_Breakdown(1)_9: -6126286100275261575
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
