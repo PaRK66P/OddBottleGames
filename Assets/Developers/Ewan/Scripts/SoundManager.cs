@@ -12,6 +12,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource BGMAudioSource;
     [SerializeField] private AudioSource EnemyAudioSource;
     [SerializeField] private AudioSource AmbrosiaAudioSource;
+    [SerializeField] private AudioSource IchorAudioSource;
 
     [Header("Music")]
     //Back Ground Music (PLACEHOLDER)
@@ -58,25 +59,35 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip AmbSpitAttack;
     [SerializeField] private AudioClip AmbLickPrep;
     [SerializeField] private AudioClip AmbLickAttack;
+    [SerializeField] private AudioClip AmbScreamAttack;
     [SerializeField] private AudioClip AmbHit;
     [SerializeField] private AudioClip AmbDown;
     [SerializeField] private AudioClip AmbConsume;
     private bool isWalkingAmb = false;
     private float footstepLengthAmb;
 
-    public void SetAmbrosiaAudioSource(ref AudioSource audioSource)
-    {
-        AmbrosiaAudioSource = audioSource;
-    }
+    [Header("Ichor Sounds")]
+    //Ichor Sounds
+    [SerializeField] private AudioClip IchorStndAttack;
+    [SerializeField] private AudioClip IchorBlastAttack;
+    [SerializeField] private AudioClip IchorScreenAttack;
+    [SerializeField] private AudioClip IchorTumorSpawn;
+    [SerializeField] private AudioClip IchorTumorDestroy;
+    [SerializeField] private AudioClip IchorHit;
+    [SerializeField] private AudioClip IchorImmune;
+    [SerializeField] private AudioClip IchorKnocked;
+    [SerializeField] private AudioClip IchorCrit;
+    [SerializeField] private AudioClip IchorDown;
 
     public void Update()
     {
         //update volume
         volume = PlayerPrefs.GetFloat("volume", volume);
         PlayerAudioSource.volume = volume;
-        //BGMAudioSource.volume = volume;
-        //EnemyAudioSource.volume = volume;
+        BGMAudioSource.volume = volume;
+        EnemyAudioSource.volume = volume;
         AmbrosiaAudioSource.volume = volume;
+        IchorAudioSource.volume = volume;
 
 
         //Player footsteps
@@ -92,7 +103,6 @@ public class SoundManager : MonoBehaviour
         PlayAmbFootsteps();
         if (footstepLengthAmb < 0f) footstepLengthAmb = 0f;
     }
-
     public void PlayBGM()
     {
         BGMAudioSource.clip = BGMClip;
@@ -180,6 +190,7 @@ public class SoundManager : MonoBehaviour
         PlayerAudioSource.pitch = 1f;
         PlayerAudioSource.PlayOneShot(PlyrDashReady);
     }
+
     public void PlayEnemyShoot()
     {
         EnemyAudioSource.pitch = Random.Range(0.5f, 1.5f);
@@ -191,11 +202,12 @@ public class SoundManager : MonoBehaviour
         EnemyAudioSource.pitch = Random.Range(0.5f, 1.5f);
         EnemyAudioSource.PlayOneShot(EnHit);
     }
-    public void PlayenDead()
+    public void PlayEnemyDead()
     {
         EnemyAudioSource.pitch = Random.Range(0.5f, 1.5f);
         EnemyAudioSource.PlayOneShot(EnDead);
     }
+
     public void PlayAmbFootsteps()
     {
         if (isWalkingAmb && footstepLengthAmb < 0f)
@@ -225,5 +237,100 @@ public class SoundManager : MonoBehaviour
         //Randomise Pitch
         AmbrosiaAudioSource.pitch = Random.Range(0.8f, 1.2f);
         AmbrosiaAudioSource.PlayOneShot(AmbDashAttack[state - 1]);
+    }
+    public void PlayAmbLickPrep()
+    {
+        //Randomise Pitch
+        AmbrosiaAudioSource.pitch = Random.Range(0.8f, 1.2f);
+        AmbrosiaAudioSource.PlayOneShot(AmbLickPrep);
+    }
+    public void PlayAmbLickAttack()
+    {
+        //Randomise Pitch
+        AmbrosiaAudioSource.pitch = Random.Range(0.8f, 1.2f);
+        AmbrosiaAudioSource.PlayOneShot(AmbLickAttack);
+    }
+    public void PlayAmbScreamAttack()
+    {
+        //Randomise Pitch
+        AmbrosiaAudioSource.pitch = Random.Range(0.8f, 1.2f);
+        AmbrosiaAudioSource.PlayOneShot(AmbScreamAttack);
+    }
+    public void PlayAmbHit()
+    {
+        //Randomise Pitch
+        AmbrosiaAudioSource.pitch = Random.Range(0.6f, 1.4f);
+        AmbrosiaAudioSource.PlayOneShot(AmbHit);
+    }
+    public void PlayAmbDown()
+    {
+        //Reset Pitch
+        AmbrosiaAudioSource.pitch = 1f;
+        AmbrosiaAudioSource.PlayOneShot(AmbDown);
+    }
+    public void PlayAmbConsume()
+    {
+        AmbrosiaAudioSource.PlayOneShot(AmbConsume);
+    }
+
+    public void PlayIchorStandardAttack()
+    {
+        //Randomise Pitch
+        IchorAudioSource.pitch = Random.Range(0.8f, 1.2f);
+        IchorAudioSource.PlayOneShot(IchorStndAttack);
+    }
+    public void PlayIchorBlastAttack()
+    {
+        //Randomise Pitch
+        IchorAudioSource.pitch = Random.Range(0.9f, 1.1f);
+        IchorAudioSource.PlayOneShot(IchorBlastAttack);
+    }
+    public void PlayIchorScreenAttack()
+    {
+        //Randomise Pitch
+        IchorAudioSource.pitch = Random.Range(0.8f, 1.1f);
+        IchorAudioSource.PlayOneShot(IchorBlastAttack);
+    }
+    public void PlayIchorTumorSpawn()
+    {
+        //Randomise Pitch
+        IchorAudioSource.pitch = Random.Range(0.7f, 1.3f);
+        IchorAudioSource.PlayOneShot(IchorTumorSpawn);
+    }
+    public void PlayIchorTumorDestroy()
+    {
+        //Randomise Pitch
+        IchorAudioSource.pitch = Random.Range(0.8f, 1.4f);
+        IchorAudioSource.PlayOneShot(IchorTumorDestroy);
+    }
+    public void PlayIchorHit()
+    {
+        //Randomise Pitch
+        IchorAudioSource.pitch = Random.Range(0.6f, 1.4f);
+        IchorAudioSource.PlayOneShot(IchorHit);
+    }
+    public void PlayIchorImmune()
+    {
+        //Randomise Pitch
+        IchorAudioSource.pitch = Random.Range(0.9f, 1.1f);
+        IchorAudioSource.PlayOneShot(IchorImmune);
+    }
+    public void PlayIchorKnocked()
+    {
+        //Reset Pitch
+        IchorAudioSource.pitch = 1f;
+        IchorAudioSource.PlayOneShot(IchorKnocked);
+    }
+    public void PlayIchorCrit()
+    {
+        //Randomise Pitch
+        IchorAudioSource.pitch = Random.Range(0.9f, 1.1f);
+        IchorAudioSource.PlayOneShot(IchorCrit);
+    }
+    public void PlayIchorDown()
+    {
+        //Reset Pitch
+        IchorAudioSource.pitch = 1f;
+        IchorAudioSource.PlayOneShot(IchorDown);
     }
 }
