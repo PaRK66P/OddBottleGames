@@ -137,7 +137,6 @@ public class CompanionManager : MonoBehaviour
     {
         if(_currentState != CompanionStates.Enemy) { return; } // Can only take damage in enemy state
 
-        _soundManager.PlayEnemyHit();
         _health -= damage;
         if(_health <= 0 && !_hasPlayedNovel)
         {
@@ -173,7 +172,6 @@ public class CompanionManager : MonoBehaviour
 
     private void CompanionDeath()
     {
-        _soundManager.PlayenDead();
         ChangeToNone();
         RemoveHealthBar();
         StartCoroutine(PlayDeathEffects());

@@ -327,8 +327,6 @@ public class CompanionBoss : MonoBehaviour
                 transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * (angleFromRight + (i * _dataObj.SpitSpawnAngle))), Mathf.Sin(Mathf.Deg2Rad * (angleFromRight + (i * _dataObj.SpitSpawnAngle))), 0.0f) * (_dataObj.SpitSpawnDistance + _spitTravelDistance)); 
         }
 
-        _soundManager.PlayEnemyShoot();
-
         // End spit attack
         _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SpitEnd);
 
@@ -354,8 +352,6 @@ public class CompanionBoss : MonoBehaviour
             if(Time.time - _lickLastWaveStartTime <= _lickWaveGap) { return; }
 
             // Create wave
-            _soundManager.PlayEnemyShoot();
-
             Vector3 forwardVector = (_player.transform.position - transform.position).normalized;
             Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
 
@@ -402,8 +398,6 @@ public class CompanionBoss : MonoBehaviour
             if (Time.time - _lickLastWaveStartTime <= _lickWaveGap) { return; }
 
             // Create final wave
-            _soundManager.PlayEnemyShoot();
-
             Vector3 forwardVector = (_player.transform.position - transform.position).normalized;
             Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
 
@@ -467,8 +461,6 @@ public class CompanionBoss : MonoBehaviour
             if (Time.time - _screamLastWaveStartTime <= _screamWaveGap) { return; }
 
             // Create wave
-            _soundManager.PlayEnemyShoot();
-
             GameObject projectileRef;
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, _screamStartDirection, new Vector3(0.0f, 0.0f, 1.0f));
             float screamAngle = 360.0f / (float)_dataObj.NumberOfScreamProjectiles;

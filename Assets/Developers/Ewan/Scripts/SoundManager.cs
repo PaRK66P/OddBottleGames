@@ -75,9 +75,6 @@ public class SoundManager : MonoBehaviour
         volume = PlayerPrefs.GetFloat("volume", volume);
         PlayerAudioSource.volume = volume;
         //BGMAudioSource.volume = volume;
-        //EnemyAudioSource.volume = volume;
-        AmbrosiaAudioSource.volume = volume;
-
 
         //Player footsteps
         footstepLength -= Time.deltaTime;
@@ -87,10 +84,16 @@ public class SoundManager : MonoBehaviour
         dashLength -= Time.deltaTime;
         PlayPDash();
         if (dashLength < 0f) dashLength = 0f;
-        //Ambrosia Footsteps
-        footstepLengthAmb -= Time.deltaTime;
-        PlayAmbFootsteps();
-        if (footstepLengthAmb < 0f) footstepLengthAmb = 0f;
+
+        if (AmbrosiaAudioSource != null)
+        {
+            AmbrosiaAudioSource.volume = volume;
+
+            //Ambrosia Footsteps
+            footstepLengthAmb -= Time.deltaTime;
+            PlayAmbFootsteps();
+            if (footstepLengthAmb < 0f) footstepLengthAmb = 0f;
+        }
     }
 
     public void PlayBGM()

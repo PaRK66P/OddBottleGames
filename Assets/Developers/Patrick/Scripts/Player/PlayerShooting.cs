@@ -348,9 +348,9 @@ public class PlayerShooting : MonoBehaviour
     #region Gizmos
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Vector3 worldPoint = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
-        Gizmos.DrawLine(transform.position, transform.position + new Vector3(worldPoint.x, worldPoint.y, 0.0f) * 10.0f);
+        //Gizmos.color = Color.red;
+        //Vector3 worldPoint = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
+        //Gizmos.DrawLine(transform.position, transform.position + new Vector3(worldPoint.x, worldPoint.y, 0.0f) * 10.0f);
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, transform.position + new Vector3(_aimInput.x, _aimInput.y, 0.0f) * 10.0f);
     }

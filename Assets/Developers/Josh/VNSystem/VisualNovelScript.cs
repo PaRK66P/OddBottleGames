@@ -62,7 +62,7 @@ public class VisualNovelScript : MonoBehaviour
     void Start()
     {
         canv = GameObject.Find("Canvas").transform.Find("VisualNovelCanvas").gameObject;
-        text = canv.transform.Find("VisualNovelText").gameObject;
+        text = canv.transform.Find("DialogueBox").transform.Find("VisualNovelText").gameObject;
         sprite = canv.transform.Find("VisualNovelSprite").gameObject;
         buttonContainer = canv.transform.Find("VisualNovelButtonContainer").GetComponent<Transform>();
         canvGroup = canv.GetComponent<CanvasGroup>();
@@ -137,8 +137,10 @@ public class VisualNovelScript : MonoBehaviour
                 {
                     text.GetComponent<TMP_Text>().text = currentNode.sceneData.text;
                 }
+
                 sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
                 sprite.GetComponent<Image>().SetNativeSize();
+                sprite.GetComponent<RectTransform>().anchoredPosition = new Vector2(sprite.GetComponent<RectTransform>().anchoredPosition.x, -100.0f);
 
                 int count = -1;
                 IDSelectionOptions(currentNode, ref count);
@@ -177,8 +179,11 @@ public class VisualNovelScript : MonoBehaviour
             if (index > -1 && index < currentNode.children.Count)
             {
                 currentNode = currentNode.children[index];
+
                 sprite.GetComponent<Image>().sprite = currentNode.sceneData.CharacterAsset;
                 sprite.GetComponent<Image>().SetNativeSize();
+                sprite.GetComponent<RectTransform>().anchoredPosition = new Vector2(sprite.GetComponent<RectTransform>().anchoredPosition.x, -100.0f);
+
                 if (typingTextToggle)
                 {
                     typingText = TypewriterText(currentNode.sceneData.text);
