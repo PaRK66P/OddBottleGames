@@ -174,6 +174,7 @@ public class CompanionBoss : MonoBehaviour
             _rb.MovePosition(transform.position + _lastLeapMoveDirection * _dataObj.MoveSpeed * Time.fixedDeltaTime * Mathf.Max((_dataObj.MoveSpeedMultiplier * (Time.time - _readyStartTime)), 1.0f));
 
             // Check if ready
+            Debug.Log(_leapTravelDistance);
             if (WithinLeapRange(_leapTravelDistance))
             {
                 _leapStartTimer = Time.time;

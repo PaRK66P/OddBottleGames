@@ -95,6 +95,9 @@ public class CompanionManager : MonoBehaviour
         // Only created as an enemy so change to that state
         ChangeToEnemy();
         ChangeToIdleForTime(1.0f); // So they don't immediately charge the player
+
+        // Debug
+        gizmosPlayerReference = _playerObject;
     }
 
     #region Update
