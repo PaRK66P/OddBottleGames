@@ -48,6 +48,7 @@ MonoBehaviour:
   BGMAudioSource: {fileID: 0}
   EnemyAudioSource: {fileID: 0}
   AmbrosiaAudioSource: {fileID: 0}
+  IchorAudioSource: {fileID: 0}
   BGMClip: {fileID: 8300000, guid: c15a837f65bbdfc48addee543e587a2a, type: 3}
   PlyrFootstepsClips:
   - {fileID: 8300000, guid: 9176a4c013d8ee0448d69388269a0569, type: 3}
@@ -88,8 +89,8 @@ MonoBehaviour:
   PlyrDashReady: {fileID: 8300000, guid: 6b6133e0066e73f4c89883efab13032b, type: 3}
   PlyrHit: {fileID: 8300000, guid: 129d952eba8654642a927edd3ed06aa0, type: 3}
   EnHit: {fileID: 8300000, guid: f994d9306da5eaf499f90de348cc22a2, type: 3}
-  EnDead: {fileID: 0}
-  EnShoot: {fileID: 0}
+  EnDead: {fileID: 8300000, guid: 69958ff56f3f06f43808c2291be345ae, type: 3}
+  EnShoot: {fileID: 8300000, guid: 515aeb39133cb1d478bdd58f40b70a4e, type: 3}
   AmbFootstepsClips:
   - {fileID: 8300000, guid: e1de95e9b7eb0b742937e13efcf406be, type: 3}
   - {fileID: 8300000, guid: 67e3a3d14e451d547bec3f52ecc0033b, type: 3}
@@ -127,8 +128,21 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9ba412d7c1f1c4643a945a78f372f138, type: 3}
   - {fileID: 8300000, guid: ac9517303f6ad2144abed4cfda482e5e, type: 3}
   - {fileID: 8300000, guid: cb5cf5b79333fd440817bfecd421c875, type: 3}
-  AmbSpitAttack: {fileID: 0}
-  AmbLickAttack: {fileID: 0}
-  AmbHit: {fileID: 0}
-  AmbDown: {fileID: 0}
-  AmbConsume: {fileID: 0}
+  AmbSpitPrep: {fileID: 8300000, guid: 339c0c9438a1568438000c04557bef79, type: 3}
+  AmbSpitAttack: {fileID: 8300000, guid: 126131489867bed47b80e2f536ea6781, type: 3}
+  AmbLickPrep: {fileID: 8300000, guid: 35da3622cce95df43bca306d33b00260, type: 3}
+  AmbLickAttack: {fileID: 8300000, guid: 93e33d3883de78041bdf2d304dc51b89, type: 3}
+  AmbScreamAttack: {fileID: 8300000, guid: db60fe1c35e2b204da4d81d3a239f335, type: 3}
+  AmbHit: {fileID: 8300000, guid: 4f78045b9ddb97a4eab830c393f560d0, type: 3}
+  AmbDown: {fileID: 8300000, guid: 49a2d3e4d54e96849999a719e4efa1ad, type: 3}
+  AmbConsume: {fileID: 8300000, guid: 5bd7ba22ad37b434696c5a28583a1f39, type: 3}
+  IchorStndAttack: {fileID: 0}
+  IchorBlastAttack: {fileID: 0}
+  IchorScreenAttack: {fileID: 0}
+  IchorTumorSpawn: {fileID: 0}
+  IchorTumorDestroy: {fileID: 0}
+  IchorHit: {fileID: 0}
+  IchorImmune: {fileID: 0}
+  IchorKnocked: {fileID: 0}
+  IchorCrit: {fileID: 0}
+  IchorDown: {fileID: 0}
