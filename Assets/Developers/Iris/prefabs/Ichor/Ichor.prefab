@@ -82,7 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   phaseNo: 0
   pattern: 0,1/2,3/4,1,0,3/4,1/2,1,
-  timeBetweenAttacks: 0.25
+  timeBetweenAttacks: 0.4
   attackList:
   - {fileID: 5169843901188423363, guid: 8e98f6482aedd9946b8707b2b15a08e4, type: 3}
   - {fileID: 2472219134077984931, guid: 5129f518322ab0c4ea8561349347f597, type: 3}
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30de30e18e55bc74d97fb60c0293dee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phaseNo: 2
+  phaseNo: 1
   pattern: 0,1/2,3/4,1,0,3/4,1/2,1,
   timeBetweenAttacks: 0.35
   attackList:
@@ -124,9 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30de30e18e55bc74d97fb60c0293dee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phaseNo: 1
+  phaseNo: 2
   pattern: 0,1/2,3/4,1,0,3/4,1/2,1,
-  timeBetweenAttacks: 0.4
+  timeBetweenAttacks: 0.3
   attackList:
   - {fileID: 5169843901188423363, guid: 63d6b702a467fe64fbf6ff4842978a5c, type: 3}
   - {fileID: 2472219134077984931, guid: 12b4aa4a17d2e7e46aab602940bbc264, type: 3}

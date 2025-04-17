@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 1bd9427cbea4f044cbba38dbde35e834
+guid: c9526b9e393f9fc40ad644e8ff474f1b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3509832143905904880
-    second: bossHurtEdit 1_0
+      213: -4349655835596433054
+    second: Boss_Stunned_0
   - first:
-      213: 652918854332672296
-    second: bossHurtEdit 1_1
+      213: -5062286931662205418
+    second: Boss_Stunned_1
   - first:
-      213: 8239304901305577073
-    second: bossHurtEdit 1_2
+      213: -1883501037106313960
+    second: Boss_Stunned_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -119,7 +119,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bossHurtEdit 1_0
+      name: Boss_Stunned_0
       rect:
         serializedVersion: 2
         x: 31
@@ -133,14 +133,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 017ad31d2429a4fc0800000000000000
-      internalID: -3509832143905904880
+      spriteID: 269d110201be2a3c0800000000000000
+      internalID: -4349655835596433054
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bossHurtEdit 1_1
+      name: Boss_Stunned_1
       rect:
         serializedVersion: 2
         x: 73
@@ -154,14 +154,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 82967ab1d32af0900800000000000000
-      internalID: 652918854332672296
+      spriteID: 61e0c275bd42fb9b0800000000000000
+      internalID: -5062286931662205418
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bossHurtEdit 1_2
+      name: Boss_Stunned_2
       rect:
         serializedVersion: 2
         x: 396
@@ -175,8 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 17e247e6724e75270800000000000000
-      internalID: 8239304901305577073
+      spriteID: 815c23539c57cd5e0800000000000000
+      internalID: -1883501037106313960
       vertices: []
       indices: 
       edges: []
@@ -192,9 +192,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bossHurtEdit 1_0: -3509832143905904880
-      bossHurtEdit 1_1: 652918854332672296
-      bossHurtEdit 1_2: 8239304901305577073
+      Boss_Stunned_0: -4349655835596433054
+      Boss_Stunned_1: -5062286931662205418
+      Boss_Stunned_2: -1883501037106313960
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

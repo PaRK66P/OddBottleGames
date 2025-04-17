@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a9b15790752fd174eb60099dc4fb8287
+guid: eb65c74fab7d40247b49fda983beeac3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7763975854129994201
-    second: bossWeakPointHurt_0
+      213: -1031155388836973766
+    second: Boss_Target_Weakness_Damage_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bossWeakPointHurt_0
+      name: Boss_Target_Weakness_Damage_0
       rect:
         serializedVersion: 2
         x: 84
@@ -127,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7262fd19811d04490800000000000000
-      internalID: -7763975854129994201
+      spriteID: a33742c13a990b1f0800000000000000
+      internalID: -1031155388836973766
       vertices: []
       indices: 
       edges: []
@@ -144,7 +144,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bossWeakPointHurt_0: -7763975854129994201
+      Boss_Target_Weakness_Damage_0: -1031155388836973766
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

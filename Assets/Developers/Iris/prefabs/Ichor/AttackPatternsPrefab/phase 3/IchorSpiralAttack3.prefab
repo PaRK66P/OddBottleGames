@@ -50,7 +50,7 @@ MonoBehaviour:
   largeProjectileLifetime: 3.5
   chargeTimer: 1.2
   timeBetweenWaves: 0.18
-  projectilePerWaveNo: 10
+  projectilePerWaveNo: 9
   numberOfWaves: 10
   angleBetweenWaves: 5
   largeProjectileSpeed: 7

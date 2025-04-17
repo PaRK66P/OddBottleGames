@@ -47,7 +47,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7241303215407426317, guid: 3794600c18a351a44a1d299476b2e027, type: 3}
   projectileNo: 15
   chargeUpTimer: 0.5
-  projectileSpeed: 10
+  projectileSpeed: 12
   waves: 1
   timeBetweenWaves: 0.75
   waveLifespan: 1
