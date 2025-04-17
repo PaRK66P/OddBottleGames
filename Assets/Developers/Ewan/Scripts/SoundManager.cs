@@ -200,6 +200,11 @@ public class SoundManager : MonoBehaviour
         PlayerAudioSource.pitch = 1f;
         PlayerAudioSource.PlayOneShot(PlyrDashReady);
     }
+    public void PlayerPHit()
+    {
+        PlayerAudioSource.pitch = 1f;
+        PlayerAudioSource.PlayOneShot(PlyrHit);
+    }
 
     public void PlayEnemyShoot()
     {
@@ -247,6 +252,16 @@ public class SoundManager : MonoBehaviour
         //Randomise Pitch
         AmbrosiaAudioSource.pitch = Random.Range(0.8f, 1.2f);
         AmbrosiaAudioSource.PlayOneShot(AmbDashAttack[state - 1]);
+    }
+    public void PlayAmbSpitPrep()
+    {
+        AmbrosiaAudioSource.pitch = Random.Range(0.8f, 1.2f);
+        AmbrosiaAudioSource.PlayOneShot(AmbSpitPrep);
+    }
+    public void PlayAmbSpitAttack()
+    {
+        AmbrosiaAudioSource.pitch = Random.Range(0.8f, 1.2f);
+        AmbrosiaAudioSource.PlayOneShot(AmbSpitAttack);
     }
     public void PlayAmbLickPrep()
     {
