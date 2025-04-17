@@ -154,7 +154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0025024, y: 50}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 254.028, y: 30.4451}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &36355312
@@ -179,8 +179,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: They were not special
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e21188fb4aef2624ca720bcb9b2e8786, type: 2}
+  m_sharedMaterial: {fileID: -2637909185205262748, guid: e21188fb4aef2624ca720bcb9b2e8786, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 3
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -313,8 +313,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000022888, y: -50}
-  m_SizeDelta: {x: 845.8572, y: 33.9116}
+  m_AnchoredPosition: {x: -0.000019106, y: -50}
+  m_SizeDelta: {x: 899.72, y: 33.9116}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &195135149
 MonoBehaviour:
@@ -339,8 +339,8 @@ MonoBehaviour:
   m_text: Time was lost to a purgatory of dragging decay; the slowing beat of its
     heart
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e21188fb4aef2624ca720bcb9b2e8786, type: 2}
+  m_sharedMaterial: {fileID: -2637909185205262748, guid: e21188fb4aef2624ca720bcb9b2e8786, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 3
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 1.377533, y: 0, z: 1.2364807, w: 0}
+  m_margin: {x: 1.377533, y: 0, z: -0.32730103, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -796,8 +796,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -9.1886, y: 150}
-  m_SizeDelta: {x: 827.48, y: 37.2529}
+  m_AnchoredPosition: {x: 0.0025024, y: 150}
+  m_SizeDelta: {x: 899.7198, y: 37.2529}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1434270422
 MonoBehaviour:
@@ -821,8 +821,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: As the Dungeon swallowed them whole, the Hunter realised a simple truth
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e21188fb4aef2624ca720bcb9b2e8786, type: 2}
+  m_sharedMaterial: {fileID: -2637909185205262748, guid: e21188fb4aef2624ca720bcb9b2e8786, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -846,13 +846,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 3
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -1055,8 +1055,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0025082, y: -150}
-  m_SizeDelta: {x: 864.44, y: 38.9236}
+  m_AnchoredPosition: {x: 0.34709, y: -150}
+  m_SizeDelta: {x: 900.409, y: 38.9236}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1601959275
 MonoBehaviour:
@@ -1080,8 +1080,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: It only hoped it would die before another entered to repeat the same mistake
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e21188fb4aef2624ca720bcb9b2e8786, type: 2}
+  m_sharedMaterial: {fileID: -2637909185205262748, guid: e21188fb4aef2624ca720bcb9b2e8786, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1111,7 +1111,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 3
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
