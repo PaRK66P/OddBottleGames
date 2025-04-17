@@ -147,6 +147,8 @@ public class CompanionManager : MonoBehaviour
             return;
         }
 
+        _soundManager.PlayAmbHit();
+
         // Check for heat up thresholds
         switch (_bossScript.GetHeatUpStage())
         {
@@ -175,6 +177,7 @@ public class CompanionManager : MonoBehaviour
 
     private void CompanionDeath()
     {
+        _soundManager.PlayAmbDown();
         ChangeToNone();
         RemoveHealthBar();
         StartCoroutine(PlayDeathEffects());
@@ -407,10 +410,12 @@ public class CompanionManager : MonoBehaviour
             case 25:
             case 27:
             case 28:
+                _soundManager.PlayAmbConsume();
                 _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
                 gameObject.GetComponent<enemyScr>().releaseEnemy();
                 break;
             default:
+                _soundManager.PlayAmbConsume();
                 _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
                 gameObject.GetComponent<enemyScr>().releaseEnemy();
                 Debug.LogError("Visual novel selection of " + _visualNovelManager.GetLastSelectionID() + " not supported. make sure to update selection code in miniboss as well as the novel that plays");

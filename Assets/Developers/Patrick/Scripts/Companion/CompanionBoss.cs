@@ -68,6 +68,7 @@ public class CompanionBoss : MonoBehaviour
     private float _lickProjectileSpeed;
     private float _lickProjectiles;
     private float _lickLastWaveProjectiles;
+    private bool _isLickStarted;
 
     // Scream Attack
     private float _screamStartTimer;
@@ -341,6 +342,11 @@ public class CompanionBoss : MonoBehaviour
         // Charge
         if (Time.time - _lickStartTimer <= _dataObj.LickChargeTime)
         {
+            if (!_isLickStarted)
+            {
+                _isLickStarted = true;
+                _soundManager.PlayAmbLickPrep();
+            }
             _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LickCharge);
 
             return;
@@ -353,6 +359,8 @@ public class CompanionBoss : MonoBehaviour
             if(Time.time - _lickLastWaveStartTime <= _lickWaveGap) { return; }
 
             // Create wave
+            _soundManager.PlayAmbLickAttack();
+
             Vector3 forwardVector = (_player.transform.position - transform.position).normalized;
             Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
 
@@ -462,6 +470,8 @@ public class CompanionBoss : MonoBehaviour
             if (Time.time - _screamLastWaveStartTime <= _screamWaveGap) { return; }
 
             // Create wave
+            _soundManager.PlayAmbScreamAttack();
+
             GameObject projectileRef;
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, _screamStartDirection, new Vector3(0.0f, 0.0f, 1.0f));
             float screamAngle = 360.0f / (float)_dataObj.NumberOfScreamProjectiles;
@@ -660,6 +670,7 @@ public class CompanionBoss : MonoBehaviour
         {
             // Selecting lick attack
             _doLickAttack = false; // Next non-close range attack will be scream
+            _isLickStarted = false;
             _lickStartTimer = Time.time;
             _lickWaveCurrentCount = 0;
             switch (_heatUpStage)
