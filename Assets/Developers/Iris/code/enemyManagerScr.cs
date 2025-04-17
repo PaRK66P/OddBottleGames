@@ -40,7 +40,7 @@ public class enemyManager : MonoBehaviour
     {
         foreach (GameObject d in doors)
         {
-            d.SetActive(false);
+            d.GetComponentInChildren<DoorAnimationScript>().CloseDoorCommand();
         }
     }
 
