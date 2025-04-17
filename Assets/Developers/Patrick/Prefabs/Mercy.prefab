@@ -79,8 +79,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.018161774, y: -0.7252021}
-  m_Size: {x: 1.2990646, y: 3.0727243}
+  m_Offset: {x: -0.04450023, y: -0.12364721}
+  m_Size: {x: 1.4745181, y: 4.275834}
   m_Direction: 0
 --- !u!1 &3669714190226329484
 GameObject:
@@ -296,6 +296,16 @@ MonoBehaviour:
   FrontDirection: Directions/Front
   BackDirection: Directions/Back
   SideDirection: Directions/Side
+  CloakLeft: Directions/Cloak L
+  CloakRight: Directions/Cloak R
+  IdleAnimation: Idle
+  RunAnimation: Run
+  LickAnimation: Lick
+  SpitAnimation: Spit
+  ScreamStartAnimation: ScreamStart
+  ScreamContinuedAnimation: ScreamCont
+  LeapWindupAnimation: DashWindup
+  LeapMovementAnimation: Lunge
 --- !u!1 &5602794491860636395
 GameObject:
   m_ObjectHideFlags: 0

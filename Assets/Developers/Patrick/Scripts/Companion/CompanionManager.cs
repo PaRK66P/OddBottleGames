@@ -39,7 +39,7 @@ public class CompanionManager : MonoBehaviour
     private CompanionManager _managerRef;
     private CompanionBoss _bossScript;
     private CompanionFriend _friendScript;
-    private CompanionAnimations _animationsScript;
+    private CompanionAnimationHandler _animationsScript;
 
     // Values
     private CompanionStates _currentState;
@@ -79,8 +79,8 @@ public class CompanionManager : MonoBehaviour
         _detectionScript.InitialiseComponent(ref _friendData);
         _detectionScript.GetComponent<CircleCollider2D>().radius = _friendData.DetectionRadius;
 
-        _animationsScript = gameObject.AddComponent<CompanionAnimations>();
-        _animationsScript.InitialiseComponent(ref _bossData, ref _companionImage);
+        _animationsScript = GetComponentInChildren<CompanionAnimationHandler>();
+        _animationsScript.SetManager(ref _managerRef);
 
         _bossScript = gameObject.AddComponent<CompanionBoss>();
         _bossScript.InitialiseComponent(ref _bossData, ref _rb, ref _animationsScript, ref _pathfindingManager, ref _playerObject, ref _poolManager, ref _soundManager);
@@ -135,6 +135,11 @@ public class CompanionManager : MonoBehaviour
     }
     #endregion
 
+    public bool IsPlayerOnRightSide()
+    {
+        return (_playerObject.transform.position.x - transform.position.x >= 0.0f);
+    }
+
     #region Damage
     public void TakeDamage(float damage)
     {
@@ -177,6 +182,8 @@ public class CompanionManager : MonoBehaviour
 
     private void CompanionDeath()
     {
+        _animationsScript.ResetActionState();
+        _animationsScript.ResetAnimationTrackSpeed();
         _soundManager.PlayAmbDown();
         ChangeToNone();
         RemoveHealthBar();
