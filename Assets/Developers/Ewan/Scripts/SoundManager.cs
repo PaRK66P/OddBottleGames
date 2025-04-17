@@ -79,6 +79,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip IchorCrit;
     [SerializeField] private AudioClip IchorDown;
 
+    public void SetAmbrosiaAudioSource(ref AudioSource audioSource)
+    {
+        AmbrosiaAudioSource = audioSource;
+    }
+
     public void Update()
     {
         //update volume
