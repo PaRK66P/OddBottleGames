@@ -62,7 +62,7 @@ public class CompanionAnimations : MonoBehaviour
         {
             _spriteRenderer.transform.localScale = new Vector3(Mathf.Abs(_spriteRenderer.transform.localScale.x) * (_isFacingRightLast ? 1 : -1), _spriteRenderer.transform.localScale.y, _spriteRenderer.transform.localScale.z);
         }
-        _spriteRenderer.sprite = _bossData.GetSprite(_animState, _isFacingRightLast); // Change animation based on boss data
+        //_spriteRenderer.sprite = _bossData.GetSprite(_animState, _isFacingRightLast); // Change animation based on boss data
     }
 
     public void ChangeAnimationDirection(FacingDirection direction)

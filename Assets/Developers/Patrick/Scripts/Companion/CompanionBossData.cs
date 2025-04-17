@@ -12,7 +12,6 @@ public class CompanionBossData : ScriptableObject
     public float MoveSpeedMultiplier; // The multiplier that effects the speed the longer they move towards the player
     public LayerMask EnvironmentMask;
     public LayerMask PlayerMask;
-    public Sprite IdleSprite;
     [Range(0f, 1f)] public float StageTwoHealthThreshold;
     [Range(0f, 1f)] public float StageThreeHealthThreshold;
 
@@ -33,11 +32,6 @@ public class CompanionBossData : ScriptableObject
     public float LeapChargeTimeStage3;
     public float LeapTravelTimeStage3;
     public float LeapTravelDistanceStage3;
-    [Header("Animations")]
-    public Sprite LeapChargeSpriteLeft;
-    public Sprite LeapChargeSpriteRight;
-    public Sprite LeapMoveSprite;
-    public Sprite LeapEndSprite;
 
     [Space(16)]
     [Header("Feral")]
@@ -76,10 +70,6 @@ public class CompanionBossData : ScriptableObject
     [Header("Stage 3")]
     public float SpitProjectileTravelDistance3;
     public float SpitProjectileSize3;
-    [Header("Animations")]
-    public Sprite SpitChargeSprite;
-    public Sprite SpitAttackSprite;
-    public Sprite SpitEndSprite;
 
     [Space(16)]
     [Header("Lick")]
@@ -109,10 +99,6 @@ public class CompanionBossData : ScriptableObject
     public int LickWavesStage3;
     public int LickProjectilesStage3;
     public int LickLastWaveProjectilesStage3;
-    [Header("Animations")]
-    public Sprite LickChargeSprite;
-    public Sprite LickAttackSprite;
-    public Sprite LickEndSprite;
 
     [Space(16)]
     [Header("Scream")]
@@ -135,11 +121,25 @@ public class CompanionBossData : ScriptableObject
     public float ScreamProjectileSpeed3;
     public float ScreamWaveGapStage3;
     public int ScreamWavesStage3;
-    [Header("Animations")]
-    public Sprite ScreamChargeSprite;
-    public Sprite ScreamAttackSprite;
-    public Sprite ScreamEndSprite;
 
+    [Header("Animation Timings")]
+    public int IdleFrames;
+    public int RunFrames;
+    public int LickFrames;
+    public int SpitFrames;
+    public int ScreamStartFrames;
+    public int ScreamContinuedFrames;
+    public int LeapWindupFrames;
+    public int LeapMovementFrames;
+
+    [HideInInspector] public float IdleTiming;
+    [HideInInspector] public float RunTiming;
+    [HideInInspector] public float LickTiming;
+    [HideInInspector] public float SpitTiming;
+    [HideInInspector] public float ScreamStartTiming;
+    [HideInInspector] public float ScreamContinuedTiming;
+    [HideInInspector] public float LeapWindupTiming;
+    [HideInInspector] public float LeapMovementTiming;
 
     [Header("Debug")]
     [Min(0.0f)] public float CompanionHeight;
@@ -155,56 +155,15 @@ public class CompanionBossData : ScriptableObject
     public bool DrawLick;
     public bool DrawScream;
 
-    // TO BE REMOVED
-    public Sprite GetSprite(CompanionAnimations.AnimationState animation, bool isFacingRight)
+    private void OnValidate()
     {
-        switch (animation)
-        {
-            case CompanionAnimations.AnimationState.Idle:
-                return IdleSprite;
-
-            case CompanionAnimations.AnimationState.LeapCharge:
-                if (isFacingRight)
-                {
-                    return LeapChargeSpriteRight;
-                }
-                return LeapChargeSpriteLeft;
-
-            case CompanionAnimations.AnimationState.LeapMove:
-                return LeapMoveSprite;
-
-            case CompanionAnimations.AnimationState.LeapEnd:
-                return LeapEndSprite;
-
-            case CompanionAnimations.AnimationState.SpitCharge:
-                return SpitChargeSprite;
-
-            case CompanionAnimations.AnimationState.SpitAttack:
-                return SpitAttackSprite;
-
-            case CompanionAnimations.AnimationState.SpitEnd:
-                return SpitEndSprite;
-
-            case CompanionAnimations.AnimationState.LickCharge:
-                return LickChargeSprite;
-
-            case CompanionAnimations.AnimationState.LickAttack:
-                return LickAttackSprite;
-
-            case CompanionAnimations.AnimationState.LickEnd:
-                return LickEndSprite;
-
-            case CompanionAnimations.AnimationState.ScreamCharge:
-                return ScreamChargeSprite;
-
-            case CompanionAnimations.AnimationState.ScreamAttack:
-                return ScreamAttackSprite;
-
-            case CompanionAnimations.AnimationState.ScreamEnd:
-                return ScreamEndSprite;
-
-            default:
-                return null;
-        }
+        IdleTiming = (float)IdleFrames / 30.0f;
+        RunTiming = (float)RunFrames / 30.0f;
+        LickTiming = (float)LickFrames / 30.0f;
+        SpitTiming = (float)SpitFrames / 30.0f;
+        ScreamStartTiming = (float)ScreamStartFrames / 30.0f;
+        ScreamContinuedTiming = (float)ScreamContinuedFrames / 30.0f;
+        LeapWindupTiming = (float)LeapWindupFrames / 30.0f;
+        LeapMovementTiming = (float)LeapMovementFrames / 30.0f;
     }
 }

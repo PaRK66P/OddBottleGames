@@ -24,9 +24,8 @@ MonoBehaviour:
   PlayerMask:
     serializedVersion: 2
     m_Bits: 128
-  IdleSprite: {fileID: 21300000, guid: 0ecc6c1ab2240634fb0e0ed9ae17e0c5, type: 3}
   StageTwoHealthThreshold: 0.75
-  StageThreeHealthThreshold: 0.5
+  StageThreeHealthThreshold: 0.4
   LeapDamage: 8
   LeapEndTime: 0.5
   LeapTargetTravelPercentage: 0.8
@@ -39,10 +38,6 @@ MonoBehaviour:
   LeapChargeTimeStage3: 0.4
   LeapTravelTimeStage3: 0.3
   LeapTravelDistanceStage3: 14
-  LeapChargeSpriteLeft: {fileID: 21300000, guid: 04463bf04261e3f43bb0d7f34ea374e1, type: 3}
-  LeapChargeSpriteRight: {fileID: 21300000, guid: bb1309a33d4407e459590c5129e01a3f, type: 3}
-  LeapMoveSprite: {fileID: 21300000, guid: 0f56ace36a8c51043867070d895d3ca4, type: 3}
-  LeapEndSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   FeralLeapRestTime: 2
   FeralLeapAmountStage1: 1
   FeralLeapDelayStage1: 0.75
@@ -69,9 +64,6 @@ MonoBehaviour:
   SpitProjectileSize2: 3
   SpitProjectileTravelDistance3: 8
   SpitProjectileSize3: 4
-  SpitChargeSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
-  SpitAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
-  SpitEndSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   LickProjectile: {fileID: 6314627607262925113, guid: 7e751bbcfe8a2894992bf098742dccc3, type: 3}
   LickProjectileSpawnDistance: 1.64
   LickProjectileSeperationDistance: 0.38
@@ -95,9 +87,6 @@ MonoBehaviour:
   LickWavesStage3: 5
   LickProjectilesStage3: 5
   LickLastWaveProjectilesStage3: 8
-  LickChargeSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
-  LickAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
-  LickEndSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
   ScreamProjectile: {fileID: 6314627607262925113, guid: 7e751bbcfe8a2894992bf098742dccc3, type: 3}
   ScreamProjectileSize: 0.8
   ScreamProjectileDamage: 10
@@ -114,9 +103,22 @@ MonoBehaviour:
   ScreamProjectileSpeed3: 9
   ScreamWaveGapStage3: 0.4
   ScreamWavesStage3: 10
-  ScreamChargeSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
-  ScreamAttackSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
-  ScreamEndSprite: {fileID: 21300000, guid: d65b072f29ce93f47802ac52577ae2d4, type: 3}
+  IdleFrames: 16
+  RunFrames: 42
+  LickFrames: 15
+  SpitFrames: 17
+  ScreamStartFrames: 19
+  ScreamContinuedFrames: 24
+  LeapWindupFrames: 8
+  LeapMovementFrames: 1
+  IdleTiming: 0.53333336
+  RunTiming: 1.4
+  LickTiming: 0.5
+  SpitTiming: 0.56666666
+  ScreamStartTiming: 0.6333333
+  ScreamContinuedTiming: 0.8
+  LeapWindupTiming: 0.26666668
+  LeapMovementTiming: 0.033333335
   CompanionHeight: 0
   CompanionWidth: 0
   HeightOffset: 0

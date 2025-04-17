@@ -24,7 +24,7 @@ public class CompanionFriend : MonoBehaviour
     // Components
     private Rigidbody2D _rb;
     private CompanionDetection _detectionScript;
-    private CompanionAnimations _animationScript;
+    private CompanionAnimationHandler _animationScript;
 
     // Values
     private CompanionStates _state;
@@ -45,7 +45,7 @@ public class CompanionFriend : MonoBehaviour
     private Vector2 _leapStart;
     private Vector2 _leapEnd;
 
-    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimations animationScript, ref PathfindingManager pathfindingManager, ref SoundManager soundManager, ref Rigidbody2D rb, ref GameObject player)
+    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimationHandler animationScript, ref PathfindingManager pathfindingManager, ref SoundManager soundManager, ref Rigidbody2D rb, ref GameObject player)
     {
         _dataObj = dataObj;
         _detectionScript = detectionScript;
@@ -74,22 +74,28 @@ public class CompanionFriend : MonoBehaviour
 
     public void CompanionFixedUpdate()
     {
-        _soundManager.SetWalkingAmb(false);
+        _soundManager.SetWalkingAmb(false); // Assume false until not
         // Fixed update based on state
         switch (_state)
         {
             case CompanionStates.Idle: // Move towards the player
+                UpdateDirection();
+
                 float travelDistance = _dataObj.IdleSpeed * Time.fixedDeltaTime;
                 Vector2 playerDistance = new Vector2(_player.transform.position.x, _player.transform.position.y) - _rb.position;
 
                 if(playerDistance.sqrMagnitude <= _dataObj.IdleDistance * _dataObj.IdleDistance) // If the player is close enough, no need to move
                 {
+                    _animationScript.SetToIdleAnimation();
+                    _animationScript.ChangeAnimationTrackSpeed(2.0f);
                     break;
                 }
 
                 Vector2 travelDirection = CompanionPathfindingToPlayer();
 
                 _soundManager.SetWalkingAmb(true);
+                _animationScript.SetToRunAnimation();
+                _animationScript.ResetAnimationTrackSpeed();
                 _rb.MovePosition(new Vector2(_rb.position.x, _rb.position.y) + travelDirection * travelDistance);
 
                 break;
@@ -112,6 +118,8 @@ public class CompanionFriend : MonoBehaviour
                     }
 
                     _soundManager.SetWalkingAmb(true);
+                    UpdateDirection();
+                    _animationScript.SetToRunAnimation();
                     // Move closer to the target
                     _rb.MovePosition(new Vector2(transform.position.x, transform.position.y) + pathfindingDirection * _dataObj.MoveSpeed * Time.fixedDeltaTime);
 
@@ -136,13 +144,10 @@ public class CompanionFriend : MonoBehaviour
 
                         _leapEnd = _pathfindingManager.GetNearestNodeInDirection(_leapEnd, new Vector3(-leapDirection.x, -leapDirection.y, 0.0f)).worldPosition; // Find the nearest unblocked node along the path
 
-
                         _leapTimer = Time.time;
 
                         _isReadyToLeap = true;
                         _isLeapChargeStarted = false;
-
-                        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapMove);
                     }
                     return;
                 }
@@ -156,7 +161,7 @@ public class CompanionFriend : MonoBehaviour
                         _soundManager.PlayAmbDashReady(2);
                     }
 
-                    _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapCharge);
+                    _animationScript.StartLeap();
                     _leapMoveTimer = Time.time;
                     return;
                 }
@@ -166,6 +171,8 @@ public class CompanionFriend : MonoBehaviour
                 float travelPosition = (Time.time - _leapMoveTimer) / _dataObj.LeapTravelTime;
 
                 _rb.MovePosition(Vector2.Lerp(_leapStart, _leapEnd, travelPosition));
+
+                _animationScript.PlayLeapMovement();
 
                 if (travelPosition >= 1) // Once the leap is finished
                 {
@@ -270,23 +277,10 @@ public class CompanionFriend : MonoBehaviour
             _isReadyToLeap = false;
             _isLeapFinished = false;
 
-
-            Debug.Log("Target: " + _currentTarget.ToString());
-
-            // To be updated later
-            if (_currentTarget.transform.position.x - transform.position.x < 0)
-            {
-                _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.Left);
-            }
-            else if (_currentTarget.transform.position.x - transform.position.x > 0)
-            {
-                _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.Right);
-            }
+            _animationScript.ResetAnimationTrackSpeed();
 
             return;
         }
-
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.Idle);
     }
 
     // Companion will jump towards the target, damaging on collision
@@ -303,7 +297,6 @@ public class CompanionFriend : MonoBehaviour
         }
 
         // Delay for the end of the attack
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapEnd);
         if(Time.time - _leapEndTimer < _dataObj.LeapEndTime)
         {
             return;
@@ -313,4 +306,15 @@ public class CompanionFriend : MonoBehaviour
         _state = CompanionStates.Idle;
     }
     #endregion
+
+    private void UpdateDirection()
+    {
+        Vector3 direction = _player.transform.position - transform.position;
+
+        float AngleFromRight = Vector3.SignedAngle(Vector3.right, direction, new Vector3(0.0f, 0.0f, 1.0f));
+        if (AngleFromRight > -45.0f && AngleFromRight < 45.0f) { _animationScript.UpdateFacingDirection(CompanionAnimationHandler.FacingDirection.Right); }
+        else if (AngleFromRight >= 45.0f && AngleFromRight <= 135.0f) { _animationScript.UpdateFacingDirection(CompanionAnimationHandler.FacingDirection.Back); }
+        else if (AngleFromRight > 135.0f || AngleFromRight < -135.0f) { _animationScript.UpdateFacingDirection(CompanionAnimationHandler.FacingDirection.Left); }
+        else if (AngleFromRight >= -135.0f || AngleFromRight <= -45.0f) { _animationScript.UpdateFacingDirection(CompanionAnimationHandler.FacingDirection.Front); }
+    }
 }

@@ -23,7 +23,7 @@ public class CompanionBoss : MonoBehaviour
 
     // Components
     private Rigidbody2D _rb;
-    private CompanionAnimations _animationScript;
+    private CompanionAnimationHandler _animationScript;
 
     // Attacks
     private AttackState _currentState;
@@ -85,7 +85,7 @@ public class CompanionBoss : MonoBehaviour
     #region Set Up
     // Sets up the component
     public void InitialiseComponent(ref CompanionBossData bossData, 
-        ref Rigidbody2D rigidbodyComp, ref CompanionAnimations animationScript, 
+        ref Rigidbody2D rigidbodyComp, ref CompanionAnimationHandler animationScript, 
         ref PathfindingManager pathfindingScript, ref GameObject playerObject, 
         ref ObjectPoolManager poolManager, ref SoundManager soundManager)
     {
@@ -173,9 +173,9 @@ public class CompanionBoss : MonoBehaviour
 
             // Move closer to the player
             _rb.MovePosition(transform.position + _lastLeapMoveDirection * _dataObj.MoveSpeed * Time.fixedDeltaTime * Mathf.Max((_dataObj.MoveSpeedMultiplier * (Time.time - _readyStartTime)), 1.0f));
+            _animationScript.ChangeAnimationTrackSpeed(Mathf.Max((_dataObj.MoveSpeedMultiplier * (Time.time - _readyStartTime)), 1.0f));
 
             // Check if ready
-            Debug.Log(_leapTravelDistance);
             if (WithinLeapRange(_leapTravelDistance))
             {
                 _leapStartTimer = Time.time;
@@ -197,7 +197,11 @@ public class CompanionBoss : MonoBehaviour
                 _leapStartTimer = Time.time;
                 _isReadyToLeap = true;
                 _isLeapChargeStarted = false;
+
+                _animationScript.ResetAnimationTrackSpeed();
             }
+
+            UpdateDirection();
             return;
         }
         _soundManager.SetWalkingAmb(false);
@@ -209,9 +213,10 @@ public class CompanionBoss : MonoBehaviour
             {
                 _isLeapChargeStarted = true;
                 _soundManager.PlayAmbDashReady(_heatUpStage);
+                _animationScript.StartLeap();
             }
 
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapCharge);
+            UpdateDirection();
             return;
         }
 
@@ -224,7 +229,7 @@ public class CompanionBoss : MonoBehaviour
             _leapMoveTimer = Time.time;
             _isLeapMoving = true;
 
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapMove);
+            _animationScript.PlayLeapMovement();
         }
 
         float travelPosition = (Time.time - _leapMoveTimer) / _leapTravelTime;
@@ -284,8 +289,6 @@ public class CompanionBoss : MonoBehaviour
         }
 
         // End leap attack
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LeapEnd);
-
         _attackEndDelay = _leapEndTime;
         _currentState = AttackState.Delay;
 
@@ -300,7 +303,7 @@ public class CompanionBoss : MonoBehaviour
         // Charge
         if (Time.time - _spitStartTimer <= _dataObj.SpitChargeTime)
         {
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SpitCharge);
+            _animationScript.SetToIdleAnimation();
             return;
         }
 
@@ -310,14 +313,13 @@ public class CompanionBoss : MonoBehaviour
         Vector3 forwardDirection = (_player.transform.position - transform.position).normalized;
         float angleFromRight = Vector3.SignedAngle(Vector3.right, forwardDirection, new Vector3(0.0f, 0.0f, 1.0f)) - _dataObj.SpitSpawnAngle;
 
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SpitAttack); // Need to setup anim changes on coroutines potentially as this never stays
-
         for (int i = 0; i < 3; i++)
         {
             // TO DO
             /*
              * Add linecast to end projectile early at wall
              */
+            _animationScript.SetToSpitAnimation();
 
             projectileRef = _poolManager.GetFreeObject(_dataObj.SpitProjectile.name);
             projectileRef.GetComponent<CompanionLargeProjectileLogic>().Initialise(
@@ -330,8 +332,6 @@ public class CompanionBoss : MonoBehaviour
         }
 
         // End spit attack
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.SpitEnd);
-
         _attackEndDelay = _dataObj.SpitEndTime;
         _currentState = AttackState.Delay;
     }
@@ -346,8 +346,8 @@ public class CompanionBoss : MonoBehaviour
             {
                 _isLickStarted = true;
                 _soundManager.PlayAmbLickPrep();
+                _animationScript.SetToIdleAnimation();
             }
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LickCharge);
 
             return;
         }
@@ -360,6 +360,9 @@ public class CompanionBoss : MonoBehaviour
 
             // Create wave
             _soundManager.PlayAmbLickAttack();
+            _animationScript.SetToLickAnimation();
+            _animationScript.ResetActionState();
+            _animationScript.ChangeAnimationTrackSpeed(Mathf.Max(_lickWaveGap / _dataObj.LickTiming, 1.0f));
 
             Vector3 forwardVector = (_player.transform.position - transform.position).normalized;
             Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
@@ -375,8 +378,6 @@ public class CompanionBoss : MonoBehaviour
             float currentAngle;
 
             GameObject objectRef;
-
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LickAttack);
 
             // Creates projectiles left to right
             for (int i = 0; i < _lickProjectiles; i++)
@@ -407,6 +408,10 @@ public class CompanionBoss : MonoBehaviour
             if (Time.time - _lickLastWaveStartTime <= _lickWaveGap) { return; }
 
             // Create final wave
+            _soundManager.PlayAmbLickAttack();
+            _animationScript.SetToLickAnimation();
+            _animationScript.ChangeAnimationTrackSpeed(Mathf.Max(_lickWaveGap / _dataObj.LickTiming, 1.0f));
+
             Vector3 forwardVector = (_player.transform.position - transform.position).normalized;
             Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
 
@@ -421,8 +426,6 @@ public class CompanionBoss : MonoBehaviour
             float currentAngle;
 
             GameObject objectRef;
-
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LickAttack);
 
             // Creates projectiles left to right
             for (int i = 0; i < _lickLastWaveProjectiles; i++)
@@ -447,7 +450,6 @@ public class CompanionBoss : MonoBehaviour
         }
 
         // End lick attack
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.LickEnd);
         _attackEndDelay = _dataObj.LickEndTime;
         _currentState = AttackState.Delay;
     }
@@ -458,7 +460,8 @@ public class CompanionBoss : MonoBehaviour
         // Charge
         if (Time.time - _screamStartTimer <= _dataObj.ScreamChargeTime)
         {
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.ScreamCharge);
+            _animationScript.StartScream();
+            _animationScript.ChangeAnimationTrackSpeed(Mathf.Max(_dataObj.ScreamChargeTime / _dataObj.ScreamStartTiming, 1.0f));
 
             return;
         }
@@ -471,13 +474,13 @@ public class CompanionBoss : MonoBehaviour
 
             // Create wave
             _soundManager.PlayAmbScreamAttack();
+            _animationScript.ContinueScream();
+            _animationScript.ChangeAnimationTrackSpeed(Mathf.Max(_screamWaveGap / _dataObj.ScreamContinuedTiming, 1.0f));
 
             GameObject projectileRef;
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, _screamStartDirection, new Vector3(0.0f, 0.0f, 1.0f));
             float screamAngle = 360.0f / (float)_dataObj.NumberOfScreamProjectiles;
             Vector3 projectileSpawnPosition;
-
-            _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.ScreamAttack);
 
             for (int i = 0; i < _dataObj.NumberOfScreamProjectiles; i++)
             {
@@ -500,8 +503,6 @@ public class CompanionBoss : MonoBehaviour
         }
         
         // End scream attack
-        _animationScript.ChangeAnimationState(CompanionAnimations.AnimationState.ScreamEnd);
-
         _attackEndDelay = _dataObj.ScreamEndTime;
         _currentState = AttackState.Delay;
     }
@@ -541,6 +542,8 @@ public class CompanionBoss : MonoBehaviour
     // The delay that happens between attacks
     private void Delay()
     {
+        _animationScript.SetToIdleAnimation();
+        _animationScript.ChangeAnimationTrackSpeed(2.0f);
         _attackEndDelay -= Time.deltaTime;
         if(_attackEndDelay < 0)
         {
@@ -555,15 +558,8 @@ public class CompanionBoss : MonoBehaviour
      */
     private void SelectAttack()
     {
-        // To be updated later
-        if (_player.transform.position.x - transform.position.x < 0)
-        {
-            _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.Left);
-        }
-        else if (_player.transform.position.x - transform.position.x > 0)
-        {
-            _animationScript.ChangeAnimationDirection(CompanionAnimations.FacingDirection.Right);
-        }
+        UpdateDirection();
+        _animationScript.ResetAnimationTrackSpeed();
 
         // Does a leap attack between other attacks (leap or feral)
         if (!_isLastAttackLeap)
@@ -746,4 +742,15 @@ public class CompanionBoss : MonoBehaviour
         return _heatUpStage;
     }
     #endregion
+
+    private void UpdateDirection()
+    {
+        Vector3 direction = _player.transform.position - transform.position;
+
+        float AngleFromRight = Vector3.SignedAngle(Vector3.right, direction, new Vector3(0.0f, 0.0f, 1.0f));
+        if (AngleFromRight > -45.0f && AngleFromRight < 45.0f) { _animationScript.UpdateFacingDirection(CompanionAnimationHandler.FacingDirection.Right); }
+        else if (AngleFromRight >= 45.0f && AngleFromRight <= 135.0f) { _animationScript.UpdateFacingDirection(CompanionAnimationHandler.FacingDirection.Back); }
+        else if (AngleFromRight > 135.0f || AngleFromRight < -135.0f) { _animationScript.UpdateFacingDirection(CompanionAnimationHandler.FacingDirection.Left); }
+        else if (AngleFromRight >= -135.0f || AngleFromRight <= -45.0f) { _animationScript.UpdateFacingDirection(CompanionAnimationHandler.FacingDirection.Front); }
+    }
 }
