@@ -87,7 +87,7 @@ public class CompanionFriend : MonoBehaviour
                 if(playerDistance.sqrMagnitude <= _dataObj.IdleDistance * _dataObj.IdleDistance) // If the player is close enough, no need to move
                 {
                     _animationScript.SetToIdleAnimation();
-                    _animationScript.ChangeAnimationTrackSpeed(2.0f);
+                    _animationScript.ChangeAnimationTrackSpeed(0.5f);
                     break;
                 }
 
@@ -307,6 +307,10 @@ public class CompanionFriend : MonoBehaviour
     }
     #endregion
 
+    public GameObject GetTarget()
+    {
+        return _currentTarget;
+    }
     private void UpdateDirection()
     {
         Vector3 direction = _player.transform.position - transform.position;

@@ -83,6 +83,7 @@ public class PlayerManager : MonoBehaviour
 
         PlayerManager manager = this; // Reference for the manager
         _playerMovement.InitialiseComponent(ref manager, ref _playerShooting, ref _playerAnimationHandler, ref _playerData, ref _playerDebugData, ref _soundManager, ref _healthBarScript, ref _evolveDashCollider);
+        _playerMovement.ResetSpeedScale();
         _playerShooting.InitialiseComponent(ref _playerData, ref _playerDebugData, ref _playerMovement, ref _playerAnimationHandler, ref _objectPoolManager, ref _timeManager, ref _soundManager, ref _canvasPlayer);
         _playerInputManager.InitialiseComponent(ref _playerMovement, ref _playerShooting, ref _playerAimReticle);
 

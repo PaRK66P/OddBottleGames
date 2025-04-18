@@ -258,14 +258,14 @@ public class PlayerMovement : MonoBehaviour
     public void SetSpeedScale(float scale)
     {
         _speedScale = scale;
-        _playerAnimationHandler.UpdateMovementScale(scale);
+        _playerAnimationHandler.UpdateMovementScale(scale / _playerData.RunAnimationSpeedScale);
     }
 
     // Resets to base amount
     public void ResetSpeedScale()
     {
         _speedScale = 1.0f;
-        _playerAnimationHandler.UpdateMovementScale(1.0f);
+        _playerAnimationHandler.UpdateMovementScale(_playerData.RunAnimationSpeedScale);
     }
 
     // Regain all dash charges

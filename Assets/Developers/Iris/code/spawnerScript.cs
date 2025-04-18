@@ -11,18 +11,19 @@ public class spawnerScript : MonoBehaviour
     GameObject player;
     PathfindingManager pathfinder;
     List<GameObject> weakPointPos;
-
+    
+    private GameObject _projectileDespawner;
     private SoundManager _soundManager;
 
     public void spawn()
     {
         GameObject obj = pooler.GetFreeObject(enemyPrefab.name);
-        obj.GetComponent<enemyScr>().InstantiateEnemy(ref pooler, enemyPrefab.name, ref enemyMan, ref UICanvas, ref player, ref pathfinder, ref _soundManager, ref weakPointPos);
+        obj.GetComponent<enemyScr>().InstantiateEnemy(ref pooler, enemyPrefab.name, ref enemyMan, ref UICanvas, ref player, ref pathfinder, ref _soundManager, ref weakPointPos, ref _projectileDespawner);
         obj.transform.position = transform.position;
         obj.transform.rotation = transform.rotation;
     }
 
-    public void setUp(ref ObjectPoolManager objPooler, ref enemyManager eneMan, ref Canvas dUICanvas, ref GameObject dPlayer, ref PathfindingManager dPathfinder, ref SoundManager soundManager, ref List<GameObject> dWeakPos)
+    public void setUp(ref ObjectPoolManager objPooler, ref enemyManager eneMan, ref Canvas dUICanvas, ref GameObject dPlayer, ref PathfindingManager dPathfinder, ref SoundManager soundManager, ref List<GameObject> dWeakPos, ref GameObject projectileDespawner)
     {
         pooler = objPooler;
         enemyMan = eneMan;
@@ -31,5 +32,6 @@ public class spawnerScript : MonoBehaviour
         pathfinder = dPathfinder;
         _soundManager = soundManager;
         weakPointPos = dWeakPos;
+        _projectileDespawner = projectileDespawner;
     }
 }

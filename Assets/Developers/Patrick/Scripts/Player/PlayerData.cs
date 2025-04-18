@@ -18,6 +18,7 @@ public class PlayerData : ScriptableObject
     [HideInInspector] public float AccelerationRate;
     [Range(0.0f, 1.0f)] public float Deceleration;
     [HideInInspector] public float DecelerationRate;
+    [Range(0.0f, 5.0f)] public float RunAnimationSpeedScale;
 
     [Header("Dashing")]
     [Min(0.0f)] public float DashTime;

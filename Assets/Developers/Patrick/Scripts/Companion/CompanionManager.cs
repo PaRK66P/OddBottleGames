@@ -25,6 +25,7 @@ public class CompanionManager : MonoBehaviour
     // Objects
     private GameObject _playerObject;
     private GameObject _healthbar;
+    private GameObject _projectileDespawner;
 
     // Managers
     private ObjectPoolManager _poolManager;
@@ -57,7 +58,7 @@ public class CompanionManager : MonoBehaviour
     /*
      * MUST BE CALLED BEFORE THIS OBJECT'S FIRST UPDATE FRAME
      */
-    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref PathfindingManager pathfindingManager, ref SoundManager soundManager, ref Canvas dUICanvas)
+    public void InitialiseEnemy(ref GameObject playerObject, ref ObjectPoolManager poolManager, ref PathfindingManager pathfindingManager, ref SoundManager soundManager, ref Canvas dUICanvas, ref GameObject projectileDespawner)
     {
         _managerRef = this;
 
@@ -65,6 +66,8 @@ public class CompanionManager : MonoBehaviour
         _poolManager = poolManager;
         _pathfindingManager = pathfindingManager;
         _soundManager = soundManager;
+
+        _projectileDespawner = projectileDespawner;
 
         _soundManager.SetAmbrosiaAudioSource(ref _companionAudioSource);
 
@@ -137,6 +140,13 @@ public class CompanionManager : MonoBehaviour
 
     public bool IsPlayerOnRightSide()
     {
+        if (_currentState == CompanionStates.Friend)
+        {
+            if (_friendScript.GetTarget() != null)
+            {
+                return (_friendScript.GetTarget().transform.position.x - transform.position.x >= 0.0f);
+            }
+        }
         return (_playerObject.transform.position.x - transform.position.x >= 0.0f);
     }
 
@@ -185,6 +195,7 @@ public class CompanionManager : MonoBehaviour
         _animationsScript.ResetActionState();
         _animationsScript.ResetAnimationTrackSpeed();
         _soundManager.PlayAmbDown();
+        _projectileDespawner.SetActive(true);
         ChangeToNone();
         RemoveHealthBar();
         StartCoroutine(PlayDeathEffects());
@@ -197,7 +208,7 @@ public class CompanionManager : MonoBehaviour
 
     private void DamageVisual()
     {
-        StartCoroutine(DamageColor());
+        
     }
 
     private void DefeatVisualNovel()
@@ -210,12 +221,6 @@ public class CompanionManager : MonoBehaviour
             _visualNovelManager.StartNovelSceneByName("Ambrosia1");
             _visualNovelManager.onNovelFinish.AddListener(GetVisualNovelResult);
         }
-    }
-    IEnumerator DamageColor()
-    {
-        _companionImage.color = UnityEngine.Color.red;
-        yield return new WaitForSeconds(0.1f);
-        _companionImage.color = UnityEngine.Color.white;
     }
 
     private IEnumerator PlayDeathEffects()
@@ -397,6 +402,7 @@ public class CompanionManager : MonoBehaviour
             case 20:
             case 21:
             case 26:
+                _projectileDespawner.SetActive(false);
                 gameObject.GetComponent<enemyScr>().DecreaseEnemyCount();
                 ChangeToFriendly();
                 _playerObject.GetComponent<PlayerManager>().SetAllyCompanion(true, ref _managerRef);
@@ -417,6 +423,7 @@ public class CompanionManager : MonoBehaviour
             case 25:
             case 27:
             case 28:
+                _projectileDespawner.SetActive(false);
                 _soundManager.PlayAmbConsume();
                 _playerObject.GetComponent<PlayerManager>().EvolveDash(true);
                 gameObject.GetComponent<enemyScr>().releaseEnemy();
