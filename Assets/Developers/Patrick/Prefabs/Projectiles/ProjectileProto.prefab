@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -8246490067953596040}
   - component: {fileID: 5876074989907784772}
   - component: {fileID: 8980284613227498950}
+  - component: {fileID: 198717284090699293}
   m_Layer: 8
   m_Name: ProjectileProto
   m_TagString: Untagged
@@ -48,9 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 376b55ce8a55c5044ac325dfc4f60194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalScale: {x: 1, y: 1, z: 1}
-  originalDamage: 1
-  _moveDirection: {x: 0, y: 0}
 --- !u!50 &5876074989907784772
 Rigidbody2D:
   serializedVersion: 4
@@ -124,6 +122,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.8077564, y: 0.30149204}
   m_EdgeRadius: 0
+--- !u!114 &198717284090699293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223489425459614113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023034b3edaaad94f88bcd0754961aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectileBehaviour: {fileID: -8246490067953596040}
+  _environment:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &4214531302752511102
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,10 +269,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023034b3edaaad94f88bcd0754961aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileBehaviour: {fileID: -8246490067953596040}
-  environment:
+  _projectileBehaviour: {fileID: 0}
+  _environment:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
 --- !u!61 &565173177229022644
 BoxCollider2D:
   m_ObjectHideFlags: 0
