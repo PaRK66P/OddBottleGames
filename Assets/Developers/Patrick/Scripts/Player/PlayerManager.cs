@@ -52,6 +52,8 @@ public class PlayerManager : MonoBehaviour
     private float _regenTimer = 0.0f;
     private float _health = 100;
 
+    private bool _hasControl;
+
     // Dialogue System
     private CanvasGroup _canvasGroup;
     [SerializeField]
@@ -88,6 +90,8 @@ public class PlayerManager : MonoBehaviour
         _playerInputManager.InitialiseComponent(ref _playerMovement, ref _playerShooting, ref _playerAimReticle);
 
         _canvasGroup = _canvasPlayer.transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
+
+        _hasControl = true;
     }
 
     // Update is called once per frame
@@ -201,7 +205,7 @@ public class PlayerManager : MonoBehaviour
 
     public bool CanBeDamaged()
     {
-        if (_isDamaged || _isDashing) { return false; }
+        if (_isDamaged || _isDashing || !_hasControl) { return false; }
         return true;
     }
     #endregion
@@ -209,11 +213,13 @@ public class PlayerManager : MonoBehaviour
     #region Input
     public void DisableInput()
     {
+        _hasControl = false;
         _playerInputManager.DisableInput();
     }
 
     public void EnableInput()
     {
+        _hasControl = true;
         _playerInputManager.EnableInput();
     }
     #endregion
