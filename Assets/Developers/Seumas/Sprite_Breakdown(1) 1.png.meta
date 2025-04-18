@@ -315,6 +315,71 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1882,7 +1947,81 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite_Breakdown(1) 1_0: 8492772932130987830
+      Sprite_Breakdown(1) 1_1: 3063656018623124417
+      Sprite_Breakdown(1) 1_10: -5100094726867684130
+      Sprite_Breakdown(1) 1_11: -1913836868381432094
+      Sprite_Breakdown(1) 1_12: 5126001553098498694
+      Sprite_Breakdown(1) 1_13: -6006892202371569937
+      Sprite_Breakdown(1) 1_14: 1351507067457866778
+      Sprite_Breakdown(1) 1_15: 5733987167585603741
+      Sprite_Breakdown(1) 1_16: 9080836786926986889
+      Sprite_Breakdown(1) 1_17: -7883156279735286475
+      Sprite_Breakdown(1) 1_18: 4046160655320487348
+      Sprite_Breakdown(1) 1_19: 1339685681464166446
+      Sprite_Breakdown(1) 1_2: -2150304247996053446
+      Sprite_Breakdown(1) 1_20: -3957880449409172479
+      Sprite_Breakdown(1) 1_21: 6380607279932563954
+      Sprite_Breakdown(1) 1_22: 6552289341779439602
+      Sprite_Breakdown(1) 1_23: -9060057731773350805
+      Sprite_Breakdown(1) 1_24: -2142809402323072003
+      Sprite_Breakdown(1) 1_25: 8148667236225565694
+      Sprite_Breakdown(1) 1_26: -6925477315877604229
+      Sprite_Breakdown(1) 1_27: -6888217953835166747
+      Sprite_Breakdown(1) 1_28: -7514060108296896252
+      Sprite_Breakdown(1) 1_29: 2804675971334821504
+      Sprite_Breakdown(1) 1_3: 4933629956015909973
+      Sprite_Breakdown(1) 1_30: -7400967799123546962
+      Sprite_Breakdown(1) 1_31: -6502106462927564631
+      Sprite_Breakdown(1) 1_32: -5038057916953690907
+      Sprite_Breakdown(1) 1_33: -7227354606858444443
+      Sprite_Breakdown(1) 1_34: -3619200433109337152
+      Sprite_Breakdown(1) 1_35: 8089105183238307144
+      Sprite_Breakdown(1) 1_36: 1009213878493824535
+      Sprite_Breakdown(1) 1_37: 5384201150679602443
+      Sprite_Breakdown(1) 1_38: -444068071241637910
+      Sprite_Breakdown(1) 1_39: 1133066087768331881
+      Sprite_Breakdown(1) 1_4: 3207972008600406475
+      Sprite_Breakdown(1) 1_40: -1309797915624411961
+      Sprite_Breakdown(1) 1_41: -7340460349749148387
+      Sprite_Breakdown(1) 1_42: 7907374771673879039
+      Sprite_Breakdown(1) 1_43: -7440047332596982087
+      Sprite_Breakdown(1) 1_44: -1797918528513479059
+      Sprite_Breakdown(1) 1_45: -4260849318227192242
+      Sprite_Breakdown(1) 1_46: -6104223302253922635
+      Sprite_Breakdown(1) 1_47: 3450467159134364310
+      Sprite_Breakdown(1) 1_48: 5503369158499491216
+      Sprite_Breakdown(1) 1_49: -2902653393468352528
+      Sprite_Breakdown(1) 1_5: -861446357030436484
+      Sprite_Breakdown(1) 1_50: -4394173706497337257
+      Sprite_Breakdown(1) 1_51: 3761809579394762951
+      Sprite_Breakdown(1) 1_52: -2826995393062315552
+      Sprite_Breakdown(1) 1_53: 992431689869244430
+      Sprite_Breakdown(1) 1_54: -8261995798317438385
+      Sprite_Breakdown(1) 1_55: 8484826311709446811
+      Sprite_Breakdown(1) 1_56: -8272561317307708421
+      Sprite_Breakdown(1) 1_57: 8485555071963137104
+      Sprite_Breakdown(1) 1_58: 6660312356869618114
+      Sprite_Breakdown(1) 1_59: 7967550877484515979
+      Sprite_Breakdown(1) 1_6: 982772972176742227
+      Sprite_Breakdown(1) 1_60: -6657733560402049072
+      Sprite_Breakdown(1) 1_61: -2483528337494468626
+      Sprite_Breakdown(1) 1_62: 4931729659515334155
+      Sprite_Breakdown(1) 1_63: 5987771448311275355
+      Sprite_Breakdown(1) 1_64: -4849759159527660672
+      Sprite_Breakdown(1) 1_65: -2203136590939594748
+      Sprite_Breakdown(1) 1_66: 9018414969091347801
+      Sprite_Breakdown(1) 1_67: 6754179109673590132
+      Sprite_Breakdown(1) 1_68: 7148298482122223979
+      Sprite_Breakdown(1) 1_69: 3034904089026992593
+      Sprite_Breakdown(1) 1_7: 190865863712976272
+      Sprite_Breakdown(1) 1_70: 8667961131572412995
+      Sprite_Breakdown(1) 1_71: -4285812958294804506
+      Sprite_Breakdown(1) 1_72: -1500707216087948037
+      Sprite_Breakdown(1) 1_73: 986390552244852428
+      Sprite_Breakdown(1) 1_8: -3696914392219820586
+      Sprite_Breakdown(1) 1_9: -5618727237177776654
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

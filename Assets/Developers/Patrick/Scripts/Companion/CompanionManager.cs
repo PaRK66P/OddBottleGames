@@ -155,6 +155,8 @@ public class CompanionManager : MonoBehaviour
     {
         if(_currentState != CompanionStates.Enemy) { return; } // Can only take damage in enemy state
 
+        _animationsScript.AddHurtAnimation();
+
         _health -= damage;
         if(_health <= 0 && !_hasPlayedNovel)
         {

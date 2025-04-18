@@ -288,6 +288,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         _healthBarScript.setDashUI(_dashChargesNumber);
+        _soundManager.PlayPDashReady();
     }
 
     public Vector2 getMovementInput()

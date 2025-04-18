@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 428bb17abe4e83a43ad105b9e8a5f8df, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: b77b987ef7f523042a4277d21f66ea1e, type: 2}
   initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
@@ -306,6 +306,7 @@ MonoBehaviour:
   ScreamContinuedAnimation: ScreamCont
   LeapWindupAnimation: DashWindup
   LeapMovementAnimation: Lunge
+  HurtAnimation: HurtNoMove
 --- !u!1 &5602794491860636395
 GameObject:
   m_ObjectHideFlags: 0
