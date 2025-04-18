@@ -1,0 +1,414 @@
+fileFormatVersion: 2
+guid: 67f4898c6f0140a4eb4b74b320e775da
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3218642606014083122
+    second: lilguyspsd_0
+  - first:
+      213: -8899133705640026494
+    second: lilguyspsd_1
+  - first:
+      213: 8051942564151357413
+    second: lilguyspsd_2
+  - first:
+      213: 7389101228314929830
+    second: lilguyspsd_3
+  - first:
+      213: 8107587448973501952
+    second: lilguyspsd_4
+  - first:
+      213: -2125917607832181619
+    second: lilguyspsd_5
+  - first:
+      213: -2443748851311672050
+    second: lilguyspsd_6
+  - first:
+      213: -6332405700902881506
+    second: lilguyspsd_7
+  - first:
+      213: -5422146327741324666
+    second: lilguyspsd_8
+  - first:
+      213: 885198585552078392
+    second: lilguyspsd_9
+  - first:
+      213: 7182803469828367473
+    second: lilguyspsd_10
+  - first:
+      213: 4514125517392713327
+    second: lilguyspsd_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: lilguyspsd_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 495
+        width: 42
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecfc7995a951553d0800000000000000
+      internalID: -3218642606014083122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lilguyspsd_1
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 496
+        width: 38
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28ede9a5b0def7480800000000000000
+      internalID: -8899133705640026494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lilguyspsd_2
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 495
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5efe610e91f3ebf60800000000000000
+      internalID: 8051942564151357413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lilguyspsd_3
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 477
+        width: 49
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6aa2d130b6c5b8660800000000000000
+      internalID: 7389101228314929830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lilguyspsd_4
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 477
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0062b7934dfe38070800000000000000
+      internalID: 8107587448973501952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lilguyspsd_5
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 401
+        width: 192
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d842a6303393f72e0800000000000000
+      internalID: -2125917607832181619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lilguyspsd_6
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 389
+        width: 74
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e058c450e5f061ed0800000000000000
+      internalID: -2443748851311672050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lilguyspsd_7
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 271
+        width: 175
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e177608c096ce18a0800000000000000
+      internalID: -6332405700902881506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lilguyspsd_8
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 196
+        width: 94
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6822ac684aaa0c4b0800000000000000
+      internalID: -5422146327741324666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lilguyspsd_9
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 136
+        width: 175
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 836828f6c6bd84c00800000000000000
+      internalID: 885198585552078392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lilguyspsd_10
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 2
+        width: 98
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 174209e13b17ea360800000000000000
+      internalID: 7182803469828367473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lilguyspsd_11
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2
+        width: 175
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6618bfbd3565ae30800000000000000
+      internalID: 4514125517392713327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      lilguyspsd_0: -3218642606014083122
+      lilguyspsd_1: -8899133705640026494
+      lilguyspsd_10: 7182803469828367473
+      lilguyspsd_11: 4514125517392713327
+      lilguyspsd_2: 8051942564151357413
+      lilguyspsd_3: 7389101228314929830
+      lilguyspsd_4: 8107587448973501952
+      lilguyspsd_5: -2125917607832181619
+      lilguyspsd_6: -2443748851311672050
+      lilguyspsd_7: -6332405700902881506
+      lilguyspsd_8: -5422146327741324666
+      lilguyspsd_9: 885198585552078392
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
