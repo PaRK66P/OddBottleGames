@@ -84,7 +84,7 @@ public class VNEditorWindow : EditorWindow
         {
             foreach (Sprite sprite in allObjects)
             {
-                if (sprite.name == "missing sprite_0")
+                if (sprite.name == "PLACEHOLDER_CHARACTER")
                 {
                     defaultSprite = sprite;
                 }
