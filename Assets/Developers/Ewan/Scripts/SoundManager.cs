@@ -115,9 +115,9 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayBGM()
     {
-        BGMAudioSource.clip = BGMClip;
-        BGMAudioSource.loop = true;
-        BGMAudioSource.Play();
+        //BGMAudioSource.clip = BGMClip;
+        //BGMAudioSource.loop = true;
+        //BGMAudioSource.Play();
     }
 
     public void PlayFootstep()
