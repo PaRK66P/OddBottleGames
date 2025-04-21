@@ -267,7 +267,14 @@ public class CompanionFriend : MonoBehaviour
         }
         if(_playerTarget != null) 
         {
-            _currentTarget = _playerTarget;
+            if (_playerTarget.activeInHierarchy)
+            {
+                _currentTarget = _playerTarget;
+            }
+            else
+            {
+                RemovePlayerTarget(_playerTarget);
+            }
         }
 
         if (_currentTarget != null) // Found target to attack

@@ -40,7 +40,6 @@ public class AISimpleBehaviour : MonoBehaviour
 
     private LilGuysAnimationHandler _animations;
 
-
     public void Instantiate(ref ObjectPoolManager bObjectPoolManager, ref GameObject bPlayer)
     {
         isDead = false;
@@ -52,6 +51,7 @@ public class AISimpleBehaviour : MonoBehaviour
         player = bPlayer;
 
         _animations = GetComponentInChildren<LilGuysAnimationHandler>();
+        _animations.AddIdle();
     }
 
     // Update is called once per frame
