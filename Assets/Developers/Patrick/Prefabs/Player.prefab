@@ -537,7 +537,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 879889349
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 17
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &5322860660519061725
@@ -973,8 +973,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
