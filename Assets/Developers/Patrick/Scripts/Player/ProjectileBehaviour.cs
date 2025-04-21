@@ -3,6 +3,8 @@ using UnityEngine;
 public class ProjectileBehaviour : MonoBehaviour
 {
     // Objects
+    [SerializeField] private GameObject _bulletImage;
+    [SerializeField] private GameObject _chargeImage;
     private ObjectPoolManager _objectPoolManager;
     private CompanionManager _companionManager;
 
@@ -33,6 +35,9 @@ public class ProjectileBehaviour : MonoBehaviour
         {
             transform.localScale = _originalScale * (1 + (damageMultiplier * 0.2f));
             _damage = (int)(_originalDamage * damageMultiplier);
+
+            _bulletImage.SetActive(false);
+            _chargeImage.SetActive(true);
         }
     }
 
