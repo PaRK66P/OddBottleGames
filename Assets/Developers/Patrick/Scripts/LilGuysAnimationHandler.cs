@@ -25,9 +25,10 @@ public class LilGuysAnimationHandler : MonoBehaviour
 
     private bool _isIdleInTrack;
     private bool _isDead;
+    private bool _isReady = false;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
         SpineAnimationState = _skeletonAnimation.AnimationState;
@@ -36,14 +37,19 @@ public class LilGuysAnimationHandler : MonoBehaviour
         SpineAnimationState.SetAnimation(0, IdleAnimation, true);
         _isIdleInTrack = true;
         _isDead = false;
+
+        _isReady = true;
     }
 
     public void AddIdle()
     {
-        if (_isIdleInTrack || _isDead) { return; }
-        _isIdleInTrack = true;
+        if (_isReady)
+        {
+            if (_isIdleInTrack || _isDead) { return; }
+            _isIdleInTrack = true;
 
-        SpineAnimationState.AddAnimation(0, IdleAnimation, true, 0.0f);
+            SpineAnimationState.AddAnimation(0, IdleAnimation, true, 0.0f);
+        }
     }
 
     public void SetAttack()
