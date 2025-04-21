@@ -158,7 +158,7 @@ public class CompanionFriend : MonoBehaviour
                     if (!_isLeapChargeStarted)
                     {
                         _isLeapChargeStarted = true;
-                        _soundManager.PlayAmbDashReady(2);
+                        //_soundManager.PlayAmbDashReady(2); // Sound is very annoying
                     }
 
                     _animationScript.StartLeap();
@@ -176,7 +176,7 @@ public class CompanionFriend : MonoBehaviour
 
                 if (travelPosition >= 1) // Once the leap is finished
                 {
-                    _soundManager.PlayAmbDashAttack(2);
+                    //_soundManager.PlayAmbDashReady(2); // Sound is very annoying
 
                     _currentTarget = null;
                     _isLeapFinished = true;
