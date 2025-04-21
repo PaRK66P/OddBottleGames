@@ -12,7 +12,6 @@ public class PlayerInputManager : MonoBehaviour
     private PlayerInput _playerInput;
     private PlayerMovement _playerMovement;
     private PlayerShooting _playerShooting;
-    private PlayerAimReticle _playerAimReticle;
 
     // Values
     private bool _isInitialised = false;
@@ -35,14 +34,13 @@ public class PlayerInputManager : MonoBehaviour
         _playerInput.onControlsChanged -= OnChangeControls;
     }
 
-    public void InitialiseComponent(ref PlayerMovement playerMovement, ref PlayerShooting playerShooting, ref PlayerAimReticle playerAimReticle)
+    public void InitialiseComponent(ref PlayerMovement playerMovement, ref PlayerShooting playerShooting)
     {
         _playerInput = GetComponent<PlayerInput>();
         _playerInput.onControlsChanged += OnChangeControls;
 
         _playerMovement = playerMovement;
         _playerShooting = playerShooting;
-        _playerAimReticle = playerAimReticle;
 
         _playerInputActions = new NewPlayerInputMap();
 
@@ -60,7 +58,6 @@ public class PlayerInputManager : MonoBehaviour
         //    playerAimReticle.SwitchToController();
         //}
         // No controller menu functionality means default for keyboard
-        playerAimReticle.SwitchToMouse();
 
         EnableInput();
     }
@@ -87,7 +84,6 @@ public class PlayerInputManager : MonoBehaviour
         //}
 
         EnableMouseAim();
-        _playerAimReticle.SwitchToMouse();
     }
 
     public void EnableInput()
