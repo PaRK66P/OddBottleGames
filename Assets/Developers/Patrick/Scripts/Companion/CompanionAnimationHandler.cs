@@ -205,6 +205,6 @@ public class CompanionAnimationHandler : MonoBehaviour
 
     public void AddHurtAnimation()
     {
-        SpineAnimationState.SetAnimation(3, HurtAnimation, _skeletonAnimation);
+        SpineAnimationState.SetAnimation(3, HurtAnimation, false);
     }
 }
