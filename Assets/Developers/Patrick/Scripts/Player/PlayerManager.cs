@@ -27,8 +27,6 @@ public class PlayerManager : MonoBehaviour
     private GameObject _evolveDashCollider;
     [SerializeField]
     private PlayerAnimationHandler _playerAnimationHandler;
-    [SerializeField]
-    private PlayerAimReticle _playerAimReticle;
 
     // Objects
     private GameObject _healthbar;
@@ -87,7 +85,7 @@ public class PlayerManager : MonoBehaviour
         _playerMovement.InitialiseComponent(ref manager, ref _playerShooting, ref _playerAnimationHandler, ref _playerData, ref _playerDebugData, ref _soundManager, ref _healthBarScript, ref _evolveDashCollider);
         _playerMovement.ResetSpeedScale();
         _playerShooting.InitialiseComponent(ref _playerData, ref _playerDebugData, ref _playerMovement, ref _playerAnimationHandler, ref _objectPoolManager, ref _timeManager, ref _soundManager, ref _canvasPlayer);
-        _playerInputManager.InitialiseComponent(ref _playerMovement, ref _playerShooting, ref _playerAimReticle);
+        _playerInputManager.InitialiseComponent(ref _playerMovement, ref _playerShooting);
 
         _canvasGroup = _canvasPlayer.transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
 
