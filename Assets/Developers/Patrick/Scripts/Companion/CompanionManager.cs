@@ -18,8 +18,6 @@ public class CompanionManager : MonoBehaviour
     [SerializeField]
     private CompanionFriendData _friendData;
     [SerializeField]
-    private SpriteRenderer _companionImage; // TO BE REMOVED
-    [SerializeField]
     private AudioSource _companionAudioSource;
 
     // Objects
