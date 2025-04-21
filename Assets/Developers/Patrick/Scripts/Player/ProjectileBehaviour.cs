@@ -29,6 +29,8 @@ public class ProjectileBehaviour : MonoBehaviour
         _lifeSpan = Time.time;
         _canBeReleased = false;
 
+        _bulletImage.SetActive(true);
+
         transform.localScale = _originalScale;
         _damage = _originalDamage;
         if (damageMultiplier != 1) // Calculate damage modifications
@@ -48,6 +50,7 @@ public class ProjectileBehaviour : MonoBehaviour
         {
             if(Time.time - _lifeSpan > _minLife)
             {
+                _chargeImage.SetActive(false);
                 _objectPoolManager.ReleaseObject(_objectName, this.gameObject);
             }
         }
