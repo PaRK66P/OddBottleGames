@@ -60,7 +60,7 @@ public class ExplosionLogic : MonoBehaviour
                 }
             }
             _isFiredDamage = true;
-            GetComponent<SpriteRenderer>().color = Color.red;
+            //GetComponent<SpriteRenderer>().color = Color.red;
         }
         else if (_timer > _removal)
         {
@@ -75,14 +75,14 @@ public class ExplosionLogic : MonoBehaviour
     {
         _target = damageLayer;
         _damage = totalDamage;
-        gameObject.transform.localScale = Vector3.one * explosionRadius;
+        //gameObject.transform.localScale = Vector3.one * explosionRadius; // This code wasn't supposed to be used and I don't want to go through all the scripts and remove this variable from the function call
         _delay = explosionDelay;
         _removal = removalTime;
         _timer = 0;
         _isFiredDamage = false;
         _objectPoolManager = objMgr;
 
-        GetComponent<SpriteRenderer>().color = new Color(222.0f / 256.0f, 170.0f / 256.0f, 65.0f / 256.0f);
+        //GetComponent<SpriteRenderer>().color = new Color(222.0f / 256.0f, 170.0f / 256.0f, 65.0f / 256.0f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
