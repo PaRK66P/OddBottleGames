@@ -5,6 +5,7 @@ using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 enum EN_STATES { NORMAL, DAMAGED, ARMORED, STUNNED, DEAD};
 
@@ -323,7 +324,7 @@ public class IchorManager : MonoBehaviour
             case 46:
             case 47:
             case 48:
-                //function
+                SceneManager.LoadScene(3);
                 break;
 
             //good------------------------------------------------------------
@@ -345,10 +346,10 @@ public class IchorManager : MonoBehaviour
             case 33:
             case 37:
             case 41:
-                //function
+                SceneManager.LoadScene(2);
                 break;
             default:
-                //function
+                SceneManager.LoadScene(3);
                 Debug.Log("VisualNovel case not found.");                
                 break;
         }

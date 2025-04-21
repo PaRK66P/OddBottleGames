@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Developers/David/Scenes/Map 8.unity
     guid: 085938c3114b2d34fba9180d9e38a39f
+  - enabled: 1
+    path: Assets/Developers/Hannah/Good ending.unity
+    guid: fecc1572f3ac6104b9c41a836dcae4c9
+  - enabled: 1
+    path: Assets/Developers/Hannah/Bad Ending.unity
+    guid: cd87f4a1f35f08240a44268787eb608d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: cdf6e7af1604c5a47b96cc792a1ce488, type: 2}
   m_UseUCBPForAssetBundles: 0
