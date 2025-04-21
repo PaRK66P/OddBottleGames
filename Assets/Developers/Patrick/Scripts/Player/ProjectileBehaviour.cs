@@ -26,7 +26,7 @@ public class ProjectileBehaviour : MonoBehaviour
         _objectPoolManager = dPoolManager;
 
         _objectName = prefabName;
-        _lifeSpan = 0.0f;
+        _lifeSpan = Time.time;
         _canBeReleased = false;
 
         transform.localScale = _originalScale;
@@ -46,11 +46,10 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         if (_canBeReleased)
         {
-            if(_lifeSpan > _minLife)
+            if(Time.time - _lifeSpan > _minLife)
             {
                 _objectPoolManager.ReleaseObject(_objectName, this.gameObject);
             }
-            _lifeSpan += Time.deltaTime;
         }
     }
 
