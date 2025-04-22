@@ -19,8 +19,6 @@ public class DoorAnimationScript : MonoBehaviour
 
     private Transform _imageTransform;
 
-    private bool _isDoorClosed = true;
-
     private void Start()
     {
         _imageTransform = _renderer.gameObject.transform;

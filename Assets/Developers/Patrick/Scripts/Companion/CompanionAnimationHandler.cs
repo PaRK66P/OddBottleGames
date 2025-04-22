@@ -75,6 +75,8 @@ public class CompanionAnimationHandler : MonoBehaviour
 
     private Spine.TrackEntry _animationTrack;
 
+    private bool _shouldLeapFaceRight;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,7 +84,7 @@ public class CompanionAnimationHandler : MonoBehaviour
         SpineAnimationState = _skeletonAnimation.AnimationState;
         SpineSkeleton = _skeletonAnimation.Skeleton;
 
-        SpineAnimationState.SetAnimation(0, FrontDirection, _skeletonAnimation);
+        SpineAnimationState.SetAnimation(0, FrontDirection, false);
         SpineAnimationState.SetAnimation(1, IdleAnimation, true);
     }
 
@@ -99,7 +101,10 @@ public class CompanionAnimationHandler : MonoBehaviour
     public void UpdateFacingDirection(FacingDirection facingDirection)
     {
         if (facingDirection == _currentDirection) { return; }
-        if (_currentAction == ActionState.Windup) { return; }
+        if (_currentAction == ActionState.Windup ||
+            _currentAction == ActionState.Scream ||
+            _currentAction == ActionState.ScreamContinue ||
+            _currentAction == ActionState.Leap) { return; }
 
         _currentDirection = facingDirection;
 
@@ -107,23 +112,23 @@ public class CompanionAnimationHandler : MonoBehaviour
         {
             case FacingDirection.Front:
                 SpineSkeleton.ScaleX = 1.0f;
-                SpineAnimationState.SetAnimation(0, FrontDirection, _skeletonAnimation);
-                SpineAnimationState.SetAnimation(2, CloakLeft, _skeletonAnimation);
+                SpineAnimationState.SetAnimation(0, FrontDirection, false);
+                SpineAnimationState.ClearTrack(2);
                 break;
             case FacingDirection.Back:
                 SpineSkeleton.ScaleX = 1.0f;
-                SpineAnimationState.SetAnimation(0, BackDirection, _skeletonAnimation);
-                SpineAnimationState.SetAnimation(2, CloakRight, _skeletonAnimation);
+                SpineAnimationState.SetAnimation(0, BackDirection, false);
+                SpineAnimationState.ClearTrack(2);
                 break;
             case FacingDirection.Left:
                 SpineSkeleton.ScaleX = 1.0f;
-                SpineAnimationState.SetAnimation(0, SideDirection, _skeletonAnimation);
-                SpineAnimationState.SetAnimation(2, CloakLeft, _skeletonAnimation);
+                SpineAnimationState.SetAnimation(0, SideDirection, false);
+                SpineAnimationState.SetAnimation(2, CloakLeft, false);
                 break;
             case FacingDirection.Right: // Right side animations are funky as the whole SpineSkeleton's scale is reversed
                 SpineSkeleton.ScaleX = -1.0f;
-                SpineAnimationState.SetAnimation(0, SideDirection, _skeletonAnimation);
-                SpineAnimationState.SetAnimation(2, CloakLeft, _skeletonAnimation);
+                SpineAnimationState.SetAnimation(0, SideDirection, false);
+                SpineAnimationState.SetAnimation(2, CloakRight, false);
                 break;
         }
     }
@@ -160,6 +165,21 @@ public class CompanionAnimationHandler : MonoBehaviour
     {
         if (_currentAction == ActionState.Scream) { return; }
         _currentAction = ActionState.Scream;
+
+        if (_companionManager.IsPlayerAbove())
+        {
+            _currentDirection = FacingDirection.Back;
+            SpineAnimationState.SetAnimation(0, BackDirection, false);
+        }
+        else
+        {
+            _currentDirection = FacingDirection.Front;
+            SpineAnimationState.SetAnimation(0, FrontDirection, false);
+        }
+
+        SpineSkeleton.ScaleX = 1.0f;
+        SpineAnimationState.ClearTrack(2);
+
         _animationTrack = SpineAnimationState.SetAnimation(1, ScreamStartAnimation, false);
     }
 
@@ -167,6 +187,9 @@ public class CompanionAnimationHandler : MonoBehaviour
     {
         if(_currentAction == ActionState.ScreamContinue) { return; }
         _currentAction = ActionState.ScreamContinue;
+
+        // Can only play facing forward or backwards but should only ever be called after a scream is started so not necessary to reapply the code
+
         _animationTrack = SpineAnimationState.SetAnimation(1, ScreamContinuedAnimation, false);
     }
 
@@ -176,9 +199,19 @@ public class CompanionAnimationHandler : MonoBehaviour
         _currentAction = ActionState.Windup;
         
         _currentDirection = FacingDirection.Front;
-        SpineSkeleton.ScaleX = _companionManager.IsPlayerOnRightSide()?1.0f:-1.0f;
-        SpineAnimationState.SetAnimation(0, FrontDirection, _skeletonAnimation);
-        SpineAnimationState.SetAnimation(2, CloakLeft, _skeletonAnimation);
+        if (_companionManager.IsPlayerOnRightSide())
+        {
+            SpineSkeleton.ScaleX = 1.0f;
+            _shouldLeapFaceRight = true;
+        }
+        else
+        {
+            SpineSkeleton.ScaleX = -1.0f;
+            _shouldLeapFaceRight = false;
+        }
+        
+        SpineAnimationState.SetAnimation(0, FrontDirection, false);
+        SpineAnimationState.ClearTrack(2);
 
         _animationTrack = SpineAnimationState.SetAnimation(1, LeapWindupAnimation, false);
     }
@@ -187,6 +220,22 @@ public class CompanionAnimationHandler : MonoBehaviour
     {
         if (_currentAction == ActionState.Leap) { return; }
         _currentAction = ActionState.Leap;
+
+        if (_shouldLeapFaceRight)
+        {
+            _currentDirection = FacingDirection.Right;
+            SpineSkeleton.ScaleX = -1.0f;
+            SpineAnimationState.SetAnimation(0, SideDirection, false);
+            SpineAnimationState.SetAnimation(2, CloakRight, false);
+        }
+        else
+        {
+            _currentDirection = FacingDirection.Left;
+            SpineSkeleton.ScaleX = 1.0f;
+            SpineAnimationState.SetAnimation(0, SideDirection, false);
+            SpineAnimationState.SetAnimation(2, CloakLeft, false);
+        }
+
         _animationTrack = SpineAnimationState.SetAnimation(1, LeapMovementAnimation, false);
     }
 

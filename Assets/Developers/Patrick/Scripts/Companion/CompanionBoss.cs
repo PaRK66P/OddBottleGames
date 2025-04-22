@@ -216,8 +216,6 @@ public class CompanionBoss : MonoBehaviour
                 _soundManager.PlayAmbDashReady(_heatUpStage);
                 _animationScript.StartLeap();
             }
-
-            UpdateDirection();
             return;
         }
 
@@ -304,7 +302,7 @@ public class CompanionBoss : MonoBehaviour
         // Charge
         if (Time.time - _spitStartTimer <= _dataObj.SpitChargeTime)
         {
-            _animationScript.SetToIdleAnimation();
+            _animationScript.SetToSpitAnimation();
             return;
         }
 
@@ -320,7 +318,6 @@ public class CompanionBoss : MonoBehaviour
             /*
              * Add linecast to end projectile early at wall
              */
-            _animationScript.SetToSpitAnimation();
 
             projectileRef = _poolManager.GetFreeObject(_dataObj.SpitProjectile.name);
             projectileRef.GetComponent<CompanionLargeProjectileLogic>().Initialise(
@@ -462,7 +459,6 @@ public class CompanionBoss : MonoBehaviour
         if (Time.time - _screamStartTimer <= _dataObj.ScreamChargeTime)
         {
             _animationScript.StartScream();
-            _animationScript.ChangeAnimationTrackSpeed(Mathf.Max(_dataObj.ScreamChargeTime / _dataObj.ScreamStartTiming, 1.0f));
 
             return;
         }
@@ -476,8 +472,7 @@ public class CompanionBoss : MonoBehaviour
             // Create wave
             _soundManager.PlayAmbScreamAttack();
             _animationScript.ContinueScream();
-            _animationScript.ResetAnimationTrackSpeed();
-            //_animationScript.ChangeAnimationTrackSpeed(Mathf.Max(_screamWaveGap / _dataObj.ScreamContinuedTiming, 1.0f));
+            _animationScript.ChangeAnimationTrackSpeed(Mathf.Max(_screamWaveGap / _dataObj.ScreamContinuedTiming, 1.0f));
 
             GameObject projectileRef;
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, _screamStartDirection, new Vector3(0.0f, 0.0f, 1.0f));

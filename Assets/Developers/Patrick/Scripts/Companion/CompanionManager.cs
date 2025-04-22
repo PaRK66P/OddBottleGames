@@ -148,6 +148,18 @@ public class CompanionManager : MonoBehaviour
         return (_playerObject.transform.position.x - transform.position.x >= 0.0f);
     }
 
+    public bool IsPlayerAbove()
+    {
+        if (_currentState == CompanionStates.Friend)
+        {
+            if (_friendScript.GetTarget() != null)
+            {
+                return (_friendScript.GetTarget().transform.position.y - transform.position.y >= 0.0f);
+            }
+        }
+        return (_playerObject.transform.position.y - transform.position.y >= 0.0f);
+    }
+
     #region Damage
     public void TakeDamage(float damage)
     {
