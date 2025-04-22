@@ -159,6 +159,8 @@ GameObject:
   - component: {fileID: 7327266597220718207}
   - component: {fileID: 3903800163581356149}
   - component: {fileID: -7204287080718888579}
+  - component: {fileID: 286284408656387666}
+  - component: {fileID: 5273258445060064422}
   m_Layer: 9
   m_Name: EnemyPrototype
   m_TagString: Untagged
@@ -180,7 +182,6 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7126522068257841268}
-  - {fileID: 4175295892069199397}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &250053247744475674
@@ -234,7 +235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3371b13a0940b204c9258e2d4639607d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliderChild: {fileID: 2356099704046212146}
+  colliders:
+  - {fileID: 286284408656387666}
+  - {fileID: 5273258445060064422}
   player: {fileID: 0}
   particle: {fileID: 7317420507254709891, guid: e44d4902256532545890d4ebc28a53ac, type: 3}
   detectionRange: 20
@@ -259,78 +262,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76371ebdf3a9374581ca762dfe3d483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &2498345568151965505
-PrefabInstance:
+--- !u!70 &286284408656387666
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 7539260707697874936}
-    m_Modifications:
-    - target: {fileID: 151262272038984563, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_Name
-      value: small enemy collider
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4381864343742828173, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6265498912696767474, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
---- !u!1 &2356099704046212146 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 151262272038984563, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-  m_PrefabInstance: {fileID: 2498345568151965505}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4175295892069199397 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-  m_PrefabInstance: {fileID: 2498345568151965505}
+  m_GameObject: {fileID: 8695463969144503389}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.75, y: 1}
+  m_Direction: 0
+--- !u!70 &5273258445060064422
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8695463969144503389}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -0.65}
+  m_Size: {x: 1.9, y: 0.6}
+  m_Direction: 1

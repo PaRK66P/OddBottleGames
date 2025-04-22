@@ -12,7 +12,7 @@ public enum AIType
 }
 public class AISimpleBehaviour : MonoBehaviour
 {
-    public GameObject colliderChild;
+    public Collider2D[] colliders;
     public GameObject player;
     public GameObject particle;
     public float detectionRange = 15;
@@ -53,7 +53,10 @@ public class AISimpleBehaviour : MonoBehaviour
 
         _animations = GetComponentInChildren<LilGuysAnimationHandler>();
         _animations.AddIdle();
-        colliderChild.SetActive(true);
+        foreach(Collider2D collider in colliders)
+        {
+            collider.enabled = true;
+        }
     }
 
     // Update is called once per frame
@@ -80,7 +83,10 @@ public class AISimpleBehaviour : MonoBehaviour
         if (health <= 0)
         {
             GetComponent<CompanionTargettingHandler>().ReleaseAsTarget();
-            colliderChild.SetActive(false);
+            foreach (Collider2D collider in colliders)
+            {
+                collider.enabled = false;
+            }
             isDead = true;
             OnDeath();
         }
