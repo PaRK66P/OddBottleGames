@@ -78,6 +78,7 @@ public class AISimpleBehaviour : MonoBehaviour
         if (health <= 0)
         {
             GetComponent<CompanionTargettingHandler>().ReleaseAsTarget();
+            GetComponent<BoxCollider2D>().enabled = false;
             isDead = true;
             OnDeath();
         }
