@@ -12,6 +12,7 @@ public enum AIType
 }
 public class AISimpleBehaviour : MonoBehaviour
 {
+    public GameObject colliderChild;
     public GameObject player;
     public GameObject particle;
     public float detectionRange = 15;
@@ -78,7 +79,7 @@ public class AISimpleBehaviour : MonoBehaviour
         if (health <= 0)
         {
             GetComponent<CompanionTargettingHandler>().ReleaseAsTarget();
-            GetComponent<BoxCollider2D>().enabled = false;
+            colliderChild.SetActive(false);
             isDead = true;
             OnDeath();
         }
