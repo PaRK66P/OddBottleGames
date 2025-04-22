@@ -48,7 +48,7 @@ MonoBehaviour:
   tree:
     nodes:
     - id: 788277310
-      parentId: -863913298
+      parentId: 0
       sceneData:
         entryText: 0.1
         text: If I could acquire that power or get that Ghoul on my side...

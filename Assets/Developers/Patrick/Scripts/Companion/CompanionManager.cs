@@ -218,7 +218,7 @@ public class CompanionManager : MonoBehaviour
             _hasPlayedNovel = true;
 
 
-            _visualNovelManager.StartNovelSceneByName("Ambrosia1");
+            _visualNovelManager.StartNovelSceneByName("Ambrosia1_PortraitsDone");
             _visualNovelManager.onNovelFinish.AddListener(GetVisualNovelResult);
         }
     }

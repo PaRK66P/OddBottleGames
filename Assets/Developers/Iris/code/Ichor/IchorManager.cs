@@ -97,7 +97,7 @@ public class IchorManager : MonoBehaviour
             {
                 healthbarArmored.SetActive(false);
                 healthbarNormal.SetActive(false);
-                visualNovelManager.StartNovelSceneByName("Ichor1.0");
+                visualNovelManager.StartNovelSceneByName("Ichor1.0_PortraitsDone");
                 visualNovelManager.onNovelFinish.AddListener(VNEnd);
                 pooler.ReleaseObject(prefabName, gameObject);
             }
