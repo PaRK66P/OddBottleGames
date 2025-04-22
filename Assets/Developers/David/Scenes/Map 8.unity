@@ -15325,7 +15325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3433816400093442671, guid: 8cdc1eb41ef6b9e4a93134a11ab46b33, type: 3}
       propertyPath: sceneName
-      value: Ichor0.1
+      value: Ichor0.1_PortraitsDone
       objectReference: {fileID: 0}
     - target: {fileID: 3433816400093442671, guid: 8cdc1eb41ef6b9e4a93134a11ab46b33, type: 3}
       propertyPath: VNSceneManager
