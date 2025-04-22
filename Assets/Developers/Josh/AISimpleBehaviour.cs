@@ -53,6 +53,7 @@ public class AISimpleBehaviour : MonoBehaviour
 
         _animations = GetComponentInChildren<LilGuysAnimationHandler>();
         _animations.AddIdle();
+        colliderChild.SetActive(true);
     }
 
     // Update is called once per frame
