@@ -22,6 +22,7 @@ public class CompanionAnimationHandler : MonoBehaviour
         Lick,
         Spit,
         Scream,
+        ScreamContinue,
         Windup,
         Leap
     }
@@ -164,6 +165,8 @@ public class CompanionAnimationHandler : MonoBehaviour
 
     public void ContinueScream()
     {
+        if(_currentAction == ActionState.ScreamContinue) { return; }
+        _currentAction = ActionState.ScreamContinue;
         _animationTrack = SpineAnimationState.SetAnimation(1, ScreamContinuedAnimation, false);
     }
 
@@ -206,5 +209,6 @@ public class CompanionAnimationHandler : MonoBehaviour
     public void AddHurtAnimation()
     {
         SpineAnimationState.SetAnimation(3, HurtAnimation, false);
+        SpineAnimationState.AddEmptyAnimation(3, 0, 0);
     }
 }
