@@ -362,8 +362,8 @@ public class CompanionBoss : MonoBehaviour
             // Create wave
             _soundManager.PlayAmbLickAttack();
             _animationScript.SetToLickAnimation();
-            _animationScript.ResetActionState();
-            _animationScript.ChangeAnimationTrackSpeed(Mathf.Max(_lickWaveGap / _dataObj.LickTiming, 1.0f));
+            //_animationScript.ResetActionState();
+            //_animationScript.ChangeAnimationTrackSpeed(Mathf.Max(_lickWaveGap / _dataObj.LickTiming, 1.0f));
 
             Vector3 forwardVector = (_player.transform.position - transform.position).normalized;
             Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
@@ -411,7 +411,7 @@ public class CompanionBoss : MonoBehaviour
             // Create final wave
             _soundManager.PlayAmbLickAttack();
             _animationScript.SetToLickAnimation();
-            _animationScript.ChangeAnimationTrackSpeed(Mathf.Max(_lickWaveGap / _dataObj.LickTiming, 1.0f));
+            //_animationScript.ChangeAnimationTrackSpeed(Mathf.Max(_lickWaveGap / _dataObj.LickTiming, 1.0f));
 
             Vector3 forwardVector = (_player.transform.position - transform.position).normalized;
             Vector3 rightVector = new Vector3(forwardVector.y, -forwardVector.x, forwardVector.z);
@@ -476,7 +476,8 @@ public class CompanionBoss : MonoBehaviour
             // Create wave
             _soundManager.PlayAmbScreamAttack();
             _animationScript.ContinueScream();
-            _animationScript.ChangeAnimationTrackSpeed(Mathf.Max(_screamWaveGap / _dataObj.ScreamContinuedTiming, 1.0f));
+            _animationScript.ResetAnimationTrackSpeed();
+            //_animationScript.ChangeAnimationTrackSpeed(Mathf.Max(_screamWaveGap / _dataObj.ScreamContinuedTiming, 1.0f));
 
             GameObject projectileRef;
             float forwardAngleFromRight = Vector3.SignedAngle(Vector3.right, _screamStartDirection, new Vector3(0.0f, 0.0f, 1.0f));

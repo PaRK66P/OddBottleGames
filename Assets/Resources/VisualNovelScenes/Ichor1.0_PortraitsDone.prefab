@@ -48,7 +48,7 @@ MonoBehaviour:
   tree:
     nodes:
     - id: 1791632084
-      parentId: 735056482
+      parentId: 0
       sceneData:
         entryText: 1
         text: 'Ichor: Hunter...it is...commendable, that you made it, this far.'
