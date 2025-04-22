@@ -48,8 +48,8 @@ MonoBehaviour:
   projectileNo: 15
   chargeUpTimer: 0.5
   projectileSpeed: 10
-  waves: 1
-  timeBetweenWaves: 0.75
+  waves: 2
+  timeBetweenWaves: 2
   waveLifespan: 1
   TopLimit: 145
   BottomLimit: 120

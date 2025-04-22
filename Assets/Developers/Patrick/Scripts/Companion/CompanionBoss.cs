@@ -159,6 +159,7 @@ public class CompanionBoss : MonoBehaviour
         // Not ready when not in range to leap yet
         if (!_isReadyToLeap)
         {
+            _animationScript.SetToRunAnimation();
             _soundManager.SetWalkingAmb(true);
 
             // Find direction
@@ -543,7 +544,7 @@ public class CompanionBoss : MonoBehaviour
     private void Delay()
     {
         _animationScript.SetToIdleAnimation();
-        _animationScript.ChangeAnimationTrackSpeed(2.0f);
+        _animationScript.ChangeAnimationTrackSpeed(0.5f);
         _attackEndDelay -= Time.deltaTime;
         if(_attackEndDelay < 0)
         {

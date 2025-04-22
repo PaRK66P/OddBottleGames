@@ -147,7 +147,7 @@ public class NPlayerInput : MonoBehaviour
     {
         playerInputActions.Player.AimDirection.Enable();
 
-        playerInputActions.Player.AimDirection.performed += playerShooting.SetControllerAimInput;
+        //playerInputActions.Player.AimDirection.performed += playerShooting.SetControllerAimInput;
         playerInputActions.Player.AimDirection.canceled += playerShooting.SetAimToMovement;
     }
 
@@ -155,7 +155,7 @@ public class NPlayerInput : MonoBehaviour
     {
         playerInputActions.Player.AimDirection.Disable();
 
-        playerInputActions.Player.AimDirection.performed -= playerShooting.SetControllerAimInput;
+        //playerInputActions.Player.AimDirection.performed -= playerShooting.SetControllerAimInput;
         playerInputActions.Player.AimDirection.canceled -= playerShooting.SetAimToMovement;
     }
     private void EnableMouseAim()

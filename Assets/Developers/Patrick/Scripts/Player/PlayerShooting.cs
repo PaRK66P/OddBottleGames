@@ -171,16 +171,16 @@ public class PlayerShooting : MonoBehaviour
         UpdateFacingDirection(_aimInput);
     }
 
-    public void SetControllerAimInput(InputAction.CallbackContext context)
-    {
-        _isUsingMovementToAim = false;
+    //public void SetControllerAimInput(InputAction.CallbackContext context)
+    //{
+    //    _isUsingMovementToAim = false;
 
-        Vector2 inputValue = context.ReadValue<Vector2>();
-        if (inputValue == Vector2.zero) { return; }
+    //    Vector2 inputValue = context.ReadValue<Vector2>();
+    //    if (inputValue == Vector2.zero) { return; }
 
-        _aimInput = inputValue;
-        UpdateFacingDirection(_aimInput);
-    }
+    //    _aimInput = inputValue;
+    //    UpdateFacingDirection(_aimInput);
+    //}
 
     public void SetAimToMovement(InputAction.CallbackContext context)
     {

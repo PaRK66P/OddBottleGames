@@ -21,6 +21,7 @@ MonoBehaviour:
   AccelerationRate: 20
   Deceleration: 0.7
   DecelerationRate: 35
+  RunAnimationSpeedScale: 1.75
   DashTime: 0.2
   DashDistance: 5
   EvolvedDashExtraDistance: 3

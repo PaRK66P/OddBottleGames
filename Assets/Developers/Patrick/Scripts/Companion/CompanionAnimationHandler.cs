@@ -58,6 +58,8 @@ public class CompanionAnimationHandler : MonoBehaviour
     public string LeapWindupAnimation;
     [SpineAnimation]
     public string LeapMovementAnimation;
+    [SpineAnimation]
+    public string HurtAnimation;
 
     // Components
     private SkeletonAnimation _skeletonAnimation;
@@ -199,5 +201,10 @@ public class CompanionAnimationHandler : MonoBehaviour
         {
             _animationTrack.TimeScale = 1.0f;
         }
+    }
+
+    public void AddHurtAnimation()
+    {
+        SpineAnimationState.SetAnimation(3, HurtAnimation, false);
     }
 }

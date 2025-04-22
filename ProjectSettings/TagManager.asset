@@ -45,12 +45,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: LilGuys
+    uniqueID: 725638821
+    locked: 0
   - name: Player
     uniqueID: 879889349
     locked: 0
   - name: Ambrosia
     uniqueID: 751508055
-    locked: 0
-  - name: Layer2
-    uniqueID: 725638821
     locked: 0

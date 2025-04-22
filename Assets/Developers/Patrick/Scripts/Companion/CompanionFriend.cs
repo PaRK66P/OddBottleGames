@@ -87,7 +87,7 @@ public class CompanionFriend : MonoBehaviour
                 if(playerDistance.sqrMagnitude <= _dataObj.IdleDistance * _dataObj.IdleDistance) // If the player is close enough, no need to move
                 {
                     _animationScript.SetToIdleAnimation();
-                    _animationScript.ChangeAnimationTrackSpeed(2.0f);
+                    _animationScript.ChangeAnimationTrackSpeed(0.5f);
                     break;
                 }
 
@@ -158,7 +158,7 @@ public class CompanionFriend : MonoBehaviour
                     if (!_isLeapChargeStarted)
                     {
                         _isLeapChargeStarted = true;
-                        _soundManager.PlayAmbDashReady(2);
+                        //_soundManager.PlayAmbDashReady(2); // Sound is very annoying
                     }
 
                     _animationScript.StartLeap();
@@ -176,7 +176,7 @@ public class CompanionFriend : MonoBehaviour
 
                 if (travelPosition >= 1) // Once the leap is finished
                 {
-                    _soundManager.PlayAmbDashAttack(2);
+                    //_soundManager.PlayAmbDashReady(2); // Sound is very annoying
 
                     _currentTarget = null;
                     _isLeapFinished = true;
@@ -267,7 +267,14 @@ public class CompanionFriend : MonoBehaviour
         }
         if(_playerTarget != null) 
         {
-            _currentTarget = _playerTarget;
+            if (_playerTarget.activeInHierarchy)
+            {
+                _currentTarget = _playerTarget;
+            }
+            else
+            {
+                RemovePlayerTarget(_playerTarget);
+            }
         }
 
         if (_currentTarget != null) // Found target to attack
@@ -307,6 +314,10 @@ public class CompanionFriend : MonoBehaviour
     }
     #endregion
 
+    public GameObject GetTarget()
+    {
+        return _currentTarget;
+    }
     private void UpdateDirection()
     {
         Vector3 direction = _player.transform.position - transform.position;

@@ -27,8 +27,6 @@ public class PlayerManager : MonoBehaviour
     private GameObject _evolveDashCollider;
     [SerializeField]
     private PlayerAnimationHandler _playerAnimationHandler;
-    [SerializeField]
-    private PlayerAimReticle _playerAimReticle;
 
     // Objects
     private GameObject _healthbar;
@@ -51,6 +49,8 @@ public class PlayerManager : MonoBehaviour
     private float _invulnerableTime = 1.0f;
     private float _regenTimer = 0.0f;
     private float _health = 100;
+
+    private bool _hasControl;
 
     // Dialogue System
     private CanvasGroup _canvasGroup;
@@ -83,10 +83,13 @@ public class PlayerManager : MonoBehaviour
 
         PlayerManager manager = this; // Reference for the manager
         _playerMovement.InitialiseComponent(ref manager, ref _playerShooting, ref _playerAnimationHandler, ref _playerData, ref _playerDebugData, ref _soundManager, ref _healthBarScript, ref _evolveDashCollider);
+        _playerMovement.ResetSpeedScale();
         _playerShooting.InitialiseComponent(ref _playerData, ref _playerDebugData, ref _playerMovement, ref _playerAnimationHandler, ref _objectPoolManager, ref _timeManager, ref _soundManager, ref _canvasPlayer);
-        _playerInputManager.InitialiseComponent(ref _playerMovement, ref _playerShooting, ref _playerAimReticle);
+        _playerInputManager.InitialiseComponent(ref _playerMovement, ref _playerShooting);
 
         _canvasGroup = _canvasPlayer.transform.Find("FadeInOutGroup").GetComponent<CanvasGroup>();
+
+        _hasControl = true;
     }
 
     // Update is called once per frame
@@ -200,7 +203,7 @@ public class PlayerManager : MonoBehaviour
 
     public bool CanBeDamaged()
     {
-        if (_isDamaged || _isDashing) { return false; }
+        if (_isDamaged || _isDashing || !_hasControl) { return false; }
         return true;
     }
     #endregion
@@ -208,11 +211,13 @@ public class PlayerManager : MonoBehaviour
     #region Input
     public void DisableInput()
     {
+        _hasControl = false;
         _playerInputManager.DisableInput();
     }
 
     public void EnableInput()
     {
+        _hasControl = true;
         _playerInputManager.EnableInput();
     }
     #endregion

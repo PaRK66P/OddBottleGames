@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Schema;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 enum EN_STATES { NORMAL, DAMAGED, ARMORED, STUNNED, DEAD};
 
@@ -96,6 +98,7 @@ public class IchorManager : MonoBehaviour
                 healthbarArmored.SetActive(false);
                 healthbarNormal.SetActive(false);
                 visualNovelManager.StartNovelSceneByName("Ichor1.0");
+                visualNovelManager.onNovelFinish.AddListener(VNEnd);
                 pooler.ReleaseObject(prefabName, gameObject);
             }
         }
@@ -282,6 +285,73 @@ public class IchorManager : MonoBehaviour
                     GetComponentInChildren<SpriteRenderer>().sprite = data.Idle;
                     break;
                 }
+        }
+    }
+
+    public void VNEnd()
+    {
+        switch(visualNovelManager.GetLastSelectionID())
+        {
+            //bad-----------------------------------------------------------
+            case 1:
+            case 2:
+            case 4:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 11:
+            case 13:
+            case 14:
+            case 16:
+            case 18:
+            case 22:
+            case 26:
+            case 28:
+            case 29:
+            case 31:
+            case 32:
+            case 34:
+            case 35:
+            case 36:
+            case 38:
+            case 39:
+            case 40:
+            case 42:
+            case 43:
+            case 44:
+            case 45:
+            case 46:
+            case 47:
+            case 48:
+                SceneManager.LoadScene(3);
+                break;
+
+            //good------------------------------------------------------------
+            case 0:
+            case 3:
+            case 6:
+            case 9:
+            case 12:
+            case 15:
+            case 17:
+            case 19:
+            case 20:
+            case 21:
+            case 23:
+            case 24:
+            case 25:
+            case 27:
+            case 30:
+            case 33:
+            case 37:
+            case 41:
+                SceneManager.LoadScene(2);
+                break;
+            default:
+                SceneManager.LoadScene(3);
+                Debug.Log("VisualNovel case not found.");                
+                break;
         }
     }
 }

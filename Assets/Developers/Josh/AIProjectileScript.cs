@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using UnityEngine;
 
 public class AIProjectileScript : MonoBehaviour
@@ -48,6 +49,11 @@ public class AIProjectileScript : MonoBehaviour
     public void SetBulletDirectionAndSpeed(Vector3 newDirection, float newBulletSpeed)
     {
         direction = newDirection.normalized;
+
+        float rotz = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.Euler(0, 0, rotz);
+
         bulletSpeed = newBulletSpeed;
         this.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
     }

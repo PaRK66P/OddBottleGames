@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using TMPro;
 using UnityEngine;
 
@@ -30,18 +31,14 @@ public class AISimpleBehaviour : MonoBehaviour
     private bool isDead = false;
     private float deadTimer = 0.0f;
     public bool takesKnockback = true;
-    private List<GameObject> particles = new List<GameObject>();
 
     public GameObject AIProjectilePrefab;
-    [SerializeField]
-    private List<GameObject> projectiles = new List<GameObject>();
 
     public ObjectPoolManager objectPoolManager;
 
     public AIType aiMode = AIType.SHOOTER;
 
-    private Color currentColor;
-
+    private LilGuysAnimationHandler _animations;
 
     public void Instantiate(ref ObjectPoolManager bObjectPoolManager, ref GameObject bPlayer)
     {
@@ -52,7 +49,9 @@ public class AISimpleBehaviour : MonoBehaviour
         inStun = false;
         objectPoolManager = bObjectPoolManager;
         player = bPlayer;
-        currentColor = GetComponent<SpriteRenderer>().color;
+
+        _animations = GetComponentInChildren<LilGuysAnimationHandler>();
+        _animations.AddIdle();
     }
 
     // Update is called once per frame
@@ -74,8 +73,6 @@ public class AISimpleBehaviour : MonoBehaviour
             {
                 UpdateAIVision();
                 MakeAIActions();
-                BulletCleanUp();
-
             }
         }
         if (health <= 0)
@@ -102,10 +99,6 @@ public class AISimpleBehaviour : MonoBehaviour
         if (dist < detectionRange)
         {
             seePlayer = true;
-             float angle = Mathf.Atan2(distToPlayer.y, distToPlayer.x) * Mathf.Rad2Deg;
-             float targetRotation = Mathf.LerpAngle(this.transform.rotation.eulerAngles.z, angle, Time.deltaTime * 10);
-             this.transform.rotation = Quaternion.Euler(0, 0, targetRotation);
-
         }
         else
         {
@@ -116,6 +109,7 @@ public class AISimpleBehaviour : MonoBehaviour
     void MakeAIActions()
     {
         shootingTimer -= Time.deltaTime;
+        _animations.AddIdle();
         if (seePlayer && !playerInRange)
         {
             MoveTowardsPlayer();
@@ -129,6 +123,7 @@ public class AISimpleBehaviour : MonoBehaviour
         {
             shootingTimer = fireRate;
             ShootAtPlayer();
+            _animations.SetAttack();
         }
     }
 
@@ -152,7 +147,6 @@ public class AISimpleBehaviour : MonoBehaviour
                     projScript.owner = this.gameObject;
                     projScript.toBeDestroyed = false;
                     projScript.projectileTimer = 5.0f;
-                    projectiles.Add(newBullet);
                     break;
                 }
             case AIType.BLASTER:
@@ -169,7 +163,6 @@ public class AISimpleBehaviour : MonoBehaviour
                         projScript.owner = this.gameObject;
                         projScript.toBeDestroyed = false;
                         projScript.projectileTimer = 5.0f;
-                        projectiles.Add(newBullet);
                     }
                     break;
                 }
@@ -197,39 +190,13 @@ public class AISimpleBehaviour : MonoBehaviour
             projScript.owner = this.gameObject;
             projScript.toBeDestroyed = false;
             projScript.projectileTimer = 5.0f;
-            projectiles.Add(newBullet);
         }
-    }
-    void BulletCleanUp()
-    {
-        List<GameObject> releasedBullets = new List<GameObject>();
-        foreach (var bullet in projectiles)
-        {
-            if (bullet.GetComponent<AIProjectileScript>().toBeDestroyed)
-            {
-                objectPoolManager.ReleaseObject("AIProjectileProto", bullet);
-                releasedBullets.Add(bullet);
-            }
-        }
-        foreach (var bullet in releasedBullets)
-        {
-            projectiles.Remove(bullet);
-        }
-    }
-
-    void DestroyAllBullets()
-    {
-        foreach (var bullet in projectiles)
-        {
-            objectPoolManager.ReleaseObject("AIProjectileProto", bullet);
-        }
-        projectiles.Clear();
     }
 
     public void TakeDamage(float damage, Vector2 damageDir)
     {
+        _animations.SetHurt();
         health -= damage;
-        StartCoroutine(DamageColor());
         hitStunTimer = 0.0f;
         //inStun = true;
         this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
@@ -240,46 +207,17 @@ public class AISimpleBehaviour : MonoBehaviour
         }
     }
 
-    IEnumerator DamageColor()
-    {
-        SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
-        spriteRenderer.color = Color.white;
-        yield return new WaitForSeconds(0.1f);
-        spriteRenderer.color = currentColor;
-    }
-
     void OnDeath()
     {
         if (deadTimer == 0.0f)
         {
-            
-            for (int i = 0; i < 8; i++)
-            {
-                particles.Add(Instantiate(particle));
-                float speed = 3.0f;
-                float angle = Mathf.PI * 2.0f * i/8.0f;
-                float x = speed * Mathf.Cos(angle);
-                float y = speed * Mathf.Sin(angle);
-                particles[i].GetComponent<Rigidbody2D>().velocity = new Vector2(x, y);
-                particles[i].transform.rotation = Quaternion.Euler(0,0,Mathf.Rad2Deg*angle);
-                particles[i].transform.position = gameObject.transform.position + (new Vector3(x,y,0)*0.4f);
-            }
+            _animations.SetDeath();
         }
 
         deadTimer += Time.deltaTime;
 
-        foreach (GameObject particle in particles)
+        if (deadTimer > 2.0f)
         {
-            particle.GetComponent<Rigidbody2D>().velocity *= 0.95f;
-        }
-
-        if (deadTimer > 0.3f)
-        {
-            foreach (GameObject particle in particles)
-            {
-                Destroy(particle);
-            }
-            particles.Clear();
             GetComponent<enemyScr>().releaseEnemy();
         }
     }

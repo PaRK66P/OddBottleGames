@@ -3,6 +3,8 @@ using UnityEngine;
 public class ProjectileBehaviour : MonoBehaviour
 {
     // Objects
+    [SerializeField] private GameObject _bulletImage;
+    [SerializeField] private GameObject _chargeImage;
     private ObjectPoolManager _objectPoolManager;
     private CompanionManager _companionManager;
 
@@ -24,8 +26,10 @@ public class ProjectileBehaviour : MonoBehaviour
         _objectPoolManager = dPoolManager;
 
         _objectName = prefabName;
-        _lifeSpan = 0.0f;
+        _lifeSpan = Time.time;
         _canBeReleased = false;
+
+        _bulletImage.SetActive(true);
 
         transform.localScale = _originalScale;
         _damage = _originalDamage;
@@ -33,6 +37,9 @@ public class ProjectileBehaviour : MonoBehaviour
         {
             transform.localScale = _originalScale * (1 + (damageMultiplier * 0.2f));
             _damage = (int)(_originalDamage * damageMultiplier);
+
+            _bulletImage.SetActive(false);
+            _chargeImage.SetActive(true);
         }
     }
 
@@ -41,11 +48,11 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         if (_canBeReleased)
         {
-            if(_lifeSpan > _minLife)
+            if(Time.time - _lifeSpan > _minLife)
             {
+                _chargeImage.SetActive(false);
                 _objectPoolManager.ReleaseObject(_objectName, this.gameObject);
             }
-            _lifeSpan += Time.deltaTime;
         }
     }
 

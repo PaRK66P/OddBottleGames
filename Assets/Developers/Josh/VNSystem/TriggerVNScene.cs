@@ -17,12 +17,12 @@ public class TriggerVNScene : MonoBehaviour
         {
             if (!VNSceneManager.isNovelSection)
             {
-                if (collision.gameObject == GameObject.Find("Player"))
+                if (collision.gameObject.tag == "Player")
                 {
                     VNSceneManager.StartNovelSceneByName(sceneName);
+                    hasBeenTriggered = true;
                 }
             }
-            hasBeenTriggered = true;
         }
     }
 }

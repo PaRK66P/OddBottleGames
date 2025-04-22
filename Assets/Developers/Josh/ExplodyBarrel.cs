@@ -28,10 +28,10 @@ public class ExplodyBarrel : MonoBehaviour
     void TriggerExplosion()
     {
         currentExplosion = objectPoolManager.GetFreeObject("Explosion");
-        currentExplosion.GetComponent<ExplosionLogic>().InitialiseEffect(layers1, 20,8,0.1f,1,objectPoolManager);
+        currentExplosion.GetComponent<ExplosionLogic>().InitialiseEffect(layers1, 20,8,0.1f,0.2f,objectPoolManager);
         currentExplosion.transform.position = this.transform.position;
         currentExplosion1 = objectPoolManager.GetFreeObject("Explosion");
-        currentExplosion1.GetComponent<ExplosionLogic>().InitialiseEffect(layers2, 20, 8, 0.1f, 1, objectPoolManager);
+        currentExplosion1.GetComponent<ExplosionLogic>().InitialiseEffect(layers2, 20, 8, 0.1f, 0.2f, objectPoolManager);
         currentExplosion1.transform.position = this.transform.position;
         Destroy(this.gameObject);
     }

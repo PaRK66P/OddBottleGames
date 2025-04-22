@@ -12,11 +12,10 @@ public class PlayerInputManager : MonoBehaviour
     private PlayerInput _playerInput;
     private PlayerMovement _playerMovement;
     private PlayerShooting _playerShooting;
-    private PlayerAimReticle _playerAimReticle;
 
     // Values
     private bool _isInitialised = false;
-    private bool _isUsingController = true;
+   // private bool _isUsingController = true;
 
     void OnEnable()
     {
@@ -35,54 +34,56 @@ public class PlayerInputManager : MonoBehaviour
         _playerInput.onControlsChanged -= OnChangeControls;
     }
 
-    public void InitialiseComponent(ref PlayerMovement playerMovement, ref PlayerShooting playerShooting, ref PlayerAimReticle playerAimReticle)
+    public void InitialiseComponent(ref PlayerMovement playerMovement, ref PlayerShooting playerShooting)
     {
         _playerInput = GetComponent<PlayerInput>();
         _playerInput.onControlsChanged += OnChangeControls;
 
         _playerMovement = playerMovement;
         _playerShooting = playerShooting;
-        _playerAimReticle = playerAimReticle;
 
         _playerInputActions = new NewPlayerInputMap();
 
         _isInitialised = true;
 
         // Setup control scheme
-        if (_playerInput.currentControlScheme == "Keyboard")
-        {
-            _isUsingController = false;
-            playerAimReticle.SwitchToMouse();
-        }
-        else
-        {
-            _isUsingController = true;
-            playerAimReticle.SwitchToController();
-        }
+        //if (_playerInput.currentControlScheme == "Keyboard")
+        //{
+        //    _isUsingController = false;
+        //    playerAimReticle.SwitchToMouse();
+        //}
+        //else
+        //{
+        //    _isUsingController = true;
+        //    playerAimReticle.SwitchToController();
+        //}
+        // No controller menu functionality means default for keyboard
 
         EnableInput();
     }
 
     public void OnChangeControls(PlayerInput input)
     {
-        if (input.currentControlScheme == "Controller")
-        {
-            _isUsingController = true;
-            EnableControllerAim();
-            DisableMouseAim();
-            _playerAimReticle.SwitchToController();
-        }
-        else if (input.currentControlScheme == "Keyboard")
-        {
-            _isUsingController = false;
-            EnableMouseAim();
-            DisableControllerAim();
-            _playerAimReticle.SwitchToMouse();
-        }
-        else
-        {
-            Debug.LogWarning("Unknown device");
-        }
+        //if (input.currentControlScheme == "Controller")
+        //{
+        //    _isUsingController = true;
+        //    EnableControllerAim();
+        //    DisableMouseAim();
+        //    _playerAimReticle.SwitchToController();
+        //}
+        //else if (input.currentControlScheme == "Keyboard")
+        //{
+        //    _isUsingController = false;
+        //    EnableMouseAim();
+        //    DisableControllerAim();
+        //    _playerAimReticle.SwitchToMouse();
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("Unknown device");
+        //}
+
+        EnableMouseAim();
     }
 
     public void EnableInput()
@@ -103,14 +104,16 @@ public class PlayerInputManager : MonoBehaviour
         _playerInputActions.Player.Shoot.performed += _playerShooting.PlayerFireInput;
         _playerInputActions.Player.Reload.performed += _playerShooting.PlayerReloadAction;
 
-        if (_isUsingController)
-        {
-            EnableControllerAim();
-        }
-        else
-        {
-            EnableMouseAim();
-        }
+        //if (_isUsingController)
+        //{
+        //    EnableControllerAim();
+        //}
+        //else
+        //{
+        //    EnableMouseAim();
+        //}
+
+        EnableMouseAim();
     }
 
     public void DisableInput()
@@ -134,31 +137,34 @@ public class PlayerInputManager : MonoBehaviour
         _playerInputActions.Player.Shoot.performed -= _playerShooting.PlayerFireInput;
         _playerInputActions.Player.Reload.performed -= _playerShooting.PlayerReloadAction;
 
-        if (_isUsingController)
-        {
-            DisableControllerAim();
-        }
-        else
-        {
-            DisableMouseAim();
-        }
+        //if (_isUsingController)
+        //{
+        //    DisableControllerAim();
+        //}
+        //else
+        //{
+        //    DisableMouseAim();
+        //}
+
+        DisableMouseAim();
     }
 
-    private void EnableControllerAim()
-    {
-        _playerInputActions.Player.AimDirection.Enable();
+    //private void EnableControllerAim()
+    //{
+    //    _playerInputActions.Player.AimDirection.Enable();
 
-        _playerInputActions.Player.AimDirection.performed += _playerShooting.SetControllerAimInput;
-        _playerInputActions.Player.AimDirection.canceled += _playerShooting.SetAimToMovement;
-    }
+    //    _playerInputActions.Player.AimDirection.performed += _playerShooting.SetControllerAimInput;
+    //    _playerInputActions.Player.AimDirection.canceled += _playerShooting.SetAimToMovement;
+    //}
 
-    private void DisableControllerAim()
-    {
-        _playerInputActions.Player.AimDirection.Disable();
+    //private void DisableControllerAim()
+    //{
+    //    _playerInputActions.Player.AimDirection.Disable();
 
-        _playerInputActions.Player.AimDirection.performed -= _playerShooting.SetControllerAimInput;
-        _playerInputActions.Player.AimDirection.canceled -= _playerShooting.SetAimToMovement;
-    }
+    //    _playerInputActions.Player.AimDirection.performed -= _playerShooting.SetControllerAimInput;
+    //    _playerInputActions.Player.AimDirection.canceled -= _playerShooting.SetAimToMovement;
+    //}
+
     private void EnableMouseAim()
     {
         _playerInputActions.Player.AimPosition.Enable();

@@ -1,0 +1,1972 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6083632813458829280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7170622606949639328}
+  - component: {fileID: 5112209290301137106}
+  m_Layer: 0
+  m_Name: Ichor1.0_PortraitsDone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7170622606949639328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6083632813458829280}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5112209290301137106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6083632813458829280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71bfef80ec99bae43b5a69ec1f2ade9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VNname: 
+  tree:
+    nodes:
+    - id: 1791632084
+      parentId: 735056482
+      sceneData:
+        entryText: 1
+        text: 'Ichor: Hunter...it is...commendable, that you made it, this far.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1086920668
+      parentId: 1791632084
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -883164594
+      parentId: 1086920668
+      sceneData:
+        entryText: 'Everyone''s full of flattery today. '
+        text: 'Ichor: Is that..how you, interpreted it?'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1453836668
+      parentId: -883164594
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Even longer, it has been, since I''ve...had to...converse,
+          with a...human.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1263730398
+      parentId: 1453836668
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I have far surprassed, the need for...pleasantries.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1452616136
+      parentId: -1263730398
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -715187196
+      parentId: 1452616136
+      sceneData:
+        entryText: 'I wouldn''t be aversed to helping you remember. '
+        text: 'Ichor: ...what a...quaint way of, speaking, you have.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1086610624
+      parentId: -715187196
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I am in, a, position, to do nothing but inquire... as to what
+          you have to offer, Hunter?'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -688197632
+      parentId: 1086610624
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -871355410
+      parentId: -688197632
+      sceneData:
+        entryText: 'The Hunter: Freedom. '
+        text: 'Ichor: Freedom? Ha! Such a thing, it does not exist.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1255747654
+      parentId: -871355410
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: A mere...fantasy. Everything, in this...world, Is controlled,
+          by the plague.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 546050166
+      parentId: -1255747654
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: The hearts it festers, we control, everything.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 634134116
+      parentId: 546050166
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1629796810
+      parentId: 634134116
+      sceneData:
+        entryText: 'You do not control the surface. '
+        text: 'Ichor: Not...directly, but our, influence, extends far into, the surface.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 925085394
+      parentId: 1629796810
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: And...life, up there. Our, Ghouls, can go, only so far, but...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1353034880
+      parentId: 925085394
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Hunters'' lives. *Your* life, is dictated by...clearing these,
+          Dungeons.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 464626142
+      parentId: -1353034880
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 983966382
+      parentId: 464626142
+      sceneData:
+        entryText: '...I do not wish to fight anymore. '
+        text: 'Ichor: Oh? That does not change, your promise of...freedom from being
+          impossible'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 830321610
+      parentId: 983966382
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 604931154
+      parentId: 830321610
+      sceneData:
+        entryText: 'Freedom is what you make of it. Up there we can be free from
+          these places.  '
+        text: 'Ichor: You suggest...never, returning to...these places?'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -973999652
+      parentId: 604931154
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I do not know, if I can leave this room, let alone this place.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1310492158
+      parentId: -973999652
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -664288952
+      parentId: -1310492158
+      sceneData:
+        entryText: 'Have you ever even tried? '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 537331126
+      parentId: -664288952
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -474537168
+      parentId: -1310492158
+      sceneData:
+        entryText: 'Then I shall put you out of your misery. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -788004938
+      parentId: -474537168
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1737715602
+      parentId: 830321610
+      sceneData:
+        entryText: 'Freedom can mean many things, death will be your freedom. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1966454864
+      parentId: 1737715602
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -425456450
+      parentId: 464626142
+      sceneData:
+        entryText: 'The hearts power...it''s more extensive that I realised. '
+        text: 'Ichor: It is the...ultimate form, of Power. It is why...none, can
+          resist.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 579864676
+      parentId: -425456450
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I do not need to...sway you. You will, submit, to it''s...temptations.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 843661370
+      parentId: 579864676
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -124846740
+      parentId: 843661370
+      sceneData:
+        entryText: 'Power is not what I seek, it can''t control me. '
+        text: 'Ichor: Truly? Then...leave. None before you, have done so, After...making
+          it this, far.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1297152398
+      parentId: -124846740
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1064481752
+      parentId: -1297152398
+      sceneData:
+        entryText: 'I will leave, but with you. '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1850628630
+      parentId: -1064481752
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -815865438
+      parentId: -1297152398
+      sceneData:
+        entryText: 'I will destroy this place. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1912017394
+      parentId: -815865438
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 700357940
+      parentId: 843661370
+      sceneData:
+        entryText: 'You will submit to me. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -948018268
+      parentId: 700357940
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -829558156
+      parentId: 634134116
+      sceneData:
+        entryText: 'Destroying the Dungeons solves that. '
+        text: 'Ichor: And to destroy a Dungeon...you must destroy the heart.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -281014954
+      parentId: -829558156
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: The answer lies, with you.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -702738104
+      parentId: -281014954
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -492072784
+      parentId: -702738104
+      sceneData:
+        entryText: 'Removing a heart should destroy the Dungeon, I just have to get
+          you out. '
+        text: 'Ichor: I *am* this Dungeon. I cannot simply...leave.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1451415424
+      parentId: -492072784
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -544148646
+      parentId: 1451415424
+      sceneData:
+        entryText: 'Have you even tried? '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1821396136
+      parentId: -544148646
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1440455828
+      parentId: 1451415424
+      sceneData:
+        entryText: 'Then...my only option is to destroy you. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -2073979652
+      parentId: -1440455828
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 713697700
+      parentId: -702738104
+      sceneData:
+        entryText: 'So kill you I shall. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 825470620
+      parentId: 713697700
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1309725036
+      parentId: -688197632
+      sceneData:
+        entryText: 'Reprieve. '
+        text: 'Ichor: Reprieve? This...confinement could be, seen as a punishment.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -648240998
+      parentId: 1309725036
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: My...fate, here. Doomed to decay, alongside these...Ghouls
+          is my choice.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1688760264
+      parentId: -648240998
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: My....consequences for my greed.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1028806802
+      parentId: 1688760264
+      sceneData:
+        entryText: '.. '
+        text: Ichor I do not, wish for...anyone to fall to this same, prison.
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1308194460
+      parentId: -1028806802
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: So, leave me. Hunter. If you, try to...help me,'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -649771574
+      parentId: 1308194460
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: To...kill me. It will ensnare you.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -689398344
+      parentId: -649771574
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1354482990
+      parentId: -689398344
+      sceneData:
+        entryText: 'My resolve is strong, I can get you out. '
+        text: 'Ichor: You will do no such thing. No one has, escaped, this place.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 982518272
+      parentId: -1354482990
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: No one enters the heart, without losing their free will.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1662062758
+      parentId: 982518272
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: You will become that, of the Dungeon. Death will greet you
+          here.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1464755184
+      parentId: -1662062758
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 356750264
+      parentId: 1464755184
+      sceneData:
+        entryText: 'I did not come here to be the first to do so, but I will. '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1967955270
+      parentId: 356750264
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1427116068
+      parentId: 1464755184
+      sceneData:
+        entryText: 'You do not know me, I am stronger than you think. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1213700870
+      parentId: -1427116068
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 727037460
+      parentId: -689398344
+      sceneData:
+        entryText: 'It will not ensnare me, I will conquer it. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1120977772
+      parentId: 727037460
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1113519556
+      parentId: 1452616136
+      sceneData:
+        entryText: 'I though you''d want a little bit of small talk before your death. '
+        text: 'Ichor: I only wish for, one thing now.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1818230972
+      parentId: -1113519556
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: It is, amusing how being so close to...the end, is what has
+          quietened the voices.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1269687770
+      parentId: -1818230972
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I can think, for myself...again. I now...I only wish for this
+          to be over.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -676058584
+      parentId: -1269687770
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 307712460
+      parentId: -676058584
+      sceneData:
+        entryText: 'Surely if you leave, the voices will stop? '
+        text: 'Ichor:  Such a thing...is unheard of. Not once has...leaving been
+          an, option.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1650253574
+      parentId: 307712460
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: This is our...repentance for, choosing to be here. To become,
+          this.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1478094944
+      parentId: -1650253574
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1784063504
+      parentId: 1478094944
+      sceneData:
+        entryText: 'You have paid your dues. It''s time to move on. '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1996260224
+      parentId: -1784063504
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1413776308
+      parentId: 1478094944
+      sceneData:
+        entryText: 'If you want to spend your life wallowing. I might as well end
+          it. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -750832504
+      parentId: -1413776308
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1609280980
+      parentId: -676058584
+      sceneData:
+        entryText: 'I can grant that request. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 108526726
+      parentId: -1609280980
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1940002306
+      parentId: 1086920668
+      sceneData:
+        entryText: 'It is commendable you lasted so long. '
+        text: 'Ichor: : I have, no need, for your...praise.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -17963728
+      parentId: 1940002306
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Be with it, I have...long, accepted, this fate, as those...before
+          me.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1843790412
+      parentId: -17963728
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1482276176
+      parentId: 1843790412
+      sceneData:
+        entryText: 'What do you mean? '
+        text: 'Ichor: Choose to, kill me...and you will know.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 2107979704
+      parentId: -1482276176
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Even for you, I am sure...you may think you know, what you
+          will get.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -385189772
+      parentId: 2107979704
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: But it is never as...ideallic. You will suffer the pain of
+          the thousands who reside here.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1810020650
+      parentId: -385189772
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -694217650
+      parentId: -1810020650
+      sceneData:
+        entryText: 'You suffer this pain? '
+        text: 'Ichor: For the avarice I suffered, it is my...damnation.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1642783612
+      parentId: -694217650
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: But it does not seem, you are here for the same...reason.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1479727806
+      parentId: 1642783612
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Why are you here, Hunter?'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 344132878
+      parentId: 1479727806
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1165618512
+      parentId: 344132878
+      sceneData:
+        entryText: 'I came here with the intention of reaching the heart of the Dungeon. '
+        text: 'Ichor: Well here you are. And here I am. Behold me in all of my...glory.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1171382750
+      parentId: -1165618512
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: The very being that holds this, Dungeon together.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1719925952
+      parentId: 1171382750
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: None who have entered this room, have lived to tell the tale.
+          Be the first.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 707179524
+      parentId: 1719925952
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1491294700
+      parentId: 707179524
+      sceneData:
+        entryText: 'I can''t just...leave? '
+        text: 'Ichor: You can, and you will. It is...to your merit, that you have
+          not been swayed...yet.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1121167328
+      parentId: -1491294700
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Most who lay eyes on the heart, already have been corrupted.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -118747530
+      parentId: 1121167328
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Seeing it, is just the death warrant. Go, while you still have
+          your sanity.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1072874992
+      parentId: -118747530
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1683050290
+      parentId: 1072874992
+      sceneData:
+        entryText: 'You don''t sound like your mind is gone. '
+        text: 'Ichor: Don''t expect a, reasonable explanation for my...clarity.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 443135432
+      parentId: 1683050290
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Perhaps, conversing with someone...fresh, has reminded me of
+          what I once was.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 185315842
+      parentId: 443135432
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1203259462
+      parentId: 185315842
+      sceneData:
+        entryText: 'Surely getting you out of here would...help? '
+        text: 'Ichor: Do you not see my...dissposition?'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1725123144
+      parentId: -1203259462
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I cannot just...leave.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -458528766
+      parentId: -1725123144
+      sceneData:
+        entryText: '.. '
+        text: Ichor I cannot...
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -702243308
+      parentId: -458528766
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1489864576
+      parentId: -702243308
+      sceneData:
+        entryText: 'You''re not in any position to resist my help. '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 71084150
+      parentId: 1489864576
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 544872548
+      parentId: -702243308
+      sceneData:
+        entryText: 'Then a mercy killing is all I can offer. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1901593484
+      parentId: 544872548
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1163240182
+      parentId: 185315842
+      sceneData:
+        entryText: 'What you once were? '
+        text: 'Ichor: The memories are hazy, after so long.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 378814962
+      parentId: -1163240182
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: But, I ended up here...by the same means as you, Hunter.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -861099896
+      parentId: 378814962
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I could not...resist the temptations of, the heart.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -129708960
+      parentId: -861099896
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Which is why I, urge you to leave.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1668227976
+      parentId: -129708960
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -650949192
+      parentId: -1668227976
+      sceneData:
+        entryText: 'You were a human once, surely that part of you is still there. '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1666383040
+      parentId: -650949192
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1595941220
+      parentId: -1668227976
+      sceneData:
+        entryText: 'Leaving you like this...I must put an end to it. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 772075126
+      parentId: -1595941220
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1503204336
+      parentId: 1072874992
+      sceneData:
+        entryText: 'If I''ve lasted this long...I can last long enough to get you
+          out too. '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 122806086
+      parentId: 1503204336
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 2092756410
+      parentId: 707179524
+      sceneData:
+        entryText: 'If I leave, you''re coming with me. '
+        text: 'Ichor: These confines will not, release me. Such a thought, is not
+          comprehensible.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1470819950
+      parentId: 2092756410
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Even if they would...I am not your conquest to, trophy around.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -204225572
+      parentId: -1470819950
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: It is unspeakable to think of, consigning...myself to such
+          a fate.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1302532508
+      parentId: -204225572
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1444140430
+      parentId: -1302532508
+      sceneData:
+        entryText: 'I hadn''t even thought of that. '
+        text: 'Ichor: Then what could you...possibly want from it?'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1068738508
+      parentId: -1444140430
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: What are you hoping to gain from, getting me out of here?'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 851621020
+      parentId: 1068738508
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -637609432
+      parentId: 851621020
+      sceneData:
+        entryText: 'A friend. '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1745445948
+      parentId: -637609432
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1617281710
+      parentId: 851621020
+      sceneData:
+        entryText: 'I haven''t thought further than freeing you from here. '
+        text: 'Ichor: Brash decisions, so forthcoming. I shall not vest myself on
+          such traits.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -35938130
+      parentId: 1617281710
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1516544096
+      parentId: -35938130
+      sceneData:
+        entryText: 'Maybe lacking those traits is what got you here...let me teach
+          you. '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1742825222
+      parentId: 1516544096
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1459111218
+      parentId: -35938130
+      sceneData:
+        entryText: 'If you won''t come with me, there''s only one thing I can do. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 841196298
+      parentId: 1459111218
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 912570294
+      parentId: -1302532508
+      sceneData:
+        entryText: 'I hadn''t even thought of that... '
+        text: 'Ichor: Leave me here. Leave me...or kill me. Both have become more,
+          favourable options.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -923497280
+      parentId: 912570294
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -624269672
+      parentId: -923497280
+      sceneData:
+        entryText: 'I jest, once I get you out you''re free to do as you wish. '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -716497444
+      parentId: -624269672
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 697296788
+      parentId: -923497280
+      sceneData:
+        entryText: 'I''m sure you''ve wondered what it feels like to be the one getting
+          conquered for once. '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 963518354
+      parentId: 697296788
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1045395740
+      parentId: 344132878
+      sceneData:
+        entryText: 'I came here to fight, to see if the heart is anything worth taking. '
+        text: 'Ichor: It seems I was mistaken. There has never been anyone, strong
+          enough to resist.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -294377808
+      parentId: -1045395740
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: To resist the pull of the heart...everyone falls to it''s whims.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -999089224
+      parentId: -294377808
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I do not wish for anyone else to suffer as I have.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 802708596
+      parentId: -999089224
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Hunter, you must leave. Your fight is over.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1796680890
+      parentId: 802708596
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 97997180
+      parentId: -1796680890
+      sceneData:
+        entryText: 'What about you? '
+        text: 'Ichor: What about me? There is, nothing to say.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 994221896
+      parentId: 97997180
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I will continue here, for not much longer.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -963744138
+      parentId: 994221896
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: This Dungeon is near it''s collapse, it cannot...sustain itself.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1373257124
+      parentId: -963744138
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: With no more humans...entering, it will not be able to survive.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 357472638
+      parentId: 1373257124
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -584708910
+      parentId: 357472638
+      sceneData:
+        entryText: 'Why not try to leave before then? '
+        text: 'Ichor: Leave? I cannot leave myself, I am this Dungeon.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1752292352
+      parentId: -584708910
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I have been down here...for so long. You see what it has done
+          to me.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 723168106
+      parentId: 1752292352
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1443516980
+      parentId: 723168106
+      sceneData:
+        entryText: 'It''s not like you''ll be alone. '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1108700952
+      parentId: -1443516980
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -681702550
+      parentId: 723168106
+      sceneData:
+        entryText: 'If you can''t leave...I''ll put an end to your miserable fate. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1863308400
+      parentId: -681702550
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1646450228
+      parentId: 357472638
+      sceneData:
+        entryText: 'I can put an end to it now. '
+        text: 'Ichor: An end...this place will only end in one way.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1943805652
+      parentId: -1646450228
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Leave, let nature...run its course. I am...beyond, help.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -164391044
+      parentId: 1943805652
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 710636548
+      parentId: -164391044
+      sceneData:
+        entryText: 'No, I must help you, I can get you out. '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 138851030
+      parentId: 710636548
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1472450978
+      parentId: -164391044
+      sceneData:
+        entryText: 'A mercy killing is the honourable thing to do... '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 112963342
+      parentId: 1472450978
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -14160382
+      parentId: -1796680890
+      sceneData:
+        entryText: 'It''s not over until this place is destroyed. '
+        text: 'Ichor: This place will be destroyed, just...leave.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1972126416
+      parentId: -14160382
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Trying to...bring it down, bring me down. It will only seal
+          your fate...here, till the end.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1229043206
+      parentId: -1972126416
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -964981128
+      parentId: 1229043206
+      sceneData:
+        entryText: 'My fate was sealed the moment I decided to destroy this place,
+          I will see it through. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 332683816
+      parentId: -964981128
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 785542396
+      parentId: 1229043206
+      sceneData:
+        entryText: 'Surely there''s more than one way to go about this '
+        text: 'Ichor: The choice has only ever been to...take the place.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 2052136774
+      parentId: 785542396
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: That is the only path taken, from everyone who...entered.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -911770562
+      parentId: 2052136774
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1430177220
+      parentId: -911770562
+      sceneData:
+        entryText: '...I don''t need to take your place. I can just take you. Out.
+          Outside '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1834423158
+      parentId: -1430177220
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1656352784
+      parentId: -911770562
+      sceneData:
+        entryText: 'It appears there is only one option then. I will kill you. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1019997126
+      parentId: -1656352784
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -695042310
+      parentId: -1810020650
+      sceneData:
+        entryText: 'You''re trying to talk me out of it...I won''t be denied this. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1609141132
+      parentId: -695042310
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 175822342
+      parentId: 1843790412
+      sceneData:
+        entryText: 'Well...this isn''t what I expected. '
+        text: 'Ichor: I am far past my, days of grandiosity.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1259568986
+      parentId: 175822342
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I no longer have the...energy nor the, will to give you a spectacle.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1951651666
+      parentId: 1259568986
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -867905022
+      parentId: -1951651666
+      sceneData:
+        entryText: 'Ichor: This..repitition, the cycle of...death. '
+        text: 'Ichor: I have witnessed it, the memories of all those before.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 215841622
+      parentId: -867905022
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: It is the same. And I do not have the power to stop it.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1230656248
+      parentId: 215841622
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 2122826946
+      parentId: 1230656248
+      sceneData:
+        entryText: '...I do. '
+        text: 'Ichor: You do not. No one has any, power of their own once they...are
+          tempted.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1431318560
+      parentId: 2122826946
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -151384422
+      parentId: -1431318560
+      sceneData:
+        entryText: 'Ichor: You will kill me. And then you will die. '
+        text: 'Ichor: It is the way of, the dungeon, the rule of the heart.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 343097098
+      parentId: -151384422
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -262776696
+      parentId: 343097098
+      sceneData:
+        entryText: 'I''m different. '
+        text: 'Ichor: You are not, nobody is...the power of the heart is too strong,
+          even for you.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -2037894996
+      parentId: -262776696
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: It is a testament you have made it this far, I will give you
+          that.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -33622446
+      parentId: -2037894996
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: But you shall go no further. Leave this place, it will all
+          end soon enough.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1985238598
+      parentId: -33622446
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1077349810
+      parentId: -1985238598
+      sceneData:
+        entryText: 'How will it all end? '
+        text: 'Ichor: It will die...naturally. This place is...alive.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1561791738
+      parentId: -1077349810
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: You are the first Hunter to enter in a...long, time.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1816094932
+      parentId: 1561791738
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: It has not eaten, you would die in the same...circumstance.
+          As I will.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1606203370
+      parentId: 1816094932
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1669357572
+      parentId: -1606203370
+      sceneData:
+        entryText: 'Why have you accepted this? '
+        text: 'Ichor: I have had enough...time to contemplate my, fate. ..'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 498523384
+      parentId: 1669357572
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -64082218
+      parentId: -1606203370
+      sceneData:
+        entryText: 'I''ll move it along then. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -362423750
+      parentId: -64082218
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -755453874
+      parentId: -1985238598
+      sceneData:
+        entryText: 'I AM different. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1336640726
+      parentId: -755453874
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -993319878
+      parentId: 343097098
+      sceneData:
+        entryText: 'I don''t want to kill you. '
+        text: 'Ichor: Then leave, no other choices are before you. My time is up,
+          regardless your decision.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -2030760006
+      parentId: -993319878
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I will be at peace.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 168914930
+      parentId: -2030760006
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -947013362
+      parentId: 168914930
+      sceneData:
+        entryText: 'Why can''t you leave? '
+        text: 'Ichor: Is it not obvious? Even if it was possible, there is nothing
+          for me...above.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -718644220
+      parentId: -947013362
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1455367244
+      parentId: -718644220
+      sceneData:
+        entryText: 'You don''t have to do it alone. '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 962233292
+      parentId: 1455367244
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -742114114
+      parentId: -718644220
+      sceneData:
+        entryText: 'If it''s not possible then...I''ll grant you a swift end. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 2136851800
+      parentId: -742114114
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 145445036
+      parentId: 168914930
+      sceneData:
+        entryText: 'If this will put you at peace... '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -998280756
+      parentId: 145445036
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 763065368
+      parentId: 1230656248
+      sceneData:
+        entryText: 'Then you are finished. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1386829744
+      parentId: 763065368
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 136733282
+      parentId: 1086920668
+      sceneData:
+        entryText: 'Your power is mine. '
+        text: 'Ichor: Hunter, you...must not be swayed by the...power within this,
+          room.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1821232752
+      parentId: 136733282
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I once was, tempted, as you are...now'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 501663462
+      parentId: -1821232752
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: But...look what it has done to me. I am...not human.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -422771350
+      parentId: 501663462
+      sceneData:
+        entryText: '..  '
+        text: 'Ichor: My thoughts are...clouded by others, before me. If you try
+          to do, as I did...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -122926928
+      parentId: -422771350
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: My voice will become another...amongst the, cacophony, within
+          your head.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 960819716
+      parentId: -122926928
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: You will die.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 913645626
+      parentId: 960819716
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -997146318
+      parentId: 913645626
+      sceneData:
+        entryText: 'What do you mean, voices? '
+        text: 'Ichor: No one, truly dies in the...Dungeon. It is alive.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -448603116
+      parentId: -997146318
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I am simply...the heart of it all. If you choose, to kill me...then
+          it will take you.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1383100308
+      parentId: -448603116
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: The Dungeon has a mind of it''s own, And you will, be swallowed
+          into it.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1396440068
+      parentId: 1383100308
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Then you will hear...everything.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 26086476
+      parentId: 1396440068
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 691728652
+      parentId: 26086476
+      sceneData:
+        entryText: 'You...live like this? '
+        text: 'Ichor: To call it living, such a thing does not make...sense.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1266237382
+      parentId: 691728652
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Heed my warning, young Hunter, it is no feat.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1977153568
+      parentId: -1266237382
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: You may think, you want this, but you do not know...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1613102312
+      parentId: -1977153568
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: The horrors I have seen. The pain I endure. With you, it shall
+          only multiply.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1626442072
+      parentId: 1613102312
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Leave now, whilst you still can.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1584963332
+      parentId: 1626442072
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 921730656
+      parentId: -1584963332
+      sceneData:
+        entryText: 'It isn''t...right, leaving you here. '
+        text: 'Ichor: So fickle to think that now. It does not matter.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1187646932
+      parentId: 921730656
+      sceneData:
+        entryText: '..  '
+        text: 'Ichor: If you try anything foolish, you will be consumed.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -840232636
+      parentId: -1187646932
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1596665122
+      parentId: -840232636
+      sceneData:
+        entryText: 'I can make up for my wrongdoings. I can try. '
+        text: 'Ichor: ...'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -171377208
+      parentId: 1596665122
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -137833542
+      parentId: -840232636
+      sceneData:
+        entryText: 'This place truly does corrupt...I will end this. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1978577542
+      parentId: -137833542
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 776405128
+      parentId: -1584963332
+      sceneData:
+        entryText: 'You will not fool me, that power will be mine. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 2123201556
+      parentId: 776405128
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -124493782
+      parentId: 26086476
+      sceneData:
+        entryText: 'That is exactly what I want. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1733127588
+      parentId: -124493782
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -639103730
+      parentId: 913645626
+      sceneData:
+        entryText: 'And be reborn, more powerful than ever before. '
+        text: 'Ichor: It''s not, as it is told, this, is your...last chance, to turn
+          back. To keep...*living*.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 444642914
+      parentId: -639103730
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: It is no life here, part of the Dungeon. And no life will come,
+          it is dying.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1528389558
+      parentId: 444642914
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I...it cannot live when no one enters,when no life is near
+          to steal.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1822444814
+      parentId: 1528389558
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -964779918
+      parentId: 1822444814
+      sceneData:
+        entryText: 'I will be different. '
+        text: 'Ichor: You are not different. You will not be, different.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1111713380
+      parentId: -964779918
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: I will die in this place regardless of your...choice.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -2099507272
+      parentId: 1111713380
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: If your arrogance is so much as to, resign yourself to wither
+          away in this hell,'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 1490748608
+      parentId: -2099507272
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: No more pity I shall take on your...weak soul.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 934885664
+      parentId: 1490748608
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 786037192
+      parentId: 934885664
+      sceneData:
+        entryText: 'Pity? There is nothing to pity about me, nor my choice. '
+        text: 'Ichor: You do not know anything. Are you not...listening?'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -1432436806
+      parentId: 786037192
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: Coming to this place with you mind set on, solely acquiring
+          power.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: -348690162
+      parentId: -1432436806
+      sceneData:
+        entryText: '.. '
+        text: 'Ichor: No matter the cost. Kill me if you must. Your fate will be
+          deserved.'
+        CharacterAsset: {fileID: -2303242142211079768, guid: 4023968538b189a499f53d5c06a47553, type: 3}
+        selectionID: 0
+    - id: 47326514
+      parentId: -348690162
+      sceneData:
+        entryText: '.. '
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1453795588
+      parentId: 47326514
+      sceneData:
+        entryText: 'My fate is my own to conquer. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -2131569208
+      parentId: -1453795588
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 85033472
+      parentId: 47326514
+      sceneData:
+        entryText: 'As will yours. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 793773910
+      parentId: 85033472
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1716764348
+      parentId: 934885664
+      sceneData:
+        entryText: 'Do not look down on me. I am your end. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1957829628
+      parentId: -1716764348
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: 1677304038
+      parentId: 1822444814
+      sceneData:
+        entryText: 'A life outside of this place is not worth living. '
+        text: '*Eat it*'
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0
+    - id: -1744375442
+      parentId: 1677304038
+      sceneData:
+        entryText: 
+        text: 
+        CharacterAsset: {fileID: -7756645435916287982, guid: 36bc88a1050a2ab4ea5d86f8b7ecbdc4, type: 3}
+        selectionID: 0

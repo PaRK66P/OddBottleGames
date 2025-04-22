@@ -37,11 +37,6 @@ public class PlayerAnimationHandler : MonoBehaviour
     [SpineAnimation]
     public string RightSide;
 
-    // Objects
-    [Header("Reticle")]
-    [SerializeField]
-    private PlayerAimReticle _aimReticle;
-
     // Components
     private SkeletonAnimation _skeletonAnimation;
 
@@ -177,7 +172,6 @@ public class PlayerAnimationHandler : MonoBehaviour
 
     public void SetAimDirection(Vector2 direction)
     {
-        _aimReticle.UpdateDirection(direction);
         if (_currentDirection == FacingDirection.Right) { direction.x *= -1.0f; } // Scale is reversed when facing right
 
         float AngleFromRight = Vector3.SignedAngle(Vector3.right, new Vector3(direction.x, direction.y, Vector3.right.z), new Vector3(0.0f, 0.0f, 1.0f));
