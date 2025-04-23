@@ -59,6 +59,8 @@ public class VisualNovelScript : MonoBehaviour
 
     public UnityEvent onNovelFinish;
 
+    [SerializeField] private TimeManager timeManager;
+
     void Start()
     {
         canv = GameObject.Find("Canvas").transform.Find("VisualNovelCanvas").gameObject;
@@ -113,7 +115,7 @@ public class VisualNovelScript : MonoBehaviour
         if (!isNovelSection)
         {
             canvGroup.alpha = 0;
-            Time.timeScale = 0;
+            timeManager.SetDefaultTimescale(0.0f);
             playerRef.GetComponent<PlayerManager>().DisableInput();
             currentVNPrefabIndex = NovelSceneID;
             playerUI.SetActive(false);
@@ -206,7 +208,7 @@ public class VisualNovelScript : MonoBehaviour
             lastSelectionID = currentNode.sceneData.selectionID;
             isNovelSection = false;
             playerRef.GetComponent<PlayerManager>().EnableInput();
-            Time.timeScale = 1.0f;
+            timeManager.SetDefaultTimescale(1.0f);
             fadeOut = true;
             //canv.SetActive(false);
             playerUI.SetActive(true);

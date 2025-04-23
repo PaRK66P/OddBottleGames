@@ -764,6 +764,7 @@ MonoBehaviour:
   onNovelFinish:
     m_PersistentCalls:
       m_Calls: []
+  timeManager: {fileID: 744565093}
 --- !u!4 &88376872
 Transform:
   m_ObjectHideFlags: 0
