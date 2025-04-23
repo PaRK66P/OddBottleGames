@@ -100,7 +100,7 @@ public class PathfindingManager : MonoBehaviour
     }
 
     // Updates each node in the grid
-    private void CalculateGrid()
+    public void CalculateGrid()
     {
         for (int x = 0; x < _gridSizeX; x++)
         {

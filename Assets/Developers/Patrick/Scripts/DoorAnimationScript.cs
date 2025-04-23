@@ -14,6 +14,8 @@ public class DoorAnimationScript : MonoBehaviour
     private Transform _closedPosition; 
     [SerializeField]
     private Transform _openPosition;
+    [SerializeField]
+    private PathfindingManager _pathfinder;
     private float _currentAlpha;
     private float _closeTime;
 
@@ -27,6 +29,8 @@ public class DoorAnimationScript : MonoBehaviour
     private void OnEnable()
     {
         _collisionBox.gameObject.SetActive(true);
+
+        _pathfinder.CalculateGrid();
 
         _currentAlpha = 0.0f;
         _renderer.color = new Color(1.0f, 1.0f, 1.0f, _currentAlpha);
@@ -45,6 +49,8 @@ public class DoorAnimationScript : MonoBehaviour
     public void CloseDoorCommand()
     {
         _collisionBox.gameObject.SetActive(false);
+
+        _pathfinder.CalculateGrid();
 
         _currentAlpha = 1.0f;
         _renderer.color = new Color(1.0f, 1.0f, 1.0f, _currentAlpha);

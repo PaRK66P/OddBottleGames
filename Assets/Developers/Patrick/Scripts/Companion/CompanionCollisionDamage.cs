@@ -16,6 +16,8 @@ public class CompanionCollisionDamage : MonoBehaviour
     // Values
     private CollisionDamageStates _collisionDamageState;
 
+    private bool _isNewLeap;
+
     public void InitialiseComponent(ref CompanionBossData bossData, ref CompanionFriendData friendData)
     {
         _bossData = bossData;
@@ -45,6 +47,8 @@ public class CompanionCollisionDamage : MonoBehaviour
                     // Check all enemy types
                     if (collision.gameObject.tag == "Boss")
                     {
+                        if(!_isNewLeap) { return; }
+                        _isNewLeap = false;
                         collision.gameObject.GetComponent<IchorManager>().takeDamage((int)_friendData.LeapDamage);
                     }
                     else if (collision.gameObject.tag == "WeakPoint")
@@ -87,5 +91,10 @@ public class CompanionCollisionDamage : MonoBehaviour
     public void ChangeState(CollisionDamageStates collisionDamageState)
     {
         _collisionDamageState = collisionDamageState;
+    }
+
+    public void SetNewLeap()
+    {
+        _isNewLeap = true;
     }
 }

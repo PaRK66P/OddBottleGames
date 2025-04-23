@@ -25,6 +25,7 @@ public class CompanionFriend : MonoBehaviour
     private Rigidbody2D _rb;
     private CompanionDetection _detectionScript;
     private CompanionAnimationHandler _animationScript;
+    private CompanionCollisionDamage _collisionDamageScript;
 
     // Values
     private CompanionStates _state;
@@ -45,11 +46,15 @@ public class CompanionFriend : MonoBehaviour
     private Vector2 _leapStart;
     private Vector2 _leapEnd;
 
-    public void InitialiseComponent(ref CompanionFriendData dataObj, ref CompanionDetection detectionScript, ref CompanionAnimationHandler animationScript, ref PathfindingManager pathfindingManager, ref SoundManager soundManager, ref Rigidbody2D rb, ref GameObject player)
+    public void InitialiseComponent(ref CompanionFriendData dataObj, 
+        ref CompanionDetection detectionScript, ref CompanionAnimationHandler animationScript, ref CompanionCollisionDamage collisionDamageScript, 
+        ref PathfindingManager pathfindingManager, ref SoundManager soundManager, 
+        ref Rigidbody2D rb, ref GameObject player)
     {
         _dataObj = dataObj;
         _detectionScript = detectionScript;
         _animationScript = animationScript;
+        _collisionDamageScript = collisionDamageScript;
         _pathfindingManager = pathfindingManager;
         _soundManager = soundManager;
         _rb = rb;
@@ -60,13 +65,17 @@ public class CompanionFriend : MonoBehaviour
     public void CompanionUpdate()
     {
         // Update based on state
-        Debug.Log("Companion State: " + _state.ToString());
         switch (_state)
         {
             case CompanionStates.Idle:
                 IdleAction();
                 break;
             case CompanionStates.Attacking:
+                if(_currentTarget == null)
+                {
+                    _state = CompanionStates.Idle;
+                    return;
+                }
                 Leap();
                 break;
         }
@@ -267,18 +276,12 @@ public class CompanionFriend : MonoBehaviour
         }
         if(_playerTarget != null) 
         {
-            if (_playerTarget.activeInHierarchy)
-            {
-                _currentTarget = _playerTarget;
-            }
-            else
-            {
-                RemovePlayerTarget(_playerTarget);
-            }
+            RemovePlayerTarget(_playerTarget);
         }
 
         if (_currentTarget != null) // Found target to attack
         {
+            _collisionDamageScript.SetNewLeap();
             _state = CompanionStates.Attacking;
             _leapTimer = Time.time;
             _isReadyToLeap = false;
