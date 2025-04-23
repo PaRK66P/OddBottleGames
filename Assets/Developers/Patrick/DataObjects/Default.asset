@@ -43,7 +43,7 @@ MonoBehaviour:
   ChargeShotIntervals: 0.1
   MaxAmmo: 6
   ReloadTime: 1
-  DamageMultiplier: 1.4
+  DamageMultiplier: 1.6
   ChargeSlowDown: 0.444
   MaxChargeShotImpactSlowDown: 0.5
   ChargeShotImpactFrameDuration: 0.05
