@@ -101,6 +101,7 @@ public class PlayerManager : MonoBehaviour
             {
                 _playerAnimationHandler.EndDamageAnimation();
                 _playerInputManager.EnableInput();
+                _playerMovement.hasControl = true;
             }
             if(Time.time - _timeOfDamage > _invulnerableTime) // We've exceeded the time for being invulnerable
             {
@@ -165,10 +166,12 @@ public class PlayerManager : MonoBehaviour
         _timeOfDamage = Time.time;
         _invulnerableTime = damageTime;
         _fadeOut = true;
-        _playerMovement.KnockbackPlayer(damageDirection, knockbackScalar); // Knockback
+        _playerMovement.KnockbackPlayer(damageDirection, 16);
+        //_playerMovement.KnockbackPlayer(damageDirection, knockbackScalar); // Knockback
         _playerAnimationHandler.StartDamageAnimation();
 
         // Remove control
+        _playerMovement.hasControl = false;
         _playerInputManager.DisableInput();
         _playerShooting.InterruptFiring();
 

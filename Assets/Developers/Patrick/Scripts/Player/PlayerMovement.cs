@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private GameObject _evolveDashCollider;
 
     // Values
+    public bool hasControl = true;
+
     private Vector2 _movementInput;
 
     public bool _canDash = false;
@@ -114,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _canDash = false;
 
+            _rigidbody.velocity = Vector2.zero;
             _rigidbody.AddForce(_knockbackForce, ForceMode2D.Impulse);
             _knockbackForce = Vector2.zero;
             _isMoving = false;
@@ -122,8 +125,13 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        // Dashing
-        if (_canDash) // Can dashing means wanting to dash
+        if (!hasControl)
+        {
+            return;
+        }
+
+            // Dashing
+            if (_canDash) // Can dashing means wanting to dash
         {
             if (Time.time - _lastDashTime >= _playerData.DashCooldown && _dashChargesNumber > 0) // Off cooldown
             {
@@ -230,7 +238,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void KnockbackPlayer(Vector2 direction, float scale)
     {
-        _knockbackForce = direction * scale;
+        _knockbackForce = direction.normalized * scale;
     }
 
     // Evolve the dash ability (toggle can disable the dash evolve)
