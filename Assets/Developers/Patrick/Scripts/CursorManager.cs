@@ -10,6 +10,7 @@ public class CursorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.SetCursor(cursorImage, new Vector2(0.5f * (cursorImage.width - 1), 0.5f * (cursorImage.height - 1)), CursorMode.Auto);
+        //Cursor.SetCursor(null, new Vector2(0.5f * (cursorImage.width - 1), 0.5f * (cursorImage.height - 1)), CursorMode.Auto);
+        //Cursor.visible = false;
     }
 }
