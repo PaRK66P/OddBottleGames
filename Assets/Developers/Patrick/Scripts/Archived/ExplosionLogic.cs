@@ -54,10 +54,6 @@ public class ExplosionLogic : MonoBehaviour
                 {
                     obj.GetComponent<AISimpleBehaviour>().TakeDamage(_damage, gameObject.transform.position - obj.transform.position);
                 }
-                else if (obj.GetComponent<bossScript>() != null)
-                {
-                    obj.GetComponent<bossScript>().takeDamage(1);
-                }
             }
             _isFiredDamage = true;
             //GetComponent<SpriteRenderer>().color = Color.red;
