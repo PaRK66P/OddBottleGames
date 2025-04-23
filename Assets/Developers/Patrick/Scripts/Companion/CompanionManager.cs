@@ -46,6 +46,7 @@ public class CompanionManager : MonoBehaviour
     private float _health;
     private bool _isIdleTimedCoroutineRunning = false;
     private bool _hasPlayedNovel = false;
+    private TimeManager _timeManager;
 
     [Header("GIZMOS")]
     // Gizmos
@@ -70,7 +71,7 @@ public class CompanionManager : MonoBehaviour
         _soundManager.SetAmbrosiaAudioSource(ref _companionAudioSource);
 
         _visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
-
+        _timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
         _rb = GetComponent<Rigidbody2D>();
 
         _collisionDamageScript = GetComponentInChildren<CompanionCollisionDamage>();
@@ -247,12 +248,12 @@ public class CompanionManager : MonoBehaviour
          */
 
         float targetTime = 0.5f;
-        while (Time.timeScale > targetTime)
+        while (_timeManager.GetDefaultTimescale() > targetTime)
         {
-            Time.timeScale -= Time.unscaledDeltaTime;
-            if (Time.timeScale < targetTime)
+            _timeManager.SetDefaultTimescale(_timeManager.GetDefaultTimescale()-Time.unscaledDeltaTime);
+            if (_timeManager.GetDefaultTimescale() < targetTime)
             {
-                Time.timeScale = targetTime;
+                _timeManager.SetDefaultTimescale(0.5f);
             }
             yield return null;
         }
