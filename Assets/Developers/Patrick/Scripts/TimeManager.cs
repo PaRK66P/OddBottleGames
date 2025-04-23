@@ -68,6 +68,7 @@ public class TimeManager : MonoBehaviour
     {
         return _defaultTimescale;
     }
+
     // Adds a timescale to the dictionary for the specified duration
     public void AddTimescaleForDuration(float timescale, float duration)
     {
