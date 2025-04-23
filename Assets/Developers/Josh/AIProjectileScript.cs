@@ -12,6 +12,9 @@ public class AIProjectileScript : MonoBehaviour
     public GameObject owner;
     public bool toBeDestroyed;
 
+    private ObjectPoolManager pooler;
+    private string objectName;
+
     void Start()
     {
         GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
@@ -42,11 +45,15 @@ public class AIProjectileScript : MonoBehaviour
                 collision.gameObject.transform.position.y - transform.position.y);
             
             collision.gameObject.GetComponent<PlayerManager>().TakeDamage(damageDirection, 1, 1, 5);
-            
+            pooler.ReleaseObject(objectName, gameObject);
+        }
+        if (collision.gameObject.layer == 6)
+        {
+            pooler.ReleaseObject(objectName, gameObject);
         }
     }
 
-    public void SetBulletDirectionAndSpeed(Vector3 newDirection, float newBulletSpeed)
+    public void SetBulletDirectionAndSpeed(Vector3 newDirection, float newBulletSpeed, ref ObjectPoolManager dPooler, string dObjectName)
     {
         direction = newDirection.normalized;
 
@@ -56,5 +63,8 @@ public class AIProjectileScript : MonoBehaviour
 
         bulletSpeed = newBulletSpeed;
         this.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+
+        pooler = dPooler;
+        objectName = dObjectName;
     }
 }

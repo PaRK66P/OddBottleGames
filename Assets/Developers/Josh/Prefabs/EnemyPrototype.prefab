@@ -247,7 +247,7 @@ MonoBehaviour:
   maxHealth: 10
   hitStunLength: 0.2
   takesKnockback: 1
-  AIProjectilePrefab: {fileID: 0}
+  AIProjectilePrefab: {fileID: 7652979212732001909, guid: 8ec0ffbae7cf1264b87544a1b8ecad6d, type: 3}
   objectPoolManager: {fileID: 0}
   aiMode: 0
 --- !u!114 &-7204287080718888579

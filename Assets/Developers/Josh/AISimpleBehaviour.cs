@@ -148,10 +148,10 @@ public class AISimpleBehaviour : MonoBehaviour
         {
             case AIType.SHOOTER:
                 {
-                    GameObject newBullet = objectPoolManager.GetFreeObject("AIProjectileProto");
+                    GameObject newBullet = objectPoolManager.GetFreeObject(AIProjectilePrefab.name);
                     Vector3 toPlayer = player.transform.position - this.transform.position;
                     AIProjectileScript projScript = newBullet.GetComponent<AIProjectileScript>();
-                    projScript.SetBulletDirectionAndSpeed(toPlayer, 8);
+                    projScript.SetBulletDirectionAndSpeed(toPlayer, 8, ref objectPoolManager, AIProjectilePrefab.name);
                     newBullet.transform.position = this.transform.position + toPlayer.normalized;
                     projScript.owner = this.gameObject;
                     projScript.toBeDestroyed = false;
@@ -162,12 +162,12 @@ public class AISimpleBehaviour : MonoBehaviour
                 {
                     for (int i = 0; i < 5; i++)
                     {
-                        GameObject newBullet = objectPoolManager.GetFreeObject("AIProjectileProto");
+                        GameObject newBullet = objectPoolManager.GetFreeObject(AIProjectilePrefab.name);
                         Vector3 toPlayer = player.transform.position - this.transform.position;
                         AIProjectileScript projScript = newBullet.GetComponent<AIProjectileScript>();
                         float randomAngle = Random.Range(-20.0f, 20.0f);
                         Vector3 bulletDir = Quaternion.Euler(0, 0, randomAngle) * toPlayer;
-                        projScript.SetBulletDirectionAndSpeed(bulletDir, 8);
+                        projScript.SetBulletDirectionAndSpeed(bulletDir, 8, ref objectPoolManager, AIProjectilePrefab.name);
                         newBullet.transform.position = this.transform.position + toPlayer.normalized;
                         projScript.owner = this.gameObject;
                         projScript.toBeDestroyed = false;
@@ -189,12 +189,12 @@ public class AISimpleBehaviour : MonoBehaviour
         for (int i = -2; i < 3; i++)
         {
             yield return new WaitForSeconds(0.1f);
-            GameObject newBullet = objectPoolManager.GetFreeObject("AIProjectileProto");
+            GameObject newBullet = objectPoolManager.GetFreeObject(AIProjectilePrefab.name);
             Vector3 toPlayer = player.transform.position - this.transform.position;
             AIProjectileScript projScript = newBullet.GetComponent<AIProjectileScript>();
             float bulletMaxAngle = 20.0f;
             Vector3 bulletDir = Quaternion.Euler(0, 0, bulletMaxAngle * i) * toPlayer;
-            projScript.SetBulletDirectionAndSpeed(bulletDir, 8);
+            projScript.SetBulletDirectionAndSpeed(bulletDir, 8, ref objectPoolManager, AIProjectilePrefab.name);
             newBullet.transform.position = this.transform.position + toPlayer.normalized;
             projScript.owner = this.gameObject;
             projScript.toBeDestroyed = false;
