@@ -1,7 +1,6 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO.Pipes;
-using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 
 public enum AIType
@@ -82,6 +81,7 @@ public class AISimpleBehaviour : MonoBehaviour
         }
         if (health <= 0)
         {
+            gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.Lerp(gameObject.GetComponent<Rigidbody2D>().velocity, new Vector3(0,0,0), Time.deltaTime*5);
             GetComponent<CompanionTargettingHandler>().ReleaseAsTarget();
             foreach (Collider2D collider in colliders)
             {
@@ -165,7 +165,7 @@ public class AISimpleBehaviour : MonoBehaviour
                         GameObject newBullet = objectPoolManager.GetFreeObject(AIProjectilePrefab.name);
                         Vector3 toPlayer = player.transform.position - this.transform.position;
                         AIProjectileScript projScript = newBullet.GetComponent<AIProjectileScript>();
-                        float randomAngle = Random.Range(-20.0f, 20.0f);
+                        float randomAngle = UnityEngine.Random.Range(-20.0f, 20.0f);
                         Vector3 bulletDir = Quaternion.Euler(0, 0, randomAngle) * toPlayer;
                         projScript.SetBulletDirectionAndSpeed(bulletDir, 8, ref objectPoolManager, AIProjectilePrefab.name);
                         newBullet.transform.position = this.transform.position + toPlayer.normalized;
@@ -210,7 +210,7 @@ public class AISimpleBehaviour : MonoBehaviour
         //inStun = true;
         this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         
-        if (takesKnockback && health > 0)
+        if (takesKnockback)
         {
             gameObject.GetComponent<Rigidbody2D>().velocity = -damageDir.normalized * 4.0f;
         }
