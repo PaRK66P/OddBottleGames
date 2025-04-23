@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1592756413988045176}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DoorVertical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1661783506923310997}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OpenPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 7911690760493834806}
   - component: {fileID: 7289390033680180830}
   - component: {fileID: 6322195625844884000}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CollisionBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 8182563749634228134}
   - component: {fileID: 4843163155747329705}
   - component: {fileID: 7504075941153527210}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DoorImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
