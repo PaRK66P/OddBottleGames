@@ -311,12 +311,12 @@ public class IchorManager : MonoBehaviour
             case 29:
             case 31:
             case 32:
+            case 33:
             case 34:
             case 35:
-            case 36:
+            case 37:
             case 38:
             case 39:
-            case 40:
             case 42:
             case 43:
             case 44:
@@ -343,14 +343,13 @@ public class IchorManager : MonoBehaviour
             case 25:
             case 27:
             case 30:
-            case 33:
-            case 37:
-            case 41:
+            case 36:
+            case 40:
                 SceneManager.LoadScene(2);
                 break;
             default:
                 SceneManager.LoadScene(3);
-                Debug.Log("VisualNovel case not found.");                
+                Debug.Log("VisualNovel Ichor case not found. case " + visualNovelManager.GetLastSelectionID());                
                 break;
         }
     }

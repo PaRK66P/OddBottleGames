@@ -403,36 +403,36 @@ public class CompanionManager : MonoBehaviour
         {
             case 0:
             case 1:
-            case 4:
-            case 6:
-            case 8:
+            case 3:
+            case 5:
+            case 7:
             case 9:
             case 11:
             case 13:
             case 15:
-            case 18:
-            case 20:
+            case 17:
+            case 19:
             case 21:
-            case 26:
+            case 25:
                 _projectileDespawner.SetActive(false);
                 gameObject.GetComponent<enemyScr>().DecreaseEnemyCount();
                 ChangeToFriendly();
                 _playerObject.GetComponent<PlayerManager>().SetAllyCompanion(true, ref _managerRef);
                 break;
             case 2:
-            case 3:
-            case 5:
-            case 7:
+            case 4:
+            case 6:
+            case 8:
             case 10:
             case 12:
             case 14:
             case 16:
-            case 17:
-            case 19:
+            case 18:
+            case 20:
             case 22:
             case 23:
             case 24:
-            case 25:
+            case 26:
             case 27:
             case 28:
                 _projectileDespawner.SetActive(false);
