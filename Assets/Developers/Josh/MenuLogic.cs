@@ -28,27 +28,27 @@ public class MenuLogic : MonoBehaviour
     public void Start()
     {
         //PlayerPrefs.DeleteAll();
-        if (!PlayerPrefs.HasKey("volume"))
-            PlayerPrefs.SetFloat("volume", volume);
-        volume = PlayerPrefs.GetFloat("volume", volume);
-        volumeSlider.value = volume;
+        //if (!PlayerPrefs.HasKey("volume"))
+        //    PlayerPrefs.SetFloat("volume", volume);
+        //volume = PlayerPrefs.GetFloat("volume", volume);
+        //volumeSlider.value = volume;
 
-        if (!PlayerPrefs.HasKey("typingSpeed"))
-            PlayerPrefs.SetFloat("typingSpeed", typingSpeed);
-        typingSpeed = PlayerPrefs.GetFloat("typingSpeed", typingSpeed);
-        typingSpeedSlider.value = typingSpeed;
+        //if (!PlayerPrefs.HasKey("typingSpeed"))
+        //    PlayerPrefs.SetFloat("typingSpeed", typingSpeed);
+        //typingSpeed = PlayerPrefs.GetFloat("typingSpeed", typingSpeed);
+        //typingSpeedSlider.value = typingSpeed;
         
-        if (!PlayerPrefs.HasKey("dash"))
-            PlayerPrefs.SetInt("dash", BoolToInt(dash));
-        dash = IntToBool(PlayerPrefs.GetInt("dash", BoolToInt(dash)));
-        dashToggle.isOn = dash;
+        //if (!PlayerPrefs.HasKey("dash"))
+        //    PlayerPrefs.SetInt("dash", BoolToInt(dash));
+        //dash = IntToBool(PlayerPrefs.GetInt("dash", BoolToInt(dash)));
+        //dashToggle.isOn = dash;
         
-        if (!PlayerPrefs.HasKey("autoType"))
-            PlayerPrefs.SetInt("autoType", BoolToInt(autoType));
-        autoType = IntToBool(PlayerPrefs.GetInt("autoType", BoolToInt(autoType)));
-        autoTypeToggle.isOn = autoType;
+        //if (!PlayerPrefs.HasKey("autoType"))
+        //    PlayerPrefs.SetInt("autoType", BoolToInt(autoType));
+        //autoType = IntToBool(PlayerPrefs.GetInt("autoType", BoolToInt(autoType)));
+        //autoTypeToggle.isOn = autoType;
 
-        PlayerPrefs.Save();
+        //PlayerPrefs.Save();
 
     }
 
