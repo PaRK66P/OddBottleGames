@@ -82,12 +82,13 @@ public class SoundManager : MonoBehaviour
     public void SetAmbrosiaAudioSource(ref AudioSource audioSource)
     {
         AmbrosiaAudioSource = audioSource;
+        AmbrosiaAudioSource.volume = PlayerPrefs.GetFloat("volume", 0.3f);
     }
 
     public void Update()
     {
         //update volume
-        volume = PlayerPrefs.GetFloat("volume", volume);
+        volume = PlayerPrefs.GetFloat("volume", 0.3f);
         PlayerAudioSource.volume = volume;
 
         //BGMAudioSource.volume = volume;
