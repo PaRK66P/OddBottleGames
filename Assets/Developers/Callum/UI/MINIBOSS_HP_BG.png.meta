@@ -143,7 +143,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      MINIBOSS_HP_BG_0: -6998938330237409953
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

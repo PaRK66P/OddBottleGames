@@ -13,7 +13,7 @@ public class TimeManager : MonoBehaviour
     private float _checkTimer = 0.0f;
     private bool _isNotDefaultTimescale = false;
 
-    private void Update()
+    private void FixedUpdate()
     {
         // Doesn't work for default timescales below 1.0f
 
@@ -54,11 +54,15 @@ public class TimeManager : MonoBehaviour
                 }
             }
         }
+        UnityEngine.Debug.Log("default time scale: " + _defaultTimescale);
+        UnityEngine.Debug.Log("current time scale: " + _currentTimescale);
+        UnityEngine.Debug.Log("unity time scale: " + Time.timeScale);
     }
 
     // Changes the default timescale
     public void SetDefaultTimescale(float timescale)
     {
+        UnityEngine.Debug.Log("setting default time scale to: " + timescale);
         _defaultTimescale = timescale;
 
         _currentTimescale = GetLowestTimescale();

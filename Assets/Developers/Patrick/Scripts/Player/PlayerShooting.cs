@@ -127,6 +127,7 @@ public class PlayerShooting : MonoBehaviour
         // Start _isCharging a shot
         _timeForChargedShot = Time.time;
 
+
         _hasStartedCharging = true;
         _isInterrupted = false;
         _isCharging = true;
@@ -316,7 +317,7 @@ public class PlayerShooting : MonoBehaviour
         _soundManager.PlayGunChargeFire();
 
         float impactFrameTimescale = 1.0f + (((float)_chargedAmmo) * (_playerData.MaxChargeShotImpactSlowDown - 1.0f)) / ((float)_playerData.MaxAmmo);
-        _timeManager.AddTimescaleForDuration(impactFrameTimescale, _playerData.ChargeShotImpactFrameDuration);
+        //_timeManager.AddTimescaleForDuration(impactFrameTimescale, _playerData.ChargeShotImpactFrameDuration);
 
         Fire(direction, _chargedAmmo, localDamageMultiplier);
 

@@ -204,11 +204,11 @@ public class VisualNovelScript : MonoBehaviour
         }
         else
         {
-
+            Debug.Log("ending visual novel");
             lastSelectionID = currentNode.sceneData.selectionID;
             isNovelSection = false;
-            playerRef.GetComponent<PlayerManager>().EnableInput();
             timeManager.SetDefaultTimescale(1.0f);
+            playerRef.GetComponent<PlayerManager>().EnableInput();
             fadeOut = true;
             //canv.SetActive(false);
             playerUI.SetActive(true);
