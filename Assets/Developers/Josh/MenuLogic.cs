@@ -20,9 +20,9 @@ public class MenuLogic : MonoBehaviour
     //[SerializeField] UnityEngine.UI.Image loadingBar;
 
     private float volume = 0.3f;
-    //private float typingSpeed = 1.0f;
-    //private bool dash = false;
-    //private bool autoType = true;
+    private float typingSpeed = 1.0f;
+    private bool dash = false;
+    private bool autoType = true;
 
     // Start is called before the first frame update
     public void Start()
@@ -33,18 +33,18 @@ public class MenuLogic : MonoBehaviour
         //volume = PlayerPrefs.GetFloat("volume", volume);
         //volumeSlider.value = volume;
 
-        //if (!PlayerPrefs.HasKey("typingSpeed"))
-        //    PlayerPrefs.SetFloat("typingSpeed", typingSpeed);
+        if (!PlayerPrefs.HasKey("typingSpeed"))
+           PlayerPrefs.SetFloat("typingSpeed", typingSpeed);
         //typingSpeed = PlayerPrefs.GetFloat("typingSpeed", typingSpeed);
         //typingSpeedSlider.value = typingSpeed;
         
-        //if (!PlayerPrefs.HasKey("dash"))
-        //    PlayerPrefs.SetInt("dash", BoolToInt(dash));
+        if (!PlayerPrefs.HasKey("dash"))
+           PlayerPrefs.SetInt("dash", BoolToInt(dash));
         //dash = IntToBool(PlayerPrefs.GetInt("dash", BoolToInt(dash)));
         //dashToggle.isOn = dash;
         
-        //if (!PlayerPrefs.HasKey("autoType"))
-        //    PlayerPrefs.SetInt("autoType", BoolToInt(autoType));
+        if (!PlayerPrefs.HasKey("autoType"))
+           PlayerPrefs.SetInt("autoType", BoolToInt(autoType));
         //autoType = IntToBool(PlayerPrefs.GetInt("autoType", BoolToInt(autoType)));
         //autoTypeToggle.isOn = autoType;
 
@@ -131,5 +131,21 @@ public class MenuLogic : MonoBehaviour
     //    dash = toggle;
     //    PlayerPrefs.SetInt("dash", BoolToInt(toggle));
     //}
+
+    private int BoolToInt(bool val)
+    {
+       if (val == true)
+           return 1;
+       else
+           return 0;
+    }
+
+    private bool IntToBool(int val)
+    {
+       if (val == 0)
+           return false;
+       else
+           return true;
+    }
 
 }
