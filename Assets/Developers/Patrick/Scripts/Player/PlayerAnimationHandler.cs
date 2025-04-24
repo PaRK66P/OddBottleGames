@@ -126,11 +126,11 @@ public class PlayerAnimationHandler : MonoBehaviour
     {
         if(_isMoving == isMoving || _isTakingDamage) { return; }
 
-        _isMoving = isMoving;
-
         if (_isDashing) {  return; } // Values shouldn't change as would mess with the dash animations
 
-        if (_isMoving)
+        _isMoving = isMoving;
+
+        if (isMoving)
         {
             _movementTrack = SpineAnimationState.SetAnimation(1, RunAnimation, true);
             _movementTrack.TimeScale = _currentMovementScale;
@@ -244,38 +244,39 @@ public class PlayerAnimationHandler : MonoBehaviour
     public void StartDamageAnimation()
     {
         _isTakingDamage = true;
+        _isMoving = false;
         SpineAnimationState.SetAnimation(1, DamageAnimation, false);
+        SpineAnimationState.AddEmptyAnimation(1, 0, 0);
     }
 
     public void EndDamageAnimation()
     {
         _isTakingDamage = false;
-        SpineAnimationState.SetEmptyAnimation(1, 0.0f);
 
-        switch (_currentDirection) // Damage animation is flat so need to change based on direction
-        {
-            case FacingDirection.Front:
-                SpineSkeleton.ScaleX = 1.0f;
-                SetArmSide(true);
-                SpineAnimationState.SetAnimation(0, FrontDirection, _skeletonAnimation);
-                break;
-            case FacingDirection.Back:
-                SpineSkeleton.ScaleX = 1.0f;
-                SetArmSide(false);
-                SpineAnimationState.SetAnimation(0, BackDirection, _skeletonAnimation);
-                break;
-            case FacingDirection.Left:
-                SpineSkeleton.ScaleX = 1.0f;
-                SetArmSide(true);
-                SpineAnimationState.SetAnimation(0, SideDirection, _skeletonAnimation);
-                break;
-            case FacingDirection.Right: // Right side animations are funky as the whole SpineSkeleton's scale is reversed
-                SpineSkeleton.ScaleX = -1.0f;
-                SetArmSide(true);
-                SpineAnimationState.SetAnimation(0, SideDirection, _skeletonAnimation);
-                break;
-        }
+        //switch (_currentDirection) // Damage animation is flat so need to change based on direction
+        //{
+        //    case FacingDirection.Front:
+        //        SpineSkeleton.ScaleX = 1.0f;
+        //        SetArmSide(true);
+        //        SpineAnimationState.SetAnimation(0, FrontDirection, _skeletonAnimation);
+        //        break;
+        //    case FacingDirection.Back:
+        //        SpineSkeleton.ScaleX = 1.0f;
+        //        SetArmSide(false);
+        //        SpineAnimationState.SetAnimation(0, BackDirection, _skeletonAnimation);
+        //        break;
+        //    case FacingDirection.Left:
+        //        SpineSkeleton.ScaleX = 1.0f;
+        //        SetArmSide(true);
+        //        SpineAnimationState.SetAnimation(0, SideDirection, _skeletonAnimation);
+        //        break;
+        //    case FacingDirection.Right: // Right side animations are funky as the whole SpineSkeleton's scale is reversed
+        //        SpineSkeleton.ScaleX = -1.0f;
+        //        SetArmSide(true);
+        //        SpineAnimationState.SetAnimation(0, SideDirection, _skeletonAnimation);
+        //        break;
+        //}
 
-        UpdateAimDirection();
+        //UpdateAimDirection();
     }
 }
