@@ -54,9 +54,9 @@ public class TimeManager : MonoBehaviour
                 }
             }
         }
-        UnityEngine.Debug.Log("default time scale: " + _defaultTimescale);
-        UnityEngine.Debug.Log("current time scale: " + _currentTimescale);
-        UnityEngine.Debug.Log("unity time scale: " + Time.timeScale);
+        //UnityEngine.Debug.Log("default time scale: " + _defaultTimescale);
+        //UnityEngine.Debug.Log("current time scale: " + _currentTimescale);
+        //UnityEngine.Debug.Log("unity time scale: " + Time.timeScale);
     }
 
     // Changes the default timescale
