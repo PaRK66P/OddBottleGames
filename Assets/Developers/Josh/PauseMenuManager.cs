@@ -55,17 +55,17 @@ public class PauseMenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    if (!isPaused)
-        //    {
-        //        OnPause();
-        //    }
-        //    else
-        //    {
-        //        OnUnpause();
-        //    }
-        //}
+        if (Input.GetKeyDown(KeyCode.P) && !visualNovelManager.isNovelSection)
+        {
+            if (!isPaused)
+            {
+                OnPause();
+            }
+            else
+            {
+                OnUnpause();
+            }
+        }
     }
 
     private void OnPause()
