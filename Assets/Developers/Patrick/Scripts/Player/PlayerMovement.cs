@@ -131,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
             // Dashing
-            if (_canDash) // Can dashing means wanting to dash
+        if (_canDash) // Can dashing means wanting to dash
         {
             if (Time.time - _lastDashTime >= _playerData.DashCooldown && _dashChargesNumber > 0) // Off cooldown
             {

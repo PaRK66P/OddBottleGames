@@ -19,6 +19,7 @@ public class ProjectileBehaviour : MonoBehaviour
     private int _damage = 1;
 
     private bool _hasCompanion = false;
+    private bool _hasDamaged = false;
 
     public void InitialiseComponent(Vector2 moveDirection, float speed, ref ObjectPoolManager dPoolManager, string prefabName, float damageMultiplier, int ammoUsed)
     {
@@ -33,6 +34,8 @@ public class ProjectileBehaviour : MonoBehaviour
 
         transform.localScale = _originalScale;
         _damage = _originalDamage;
+        _hasDamaged = false;
+
         if (damageMultiplier != 1) // Calculate damage modifications
         {
             transform.localScale = _originalScale * (1 + (0.12f * ammoUsed));
@@ -64,6 +67,7 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(_hasDamaged) { return; }
         if(collision.gameObject.layer == 9) // Enemy layer
         {
             if(collision.gameObject.tag == "Companion")
@@ -100,6 +104,7 @@ public class ProjectileBehaviour : MonoBehaviour
             // Set projectile to be released
             _lifeSpan = _minLife;
             _canBeReleased = true;
+            _hasDamaged = true;
         }
     }
 
