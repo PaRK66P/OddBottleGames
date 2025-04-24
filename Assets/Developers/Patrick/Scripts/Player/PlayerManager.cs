@@ -184,7 +184,7 @@ public class PlayerManager : MonoBehaviour
         _healthBarScript.SetValue(_health);
 
         // Impact frames
-        _timeManager.AddTimescaleForDuration(_playerData.DamageImpactFrameScale, _playerData.DamageImpactFrameDuration * (ammount / 10.0f));
+        //_timeManager.AddTimescaleForDuration(_playerData.DamageImpactFrameScale, _playerData.DamageImpactFrameDuration * (ammount / 10.0f));
     }
 
     // Restore health
