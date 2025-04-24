@@ -35,8 +35,6 @@ public class ProjectileBehaviour : MonoBehaviour
         _damage = _originalDamage;
         if (damageMultiplier != 1) // Calculate damage modifications
         {
-            Debug.Log(damageMultiplier);
-            Debug.Log(ammoUsed);
             transform.localScale = _originalScale * (1 + (0.12f * ammoUsed));
             //transform.localScale = _originalScale * (1 + (damageMultiplier * 0.05f));
             _damage = (int)(_originalDamage * damageMultiplier);
