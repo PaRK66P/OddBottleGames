@@ -20,7 +20,7 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private bool _hasCompanion = false;
 
-    public void InitialiseComponent(Vector2 moveDirection, float speed, ref ObjectPoolManager dPoolManager, string prefabName, float damageMultiplier)
+    public void InitialiseComponent(Vector2 moveDirection, float speed, ref ObjectPoolManager dPoolManager, string prefabName, float damageMultiplier, int ammoUsed)
     {
         GetComponent<Rigidbody2D>().velocity = moveDirection * speed;
         _objectPoolManager = dPoolManager;
@@ -35,7 +35,10 @@ public class ProjectileBehaviour : MonoBehaviour
         _damage = _originalDamage;
         if (damageMultiplier != 1) // Calculate damage modifications
         {
-            transform.localScale = _originalScale * (1 + (damageMultiplier * 0.2f));
+            Debug.Log(damageMultiplier);
+            Debug.Log(ammoUsed);
+            transform.localScale = _originalScale * (1 + (0.12f * ammoUsed));
+            //transform.localScale = _originalScale * (1 + (damageMultiplier * 0.05f));
             _damage = (int)(_originalDamage * damageMultiplier);
 
             _bulletImage.SetActive(false);

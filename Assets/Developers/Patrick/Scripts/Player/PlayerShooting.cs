@@ -237,7 +237,8 @@ public class PlayerShooting : MonoBehaviour
             _playerData.BaseProjectileSpeed,
             ref _objectPoolManager,
             _playerData.BaseProjectileType.name,
-            fireMultiplier);
+            fireMultiplier,
+            ammoUsed);
 
         // Sound
         _soundManager.PlayPGunFire();
