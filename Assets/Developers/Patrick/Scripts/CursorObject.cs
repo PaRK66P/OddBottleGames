@@ -26,8 +26,8 @@ public class CursorObject : MonoBehaviour
     {
         Vector3 viewportPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
         Vector2 canvasPosition = new Vector2(
-            (viewportPosition.x * _canvasRect.sizeDelta.x) - (_canvasRect.sizeDelta.x * 0.5f),
-            (viewportPosition.y * _canvasRect.sizeDelta.y) - (_canvasRect.sizeDelta.y * 0.5f));
+            viewportPosition.x * _canvasRect.sizeDelta.x,
+            viewportPosition.y * _canvasRect.sizeDelta.y);
 
         _rectTransform.anchoredPosition = canvasPosition;
     }

@@ -4,11 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
-    [Header("Pause menu assets")]
-    [SerializeField] UnityEngine.UI.Slider volumeSlider;
-    [SerializeField] UnityEngine.UI.Slider typingSpeedSlider;
-    [SerializeField] UnityEngine.UI.Toggle dashToggle;
-    [SerializeField] UnityEngine.UI.Toggle autoTypeToggle;
+    //[Header("Pause menu assets")]
+    //[SerializeField] UnityEngine.UI.Slider volumeSlider;
+    //[SerializeField] UnityEngine.UI.Slider typingSpeedSlider;
+    //[SerializeField] UnityEngine.UI.Toggle dashToggle;
+    //[SerializeField] UnityEngine.UI.Toggle autoTypeToggle;
 
     [Header("Important references")]
     [SerializeField] private GameObject player;
@@ -16,10 +16,10 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private VisualNovelScript visualNovelManager;
     private bool isPaused = false;
 
-    private float volume = 0.3f;
-    private float typingSpeed = 1.0f;
-    private bool dash = false;
-    private bool autoType = true;
+    //private float volume = 0.3f;
+    //private float typingSpeed = 1.0f;
+    //private bool dash = false;
+    //private bool autoType = true;
 
     // Start is called before the first frame update
     void Start()
@@ -29,43 +29,43 @@ public class PauseMenuManager : MonoBehaviour
         //visualNovelManager = GameObject.Find("VisualNovelManager").GetComponent<VisualNovelScript>();
 
 
-        if (!PlayerPrefs.HasKey("volume"))
-            PlayerPrefs.SetFloat("volume", volume);
-        volume = PlayerPrefs.GetFloat("volume", volume);
-        volumeSlider.value = volume;
+        //if (!PlayerPrefs.HasKey("volume"))
+        //    PlayerPrefs.SetFloat("volume", volume);
+        //volume = PlayerPrefs.GetFloat("volume", volume);
+        //volumeSlider.value = volume;
 
-        if (!PlayerPrefs.HasKey("typingSpeed"))
-            PlayerPrefs.SetFloat("typingSpeed", typingSpeed);
-        typingSpeed = PlayerPrefs.GetFloat("typingSpeed", typingSpeed);
-        typingSpeedSlider.value = typingSpeed;
+        //if (!PlayerPrefs.HasKey("typingSpeed"))
+        //    PlayerPrefs.SetFloat("typingSpeed", typingSpeed);
+        //typingSpeed = PlayerPrefs.GetFloat("typingSpeed", typingSpeed);
+        //typingSpeedSlider.value = typingSpeed;
 
-        if (!PlayerPrefs.HasKey("dash"))
-            PlayerPrefs.SetInt("dash", BoolToInt(dash));
-        dash = IntToBool(PlayerPrefs.GetInt("dash", BoolToInt(dash)));
-        dashToggle.isOn = dash;
+        //if (!PlayerPrefs.HasKey("dash"))
+        //    PlayerPrefs.SetInt("dash", BoolToInt(dash));
+        //dash = IntToBool(PlayerPrefs.GetInt("dash", BoolToInt(dash)));
+        //dashToggle.isOn = dash;
 
-        if (!PlayerPrefs.HasKey("autoType"))
-            PlayerPrefs.SetInt("autoType", BoolToInt(autoType));
-        autoType = IntToBool(PlayerPrefs.GetInt("autoType", BoolToInt(autoType)));
-        autoTypeToggle.isOn = autoType;
+        //if (!PlayerPrefs.HasKey("autoType"))
+        //    PlayerPrefs.SetInt("autoType", BoolToInt(autoType));
+        //autoType = IntToBool(PlayerPrefs.GetInt("autoType", BoolToInt(autoType)));
+        //autoTypeToggle.isOn = autoType;
 
-        PlayerPrefs.Save();
+        //PlayerPrefs.Save();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (!isPaused)
-            {
-                OnPause();
-            }
-            else
-            {
-                OnUnpause();
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    if (!isPaused)
+        //    {
+        //        OnPause();
+        //    }
+        //    else
+        //    {
+        //        OnUnpause();
+        //    }
+        //}
     }
 
     private void OnPause()
@@ -101,17 +101,17 @@ public class PauseMenuManager : MonoBehaviour
         SceneManager.LoadScene("MainMenuScene");
     }
 
-    public void OnControlsClick()
-    {
-        pauseMenuContainer.transform.Find("MainPause").gameObject.SetActive(false);
-        pauseMenuContainer.transform.Find("SettingsScreen").gameObject.SetActive(true);
-    }
+    //public void OnControlsClick()
+    //{
+    //    pauseMenuContainer.transform.Find("MainPause").gameObject.SetActive(false);
+    //    pauseMenuContainer.transform.Find("SettingsScreen").gameObject.SetActive(true);
+    //}
 
-    public void OnControlsBackClick()
-    {
-        pauseMenuContainer.transform.Find("MainPause").gameObject.SetActive(true);
-        pauseMenuContainer.transform.Find("SettingsScreen").gameObject.SetActive(false);
-    }
+    //public void OnControlsBackClick()
+    //{
+    //    pauseMenuContainer.transform.Find("MainPause").gameObject.SetActive(true);
+    //    pauseMenuContainer.transform.Find("SettingsScreen").gameObject.SetActive(false);
+    //}
 
     public void OnRestartClick()
     {
@@ -121,43 +121,43 @@ public class PauseMenuManager : MonoBehaviour
         SceneManager.LoadScene(scene.name);
     }
 
-    public void OnVolumeSliderChanged(float value)
-    {
-        volume = value;
-        PlayerPrefs.SetFloat("volume", volume);
-    }
+    //public void OnVolumeSliderChanged(float value)
+    //{
+    //    volume = value;
+    //    PlayerPrefs.SetFloat("volume", volume);
+    //}
 
-    public void OnTextSpeedSliderChange(float value)
-    {
-        typingSpeed = value;
-        PlayerPrefs.SetFloat("typingSpeed", typingSpeed);
-    }
+    //public void OnTextSpeedSliderChange(float value)
+    //{
+    //    typingSpeed = value;
+    //    PlayerPrefs.SetFloat("typingSpeed", typingSpeed);
+    //}
 
-    public void OnTypingTextToggleChanged(bool toggle)
-    {
-        autoType = toggle;
-        PlayerPrefs.SetInt("autoType", BoolToInt(autoType));
-    }
+    //public void OnTypingTextToggleChanged(bool toggle)
+    //{
+    //    autoType = toggle;
+    //    PlayerPrefs.SetInt("autoType", BoolToInt(autoType));
+    //}
 
-    public void DashToMouseToggleChanged(bool toggle)
-    {
-        dash = toggle;
-        PlayerPrefs.SetInt("dash", BoolToInt(dash));
-    }
+    //public void DashToMouseToggleChanged(bool toggle)
+    //{
+    //    dash = toggle;
+    //    PlayerPrefs.SetInt("dash", BoolToInt(dash));
+    //}
 
-    private int BoolToInt(bool val)
-    {
-        if (val == true)
-            return 1;
-        else
-            return 0;
-    }
+    //private int BoolToInt(bool val)
+    //{
+    //    if (val == true)
+    //        return 1;
+    //    else
+    //        return 0;
+    //}
 
-    private bool IntToBool(int val)
-    {
-        if (val == 0)
-            return false;
-        else
-            return true;
-    }
+    //private bool IntToBool(int val)
+    //{
+    //    if (val == 0)
+    //        return false;
+    //    else
+    //        return true;
+    //}
 }

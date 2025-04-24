@@ -36,7 +36,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8351994862924186086}
-  - {fileID: 5303031640120023148}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &296382776903773641
@@ -99,7 +98,7 @@ MonoBehaviour:
   shootingRange: 6
   speed: 3
   fireRate: 2
-  maxHealth: 8
+  maxHealth: 4
   hitStunLength: 0.2
   takesKnockback: 1
   AIProjectilePrefab: {fileID: 7652979212732001909, guid: 8ec0ffbae7cf1264b87544a1b8ecad6d, type: 3}
@@ -274,8 +273,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 725638821
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 14
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &4754461566360320247
@@ -337,73 +336,3 @@ MonoBehaviour:
   AttackAnimation: Attack1
   DeathAnimation: Death
   HurtAnimation: Hurt
---- !u!1001 &5963450203833039112
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1019714419187534283}
-    m_Modifications:
-    - target: {fileID: 151262272038984563, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_Name
-      value: small enemy collider
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4381864343742828173, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6265498912696767474, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
---- !u!4 &5303031640120023148 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1970968546493079908, guid: e9ab4aa8704888046871e06e10e731d2, type: 3}
-  m_PrefabInstance: {fileID: 5963450203833039112}
-  m_PrefabAsset: {fileID: 0}
