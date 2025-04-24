@@ -234,8 +234,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 751508055
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 18
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &3844966021754536097
@@ -516,7 +516,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bossData: {fileID: 11400000, guid: 5b5f6e8c4c7dec144ad524db11ccb3b6, type: 2}
   _friendData: {fileID: 11400000, guid: 9548d43bc6e9d494f9f5228ff2759db9, type: 2}
-  _companionImage: {fileID: 0}
   _companionAudioSource: {fileID: 2634039186083724255}
   gizmosPlayerReference: {fileID: 0}
 --- !u!114 &5975339444127402670

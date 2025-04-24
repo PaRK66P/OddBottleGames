@@ -25,11 +25,11 @@ MonoBehaviour:
   IdleSpeed: 12
   IdleDistance: 3.06
   MoveSpeed: 8
-  LeapTravelTime: 0.2
-  LeapChargeTime: 0.8
-  LeapDistance: 12
+  LeapTravelTime: 0.5
+  LeapChargeTime: 1.2
+  LeapDistance: 8
   LeapTargetTravelPercentage: 0.8
-  LeapDamage: 8
-  LeapEndTime: 0.5
+  LeapDamage: 4
+  LeapEndTime: 0.8
   DrawDetectionRange: 0
   DrawIdleDistance: 0

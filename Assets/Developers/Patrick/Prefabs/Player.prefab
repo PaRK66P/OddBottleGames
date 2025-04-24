@@ -403,8 +403,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 879889349
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 17
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &5322860660519061725
@@ -470,7 +470,6 @@ MonoBehaviour:
   DamageAnimation: Hurt
   LeftSide: GunTurn_WithBody_L
   RightSide: GunTurn_WithBody_R
-  _aimReticle: {fileID: 0}
 --- !u!1 &7717079466058900521
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,7 +723,6 @@ MonoBehaviour:
   _canvasPlayer: {fileID: 2704403275224883303}
   _evolveDashCollider: {fileID: 2293566067234523102}
   _playerAnimationHandler: {fileID: 7124493148972535769}
-  _playerAimReticle: {fileID: 0}
   _fadeIn: 0
   _fadeOut: 0
   _fadeTextTimer: 0
