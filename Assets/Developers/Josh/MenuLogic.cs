@@ -19,7 +19,7 @@ public class MenuLogic : MonoBehaviour
     //[SerializeField] GameObject loadingScreenAssets;
     //[SerializeField] UnityEngine.UI.Image loadingBar;
 
-    //private float volume = 0.3f;
+    private float volume = 0.3f;
     //private float typingSpeed = 1.0f;
     //private bool dash = false;
     //private bool autoType = true;
@@ -28,8 +28,8 @@ public class MenuLogic : MonoBehaviour
     public void Start()
     {
         //PlayerPrefs.DeleteAll();
-        //if (!PlayerPrefs.HasKey("volume"))
-        //    PlayerPrefs.SetFloat("volume", volume);
+        if (!PlayerPrefs.HasKey("volume"))
+           PlayerPrefs.SetFloat("volume", volume);
         //volume = PlayerPrefs.GetFloat("volume", volume);
         //volumeSlider.value = volume;
 
