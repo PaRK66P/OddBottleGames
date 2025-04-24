@@ -16,13 +16,18 @@ public class CursorObject : MonoBehaviour
         _rectTransform = GetComponent<RectTransform>();
     }
 
+    private void OnApplicationFocus(bool focus)
+    {
+        Cursor.visible = focus;
+    }
+
     // Update is called once per frame
     void Update()
     {
         Vector3 viewportPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
         Vector2 canvasPosition = new Vector2(
-            viewportPosition.x * _canvasRect.sizeDelta.x,
-            viewportPosition.y * _canvasRect.sizeDelta.y);
+            (viewportPosition.x * _canvasRect.sizeDelta.x) - (_canvasRect.sizeDelta.x * 0.5f),
+            (viewportPosition.y * _canvasRect.sizeDelta.y) - (_canvasRect.sizeDelta.y * 0.5f));
 
         _rectTransform.anchoredPosition = canvasPosition;
     }
